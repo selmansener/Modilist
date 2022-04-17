@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.API\\Modilist.API.csproj",
-      "projectName": "Modilist.API",
-      "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.API\\Modilist.API.csproj",
+      "projectUniqueName": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Data\\Modilist.Data.csproj",
+      "projectName": "Modilist.Data",
+      "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Data\\Modilist.Data.csproj",
       "packagesPath": "C:\\Users\\aselm\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.API\\obj\\",
+      "outputPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -64,9 +64,6 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
-          "Microsoft.AspNetCore.App": {
-            "privateAssets": "none"
-          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
