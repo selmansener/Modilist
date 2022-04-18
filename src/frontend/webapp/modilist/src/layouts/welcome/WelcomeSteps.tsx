@@ -1,11 +1,11 @@
-import { Stepper, Typography, Step, StepLabel, Box, Button } from "@mui/material";
+import { Stepper, Typography, Step, StepLabel, Box, Button, Paper } from "@mui/material";
 import React, { useState } from "react";
 
 type WelcomeStepProps = {
     steps: {
         title: string,
         component: React.ReactNode
-    } []
+    }[]
 }
 
 export function WelcomeSteps(props: WelcomeStepProps) {
@@ -64,11 +64,6 @@ export function WelcomeSteps(props: WelcomeStepProps) {
                     const labelProps: {
                         optional?: React.ReactNode;
                     } = {};
-                    if (isStepOptional(index)) {
-                        labelProps.optional = (
-                            <Typography variant="caption">Optional</Typography>
-                        );
-                    }
                     if (isStepSkipped(index)) {
                         stepProps.completed = false;
                     }
@@ -91,7 +86,16 @@ export function WelcomeSteps(props: WelcomeStepProps) {
                 </React.Fragment>
             ) : (
                 <React.Fragment>
-                    {steps[activeStep].component}
+                    <Paper
+                        sx={{
+                            p: 2,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            mt: 2
+                        }}
+                    >
+                        {steps[activeStep].component}
+                    </Paper>
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                         <Button
                             color="inherit"
