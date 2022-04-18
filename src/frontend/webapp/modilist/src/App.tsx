@@ -11,7 +11,7 @@ function App() {
   const { instance, accounts } = useMsal();
   const account = accounts[0] as AccountInfo;
   // TODO: change with user idToken.newUser
-  const newUser = true;
+  const newUser = false;
   
   return (
     <div className="App">

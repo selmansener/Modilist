@@ -51,7 +51,6 @@ export default function Subscription() {
         const start = moment(value).startOf('week');
         const end = moment(value).endOf('week');
         const dayIsBetween = moment(date).isBetween(start, end);
-        // const dayIsBetween = isWithinInterval(date, { start, end });
         const isFirstDay = moment(date).isSame(start, 'day');
         const isLastDay = moment(date).isSame(end, 'day');
 
