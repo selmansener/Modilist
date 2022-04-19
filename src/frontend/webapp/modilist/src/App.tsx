@@ -7,7 +7,7 @@ import Welcome from './layouts/welcome/WelcomeLayout';
 
 function App() {
   const { accounts } = useMsal();
-  const account = accounts[0] as AccountInfo;
+  // const account = accounts[0] as AccountInfo;
   // TODO: change with user idToken.newUser
   const newUser = false;
   
@@ -22,7 +22,6 @@ function App() {
       <UnauthenticatedTemplate>
         <Unauthenticated />
       </UnauthenticatedTemplate>
-
     </div>
   );
 }

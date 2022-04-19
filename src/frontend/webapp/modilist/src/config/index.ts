@@ -1,5 +1,7 @@
 
-const env = process.env.REACT_APP_ENV == undefined ? "development" : process.env.REACT_APP_ENV;
+const env = process.env.REACT_APP_ENV === undefined ? "development" : process.env.REACT_APP_ENV;
+
+console.log(env);
 
 const envConfig = require(`./config.${env}`).config;
 const msalConfig = require(`./auth/msalConfig.${env}`).msalConfig;

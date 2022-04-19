@@ -1,8 +1,6 @@
 import { ThemeProvider } from "@emotion/react"
-import { AppBar, Box, Button, Container, createTheme, Grid, IconButton, Menu, MenuItem, Paper, Step, StepLabel, Stepper, Toolbar, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { AppBar, Box, Container, createTheme, Grid, IconButton, Menu, MenuItem, Paper, Toolbar, Typography } from "@mui/material";
 import { WelcomeSteps } from "./WelcomeSteps";
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Personal from "../../pages/welcome/Personal";
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
@@ -11,6 +9,7 @@ import StylePreferences from "../../pages/welcome/StylePreferences";
 import Subscription from "../../pages/welcome/Subscription";
 import PaymentMethod from "../../pages/welcome/PaymentMethod";
 import ContactInfo from "../../pages/welcome/ContactInfo";
+import React from "react";
 
 const mdTheme = createTheme({
     palette: {
