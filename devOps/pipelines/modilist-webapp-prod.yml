@@ -24,6 +24,7 @@ steps:
     customCommand: 'run build'
 - task: AzureStaticWebApp@0
   inputs:
+    app_location: 'src/frontend/webapp/modilist/build'
     output_location: 'src/frontend/webapp/modilist/build'
     config_file_location: 'src/frontend/webapp/modilist/build'
     skip_app_build: true
