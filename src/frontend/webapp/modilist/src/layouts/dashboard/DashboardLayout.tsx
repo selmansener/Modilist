@@ -4,10 +4,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import { useMsal } from '@azure/msal-react';
-import { loginRequest } from '../../config/auth/msalConfig';
 import { DashboardHeader } from './DashboardHeader';
 import { DashboardMain } from './DashboardMain';
 import { DashboardFooter } from './DashboardFooter';
+import { config } from '../../config';
 
 // TODO: temayı tek bir yerden al
 const mdTheme = createTheme({
@@ -56,7 +56,7 @@ function DashboardContent() {
           <Button onClick={() => {
 
             instance.acquireTokenSilent({
-              ...loginRequest,
+              ...config.loginRequest,
               account: accounts[0]
             })
               .then(response => {

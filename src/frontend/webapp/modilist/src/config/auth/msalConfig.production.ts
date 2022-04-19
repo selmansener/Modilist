@@ -1,6 +1,29 @@
-import { AccountInfo, LogLevel } from "@azure/msal-browser";
-import { apiConfig } from "./apiConfig";
-import { b2cPolicies } from "./policies";
+import { LogLevel } from "@azure/msal-browser";
+
+export const apiConfig = {
+    b2cScopes: ["https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Test.Read"],
+    webApi: "http://localhost:5088/api"
+};
+
+export const b2cPolicies = {
+    names: {
+        signUpSignIn: "b2c_1_susi",
+        forgotPassword: "b2c_1_reset",
+        editProfile: "b2c_1_edit_profile"
+    },
+    authorities: {
+        signUpSignIn: {
+            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_signIn_signUp",
+        },
+        forgotPassword: {
+            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_reset",
+        },
+        editProfile: {
+            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_edit_profile"
+        }
+    },
+    authorityDomain: "modilistauth.b2clogin.com"
+}
 
 /**
  * Configuration object to be passed to MSAL instance on creation. 
@@ -9,11 +32,11 @@ import { b2cPolicies } from "./policies";
  */
 export const msalConfig = {
     auth: {
-        clientId: "70773d38-9a72-4f72-af81-17eb6737353c", // This is the ONLY mandatory field; everything else is optional.
+        clientId: "c2a43089-5855-4fa3-a46c-41fa67ac0ae4", // This is the ONLY mandatory field; everything else is optional.
         authority: b2cPolicies.authorities.signUpSignIn.authority, // Choose sign-up/sign-in user-flow as your default.
         knownAuthorities: [b2cPolicies.authorityDomain], // You must identify your tenant's domain as a known authority.
-        redirectUri: "https://localhost:3000", // You must register this URI on Azure Portal/App Registration. Defaults to "window.location.href".
-        postLogoutRedirectUri: "https://localhost:3000",
+        redirectUri: "https://app.modilist.com", // You must register this URI on Azure Portal/App Registration. Defaults to "window.location.href".
+        postLogoutRedirectUri: "https://app.modilist.com",
         navigateToLoginRequestUrl: true
     },
     cache: {
@@ -29,12 +52,6 @@ export const msalConfig = {
                 switch (level) {
                     case LogLevel.Error:
                         console.error(message);
-                        return;
-                    case LogLevel.Info:
-                        console.info(message);
-                        return;
-                    case LogLevel.Verbose:
-                        console.debug(message);
                         return;
                     case LogLevel.Warning:
                         console.warn(message);

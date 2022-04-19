@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useMsal } from "@azure/msal-react";
-import { loginRequest } from '../../config/auth/msalConfig';
+import { config } from '../../config';
 
 export default function Unauthenticated() {
     const { instance } = useMsal();
     
-    instance.loginRedirect(loginRequest)
+    instance.loginRedirect(config.loginRequest)
     .catch(e => {
         console.log(e);
     });
