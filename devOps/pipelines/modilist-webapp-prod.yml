@@ -21,7 +21,7 @@ steps:
   inputs:
     command: 'custom'
     workingDir: 'src/frontend/webapp/modilist'
-    customCommand: 'build'
+    customCommand: 'run build'
 - task: AzureStaticWebApp@0
   inputs:
     output_location: 'src/frontend/webapp/modilist/build'
