@@ -1,3 +1,5 @@
+console.log(process.env.NODE_ENV);
+
 const env = process.env.NODE_ENV === undefined ? "development" : process.env.NODE_ENV;
 
 const envConfig = require(`./config.${env}`).config;
@@ -9,7 +11,7 @@ export const config = {
     isDev: env === "development",
     isProduction: env === "production",
     ...envConfig,
-    ...msalConfig,
     ...webApiConfig,
-    loginRequest
+    loginRequest,
+    msalConfig,
 };
