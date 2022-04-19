@@ -12,18 +12,18 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import { Link, To } from "react-router-dom";
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
-import StylePreferences from '../../pages/stylePreferences/StylePreferences';
-import Orders from '../../pages/orders/Orders';
-import Main from '../../pages/main/Main';
+import { Main } from '../../pages/main/Main';
+import { Orders } from '../../pages/orders/Orders';
+import { StylePreferences } from '../../pages/stylePreferences/StylePreferences';
 
-export type DashboardMenuItem = {
+export type MenuLinkItem = {
   title: string,
   route: string,
   icon: React.ReactNode,
   component: React.ReactNode
 }
 
-export const dashboardMenu: DashboardMenuItem[] = [
+export const dashboardMenu: MenuLinkItem[] = [
   {
     title: "Dashboard",
     route: "/",
@@ -42,4 +42,8 @@ export const dashboardMenu: DashboardMenuItem[] = [
     icon: <ShoppingCartIcon />,
     component: <Orders />
   }
-]
+];
+
+export const footerMenu: MenuLinkItem[] = [
+
+];
