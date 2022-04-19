@@ -16,15 +16,15 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
-    workingDir: '/src/frontend/webapp/modilist'
+    workingDir: 'src/frontend/webapp/modilist'
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: '/src/frontend/webapp/modilist'
+    workingDir: 'src/frontend/webapp/modilist'
     customCommand: 'build'
 - task: AzureStaticWebApp@0
   inputs:
-    output_location: '/src/frontend/webapp/modilist/build'
-    config_file_location: '/src/frontend/webapp/modilist/build'
+    output_location: 'src/frontend/webapp/modilist/build'
+    config_file_location: 'src/frontend/webapp/modilist/build'
     skip_app_build: true
     azure_static_web_apps_api_token: 'f4a23a1fb288f30fe514263ba5bcf7e092afb14c1ffb1812017ab3998f815e021-d3b07b05-786d-4e60-9c75-9f58bf01741500382110'
