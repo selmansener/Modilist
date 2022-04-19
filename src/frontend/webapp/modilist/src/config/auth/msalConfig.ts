@@ -1,4 +1,4 @@
-import { LogLevel } from "@azure/msal-browser";
+import { AccountInfo, LogLevel } from "@azure/msal-browser";
 import { apiConfig } from "./apiConfig";
 import { b2cPolicies } from "./policies";
 
@@ -52,7 +52,7 @@ export const msalConfig = {
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-    scopes: ["openid", ...apiConfig.b2cScopes],
+    scopes: [...apiConfig.b2cScopes, "openid", "offline_access" ]
 };
 
 /**

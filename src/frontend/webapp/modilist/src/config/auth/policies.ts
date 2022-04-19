@@ -14,10 +14,10 @@
             authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_signIn_signUp",
         },
         forgotPassword: {
-            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/b2c_1_reset",
+            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_reset",
         },
         editProfile: {
-            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/b2c_1_edit_profile"
+            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_edit_profile"
         }
     },
     authorityDomain: "modilistauth.b2clogin.com"

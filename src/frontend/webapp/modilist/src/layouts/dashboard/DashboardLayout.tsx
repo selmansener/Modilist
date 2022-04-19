@@ -9,19 +9,17 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { DashboardMenuItem, dashboardMenu } from './DashboardMenu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
-import StylePreferences from '../../pages/stylePreferences/StylePreferences';
-import Orders from '../../pages/orders/Orders';
+import { Button, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 import { Link, Route, Routes } from 'react-router-dom';
+import { useMsal } from '@azure/msal-react';
+import { loginRequest } from '../../config/auth/msalConfig';
 
 function Copyright(props: any) {
   return (
@@ -100,11 +98,30 @@ const mdTheme = createTheme({
   }
 });
 
+async function callApi(accessToken: string) {
+  const headers = new Headers();
+  const bearer = `Bearer ${accessToken}`;
+
+  headers.append("Authorization", bearer);
+
+  const options = {
+    method: "GET",
+    headers: headers
+  };
+
+  return fetch("http://localhost:5088/api/v1/test", options)
+    .then(response => response.json())
+    .catch(error => console.log(error));
+}
+
 function DashboardContent() {
+  const { instance, accounts } = useMsal();
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -115,6 +132,12 @@ function DashboardContent() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const logout = () => {
+    instance.logoutRedirect({
+      account: accounts[0]
+    });
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -169,6 +192,7 @@ function DashboardContent() {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={logout}>Logout</MenuItem>
               </Menu>
             </div>
           </Toolbar>
@@ -216,6 +240,21 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Button onClick={() => {
+
+              instance.acquireTokenSilent({
+                ...loginRequest,
+                account: accounts[0]
+              })
+                .then(response => {
+                  callApi(response.accessToken)
+                    .then(resp => console.log(resp.json()))
+                    .catch(er => console.log(er))
+                })
+                .catch(error => console.log(error));
+            }}>
+              <Typography>Test</Typography>
+            </Button>
             <Routes>
               {dashboardMenu.map((item: DashboardMenuItem) => {
                 return <Route key={item.route} path={item.route} element={item.component} />

@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "JJyfJGl4/BNbcr+B5XASEHCThXgCy7bqd9qW6cdOvZ8=",
+  "Source": "Modilist.API",
+  "BasePath": "_content/Modilist.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Modilist.API\\wwwroot",
+      "Source": "Modilist.API",
+      "ContentRoot": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.API\\wwwroot\\",
+      "BasePath": "_content/Modilist.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
