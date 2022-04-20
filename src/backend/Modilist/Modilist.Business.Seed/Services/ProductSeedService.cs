@@ -13,14 +13,12 @@ using Modilist.Domains.ProductDomain.Models;
 
 namespace Modilist.Business.Seed.Services
 {
-    internal class PlaylistSeedService : BaseSeedService
+    internal class ProductSeedService : BaseSeedService
     {
-        public PlaylistSeedService(ModilistWriteDbContext dbContext)
+        public ProductSeedService(ModilistWriteDbContext dbContext)
             : base(dbContext)
         {
         }
-
-        protected override ImmutableList<SeedServiceType> Dependencies => ImmutableList.Create(SeedServiceType.User);
 
         public override async Task Execute(CancellationToken cancellationToken)
         {

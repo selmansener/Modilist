@@ -5,6 +5,8 @@ namespace Modilist.Domains.ProductDomain.Models
 {
     public class Product : BaseEntity
     {
+        protected Product() { }
+
         public Product(string sku, string name)
         {
             SKU = sku;

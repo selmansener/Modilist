@@ -5,7 +5,6 @@ C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.API.deps.json
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.API.runtimeconfig.json
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.API.dll
-C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\ref\Modilist.API.dll
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.API.pdb
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Azure.Core.dll
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Azure.Identity.dll
@@ -109,3 +108,4 @@ C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Data.pdb
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Domains.Base.pdb
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Domains.ProductDomain.pdb
+C:\Projects\Modilist\src\backend\Modilist\Modilist.API\obj\Debug\net6.0\refint\Modilist.API.dll

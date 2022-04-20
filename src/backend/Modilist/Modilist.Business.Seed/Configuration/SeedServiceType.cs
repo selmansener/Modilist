@@ -8,9 +8,6 @@ namespace Modilist.Business.Seed.Configuration
 {
     public enum SeedServiceType
     {
-        User = 0,
-        Playlist = 1,
-        Video = 2,
-        Session = 3
+        Product = 0
     }
 }
