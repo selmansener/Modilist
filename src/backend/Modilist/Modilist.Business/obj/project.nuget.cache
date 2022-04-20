@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "HaOxDP8+OzD1t3dR4GAjYwX56mIHzHZU12AVD3DDX7ZIHOyR8EqHqN7nwn4MrqyPYi/q4b/H1/dwYDZRdAD5qg==",
+  "dgSpecHash": "hGI3X/DauIW6tNs7Gqzv/Q61iWoHHgCb22h2tKCkKlJ3bRLuhJkwmd3WAlkguxQNJZ5AFl02d3PCfsgl03m8Rg==",
   "success": true,
   "projectFilePath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business\\Modilist.Business.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\aselm\\.nuget\\packages\\fluentvalidation\\10.0.4\\fluentvalidation.10.0.4.nupkg.sha512",
+    "C:\\Users\\aselm\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.0.4\\fluentvalidation.dependencyinjectionextensions.10.0.4.nupkg.sha512",
+    "C:\\Users\\aselm\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
+    "C:\\Users\\aselm\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\aselm\\.nuget\\packages\\mediatr.extensions.fluentvalidation.aspnetcore\\2.0.0\\mediatr.extensions.fluentvalidation.aspnetcore.2.0.0.nupkg.sha512",
+    "C:\\Users\\aselm\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\10.0.1\\mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
+    "C:\\Users\\aselm\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

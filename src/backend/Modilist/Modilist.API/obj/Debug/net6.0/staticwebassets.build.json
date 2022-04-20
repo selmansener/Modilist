@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JJyfJGl4/BNbcr+B5XASEHCThXgCy7bqd9qW6cdOvZ8=",
+  "Hash": "talaxQMtj7CtwCHYvMfV+r1JCtylC5++XVBVK7ZPLdQ=",
   "Source": "Modilist.API",
   "BasePath": "_content/Modilist.API",
   "Mode": "Default",
@@ -15,5 +15,23 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.API\\wwwroot\\js\\swagger-seed-dropdown-sorting.js",
+      "SourceId": "Modilist.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.API\\wwwroot\\",
+      "BasePath": "_content/Modilist.API",
+      "RelativePath": "js/swagger-seed-dropdown-sorting.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\swagger-seed-dropdown-sorting.js"
+    }
+  ]
 }

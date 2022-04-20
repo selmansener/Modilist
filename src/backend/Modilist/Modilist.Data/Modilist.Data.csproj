@@ -6,4 +6,20 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="EntityConfigurations\" />
+    <Folder Include="Migrations\Modilist\2022\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modilist.Domains.Base\Modilist.Domains.Base.csproj" />
+    <ProjectReference Include="..\Modilist.Domains.ProductDomain\Modilist.Domains.ProductDomain.csproj" />
+    <ProjectReference Include="..\Modilist.Infrastructure.Shared\Modilist.Infrastructure.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

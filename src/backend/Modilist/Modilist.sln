@@ -15,15 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{34C7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{91F2945B-7594-459B-87D7-DE2CE40860A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modilist.Business", "Modilist.Business\Modilist.Business.csproj", "{03A08AB1-8C9A-4D1E-A4D0-3D0D93B7F828}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modilist.Business", "Modilist.Business\Modilist.Business.csproj", "{03A08AB1-8C9A-4D1E-A4D0-3D0D93B7F828}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modilist.Business.Seed", "Modilist.Business.Seed\Modilist.Business.Seed.csproj", "{3069CA70-E8AA-4EDD-A07F-A9697101E216}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modilist.Business.Seed", "Modilist.Business.Seed\Modilist.Business.Seed.csproj", "{3069CA70-E8AA-4EDD-A07F-A9697101E216}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modilist.Data", "Modilist.Data\Modilist.Data.csproj", "{432387C5-393F-411B-9857-919E32115B20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modilist.Data", "Modilist.Data\Modilist.Data.csproj", "{432387C5-393F-411B-9857-919E32115B20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modilist.Domains.Base", "Modilist.Domains.Base\Modilist.Domains.Base.csproj", "{DCB9C19A-14E9-488A-B5A1-37C1A7D31060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modilist.Domains.Base", "Modilist.Domains.Base\Modilist.Domains.Base.csproj", "{DCB9C19A-14E9-488A-B5A1-37C1A7D31060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modilist.Infrastructure.Shared", "Modilist.Infrastructure.Shared\Modilist.Infrastructure.Shared.csproj", "{7D7828D0-4652-41BF-873B-80319A4075D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modilist.Infrastructure.Shared", "Modilist.Infrastructure.Shared\Modilist.Infrastructure.Shared.csproj", "{7D7828D0-4652-41BF-873B-80319A4075D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modilist.Domains.ProductDomain", "Modilist.Domains.ProductDomain\Modilist.Domains.ProductDomain.csproj", "{35275986-0D53-4E71-A835-CA8A45845630}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{7D7828D0-4652-41BF-873B-80319A4075D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D7828D0-4652-41BF-873B-80319A4075D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D7828D0-4652-41BF-873B-80319A4075D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35275986-0D53-4E71-A835-CA8A45845630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35275986-0D53-4E71-A835-CA8A45845630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35275986-0D53-4E71-A835-CA8A45845630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35275986-0D53-4E71-A835-CA8A45845630}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{432387C5-393F-411B-9857-919E32115B20} = {4F2DD893-F46A-4EB2-A9FB-DF17CC183AC6}
 		{DCB9C19A-14E9-488A-B5A1-37C1A7D31060} = {34C78D67-4FA4-4C9C-A6D6-7AFC4EA43027}
 		{7D7828D0-4652-41BF-873B-80319A4075D7} = {91F2945B-7594-459B-87D7-DE2CE40860A9}
+		{35275986-0D53-4E71-A835-CA8A45845630} = {34C78D67-4FA4-4C9C-A6D6-7AFC4EA43027}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7FE135-FD7A-4E36-A821-2299B267F86E}

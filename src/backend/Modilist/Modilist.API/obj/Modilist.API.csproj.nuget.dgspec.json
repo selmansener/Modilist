@@ -27,8 +27,203 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/oplog/_packaging/OPM/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business.Seed\\Modilist.Business.Seed.csproj": {
+                "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business.Seed\\Modilist.Business.Seed.csproj"
+              },
+              "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business\\Modilist.Business.csproj": {
+                "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business\\Modilist.Business.csproj"
+              },
+              "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Infrastructure.Shared\\Modilist.Infrastructure.Shared.csproj": {
+                "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Infrastructure.Shared\\Modilist.Infrastructure.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Versioning": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
+            "Microsoft.Identity.Web": {
+              "target": "Package",
+              "version": "[1.23.1, )"
+            },
+            "Swashbuckle.AspNetCore.Newtonsoft": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.104\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business.Seed\\Modilist.Business.Seed.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business.Seed\\Modilist.Business.Seed.csproj",
+        "projectName": "Modilist.Business.Seed",
+        "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business.Seed\\Modilist.Business.Seed.csproj",
+        "packagesPath": "C:\\Users\\aselm\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business.Seed\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\aselm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Data\\Modilist.Data.csproj": {
+                "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Data\\Modilist.Data.csproj"
+              },
+              "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.ProductDomain\\Modilist.Domains.ProductDomain.csproj": {
+                "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.ProductDomain\\Modilist.Domains.ProductDomain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Bogus": {
+              "target": "Package",
+              "version": "[34.0.2, )"
+            },
+            "EFCoreAutoMigrator": {
+              "target": "Package",
+              "version": "[1.0.5, )"
+            },
+            "JsonNet.ContractResolvers": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.104\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business\\Modilist.Business.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business\\Modilist.Business.csproj",
+        "projectName": "Modilist.Business",
+        "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business\\Modilist.Business.csproj",
+        "packagesPath": "C:\\Users\\aselm\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\aselm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -46,13 +241,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "MediatR": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[10.0.1, )"
             },
-            "Microsoft.Identity.Web": {
+            "MediatR.Extensions.FluentValidation.AspNetCore": {
               "target": "Package",
-              "version": "[1.23.1, )"
+              "version": "[2.0.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[10.0.1, )"
             }
           },
           "imports": [
@@ -66,9 +265,280 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.104\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Data\\Modilist.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Data\\Modilist.Data.csproj",
+        "projectName": "Modilist.Data",
+        "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Data\\Modilist.Data.csproj",
+        "packagesPath": "C:\\Users\\aselm\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\aselm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.Base\\Modilist.Domains.Base.csproj": {
+                "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.Base\\Modilist.Domains.Base.csproj"
+              },
+              "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.ProductDomain\\Modilist.Domains.ProductDomain.csproj": {
+                "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.ProductDomain\\Modilist.Domains.ProductDomain.csproj"
+              },
+              "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Infrastructure.Shared\\Modilist.Infrastructure.Shared.csproj": {
+                "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Infrastructure.Shared\\Modilist.Infrastructure.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.4, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.104\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.Base\\Modilist.Domains.Base.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.Base\\Modilist.Domains.Base.csproj",
+        "projectName": "Modilist.Domains.Base",
+        "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.Base\\Modilist.Domains.Base.csproj",
+        "packagesPath": "C:\\Users\\aselm\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.Base\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\aselm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.104\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.ProductDomain\\Modilist.Domains.ProductDomain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.ProductDomain\\Modilist.Domains.ProductDomain.csproj",
+        "projectName": "Modilist.Domains.ProductDomain",
+        "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.ProductDomain\\Modilist.Domains.ProductDomain.csproj",
+        "packagesPath": "C:\\Users\\aselm\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.ProductDomain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\aselm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.Base\\Modilist.Domains.Base.csproj": {
+                "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Domains.Base\\Modilist.Domains.Base.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.104\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Infrastructure.Shared\\Modilist.Infrastructure.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Infrastructure.Shared\\Modilist.Infrastructure.Shared.csproj",
+        "projectName": "Modilist.Infrastructure.Shared",
+        "projectPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Infrastructure.Shared\\Modilist.Infrastructure.Shared.csproj",
+        "packagesPath": "C:\\Users\\aselm\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Infrastructure.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\aselm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "DynamicQueryBuilder": {
+              "target": "Package",
+              "version": "[1.0.5, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[10.4.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
