@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      publishWebProjects: true
+      workingDirectory: '$(System.DefaultWorkingDirectory)\src\backend\Modilist\Modilist.API'
+  - task: AzureRmWebAppDeployment@4
+    inputs:
+      ConnectionType: 'AzureRM'
+      azureSubscription: 'Microsoft Azure Sponsorship(cd6bc22e-8b3a-4c6e-9c03-03152a8567ea)'
+      appType: 'webAppLinux'
+      WebAppName: 'app-modilist-int-westeu'
+      packageForLinux: '$(System.DefaultWorkingDirectory)/**/Modilist.API.zip'
+      RuntimeStack: 'DOTNETCORE|6.0'
