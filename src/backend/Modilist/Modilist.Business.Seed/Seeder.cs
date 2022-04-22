@@ -115,6 +115,14 @@ namespace Modilist.Business.Seed
 
             string resourceName = $"Modilist.Business.Seed.Data.DataFiles.SeedData.{environment}.json";
 
+
+            var names = assembly.GetManifestResourceNames();
+            foreach (var name in names)
+            {
+                Console.WriteLine(name);
+                Debug.Write(name);
+            }
+
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var reader = new StreamReader(stream, Encoding.UTF8))
             {

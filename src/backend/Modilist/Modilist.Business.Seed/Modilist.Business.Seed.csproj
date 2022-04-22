@@ -8,9 +8,11 @@
 
   <ItemGroup>
     <None Remove="Data\DataFiles\SeedData.Development.json" />
+    <None Remove="Data\DataFiles\SeedData.Int.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Data\DataFiles\SeedData.Int.json" />
     <EmbeddedResource Include="Data\DataFiles\SeedData.Development.json" />
   </ItemGroup>
 
