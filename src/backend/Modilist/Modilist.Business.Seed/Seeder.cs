@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 
 using EFCoreAutoMigrator;
 
@@ -106,6 +107,9 @@ namespace Modilist.Business.Seed
     {
         public static void AddSeedServices(this IServiceCollection services, string environment)
         {
+            Console.WriteLine(environment);
+            Debug.Write(environment);
+
             SeedData seedData;
             var assembly = typeof(SeedData).Assembly;
 
