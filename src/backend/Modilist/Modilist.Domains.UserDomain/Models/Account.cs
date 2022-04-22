@@ -10,7 +10,7 @@ namespace Modilist.Domains.UserDomain.Models
         public Account(Guid id,
                        string firstName,
                        string lastName,
-                       DateTime birthDate,
+                       DateTime? birthDate,
                        Gender gender,
                        string instagramUserName,
                        string email,
