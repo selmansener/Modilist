@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Modilist.API.Middlewares;
 using Newtonsoft.Json.Converters;
+using Modilist.API.Extensions;
 
 const string CorsPolicyName = "Default";
 const string ApiTitle = "ModilistAPI";
@@ -74,7 +75,7 @@ var app = builder.Build();
 
 app.UseCors(CorsPolicyName);
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsInt())
 {
     app.UseSwagger();
     app.UseSwaggerUI(ConfigureSwaggerUI);
