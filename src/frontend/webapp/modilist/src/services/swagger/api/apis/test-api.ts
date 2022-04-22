@@ -114,7 +114,7 @@ export const TestApiAxiosParamCreator = function (configuration?: Configuration)
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (typeof body !== "string") || (localVarRequestOptions.headers && localVarRequestOptions.headers['Content-Type'] === 'application/json');
             localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
@@ -151,7 +151,7 @@ export const TestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1TestPost(body?: CreateProductInputDTO, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async apiV1TestPost(body?: CreateProductInputDTO, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<CreateProductInputDTO>>> {
             const localVarAxiosArgs = await TestApiAxiosParamCreator(configuration).apiV1TestPost(body, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -183,7 +183,7 @@ export const TestApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1TestPost(body?: CreateProductInputDTO, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async apiV1TestPost(body?: CreateProductInputDTO, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<CreateProductInputDTO>> {
             return TestApiFp(configuration).apiV1TestPost(body, apiVersion, options).then((request) => request(axios, basePath));
         },
     };
@@ -214,7 +214,7 @@ export class TestApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TestApi
      */
-    public async apiV1TestPost(body?: CreateProductInputDTO, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async apiV1TestPost(body?: CreateProductInputDTO, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<CreateProductInputDTO>> {
         return TestApiFp(this.configuration).apiV1TestPost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
 }

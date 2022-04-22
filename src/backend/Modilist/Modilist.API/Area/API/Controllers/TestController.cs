@@ -18,6 +18,7 @@ namespace Modilist.API.Area.API.Controllers
 
         [Authorize("ReadTests")]
         [HttpPost]
+        [ProducesResponseType(typeof(CreateProductInputDTO), 200)]
         public async Task<IActionResult> Post(CreateProductInputDTO input)
         {
             return Ok(input);

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { IPublicClientApplication } from "@azure/msal-browser";
 import { config } from "../config";
 
-const apiFactory = function (msalInstance: IPublicClientApplication) {
+export const apiFactory = function (msalInstance: IPublicClientApplication) {
     axios.interceptors.request.use(
         async options => {
             const account = msalInstance.getActiveAccount();
@@ -25,8 +25,6 @@ const apiFactory = function (msalInstance: IPublicClientApplication) {
     );
 
     return {
-        test: TestApiFactory(undefined, config.msalConfig.apiConfig.webApi, axios)
+        test: TestApiFactory(undefined, config.webApi, axios)
     }
 }
-
-export default apiFactory;

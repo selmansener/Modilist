@@ -2,7 +2,7 @@ import { LogLevel } from "@azure/msal-browser";
 
 export const apiConfig = {
     b2cScopes: ["https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Test.Read"],
-    webApi: "http://localhost:5088/api"
+    webApi: "http://localhost:5088"
 };
 
 export const b2cPolicies = {

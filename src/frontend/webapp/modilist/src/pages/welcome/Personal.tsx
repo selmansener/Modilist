@@ -32,7 +32,6 @@ const choiseReasons = [
 ];
 
 const maxDate = moment().subtract(18, 'years');
-console.log(maxDate);
 
 export default function Personal() {
     const [locale, setLocale] = React.useState<string>('tr');

@@ -4,11 +4,11 @@ import { config } from '../../config';
 
 export default function Unauthenticated() {
     const { instance } = useMsal();
-    
+
     instance.loginRedirect(config.loginRequest)
-    .catch(e => {
-        console.log(e);
-    });
+        .catch(e => {
+            console.log(e);
+        });
 
     return (
         <></>
