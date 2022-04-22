@@ -26,6 +26,9 @@ const string SwaggerEndpoint = "/swagger/v1/swagger.json";
 
 var builder = WebApplication.CreateBuilder(args);
 
+var appSettings = builder.Configuration.GetSection("AppSettings");
+var config = appSettings.Get<ConfigurationOptions>();
+
 builder.Services.AddCors(ConfigureCors);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -46,9 +49,6 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("ReadTests", policy => policy.Requirements.Add(new ScopesRequirement("Test.Read")));
 });
-
-var appSettings = builder.Configuration.GetSection("AppSettings");
-var config = appSettings.Get<ConfigurationOptions>();
 
 builder.Services.AddRepositories();
 
@@ -100,7 +100,7 @@ void ConfigureCors(CorsOptions obj)
 {
     obj.AddPolicy(CorsPolicyName, builder =>
     {
-        builder.WithOrigins("https://localhost:3000", "https://app.modilist.com");
+        builder.WithOrigins(config.AllowedOrigins.ToArray());
         builder.AllowAnyHeader();
         builder.AllowAnyMethod();
         builder.AllowCredentials();

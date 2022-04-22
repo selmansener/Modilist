@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "AgZiVVazGSvK0Vu/8pmwZYsJc/KA74j4xgjB6i9CC+sMPapH7hIV4TPo09mU3Vu9pEGmzczJC9IknrAKO2+TCg==",
+  "dgSpecHash": "C1oLB2Y62hBAccZ1dcqFX6aqS3ViMrqUA6Qqej/ZREfNiWofhHXznSnvHfqv/Zh9oWFmsUreC0qPURgFXZaDlQ==",
   "success": true,
   "projectFilePath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.API\\Modilist.API.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,8 @@
     "C:\\Users\\aselm\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.4.0\\fluentvalidation.dependencyinjectionextensions.10.4.0.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\jsonnet.contractresolvers\\2.0.0\\jsonnet.contractresolvers.2.0.0.nupkg.sha512",
+    "C:\\Users\\aselm\\.nuget\\packages\\mapster\\7.3.0\\mapster.7.3.0.nupkg.sha512",
+    "C:\\Users\\aselm\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\mediatr.extensions.fluentvalidation.aspnetcore\\2.0.0\\mediatr.extensions.fluentvalidation.aspnetcore.2.0.0.nupkg.sha512",

@@ -11,8 +11,6 @@ export function Main() {
     const dispatch = useDispatch<Dispatch>();
     let createProductResponse = useSelector((state: RootState) => state.createProduct);
 
-    // console.log(createProductResponse);
-
     return (
         <>
             <Typography variant="h1">Main</Typography>
@@ -31,6 +29,21 @@ export function Main() {
             <Typography>
                 Name: {createProductResponse.name}
             </Typography>
+            <Button onClick={() => {
+                const account = instance.getActiveAccount();
+
+                if (!account) {
+                    return;
+                }
+
+                instance.acquireTokenRedirect({
+                    account: account,
+                    scopes: config.loginRequest.scopes,
+                    authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_edit_profile"
+                })
+            }}>
+                <Typography>Edit profile</Typography>
+            </Button>
         </>
     )
 }

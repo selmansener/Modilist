@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LoYMf2ILqXyFK5CQlsKVDTAjppPwfJQH4OrmpTzmjMurry2Rxsn43IihAr0ha6ILCG1VjTZophNapw0xJCoNUQ==",
+  "dgSpecHash": "2Mg0/lacnAS8wMGs9XqZbDxcASFftv0uEhNCm2VRZj//u+4uekccuy5rflY7GbH6zmzwjclzEMOQFsRkavTJwg==",
   "success": true,
   "projectFilePath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Data\\Modilist.Data.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "C:\\Users\\aselm\\.nuget\\packages\\fluentvalidation\\10.4.0\\fluentvalidation.10.4.0.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.4.0\\fluentvalidation.aspnetcore.10.4.0.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.4.0\\fluentvalidation.dependencyinjectionextensions.10.4.0.nupkg.sha512",
+    "C:\\Users\\aselm\\.nuget\\packages\\mapster\\7.3.0\\mapster.7.3.0.nupkg.sha512",
+    "C:\\Users\\aselm\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

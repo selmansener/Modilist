@@ -7,5 +7,7 @@ namespace Modilist.API.Configurations
         public AzureAdB2COptions AzureAdB2COptions { get; set; }
 
         public DbConnectionOptions ModilistDbConnectionOptions { get; set; }
+
+        public IEnumerable<string> AllowedOrigins { get; set; }
     }
 }

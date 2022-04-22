@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 using Modilist.Domains.Base;
 using Modilist.Domains.ProductDomain.Models;
+using Modilist.Domains.UserDomain.Models;
 using Modilist.Infrastructure.Shared.Constants;
 using Modilist.Infrastructure.Shared.Models;
 
@@ -29,6 +30,7 @@ namespace Modilist.Data.DataAccess
 
         public virtual DbSet<Product> Products { get; set; }
 
+        public virtual DbSet<Account> Accounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

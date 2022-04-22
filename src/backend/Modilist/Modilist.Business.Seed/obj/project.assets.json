@@ -86,6 +86,29 @@
           "lib/netstandard2.0/JsonNet.ContractResolvers.dll": {}
         }
       },
+      "Mapster/7.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Mapster.Core": "1.2.0",
+          "Microsoft.CSharp": "4.3.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Mapster.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mapster.dll": {}
+        }
+      },
+      "Mapster.Core/1.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Mapster.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mapster.Core.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Antiforgery/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -2052,7 +2075,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.1/_._": {}
+          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Reflection.Emit.dll": {}
@@ -2066,7 +2089,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.0/_._": {}
+          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Reflection.Emit.ILGeneration.dll": {}
@@ -2865,6 +2888,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.4",
           "Modilist.Domains.Base": "1.0.0",
           "Modilist.Domains.ProductDomain": "1.0.0",
+          "Modilist.Domains.UserDomain": "1.0.0",
           "Modilist.Infrastructure.Shared": "1.0.0"
         },
         "compile": {
@@ -2897,12 +2921,27 @@
           "bin/placeholder/Modilist.Domains.ProductDomain.dll": {}
         }
       },
+      "Modilist.Domains.UserDomain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Modilist.Domains.Base": "1.0.0",
+          "Modilist.Infrastructure.Shared": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Modilist.Domains.UserDomain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Modilist.Domains.UserDomain.dll": {}
+        }
+      },
       "Modilist.Infrastructure.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "DynamicQueryBuilder": "1.0.5",
           "FluentValidation.AspNetCore": "10.4.0",
+          "Mapster": "7.3.0",
           "Newtonsoft.Json": "13.0.1"
         },
         "compile": {
@@ -3028,6 +3067,36 @@
         "lib/netstandard1.3/JsonNet.ContractResolvers.xml",
         "lib/netstandard2.0/JsonNet.ContractResolvers.dll",
         "lib/netstandard2.0/JsonNet.ContractResolvers.xml"
+      ]
+    },
+    "Mapster/7.3.0": {
+      "sha512": "NrCUX/rJa5PTyo6iW4AL5dZLU9PDNlYnrJOVjgdpo5OQM9EtWH2CMHnC5sSuJWC0d0b0SnmeRrIviEem6WxtuQ==",
+      "type": "package",
+      "path": "mapster/7.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netstandard1.3/Mapster.dll",
+        "lib/netstandard2.0/Mapster.dll",
+        "mapster.7.3.0.nupkg.sha512",
+        "mapster.nuspec"
+      ]
+    },
+    "Mapster.Core/1.2.0": {
+      "sha512": "TNdqZk2zAuBYfJF88D/3clQTOyOdqr1crU81yZQtlGa+e7FYWhJdK/buBWT+TpM3qQko9UzmzfOT4iq3JCs/ZA==",
+      "type": "package",
+      "path": "mapster.core/1.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net40/Mapster.Core.dll",
+        "lib/net45/Mapster.Core.dll",
+        "lib/netstandard1.3/Mapster.Core.dll",
+        "lib/netstandard2.0/Mapster.Core.dll",
+        "mapster.core.1.2.0.nupkg.sha512",
+        "mapster.core.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
@@ -8823,6 +8892,11 @@
       "type": "project",
       "path": "../Modilist.Domains.ProductDomain/Modilist.Domains.ProductDomain.csproj",
       "msbuildProject": "../Modilist.Domains.ProductDomain/Modilist.Domains.ProductDomain.csproj"
+    },
+    "Modilist.Domains.UserDomain/1.0.0": {
+      "type": "project",
+      "path": "../Modilist.Domains.UserDomain/Modilist.Domains.UserDomain.csproj",
+      "msbuildProject": "../Modilist.Domains.UserDomain/Modilist.Domains.UserDomain.csproj"
     },
     "Modilist.Infrastructure.Shared/1.0.0": {
       "type": "project",
