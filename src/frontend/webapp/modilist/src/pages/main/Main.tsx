@@ -2,7 +2,6 @@ import { AuthError, InteractionRequiredAuthError } from "@azure/msal-browser";
 import { useMsal } from "@azure/msal-react";
 import { Button, Typography } from "@mui/material";
 import { config } from "../../config";
-import { TestApiFactory } from "../../swagger/api";
 
 
 async function callApi(accessToken: string) {
@@ -39,6 +38,8 @@ export function Main() {
                             basePath: "http://localhost:5088/api/",
                             accessToken: response.accessToken,
                         });
+
+                        api.test.
 
                         testApi.apiV1TestPost({
                             sku: "test",
