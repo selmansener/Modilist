@@ -77,7 +77,9 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "start:int": "set \"REACT_APP_ENV=int\" && node scripts/start.js",
     "build": "node scripts/build.js",
+    "build:int": "set \"REACT_APP_ENV=int\" && node scripts/build.js",
     "test": "node scripts/test.js",
     "swagger:generate": "node scripts/swagger-generate.js"
   },
