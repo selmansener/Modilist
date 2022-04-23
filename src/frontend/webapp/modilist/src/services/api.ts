@@ -1,4 +1,4 @@
-import { TestApiFactory } from "./swagger/api";
+import { TestApiFactory, UserApiFactory } from "./swagger/api";
 import axios from 'axios';
 import { IPublicClientApplication } from "@azure/msal-browser";
 import { config } from "../config";
@@ -25,6 +25,6 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
     );
 
     return {
-        test: TestApiFactory(undefined, config.webApi, axios)
+        users: UserApiFactory(undefined, config.webApi, axios)
     }
 }

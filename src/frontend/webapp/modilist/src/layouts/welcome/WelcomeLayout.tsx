@@ -9,7 +9,10 @@ import StylePreferences from "../../pages/welcome/StylePreferences";
 import Subscription from "../../pages/welcome/Subscription";
 import PaymentMethod from "../../pages/welcome/PaymentMethod";
 import ContactInfo from "../../pages/welcome/ContactInfo";
-import React from "react";
+import React, { useEffect } from "react";
+import { useMsal } from "@azure/msal-react";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../store/store";
 
 const mdTheme = createTheme({
     palette: {
@@ -53,6 +56,20 @@ const steps = [
 ];
 
 export default function Welcome() {
+    const { instance } = useMsal();
+    const account = instance.getActiveAccount();
+
+    const dispatch = useDispatch<Dispatch>();
+    const { statusCode } = useSelector((state: RootState) => state.createAccountModel);
+
+    useEffect(() => {
+        if (account && statusCode == 0) {
+            dispatch.createAccountModel.createAccount({
+                id: (account.idTokenClaims as any)["oid"]
+            });
+        }
+    }, []);
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -62,6 +79,7 @@ export default function Welcome() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     return (
         <ThemeProvider theme={mdTheme}>
             <Box
@@ -115,32 +133,36 @@ export default function Welcome() {
                 </AppBar>
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                     <Grid container spacing="2">
-                        <Grid item xs={12}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    height: 240,
-                                }}
-                            >
-                                <Typography variant="h4" component="div" sx={{mt:2}}>
-                                    Modilist'e hoşgeldin!
-                                </Typography>
-                                <Typography variant="h6" component="div">
-                                    Sana özel kombinlerini hazırlamaya başlamadan önce bazı bilgilere ihtiyacımız var.
-                                </Typography>
-                                <Typography variant="h6" component="div">
-                                    Lütfen aşağıdaki birkaç aşamadan oluşan formu dikkatlice doldur.
-                                </Typography>
-                                <Typography component="div">
-                                    <ExpandCircleDownIcon sx={{ fontSize: 72, mt: 5 }} color="primary" />
-                                </Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} sx={{ mt: 5 }}>
-                            <WelcomeSteps steps={steps} />
-                        </Grid>
+                        {statusCode == 0 ? <></> :
+                            <>
+                                <Grid item xs={12}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            height: 240,
+                                        }}
+                                    >
+                                        <Typography variant="h4" component="div" sx={{ mt: 2 }}>
+                                            Modilist'e hoşgeldin!
+                                        </Typography>
+                                        <Typography variant="h6" component="div">
+                                            Sana özel kombinlerini hazırlamaya başlamadan önce bazı bilgilere ihtiyacımız var.
+                                        </Typography>
+                                        <Typography variant="h6" component="div">
+                                            Lütfen aşağıdaki birkaç aşamadan oluşan formu dikkatlice doldur.
+                                        </Typography>
+                                        <Typography component="div">
+                                            <ExpandCircleDownIcon sx={{ fontSize: 72, mt: 5 }} color="primary" />
+                                        </Typography>
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12} sx={{ mt: 5 }}>
+                                    <WelcomeSteps steps={steps} />
+                                </Grid>
+                            </>
+                        }
                     </Grid>
                 </Container>
             </Box>

@@ -14,7 +14,7 @@ namespace Modilist.Data.Repositories.UserDomain
 
     internal class AccountReadRepository : ReadRepository<Account>, IAccountReadRepository
     {
-        internal AccountReadRepository(ModilistReadDbContext baseDb)
+        public AccountReadRepository(ModilistReadDbContext baseDb)
             : base(baseDb)
         {
         }

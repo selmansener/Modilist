@@ -109,3 +109,8 @@ C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Domains.Base.pdb
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Domains.ProductDomain.pdb
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\obj\Debug\net6.0\refint\Modilist.API.dll
+C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\appsettings.Int.json
+C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Mapster.dll
+C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Mapster.Core.dll
+C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Domains.UserDomain.dll
+C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Domains.UserDomain.pdb

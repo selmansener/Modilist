@@ -4,19 +4,29 @@ import Dashboard from './layouts/dashboard/DashboardLayout';
 import Unauthenticated from './layouts/unauthenticated/UnauthenticatedLayout';
 import { AccountInfo } from '@azure/msal-browser';
 import Welcome from './layouts/welcome/WelcomeLayout';
+import { Backdrop, CircularProgress } from '@mui/material';
 
 function App() {
-  const { accounts } = useMsal();
-  // const account = accounts[0] as AccountInfo;
-  // TODO: change with user idToken.newUser
-  const newUser = false;
-  
+  const { instance, accounts } = useMsal();
+
+  const account = instance.getActiveAccount();
+  let newUser = false;
+  if (account) {
+    newUser = (account.idTokenClaims as any)["newUser"];
+  }
+
+  console.log(account);
+  console.log(newUser);
+
   return (
     <div className="App">
       <AuthenticatedTemplate>
-        {
-          newUser ? <Welcome /> : <Dashboard />
-        }
+        {(newUser === false ?
+          <Backdrop open={true}
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+            <CircularProgress color="inherit" />
+          </Backdrop> : newUser === undefined ?  <Dashboard /> : <Welcome />
+        )}
       </AuthenticatedTemplate>
 
       <UnauthenticatedTemplate>

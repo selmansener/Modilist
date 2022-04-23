@@ -8,27 +8,10 @@ import { Dispatch, RootState } from "../../store/store";
 
 export function Main() {
     const { instance, accounts } = useMsal();
-    const dispatch = useDispatch<Dispatch>();
-    let createProductResponse = useSelector((state: RootState) => state.createProduct);
 
     return (
         <>
             <Typography variant="h1">Main</Typography>
-            <Button onClick={() => {
-                dispatch.createProduct.createProduct({
-                    sku: "qqweqweq",
-                    name: "feegeg"
-                });
-            }}>
-                <Typography>Test</Typography>
-            </Button>
-            <Typography>
-                SKU: {createProductResponse.sku}
-            </Typography>
-
-            <Typography>
-                Name: {createProductResponse.name}
-            </Typography>
             <Button onClick={() => {
                 const account = instance.getActiveAccount();
 

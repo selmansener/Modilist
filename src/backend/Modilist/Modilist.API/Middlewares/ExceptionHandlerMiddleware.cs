@@ -1,4 +1,5 @@
-﻿using Modilist.Infrastructure.Shared.Interfaces;
+﻿using Modilist.API.Models;
+using Modilist.Infrastructure.Shared.Interfaces;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -48,9 +49,10 @@ namespace Modilist.API.Middlewares
             }
         }
 
-        public sealed class ExceptionResponse
+        public sealed class ExceptionResponse : CommonResponse<object?>
         {
             public ExceptionResponse(Exception exception, IWebHostEnvironment environment)
+                : base(0, null)
             {
                 if (exception is IClientException clientException)
                 {
@@ -68,14 +70,6 @@ namespace Modilist.API.Middlewares
                     Data = environment.IsProduction() ? null : exception.Data;
                 }
             }
-
-            public int StatusCode { get; private set; }
-
-            public string Message { get; private set; }
-
-            public string Type { get; private set; }
-
-            public object Data { get; private set; }
         }
     }
 

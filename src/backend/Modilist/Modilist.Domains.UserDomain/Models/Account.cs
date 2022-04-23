@@ -8,15 +8,14 @@ namespace Modilist.Domains.UserDomain.Models
     public class Account : BaseEntity
     {
         public Account(Guid id,
-                       string firstName,
-                       string lastName,
-                       DateTime? birthDate,
-                       Gender gender,
-                       string instagramUserName,
-                       string email,
-                       string phone,
-                       string jobTitle,
-                       AccountStatus status)
+                       string? firstName = null,
+                       string? lastName = null,
+                       DateTime? birthDate = null,
+                       Gender gender = Gender.None,
+                       string? instagramUserName = null,
+                       string? email = null,
+                       string? phone = null,
+                       string? jobTitle = null)
         {
             Id = id;
             FirstName = firstName;
@@ -27,7 +26,7 @@ namespace Modilist.Domains.UserDomain.Models
             Email = email;
             Phone = phone;
             JobTitle = jobTitle;
-            Status = status;
+            Status = AccountStatus.Active;
         }
 
         public new Guid Id { get; private set; }
@@ -49,5 +48,24 @@ namespace Modilist.Domains.UserDomain.Models
         public string? JobTitle { get; private set; }
 
         public AccountStatus Status { get; private set; }
+
+        public void Update(string firstName,
+                       string lastName,
+                       DateTime? birthDate,
+                       Gender gender,
+                       string instagramUserName,
+                       string email,
+                       string phone,
+                       string jobTitle)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            BirthDate = birthDate;
+            Gender = gender;
+            InstagramUserName = instagramUserName;
+            Email = email;
+            Phone = phone;
+            JobTitle = jobTitle;
+        }
     }
 }

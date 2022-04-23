@@ -8,7 +8,7 @@ using Modilist.Infrastructure.Shared.Interfaces.Enums;
 
 namespace Modilist.Business.CQRS.UserDomain.Commands.DTOs
 {
-    public class CreateAccountInputDTO
+    public class UpdateAccountOutputDTO
     {
         public new Guid Id { get; private set; }
 

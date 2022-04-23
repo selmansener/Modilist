@@ -170,6 +170,27 @@
           }
         }
       },
+      "Mapster/7.3.0": {
+        "dependencies": {
+          "Mapster.Core": "1.2.0",
+          "Microsoft.CSharp": "4.7.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mapster.dll": {
+            "assemblyVersion": "7.3.0.0",
+            "fileVersion": "7.3.0.0"
+          }
+        }
+      },
+      "Mapster.Core/1.2.0": {
+        "runtime": {
+          "lib/netstandard2.0/Mapster.Core.dll": {
+            "assemblyVersion": "1.2.0.0",
+            "fileVersion": "1.2.0.0"
+          }
+        }
+      },
       "MediatR/10.0.1": {
         "dependencies": {
           "MediatR.Contracts": "1.0.1"
@@ -1901,9 +1922,12 @@
       },
       "Modilist.Business/1.0.0": {
         "dependencies": {
+          "Mapster": "7.3.0",
           "MediatR": "10.0.1",
           "MediatR.Extensions.FluentValidation.AspNetCore": "2.0.0",
-          "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1"
+          "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1",
+          "Modilist.Data": "1.0.0",
+          "Modilist.Infrastructure.Shared": "1.0.0"
         },
         "runtime": {
           "Modilist.Business.dll": {}
@@ -1927,6 +1951,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.4",
           "Modilist.Domains.Base": "1.0.0",
           "Modilist.Domains.ProductDomain": "1.0.0",
+          "Modilist.Domains.UserDomain": "1.0.0",
           "Modilist.Infrastructure.Shared": "1.0.0"
         },
         "runtime": {
@@ -1946,10 +1971,20 @@
           "Modilist.Domains.ProductDomain.dll": {}
         }
       },
+      "Modilist.Domains.UserDomain/1.0.0": {
+        "dependencies": {
+          "Modilist.Domains.Base": "1.0.0",
+          "Modilist.Infrastructure.Shared": "1.0.0"
+        },
+        "runtime": {
+          "Modilist.Domains.UserDomain.dll": {}
+        }
+      },
       "Modilist.Infrastructure.Shared/1.0.0": {
         "dependencies": {
           "DynamicQueryBuilder": "1.0.5",
           "FluentValidation.AspNetCore": "10.4.0",
+          "Mapster": "7.3.0",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
@@ -2047,6 +2082,20 @@
       "sha512": "sha512-OqBmReOlo1VEY0ssIXrKOdyz+sPDmm0cjlb8pVg7RY4Xb6soUJ/kzVmwgMCFMrYnye/omqgefz3VPUWmsI5DNA==",
       "path": "jsonnet.contractresolvers/2.0.0",
       "hashPath": "jsonnet.contractresolvers.2.0.0.nupkg.sha512"
+    },
+    "Mapster/7.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NrCUX/rJa5PTyo6iW4AL5dZLU9PDNlYnrJOVjgdpo5OQM9EtWH2CMHnC5sSuJWC0d0b0SnmeRrIviEem6WxtuQ==",
+      "path": "mapster/7.3.0",
+      "hashPath": "mapster.7.3.0.nupkg.sha512"
+    },
+    "Mapster.Core/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TNdqZk2zAuBYfJF88D/3clQTOyOdqr1crU81yZQtlGa+e7FYWhJdK/buBWT+TpM3qQko9UzmzfOT4iq3JCs/ZA==",
+      "path": "mapster.core/1.2.0",
+      "hashPath": "mapster.core.1.2.0.nupkg.sha512"
     },
     "MediatR/10.0.1": {
       "type": "package",
@@ -3462,6 +3511,11 @@
       "sha512": ""
     },
     "Modilist.Domains.ProductDomain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Modilist.Domains.UserDomain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

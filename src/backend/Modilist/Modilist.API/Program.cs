@@ -47,7 +47,12 @@ Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("ReadTests", policy => policy.Requirements.Add(new ScopesRequirement("Test.Read")));
+    var permissions = GetPermissions();
+
+    foreach (var permission in permissions)
+    {
+        options.AddPolicy(permission.Key, policy => policy.Requirements.Add(new ScopesRequirement(permission.Value)));
+    }
 });
 
 builder.Services.AddRepositories();
@@ -125,6 +130,10 @@ void ConfigureSwaggerGenerator(SwaggerGenOptions options)
     options.SchemaFilter<RequireValueTypePropertiesSchemaFilter>(true);
     // options.SchemaFilter<SwaggerExcludeFilter>();
 
+    var permissions = GetPermissions().ToDictionary(
+        x => $"https://{config.AzureAdB2COptions.Domain}/{config.AzureAdB2COptions.ClientId}/{x.Value}", 
+        x => x.Key);
+
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -137,10 +146,7 @@ void ConfigureSwaggerGenerator(SwaggerGenOptions options)
             Implicit = new OpenApiOAuthFlow
             {
                 AuthorizationUrl = new Uri(config.AzureAdB2COptions.AuthorizationUrl, UriKind.Absolute),
-                Scopes = new Dictionary<string, string>
-                        {
-                            { "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Test.Read", "Read Posts" }
-                        }
+                Scopes = permissions
             }
         }
     });
@@ -165,10 +171,7 @@ void ConfigureSwaggerGenerator(SwaggerGenOptions options)
                                 Implicit = new OpenApiOAuthFlow
                                 {
                                     AuthorizationUrl = new Uri(config.AzureAdB2COptions.AuthorizationUrl, UriKind.Absolute),
-                                    Scopes = new Dictionary<string, string>
-                                    {
-                                        { "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Test.Read", "Read Tests" }
-                                    }
+                                    Scopes = permissions
                                 }
                             }
                         },
@@ -243,4 +246,21 @@ void ConfigureApiExplorer(ApiExplorerOptions options)
     options.SubstituteApiVersionInUrl = true;
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.AssumeDefaultVersionWhenUnspecified = true;
+}
+
+IDictionary<string, string> GetPermissions()
+{
+    var authPermissions = new AuthorizationPermissions();
+    var fields = typeof(AuthorizationPermissions).GetFields();
+    var permissions = new Dictionary<string, string>();
+
+    foreach (var field in fields)
+    {
+        if (!permissions.ContainsKey(field.Name))
+        {
+            permissions.Add(field.Name, field.GetValue(permissions).ToString());
+        }
+    }
+
+    return permissions;
 }
