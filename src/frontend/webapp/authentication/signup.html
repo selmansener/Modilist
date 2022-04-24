@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <title>Hesap Oluştur | Modilist</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            height: 100%;
+        }
+
+        .root {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fffef8;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: stretch;
+        }
+
+        .panel {
+            width: 490px;
+            padding: 50px;
+            background-color: #06273a;
+            color: #fffef8;
+            align-self: stretch;
+        }
+
+        .companyLogo {
+            width: 100%;
+        }
+
+        .heading h1 {
+            text-align: center;
+        }
+
+        .divider {
+            display: none;
+        }
+
+        .social button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 15px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            background-color: #fffef8;
+            border: 2px solid #5c5c5c;
+            border-radius: 5px;
+
+            background-position: left;
+            background-repeat: no-repeat;
+            background-position-x: 3%;
+            background-position-y: 50%;
+            transition: background 250ms ease-in-out, transform 150ms;
+            outline: none;
+
+            cursor: pointer;
+        }
+
+        #FacebookExchange {
+            background-image: url(https://stazureb2c.blob.core.windows.net/authentacation-pages/images/facebook.svg);
+            background-size: 20% 90%;
+        }
+
+        #FacebookExchange:hover {
+            background-color: #3b5595;
+            color: #ffffff;
+        }
+
+        #GoogleExchange {
+            background-image: url(https://stazureb2c.blob.core.windows.net/authentacation-pages/images/google.svg);
+            background-size: 20% 60%;
+        }
+
+        #GoogleExchange:hover {
+            background-color: #c64a29;
+            color: #ffffff;
+        }
+
+        button:active {
+            transform: scale(0.99);
+        }
+
+        .entry-item {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .attrEntry input {
+            outline: none;
+            border: 2px solid #5c5c5c;
+            border-radius: 5px;
+            font-size: 1em;
+            height: 50px;
+            line-height: 1.42857143;
+            padding: 6px 20px;
+            margin-top: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: calc(100% - 40px);
+        }
+
+        .attrEntry input:focus {
+            border: 2px solid #000;
+        }
+
+        .attrEntry label {
+            display: none;
+        }
+
+        .password-label,
+        .rememberMe {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .password-label a {
+            color: #ffffff;
+        }
+
+        .buttons {
+            text-align: right;
+        }
+
+        .buttons button {
+            width: 200px;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 1em;
+            font-weight: 400;
+            height: inherit;
+            line-height: 1.3333333;
+            margin-top: 2rem;
+            margin-right: 0;
+            margin-bottom: 1.2rem;
+            margin-left: 0;
+            padding: 10px 16px;
+            text-align: center;
+        }
+
+        .buttons #cancel {
+            padding: 0;
+            margin-right: auto;
+            background: 0 0;
+            border: 0;
+            width: inherit;
+            background-color: transparent;
+            font-size: 1em;
+            color: #ffffff;
+            box-shadow: none;
+            text-align: left;
+            display: block;
+        }
+
+        .buttons #cancel::before {
+            content: "←";
+            vertical-align: text-bottom;
+            margin-right: 5px;
+        }
+
+        .create,
+        .create a {
+            color: #ffffff;
+            text-align: right;
+        }
+
+        .create a {
+            padding-left: 5px;
+        }
+
+        .left {
+            flex-grow: 1;
+            align-self: stretch;
+            background-image: url(https://stazureb2c.blob.core.windows.net/authentacation-pages/images/left.jpg);
+            background-size: cover;
+            background-position-x: 30%;
+        }
+
+        .right {
+            flex-grow: 1;
+            align-self: stretch;
+            background-image: url(https://stazureb2c.blob.core.windows.net/authentacation-pages/images/right.jpg);
+            background-size: cover;
+            background-position-x: 31%;
+        }
+
+        .helpLink,
+        .intro {
+            display: none;
+        }
+
+        ul {
+            list-style: none outside none;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="root">
+        <div class="left">
+        </div>
+        <div class="container">
+            <div class="panel">
+                <img class="companyLogo" data-tenant-branding-logo="true"
+                    src="https://stazureb2c.blob.core.windows.net/authentacation-pages/images/logo.svg"
+                    alt="Company Logo">
+                <div id="api" data-name="SelfAsserted" role="main">
+                    <div class="heading">
+                        <h1 role="heading">User Details</h1>
+                    </div>
+                    <div class="buttons">
+                        <button id="cancel" aria-label="Cancel" formnovalidate="">Cancel</button>
+                    </div>
+                    <div class="intro">
+                        <p>Please provide the following details.</p>
+                    </div>
+                    <form id="attributeVerification" action="JavaScript:void(0);">
+                        <div id="passwordEntryMismatch" class="error pageLevel" style="display: none;"
+                            aria-hidden="true">The password entry fields do not match. Please enter the same password in
+                            both fields and try again.</div>
+                        <div id="requiredFieldMissing" class="error pageLevel" style="display: none;"
+                            aria-hidden="true">A required field is missing. Please fill out all required fields and try
+                            again.</div>
+                        <div id="fieldIncorrect" class="error pageLevel" style="display: none;" aria-hidden="true">One
+                            or more fields are filled out incorrectly. Please check your entries and try again.</div>
+                        <div id="claimVerificationServerError" class="error pageLevel" style="display: none;"
+                            aria-hidden="true"></div>
+                        <div id="attributeList" class="attr">
+                            <ul>
+                                <li class="VerificationControl emailVerificationControl_li">
+                                    <div class="attrEntry"><label id="emailVerificationControl_label"
+                                            for="emailVerificationControl"></label>
+                                        <div class="error itemLevel" role="alert"></div>
+                                        <div class="verificationControlContent" id="emailVerificationControl">
+                                            <div class="verificationInfoText">
+                                                <div id="emailVerificationControl_info_message" aria-hidden="true"
+                                                    role="alert"
+                                                    aria-label="Verification is necessary. Please click Send button."
+                                                    style="display: none;">Verification is necessary. Please click Send
+                                                    button.</div>
+                                            </div>
+                                            <div class="verificationSuccessText">
+                                                <div id="emailVerificationControl_success_message" aria-hidden="true"
+                                                    role="alert" aria-label="" style="display: none;"></div>
+                                            </div>
+                                            <div class="verificationErrorText error">
+                                                <div id="emailVerificationControl_error_message" aria-hidden="true"
+                                                    role="alert" aria-label="" style="display: none;"></div>
+                                            </div>
+                                            <ul>
+                                                <li class="EmailBox email_li email" aria-hidden="false"
+                                                    style="display: inline;">
+                                                    <div class="attrEntry">
+                                                        <div class="error itemLevel" role="alert"></div><input
+                                                            id="email" class="textInput" type="email"
+                                                            placeholder="Email Address" aria-label="Email Address"
+                                                            pattern="^[a-zA-Z0-9!#$%&amp;'+^_`{}~-]+(?:\.[a-zA-Z0-9!#$%&amp;'+^_`{}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+                                                            title="Email address that can be used to contact you."
+                                                            aria-required="true" autofocus="autofocus"><a
+                                                            class="helpLink tiny" href="javascript:void(0)"
+                                                            data-help="Email address that can be used to contact you.">What
+                                                            is this?</a>
+                                                    </div>
+                                                </li>
+                                                <li class="TextBox emailVerificationCode_li VerificationCode"
+                                                    aria-hidden="true" style="display: none;">
+                                                    <div class="attrEntry">
+                                                        <div class="error itemLevel" role="alert"></div><input
+                                                            id="emailVerificationCode" class="textInput" type="text"
+                                                            placeholder="Verification Code"
+                                                            aria-label="Verification Code"
+                                                            title="Verification code received in the email."
+                                                            aria-required="true" autocomplete="off" disabled=""><a
+                                                            class="helpLink tiny" href="javascript:void(0)"
+                                                            data-help="Verification code received in the email.">What is
+                                                            this?</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div class="working" style="display: none;" aria-hidden="true"></div>
+                                            <div class="buttons"><button class="sendCode"
+                                                    id="emailVerificationControl_but_send_code" type="button"
+                                                    aria-label="Send verification code" aria-hidden="false"
+                                                    style="display: inline;">Send verification code</button><button
+                                                    class="verifyCode" id="emailVerificationControl_but_verify_code"
+                                                    type="button" aria-label="Verify code" aria-hidden="true"
+                                                    style="display: none;">Verify code</button><button
+                                                    class="sendNewCode" id="emailVerificationControl_but_send_new_code"
+                                                    type="button" aria-label="Send new code" aria-hidden="true"
+                                                    style="display: none;">Send new code</button><button
+                                                    class="changeClaims" id="emailVerificationControl_but_change_claims"
+                                                    type="button" aria-label="Change e-mail Email Address"
+                                                    aria-hidden="true" style="display: none;">Change e-mail</button>
+                                            </div>
+                                        </div><a class="helpLink tiny" href="javascript:void(0)">What is this?</a>
+                                    </div>
+                                </li>
+                                <li class="Password newPassword_li">
+                                    <div class="attrEntry">
+                                        <div class="error itemLevel" role="alert"></div><input id="newPassword"
+                                            class="textInput" type="password" placeholder="New Password"
+                                            aria-label="New Password" title="Enter new password"
+                                            autocomplete="new-password" aria-required="true"><a class="helpLink tiny"
+                                            href="javascript:void(0)" data-help="Enter new password">What is this?</a>
+                                    </div>
+                                </li>
+                                <li class="Password reenterPassword_li">
+                                    <div class="attrEntry">
+                                        <div class="error itemLevel" role="alert"></div><input id="reenterPassword"
+                                            class="textInput" type="password" placeholder="Confirm New Password"
+                                            aria-label="Confirm New Password" title="Confirm new password"
+                                            autocomplete="new-password" aria-required="true"><a class="helpLink tiny"
+                                            href="javascript:void(0)" data-help="Confirm new password">What is this?</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="buttons">
+                            <button id="continue" type="submit" form="attributeVerification" aria-disabled="false"
+                                aria-label="Create">Create</button>
+                        </div>
+
+                        <div class="verifying-modal">
+                            <div id="verifying_blurb"></div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="right">
+        </div>
+    </div>
+</body>
+
+</html>
