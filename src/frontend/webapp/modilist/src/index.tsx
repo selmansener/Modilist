@@ -24,15 +24,13 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <MsalProvider instance={msalInstance}>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </MsalProvider>
-  </React.StrictMode>
+  <MsalProvider instance={msalInstance}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </MsalProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -7,6 +7,8 @@ using Modilist.API.Configurations;
 using Modilist.API.Models;
 using Modilist.Business.CQRS.UserDomain.Commands;
 using Modilist.Business.CQRS.UserDomain.Commands.DTOs;
+using Modilist.Business.CQRS.UserDomain.Queries;
+using Modilist.Business.CQRS.UserDomain.Queries.DTOs;
 
 namespace Modilist.API.Area.API.Controllers
 {
@@ -19,7 +21,17 @@ namespace Modilist.API.Area.API.Controllers
             _mediator = mediator;
         }
 
-        // TODO: change response type with a generic object
+
+        [Authorize(nameof(AuthorizationPermissions.GetAccount))]
+        [HttpGet("Get/{id}")]
+        [ProducesResponseType(typeof(CommonResponse<GetAccountOutputDTO>), 200)]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var account = await _mediator.Send(new GetAccount { Id = id });
+
+            return Ok(new CommonResponse<GetAccountOutputDTO>(200, account));
+        }
+
         [Authorize(nameof(AuthorizationPermissions.CreateAccount))]
         [HttpPost("Create")]
         [ProducesResponseType(typeof(CommonResponse), 200)]
@@ -30,7 +42,6 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(new CommonResponse(200));
         }
 
-        // TODO: change response type with a generic object
         [Authorize(nameof(AuthorizationPermissions.UpdateAccount))]
         [HttpPost("Update")]
         [ProducesResponseType(typeof(CommonResponse<UpdateAccountOutputDTO>), 200)]

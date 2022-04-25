@@ -114,13 +114,15 @@ export default function Personal() {
                     <Typography>
                         Alışveriş yapmayı seviyor musun?
                     </Typography>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                        <Typography variant='caption'>Sevmiyorum</Typography>
                         <Rating
                             name="love-shopping"
                             defaultValue={0}
                             IconContainerComponent={IconContainer}
                             highlightSelectedOnly
                         />
+                        <Typography variant='caption'>Seviyorum</Typography>
                     </div>
                 </FormControl>
             </Grid>
@@ -129,13 +131,15 @@ export default function Personal() {
                     <Typography>
                         Stilin dışında önerilere ne kadar açıksın?
                     </Typography>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                        <Typography variant='caption'>Değilim</Typography>
                         <Rating
                             name="love-shopping"
                             defaultValue={0}
                             IconContainerComponent={IconContainer}
                             highlightSelectedOnly
                         />
+                        <Typography variant='caption'>Açığım</Typography>
                     </div>
                 </FormControl>
             </Grid>

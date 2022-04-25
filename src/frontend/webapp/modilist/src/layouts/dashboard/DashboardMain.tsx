@@ -13,7 +13,7 @@ export function DashboardMain() {
                 overflow: 'auto',
             }}
         >
-            <Container fixed maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Container fixed maxWidth="lg" sx={{ mt: 18, mb: 4 }}>
                 <Routes>
                     {dashboardMenu.map((item: MenuLinkItem) => {
                         return <Route key={item.route} path={item.route} element={(

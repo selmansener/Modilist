@@ -15,9 +15,6 @@ function App() {
     newUser = (account.idTokenClaims as any)["newUser"];
   }
 
-  console.log(account);
-  console.log(newUser);
-
   return (
     <div className="App">
       <AuthenticatedTemplate>

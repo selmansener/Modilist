@@ -10,6 +10,10 @@ export default function Unauthenticated() {
             console.log(e);
         });
 
+    React.useEffect(() => {
+        document.title = "Modilist";
+    }, []);
+
     return (
         <></>
     );

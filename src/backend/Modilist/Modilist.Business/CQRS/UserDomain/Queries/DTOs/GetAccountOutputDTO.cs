@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Mapster;
+
+using Modilist.Domains.UserDomain.Models;
 using Modilist.Infrastructure.Shared.Interfaces.Enums;
 
-namespace Modilist.Business.CQRS.UserDomain.Commands.DTOs
+namespace Modilist.Business.CQRS.UserDomain.Queries.DTOs
 {
-    public class UpdateAccountOutputDTO
+    public class GetAccountOutputDTO
     {
         public Guid Id { get; private set; }
 
@@ -27,5 +30,13 @@ namespace Modilist.Business.CQRS.UserDomain.Commands.DTOs
         public string? Phone { get; private set; }
 
         public string? JobTitle { get; private set; }
+    }
+
+    public class GetAccountOutputDTOMapper : IRegister
+    {
+        public void Register(TypeAdapterConfig config)
+        {
+            config.ForType<Account, GetAccountOutputDTO>();
+        }
     }
 }

@@ -15,7 +15,8 @@ const mdTheme = createTheme({
       main: '#ffeddf'
     },
     background: {
-      default: '#294260'
+      default: '#ffeddf',
+      paper: '#294260'
     },
     text: {
       primary: '#ffeddf',
