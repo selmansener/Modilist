@@ -1,4 +1,6 @@
 ﻿
+using FluentValidation;
+
 using MediatR;
 
 using Modilist.Data.Repositories.UserDomain;
@@ -8,7 +10,24 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
 {
     public class CreateAccount : IRequest
     {
+        public CreateAccount(Guid id, string email)
+        {
+            Id = id;
+            Email = email;
+        }
+
         public Guid Id { get; set; }
+
+        public string Email { get; set; }
+    }
+
+    internal class CreateAccountValidator : AbstractValidator<CreateAccount>
+    {
+        public CreateAccountValidator()
+        {
+            RuleFor(x => x.Id).NotEmpty();
+            RuleFor(x => x.Email).NotEmpty();
+        }
     }
 
     internal class CreateAccountHandler : IRequestHandler<CreateAccount>
@@ -30,7 +49,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
                 throw new Exception("account already exists");
             }
 
-            account = new Account(request.Id);
+            account = new Account(request.Id, request.Email);
 
             await _accountWriteRepository.AddAsync(account, cancellationToken, true);
 

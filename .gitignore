@@ -409,3 +409,13 @@ FodyWeavers.xsd
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
+
+**/bin/*
+**/obj/*

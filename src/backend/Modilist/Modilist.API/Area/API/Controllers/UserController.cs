@@ -9,6 +9,7 @@ using Modilist.Business.CQRS.UserDomain.Commands;
 using Modilist.Business.CQRS.UserDomain.Commands.DTOs;
 using Modilist.Business.CQRS.UserDomain.Queries;
 using Modilist.Business.CQRS.UserDomain.Queries.DTOs;
+using Modilist.Infrastructure.Shared.Extensions;
 
 namespace Modilist.API.Area.API.Controllers
 {
@@ -23,11 +24,11 @@ namespace Modilist.API.Area.API.Controllers
 
 
         [Authorize(nameof(AuthorizationPermissions.GetAccount))]
-        [HttpGet("Get/{id}")]
+        [HttpGet("Get")]
         [ProducesResponseType(typeof(CommonResponse<GetAccountOutputDTO>), 200)]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<IActionResult> Get()
         {
-            var account = await _mediator.Send(new GetAccount { Id = id });
+            var account = await _mediator.Send(new GetAccount { Id = User.GetUserId() });
 
             return Ok(new CommonResponse<GetAccountOutputDTO>(200, account));
         }
@@ -47,6 +48,8 @@ namespace Modilist.API.Area.API.Controllers
         [ProducesResponseType(typeof(CommonResponse<UpdateAccountOutputDTO>), 200)]
         public async Task<IActionResult> Post(UpdateAccount input, CancellationToken cancellationToken)
         {
+            input.Id = User.GetUserId();
+
             var response = await _mediator.Send(input, cancellationToken);
 
             return Ok(new CommonResponse<UpdateAccountOutputDTO>(200, response));

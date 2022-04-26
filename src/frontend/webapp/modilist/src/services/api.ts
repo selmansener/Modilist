@@ -1,6 +1,6 @@
-import { TestApiFactory, UserApiFactory } from "./swagger/api";
+import { UserApiFactory } from "./swagger/api";
 import axios from 'axios';
-import { IPublicClientApplication } from "@azure/msal-browser";
+import { InteractionRequiredAuthError, IPublicClientApplication } from "@azure/msal-browser";
 import { config } from "../config";
 
 export const apiFactory = function (msalInstance: IPublicClientApplication) {
@@ -20,9 +20,21 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
             return options;
         },
         error => {
+            console.log("test")
             Promise.reject(error);
         }
     );
+
+    axios.interceptors.response.use(undefined,
+        async error => {
+            if (error instanceof InteractionRequiredAuthError) {
+                const account = msalInstance.getActiveAccount();
+                await msalInstance.logoutRedirect({
+                    account
+                });
+            }
+            Promise.reject(error);
+        });
 
     return {
         users: UserApiFactory(undefined, config.webApi, axios)

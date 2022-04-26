@@ -2,13 +2,23 @@ import { Button, Checkbox, FormControl, Grid, InputLabel, ListItemText, MenuItem
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { locale } from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../store/store";
 
 export function Account() {
     const [locale, setLocale] = useState<string>('tr');
     const [value, setValue] = useState<moment.Moment | null>(null);
     const maxDate = moment().subtract(18, 'years');
+    const { isBusy, response } = useSelector((state: RootState) => state.getAccountModel);
+    const dispatch = useDispatch<Dispatch>();
+
+    useEffect(() => {
+        if (isBusy == undefined) {
+            dispatch.getAccountModel.getAccount();
+        }
+    }, []);
 
     return (
         <Paper>
@@ -80,7 +90,7 @@ export function Account() {
 
                 <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', mb:5 }}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <Button variant="contained">
+                        <Button variant="contained" color="secondary">
                             <Typography>Kaydet</Typography>
                         </Button>
                     </FormControl>

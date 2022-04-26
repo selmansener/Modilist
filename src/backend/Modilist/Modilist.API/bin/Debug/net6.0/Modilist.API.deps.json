@@ -1985,6 +1985,7 @@
           "DynamicQueryBuilder": "1.0.5",
           "FluentValidation.AspNetCore": "10.4.0",
           "Mapster": "7.3.0",
+          "Microsoft.Identity.Web": "1.23.1",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
@@ -3206,7 +3207,7 @@
     "System.Reflection.TypeExtensions/4.5.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-fO8GMEkgoKioJ7cglZbhcnBgkCWWn9poS3G2jevS+fuwW9xJXMx7/1kr7dkwOJfo0pWqxLFWVcxlOr+WeK5ipA==",
+      "sha512": "sha512-MW3MxOtKtIr/gMbPUvfXZK2rUN57NUJSUuDCzLOdMAuTO8I1Gt0LJJcNf6MMTm5BWAJrz/Lex8AhYAn8fWf4Xw==",
       "path": "system.reflection.typeextensions/4.5.1",
       "hashPath": "system.reflection.typeextensions.4.5.1.nupkg.sha512"
     },

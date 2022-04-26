@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using FluentValidation;
+
 using Mapster;
 
 using MediatR;
@@ -17,7 +19,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
 {
     public class UpdateAccount : IRequest<UpdateAccountOutputDTO>
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public string? FirstName { get; set; }
 
@@ -25,18 +27,22 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
 
         public DateTime? BirthDate { get; set; }
 
-        public Gender Gender { get; set; } = Gender.None;
-
         public string? InstagramUserName { get; set; }
-
-        public string? Email { get; set; }
 
         public string? Phone { get; set; }
 
         public string? JobTitle { get; set; }
     }
 
-    public class UpdateAccountHandler : IRequestHandler<UpdateAccount, UpdateAccountOutputDTO>
+    internal class UpdateAccountValidator : AbstractValidator<UpdateAccount>
+    {
+        public UpdateAccountValidator()
+        {
+            RuleFor(x => x.Id).NotEmpty();
+        }
+    }
+
+    internal class UpdateAccountHandler : IRequestHandler<UpdateAccount, UpdateAccountOutputDTO>
     {
         private readonly IAccountWriteRepository _accountWriteRepository;
 
@@ -47,7 +53,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
 
         public async Task<UpdateAccountOutputDTO> Handle(UpdateAccount request, CancellationToken cancellationToken)
         {
-            Account account = await _accountWriteRepository.GetByIdAsync(request.Id, cancellationToken);
+            Account account = await _accountWriteRepository.GetByIdAsync(request.Id.Value, cancellationToken);
 
             // TODO: change exception type
             if (account == null)
@@ -58,9 +64,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
             account.Update(request.FirstName,
                 request.LastName,
                 request.BirthDate,
-                request.Gender,
                 request.InstagramUserName,
-                request.Email,
                 request.Phone,
                 request.JobTitle);
 

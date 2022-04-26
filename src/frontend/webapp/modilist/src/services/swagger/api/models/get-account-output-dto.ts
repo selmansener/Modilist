@@ -11,52 +11,65 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Gender } from './gender';
 /**
  * 
  * @export
- * @interface UpdateAccount
+ * @interface GetAccountOutputDTO
  */
-export interface UpdateAccount {
+export interface GetAccountOutputDTO {
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccount
+     * @memberof GetAccountOutputDTO
      */
-    id?: string;
+    id: string;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccount
+     * @memberof GetAccountOutputDTO
      */
     firstName: string;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccount
+     * @memberof GetAccountOutputDTO
      */
     lastName: string;
     /**
      * 
      * @type {Date}
-     * @memberof UpdateAccount
+     * @memberof GetAccountOutputDTO
      */
     birthDate?: Date;
     /**
      * 
+     * @type {Gender}
+     * @memberof GetAccountOutputDTO
+     */
+    gender: Gender;
+    /**
+     * 
      * @type {string}
-     * @memberof UpdateAccount
+     * @memberof GetAccountOutputDTO
      */
     instagramUserName: string;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccount
+     * @memberof GetAccountOutputDTO
+     */
+    email: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetAccountOutputDTO
      */
     phone: string;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccount
+     * @memberof GetAccountOutputDTO
      */
     jobTitle: string;
 }

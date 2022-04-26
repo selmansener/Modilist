@@ -14,19 +14,6 @@ import { useMsal } from "@azure/msal-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 
-const mdTheme = createTheme({
-    palette: {
-        primary: {
-            main: '#06273a'
-        },
-        secondary: {
-            main: '#294260'
-        },
-        background: {
-            default: '#ffeddf'
-        }
-    }
-});
 
 const steps = [
     {
@@ -62,75 +49,74 @@ export default function Welcome() {
     const dispatch = useDispatch<Dispatch>();
     const { isBusy, response } = useSelector((state: RootState) => state.createAccountModel);
 
-    // useEffect(() => {
-    //     if (account && isBusy == undefined) {
-    //         dispatch.createAccountModel.createAccount({
-    //             id: (account.idTokenClaims as any)["oid"]
-    //         }).then(() => {
-    //         });
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (account && isBusy == undefined) {
+            dispatch.createAccountModel.createAccount({
+                id: (account.idTokenClaims as any)["oid"],
+                email: (account.idTokenClaims as any)["emails"][0]
+            }).then(() => {
+            });
+        }
+    }, []);
 
     useEffect(() => {
         document.title = "Hoşgeldiniz | Modilist";
     }, []);
 
     return (
-        <ThemeProvider theme={mdTheme}>
-            <Box
-                component="main"
-                sx={{
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === 'light'
-                            ? theme.palette.grey[100]
-                            : theme.palette.grey[900],
-                    flexGrow: 1,
-                    height: '100vh',
-                    overflow: 'auto',
-                }}
-            >
-                <AppBar position="static">
-                    <Toolbar>
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            Modilist
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                    <Grid container spacing="2">
-                        {response.statusCode == 0 ? <></> :
-                            <>
-                                <Grid item xs={12}>
-                                    <Paper
-                                        sx={{
-                                            p: 2,
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            height: 240,
-                                        }}
-                                    >
-                                        <Typography variant="h4" component="div" sx={{ mt: 2 }}>
-                                            Modilist'e hoşgeldin!
-                                        </Typography>
-                                        <Typography variant="h6" component="div">
-                                            Sana özel kombinlerini hazırlamaya başlamadan önce bazı bilgilere ihtiyacımız var.
-                                        </Typography>
-                                        <Typography variant="h6" component="div">
-                                            Lütfen aşağıdaki birkaç aşamadan oluşan formu dikkatlice doldur.
-                                        </Typography>
-                                        <Typography component="div">
-                                            <ExpandCircleDownIcon sx={{ fontSize: 72, mt: 5 }} color="primary" />
-                                        </Typography>
-                                    </Paper>
-                                </Grid>
-                                <Grid item xs={12} sx={{ mt: 5 }}>
-                                    <WelcomeSteps steps={steps} />
-                                </Grid>
-                            </>
-                        }
-                    </Grid>
-                </Container>
-            </Box>
-        </ThemeProvider>
+        <Box
+            component="main"
+            sx={{
+                backgroundColor: (theme) =>
+                    theme.palette.mode === 'light'
+                        ? theme.palette.grey[100]
+                        : theme.palette.grey[900],
+                flexGrow: 1,
+                height: '100vh',
+                overflow: 'auto',
+            }}
+        >
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        Modilist
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                <Grid container spacing="2">
+                    {response.statusCode == 0 ? <></> :
+                        <>
+                            <Grid item xs={12}>
+                                <Paper
+                                    sx={{
+                                        p: 2,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        height: 240,
+                                    }}
+                                >
+                                    <Typography variant="h4" component="div" sx={{ mt: 2 }}>
+                                        Modilist'e hoşgeldin!
+                                    </Typography>
+                                    <Typography variant="h6" component="div">
+                                        Sana özel kombinlerini hazırlamaya başlamadan önce bazı bilgilere ihtiyacımız var.
+                                    </Typography>
+                                    <Typography variant="h6" component="div">
+                                        Lütfen aşağıdaki birkaç aşamadan oluşan formu dikkatlice doldur.
+                                    </Typography>
+                                    <Typography component="div">
+                                        <ExpandCircleDownIcon sx={{ fontSize: 72, mt: 5 }} color="primary" />
+                                    </Typography>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} sx={{ mt: 5 }}>
+                                <WelcomeSteps steps={steps} />
+                            </Grid>
+                        </>
+                    }
+                </Grid>
+            </Container>
+        </Box>
     )
 }

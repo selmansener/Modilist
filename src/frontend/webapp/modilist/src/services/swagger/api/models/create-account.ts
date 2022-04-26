@@ -23,4 +23,10 @@ export interface CreateAccount {
      * @memberof CreateAccount
      */
     id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAccount
+     */
+    email: string;
 }
