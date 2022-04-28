@@ -1,7 +1,7 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../..";
-import { UpdateAccount, UpdateAccountOutputDTOCommonResponse } from "../../../services/swagger/api";
+import { UpdateAccount, UpdateAccountOutputDTO, UpdateAccountOutputDTOCommonResponse } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 
 export const updateAccountModel = createModel<RootModel>()({

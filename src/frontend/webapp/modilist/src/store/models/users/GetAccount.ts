@@ -6,7 +6,7 @@ import { ResponseModel } from "../../response-model";
 
 export const getAccountModel = createModel<RootModel>()({
     state: {
-        isBusy: undefined,
+        isBusy: false,
         response: {
             statusCode: 0,
             message: "",
@@ -31,7 +31,7 @@ export const getAccountModel = createModel<RootModel>()({
                 },
                 isBusy: false
             }
-        },
+        }
     },
     effects: (dispatch) => {
         const { getAccountModel } = dispatch

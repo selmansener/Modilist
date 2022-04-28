@@ -1,5 +1,5 @@
 import AccountCircle from "@mui/icons-material/AccountCircle"
-import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
+import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge } from "@mui/material"
 import React from "react";
 import { dashboardMenu, MenuLinkItem } from "./MenuItems"
 import { styled } from '@mui/material/styles';
@@ -160,9 +160,15 @@ export function DashboardHeader() {
             return (
               <Link to={item.route}>
                 <ListItemButton key={item.route}>
-                  <ListItemIcon>
-                    {item.icon}
-                  </ListItemIcon>
+
+                  <Badge badgeContent="" variant="dot" anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }} color="error">
+                    <ListItemIcon>
+                      {item.icon}
+                    </ListItemIcon>
+                  </Badge>
                   <ListItemText primary={item.title} />
                 </ListItemButton>
               </Link>

@@ -7753,7 +7753,7 @@
       ]
     },
     "System.Security.Cryptography.ProtectedData/4.5.0": {
-      "sha512": "s/MFK8BvgtejZj5a8qAPDXEGBtWkpFX98qwQP/wqVa9CgIC7LrKHxDFdlN5x6afGAb0ZVBVGIZlCdBLnO2QjZw==",
+      "sha512": "wLBKzFnDCxP12VL9ANydSYhk59fC4cvOr9ypYQLPnAj48NQIhqnjdD2yhP8yEKyBJEjERWS9DisKL7rX5eU25Q==",
       "type": "package",
       "path": "system.security.cryptography.protecteddata/4.5.0",
       "files": [
@@ -8901,9 +8901,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aselm\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\aselm\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -8914,13 +8912,8 @@
       "packagesPath": "C:\\Users\\aselm\\.nuget\\packages\\",
       "outputPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Infrastructure.Shared\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\aselm\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8982,7 +8975,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

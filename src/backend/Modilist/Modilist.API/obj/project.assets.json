@@ -7393,7 +7393,7 @@
       ]
     },
     "System.Reflection.TypeExtensions/4.5.1": {
-      "sha512": "MW3MxOtKtIr/gMbPUvfXZK2rUN57NUJSUuDCzLOdMAuTO8I1Gt0LJJcNf6MMTm5BWAJrz/Lex8AhYAn8fWf4Xw==",
+      "sha512": "fO8GMEkgoKioJ7cglZbhcnBgkCWWn9poS3G2jevS+fuwW9xJXMx7/1kr7dkwOJfo0pWqxLFWVcxlOr+WeK5ipA==",
       "type": "package",
       "path": "system.reflection.typeextensions/4.5.1",
       "files": [
@@ -9451,9 +9451,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aselm\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\aselm\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -9464,13 +9462,8 @@
       "packagesPath": "C:\\Users\\aselm\\.nuget\\packages\\",
       "outputPath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\aselm\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9567,7 +9560,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
