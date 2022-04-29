@@ -6,7 +6,7 @@ import { ResponseModel } from "../../response-model";
 
 export const updateAccountModel = createModel<RootModel>()({
     state: {
-        isBusy: undefined,
+        isBusy: false,
         response: {
             statusCode: 0,
             message: "",

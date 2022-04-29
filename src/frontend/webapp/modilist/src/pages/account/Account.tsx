@@ -9,22 +9,40 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
+import { Gender, GetAccountOutputDTO, GetAccountOutputDTOCommonResponse, UpdateAccount } from "../../services/swagger/api";
 
 export function Account() {
     const { t } = useTranslation();
     const [locale, setLocale] = useState<string>('tr');
-    const [birthDate, setBirthDate] = useState<moment.Moment | null>(null);
     const maxDate = moment().subtract(18, 'years');
-    const { isBusy, response } = useSelector((state: RootState) => state.getAccountModel);
+    const { isBusy: getAccountIsBusy, response: getAccountResponse } = useSelector((state: RootState) => state.getAccountModel);
+    const { isBusy: updateAccountIsBusy, response: updateAccountResponse } = useSelector((state: RootState) => state.updateAccountModel);
     const dispatch = useDispatch<Dispatch>();
-    const account = response?.data;
+    const [account, setAccount] = useState<GetAccountOutputDTO>({
+        firstName: '',
+        lastName: '',
+        birthDate: new Date(),
+        email: '',
+        gender: Gender.None,
+        id: '',
+        instagramUserName: '',
+        jobTitle: '',
+        phone: ''
+    });
+
+    function parseDateString(value: Date, originalValue: Date) {
+        return moment(value).toDate();
+    }
 
     const schema = Yup.object({
         firstName: Yup.string().required("* Gerekli Alan"),
-        lastName: Yup.string().required("* Gerekli Alan")
+        lastName: Yup.string().required("* Gerekli Alan"),
+        birthDate: Yup.date().transform(parseDateString).required("* Gerekli Alan")
     });
 
     const {
+        setFormikState,
+        setFieldValue,
         handleSubmit,
         handleChange,
         handleBlur,
@@ -32,26 +50,46 @@ export function Account() {
         values,
         errors,
     } = useFormik({
-        initialValues: account ?? {
-            firstName: "",
-            lastName: ""
-        },
+        initialValues: account,
         validationSchema: schema,
         onSubmit: (values) => {
-            if (account) {
-                dispatch.updateAccountModel.updateAccount(account);
+            if (account && updateAccountIsBusy == false) {
+                dispatch.updateAccountModel.updateAccount(account).then(() => {
+                    if (updateAccountResponse?.data) {
+                        setAccount({
+                            ...account,
+                            ...updateAccountResponse?.data
+                        });
+                    }
+                });
             }
         },
     });
 
     useEffect(() => {
-        if (isBusy == false) {
-            dispatch.getAccountModel.getAccount()
-                .then(() => {
-                    if (account?.birthDate) {
-                        setBirthDate(moment(account?.birthDate));
+        if (getAccountResponse?.data) {
+            setAccount({
+                ...account,
+                ...getAccountResponse.data
+            });
+            setFormikState(state => {
+                for (const key in state.values) {
+                    if ((getAccountResponse.data as GetAccountOutputDTO)[key as keyof typeof getAccountResponse.data]) {
+                        setFieldValue(key, (getAccountResponse.data as GetAccountOutputDTO)[key as keyof typeof getAccountResponse.data]);
                     }
-                });
+                }
+
+                return state;
+            });
+        }
+
+
+
+    }, [getAccountResponse]);
+
+    useEffect(() => {
+        if (getAccountIsBusy == false) {
+            dispatch.getAccountModel.getAccount();
         }
     }, []);
 
@@ -68,11 +106,17 @@ export function Account() {
                     <FormControl sx={{ m: 1, width: 300 }}>
                         <TextField label="Ad"
                             name="firstName"
-                            helperText={touched.firstName && errors.firstName &&
-                                <Typography>
-                                    {errors.firstName}
-                                </Typography>}
-                            onChange={handleChange}
+                            helperText={touched.firstName && errors.firstName && errors.firstName}
+                            onChange={(e) => {
+                                if (account) {
+                                    setAccount({
+                                        ...account,
+                                        firstName: e.target.value
+                                    });
+                                }
+
+                                handleChange(e);
+                            }}
                             onBlur={handleBlur}
                             variant="outlined" error={touched.firstName && errors.firstName !== undefined} value={account?.firstName} />
                     </FormControl>
@@ -82,11 +126,17 @@ export function Account() {
                     <FormControl sx={{ m: 1, width: 300 }}>
                         <TextField label="Soyad"
                             name="lastName"
-                            helperText={touched.lastName && errors.lastName &&
-                                <Typography>
-                                    {errors.lastName}
-                                </Typography>}
-                            onChange={handleChange}
+                            helperText={touched.lastName && errors.lastName && errors.lastName}
+                            onChange={(e) => {
+                                if (account) {
+                                    setAccount({
+                                        ...account,
+                                        lastName: e.target.value
+                                    });
+                                }
+
+                                handleChange(e);
+                            }}
                             onBlur={handleBlur}
                             variant="outlined" error={touched.lastName && errors.lastName !== undefined} value={account?.lastName} />
                     </FormControl>
@@ -95,21 +145,46 @@ export function Account() {
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
                         <LocalizationProvider dateAdapter={AdapterMoment} locale={locale}>
-                            {/* TODO: handle validation */}
                             <DatePicker
                                 label="Doğum Tarihi"
-                                value={birthDate}
+                                value={account?.birthDate ? moment(account?.birthDate) : null}
                                 maxDate={maxDate}
                                 inputFormat={"DD/MM/YYYY"}
                                 onChange={(newValue) => {
-                                    setBirthDate(newValue);
-                                    if (account) {
-                                        account.birthDate = newValue?.toDate();
-                                    }
 
-                                    // handleChange(newValue?.toDate());
+
+                                    if (account) {
+                                        //account.birthDate = newValue?.toDate();
+                                        // setFieldValue("birthDate", newValue?.toString());
+                                    }
                                 }}
-                                renderInput={(params) => <TextField {...params} />}
+                                renderInput={(params) => (
+                                    <TextField
+                                        ref={params.ref}
+                                        {...params}
+                                        color="primary"
+                                        label="Doğum Tarihi"
+                                        name="birthDate"
+                                        value={account?.birthDate?.toString()}
+                                        helperText={(
+                                            touched.birthDate && errors.birthDate && errors.birthDate
+                                        )}
+                                        onChange={(e) => {
+                                            if (account) {
+                                                setAccount({
+                                                    ...account,
+                                                    birthDate: moment(e.target.value).toDate()
+                                                });
+                                                // setFieldValue("birthDate", e.target.value?.toString());
+                                            }
+
+                                            handleChange(e);
+                                        }}
+                                        onBlur={(e) => {
+                                            handleBlur(e);
+                                        }}
+                                        variant="outlined" error={touched.birthDate && errors.birthDate !== undefined} />
+                                )}
                             />
                         </LocalizationProvider>
                     </FormControl>
@@ -151,7 +226,6 @@ export function Account() {
                     <FormControl sx={{ m: 1, width: 300 }}>
                         <Button variant="contained"
                             onClick={() => {
-                                console.log("test");
                                 handleSubmit();
                             }}
                             color="secondary">
