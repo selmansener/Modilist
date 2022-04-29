@@ -3,7 +3,8 @@
         "rewrite": "/index.html",
         "exclude": [
             "/static/*",
-            "/images/*"
+            "/images/*",
+            "/locales/*"
         ]
     }
 }

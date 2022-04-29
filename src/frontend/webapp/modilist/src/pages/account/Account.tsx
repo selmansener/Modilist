@@ -8,6 +8,7 @@ import { Dispatch, RootState } from "../../store/store";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 
 export function Account() {
     const { t } = useTranslation();
@@ -59,7 +60,7 @@ export function Account() {
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Typography variant='h6' align='left' sx={{ m: 1 }}>
-                        {t('Welcome to React')}
+                        {t('Pages.Account.PersonalInfo')}
                     </Typography>
                 </Grid>
 

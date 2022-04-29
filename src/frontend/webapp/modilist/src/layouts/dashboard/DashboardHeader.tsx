@@ -1,5 +1,5 @@
 import AccountCircle from "@mui/icons-material/AccountCircle"
-import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge } from "@mui/material"
+import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent } from "@mui/material"
 import React from "react";
 import { dashboardMenu, MenuLinkItem } from "./MenuItems"
 import { styled } from '@mui/material/styles';
@@ -9,6 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { useTranslation } from 'react-i18next'
 
 const drawerWidth: number = 240;
 
@@ -35,6 +36,17 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+
+const supportedLanguages = [
+  {
+    code: "tr",
+    lang: "tr"
+  },
+  {
+    code: "us",
+    lang: "en"
+  }
+]
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -63,6 +75,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export function DashboardHeader() {
+  const { t, i18n } = useTranslation();
   const { instance, accounts } = useMsal();
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
@@ -83,6 +96,10 @@ export function DashboardHeader() {
     instance.logoutRedirect({
       account: accounts[0]
     });
+  }
+
+  const handleLanguageChange = (event: SelectChangeEvent) => {
+    i18n.changeLanguage(event.target.value);
   }
 
   return (
@@ -108,6 +125,26 @@ export function DashboardHeader() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Modilist
           </Typography>
+          <Select
+            value={i18n.language}
+            onChange={handleLanguageChange}
+            sx={{mr:2}}
+          >
+            {supportedLanguages.map(supportedLang => (
+              <MenuItem value={supportedLang.lang} key={supportedLang.lang}>
+                <img
+                  loading="lazy"
+                  width="20"
+                  src={`https://flagcdn.com/w20/${supportedLang.code}.png`}
+                  srcSet={`https://flagcdn.com/w40/${supportedLang.code}.png 2x`}
+                  alt={supportedLang.code}
+                />
+                <Typography variant="caption" sx={{ pl: 1 }}>
+                  {supportedLang.lang.toLocaleUpperCase()}
+                </Typography>
+              </MenuItem>
+            ))}
+          </Select>
           <div>
             <IconButton
               size="large"
@@ -158,8 +195,8 @@ export function DashboardHeader() {
         <List component="nav">
           {dashboardMenu.map((item: MenuLinkItem) => {
             return (
-              <Link to={item.route}>
-                <ListItemButton key={item.route}>
+              <Link key={item.route} to={item.route}>
+                <ListItemButton>
 
                   <Badge badgeContent="" variant="dot" anchorOrigin={{
                     vertical: 'top',
