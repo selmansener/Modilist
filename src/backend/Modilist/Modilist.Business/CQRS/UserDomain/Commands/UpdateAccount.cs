@@ -15,10 +15,14 @@ using Modilist.Data.Repositories.UserDomain;
 using Modilist.Domains.UserDomain.Models;
 using Modilist.Infrastructure.Shared.Interfaces.Enums;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace Modilist.Business.CQRS.UserDomain.Commands
 {
     public class UpdateAccount : IRequest<UpdateAccountOutputDTO>
     {
+        [JsonIgnore]
         public Guid? Id { get; set; }
 
         public string? FirstName { get; set; }
@@ -26,6 +30,8 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
         public string? LastName { get; set; }
 
         public DateTime? BirthDate { get; set; }
+
+        public Gender Gender { get; set; }
 
         public string? InstagramUserName { get; set; }
 
@@ -64,6 +70,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
             account.Update(request.FirstName,
                 request.LastName,
                 request.BirthDate,
+                request.Gender,
                 request.InstagramUserName,
                 request.Phone,
                 request.JobTitle);

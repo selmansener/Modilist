@@ -29,17 +29,17 @@ export interface UpdateAccountOutputDTOCommonResponse {
      * @type {number}
      * @memberof UpdateAccountOutputDTOCommonResponse
      */
-    statusCode: number;
+    statusCode?: number;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccountOutputDTOCommonResponse
      */
-    message: string;
+    message?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccountOutputDTOCommonResponse
      */
-    type: string;
+    type?: string | null;
 }

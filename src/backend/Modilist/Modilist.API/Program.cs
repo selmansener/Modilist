@@ -65,12 +65,12 @@ builder.Services.AddDataAccess(config.ModilistDbConnectionOptions, builder.Envir
 
 builder.Services.AddSeedServices(builder.Environment.EnvironmentName);
 
-builder.Services.AddSwaggerGen(ConfigureSwaggerGenerator);
-builder.Services.AddSwaggerGenNewtonsoftSupport();
-
 builder.Services.AddMvc(ConfigureMvc)
     .AddNewtonsoftJson(ConfigureNewtonsoftJson)
     .ConfigureApiBehaviorOptions(ConfigureApiBehavior);
+
+builder.Services.AddSwaggerGenNewtonsoftSupport();
+builder.Services.AddSwaggerGen(ConfigureSwaggerGenerator);
 
 builder.Services.AddApiVersioning(ConfigureApiVersioning);
 
@@ -127,7 +127,7 @@ void ConfigureSwaggerGenerator(SwaggerGenOptions options)
     options.OperationFilter<ResolveDynamicQueryEndpoints>("dqb");
     options.SwaggerDoc("v1", new OpenApiInfo { Title = ApiTitle, Version = "v1" });
     options.CustomSchemaIds(DefaultSchemaIdSelector);
-    options.SchemaFilter<RequireValueTypePropertiesSchemaFilter>(true);
+    // options.SchemaFilter<RequireValueTypePropertiesSchemaFilter>(true);
     // options.SchemaFilter<SwaggerExcludeFilter>();
 
     var permissions = GetPermissions().ToDictionary(
@@ -217,7 +217,7 @@ void ConfigureNewtonsoftJson(MvcNewtonsoftJsonOptions options)
     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
     options.SerializerSettings.Converters.Add(new StringEnumConverter());
     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-    options.SerializerSettings.DateFormatString = "yyyy-MM-ddTHH:mm:ss.FFFFFZ";
+    options.SerializerSettings.DateFormatString = "yyyy-MM-ddTHH:mm:ss.FFFZ";
 }
 
 void ConfigureApiBehavior(ApiBehaviorOptions options)

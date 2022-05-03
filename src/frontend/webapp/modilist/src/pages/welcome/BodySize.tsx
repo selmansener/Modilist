@@ -180,6 +180,18 @@ export default function BodySize() {
                         <TextField label="Bacak Uzunluğu (cm)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
                     </FormControl>
                 </Grid>
+
+                <Grid item xs={4}>
+                    <FormControl sx={{ m: 1, width: 300 }}>
+                        <TextField label="Boy (cm)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                    </FormControl>
+                </Grid>
+
+                <Grid item xs={4}>
+                    <FormControl sx={{ m: 1, width: 300 }}>
+                        <TextField label="Kilo (kg)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                    </FormControl>
+                </Grid>
             </Grid>
         </>
     )

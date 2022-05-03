@@ -22,17 +22,17 @@ export interface CommonResponse {
      * @type {number}
      * @memberof CommonResponse
      */
-    statusCode: number;
+    statusCode?: number;
     /**
      * 
      * @type {string}
      * @memberof CommonResponse
      */
-    message: string;
+    message?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CommonResponse
      */
-    type: string;
+    type?: string | null;
 }

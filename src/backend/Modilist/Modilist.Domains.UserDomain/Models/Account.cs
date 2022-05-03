@@ -52,6 +52,7 @@ namespace Modilist.Domains.UserDomain.Models
         public void Update(string firstName,
                        string lastName,
                        DateTime? birthDate,
+                       Gender gender,
                        string instagramUserName,
                        string phone,
                        string jobTitle)
@@ -59,6 +60,7 @@ namespace Modilist.Domains.UserDomain.Models
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
+            Gender = gender;
             InstagramUserName = instagramUserName;
             Phone = phone;
             JobTitle = jobTitle;

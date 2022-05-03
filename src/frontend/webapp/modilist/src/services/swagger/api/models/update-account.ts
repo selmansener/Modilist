@@ -11,6 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Gender } from './gender';
 /**
  * 
  * @export
@@ -22,41 +23,41 @@ export interface UpdateAccount {
      * @type {string}
      * @memberof UpdateAccount
      */
-    id?: string;
+    firstName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccount
      */
-    firstName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateAccount
-     */
-    lastName: string;
+    lastName?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof UpdateAccount
      */
-    birthDate?: Date;
+    birthDate?: Date | null;
+    /**
+     * 
+     * @type {Gender}
+     * @memberof UpdateAccount
+     */
+    gender?: Gender;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccount
      */
-    instagramUserName: string;
+    instagramUserName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccount
      */
-    phone: string;
+    phone?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccount
      */
-    jobTitle: string;
+    jobTitle?: string | null;
 }

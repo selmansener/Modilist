@@ -21,12 +21,13 @@ export const updateAccountModel = createModel<RootModel>()({
                 isBusy: true
             }
         },
-        HANDLE_RESPONSE: (state: ResponseModel<UpdateAccountOutputDTOCommonResponse>, statusCode: number) => {
+        HANDLE_RESPONSE: (state: ResponseModel<UpdateAccountOutputDTOCommonResponse>, statusCode: number, data?: UpdateAccountOutputDTO) => {
             return {
                 ...state,
                 response: {
                     ...state.response,
-                    statusCode: statusCode
+                    statusCode: statusCode,
+                    data
                 },
                 isBusy: false
             }
@@ -35,12 +36,14 @@ export const updateAccountModel = createModel<RootModel>()({
     effects: (dispatch) => {
         const { updateAccountModel } = dispatch
         return {
-            async updateAccount(input: UpdateAccount): Promise<any> {
+            async updateAccount(input: UpdateAccount): Promise<UpdateAccountOutputDTOCommonResponse> {
                 updateAccountModel.BUSY();
 
                 const response = await api.users.apiV1UserUpdatePost(input);
 
-                updateAccountModel.HANDLE_RESPONSE(response.data.statusCode)
+                updateAccountModel.HANDLE_RESPONSE(response.data.statusCode ?? 0, response.data.data);
+
+                return response.data;
             }
         }
     }

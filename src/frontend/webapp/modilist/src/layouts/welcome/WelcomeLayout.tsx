@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@emotion/react"
-import { AppBar, Box, Container, createTheme, Grid, IconButton, Menu, MenuItem, Paper, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Container, Grid, IconButton, Menu, MenuItem, Paper, Toolbar, Typography } from "@mui/material";
 import { WelcomeSteps } from "./WelcomeSteps";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Personal from "../../pages/welcome/Personal";
@@ -64,18 +64,7 @@ export default function Welcome() {
     }, []);
 
     return (
-        <Box
-            component="main"
-            sx={{
-                backgroundColor: (theme) =>
-                    theme.palette.mode === 'light'
-                        ? theme.palette.grey[100]
-                        : theme.palette.grey[900],
-                flexGrow: 1,
-                height: '100vh',
-                overflow: 'auto',
-            }}
-        >
+        <Box component="main">
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -85,7 +74,8 @@ export default function Welcome() {
             </AppBar>
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                 <Grid container spacing="2">
-                    {response.statusCode == 0 ? <></> :
+                    {
+                    // response.statusCode == 0 ? <></> :
                         <>
                             <Grid item xs={12}>
                                 <Paper

@@ -39,7 +39,7 @@ export const createAccountModel = createModel<RootModel>()({
 
                 const response = await api.users.apiV1UserCreatePost(input);
 
-                createAccountModel.HANDLE_RESPONSE(response.data.statusCode)
+                createAccountModel.HANDLE_RESPONSE(response.data.statusCode ?? 0)
             }
         }
     }

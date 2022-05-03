@@ -3,44 +3,27 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/
 import Dashboard from './layouts/dashboard/DashboardLayout';
 import Unauthenticated from './layouts/unauthenticated/UnauthenticatedLayout';
 import Welcome from './layouts/welcome/WelcomeLayout';
-import { Backdrop, CircularProgress, createTheme, ThemeProvider } from '@mui/material';
+import { Backdrop, CircularProgress, createTheme, ThemeOptions, ThemeProvider } from '@mui/material';
 import i18n from "i18next";
 import { getDefaults, initReactI18next } from "react-i18next";
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-const mdTheme = createTheme({
+
+const themeOptions: ThemeOptions = {
   palette: {
+    mode: 'light',
     primary: {
-      main: '#F2EEE2',
-      contrastText: '#00222C'
+      main: '#D98E04',
+      contrastText: 'rgba(255,255,255,0.87)',
     },
     secondary: {
-      main: '#E1E4F2',
-      contrastText: '#000608'
+      main: '#73341D',
     },
-    error: {
-      main: '#C92443',
-    },
-    warning: {
-      main: '#6E662F',
-    },
-    info: {
-      main: '#516971'
-    },
-    success: {
-      main: '#37704F'
-    },
-    background: {
-      default: '#FFFFFF',
-      paper: '#F2EEE2'
-    },
-    text: {
-      primary: '#00222C',
-      secondary: '#000608'
-    }
-  }
-});
+  },
+};
+
+const mdTheme = createTheme(themeOptions);
 
 
 i18n
@@ -73,12 +56,13 @@ function App() {
     <div className="App">
       <ThemeProvider theme={mdTheme} >
         <AuthenticatedTemplate>
-          {(newUser === false ?
+          {/* {(newUser === false ?
             <Backdrop open={true}
               sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
               <CircularProgress color="inherit" />
             </Backdrop> : newUser === undefined ? <Dashboard /> : <Welcome />
-          )}
+          )} */}
+          <Welcome />
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
           <Unauthenticated />

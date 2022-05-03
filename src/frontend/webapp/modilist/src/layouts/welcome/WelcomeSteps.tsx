@@ -1,5 +1,7 @@
 import { Stepper, Typography, Step, StepLabel, Box, Button, Paper } from "@mui/material";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 type WelcomeStepProps = {
     steps: {
@@ -13,16 +15,21 @@ export function WelcomeSteps(props: WelcomeStepProps) {
 
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set<number>());
-
-    const isStepOptional = (step: number) => {
-        return step === 1;
-    };
+    const { validator, onSubmit } = useSelector((state: RootState) => state.welcomeStepsModel);
 
     const isStepSkipped = (step: number) => {
         return skipped.has(step);
     };
 
     const handleNext = () => {
+        onSubmit();
+
+        console.log(validator());
+
+        if (!validator()) {
+            return;
+        }
+
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
             newSkipped = new Set(newSkipped.values());
@@ -35,25 +42,6 @@ export function WelcomeSteps(props: WelcomeStepProps) {
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleSkip = () => {
-        if (!isStepOptional(activeStep)) {
-            // You probably want to guard against something like this,
-            // it should never occur unless someone's actively trying to break something.
-            throw new Error("You can't skip a step that isn't optional.");
-        }
-
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setSkipped((prevSkipped) => {
-            const newSkipped = new Set(prevSkipped.values());
-            newSkipped.add(activeStep);
-            return newSkipped;
-        });
-    };
-
-    const handleReset = () => {
-        setActiveStep(0);
     };
 
     return (
@@ -79,10 +67,6 @@ export function WelcomeSteps(props: WelcomeStepProps) {
                     <Typography sx={{ mt: 2, mb: 1 }}>
                         All steps completed - you&apos;re finished
                     </Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleReset}>Reset</Button>
-                    </Box>
                 </React.Fragment>
             ) : (
                 <React.Fragment>
@@ -106,12 +90,7 @@ export function WelcomeSteps(props: WelcomeStepProps) {
                             Back
                         </Button>
                         <Box sx={{ flex: '1 1 auto' }} />
-                        {isStepOptional(activeStep) && (
-                            <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                                Skip
-                            </Button>
-                        )}
-                        <Button onClick={handleNext}>
+                        <Button onClick={handleNext} variant="outlined">
                             {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                         </Button>
                     </Box>

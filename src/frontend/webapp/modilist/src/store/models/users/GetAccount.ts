@@ -41,7 +41,7 @@ export const getAccountModel = createModel<RootModel>()({
 
                 const response = await api.users.apiV1UserGetGet();
 
-                getAccountModel.HANDLE_RESPONSE(response.data.statusCode, response.data.data)
+                getAccountModel.HANDLE_RESPONSE(response.data.statusCode ?? 0, response.data.data)
             }
         }
     }

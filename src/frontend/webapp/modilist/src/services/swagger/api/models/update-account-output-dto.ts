@@ -23,53 +23,53 @@ export interface UpdateAccountOutputDTO {
      * @type {string}
      * @memberof UpdateAccountOutputDTO
      */
-    id: string;
+    id?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccountOutputDTO
      */
-    firstName: string;
+    firstName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccountOutputDTO
      */
-    lastName: string;
+    lastName?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof UpdateAccountOutputDTO
      */
-    birthDate?: Date;
+    birthDate?: Date | null;
     /**
      * 
      * @type {Gender}
      * @memberof UpdateAccountOutputDTO
      */
-    gender: Gender;
+    gender?: Gender;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccountOutputDTO
      */
-    instagramUserName: string;
+    instagramUserName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccountOutputDTO
      */
-    email: string;
+    email?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccountOutputDTO
      */
-    phone: string;
+    phone?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateAccountOutputDTO
      */
-    jobTitle: string;
+    jobTitle?: string | null;
 }

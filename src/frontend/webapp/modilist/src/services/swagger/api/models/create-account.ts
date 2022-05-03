@@ -22,11 +22,11 @@ export interface CreateAccount {
      * @type {string}
      * @memberof CreateAccount
      */
-    id: string;
+    id?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateAccount
      */
-    email: string;
+    email?: string | null;
 }

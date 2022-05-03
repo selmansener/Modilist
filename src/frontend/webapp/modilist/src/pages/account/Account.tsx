@@ -192,20 +192,6 @@ export function Account() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Boy"
-                            type="number"
-                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={4}>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Kilo" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={4}>
-                    <FormControl sx={{ m: 1, width: 300 }}>
                         <TextField label="Mesleğin nedir? (Optional)" value={account?.jobTitle} variant="outlined" />
                     </FormControl>
                 </Grid>
