@@ -33,7 +33,7 @@ export default function Personal() {
     };
     
     const schema = Yup.object({
-        gender: Yup.string().required("* Gerekli Alan")
+        gender: Yup.string().oneOf(["Male", "Female"], "* Gerekli Alan").required("* Gerekli Alan")
     });
 
     const {
@@ -67,7 +67,7 @@ export default function Personal() {
 
     useEffect(() => {
         dispatch.welcomeStepsModel.setValidator(() => {
-            return errors.gender === undefined;
+            return errors.gender === undefined || errors.gender === "None";
         });
     }, [errors]);
 
