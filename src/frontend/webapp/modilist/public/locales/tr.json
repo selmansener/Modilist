@@ -3,5 +3,13 @@
         "Account": {
             "PersonalInfo": "Kişisel Bilgiler"
         }
+    },
+    "WelcomeSteps": {
+        "StylePreferences": {
+            "Title": "Stil Tercihleri",
+            "UnwantedPieces1": "Kombinlerinizde ",
+            "UnwantedPieces2": "kesinlikle olmasını istemediğiniz ",
+            "UnwantedPieces3": "parçaları seçiniz."
+        }
     }
 }

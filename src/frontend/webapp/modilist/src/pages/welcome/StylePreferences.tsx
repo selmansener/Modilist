@@ -1,4 +1,4 @@
-import { Checkbox, FormControl, Grid, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, Typography } from "@mui/material";
+import { Box, Checkbox, FormControl, Grid, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, Typography } from "@mui/material";
 import Rating, { IconContainerProps } from '@mui/material/Rating';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
@@ -6,8 +6,11 @@ import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import { useState } from "react";
+import { CustomCheckboxGroup } from "../../components/customCheckbox/CustomCheckbox";
+import { useTranslation } from "react-i18next";
 
 export default function StylePreferences() {
+    const { t } = useTranslation();
 
 
     const [personName, setPersonName] = useState<string[]>([]);
@@ -123,6 +126,53 @@ export default function StylePreferences() {
                         />
                         <Typography variant='caption'>Açığım</Typography>
                     </div>
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl sx={{ m: 1 }}>
+                    <CustomCheckboxGroup
+                        label={(
+                            <Box sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                mb: 2
+                            }}>
+                                <Typography sx={{ mr: 1 }}>
+                                    {t("WelcomeSteps.StylePreferences.UnwantedPieces1")}
+                                </Typography>
+                                <Typography color={"error"} sx={{ mr: 1 }}>
+                                    {t("WelcomeSteps.StylePreferences.UnwantedPieces2")}
+                                </Typography>
+                                <Typography>
+                                    {t("WelcomeSteps.StylePreferences.UnwantedPieces3")}
+                                </Typography>
+                            </Box>
+                        )}
+                        contents={
+                            [
+                                {
+                                    value: "13",
+                                    element: (<img src="13.jpg" />) // TODO: get image urls from storage
+                                },
+                                {
+                                    value: "14",
+                                    element: <img src="14.jpg" />
+                                },
+                                {
+                                    value: "15",
+                                    element: <img src="15.jpg" />
+                                },
+                                {
+                                    value: "16",
+                                    element: <img src="16.jpg" />
+                                }
+                            ]
+                        }
+                        isNegative
+                        onChange={(values: string[]) => {
+                            console.log(values)
+                        }}
+                    />
                 </FormControl>
             </Grid>
         </Grid>
