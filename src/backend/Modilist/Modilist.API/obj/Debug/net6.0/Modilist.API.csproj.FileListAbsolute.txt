@@ -60,7 +60,6 @@ C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Humanize
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\JsonNet.ContractResolvers.dll
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\MediatR.dll
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\MediatR.Contracts.dll
-C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\MediatR.Extensions.FluentValidation.AspNetCore.dll
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll

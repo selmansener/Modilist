@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JL3DSyAJ0MK6Ft71zdi6Sv+GH5cyHmdigf5SiPWnZdMTSC+CVTdyDtamRCHN+JuvQUMmdZ8t/8Z7Ed8Mrq6aig==",
+  "dgSpecHash": "zCB/r4aHDo6mqf+5SjTD/tpVnUg3riA0WGN3YZdvQqYHyoe6bnzY5JKkjUnLPUgO3UZDFlyNKOaf/HrlZLO0zw==",
   "success": true,
   "projectFilePath": "C:\\Projects\\Modilist\\src\\backend\\Modilist\\Modilist.Business\\Modilist.Business.csproj",
   "expectedPackageFiles": [
@@ -16,7 +16,6 @@
     "C:\\Users\\aselm\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
-    "C:\\Users\\aselm\\.nuget\\packages\\mediatr.extensions.fluentvalidation.aspnetcore\\2.0.0\\mediatr.extensions.fluentvalidation.aspnetcore.2.0.0.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\10.0.1\\mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\aselm\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

@@ -45,6 +45,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
         public UpdateAccountValidator()
         {
             RuleFor(x => x.Id).NotEmpty();
+            RuleFor(x => x.Gender).IsInEnum().NotEqual(Gender.None).WithErrorCode("GenderIsRequired");
         }
     }
 

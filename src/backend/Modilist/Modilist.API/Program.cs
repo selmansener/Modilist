@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Modilist.API.Middlewares;
 using Newtonsoft.Json.Converters;
 using Modilist.API.Extensions;
+using FluentValidation.AspNetCore;
 
 const string CorsPolicyName = "Default";
 const string ApiTitle = "ModilistAPI";
@@ -65,9 +66,14 @@ builder.Services.AddDataAccess(config.ModilistDbConnectionOptions, builder.Envir
 
 builder.Services.AddSeedServices(builder.Environment.EnvironmentName);
 
-builder.Services.AddMvc(ConfigureMvc)
+var mvcBuilder = builder.Services.AddMvc(ConfigureMvc)
     .AddNewtonsoftJson(ConfigureNewtonsoftJson)
     .ConfigureApiBehaviorOptions(ConfigureApiBehavior);
+
+mvcBuilder.AddValidations();
+
+builder.Services.AddLoggingBehavior();
+builder.Services.AddValidationBehavior();
 
 builder.Services.AddSwaggerGenNewtonsoftSupport();
 builder.Services.AddSwaggerGen(ConfigureSwaggerGenerator);

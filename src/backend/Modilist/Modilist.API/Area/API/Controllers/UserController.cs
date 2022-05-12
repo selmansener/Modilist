@@ -46,6 +46,8 @@ namespace Modilist.API.Area.API.Controllers
         [Authorize(nameof(AuthorizationPermissions.UpdateAccount))]
         [HttpPost("Update")]
         [ProducesResponseType(typeof(CommonResponse<UpdateAccountOutputDTO>), 200)]
+        [ProducesResponseType(typeof(Middlewares.ExceptionHandlerMiddleware.ExceptionResponse), 400)]
+        [ProducesResponseType(typeof(Middlewares.ExceptionHandlerMiddleware.ExceptionResponse), 500)]
         public async Task<IActionResult> Post(UpdateAccount input, CancellationToken cancellationToken)
         {
             input.Id = User.GetUserId();

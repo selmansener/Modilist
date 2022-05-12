@@ -205,21 +205,6 @@
           "lib/netstandard2.0/MediatR.Contracts.dll": {}
         }
       },
-      "MediatR.Extensions.FluentValidation.AspNetCore/2.0.0": {
-        "type": "package",
-        "dependencies": {
-          "FluentValidation": "10.0.4",
-          "FluentValidation.DependencyInjectionExtensions": "10.0.4",
-          "MediatR": "10.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
-        },
-        "compile": {
-          "lib/netstandard2.1/MediatR.Extensions.FluentValidation.AspNetCore.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/MediatR.Extensions.FluentValidation.AspNetCore.dll": {}
-        }
-      },
       "MediatR.Extensions.Microsoft.DependencyInjection/10.0.1": {
         "type": "package",
         "dependencies": {
@@ -3089,7 +3074,6 @@
         "dependencies": {
           "Mapster": "7.3.0",
           "MediatR": "10.0.1",
-          "MediatR.Extensions.FluentValidation.AspNetCore": "2.0.0",
           "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1",
           "Modilist.Data": "1.0.0",
           "Modilist.Infrastructure.Shared": "1.0.0"
@@ -3448,19 +3432,6 @@
         "lib/netstandard2.0/MediatR.Contracts.xml",
         "mediatr.contracts.1.0.1.nupkg.sha512",
         "mediatr.contracts.nuspec"
-      ]
-    },
-    "MediatR.Extensions.FluentValidation.AspNetCore/2.0.0": {
-      "sha512": "4STN/tHw7szwy3QWR+6o5DktLZX/rJFvvgoTN9SvCL9G2nwzulKtAtSt/IxlWFLzBum5ezswah3D0k8prfBcvA==",
-      "type": "package",
-      "path": "mediatr.extensions.fluentvalidation.aspnetcore/2.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.1/MediatR.Extensions.FluentValidation.AspNetCore.dll",
-        "logo.png",
-        "mediatr.extensions.fluentvalidation.aspnetcore.2.0.0.nupkg.sha512",
-        "mediatr.extensions.fluentvalidation.aspnetcore.nuspec"
       ]
     },
     "MediatR.Extensions.Microsoft.DependencyInjection/10.0.1": {
