@@ -14,19 +14,12 @@
 /**
  * 
  * @export
- * @interface CreateProductInputDTO
+ * @enum {string}
  */
-export interface CreateProductInputDTO {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateProductInputDTO
-     */
-    sku: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateProductInputDTO
-     */
-    name: string;
+export enum AccountStatus {
+    None = 'None',
+    Active = 'Active',
+    Deactive = 'Deactive',
+    Blocked = 'Blocked'
 }
+

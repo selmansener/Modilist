@@ -17,7 +17,7 @@ const maxDate = moment().subtract(18, 'years');
 export default function Personal() {
     const { account } = useSelector((state: RootState) => state.welcomePageModel);
     const [locale, setLocale] = React.useState<string>('tr');
-    const { isBusy: updateAccountIsBusy, response: updateAccountResponse } = useSelector((state: RootState) => state.updateAccountModel);
+    const { isBusy: updateAccountIsBusy, data: updateAccountResponse } = useSelector((state: RootState) => state.updateAccountModel);
     const dispatch = useDispatch<Dispatch>();
 
     const handleGenderChange = (event: SelectChangeEvent) => {
@@ -53,9 +53,7 @@ export default function Personal() {
         onSubmit: (values) => {
             if (account && updateAccountIsBusy == false) {
                 dispatch.updateAccountModel.updateAccount(account).then((response) => {
-                    if (response.statusCode == 200 && response?.data) {
-                        dispatch.welcomePageModel.setAccount(response.data);
-                    }
+                    dispatch.welcomePageModel.setAccount(response);
                 }).catch((er) => console.log(er));
             }
         },

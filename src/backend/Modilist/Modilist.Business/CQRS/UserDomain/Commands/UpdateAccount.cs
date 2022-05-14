@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using FluentValidation;
 
 using Mapster;
 
 using MediatR;
 
-using Modilist.Business.CQRS.UserDomain.Commands.DTOs;
+using Modilist.Business.CQRS.UserDomain.DTOs;
 using Modilist.Data.Repositories.UserDomain;
 using Modilist.Domains.UserDomain.Models;
 using Modilist.Infrastructure.Shared.Interfaces.Enums;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Modilist.Business.CQRS.UserDomain.Commands
 {
-    public class UpdateAccount : IRequest<UpdateAccountOutputDTO>
+    public class UpdateAccount : IRequest<AccountDTO>
     {
         [JsonIgnore]
         public Guid? Id { get; set; }
@@ -49,7 +43,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
         }
     }
 
-    internal class UpdateAccountHandler : IRequestHandler<UpdateAccount, UpdateAccountOutputDTO>
+    internal class UpdateAccountHandler : IRequestHandler<UpdateAccount, AccountDTO>
     {
         private readonly IAccountWriteRepository _accountWriteRepository;
 
@@ -58,7 +52,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
             _accountWriteRepository = accountWriteRepository;
         }
 
-        public async Task<UpdateAccountOutputDTO> Handle(UpdateAccount request, CancellationToken cancellationToken)
+        public async Task<AccountDTO> Handle(UpdateAccount request, CancellationToken cancellationToken)
         {
             Account account = await _accountWriteRepository.GetByIdAsync(request.Id.Value, cancellationToken);
 
@@ -78,7 +72,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
 
             await _accountWriteRepository.UpdateAsync(account, cancellationToken, true);
 
-            return account.Adapt<UpdateAccountOutputDTO>();
+            return account.Adapt<AccountDTO>();
         }
     }
 }

@@ -9,16 +9,16 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
-import { Gender, GetAccountOutputDTO, GetAccountOutputDTOCommonResponse, UpdateAccount } from "../../services/swagger/api";
+import { AccountDTO, Gender, UpdateAccount } from "../../services/swagger/api";
 
 export function Account() {
     const { t } = useTranslation();
     const [locale, setLocale] = useState<string>('tr');
     const maxDate = moment().subtract(18, 'years');
-    const { isBusy: getAccountIsBusy, response: getAccountResponse } = useSelector((state: RootState) => state.getAccountModel);
-    const { isBusy: updateAccountIsBusy, response: updateAccountResponse } = useSelector((state: RootState) => state.updateAccountModel);
+    const { isBusy: getAccountIsBusy, data: getAccountResponse } = useSelector((state: RootState) => state.getAccountModel);
+    const { isBusy: updateAccountIsBusy, data: updateAccountResponse, errors: validationErrors } = useSelector((state: RootState) => state.updateAccountModel);
     const dispatch = useDispatch<Dispatch>();
-    const [account, setAccount] = useState<GetAccountOutputDTO>({
+    const [account, setAccount] = useState<AccountDTO>({
         firstName: '',
         lastName: '',
         birthDate: new Date(),
@@ -40,6 +40,19 @@ export function Account() {
         birthDate: Yup.date().transform(parseDateString).required("* Gerekli Alan")
     });
 
+    useEffect(() => {
+        if (getAccountResponse) {
+            setAccount({
+                ...account,
+                gender: getAccountResponse.gender 
+            });
+        }
+    }, [getAccountResponse])
+
+    useEffect(() => {
+        console.log(validationErrors);
+    }, [validationErrors])
+
     const {
         setFormikState,
         setFieldValue,
@@ -54,37 +67,27 @@ export function Account() {
         validationSchema: schema,
         onSubmit: (values) => {
             if (account && updateAccountIsBusy == false) {
-                dispatch.updateAccountModel.updateAccount(account).then(() => {
-                    if (updateAccountResponse?.data) {
-                        setAccount({
-                            ...account,
-                            ...updateAccountResponse?.data
-                        });
-                    }
-                });
+                dispatch.updateAccountModel.updateAccount(account);
             }
         },
     });
 
     useEffect(() => {
-        if (getAccountResponse?.data) {
+        if (getAccountResponse) {
             setAccount({
                 ...account,
-                ...getAccountResponse.data
+                ...getAccountResponse
             });
             setFormikState(state => {
                 for (const key in state.values) {
-                    if ((getAccountResponse.data as GetAccountOutputDTO)[key as keyof typeof getAccountResponse.data]) {
-                        setFieldValue(key, (getAccountResponse.data as GetAccountOutputDTO)[key as keyof typeof getAccountResponse.data]);
+                    if ((getAccountResponse as AccountDTO)[key as keyof typeof getAccountResponse]) {
+                        setFieldValue(key, (getAccountResponse as AccountDTO)[key as keyof typeof getAccountResponse]);
                     }
                 }
 
                 return state;
             });
         }
-
-
-
     }, [getAccountResponse]);
 
     useEffect(() => {

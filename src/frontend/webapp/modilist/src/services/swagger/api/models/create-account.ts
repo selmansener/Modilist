@@ -28,5 +28,5 @@ export interface CreateAccount {
      * @type {string}
      * @memberof CreateAccount
      */
-    email?: string | null;
+    email?: string;
 }

@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Mapster;
 
 using MediatR;
 
-using Modilist.Business.CQRS.UserDomain.Queries.DTOs;
+using Modilist.Business.CQRS.UserDomain.DTOs;
 using Modilist.Data.Repositories.UserDomain;
 using Modilist.Domains.UserDomain.Models;
 
 namespace Modilist.Business.CQRS.UserDomain.Queries
 {
-    public class GetAccount : IRequest<GetAccountOutputDTO>
+    public class GetAccount : IRequest<AccountDTO>
     {
         public Guid Id { get; set; }
     }
 
-    internal class GetAccountHandler : IRequestHandler<GetAccount, GetAccountOutputDTO>
+    internal class GetAccountHandler : IRequestHandler<GetAccount, AccountDTO>
     {
         private readonly IAccountReadRepository _accountReadRepository;
 
@@ -28,7 +23,7 @@ namespace Modilist.Business.CQRS.UserDomain.Queries
             _accountReadRepository = accountReadRepository;
         }
 
-        public async Task<GetAccountOutputDTO> Handle(GetAccount request, CancellationToken cancellationToken)
+        public async Task<AccountDTO> Handle(GetAccount request, CancellationToken cancellationToken)
         {
             // Check id with user claims
 
@@ -40,7 +35,7 @@ namespace Modilist.Business.CQRS.UserDomain.Queries
                 throw new Exception("account not found");
             }
 
-            return account.Adapt<GetAccountOutputDTO>();
+            return account.Adapt<AccountDTO>();
         }
     }
 }

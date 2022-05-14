@@ -1,32 +1,25 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../..";
-import { CommonResponse, CreateAccount } from "../../../services/swagger/api";
+import { AccountDTO, CreateAccount } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 
 export const createAccountModel = createModel<RootModel>()({
     state: {
-        isBusy: undefined,
-        response: {
-            statusCode: 0,
-            message: "",
-            type: ""
-        }
-    } as ResponseModel<CommonResponse>,
+        isBusy: false,
+        data: undefined
+    } as ResponseModel<AccountDTO>,
     reducers: {
-        BUSY: (state: ResponseModel<CommonResponse>) => {
+        BUSY: (state: ResponseModel<AccountDTO>) => {
             return {
                 ...state,
                 isBusy: true
             }
         },
-        HANDLE_RESPONSE: (state: ResponseModel<CommonResponse>, statusCode: number) => {
+        HANDLE_RESPONSE: (state: ResponseModel<AccountDTO>, data: AccountDTO) => {
             return {
                 ...state,
-                response: {
-                    ...state.response,
-                    statusCode: statusCode
-                },
+                data,
                 isBusy: false
             }
         },
@@ -39,7 +32,11 @@ export const createAccountModel = createModel<RootModel>()({
 
                 const response = await api.users.apiV1UserCreatePost(input);
 
-                createAccountModel.HANDLE_RESPONSE(response.data.statusCode ?? 0)
+                if (response.status === 200) {
+
+                    createAccountModel.HANDLE_RESPONSE(response.data)
+                }
+                // TODO: handle exceptions
             }
         }
     }

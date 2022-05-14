@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using Mapster;
 
 using Modilist.Domains.UserDomain.Models;
+using Modilist.Infrastructure.Shared.Enums;
 using Modilist.Infrastructure.Shared.Interfaces.Enums;
 
-namespace Modilist.Business.CQRS.UserDomain.Queries.DTOs
+namespace Modilist.Business.CQRS.UserDomain.DTOs
 {
-    public class GetAccountOutputDTO
+    public class AccountDTO
     {
         public Guid Id { get; private set; }
 
@@ -30,13 +31,15 @@ namespace Modilist.Business.CQRS.UserDomain.Queries.DTOs
         public string? Phone { get; private set; }
 
         public string? JobTitle { get; private set; }
+
+        public AccountStatus State { get; private set; }
     }
 
-    public class GetAccountOutputDTOMapper : IRegister
+    public class AccountDTOMapper : IRegister
     {
         public void Register(TypeAdapterConfig config)
         {
-            config.ForType<Account, GetAccountOutputDTO>();
+            config.ForType<Account, AccountDTO>();
         }
     }
 }

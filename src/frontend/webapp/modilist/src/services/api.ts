@@ -1,9 +1,20 @@
 import { UserApiFactory } from "./swagger/api";
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { InteractionRequiredAuthError, IPublicClientApplication } from "@azure/msal-browser";
 import { config } from "../config";
 
 export const apiFactory = function (msalInstance: IPublicClientApplication) {
+    axios.interceptors.request.use(
+        async (config: AxiosRequestConfig) => {
+          if (config.headers === undefined) {
+            config.headers = {};
+          }
+          // ...
+          return config;
+        },
+        (error) => error
+      );
+
     axios.interceptors.request.use(
         async options => {
             const account = msalInstance.getActiveAccount();
@@ -20,7 +31,6 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
             return options;
         },
         error => {
-            console.log("test")
             Promise.reject(error);
         }
     );
@@ -33,7 +43,8 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
                     account
                 });
             }
-            Promise.reject(error);
+
+            return error.response;
         });
 
     return {

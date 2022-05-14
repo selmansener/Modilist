@@ -1,14 +1,17 @@
 ﻿
 using FluentValidation;
 
+using Mapster;
+
 using MediatR;
 
+using Modilist.Business.CQRS.UserDomain.DTOs;
 using Modilist.Data.Repositories.UserDomain;
 using Modilist.Domains.UserDomain.Models;
 
 namespace Modilist.Business.CQRS.UserDomain.Commands
 {
-    public class CreateAccount : IRequest
+    public class CreateAccount : IRequest<AccountDTO>
     {
         public CreateAccount(Guid id, string email)
         {
@@ -30,7 +33,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
         }
     }
 
-    internal class CreateAccountHandler : IRequestHandler<CreateAccount>
+    internal class CreateAccountHandler : IRequestHandler<CreateAccount, AccountDTO>
     {
         private readonly IAccountWriteRepository _accountWriteRepository;
 
@@ -39,7 +42,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
             _accountWriteRepository = accountWriteRepository;
         }
 
-        public async Task<Unit> Handle(CreateAccount request, CancellationToken cancellationToken)
+        public async Task<AccountDTO> Handle(CreateAccount request, CancellationToken cancellationToken)
         {
             Account account = await _accountWriteRepository.GetByIdAsync(request.Id, cancellationToken);
 
@@ -53,7 +56,7 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
 
             await _accountWriteRepository.AddAsync(account, cancellationToken, true);
 
-            return Unit.Value;
+            return account.Adapt<AccountDTO>();
         }
     }
 }

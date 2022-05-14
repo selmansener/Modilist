@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Modilist.Infrastructure.Shared\Modilist.Infrastructure.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CQRS\UserDomain\Queries\DTOs\" />
+  </ItemGroup>
+
 </Project>

@@ -11,65 +11,72 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { AccountStatus } from './account-status';
 import { Gender } from './gender';
 /**
  * 
  * @export
- * @interface UpdateAccountOutputDTO
+ * @interface AccountDTO
  */
-export interface UpdateAccountOutputDTO {
+export interface AccountDTO {
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccountOutputDTO
+     * @memberof AccountDTO
      */
     id?: string;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccountOutputDTO
+     * @memberof AccountDTO
      */
     firstName?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccountOutputDTO
+     * @memberof AccountDTO
      */
     lastName?: string | null;
     /**
      * 
      * @type {Date}
-     * @memberof UpdateAccountOutputDTO
+     * @memberof AccountDTO
      */
     birthDate?: Date | null;
     /**
      * 
      * @type {Gender}
-     * @memberof UpdateAccountOutputDTO
+     * @memberof AccountDTO
      */
     gender?: Gender;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccountOutputDTO
+     * @memberof AccountDTO
      */
     instagramUserName?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccountOutputDTO
+     * @memberof AccountDTO
      */
     email?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccountOutputDTO
+     * @memberof AccountDTO
      */
     phone?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof UpdateAccountOutputDTO
+     * @memberof AccountDTO
      */
     jobTitle?: string | null;
+    /**
+     * 
+     * @type {AccountStatus}
+     * @memberof AccountDTO
+     */
+    state?: AccountStatus;
 }

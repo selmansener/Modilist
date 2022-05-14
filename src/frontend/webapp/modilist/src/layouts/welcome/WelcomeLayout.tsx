@@ -47,7 +47,7 @@ export default function Welcome() {
     const account = instance.getActiveAccount();
 
     const dispatch = useDispatch<Dispatch>();
-    const { isBusy, response } = useSelector((state: RootState) => state.createAccountModel);
+    const { isBusy, data: response } = useSelector((state: RootState) => state.createAccountModel);
 
     useEffect(() => {
         if (account && isBusy == undefined) {

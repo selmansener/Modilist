@@ -1,34 +1,25 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../..";
-import { GetAccountOutputDTO, GetAccountOutputDTOCommonResponse } from "../../../services/swagger/api";
+import { AccountDTO } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 
 export const getAccountModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        response: {
-            statusCode: 0,
-            message: "",
-            type: "",
-            data: undefined
-        }
-    } as ResponseModel<GetAccountOutputDTOCommonResponse>,
+        data: undefined
+    } as ResponseModel<AccountDTO>,
     reducers: {
-        BUSY: (state: ResponseModel<GetAccountOutputDTOCommonResponse>) => {
+        BUSY: (state: ResponseModel<AccountDTO>) => {
             return {
                 ...state,
                 isBusy: true
             }
         },
-        HANDLE_RESPONSE: (state: ResponseModel<GetAccountOutputDTOCommonResponse>, statusCode: number, data: GetAccountOutputDTO | undefined) => {
+        HANDLE_RESPONSE: (state: ResponseModel<AccountDTO>, data: AccountDTO) => {
             return {
                 ...state,
-                response: {
-                    ...state.response,
-                    statusCode: statusCode,
-                    data
-                },
+                data,
                 isBusy: false
             }
         }
@@ -41,7 +32,10 @@ export const getAccountModel = createModel<RootModel>()({
 
                 const response = await api.users.apiV1UserGetGet();
 
-                getAccountModel.HANDLE_RESPONSE(response.data.statusCode ?? 0, response.data.data)
+                if (response.status === 200) {
+                    getAccountModel.HANDLE_RESPONSE(response.data);
+                }
+                // TODO: handle exceptions
             }
         }
     }

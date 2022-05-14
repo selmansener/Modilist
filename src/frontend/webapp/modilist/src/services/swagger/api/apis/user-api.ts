@@ -16,11 +16,9 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { CommonResponse } from '../models';
+import { AccountDTO } from '../models';
 import { CreateAccount } from '../models';
-import { GetAccountOutputDTOCommonResponse } from '../models';
 import { UpdateAccount } from '../models';
-import { UpdateAccountOutputDTOCommonResponse } from '../models';
 /**
  * UserApi - axios parameter creator
  * @export
@@ -194,7 +192,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1UserCreatePost(body?: CreateAccount, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<CommonResponse>>> {
+        async apiV1UserCreatePost(body?: CreateAccount, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AccountDTO>>> {
             const localVarAxiosArgs = await UserApiAxiosParamCreator(configuration).apiV1UserCreatePost(body, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -207,7 +205,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1UserGetGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetAccountOutputDTOCommonResponse>>> {
+        async apiV1UserGetGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AccountDTO>>> {
             const localVarAxiosArgs = await UserApiAxiosParamCreator(configuration).apiV1UserGetGet(apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -221,7 +219,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1UserUpdatePost(body?: UpdateAccount, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UpdateAccountOutputDTOCommonResponse>>> {
+        async apiV1UserUpdatePost(body?: UpdateAccount, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AccountDTO>>> {
             const localVarAxiosArgs = await UserApiAxiosParamCreator(configuration).apiV1UserUpdatePost(body, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -244,7 +242,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1UserCreatePost(body?: CreateAccount, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<CommonResponse>> {
+        async apiV1UserCreatePost(body?: CreateAccount, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<AccountDTO>> {
             return UserApiFp(configuration).apiV1UserCreatePost(body, apiVersion, options).then((request) => request(axios, basePath));
         },
         /**
@@ -253,7 +251,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1UserGetGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<GetAccountOutputDTOCommonResponse>> {
+        async apiV1UserGetGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<AccountDTO>> {
             return UserApiFp(configuration).apiV1UserGetGet(apiVersion, options).then((request) => request(axios, basePath));
         },
         /**
@@ -263,7 +261,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1UserUpdatePost(body?: UpdateAccount, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<UpdateAccountOutputDTOCommonResponse>> {
+        async apiV1UserUpdatePost(body?: UpdateAccount, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<AccountDTO>> {
             return UserApiFp(configuration).apiV1UserUpdatePost(body, apiVersion, options).then((request) => request(axios, basePath));
         },
     };
@@ -284,7 +282,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public async apiV1UserCreatePost(body?: CreateAccount, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<CommonResponse>> {
+    public async apiV1UserCreatePost(body?: CreateAccount, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<AccountDTO>> {
         return UserApiFp(this.configuration).apiV1UserCreatePost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -294,7 +292,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public async apiV1UserGetGet(apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetAccountOutputDTOCommonResponse>> {
+    public async apiV1UserGetGet(apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<AccountDTO>> {
         return UserApiFp(this.configuration).apiV1UserGetGet(apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -305,7 +303,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public async apiV1UserUpdatePost(body?: UpdateAccount, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<UpdateAccountOutputDTOCommonResponse>> {
+    public async apiV1UserUpdatePost(body?: UpdateAccount, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<AccountDTO>> {
         return UserApiFp(this.configuration).apiV1UserUpdatePost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
 }

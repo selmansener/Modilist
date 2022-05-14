@@ -130,6 +130,7 @@ void ConfigureSwaggerUI(SwaggerUIOptions options)
 
 void ConfigureSwaggerGenerator(SwaggerGenOptions options)
 {
+    options.SupportNonNullableReferenceTypes();
     options.OperationFilter<ResolveDynamicQueryEndpoints>("dqb");
     options.SwaggerDoc("v1", new OpenApiInfo { Title = ApiTitle, Version = "v1" });
     options.CustomSchemaIds(DefaultSchemaIdSelector);
