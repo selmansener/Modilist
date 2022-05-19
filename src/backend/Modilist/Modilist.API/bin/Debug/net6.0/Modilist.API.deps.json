@@ -1936,6 +1936,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.4",
           "Modilist.Domains.Base": "1.0.0",
           "Modilist.Domains.ProductDomain": "1.0.0",
+          "Modilist.Domains.StylePreferences": "1.0.0",
           "Modilist.Domains.UserDomain": "1.0.0",
           "Modilist.Infrastructure.Shared": "1.0.0"
         },
@@ -1954,6 +1955,15 @@
         },
         "runtime": {
           "Modilist.Domains.ProductDomain.dll": {}
+        }
+      },
+      "Modilist.Domains.StylePreferences/1.0.0": {
+        "dependencies": {
+          "Modilist.Domains.Base": "1.0.0",
+          "Modilist.Domains.UserDomain": "1.0.0"
+        },
+        "runtime": {
+          "Modilist.Domains.StylePreferences.dll": {}
         }
       },
       "Modilist.Domains.UserDomain/1.0.0": {
@@ -3490,6 +3500,11 @@
       "sha512": ""
     },
     "Modilist.Domains.ProductDomain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Modilist.Domains.StylePreferences/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

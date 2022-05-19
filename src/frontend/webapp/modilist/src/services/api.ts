@@ -1,4 +1,4 @@
-import { UserApiFactory } from "./swagger/api";
+import { StylePreferencesApiFactory, UserApiFactory } from "./swagger/api";
 import axios, { AxiosRequestConfig } from 'axios';
 import { InteractionRequiredAuthError, IPublicClientApplication } from "@azure/msal-browser";
 import { config } from "../config";
@@ -48,6 +48,7 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
         });
 
     return {
-        users: UserApiFactory(undefined, config.webApi, axios)
+        users: UserApiFactory(undefined, config.webApi, axios),
+        stylePreferences: StylePreferencesApiFactory(undefined, config.webApi, axios)
     }
 }

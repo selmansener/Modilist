@@ -113,3 +113,5 @@ C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Mapster.
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Domains.UserDomain.dll
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Domains.UserDomain.pdb
 C:\Projects\Modilist\src\backend\Modilist\Modilist.API\obj\Debug\net6.0\refint\Modilist.API.dll
+C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Domains.StylePreferences.dll
+C:\Projects\Modilist\src\backend\Modilist\Modilist.API\bin\Debug\net6.0\Modilist.Domains.StylePreferences.pdb

@@ -31,6 +31,8 @@ namespace Modilist.Domains.UserDomain.Models
 
         public new Guid Id { get; private set; }
 
+        public int StylePreferenceId { get; private set; }
+
         public string? FirstName { get; private set; }
 
         public string? LastName { get; private set; }

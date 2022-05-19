@@ -1,8 +1,21 @@
-{
+﻿{
   "Products": [
     {
       "SKU": "231-424-323",
       "Name": "5542503058"
+    }
+  ],
+  "Users": [
+    {
+      "Id": "e4d2fe04-2efe-4754-8d62-98dbf6013277",
+      "FirstName": "Selman",
+      "LastName": "Şener",
+      "BirthDate": "1989-07-16",
+      "Gender": "Male",
+      "InstagramUserName": "@aselmansener",
+      "Email": "selmansenerr@gmail.com",
+      "Phone": "5542503058",
+      "JobTitle": "Software Developer"
     }
   ]
 }

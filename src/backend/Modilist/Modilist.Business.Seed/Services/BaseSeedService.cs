@@ -21,7 +21,7 @@ namespace Modilist.Business.Seed.Services
             _dbContext = dbContext;
         }
 
-        protected virtual ImmutableList<SeedServiceType> Dependencies { get; set; } = ImmutableList<SeedServiceType>.Empty;
+        protected virtual ImmutableList<SeedServiceType> Dependencies { get; } = ImmutableList<SeedServiceType>.Empty;
 
         public abstract Task Execute(CancellationToken cancellationToken);
 

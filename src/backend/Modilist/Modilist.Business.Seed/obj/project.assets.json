@@ -3104,6 +3104,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.4",
           "Modilist.Domains.Base": "1.0.0",
           "Modilist.Domains.ProductDomain": "1.0.0",
+          "Modilist.Domains.StylePreferences": "1.0.0",
           "Modilist.Domains.UserDomain": "1.0.0",
           "Modilist.Infrastructure.Shared": "1.0.0"
         },
@@ -3135,6 +3136,20 @@
         },
         "runtime": {
           "bin/placeholder/Modilist.Domains.ProductDomain.dll": {}
+        }
+      },
+      "Modilist.Domains.StylePreferences/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Modilist.Domains.Base": "1.0.0",
+          "Modilist.Domains.UserDomain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Modilist.Domains.StylePreferences.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Modilist.Domains.StylePreferences.dll": {}
         }
       },
       "Modilist.Domains.UserDomain/1.0.0": {
@@ -9517,6 +9532,11 @@
       "type": "project",
       "path": "../Modilist.Domains.ProductDomain/Modilist.Domains.ProductDomain.csproj",
       "msbuildProject": "../Modilist.Domains.ProductDomain/Modilist.Domains.ProductDomain.csproj"
+    },
+    "Modilist.Domains.StylePreferences/1.0.0": {
+      "type": "project",
+      "path": "../Modilist.Domains.StylePreferences/Modilist.Domains.StylePreferences.csproj",
+      "msbuildProject": "../Modilist.Domains.StylePreferences/Modilist.Domains.StylePreferences.csproj"
     },
     "Modilist.Domains.UserDomain/1.0.0": {
       "type": "project",

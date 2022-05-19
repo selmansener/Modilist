@@ -26,7 +26,7 @@ function CustomCheckbox(props: React.PropsWithChildren<CustomCheckboxProps>) {
     return (
         <Badge badgeContent={
             (checked ?
-                (isNegative ? <CancelIcon color="error" fontSize="large" /> : <CheckCircleIcon color="success" fontSize="large" />)
+                (isNegative ? <CancelIcon color="error" /> : <CheckCircleIcon color="success" />)
                 : <></>)
         } sx={{
             m: 1

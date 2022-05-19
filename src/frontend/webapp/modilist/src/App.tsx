@@ -56,13 +56,13 @@ function App() {
     <div className="App">
       <ThemeProvider theme={mdTheme} >
         <AuthenticatedTemplate>
-          {(newUser === false ?
+          {/* {(newUser === false ?
             <Backdrop open={true}
               sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
               <CircularProgress color="inherit" />
             </Backdrop> : newUser === undefined ? <Dashboard /> : <Welcome />
-          )}
-          {/* <Welcome /> */}
+          )} */}
+          <Welcome />
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
           <Unauthenticated />

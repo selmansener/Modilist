@@ -9,7 +9,19 @@
             "Title": "Stil Tercihleri",
             "UnwantedPieces1": "Kombinlerinizde ",
             "UnwantedPieces2": "kesinlikle olmasını istemediğiniz ",
-            "UnwantedPieces3": "parçaları seçiniz."
+            "UnwantedPieces3": "parçaları seçiniz.",
+            "Hijab": "Tesettür giyim tercih ediyorum.",
+            "BodyPartsToHighlight": "Özellikle öne çıkarmak istediğiniz bölgeler var mı?",
+            "BodyPartsToHide": "Özellikle saklamak istediğiniz bölgeler var mı?",
+            "BodyParts": {
+                "Arms": "Kollar",
+                "Shoulders": "Omuzlar",
+                "Back": "Sırt",
+                "Chest": "Göğüs",
+                "Abdoment": "Karın",
+                "Hips": "Basen",
+                "Legs": "Bacaklar"
+            }
         }
     }
 }

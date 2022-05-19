@@ -5,6 +5,7 @@ using EFCoreAutoMigrator;
 
 using JsonNet.ContractResolvers;
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -44,6 +45,21 @@ namespace Modilist.Business.Seed
 
         public void ClearExecutedServices()
         {
+            var assembly = typeof(SeedData).Assembly;
+            using (var stream = assembly.GetManifestResourceStream("Modilist.Business.Seed.ClearDatabase.sql"))
+            using (var reader = new StreamReader(stream, Encoding.UTF8))
+            {
+                string sql = reader.ReadToEnd();
+                if (string.IsNullOrEmpty(sql))
+                {
+                    throw new InvalidOperationException($"Could not load ClearData file. (Modilist.Business.Seed.ClearDatabase.sql)");
+                }
+
+                _dbContext.Database.ExecuteSqlRaw(sql);
+            }
+
+            var script = _dbContext.Database.GenerateCreateScript();
+
             var autoMigrator = new AutoMigrator(_dbContext, new BlacklistedSource[] { }, new AutoMigratorOptions
             {
                 LoggingEnabled = true
@@ -67,7 +83,7 @@ namespace Modilist.Business.Seed
 
                 await _dbContext.Database.CommitTransactionAsync(cancellationToken);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 await _dbContext.Database.RollbackTransactionAsync(cancellationToken);
                 throw;
@@ -114,14 +130,6 @@ namespace Modilist.Business.Seed
             var assembly = typeof(SeedData).Assembly;
 
             string resourceName = $"Modilist.Business.Seed.Data.DataFiles.SeedData.{environment}.json";
-
-
-            var names = assembly.GetManifestResourceNames();
-            foreach (var name in names)
-            {
-                Console.WriteLine(name);
-                Debug.Write(name);
-            }
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var reader = new StreamReader(stream, Encoding.UTF8))

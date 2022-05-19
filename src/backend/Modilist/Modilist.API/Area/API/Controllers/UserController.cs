@@ -34,7 +34,7 @@ namespace Modilist.API.Area.API.Controllers
         [Authorize(nameof(AuthorizationPermissions.CreateAccount))]
         [HttpPost("Create")]
         [ProducesResponseType(typeof(AccountDTO), 200)]
-        public async Task<IActionResult> Post(CreateAccount input, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(CreateAccount input, CancellationToken cancellationToken)
         {
             await _mediator.Send(input, cancellationToken);
 
@@ -44,7 +44,7 @@ namespace Modilist.API.Area.API.Controllers
         [Authorize(nameof(AuthorizationPermissions.UpdateAccount))]
         [HttpPost("Update")]
         [ProducesResponseType(typeof(AccountDTO), 200)]
-        public async Task<IActionResult> Post(UpdateAccount input, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update(UpdateAccount input, CancellationToken cancellationToken)
         {
             input.Id = User.GetUserId();
 

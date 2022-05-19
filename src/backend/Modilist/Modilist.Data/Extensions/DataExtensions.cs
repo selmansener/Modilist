@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Modilist.Data.DataAccess;
+using Modilist.Data.Repositories.StylePreferencesDomain;
 using Modilist.Data.Repositories.UserDomain;
 using Modilist.Infrastructure.Shared.Configurations;
 
@@ -55,6 +56,9 @@ namespace Modilist.Data.Extensions
         {
             services.AddScoped<IAccountReadRepository, AccountReadRepository>();
             services.AddScoped<IAccountWriteRepository, AccountWriteRepository>();
+
+            services.AddScoped<IStylePreferencesReadRepository, StylePreferencesReadRepository>();
+            services.AddScoped<IStylePreferencesWriteRepository, StylePreferencesWriteRepository>();
 
             return services;
         }

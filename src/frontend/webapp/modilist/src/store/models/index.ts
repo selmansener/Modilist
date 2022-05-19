@@ -1,5 +1,8 @@
 // @filename: models.ts
 import { Models } from "@rematch/core"
+import { createStylePreferencesModel } from "./stylePreferences/CreateStylePreferences"
+import { getStylePreferencesModel } from "./stylePreferences/GetStylePreferences"
+import { updateStylePreferencesModel } from "./stylePreferences/UpdateStylePreferences"
 import { createAccountModel } from "./users/CreateAccount"
 import { getAccountModel } from "./users/GetAccount"
 import { updateAccountModel } from "./users/UpdateAccount"
@@ -11,7 +14,10 @@ export interface RootModel extends Models<RootModel> {
   updateAccountModel: typeof updateAccountModel,
   getAccountModel: typeof getAccountModel,
   welcomeStepsModel: typeof welcomeStepsModel,
-  welcomePageModel: typeof welcomePageModel
+  welcomePageModel: typeof welcomePageModel,
+  getStylePreferencesModel: typeof getStylePreferencesModel,
+  createStylePreferencesModel: typeof createStylePreferencesModel,
+  updateStylePreferencesModel: typeof updateStylePreferencesModel
 }
 
 export const models: RootModel = {
@@ -19,5 +25,8 @@ export const models: RootModel = {
   updateAccountModel,
   getAccountModel,
   welcomeStepsModel,
-  welcomePageModel
+  welcomePageModel,
+  getStylePreferencesModel,
+  createStylePreferencesModel,
+  updateStylePreferencesModel
 }

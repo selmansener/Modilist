@@ -9,5 +9,9 @@
         public const string GetAccount = "Accounts.Get";
         public const string CreateAccount = "Accounts.Create";
         public const string UpdateAccount = "Accounts.Update";
+
+        public const string GetStylePreferences = "StylePreferences.Get";
+        public const string CreateStylePreferences = "StylePreferences.Create";
+        public const string UpdateStylePreferences = "StylePreferences.Update";
     }
 }

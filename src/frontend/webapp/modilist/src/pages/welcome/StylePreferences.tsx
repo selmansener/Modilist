@@ -1,51 +1,58 @@
-import { Box, Checkbox, FormControl, Grid, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, Typography } from "@mui/material";
-import Rating, { IconContainerProps } from '@mui/material/Rating';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
-import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
-import { useState } from "react";
+import { Box, Checkbox, FormControl, FormControlLabel, Grid, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Typography } from "@mui/material";
+import Rating from '@mui/material/Rating';
+import { useEffect, useState } from "react";
 import { CustomCheckboxGroup } from "../../components/customCheckbox/CustomCheckbox";
 import { useTranslation } from "react-i18next";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../store/store";
+import { config } from "../../config";
+import { AccountDTO, Gender } from "../../services/swagger/api/models";
+
+interface ProductCategory {
+    name: string,
+    img: string,
+}
 
 export default function StylePreferences() {
     const { t } = useTranslation();
+    const [selectedChoiseReasons, setSelectedChoiseReasons] = useState<string[]>([]);
+    const { data: account } = useSelector((state: RootState) => state.getAccountModel);
+    const { isBusy: getStylePreferencesIsBusy, data: getStylePreferencesResponse } = useSelector((state: RootState) => state.getStylePreferencesModel);
+    const { isBusy: updateStylePreferencesIsBusy, data: updateStylePreferencesResponse, errors: validationErrors } = useSelector((state: RootState) => state.updateStylePreferencesModel);
+    const dispatch = useDispatch<Dispatch>();
+    const { imgBaseHost } = config;
+    const { gender } = account as AccountDTO;
 
+    const commonProductCategories: ProductCategory[] = [
+        {
+            name: "tshirt",
+            img: `${imgBaseHost}/product-category-icons/tshirt.svg`,
+        },
+        {
+            name: "shirt",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+        }
+    ]
 
-    const [personName, setPersonName] = useState<string[]>([]);
-    const customIcons: {
-        [index: string]: {
-            icon: React.ReactElement;
-            label: string;
-        };
-    } = {
-        1: {
-            icon: <SentimentVeryDissatisfiedIcon />,
-            label: 'Very Dissatisfied',
+    const femaleProductCategories: ProductCategory[] = [
+        ...commonProductCategories,
+        {
+            name: "dress",
+            img: `${imgBaseHost}/product-category-icons/dress.svg`,
         },
-        2: {
-            icon: <SentimentDissatisfiedIcon />,
-            label: 'Dissatisfied',
-        },
-        3: {
-            icon: <SentimentSatisfiedIcon />,
-            label: 'Neutral',
-        },
-        4: {
-            icon: <SentimentSatisfiedAltIcon />,
-            label: 'Satisfied',
-        },
-        5: {
-            icon: <SentimentVerySatisfiedIcon />,
-            label: 'Very Satisfied',
-        },
-    };
+        {
+            name: "blouse",
+            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+        }
+    ]
 
-    function IconContainer(props: IconContainerProps) {
-        const { value, ...other } = props;
-        return <span {...other}>{customIcons[value].icon}</span>;
-    }
+    const maleProductCategories: ProductCategory[] = [
+        ...commonProductCategories,
+    ]
+
+    const productCategories = gender === Gender.Female ? femaleProductCategories : maleProductCategories;
 
     const choiseReasons = [
         'Trendleri Takip Etmek',
@@ -55,6 +62,7 @@ export default function StylePreferences() {
         'Süprizlerle Kendimi Şımartmak',
         'Kendime Yeni Bir Stil Oluşturmak'
     ];
+
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -64,6 +72,24 @@ export default function StylePreferences() {
                 width: 250,
             },
         },
+    };
+
+    useEffect(() => {
+        dispatch.getStylePreferencesModel.getStylePreferences();
+    }, []);
+
+    useEffect(() => {
+        console.log(getStylePreferencesResponse);
+    }, [getStylePreferencesResponse])
+
+    const handleChoiseReasonChange = (event: SelectChangeEvent<typeof choiseReasons>) => {
+        const {
+            target: { value },
+        } = event;
+        setSelectedChoiseReasons(
+            // On autofill we get a stringified value.
+            typeof value === 'string' ? value.split(',') : value,
+        );
     };
 
     return (
@@ -80,14 +106,15 @@ export default function StylePreferences() {
                         labelId="demo-multiple-checkbox-label"
                         id="demo-multiple-checkbox"
                         multiple
-                        value={personName}
+                        value={selectedChoiseReasons}
                         input={<OutlinedInput label="Bizi Tercih Etme Sebebiniz" />}
                         renderValue={(selected) => selected.join(', ')}
                         MenuProps={MenuProps}
+                        onChange={handleChoiseReasonChange}
                     >
                         {choiseReasons.map((name) => (
                             <MenuItem key={name} value={name}>
-                                <Checkbox checked={personName.indexOf(name) > -1} />
+                                <Checkbox checked={selectedChoiseReasons.indexOf(name) > -1} />
                                 <ListItemText primary={name} />
                             </MenuItem>
                         ))}
@@ -104,8 +131,10 @@ export default function StylePreferences() {
                         <Rating
                             name="love-shopping"
                             defaultValue={0}
-                            IconContainerComponent={IconContainer}
-                            highlightSelectedOnly
+                            getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                            precision={0.5}
+                            icon={<FavoriteIcon fontSize="inherit" />}
+                            emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
                         />
                         <Typography variant='caption'>Seviyorum</Typography>
                     </div>
@@ -119,13 +148,108 @@ export default function StylePreferences() {
                     <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <Typography variant='caption'>Değilim</Typography>
                         <Rating
-                            name="love-shopping"
+                            name="open-to-suggestions"
                             defaultValue={0}
-                            IconContainerComponent={IconContainer}
-                            highlightSelectedOnly
+                            getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                            precision={0.5}
+                            icon={<FavoriteIcon fontSize="inherit" />}
+                            emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
                         />
                         <Typography variant='caption'>Açığım</Typography>
                     </div>
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl>
+                    <FormControlLabel control={<Checkbox />} label={t("WelcomeSteps.StylePreferences.Hijab")} />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl>
+                    <CustomCheckboxGroup
+                        label={(
+                            <Typography>{t("WelcomeSteps.StylePreferences.BodyPartsToHighlight")}</Typography>
+                        )}
+                        contents={
+                            [
+                                {
+                                    value: "arms",
+                                    element: (<Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Arms")}</Typography>) // TODO: get image urls from storage
+                                },
+                                {
+                                    value: "shoulders",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Shoulders")}</Typography>
+                                },
+                                {
+                                    value: "back",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Back")}</Typography>
+                                },
+                                {
+                                    value: "chest",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Chest")}</Typography>
+                                },
+                                {
+                                    value: "abdoment",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Abdoment")}</Typography>
+                                },
+                                {
+                                    value: "hips",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Hips")}</Typography>
+                                },
+                                {
+                                    value: "legs",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Legs")}</Typography>
+                                }
+                            ]
+                        }
+                        onChange={(values: string[]) => {
+                            console.log(values)
+                        }}
+                    />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl>
+                    <CustomCheckboxGroup
+                        label={(
+                            <Typography>{t("WelcomeSteps.StylePreferences.BodyPartsToPrmote")}</Typography>
+                        )}
+                        contents={
+                            [
+                                {
+                                    value: "arms",
+                                    element: (<Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Arms")}</Typography>) // TODO: get image urls from storage
+                                },
+                                {
+                                    value: "shoulders",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Shoulders")}</Typography>
+                                },
+                                {
+                                    value: "back",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Back")}</Typography>
+                                },
+                                {
+                                    value: "chest",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Chest")}</Typography>
+                                },
+                                {
+                                    value: "abdoment",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Abdoment")}</Typography>
+                                },
+                                {
+                                    value: "hips",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Hips")}</Typography>
+                                },
+                                {
+                                    value: "legs",
+                                    element: <Typography>{t("WelcomeSteps.StylePreferences.BodyParts.Legs")}</Typography>
+                                }
+                            ]
+                        }
+                        onChange={(values: string[]) => {
+                            console.log(values)
+                        }}
+                    />
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
