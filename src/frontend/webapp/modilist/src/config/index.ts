@@ -13,5 +13,5 @@ export const config = {
     ...webApiConfig,
     loginRequest,
     msalConfig,
-    imgBaseHost: "https://stmodilistsharedwesteu.blob.core.windows.net/img/"
+    imgBaseHost: "https://stmodilistsharedwesteu.blob.core.windows.net/img"
 };

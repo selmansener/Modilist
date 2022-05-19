@@ -61,6 +61,7 @@ export default function Personal() {
 
     useEffect(() => {
         dispatch.welcomeStepsModel.setOnSubmit(handleSubmit);
+        dispatch.getAccountModel.getAccount();
     }, []);
 
     useEffect(() => {

@@ -81,7 +81,7 @@ export function CustomCheckboxGroup(props: CustomCheckboxGroupProps) {
     return (
         <>
             {label}
-            <Box sx={{ display: 'flex', alignContent: 'space-evenly' }} >
+            <Box sx={{ display: 'flex', alignContent: 'space-evenly', flexWrap: 'wrap' }} >
                 {contents.map((content) => {
                     return (
                         <CustomCheckbox isNegative={isNegative ?? false}

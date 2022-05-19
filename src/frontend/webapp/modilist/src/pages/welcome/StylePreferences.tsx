@@ -9,10 +9,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 import { config } from "../../config";
 import { AccountDTO, Gender } from "../../services/swagger/api/models";
+import { ImageComponent } from "../../components/image/ImageComponent";
+
+enum MainCategory {
+    Upper = "Upper",
+    Lower = "Lower",
+    Accessories = "Accessories",
+    Underwear = "Underwear",
+    Bags = "Bags",
+    Beach = "Beach",
+    SportOutdoor = "SportOutdoor",
+    Footwear = "Footwear"
+}
 
 interface ProductCategory {
     name: string,
+    value: string,
     img: string,
+    mainCategory: MainCategory
 }
 
 export default function StylePreferences() {
@@ -27,32 +41,452 @@ export default function StylePreferences() {
 
     const commonProductCategories: ProductCategory[] = [
         {
-            name: "tshirt",
+            name: t("ProductCategories.Tshirt"),
+            value: "Tshirt",
             img: `${imgBaseHost}/product-category-icons/tshirt.svg`,
+            mainCategory: MainCategory.Upper
         },
         {
-            name: "shirt",
+            name: t("ProductCategories.Shirt"),
+            value: "Shirt",
             img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Upper
+        },
+        {
+            name: t("ProductCategories.Sweatshirt"),
+            value: "Sweatshirt",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Upper
+        },
+        {
+            name: t("ProductCategories.Sweater"),
+            value: "Sweater",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Upper
+        },
+        {
+            name: t("ProductCategories.Blazer"),
+            value: "Blazer",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Upper
+        },
+        {
+            name: t("ProductCategories.Jacket"),
+            value: "Jacket",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Upper
+        },
+        {
+            name: t("ProductCategories.Coats"),
+            value: "Coats",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Upper
+        },
+        {
+            name: t("ProductCategories.TrenchCoat"),
+            value: "TrenchCoat",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Upper
+        },
+        {
+            name: t("ProductCategories.Pyjamas"),
+            value: "Pyjamas",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Underwear
+        },
+        {
+            name: t("ProductCategories.Socks"),
+            value: "Socks",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Underwear
+        },
+        {
+            name: t("ProductCategories.Pants"),
+            value: "Pants",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Lower
+        },
+        {
+            name: t("ProductCategories.Jeans"),
+            value: "Jeans",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Lower
+        },
+        {
+            name: t("ProductCategories.Shorts"),
+            value: "Shorts",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Lower
+        },
+        {
+            name: t("ProductCategories.Sweatpants"),
+            value: "Sweatpants",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.SportOutdoor
+        },
+        {
+            name: t("ProductCategories.SportBag"),
+            value: "SportBag",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.SportOutdoor
+        },
+        {
+            name: t("ProductCategories.RunningShoes"),
+            value: "RunningShoes",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.SportOutdoor
+        },
+        {
+            name: t("ProductCategories.SnowBoots"),
+            value: "SnowBoots",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.SportOutdoor
+        },
+        {
+            name: t("ProductCategories.Satchel"),
+            value: "Satchel",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Bags
+        },
+        {
+            name: t("ProductCategories.HandBags"),
+            value: "HandBags",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Bags
+        },
+        {
+            name: t("ProductCategories.Wallet"),
+            value: "Wallet",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Bags
+        },
+        {
+            name: t("ProductCategories.Backpack"),
+            value: "Backpack",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Bags
+        },
+        {
+            name: t("ProductCategories.Swimsuit"),
+            value: "Swimsuit",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Beach
+        },
+        {
+            name: t("ProductCategories.CasualShoes"),
+            value: "CasualShoes",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Footwear
+        },
+        {
+            name: t("ProductCategories.Sandals"),
+            value: "Sandals",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Footwear
+        },
+        {
+            name: t("ProductCategories.Boots"),
+            value: "Boots",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Footwear
+        },
+        {
+            name: t("ProductCategories.Watch"),
+            value: "Watch",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Sunglasses"),
+            value: "Sunglasses",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Belt"),
+            value: "Sunglasses",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Hat"),
+            value: "Hat",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Beanie"),
+            value: "Beanie",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Jewelery"),
+            value: "Jewelery",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Scarf"),
+            value: "Scarf",
+            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            mainCategory: MainCategory.Accessories
         }
     ]
 
     const femaleProductCategories: ProductCategory[] = [
         ...commonProductCategories,
         {
-            name: "dress",
+            name: t("ProductCategories.Dress"),
+            value: "Dress",
             img: `${imgBaseHost}/product-category-icons/dress.svg`,
+            mainCategory: MainCategory.Upper
         },
         {
-            name: "blouse",
+            name: t("ProductCategories.Blouse"),
+            value: "Blouse",
             img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            mainCategory: MainCategory.Upper
+        },
+        {
+            name: t("ProductCategories.Nightwear"),
+            value: "Nightwear",
+            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            mainCategory: MainCategory.Underwear
+        },
+        {
+            name: t("ProductCategories.Bra"),
+            value: "Bra",
+            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            mainCategory: MainCategory.Underwear
+        },
+        {
+            name: t("ProductCategories.Panties"),
+            value: "Panties",
+            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            mainCategory: MainCategory.Underwear
+        },
+        {
+            name: t("ProductCategories.HighHeels"),
+            value: "HighHeels",
+            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            mainCategory: MainCategory.Footwear
+        },
+        {
+            name: t("ProductCategories.FlatShoes"),
+            value: "FlatShoes",
+            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            mainCategory: MainCategory.Footwear
         }
     ]
 
     const maleProductCategories: ProductCategory[] = [
         ...commonProductCategories,
+        {
+            name: t("ProductCategories.Boxer"),
+            value: "Boxer",
+            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            mainCategory: MainCategory.Underwear
+        }
     ]
 
+    console.log(gender);
+
     const productCategories = gender === Gender.Female ? femaleProductCategories : maleProductCategories;
+
+    console.log(productCategories);
+
+    const UpperGroup = () => {
+        const upperCategories = productCategories.filter(x => x.mainCategory === MainCategory.Upper).map(category => {
+            return {
+                value: category.value,
+                element: <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: 100
+                }}>
+                    <ImageComponent src={category.img} />
+                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                </Box>
+            }
+        });
+
+        return <CustomCheckboxGroup
+            label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Upper")}</Typography>}
+            contents={upperCategories}
+            isNegative
+            onChange={(values: string[]) => {
+            }}
+        />
+    };
+
+    const LowerGroup = () => {
+        const lowerCategories = productCategories.filter(x => x.mainCategory === MainCategory.Lower).map(category => {
+            return {
+                value: category.value,
+                element: <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: 100
+                }}>
+                    <ImageComponent src={category.img} />
+                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                </Box>
+            }
+        });
+
+        return <CustomCheckboxGroup
+            label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Lower")}</Typography>}
+            contents={lowerCategories}
+            isNegative
+            onChange={(values: string[]) => {
+            }}
+        />
+    }
+
+    const AccessoriesGroup = () => {
+        const accessoriesCategories = productCategories.filter(x => x.mainCategory === MainCategory.Accessories).map(category => {
+            return {
+                value: category.value,
+                element: <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: 100
+                }}>
+                    <ImageComponent src={category.img} />
+                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                </Box>
+            }
+        });
+
+        return <CustomCheckboxGroup
+            label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Accessories")}</Typography>}
+            contents={accessoriesCategories}
+            isNegative
+            onChange={(values: string[]) => {
+            }}
+        />
+    }
+
+    const UnderwearGroup = () => {
+        const underwearCategories = productCategories.filter(x => x.mainCategory === MainCategory.Underwear).map(category => {
+            return {
+                value: category.value,
+                element: <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: 100
+                }}>
+                    <ImageComponent src={category.img} />
+                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                </Box>
+            }
+        });
+
+        return <CustomCheckboxGroup
+            label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Underwear")}</Typography>}
+            contents={underwearCategories}
+            isNegative
+            onChange={(values: string[]) => {
+            }}
+        />
+    }
+
+    const BagsGroup = () => {
+        const bagsCategories = productCategories.filter(x => x.mainCategory === MainCategory.Bags).map(category => {
+            return {
+                value: category.value,
+                element: <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: 100
+                }}>
+                    <ImageComponent src={category.img} />
+                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                </Box>
+            }
+        });
+
+        return <CustomCheckboxGroup
+            label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Bags")}</Typography>}
+            contents={bagsCategories}
+            isNegative
+            onChange={(values: string[]) => {
+            }}
+        />
+    }
+
+    const BeachGroup = () => {
+        const categories = productCategories.filter(x => x.mainCategory === MainCategory.Beach).map(category => {
+            return {
+                value: category.value,
+                element: <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: 100
+                }}>
+                    <ImageComponent src={category.img} />
+                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                </Box>
+            }
+        });
+
+        return <CustomCheckboxGroup
+            label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Beach")}</Typography>}
+            contents={categories}
+            isNegative
+            onChange={(values: string[]) => {
+            }}
+        />
+    }
+
+    const FootwearGroup = () => {
+        const categories = productCategories.filter(x => x.mainCategory === MainCategory.Footwear).map(category => {
+            return {
+                value: category.value,
+                element: <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: 100
+                }}>
+                    <ImageComponent src={category.img} />
+                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                </Box>
+            }
+        });
+
+        return <CustomCheckboxGroup
+            label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Footwear")}</Typography>}
+            contents={categories}
+            isNegative
+            onChange={(values: string[]) => {
+            }}
+        />
+    }
+
+    const SportOutdoorGroup = () => {
+        const categories = productCategories.filter(x => x.mainCategory === MainCategory.SportOutdoor).map(category => {
+            return {
+                value: category.value,
+                element: <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: 100
+                }}>
+                    <ImageComponent src={category.img} />
+                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                </Box>
+            }
+        });
+
+        return <CustomCheckboxGroup
+            label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.SportOutdoor")}</Typography>}
+            contents={categories}
+            isNegative
+            onChange={(values: string[]) => {
+            }}
+        />
+    }
 
     const choiseReasons = [
         'Trendleri Takip Etmek',
@@ -77,10 +511,6 @@ export default function StylePreferences() {
     useEffect(() => {
         dispatch.getStylePreferencesModel.getStylePreferences();
     }, []);
-
-    useEffect(() => {
-        console.log(getStylePreferencesResponse);
-    }, [getStylePreferencesResponse])
 
     const handleChoiseReasonChange = (event: SelectChangeEvent<typeof choiseReasons>) => {
         const {
@@ -167,9 +597,9 @@ export default function StylePreferences() {
             <Grid item xs={12}>
                 <FormControl>
                     <CustomCheckboxGroup
-                        label={(
+                        label={
                             <Typography>{t("WelcomeSteps.StylePreferences.BodyPartsToHighlight")}</Typography>
-                        )}
+                        }
                         contents={
                             [
                                 {
@@ -203,7 +633,6 @@ export default function StylePreferences() {
                             ]
                         }
                         onChange={(values: string[]) => {
-                            console.log(values)
                         }}
                     />
                 </FormControl>
@@ -211,9 +640,9 @@ export default function StylePreferences() {
             <Grid item xs={12}>
                 <FormControl>
                     <CustomCheckboxGroup
-                        label={(
-                            <Typography>{t("WelcomeSteps.StylePreferences.BodyPartsToPrmote")}</Typography>
-                        )}
+                        label={
+                            <Typography>{t("WelcomeSteps.StylePreferences.BodyPartsToHide")}</Typography>
+                        }
                         contents={
                             [
                                 {
@@ -247,56 +676,50 @@ export default function StylePreferences() {
                             ]
                         }
                         onChange={(values: string[]) => {
-                            console.log(values)
                         }}
                     />
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    ml: 5,
+                    mb: 2
+                }}>
+                    <Typography sx={{ mr: 1 }}>
+                        {t("WelcomeSteps.StylePreferences.UnwantedPieces1")}
+                    </Typography>
+                    <Typography color={"error"} sx={{ mr: 1 }}>
+                        {t("WelcomeSteps.StylePreferences.UnwantedPieces2")}
+                    </Typography>
+                    <Typography>
+                        {t("WelcomeSteps.StylePreferences.UnwantedPieces3")}
+                    </Typography>
+                </Box>
                 <FormControl sx={{ m: 1 }}>
-                    <CustomCheckboxGroup
-                        label={(
-                            <Box sx={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                mb: 2
-                            }}>
-                                <Typography sx={{ mr: 1 }}>
-                                    {t("WelcomeSteps.StylePreferences.UnwantedPieces1")}
-                                </Typography>
-                                <Typography color={"error"} sx={{ mr: 1 }}>
-                                    {t("WelcomeSteps.StylePreferences.UnwantedPieces2")}
-                                </Typography>
-                                <Typography>
-                                    {t("WelcomeSteps.StylePreferences.UnwantedPieces3")}
-                                </Typography>
-                            </Box>
-                        )}
-                        contents={
-                            [
-                                {
-                                    value: "13",
-                                    element: (<img src="13.jpg" />) // TODO: get image urls from storage
-                                },
-                                {
-                                    value: "14",
-                                    element: <img src="14.jpg" />
-                                },
-                                {
-                                    value: "15",
-                                    element: <img src="15.jpg" />
-                                },
-                                {
-                                    value: "16",
-                                    element: <img src="16.jpg" />
-                                }
-                            ]
-                        }
-                        isNegative
-                        onChange={(values: string[]) => {
-                            console.log(values)
-                        }}
-                    />
+                    <UpperGroup />
+                </FormControl>
+                <FormControl sx={{ m: 1 }}>
+                    <LowerGroup />
+                </FormControl>
+                <FormControl>
+                    <AccessoriesGroup />
+                </FormControl>
+                <FormControl>
+                    <UnderwearGroup />
+                </FormControl>
+                <FormControl>
+                    <BagsGroup />
+                </FormControl>
+                <FormControl>
+                    <BeachGroup />
+                </FormControl>
+                <FormControl>
+                    <SportOutdoorGroup />
+                </FormControl>
+                <FormControl>
+                    <FootwearGroup />
                 </FormControl>
             </Grid>
         </Grid>
