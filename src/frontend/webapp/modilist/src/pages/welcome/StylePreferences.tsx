@@ -10,6 +10,10 @@ import { Dispatch, RootState } from "../../store/store";
 import { config } from "../../config";
 import { AccountDTO, Gender } from "../../services/swagger/api/models";
 import { ImageComponent } from "../../components/image/ImageComponent";
+import { ColorTypes } from "./stylePreferenceComponents/ColorTypes";
+import { Colors } from "./stylePreferenceComponents/Colors";
+import { Patterns } from "./stylePreferenceComponents/Patterns";
+import { Fabrics } from "./stylePreferenceComponents/Fabrics";
 
 enum MainCategory {
     Upper = "Upper",
@@ -290,11 +294,7 @@ export default function StylePreferences() {
         }
     ]
 
-    console.log(gender);
-
     const productCategories = gender === Gender.Female ? femaleProductCategories : maleProductCategories;
-
-    console.log(productCategories);
 
     const UpperGroup = () => {
         const upperCategories = productCategories.filter(x => x.mainCategory === MainCategory.Upper).map(category => {
@@ -720,6 +720,26 @@ export default function StylePreferences() {
                 </FormControl>
                 <FormControl>
                     <FootwearGroup />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl>
+                    <ColorTypes />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl>
+                    <Colors />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl>
+                    <Patterns />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl>
+                    <Fabrics />
                 </FormControl>
             </Grid>
         </Grid>

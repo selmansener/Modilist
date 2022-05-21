@@ -21,6 +21,26 @@
                 "Abdoment": "Abdoment",
                 "Hips": "Hips",
                 "Legs": "Legs"
+            },
+            "ExcludedColorTypes": {
+                "1": "Kombinlerinizde ",
+                "2": "kesinlikle olmasını istemediğiniz ",
+                "3": "renk tonlarını seçiniz."
+            },
+            "ExcludedColors": {
+                "1": "Kombinlerinizde ",
+                "2": "kesinlikle olmasını istemediğiniz ",
+                "3": "renkleri seçiniz."
+            },
+            "ExcludedPatterns": {
+                "1": "Kombinlerinizde ",
+                "2": "kesinlikle olmasını istemediğiniz ",
+                "3": "desenleri seçiniz."
+            },
+            "ExcludedFabrics": {
+                "1": "Kombinlerinizde ",
+                "2": "kesinlikle olmasını istemediğiniz ",
+                "3": "dokuları seçiniz."
             }
         }
     },
@@ -75,5 +95,44 @@
         "Beach": "Beach",
         "Footwear": "Footwear",
         "SportOutdoor": "Sport&Outdoor"
+    },
+    "ColorType": {
+        "Hot": "Hot",
+        "Cold": "Cold",
+        "Pastel": "Pastel",
+        "Nude": "Nude",
+        "BlackWhite": "Black&White",
+        "Dark": "Dark"
+    },
+    "Color": {
+        "Red": "Red",
+        "Green": "Green",
+        "Blue": "Blue",
+        "Yellow": "Yellow",
+        "Orange": "Orange",
+        "Pink": "Pink",
+        "Purple": "Purple",
+        "Brown": "Brown"
+    },
+    "Pattern": {
+        "Plaid": "Plaid",
+        "Striped": "Striped",
+        "PolkaDot": "PolkaDot",
+        "Shawl": "Shawl",
+        "Camouflage": "Camouflage",
+        "AnimalPattern": "AnimalPattern",
+        "Squared": "Squared",
+        "AnimalFigured": "AnimalFigured",
+        "BigFlower": "BigFlower",
+        "SmallFlower": "SmallFlower",
+        "Printed": "Printed"
+    },
+    "Fabric": {
+        "Leather": "Leather",
+        "Wool": "Wool",
+        "Satin": "Satin",
+        "FauxFur": "FauxFur",
+        "Velvet": "Velvet",
+        "Lace": "Lace"
     }
 }

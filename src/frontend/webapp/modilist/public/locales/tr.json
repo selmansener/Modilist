@@ -21,6 +21,26 @@
                 "Abdoment": "Karın",
                 "Hips": "Basen",
                 "Legs": "Bacaklar"
+            },
+            "ExcludedColorTypes": {
+                "1": "Kombinlerinizde ",
+                "2": "kesinlikle olmasını istemediğiniz ",
+                "3": "renk tonlarını seçiniz."
+            },
+            "ExcludedColors": {
+                "1": "Kombinlerinizde ",
+                "2": "kesinlikle olmasını istemediğiniz ",
+                "3": "renkleri seçiniz."
+            },
+            "ExcludedPatterns": {
+                "1": "Kombinlerinizde ",
+                "2": "kesinlikle olmasını istemediğiniz ",
+                "3": "desenleri seçiniz."
+            },
+            "ExcludedFabrics": {
+                "1": "Kombinlerinizde ",
+                "2": "kesinlikle olmasını istemediğiniz ",
+                "3": "dokuları seçiniz."
             }
         }
     },
@@ -75,5 +95,44 @@
         "Beach": "Plaj",
         "Footwear": "Ayakkabı",
         "SportOutdoor": "Spor&Outdoor"
+    },
+    "ColorType": {
+        "Hot": "Canlı",
+        "Cold": "Soğuk",
+        "Pastel": "Pastel",
+        "Nude": "Nude",
+        "BlackWhite": "Siyah&Beyaz",
+        "Dark": "Koyu"
+    },
+    "Color": {
+        "Red": "Kırmızı",
+        "Green": "Yeşil",
+        "Blue": "Mavi",
+        "Yellow": "Sarı",
+        "Orange": "Turuncu",
+        "Pink": "Pembe",
+        "Purple": "Mor",
+        "Brown": "Kahverengi"
+    },
+    "Pattern": {
+        "Plaid": "Ekose",
+        "Striped": "Çizgili",
+        "PolkaDot": "Puantiye",
+        "Shawl": "Şal",
+        "Camouflage": "Kamufulaj",
+        "AnimalPattern": "Hayvan Deseni",
+        "Squared": "Kareli",
+        "AnimalFigured": "Hayvan Figürlü",
+        "BigFlower": "Büyük Çiçekli",
+        "SmallFlower": "Küçük Çiçekli",
+        "Printed": "Baskılı"
+    },
+    "Fabric": {
+        "Leather": "Deri",
+        "Wool": "Yüm",
+        "Satin": "Saten",
+        "FauxFur": "Suni Kürk",
+        "Velvet": "Kadife",
+        "Lace": "Dantel"
     }
 }
