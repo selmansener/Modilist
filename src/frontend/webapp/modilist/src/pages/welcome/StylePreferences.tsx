@@ -47,7 +47,7 @@ export default function StylePreferences() {
         {
             name: t("ProductCategories.Tshirt"),
             value: "Tshirt",
-            img: `${imgBaseHost}/product-category-icons/tshirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Tshirt.svg`,
             mainCategory: MainCategory.Upper
         },
         {
@@ -59,181 +59,157 @@ export default function StylePreferences() {
         {
             name: t("ProductCategories.Sweatshirt"),
             value: "Sweatshirt",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Sweatshirt.svg`,
             mainCategory: MainCategory.Upper
         },
         {
             name: t("ProductCategories.Sweater"),
             value: "Sweater",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Sweater.svg`,
             mainCategory: MainCategory.Upper
         },
         {
             name: t("ProductCategories.Blazer"),
             value: "Blazer",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Blazer.svg`,
             mainCategory: MainCategory.Upper
         },
         {
             name: t("ProductCategories.Jacket"),
             value: "Jacket",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Jacket.svg`,
             mainCategory: MainCategory.Upper
         },
         {
             name: t("ProductCategories.Coats"),
             value: "Coats",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Coats.svg`,
             mainCategory: MainCategory.Upper
         },
         {
             name: t("ProductCategories.TrenchCoat"),
             value: "TrenchCoat",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/TrenchCoat.svg`,
             mainCategory: MainCategory.Upper
         },
         {
             name: t("ProductCategories.Pyjamas"),
             value: "Pyjamas",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Pyjamas.svg`,
             mainCategory: MainCategory.Underwear
         },
         {
             name: t("ProductCategories.Socks"),
             value: "Socks",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Socks.svg`,
             mainCategory: MainCategory.Underwear
         },
         {
             name: t("ProductCategories.Pants"),
             value: "Pants",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Pants.svg`,
             mainCategory: MainCategory.Lower
         },
         {
             name: t("ProductCategories.Jeans"),
             value: "Jeans",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Jeans.svg`,
             mainCategory: MainCategory.Lower
         },
         {
             name: t("ProductCategories.Shorts"),
             value: "Shorts",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Shorts.svg`,
             mainCategory: MainCategory.Lower
         },
         {
             name: t("ProductCategories.Sweatpants"),
             value: "Sweatpants",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Sweatpants.svg`,
             mainCategory: MainCategory.SportOutdoor
         },
         {
             name: t("ProductCategories.SportBag"),
             value: "SportBag",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/SportBag.svg`,
             mainCategory: MainCategory.SportOutdoor
         },
         {
             name: t("ProductCategories.RunningShoes"),
             value: "RunningShoes",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
-            mainCategory: MainCategory.SportOutdoor
-        },
-        {
-            name: t("ProductCategories.SnowBoots"),
-            value: "SnowBoots",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/RunningShoes.svg`,
             mainCategory: MainCategory.SportOutdoor
         },
         {
             name: t("ProductCategories.Satchel"),
             value: "Satchel",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Satchel.svg`,
             mainCategory: MainCategory.Bags
         },
         {
             name: t("ProductCategories.HandBags"),
             value: "HandBags",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/HandBags.svg`,
             mainCategory: MainCategory.Bags
         },
         {
             name: t("ProductCategories.Wallet"),
             value: "Wallet",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Wallet.svg`,
             mainCategory: MainCategory.Bags
         },
         {
             name: t("ProductCategories.Backpack"),
             value: "Backpack",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Backpack.svg`,
             mainCategory: MainCategory.Bags
-        },
-        {
-            name: t("ProductCategories.Swimsuit"),
-            value: "Swimsuit",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
-            mainCategory: MainCategory.Beach
         },
         {
             name: t("ProductCategories.CasualShoes"),
             value: "CasualShoes",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/CasualShoes.svg`,
             mainCategory: MainCategory.Footwear
         },
         {
             name: t("ProductCategories.Sandals"),
             value: "Sandals",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Sandals.svg`,
             mainCategory: MainCategory.Footwear
         },
         {
             name: t("ProductCategories.Boots"),
             value: "Boots",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Boots.svg`,
             mainCategory: MainCategory.Footwear
         },
         {
             name: t("ProductCategories.Watch"),
             value: "Watch",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Watch.svg`,
             mainCategory: MainCategory.Accessories
         },
         {
             name: t("ProductCategories.Sunglasses"),
             value: "Sunglasses",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Sunglasses.svg`,
             mainCategory: MainCategory.Accessories
         },
         {
             name: t("ProductCategories.Belt"),
             value: "Sunglasses",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
-            mainCategory: MainCategory.Accessories
-        },
-        {
-            name: t("ProductCategories.Hat"),
-            value: "Hat",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Belt.svg`,
             mainCategory: MainCategory.Accessories
         },
         {
             name: t("ProductCategories.Beanie"),
             value: "Beanie",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
-            mainCategory: MainCategory.Accessories
-        },
-        {
-            name: t("ProductCategories.Jewelery"),
-            value: "Jewelery",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Beanie.svg`,
             mainCategory: MainCategory.Accessories
         },
         {
             name: t("ProductCategories.Scarf"),
             value: "Scarf",
-            img: `${imgBaseHost}/product-category-icons/shirt.svg`,
+            img: `${imgBaseHost}/product-category-icons/Scarf.svg`,
             mainCategory: MainCategory.Accessories
         }
     ]
@@ -243,45 +219,57 @@ export default function StylePreferences() {
         {
             name: t("ProductCategories.Dress"),
             value: "Dress",
-            img: `${imgBaseHost}/product-category-icons/dress.svg`,
+            img: `${imgBaseHost}/product-category-icons/Dress.svg`,
             mainCategory: MainCategory.Upper
         },
         {
             name: t("ProductCategories.Blouse"),
             value: "Blouse",
-            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            img: `${imgBaseHost}/product-category-icons/Blouse.svg`,
             mainCategory: MainCategory.Upper
-        },
-        {
-            name: t("ProductCategories.Nightwear"),
-            value: "Nightwear",
-            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
-            mainCategory: MainCategory.Underwear
         },
         {
             name: t("ProductCategories.Bra"),
             value: "Bra",
-            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            img: `${imgBaseHost}/product-category-icons/Bra.svg`,
             mainCategory: MainCategory.Underwear
         },
         {
             name: t("ProductCategories.Panties"),
             value: "Panties",
-            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            img: `${imgBaseHost}/product-category-icons/Panties.svg`,
             mainCategory: MainCategory.Underwear
         },
         {
             name: t("ProductCategories.HighHeels"),
             value: "HighHeels",
-            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            img: `${imgBaseHost}/product-category-icons/HighHeels.svg`,
             mainCategory: MainCategory.Footwear
         },
         {
             name: t("ProductCategories.FlatShoes"),
             value: "FlatShoes",
-            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            img: `${imgBaseHost}/product-category-icons/FlatShoes.svg`,
             mainCategory: MainCategory.Footwear
-        }
+        },
+        {
+            name: t("ProductCategories.Hat"),
+            value: "Hat",
+            img: `${imgBaseHost}/product-category-icons/Hat-Women.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Jewelery"),
+            value: "Jewelery",
+            img: `${imgBaseHost}/product-category-icons/Jewelry-Women.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Swimsuit"),
+            value: "Swimsuit",
+            img: `${imgBaseHost}/product-category-icons/Swimsuit-Women.svg`,
+            mainCategory: MainCategory.Beach
+        },
     ]
 
     const maleProductCategories: ProductCategory[] = [
@@ -289,9 +277,27 @@ export default function StylePreferences() {
         {
             name: t("ProductCategories.Boxer"),
             value: "Boxer",
-            img: `${imgBaseHost}/product-category-icons/blouse.svg`,
+            img: `${imgBaseHost}/product-category-icons/Boxer.svg`,
             mainCategory: MainCategory.Underwear
-        }
+        },
+        {
+            name: t("ProductCategories.Hat"),
+            value: "Hat",
+            img: `${imgBaseHost}/product-category-icons/Hat-Man.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Jewelery"),
+            value: "Jewelery",
+            img: `${imgBaseHost}/product-category-icons/Jewelry-Man.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Swimsuit"),
+            value: "Swimsuit",
+            img: `${imgBaseHost}/product-category-icons/Swimsuit-Man.svg`,
+            mainCategory: MainCategory.Beach
+        },
     ]
 
     const productCategories = gender === Gender.Female ? femaleProductCategories : maleProductCategories;
