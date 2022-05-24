@@ -27,32 +27,32 @@ export function ColorTypes() {
         {
             name: t("ColorType.BlackWhite"),
             value: ColorType.BlackWhite,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/color-types/BlackWhite.svg`
         },
         {
             name: t("ColorType.Cold"),
             value: ColorType.Cold,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/color-types/Cold.svg`
         },
         {
             name: t("ColorType.Dark"),
             value: ColorType.Dark,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/color-types/Dark.svg`
         },
         {
             name: t("ColorType.Hot"),
             value: ColorType.Hot,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/color-types/Hot.svg`
         },
         {
             name: t("ColorType.Nude"),
             value: ColorType.Nude,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/color-types/Nude.svg`
         },
         {
             name: t("ColorType.Pastel"),
             value: ColorType.Pastel,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/color-types/Pastel.svg`
         }
     ]
 
@@ -78,7 +78,11 @@ export function ColorTypes() {
             colorTypes.map(colorType => {
                 return {
                     value: colorType.value,
-                    element: <Box>
+                    element: <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: 100
+                    }}>
                         <ImageComponent src={colorType.img} />
                         <Typography>{colorType.name}</Typography>
                     </Box>

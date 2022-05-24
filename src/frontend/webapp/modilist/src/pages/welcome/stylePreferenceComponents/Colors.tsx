@@ -30,42 +30,42 @@ export function Colors() {
         {
             name: t("Color.Red"),
             value: Color.Red,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/colors/Red.svg`
         },
         {
             name: t("Color.Green"),
             value: Color.Green,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/colors/Green.svg`
         },
         {
             name: t("Color.Blue"),
             value: Color.Blue,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/colors/Blue.svg`
         },
         {
             name: t("Color.Yellow"),
             value: Color.Yellow,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/colors/Yellow.svg`
         },
         {
             name: t("Color.Orange"),
             value: Color.Orange,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/colors/Orange.svg`
         },
         {
             name: t("Color.Pink"),
             value: Color.Pink,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/colors/Pink.svg`
         },
         {
             name: t("Color.Purple"),
             value: Color.Purple,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/colors/Purple.svg`
         },
         {
             name: t("Color.Brown"),
             value: Color.Brown,
-            img: `${imgBaseHost}/color-types/red.png`
+            img: `${imgBaseHost}/colors/Brown.svg`
         }
     ]
 
@@ -91,7 +91,11 @@ export function Colors() {
             colors.map(colorType => {
                 return {
                     value: colorType.value,
-                    element: <Box>
+                    element: <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: 100
+                    }}>
                         <ImageComponent src={colorType.img} />
                         <Typography>{colorType.name}</Typography>
                     </Box>

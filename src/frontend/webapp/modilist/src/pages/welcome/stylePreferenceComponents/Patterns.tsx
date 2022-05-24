@@ -32,57 +32,57 @@ export function Patterns() {
         {
             name: t("Pattern.Plaid"),
             value: Pattern.Plaid,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/Plaid.svg`
         },
         {
             name: t("Pattern.Striped"),
             value: Pattern.Striped,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/Striped.svg`
         },
         {
             name: t("Pattern.PolkaDot"),
             value: Pattern.PolkaDot,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/PolkaDot.svg`
         },
         {
             name: t("Pattern.Shawl"),
             value: Pattern.Shawl,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/Shawl.svg`
         },
         {
             name: t("Pattern.Camouflage"),
             value: Pattern.Camouflage,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/Camouflage.svg`
         },
         {
             name: t("Pattern.AnimalPattern"),
             value: Pattern.AnimalPattern,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/AnimalPattern.svg`
         },
         {
             name: t("Pattern.Squared"),
             value: Pattern.Squared,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/Squared.svg`
         },
         {
             name: t("Pattern.AnimalFigured"),
             value: Pattern.AnimalFigured,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/AnimalFigured.svg`
         },
         {
             name: t("Pattern.BigFlower"),
             value: Pattern.BigFlower,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/BigFlower.svg`
         },
         {
             name: t("Pattern.SmallFlower"),
             value: Pattern.SmallFlower,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/SmallFlower.svg`
         },
         {
             name: t("Pattern.Printed"),
             value: Pattern.Printed,
-            img: `${imgBaseHost}/patterns/ekose.jpg`
+            img: `${imgBaseHost}/patterns/Printed.svg`
         },
     ]
 
@@ -108,7 +108,11 @@ export function Patterns() {
             colors.map(colorType => {
                 return {
                     value: colorType.value,
-                    element: <Box>
+                    element: <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: 100
+                    }}>
                         <ImageComponent src={colorType.img} />
                         <Typography>{colorType.name}</Typography>
                     </Box>
