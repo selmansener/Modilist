@@ -10,19 +10,26 @@ pool:
 
 steps:
 - task: NodeTool@0
+  displayName: 'Nodejs Installation'
   inputs:
     versionSpec: '16.x'
     checkLatest: true
 - task: Npm@1
+  displayName: 'Instal Packages'
   inputs:
     command: 'install'
     workingDir: 'src/frontend/webapp/modilist'
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    workingDir: 'src/frontend/webapp/modilist'
-    customCommand: 'run build:staging'
+- script: REACT_APP_ENV=staging node scripts/start.js
+  displayName: Build
+  name: build
+  workingDirectory: 'src/frontend/webapp/modilist'
+# - task: Npm@1
+#   inputs:
+#     command: 'custom'
+#     workingDir: 'src/frontend/webapp/modilist'
+#     customCommand: 'run build:staging'
 - task: AzureStaticWebApp@0
+  displayName: Deploy
   inputs:
     app_location: 'src/frontend/webapp/modilist/build'
     output_location: 'src/frontend/webapp/modilist/build'
