@@ -1,12 +1,21 @@
-﻿-- drop constraints
-DECLARE @DropConstraints NVARCHAR(max) = ''
-SELECT @DropConstraints += 'ALTER TABLE ' + QUOTENAME(OBJECT_SCHEMA_NAME(parent_object_id)) + '.'
-                        +  QUOTENAME(OBJECT_NAME(parent_object_id)) + ' ' + 'DROP CONSTRAINT' + QUOTENAME(name)
-FROM sys.foreign_keys
-EXECUTE sp_executesql @DropConstraints;
-  
+﻿while(exists(select 1 from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where CONSTRAINT_TYPE='FOREIGN KEY'))
+begin
+ declare @sql nvarchar(2000)
+ SELECT TOP 1 @sql=('ALTER TABLE ' + TABLE_SCHEMA + '.[' + TABLE_NAME
+ + '] DROP CONSTRAINT [' + CONSTRAINT_NAME + ']')
+ FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+ WHERE CONSTRAINT_TYPE = 'FOREIGN KEY'
+ exec (@sql)
+ PRINT @sql
+end
+
 -- drop tables
 DECLARE @DropTables NVARCHAR(max) = ''
 SELECT @DropTables += 'DROP TABLE ' + QUOTENAME(TABLE_SCHEMA) + '.' + QUOTENAME(TABLE_NAME)
-FROM INFORMATION_SCHEMA.TABLES
+FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo'
 EXECUTE sp_executesql @DropTables;
+
+DECLARE @DropSeqs NVARCHAR(MAX) = ''
+SELECT @DropSeqs += 'DROP SEQUENCE ' + QUOTENAME(SEQUENCE_SCHEMA) + '.' + QUOTENAME(SEQUENCE_NAME)
+FROM INFORMATION_SCHEMA.SEQUENCES WHERE SEQUENCE_SCHEMA = 'dbo'
+EXECUTE sp_executesql @DropSeqs;
