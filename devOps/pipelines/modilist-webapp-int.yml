@@ -9,7 +9,7 @@ pool:
   vmImage: ubuntu-latest
 
 jobs:
--job:
+- job:
   displayName: WebApp Build & Deployment
   steps:
   - task: NodeTool@0
