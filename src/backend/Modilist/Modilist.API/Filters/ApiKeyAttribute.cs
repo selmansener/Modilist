@@ -1,25 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Options;
+
+using Modilist.API.Configurations;
 
 namespace Modilist.API.Filters
 {
     public class ApiKeyAttribute : ActionFilterAttribute
     {
-        public ApiKeyAttribute(string key)
-        {
-            Key = Guid.Parse(key);
-        }
-
-        public Guid Key { get; private set; }
-
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var environment = context.HttpContext.RequestServices.GetRequiredService<IHostEnvironment>();
+            var devApiKey = context.HttpContext.RequestServices.GetRequiredService<IOptions<ConfigurationOptions>>()?.Value?.DevelopmentApiKey;
 
-            // TODO: Enable after release
-            //if (!environment.IsProduction())
-            //{
-            //    return;
-            //}
+            if (string.IsNullOrEmpty(devApiKey) || !Guid.TryParse(devApiKey, out Guid devApiKeyGuid))
+            {
+                throw new InvalidOperationException("Cannot read devApiKey option");
+            }
 
             if (!context.HttpContext.Request.Headers.TryGetValue("X-ApiKey", out var apiKey))
             {
@@ -33,7 +28,7 @@ namespace Modilist.API.Filters
                 throw new UnauthorizedAccessException();
             }
 
-            if (Key != apiKeyGuid)
+            if (devApiKeyGuid != apiKeyGuid)
             {
                 throw new UnauthorizedAccessException();
             }

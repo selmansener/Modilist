@@ -1,5 +1,7 @@
 const env = process.env.REACT_APP_ENV ?? process.env.NODE_ENV ?? "development";
 
+console.log(env);
+
 const envConfig = require(`./config.${env}`).config;
 const msalConfig = require(`./auth/msalConfig.${env}`).msalConfig;
 const webApiConfig = require(`./auth/msalConfig.${env}`).apiConfig;

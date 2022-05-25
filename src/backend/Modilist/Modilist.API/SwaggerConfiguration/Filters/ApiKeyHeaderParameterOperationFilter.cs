@@ -1,6 +1,8 @@
-﻿using Microsoft.OpenApi.Any;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 
+using Modilist.API.Configurations;
 using Modilist.API.Filters;
 
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -9,6 +11,13 @@ namespace Modilist.API.SwaggerConfiguration.Filters
 {
     public class ApiKeyHeaderParameterOperationFilter : IOperationFilter
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public ApiKeyHeaderParameterOperationFilter(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var filterPipeline = context.ApiDescription.ActionDescriptor.FilterDescriptors;
@@ -16,6 +25,9 @@ namespace Modilist.API.SwaggerConfiguration.Filters
 
             if (hasApiKey)
             {
+                var environment = _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IHostEnvironment>();
+                var devApiKey = _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IOptions<ConfigurationOptions>>()?.Value?.DevelopmentApiKey;
+
                 if (operation.Parameters == null)
                     operation.Parameters = new List<OpenApiParameter>();
 
@@ -28,7 +40,7 @@ namespace Modilist.API.SwaggerConfiguration.Filters
                     Schema = new OpenApiSchema
                     {
                         Type = "string",
-                        Default = new OpenApiString(string.Empty)
+                        Default = new OpenApiString(environment.IsProduction() ? string.Empty : devApiKey)
                     }
                 });
             }

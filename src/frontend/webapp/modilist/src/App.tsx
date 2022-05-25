@@ -54,6 +54,8 @@ function App() {
   if (account) {
     newUser = (account.idTokenClaims as any)["newUser"];
   }
+  
+  console.log(isProduction);
 
   return (
     <div className="App">

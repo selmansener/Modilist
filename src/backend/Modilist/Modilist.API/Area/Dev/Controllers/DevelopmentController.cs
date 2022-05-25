@@ -11,7 +11,7 @@ namespace Modilist.API.Area.Dev.Controllers
     [Area("api")]
     [Route("[area]/v{v:apiVersion}")]
     [Authorize("Development")]
-    [ApiKey("c6048fc9-6ccd-4156-badb-d0c188815877")]
+    [ApiKey]
     public class DevelopmentController : Controller
     {
         private readonly ISeeder _seeder;

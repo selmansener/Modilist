@@ -32,6 +32,16 @@ IHostEnvironment environment = builder.Environment;
 var appSettings = builder.Configuration.GetSection("AppSettings");
 var config = appSettings.Get<ConfigurationOptions>();
 
+builder.Services.Configure<ConfigurationOptions>(configuration =>
+{
+    configuration.DevelopmentApiKey = config.DevelopmentApiKey;
+    configuration.AllowedOrigins = config.AllowedOrigins;
+    configuration.AzureAdB2COptions= config.AzureAdB2COptions;
+    configuration.ModilistDbConnectionOptions = config.ModilistDbConnectionOptions;
+});
+
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddCors(ConfigureCors);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -138,11 +148,7 @@ void ConfigureSwaggerGenerator(SwaggerGenOptions options)
     options.SupportNonNullableReferenceTypes();
     options.OperationFilter<ResolveDynamicQueryEndpoints>("dqb");
 
-    // TODO: Enable after release
-    //if (environment.IsProduction())
-    //{
-    //    options.OperationFilter<ApiKeyHeaderParameterOperationFilter>();
-    //}
+    options.OperationFilter<ApiKeyHeaderParameterOperationFilter>();
 
     options.SwaggerDoc("v1", new OpenApiInfo { Title = ApiTitle, Version = "v1" });
     options.CustomSchemaIds(DefaultSchemaIdSelector);

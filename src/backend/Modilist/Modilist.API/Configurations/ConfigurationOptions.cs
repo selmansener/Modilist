@@ -9,5 +9,7 @@ namespace Modilist.API.Configurations
         public DbConnectionOptions ModilistDbConnectionOptions { get; set; }
 
         public IEnumerable<string> AllowedOrigins { get; set; }
+
+        public string DevelopmentApiKey { get; set; }
     }
 }

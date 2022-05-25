@@ -15,8 +15,7 @@ export const apiConfig = {
 export const b2cPolicies = {
     names: {
         signUpSignIn: "b2c_1_susi",
-        forgotPassword: "b2c_1_reset",
-        editProfile: "b2c_1_edit_profile"
+        forgotPassword: "b2c_1_reset"
     },
     authorities: {
         signUpSignIn: {
@@ -24,9 +23,6 @@ export const b2cPolicies = {
         },
         forgotPassword: {
             authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_reset",
-        },
-        editProfile: {
-            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_edit_profile"
         }
     },
     authorityDomain: "modilistauth.b2clogin.com"

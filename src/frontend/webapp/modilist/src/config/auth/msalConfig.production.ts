@@ -5,6 +5,9 @@ export const apiConfig = {
         "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Accounts.Create",
         "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Accounts.Update",
         "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Accounts.Get",
+        "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/StylePreferences.Create",
+        "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/StylePreferences.Update",
+        "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/StylePreferences.Get",
     ],
     webApi: "https://app-modilist-prod-westeu.azurewebsites.net"
 };
@@ -12,8 +15,7 @@ export const apiConfig = {
 export const b2cPolicies = {
     names: {
         signUpSignIn: "b2c_1_susi",
-        forgotPassword: "b2c_1_reset",
-        editProfile: "b2c_1_edit_profile"
+        forgotPassword: "b2c_1_reset"
     },
     authorities: {
         signUpSignIn: {
@@ -21,9 +23,6 @@ export const b2cPolicies = {
         },
         forgotPassword: {
             authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_reset",
-        },
-        editProfile: {
-            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_edit_profile"
         }
     },
     authorityDomain: "modilistauth.b2clogin.com"
