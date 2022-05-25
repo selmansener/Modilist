@@ -8,6 +8,8 @@ import i18n from "i18next";
 import { getDefaults, initReactI18next } from "react-i18next";
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { config } from './config';
+import ComingSoonLayout from './layouts/comingSoon/ComingSoonLayout';
 
 
 const themeOptions: ThemeOptions = {
@@ -45,6 +47,7 @@ i18n
 
 function App() {
   const { instance } = useMsal();
+  const { isProduction } = config;
 
   const account = instance.getActiveAccount();
   let newUser = false;
@@ -56,13 +59,15 @@ function App() {
     <div className="App">
       <ThemeProvider theme={mdTheme} >
         <AuthenticatedTemplate>
-          {/* {(newUser === false ?
+          {isProduction ? <ComingSoonLayout /> :
+            /* {(newUser === false ?
             <Backdrop open={true}
               sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
               <CircularProgress color="inherit" />
             </Backdrop> : newUser === undefined ? <Dashboard /> : <Welcome />
-          )} */}
-          <Welcome />
+          )} */
+            <Welcome />
+          }
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
           <Unauthenticated />
