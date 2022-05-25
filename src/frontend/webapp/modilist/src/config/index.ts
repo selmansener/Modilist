@@ -8,6 +8,7 @@ const loginRequest = require(`./auth/msalConfig.${env}`).loginRequest;
 export const config = {
     isDev: env === "development",
     isInt: env === "int",
+    isStaging: env === "staging",
     isProduction: env === "production",
     ...envConfig,
     ...webApiConfig,

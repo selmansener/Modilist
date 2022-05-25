@@ -2,9 +2,9 @@ import { LogLevel } from "@azure/msal-browser";
 
 export const apiConfig = {
     b2cScopes: [
-        "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Accounts.Create",
-        "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Accounts.Update",
-        "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Accounts.Get",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Accounts.Create",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Accounts.Update",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Accounts.Get",
     ],
     webApi: "https://app-modilist-staging-westeu.azurewebsites.net"
 };
@@ -36,7 +36,7 @@ export const b2cPolicies = {
  */
 export const msalConfig = {
     auth: {
-        clientId: "c2a43089-5855-4fa3-a46c-41fa67ac0ae4", // This is the ONLY mandatory field; everything else is optional.
+        clientId: "ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8", // This is the ONLY mandatory field; everything else is optional.
         authority: b2cPolicies.authorities.signUpSignIn.authority, // Choose sign-up/sign-in user-flow as your default.
         knownAuthorities: [b2cPolicies.authorityDomain], // You must identify your tenant's domain as a known authority.
         redirectUri: "https://staging.modilist.com", // You must register this URI on Azure Portal/App Registration. Defaults to "window.location.href".

@@ -13,5 +13,7 @@
         public const string GetStylePreferences = "StylePreferences.Get";
         public const string CreateStylePreferences = "StylePreferences.Create";
         public const string UpdateStylePreferences = "StylePreferences.Update";
+
+        public const string Development = "Development";
     }
 }

@@ -27,6 +27,8 @@ const string SwaggerEndpoint = "/swagger/v1/swagger.json";
 
 var builder = WebApplication.CreateBuilder(args);
 
+IHostEnvironment environment = builder.Environment;
+
 var appSettings = builder.Configuration.GetSection("AppSettings");
 var config = appSettings.Get<ConfigurationOptions>();
 
@@ -86,12 +88,15 @@ var app = builder.Build();
 
 app.UseCors(CorsPolicyName);
 
-if (app.Environment.IsDevelopment() || app.Environment.IsInt())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(ConfigureSwaggerUI);
-    app.UseStaticFiles();
-}
+//if (app.Environment.IsDevelopment() || app.Environment.IsInt())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI(ConfigureSwaggerUI);
+//    app.UseStaticFiles();
+//}
+app.UseSwagger();
+app.UseSwaggerUI(ConfigureSwaggerUI);
+app.UseStaticFiles();
 
 app.UseExceptionHandlerMiddleware();
 
@@ -132,11 +137,15 @@ void ConfigureSwaggerGenerator(SwaggerGenOptions options)
 {
     options.SupportNonNullableReferenceTypes();
     options.OperationFilter<ResolveDynamicQueryEndpoints>("dqb");
+
+    // TODO: Enable after release
+    //if (environment.IsProduction())
+    //{
+    //    options.OperationFilter<ApiKeyHeaderParameterOperationFilter>();
+    //}
+
     options.SwaggerDoc("v1", new OpenApiInfo { Title = ApiTitle, Version = "v1" });
     options.CustomSchemaIds(DefaultSchemaIdSelector);
-    // options.SchemaFilter<RequireValueTypePropertiesSchemaFilter>(true);
-    // options.SchemaFilter<SwaggerExcludeFilter>();
-
     var permissions = GetPermissions().ToDictionary(
         x => $"https://{config.AzureAdB2COptions.Domain}/{config.AzureAdB2COptions.ClientId}/{x.Value}", 
         x => x.Key);
