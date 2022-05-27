@@ -45,6 +45,19 @@
         },
         "ContactInfo": {
             "AddressName": "Address Name"
+        },
+        "Subscription": {
+            "StartDateTitle": "Abonelik başlangıç tarihinizi seçiniz.",
+            "StartDateSubtitle": "İlk kombininizi seçtiğiniz hafta içerisinde göndereceğiz. Abonelik tercihinize göre kombinleriniz abonelik başlangıcı baz alınarak size ulaştırılacaktır.",
+            "Title": "Abonelik tercihinizi seçiniz.",
+            "Subtitle": "Aboneliğinizi dilediğiniz zaman dondurabilir ya da tercihinizi değiştirebilirsiniz. Abonelik dondurma ya da değişikliğinden ekstra bir ücret alınmaz.",
+            "TwoWeeks": "2 Haftada Bir",
+            "Monthly": "Ayda Bir",
+            "ThreeMonths": "3 Ayda Bir",
+            "TwoWeeksDescription": "Kombinlerinizde en az 3 ürün bulunur ve her 2 haftada bir teslim edilir.",
+            "MonthlyDescription": "Kombinlerinizde en az 5 ürün bulunur ve her ay teslim edilir.",
+            "ThreeMonthsDescription": "Kombinlerinizde en az 10 ürün bulunur ve her 3 ayda bir teslim edilir.",
+            "StyleConsultancyPrice": "Stil Danışmanlık Ücreti*"
         }
     },
     "ProductCategories": {

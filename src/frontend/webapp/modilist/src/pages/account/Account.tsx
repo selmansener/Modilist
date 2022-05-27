@@ -1,8 +1,7 @@
 import { Button, FormControl, Grid, Paper, TextField, Typography } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useEffect, useState } from "react";
-import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 import { useFormik } from "formik";
@@ -10,11 +9,14 @@ import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 import { AccountDTO, Gender, UpdateAccount } from "../../services/swagger/api";
+import add from 'date-fns/add'
 
 export function Account() {
     const { t } = useTranslation();
     const [locale, setLocale] = useState<string>('tr');
-    const maxDate = moment().subtract(18, 'years');
+    const maxDate = add(new Date(), {
+        years: -18
+    });
     const { isBusy: getAccountIsBusy, data: getAccountResponse } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: updateAccountIsBusy, data: updateAccountResponse, errors: validationErrors } = useSelector((state: RootState) => state.updateAccountModel);
     const dispatch = useDispatch<Dispatch>();
@@ -30,21 +32,17 @@ export function Account() {
         phone: ''
     });
 
-    function parseDateString(value: Date, originalValue: Date) {
-        return moment(value).toDate();
-    }
-
     const schema = Yup.object({
         firstName: Yup.string().required("* Gerekli Alan"),
         lastName: Yup.string().required("* Gerekli Alan"),
-        birthDate: Yup.date().transform(parseDateString).required("* Gerekli Alan")
+        birthDate: Yup.date().required("* Gerekli Alan")
     });
 
     useEffect(() => {
         if (getAccountResponse) {
             setAccount({
                 ...account,
-                gender: getAccountResponse.gender 
+                gender: getAccountResponse.gender
             });
         }
     }, [getAccountResponse])
@@ -147,12 +145,12 @@ export function Account() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <LocalizationProvider dateAdapter={AdapterMoment} locale={locale}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={locale}>
                             <DatePicker
                                 label="Doğum Tarihi"
-                                value={account?.birthDate ? moment(account?.birthDate) : null}
+                                value={account?.birthDate}
                                 maxDate={maxDate}
-                                inputFormat={"DD/MM/YYYY"}
+                                inputFormat={"dd/MM/yyyy"}
                                 onChange={(newValue) => {
 
 
@@ -176,7 +174,7 @@ export function Account() {
                                             if (account) {
                                                 setAccount({
                                                     ...account,
-                                                    birthDate: moment(e.target.value).toDate()
+                                                    birthDate: new Date(e.target.value)
                                                 });
                                                 // setFieldValue("birthDate", e.target.value?.toString());
                                             }

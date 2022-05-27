@@ -1,15 +1,20 @@
-import { Grid, styled, Typography } from '@mui/material';
-import { PickersDay, PickersDayProps } from '@mui/x-date-pickers';
-import moment from 'moment';
+import { Box, Card, CardActionArea, CardContent, CardMedia, Chip, Grid, Paper, styled, TextField, Typography, useTheme } from '@mui/material';
+import { LocalizationProvider, PickersDay, PickersDayProps, StaticDatePicker } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import React from 'react';
-
+import endOfWeek from 'date-fns/endOfWeek';
+import isSameDay from 'date-fns/isSameDay';
+import isWithinInterval from 'date-fns/isWithinInterval';
+import startOfWeek from 'date-fns/startOfWeek';
+import { useTranslation } from 'react-i18next';
+import add from 'date-fns/add';
+import CurrencyLiraIcon from '@mui/icons-material/CurrencyLira';
 
 type CustomPickerDayProps = PickersDayProps<Date> & {
     dayIsBetween: boolean;
     isFirstDay: boolean;
     isLastDay: boolean;
 };
-
 
 const CustomPickersDay = styled(PickersDay, {
     shouldForwardProp: (prop) =>
@@ -34,9 +39,14 @@ const CustomPickersDay = styled(PickersDay, {
 })) as React.ComponentType<CustomPickerDayProps>;
 
 export default function Subscription() {
-    const minDate = moment().add(2, 'week');
+    const theme = useTheme();
+    const { t } = useTranslation();
+    // TODO: get this from i18n
     const [locale, setLocale] = React.useState<string>('tr');
-    const [value, setValue] = React.useState<moment.Moment | null>(minDate);
+    const [value, setValue] = React.useState<Date | null>(new Date());
+    const [minDate] = React.useState<Date>(add(new Date(), {
+        weeks: 2
+    }));
 
     const renderWeekPickerDay = (
         date: Date,
@@ -47,11 +57,12 @@ export default function Subscription() {
             return <PickersDay {...pickersDayProps} />;
         }
 
-        const start = moment(value).startOf('week');
-        const end = moment(value).endOf('week');
-        const dayIsBetween = moment(date).isBetween(start, end);
-        const isFirstDay = moment(date).isSame(start, 'day');
-        const isLastDay = moment(date).isSame(end, 'day');
+        const start = startOfWeek(value);
+        const end = endOfWeek(value);
+
+        const dayIsBetween = isWithinInterval(date, { start, end });
+        const isFirstDay = isSameDay(date, start);
+        const isLastDay = isSameDay(date, end);
 
         return (
             <CustomPickersDay
@@ -65,33 +76,149 @@ export default function Subscription() {
     };
 
     return (
-        <>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Typography variant='h6' align='left' sx={{ m: 1 }}>
-                        Abonelik Başlangıç Tarihi
-                    </Typography>
-                </Grid>
 
-                <Grid item xs={8}>
-                    {/* TODO: fix moment issue */}
-                    {/* <LocalizationProvider dateAdapter={AdapterMoment} locale={locale}>
+        <Grid container spacing={2}>
+            <Grid item xs={12}>
+                <Typography variant='h6' align='left' sx={{ m: 1 }}>{t("WelcomeSteps.Subscription.StartDateTitle")}</Typography>
+                <Typography variant='subtitle1' align='left' sx={{ m: 1 }}>{t("WelcomeSteps.Subscription.StartDateSubtitle")}</Typography>
+            </Grid>
+            <Grid item xs={12} sx={{
+                display: 'flex',
+                flexShrink: 1,
+                justifyContent: 'center'
+            }}>
+                <Paper sx={{}}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={locale}>
                         <StaticDatePicker
                             displayStaticWrapperAs="desktop"
                             label="Week picker"
-                            value={value?.toDate()}
+                            value={value}
                             onChange={(newValue) => {
-                                setValue(newValue ? moment(newValue) : null);
+                                setValue(newValue);
                             }}
                             renderDay={renderWeekPickerDay}
                             renderInput={(params) => <TextField {...params} />}
                             inputFormat="'Week of' MMM d"
-                            minDate={minDate.toDate()}
+                            minDate={minDate}
                         />
-                    </LocalizationProvider> */}
-                </Grid>
+                    </LocalizationProvider>
+                </Paper>
             </Grid>
-
-        </>
-    )
+            <Grid item xs={12}>
+                <Typography variant='h6' align='left' sx={{ m: 1 }}>{t("WelcomeSteps.Subscription.Title")}</Typography>
+                <Typography variant='subtitle1' align='left' sx={{ m: 1 }}>{t("WelcomeSteps.Subscription.Subtitle")}</Typography>
+            </Grid>
+            <Grid item xs={4}>
+                <Card >
+                    <CardActionArea onClick={() => {
+                        console.log(1);
+                    }}>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image="/static/images/cards/contemplative-reptile.jpg"
+                            alt="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                {t("WelcomeSteps.Subscription.TwoWeeks")}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {t("WelcomeSteps.Subscription.TwoWeeksDescription")}
+                            </Typography>
+                            <Typography gutterBottom variant="h6" component="div">
+                                {t("WelcomeSteps.Subscription.StyleConsultancyPrice")}
+                            </Typography>
+                            <Box sx={{
+                                display:'flex',
+                                width: 100,
+                                borderRadius: 2,
+                                backgroundColor: theme.palette.grey[100],
+                                justifyContent: 'center'
+                            }}>
+                                <Typography gutterBottom variant="h3" component="div">
+                                    <CurrencyLiraIcon />
+                                    40
+                                </Typography>
+                            </Box>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Grid>
+            <Grid item xs={4}>
+                <Card >
+                    <CardActionArea onClick={() => {
+                        console.log(2);
+                    }}>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image="/static/images/cards/contemplative-reptile.jpg"
+                            alt="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                {t("WelcomeSteps.Subscription.Monthly")}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {t("WelcomeSteps.Subscription.MonthlyDescription")}
+                            </Typography>
+                            <Typography gutterBottom variant="h6" component="div">
+                                {t("WelcomeSteps.Subscription.StyleConsultancyPrice")}
+                            </Typography>
+                            <Box sx={{
+                                display:'flex',
+                                width: 100,
+                                borderRadius: 2,
+                                backgroundColor: theme.palette.grey[100],
+                                justifyContent: 'center'
+                            }}>
+                                <Typography gutterBottom variant="h3" component="div">
+                                    <CurrencyLiraIcon />
+                                    45
+                                </Typography>
+                            </Box>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Grid>
+            <Grid item xs={4}>
+                <Card >
+                    <CardActionArea onClick={() => {
+                        console.log(3);
+                    }}>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image="/static/images/cards/contemplative-reptile.jpg"
+                            alt="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                {t("WelcomeSteps.Subscription.ThreeMonths")}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {t("WelcomeSteps.Subscription.ThreeMonthsDescription")}
+                            </Typography>
+                            <Typography gutterBottom variant="h6" component="div">
+                                {t("WelcomeSteps.Subscription.StyleConsultancyPrice")}
+                            </Typography>
+                            <Box sx={{
+                                display:'flex',
+                                width: 100,
+                                borderRadius: 2,
+                                backgroundColor: theme.palette.grey[100],
+                                justifyContent: 'center'
+                            }}>
+                                <Typography gutterBottom variant="h3" component="div">
+                                    <CurrencyLiraIcon />
+                                    65
+                                </Typography>
+                            </Box>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Grid>
+        </Grid>
+    );
 }

@@ -3,18 +3,20 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
-import moment from 'moment';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch, RootState } from '../../store/store';
 import { Gender, UpdateAccount } from '../../services/swagger/api';
 import { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import add from 'date-fns/add'
 
-
-const maxDate = moment().subtract(18, 'years');
 
 export default function Personal() {
+    const maxDate = add(new Date(), {
+        years: -18
+    });
     const { account } = useSelector((state: RootState) => state.welcomePageModel);
     const [locale, setLocale] = React.useState<string>('tr');
     const { isBusy: updateAccountIsBusy, data: updateAccountResponse } = useSelector((state: RootState) => state.updateAccountModel);
@@ -108,16 +110,16 @@ export default function Personal() {
 
             <Grid item xs={4}>
                 <FormControl sx={{ m: 1, width: 300 }}>
-                    <LocalizationProvider dateAdapter={AdapterMoment} locale={locale}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={locale}>
                         <DatePicker
                             label="Doğum Tarihi"
-                            value={account.birthDate && moment(account.birthDate)}
+                            value={account?.birthDate}
                             maxDate={maxDate}
-                            inputFormat={"DD/MM/YYYY"}
+                            inputFormat={"dd/MM/yyyy"}
                             onChange={(newValue) => {
                                 dispatch.welcomePageModel.setAccount({
                                     ...account,
-                                    birthDate: newValue?.toDate()
+                                    birthDate: newValue
                                 });
                             }}
                             renderInput={(params) => <TextField {...params} />}
