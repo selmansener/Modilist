@@ -10,7 +10,7 @@ trigger:
      - main
   paths:
     include:
-      - src/frontend/webapp/modilist/*
+      - src/backend/Modilist/*
     
 
 pool:
