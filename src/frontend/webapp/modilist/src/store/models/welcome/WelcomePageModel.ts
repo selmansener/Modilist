@@ -16,7 +16,8 @@ export const welcomePageModel = createModel<RootModel>()({
             jobTitle: '',
             instagramUserName: '',
             phone: ''
-        }
+        },
+        
     } as WelcomePageModel,
     reducers: {
         setAccount: (state: WelcomePageModel, account: UpdateAccount) => {

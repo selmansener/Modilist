@@ -1,7 +1,7 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../..";
-import { CreateStylePreferences, StylePreferencesDTO } from "../../../services/swagger/api";
+import { StylePreferencesDTO } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 
 export const createStylePreferencesModel = createModel<RootModel>()({
@@ -27,10 +27,10 @@ export const createStylePreferencesModel = createModel<RootModel>()({
     effects: (dispatch) => {
         const { createStylePreferencesModel } = dispatch
         return {
-            async createAccount(input: CreateStylePreferences): Promise<any> {
+            async createAccount(): Promise<any> {
                 createStylePreferencesModel.BUSY();
 
-                const response = await api.stylePreferences.apiV1StylePreferencesCreatePost(input);
+                const response = await api.stylePreferences.apiV1StylePreferencesCreatePost();
 
                 if (response.status === 200) {
 

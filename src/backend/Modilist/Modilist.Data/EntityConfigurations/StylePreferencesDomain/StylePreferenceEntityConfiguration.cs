@@ -16,6 +16,7 @@ namespace Modilist.Data.EntityConfigurations.StylePreferencesDomain
         public void Configure(EntityTypeBuilder<StylePreference> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).UseHiLo(nameof(StylePreference));
 
             builder.HasOne(x => x.Account)
                 .WithOne()

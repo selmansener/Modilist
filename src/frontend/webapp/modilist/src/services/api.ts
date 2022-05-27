@@ -1,4 +1,4 @@
-import { StylePreferencesApiFactory, UserApiFactory } from "./swagger/api";
+import { AddressApiFactory, StylePreferencesApiFactory, UserApiFactory } from "./swagger/api";
 import axios, { AxiosRequestConfig } from 'axios';
 import { InteractionRequiredAuthError, IPublicClientApplication } from "@azure/msal-browser";
 import { config } from "../config";
@@ -18,6 +18,12 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
     axios.interceptors.request.use(
         async options => {
             const account = msalInstance.getActiveAccount();
+
+            if (!account) {
+                await msalInstance.logoutRedirect();
+                return;
+            }
+
             const response = await msalInstance.acquireTokenSilent({
                 ...config.loginRequest,
                 account
@@ -49,6 +55,7 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
 
     return {
         users: UserApiFactory(undefined, config.webApi, axios),
-        stylePreferences: StylePreferencesApiFactory(undefined, config.webApi, axios)
+        stylePreferences: StylePreferencesApiFactory(undefined, config.webApi, axios),
+        addresses: AddressApiFactory(undefined, config.webApi, axios)
     }
 }

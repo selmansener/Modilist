@@ -25,9 +25,9 @@ namespace Modilist.Data.Repositories.Base
 
     internal abstract class WriteRepository<TEntity> : IWriteRepository<TEntity> where TEntity : BaseEntity
     {
-        protected readonly ModilistWriteDbContext _baseDb;
+        protected readonly ModilistDbContext _baseDb;
 
-        public WriteRepository(ModilistWriteDbContext baseDb)
+        public WriteRepository(ModilistDbContext baseDb)
         {
             _baseDb = baseDb;
         }

@@ -144,7 +144,7 @@ export default function Personal() {
                         <MenuItem value={"Female"}>Kadın</MenuItem>
                         <MenuItem value={"Male"}>Erkek</MenuItem>
                     </Select>
-                    <FormHelperText>{errors.gender}</FormHelperText>
+                    <FormHelperText>{touched.gender && errors?.gender}</FormHelperText>
                 </FormControl>
             </Grid>
 

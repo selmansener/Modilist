@@ -14,6 +14,10 @@
         public const string CreateStylePreferences = "StylePreferences.Create";
         public const string UpdateStylePreferences = "StylePreferences.Update";
 
+        public const string GetAddress = "Address.Get";
+        public const string CreateAddress = "Address.Create";
+        public const string UpdateAddress = "Address.Update";
+
         public const string Development = "Development";
     }
 }

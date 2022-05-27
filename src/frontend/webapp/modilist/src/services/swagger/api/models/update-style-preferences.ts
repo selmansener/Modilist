@@ -22,12 +22,6 @@ export interface UpdateStylePreferences {
      * @type {string}
      * @memberof UpdateStylePreferences
      */
-    accountId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateStylePreferences
-     */
     choiseReasons?: string;
     /**
      * 

@@ -5,8 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Modilist.Data.DataAccess;
+using Modilist.Data.Repositories.AddressDomain;
 using Modilist.Data.Repositories.StylePreferencesDomain;
 using Modilist.Data.Repositories.UserDomain;
+using Modilist.Data.Transactions;
 using Modilist.Infrastructure.Shared.Configurations;
 
 namespace Modilist.Data.Extensions
@@ -23,7 +25,7 @@ namespace Modilist.Data.Extensions
                 InitialCatalog = dbConnectionOptions.Database
             }.ConnectionString;
 
-            services.AddDbContext<ModilistWriteDbContext>(opts =>
+            services.AddDbContext<ModilistDbContext>(opts =>
             {
                 if (environment.IsDevelopment())
                 {
@@ -34,19 +36,6 @@ namespace Modilist.Data.Extensions
                 {
                     sqlOptions.CommandTimeout(120);
                 });
-            });
-
-            services.AddDbContext<ModilistReadDbContext>(opts =>
-            {
-                opts.UseSqlServer(dbConnectionString, sqlOptions =>
-                {
-                    sqlOptions.CommandTimeout(120);
-                });
-
-                if (environment.IsDevelopment())
-                {
-                    opts.EnableSensitiveDataLogging();
-                }
             });
 
             return services;
@@ -59,6 +48,16 @@ namespace Modilist.Data.Extensions
 
             services.AddScoped<IStylePreferencesReadRepository, StylePreferencesReadRepository>();
             services.AddScoped<IStylePreferencesWriteRepository, StylePreferencesWriteRepository>();
+
+            services.AddScoped<IAddressReadRepository, AddressReadRepository>();
+            services.AddScoped<IAddressWriteRepository, AddressWriteRepository>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddTransactionManager(this IServiceCollection services)
+        {
+            services.AddScoped<ITransactionManager, TransactionManager>();
 
             return services;
         }

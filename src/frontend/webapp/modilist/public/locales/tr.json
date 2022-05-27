@@ -42,6 +42,9 @@
                 "2": "kesinlikle olmasını istemediğiniz ",
                 "3": "dokuları seçiniz."
             }
+        },
+        "ContactInfo": {
+            "AddressName": "Adres Adı"
         }
     },
     "ProductCategories": {
@@ -134,5 +137,17 @@
         "FauxFur": "Suni Kürk",
         "Velvet": "Kadife",
         "Lace": "Dantel"
+    },
+    "FormValidation": {
+        "RequiredField": "* Gerekli Alan"
+    },
+    "Generic": {
+        "FirstName": "Ad",
+        "LastName": "Soyad",
+        "Phone": "Telefon",
+        "City": "İl",
+        "District": "İlçe",
+        "Address": "Adres",
+        "ZipCode": "Posta Kodu (Opsiyonel)"
     }
 }

@@ -16,9 +16,9 @@ namespace Modilist.Data.Repositories.Base
 
     internal abstract class ReadRepository<TEntity> : IReadRepository<TEntity> where TEntity : BaseEntity
     {
-        protected readonly ModilistReadDbContext _baseDb;
+        protected readonly ModilistDbContext _baseDb;
 
-        public ReadRepository(ModilistReadDbContext baseDb)
+        public ReadRepository(ModilistDbContext baseDb)
         {
             _baseDb = baseDb;
 

@@ -17,7 +17,6 @@ namespace Modilist.Business.Extensions
         {
             var assembly = Assembly.GetExecutingAssembly();
             services.AddMediatR(assembly);
-            //services.AddFluentValidation(new[] { assembly });
 
             return services;
         }
@@ -44,6 +43,13 @@ namespace Modilist.Business.Extensions
         public static IServiceCollection AddLoggingBehavior(this IServiceCollection services)
         {
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
+            return services;
+        }
+
+        public static IServiceCollection AddTransactionBehavior(this IServiceCollection services)
+        {
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
 
             return services;
         }

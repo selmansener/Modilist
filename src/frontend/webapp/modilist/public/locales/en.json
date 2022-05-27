@@ -42,6 +42,9 @@
                 "2": "kesinlikle olmasını istemediğiniz ",
                 "3": "dokuları seçiniz."
             }
+        },
+        "ContactInfo": {
+            "AddressName": "Address Name"
         }
     },
     "ProductCategories": {
@@ -134,5 +137,17 @@
         "FauxFur": "FauxFur",
         "Velvet": "Velvet",
         "Lace": "Lace"
+    },
+    "FormValidation": {
+        "RequiredField": "* Required Field"
+    },
+    "Generic": {
+        "FirstName": "First Name",
+        "LastName": "Last Name",
+        "Phone": "Phone",
+        "City": "City",
+        "District": "District",
+        "Address": "Address",
+        "ZipCode": "Zip Code (Optional)"
     }
 }

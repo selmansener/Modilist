@@ -36,9 +36,9 @@ namespace Modilist.API.Area.API.Controllers
         [ProducesResponseType(typeof(AccountDTO), 200)]
         public async Task<IActionResult> Create(CreateAccount input, CancellationToken cancellationToken)
         {
-            await _mediator.Send(input, cancellationToken);
+            var response = await _mediator.Send(input, cancellationToken);
 
-            return Ok();
+            return Ok(response);
         }
 
         [Authorize(nameof(AuthorizationPermissions.UpdateAccount))]

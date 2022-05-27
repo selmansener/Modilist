@@ -14,10 +14,13 @@ using Modilist.Business.CQRS.StylePreferencesDomain.DTOs;
 using Modilist.Data.Repositories.StylePreferencesDomain;
 using Modilist.Domains.StylePreferences.Models;
 
+using Newtonsoft.Json;
+
 namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
 {
     public class CreateStylePreferences : IRequest<StylePreferencesDTO>
     {
+        [JsonIgnore]
         public Guid AccountId { get; set; }
     }
 

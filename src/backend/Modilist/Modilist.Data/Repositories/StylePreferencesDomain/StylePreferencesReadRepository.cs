@@ -19,7 +19,7 @@ namespace Modilist.Data.Repositories.StylePreferencesDomain
 
     internal class StylePreferencesReadRepository : ReadRepository<StylePreference>, IStylePreferencesReadRepository
     {
-        public StylePreferencesReadRepository(ModilistReadDbContext baseDb) 
+        public StylePreferencesReadRepository(ModilistDbContext baseDb) 
             : base(baseDb)
         {
         }

@@ -1,6 +1,78 @@
-import { FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../store/store";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { AddressDTO, City } from "../../services/swagger/api";
+import { Cities } from "./address/Cities";
+import { Districts } from "./address/Districts";
 
 export default function ContactInfo() {
+    const { t } = useTranslation();
+    const { data: cities } = useSelector((state: RootState) => state.citiesModel);
+    const { data: districts } = useSelector((state: RootState) => state.districtsModel);
+    const { isBusy: getDefaultAddressIsBusy, data: getDefaultAddressResponse } = useSelector((state: RootState) => state.getDefaultAddressModel);
+    const { isBusy: upsertAddressIsBusy, data: upsertAddressResponse } = useSelector((state: RootState) => state.upsertAddressModel);
+    const dispatch = useDispatch<Dispatch>();
+    const [selectedCity, setSelectedCity] = useState<City | undefined>({});
+    
+    const requiredField = t("FormValidation.RequiredField");
+
+    const schema = Yup.object({
+        name: Yup.string().required(requiredField),
+        firstName: Yup.string().required(requiredField),
+        lastName: Yup.string().required(requiredField),
+        phone: Yup.string().required(requiredField),
+        city: Yup.string().required(requiredField),
+        district: Yup.string().required(requiredField),
+        fullAddress: Yup.string().required(requiredField)
+    });
+
+    const {
+        setFormikState,
+        setFieldValue,
+        handleSubmit,
+        handleChange,
+        handleBlur,
+        touched,
+        values,
+        errors } = useFormik({
+            initialValues: getDefaultAddressResponse ?? {
+                firstName: "",
+                lastName: "",
+                name: "",
+                phone: "",
+                city: "",
+                district: "",
+                fullAddress: ""
+            },
+            validationSchema: schema,
+            onSubmit: (values) => {
+                if (getDefaultAddressResponse && getDefaultAddressResponse?.name) {
+                    dispatch.upsertAddressModel.upsertAddress({
+                        name: getDefaultAddressResponse.name,
+                        body: getDefaultAddressResponse
+                    });
+                }
+            },
+        });
+
+    useEffect(() => {
+        if (getDefaultAddressResponse) {
+            setFormikState(state => {
+                for (const key in state.values) {
+                    if ((getDefaultAddressResponse as AddressDTO)[key as keyof typeof getDefaultAddressResponse]) {
+                        setFieldValue(key, (getDefaultAddressResponse as AddressDTO)[key as keyof typeof getDefaultAddressResponse]);
+                    }
+                }
+
+                return state;
+            });
+        }
+    }, [getDefaultAddressResponse]);
+
     return (
         <>
             <Grid container spacing={2}>
@@ -12,129 +84,81 @@ export default function ContactInfo() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Ad" variant="outlined" />
+                        <TextField
+                            name={"firstName"}
+                            label={t("Generic.FirstName")}
+                            variant="outlined"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={touched.firstName && errors.firstName !== undefined}
+                            value={getDefaultAddressResponse?.firstName}
+                            helperText={touched.firstName && errors?.firstName}
+                        />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Soyad" variant="outlined" />
+                        <TextField
+                            name={"lastName"}
+                            label={t("Generic.LastName")}
+                            variant="outlined"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={touched.lastName && errors.lastName !== undefined}
+                            value={getDefaultAddressResponse?.lastName}
+                            helperText={touched.lastName && errors?.lastName}
+                        />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Telefon" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                        <TextField
+                            name={"phone"}
+                            label={t("Generic.Phone")}
+                            type="number"
+                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                            variant="outlined"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={touched.phone && errors.phone !== undefined}
+                            value={getDefaultAddressResponse?.phone}
+                            helperText={touched.phone && errors?.phone}
+                        />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="city-label">İl</InputLabel>
-                        <Select
-                            labelId="city-label"
-                            id="city"
-                            value={null}
-                            label="İl"
-                            onChange={() => { }}
-                        >
-                            <MenuItem value={"İSTANBUL"}>İSTANBUL</MenuItem>
-                            <MenuItem value={"ANKARA"}>ANKARA</MenuItem>
-                            <MenuItem value={"İZMİR"}>İZMİR</MenuItem>
-                            <MenuItem value={"BURSA"}>BURSA</MenuItem>
-                            <MenuItem value={"ADANA"}>ADANA</MenuItem>
-                            <MenuItem value={"ADIYAMAN"}>ADIYAMAN</MenuItem>
-                            <MenuItem value={"AFYONKARAHİSAR"}>AFYONKARAHİSAR</MenuItem>
-                            <MenuItem value={"AĞRI"}>AĞRI</MenuItem>
-                            <MenuItem value={"AKSARAY"}>AKSARAY</MenuItem>
-                            <MenuItem value={"AMASYA"}>AMASYA</MenuItem>
-                            <MenuItem value={"ANTALYA"}>ANTALYA</MenuItem>
-                            <MenuItem value={"ARDAHAN"}>ARDAHAN</MenuItem>
-                            <MenuItem value={"ARTVİN"}>ARTVİN</MenuItem>
-                            <MenuItem value={"AYDIN"}>AYDIN</MenuItem>
-                            <MenuItem value={"BALIKESİR"}>BALIKESİR</MenuItem>
-                            <MenuItem value={"BARTIN"}>BARTIN</MenuItem>
-                            <MenuItem value={"BATMAN"}>BATMAN</MenuItem>
-                            <MenuItem value={"BAYBURT"}>BAYBURT</MenuItem>
-                            <MenuItem value={"BİLECİK"}>BİLECİK</MenuItem>
-                            <MenuItem value={"BİNGÖL"}>BİNGÖL</MenuItem>
-                            <MenuItem value={"BİTLİS"}>BİTLİS</MenuItem>
-                            <MenuItem value={"BOLU"}>BOLU</MenuItem>
-                            <MenuItem value={"BURDUR"}>BURDUR</MenuItem>
-                            <MenuItem value={"ÇANAKKALE"}>ÇANAKKALE</MenuItem>
-                            <MenuItem value={"ÇANKIRI"}>ÇANKIRI</MenuItem>
-                            <MenuItem value={"ÇORUM"}>ÇORUM</MenuItem>
-                            <MenuItem value={"DENİZLİ"}>DENİZLİ</MenuItem>
-                            <MenuItem value={"DİYARBAKIR"}>DİYARBAKIR</MenuItem>
-                            <MenuItem value={"DÜZCE"}>DÜZCE</MenuItem>
-                            <MenuItem value={"EDİRNE"}>EDİRNE</MenuItem>
-                            <MenuItem value={"ELAZIĞ"}>ELAZIĞ</MenuItem>
-                            <MenuItem value={"ERZİNCAN"}>ERZİNCAN</MenuItem>
-                            <MenuItem value={"ERZURUM"}>ERZURUM</MenuItem>
-                            <MenuItem value={"ESKİŞEHİR"}>ESKİŞEHİR</MenuItem>
-                            <MenuItem value={"GAZİANTEP"}>GAZİANTEP</MenuItem>
-                            <MenuItem value={"GİRESUN"}>GİRESUN</MenuItem>
-                            <MenuItem value={"GÜMÜŞHANE"}>GÜMÜŞHANE</MenuItem>
-                            <MenuItem value={"HAKKARİ"}>HAKKARİ</MenuItem>
-                            <MenuItem value={"HATAY"}>HATAY</MenuItem>
-                            <MenuItem value={"IĞDIR"}>IĞDIR</MenuItem>
-                            <MenuItem value={"ISPARTA"}>ISPARTA</MenuItem>
-                            <MenuItem value={"KAHRAMANMARAŞ"}>KAHRAMANMARAŞ</MenuItem>
-                            <MenuItem value={"KARABÜK"}>KARABÜK</MenuItem>
-                            <MenuItem value={"KARAMAN"}>KARAMAN</MenuItem>
-                            <MenuItem value={"KARS"}>KARS</MenuItem>
-                            <MenuItem value={"KASTAMONU"}>KASTAMONU</MenuItem>
-                            <MenuItem value={"KAYSERİ"}>KAYSERİ</MenuItem>
-                            <MenuItem value={"KIRIKKALE"}>KIRIKKALE</MenuItem>
-                            <MenuItem value={"KIRKLARELİ"}>KIRKLARELİ</MenuItem>
-                            <MenuItem value={"KIRŞEHİR"}>KIRŞEHİR</MenuItem>
-                            <MenuItem value={"KİLİS"}>KİLİS</MenuItem>
-                            <MenuItem value={"KOCAELİ"}>KOCAELİ</MenuItem>
-                            <MenuItem value={"KONYA"}>KONYA</MenuItem>
-                            <MenuItem value={"KÜTAHYA"}>KÜTAHYA</MenuItem>
-                            <MenuItem value={"MALATYA"}>MALATYA</MenuItem>
-                            <MenuItem value={"MANİSA"}>MANİSA</MenuItem>
-                            <MenuItem value={"MARDİN"}>MARDİN</MenuItem>
-                            <MenuItem value={"MERSİN"}>MERSİN</MenuItem>
-                            <MenuItem value={"MUĞLA"}>MUĞLA</MenuItem>
-                            <MenuItem value={"MUŞ"}>MUŞ</MenuItem>
-                            <MenuItem value={"NEVŞEHİR"}>NEVŞEHİR</MenuItem>
-                            <MenuItem value={"NİĞDE"}>NİĞDE</MenuItem>
-                            <MenuItem value={"ORDU"}>ORDU</MenuItem>
-                            <MenuItem value={"OSMANİYE"}>OSMANİYE</MenuItem>
-                            <MenuItem value={"RİZE"}>RİZE</MenuItem>
-                            <MenuItem value={"SAKARYA"}>SAKARYA</MenuItem>
-                            <MenuItem value={"SAMSUN"}>SAMSUN</MenuItem>
-                            <MenuItem value={"SİİRT"}>SİİRT</MenuItem>
-                            <MenuItem value={"SİNOP"}>SİNOP</MenuItem>
-                            <MenuItem value={"SİVAS"}>SİVAS</MenuItem>
-                            <MenuItem value={"ŞANLIURFA"}>ŞANLIURFA</MenuItem>
-                            <MenuItem value={"ŞIRNAK"}>ŞIRNAK</MenuItem>
-                            <MenuItem value={"TEKİRDAĞ"}>TEKİRDAĞ</MenuItem>
-                            <MenuItem value={"TOKAT"}>TOKAT</MenuItem>
-                            <MenuItem value={"TRABZON"}>TRABZON</MenuItem>
-                            <MenuItem value={"TUNCELİ"}>TUNCELİ</MenuItem>
-                            <MenuItem value={"UŞAK"}>UŞAK</MenuItem>
-                            <MenuItem value={"VAN"}>VAN</MenuItem>
-                            <MenuItem value={"YALOVA"}>YALOVA</MenuItem>
-                            <MenuItem value={"YOZGAT"}>YOZGAT</MenuItem>
-                            <MenuItem value={"ZONGULDAK"}>ZONGULDAK</MenuItem>
-                        </Select>
+                    <FormControl
+                        sx={{ m: 1, width: 300 }}
+                        error={touched.city && errors.city !== undefined}>
+                        <InputLabel id="city-label">{t("Generic.City")}</InputLabel>
+                        <Cities
+                            value={getDefaultAddressResponse?.city}
+                            onChange={(e) => {
+                                const selectedCity = cities?.filter(x => x.code == e.target.value)[0];
+                                setSelectedCity(selectedCity);
+
+                                handleChange(e);
+                            }}
+                            onBlur={handleBlur}
+                        />
+                        <FormHelperText>{touched.city && errors?.city}</FormHelperText>
                     </FormControl>
                 </Grid>
-                {/* TODO: hepsiburada'dan ilçe listesi alınacak, city/province ayrı component olabilir */}
                 <Grid item xs={4}>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="province-label">İlçe</InputLabel>
-                        <Select
-                            labelId="province-label"
-                            id="province"
-                            value={null}
-                            label="İlçe"
-                            onChange={() => { }}
-                        >
-                            <MenuItem value={"XXS"}>İlçe</MenuItem>
-                        </Select>
+                    <FormControl
+                        sx={{ m: 1, width: 300 }}
+                        error={touched.district && errors.district !== undefined}>
+                        <InputLabel id="district-label">{t("Generic.District")}</InputLabel>
+                        <Districts 
+                            selectedCity={selectedCity?.code}
+                            value={getDefaultAddressResponse?.district}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        <FormHelperText>{touched.district && errors?.district}</FormHelperText>
                     </FormControl>
                 </Grid>
 
@@ -147,16 +171,33 @@ export default function ContactInfo() {
 
                 <Grid item xs={8}>
                     <FormControl sx={{ m: 1, width: 680 }}>
-                        <TextField label="Adres"
+                        <TextField
+                            name={"fullAddress"}
+                            label={t("Generic.Address")}
                             variant="outlined"
                             multiline
-                            rows={4} />
+                            rows={4}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={getDefaultAddressResponse?.fullAddress}
+                            error={touched.fullAddress && errors.fullAddress !== undefined}
+                            helperText={touched.fullAddress && errors.fullAddress}
+                        />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Adres Adı" variant="outlined" />
+                        <TextField
+                            name={"name"}
+                            label={t("WelcomeSteps.ContactInfo.AddressName")}
+                            variant="outlined"
+                            value={getDefaultAddressResponse?.name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={touched.name && errors.name !== undefined}
+                            helperText={touched.name && errors?.name}
+                        />
                     </FormControl>
                 </Grid>
             </Grid>

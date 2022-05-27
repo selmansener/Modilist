@@ -19,7 +19,7 @@ namespace Modilist.Data.Repositories.UserDomain
 
     internal class AccountWriteRepository : WriteRepository<Account>, IAccountWriteRepository
     {
-        public AccountWriteRepository(ModilistWriteDbContext baseDb) 
+        public AccountWriteRepository(ModilistDbContext baseDb) 
             : base(baseDb)
         {
         }

@@ -14,9 +14,9 @@ namespace Modilist.Business.Seed.Services
 
     internal abstract class BaseSeedService : ISeedService
     {
-        protected readonly ModilistWriteDbContext _dbContext;
+        protected readonly ModilistDbContext _dbContext;
 
-        protected BaseSeedService(ModilistWriteDbContext dbContext)
+        protected BaseSeedService(ModilistDbContext dbContext)
         {
             _dbContext = dbContext;
         }

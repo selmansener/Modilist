@@ -14,7 +14,7 @@ namespace Modilist.Business.Seed.Services
     {
         private readonly SeedData _seedData;
 
-        public UsersSeedService(ModilistWriteDbContext dbContext, SeedData seedData)
+        public UsersSeedService(ModilistDbContext dbContext, SeedData seedData)
             : base(dbContext)
         {
             _seedData = seedData;

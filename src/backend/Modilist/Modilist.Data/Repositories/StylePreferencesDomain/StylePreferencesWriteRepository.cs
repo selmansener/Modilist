@@ -19,7 +19,7 @@ namespace Modilist.Data.Repositories.StylePreferencesDomain
 
     internal class StylePreferencesWriteRepository : WriteRepository<StylePreference>, IStylePreferencesWriteRepository
     {
-        public StylePreferencesWriteRepository(ModilistWriteDbContext baseDb) 
+        public StylePreferencesWriteRepository(ModilistDbContext baseDb) 
             : base(baseDb)
         {
         }

@@ -15,7 +15,7 @@ namespace Modilist.Business.Seed.Services
 {
     internal class ProductSeedService : BaseSeedService
     {
-        public ProductSeedService(ModilistWriteDbContext dbContext)
+        public ProductSeedService(ModilistDbContext dbContext)
             : base(dbContext)
         {
         }

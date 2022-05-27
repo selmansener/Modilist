@@ -25,21 +25,22 @@ namespace Modilist.API.Area.API.Controllers
         [ProducesResponseType(typeof(StylePreferencesDTO), 200)]
         public async Task<IActionResult> Get()
         {
-            var account = await _mediator.Send(new GetStylePreferences { AccountId = User.GetUserId() });
+            var response = await _mediator.Send(new GetStylePreferences { AccountId = User.GetUserId() });
 
-            return Ok(account);
+            return Ok(response);
         }
 
         [Authorize(nameof(AuthorizationPermissions.CreateStylePreferences))]
         [HttpPost("Create")]
         [ProducesResponseType(typeof(StylePreferencesDTO), 200)]
-        public async Task<IActionResult> Create(CreateStylePreferences input, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(CancellationToken cancellationToken)
         {
-            input.AccountId = User.GetUserId();
+            var response = await _mediator.Send(new CreateStylePreferences
+            {
+                AccountId = User.GetUserId()
+            }, cancellationToken);
 
-            await _mediator.Send(input, cancellationToken);
-
-            return Ok();
+            return Ok(response);
         }
 
         [Authorize(nameof(AuthorizationPermissions.UpdateStylePreferences))]

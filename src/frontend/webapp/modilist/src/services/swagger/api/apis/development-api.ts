@@ -25,12 +25,17 @@ export const DevelopmentApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
+         * @param {string} xApiKey X-ApiKey
          * @param {SeedServiceType} [seedServiceType] 
          * @param {boolean} [recreateDb] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1SeedPost: async (seedServiceType?: SeedServiceType, recreateDb?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiV1SeedPost: async (xApiKey: string, seedServiceType?: SeedServiceType, recreateDb?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xApiKey' is not null or undefined
+            if (xApiKey === null || xApiKey === undefined) {
+                throw new RequiredError('xApiKey','Required parameter xApiKey was null or undefined when calling apiV1SeedPost.');
+            }
             const localVarPath = `/api/v1/Seed`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -46,7 +51,7 @@ export const DevelopmentApiAxiosParamCreator = function (configuration?: Configu
             // oauth required
             if (configuration && configuration.accessToken) {
                 const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update"])
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
             }
@@ -57,6 +62,10 @@ export const DevelopmentApiAxiosParamCreator = function (configuration?: Configu
 
             if (recreateDb !== undefined) {
                 localVarQueryParameter['recreateDb'] = recreateDb;
+            }
+
+            if (xApiKey !== undefined && xApiKey !== null) {
+                localVarHeaderParameter['X-ApiKey'] = String(xApiKey);
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -86,13 +95,14 @@ export const DevelopmentApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} xApiKey X-ApiKey
          * @param {SeedServiceType} [seedServiceType] 
          * @param {boolean} [recreateDb] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1SeedPost(seedServiceType?: SeedServiceType, recreateDb?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await DevelopmentApiAxiosParamCreator(configuration).apiV1SeedPost(seedServiceType, recreateDb, options);
+        async apiV1SeedPost(xApiKey: string, seedServiceType?: SeedServiceType, recreateDb?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await DevelopmentApiAxiosParamCreator(configuration).apiV1SeedPost(xApiKey, seedServiceType, recreateDb, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -109,13 +119,14 @@ export const DevelopmentApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
+         * @param {string} xApiKey X-ApiKey
          * @param {SeedServiceType} [seedServiceType] 
          * @param {boolean} [recreateDb] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1SeedPost(seedServiceType?: SeedServiceType, recreateDb?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return DevelopmentApiFp(configuration).apiV1SeedPost(seedServiceType, recreateDb, options).then((request) => request(axios, basePath));
+        async apiV1SeedPost(xApiKey: string, seedServiceType?: SeedServiceType, recreateDb?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return DevelopmentApiFp(configuration).apiV1SeedPost(xApiKey, seedServiceType, recreateDb, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -129,13 +140,14 @@ export const DevelopmentApiFactory = function (configuration?: Configuration, ba
 export class DevelopmentApi extends BaseAPI {
     /**
      * 
+     * @param {string} xApiKey X-ApiKey
      * @param {SeedServiceType} [seedServiceType] 
      * @param {boolean} [recreateDb] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DevelopmentApi
      */
-    public async apiV1SeedPost(seedServiceType?: SeedServiceType, recreateDb?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return DevelopmentApiFp(this.configuration).apiV1SeedPost(seedServiceType, recreateDb, options).then((request) => request(this.axios, this.basePath));
+    public async apiV1SeedPost(xApiKey: string, seedServiceType?: SeedServiceType, recreateDb?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return DevelopmentApiFp(this.configuration).apiV1SeedPost(xApiKey, seedServiceType, recreateDb, options).then((request) => request(this.axios, this.basePath));
     }
 }

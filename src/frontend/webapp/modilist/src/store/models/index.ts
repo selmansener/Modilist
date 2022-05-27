@@ -1,5 +1,11 @@
 // @filename: models.ts
 import { Models } from "@rematch/core"
+import { citiesModel } from "./addresses/Cities"
+import { createAddressModel } from "./addresses/CreateAddress"
+import { districtsModel } from "./addresses/Districts"
+import { getDefaultAddressModel } from "./addresses/GetDefaultAddress"
+import { updateAddressModel } from "./addresses/UpdateAddress"
+import { upsertAddressModel } from "./addresses/UpsertAddress"
 import { createStylePreferencesModel } from "./stylePreferences/CreateStylePreferences"
 import { getStylePreferencesModel } from "./stylePreferences/GetStylePreferences"
 import { updateStylePreferencesModel } from "./stylePreferences/UpdateStylePreferences"
@@ -17,7 +23,13 @@ export interface RootModel extends Models<RootModel> {
   welcomePageModel: typeof welcomePageModel,
   getStylePreferencesModel: typeof getStylePreferencesModel,
   createStylePreferencesModel: typeof createStylePreferencesModel,
-  updateStylePreferencesModel: typeof updateStylePreferencesModel
+  updateStylePreferencesModel: typeof updateStylePreferencesModel,
+  getDefaultAddressModel: typeof getDefaultAddressModel,
+  createAddressModel: typeof createAddressModel,
+  updateAddressModel: typeof updateAddressModel,
+  upsertAddressModel: typeof upsertAddressModel,
+  citiesModel: typeof citiesModel,
+  districtsModel: typeof districtsModel
 }
 
 export const models: RootModel = {
@@ -28,5 +40,11 @@ export const models: RootModel = {
   welcomePageModel,
   getStylePreferencesModel,
   createStylePreferencesModel,
-  updateStylePreferencesModel
+  updateStylePreferencesModel,
+  getDefaultAddressModel,
+  createAddressModel,
+  updateAddressModel,
+  upsertAddressModel,
+  citiesModel,
+  districtsModel
 }

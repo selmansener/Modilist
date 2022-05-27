@@ -32,9 +32,9 @@ namespace Modilist.Business.Seed
         private readonly IServiceProvider _serviceProvider;
         private readonly SeedCache _seedCache;
         private readonly SeedServices _seedServices;
-        private readonly ModilistWriteDbContext _dbContext;
+        private readonly ModilistDbContext _dbContext;
 
-        public Seeder(ILogger<Seeder> logger, IServiceProvider serviceProvider, SeedCache seedCache, SeedServices seedServices, ModilistWriteDbContext dbContext)
+        public Seeder(ILogger<Seeder> logger, IServiceProvider serviceProvider, SeedCache seedCache, SeedServices seedServices, ModilistDbContext dbContext)
         {
             _logger = logger;
             _serviceProvider = serviceProvider;

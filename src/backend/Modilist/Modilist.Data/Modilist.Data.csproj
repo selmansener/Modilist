@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Modilist.Domains.AddressDomain\Modilist.Domains.AddressDomain.csproj" />
     <ProjectReference Include="..\Modilist.Domains.Base\Modilist.Domains.Base.csproj" />
     <ProjectReference Include="..\Modilist.Domains.ProductDomain\Modilist.Domains.ProductDomain.csproj" />
     <ProjectReference Include="..\Modilist.Domains.StylePreferences\Modilist.Domains.StylePreferences.csproj" />

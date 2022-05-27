@@ -17,7 +17,7 @@ namespace Modilist.Business.Seed.Services
     {
         protected override ImmutableList<SeedServiceType> Dependencies => ImmutableList.Create(SeedServiceType.Users);
 
-        public StylePreferencesSeedService(ModilistWriteDbContext dbContext) 
+        public StylePreferencesSeedService(ModilistDbContext dbContext) 
             : base(dbContext)
         {
         }
