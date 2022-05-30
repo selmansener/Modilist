@@ -105,7 +105,7 @@ export function Account() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Ad"
+                        <TextField label={t('Generic.PersonalInfo.FirstName')}
                             name="firstName"
                             helperText={touched.firstName && errors.firstName && errors.firstName}
                             onChange={(e) => {
@@ -125,7 +125,7 @@ export function Account() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Soyad"
+                        <TextField label={t('Generic.PersonalInfo.LastName')}
                             name="lastName"
                             helperText={touched.lastName && errors.lastName && errors.lastName}
                             onChange={(e) => {
@@ -147,7 +147,7 @@ export function Account() {
                     <FormControl sx={{ m: 1, width: 300 }}>
                         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={locale}>
                             <DatePicker
-                                label="Doğum Tarihi"
+                                label={t('Generic.PersonalInfo.BirthDate')}
                                 value={account?.birthDate}
                                 maxDate={maxDate}
                                 inputFormat={"dd/MM/yyyy"}
@@ -164,7 +164,7 @@ export function Account() {
                                         ref={params.ref}
                                         {...params}
                                         color="primary"
-                                        label="Doğum Tarihi"
+                                        label={t('Generic.PersonalInfo.BirthDate')}
                                         name="birthDate"
                                         value={account?.birthDate?.toString()}
                                         helperText={(
@@ -193,19 +193,19 @@ export function Account() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Mesleğin nedir? (Optional)" value={account?.jobTitle} variant="outlined" />
+                        <TextField label= {t('Pages.Account.Job')} value={account?.jobTitle} variant="outlined" />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Instagram adresin? (Optional)" value={account?.instagramUserName} variant="outlined" />
+                        <TextField label={t('Pages.Account.Instagram')}  value={account?.instagramUserName} variant="outlined" />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Telefon" value={account?.phone} variant="outlined" />
+                        <TextField label={t('Generic.PersonalInfo.PhoneNumber')} value={account?.phone} variant="outlined" />
                     </FormControl>
                 </Grid>
 
@@ -215,8 +215,8 @@ export function Account() {
                             onClick={() => {
                                 handleSubmit();
                             }}
-                            color="secondary">
-                            <Typography>Kaydet</Typography>
+                            color="secondary"> 
+                            <Typography>{t('Pages.Account.Button.Save')}</Typography> 
                         </Button>
                     </FormControl>
                 </Grid>

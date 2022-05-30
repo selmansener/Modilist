@@ -2,6 +2,8 @@ import { Stepper, Typography, Step, StepLabel, Box, Button, Paper } from "@mui/m
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import i18n from "i18next";
+import { useTranslation } from "react-i18next";
 
 type WelcomeStepProps = {
     steps: {
@@ -11,6 +13,8 @@ type WelcomeStepProps = {
 }
 
 export function WelcomeSteps(props: WelcomeStepProps) {
+    
+    const {t} = useTranslation();
     const steps = props.steps;
 
     const [activeStep, setActiveStep] = useState(0);
@@ -57,7 +61,7 @@ export function WelcomeSteps(props: WelcomeStepProps) {
                     }
                     return (
                         <Step key={step.title} {...stepProps}>
-                            <StepLabel {...labelProps}>{step.title}</StepLabel>
+                            <StepLabel {...labelProps}>{t(step.title)}</StepLabel>
                         </Step>
                     );
                 })}
@@ -87,11 +91,11 @@ export function WelcomeSteps(props: WelcomeStepProps) {
                             onClick={handleBack}
                             sx={{ mr: 1 }}
                         >
-                            Back
+                            {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
                         </Button>
                         <Box sx={{ flex: '1 1 auto' }} />
                         <Button onClick={handleNext} variant="outlined">
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            {activeStep === steps.length - 1 ? t('Layouts.Welcome.WelcomeSteps.Buttons.Finish') : t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
                         </Button>
                     </Box>
                 </React.Fragment>

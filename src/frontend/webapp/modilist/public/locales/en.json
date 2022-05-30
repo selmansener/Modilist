@@ -162,5 +162,6 @@
         "District": "District",
         "Address": "Address",
         "ZipCode": "Zip Code (Optional)"
+        }
     }
 }

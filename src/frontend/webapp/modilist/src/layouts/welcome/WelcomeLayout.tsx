@@ -13,36 +13,43 @@ import React, { useCallback, useEffect } from "react";
 import { useMsal } from "@azure/msal-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
+import i18n from "i18next";
+import { useTranslation } from "react-i18next";
+
+
+
 
 
 const steps = [
     {
-        title: 'Kişisel',
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePersonal',
         component: <Personal />
     },
     {
-        title: 'Beden Ölçüleri',
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleBodySize',
         component: <BodySize />
     },
     {
-        title: 'Stil Tercihleri',
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleStylePreferences',
         component: <StylePreferences />
     },
     {
-        title: 'İletişim Bilgileri',
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleContactInfo',
         component: <ContactInfo />
     },
     {
-        title: 'Abonelik',
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleSubscription',
         component: <Subscription />
     },
     {
-        title: 'Ödeme Yöntemi',
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePaymentMethod',
         component: <PaymentMethod />
     }
 ];
 
+
 export default function Welcome() {
+    const {t} = useTranslation();
     const { instance } = useMsal();
     const account = instance.getActiveAccount();
 
@@ -87,13 +94,13 @@ export default function Welcome() {
                                     }}
                                 >
                                     <Typography variant="h4" component="div" sx={{ mt: 2 }}>
-                                        Modilist'e hoşgeldin!
+                                        {t('Layouts.Welcome.WelcomeLayout.Welcome')}
                                     </Typography>
                                     <Typography variant="h6" component="div">
-                                        Sana özel kombinlerini hazırlamaya başlamadan önce bazı bilgilere ihtiyacımız var.
+                                        {t('Layouts.Welcome.WelcomeLayout.Description1')}
                                     </Typography>
                                     <Typography variant="h6" component="div">
-                                        Lütfen aşağıdaki birkaç aşamadan oluşan formu dikkatlice doldur.
+                                        {t('Layouts.Welcome.WelcomeLayout.Description2')}
                                     </Typography>
                                     <Typography component="div">
                                         <ExpandCircleDownIcon sx={{ fontSize: 72, mt: 5 }} color="primary" />
@@ -101,7 +108,7 @@ export default function Welcome() {
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sx={{ mt: 5 }}>
-                                <WelcomeSteps steps={steps} />
+                                <WelcomeSteps steps= {steps} />
                             </Grid>
                         </>
                     }

@@ -10,6 +10,8 @@ import { Gender, UpdateAccount } from '../../services/swagger/api';
 import { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import i18n, { t } from "i18next";
+import { useTranslation } from "react-i18next";
 import add from 'date-fns/add'
 
 
@@ -17,6 +19,7 @@ export default function Personal() {
     const maxDate = add(new Date(), {
         years: -18
     });
+    const {t} = useTranslation();
     const { account } = useSelector((state: RootState) => state.welcomePageModel);
     const [locale, setLocale] = React.useState<string>('tr');
     const { isBusy: updateAccountIsBusy, data: updateAccountResponse } = useSelector((state: RootState) => state.updateAccountModel);
@@ -71,7 +74,7 @@ export default function Personal() {
             return errors.gender === undefined || errors.gender === "None";
         });
     }, [errors]);
-
+    
     return <>
         <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -82,7 +85,7 @@ export default function Personal() {
 
             <Grid item xs={4}>
                 <FormControl sx={{ m: 1, width: 300 }}>
-                    <TextField label="Ad"
+                    <TextField label={<Typography>{t('Generic.PersonalInfo.FirstName')}</Typography>}
                         name="firstName"
                         onChange={(e) => {
                             dispatch.welcomePageModel.setAccount({
@@ -96,7 +99,7 @@ export default function Personal() {
 
             <Grid item xs={4}>
                 <FormControl sx={{ m: 1, width: 300 }}>
-                    <TextField label="Soyad"
+                    <TextField label={<Typography>{t('Generic.PersonalInfo.LastName')}</Typography>}
                         name="lastName"
                         onChange={(e) => {
                             dispatch.welcomePageModel.setAccount({
@@ -112,7 +115,7 @@ export default function Personal() {
                 <FormControl sx={{ m: 1, width: 300 }}>
                     <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={locale}>
                         <DatePicker
-                            label="Doğum Tarihi"
+                            label={<Typography>{t('Generic.PersonalInfo.BirthDate')}</Typography>}
                             value={account?.birthDate}
                             maxDate={maxDate}
                             inputFormat={"dd/MM/yyyy"}
@@ -130,21 +133,21 @@ export default function Personal() {
 
             <Grid item xs={4}>
                 <FormControl sx={{ m: 1, width: 300 }} error={touched.gender && errors.gender !== undefined}>
-                    <InputLabel id="gender-label">Cinsiyet</InputLabel>
+                    <InputLabel id="gender-label">{t('Generic.PersonalInfo.Gender.Gender')}</InputLabel>
                     <Select
                         name="gender"
                         labelId="gender-label"
                         id="gender"
                         value={account?.gender}
-                        label="Cinsiyet"
+                        label={<Typography>{t('Generic.PersonalInfo.Gender.Gender')}</Typography>}
                         onBlur={handleBlur}
                         onChange={handleGenderChange}
                     >
                         <MenuItem disabled value={"None"}>
-                            <em>Seçiniz</em>
+                            <em>{t('Pages.Welcome.Personal.MenuItem')}</em>
                         </MenuItem>
-                        <MenuItem value={"Female"}>Kadın</MenuItem>
-                        <MenuItem value={"Male"}>Erkek</MenuItem>
+                        <MenuItem value={"Female"}>{t('Generic.PersonalInfo.Gender.Female')}</MenuItem>
+                        <MenuItem value={"Male"}>{t('Generic.PersonalInfo.Gender.Male')}</MenuItem>
                     </Select>
                     <FormHelperText>{touched.gender && errors?.gender}</FormHelperText>
                 </FormControl>
@@ -152,7 +155,7 @@ export default function Personal() {
 
             <Grid item xs={4}>
                 <FormControl sx={{ m: 1, width: 300 }}>
-                    <TextField label="Telefon" value={account?.phone}
+                    <TextField label={<Typography>{t('Generic.PersonalInfo.PhoneNumber')}</Typography>} value={account?.phone}
                         variant="outlined"
                         onChange={(e) => {
                             dispatch.welcomePageModel.setAccount({
@@ -165,7 +168,7 @@ export default function Personal() {
 
             <Grid item xs={4}>
                 <FormControl sx={{ m: 1, width: 300 }}>
-                    <TextField label="Mesleğin nedir?" variant="outlined"
+                    <TextField label={<Typography>{t('Pages.Welcome.Personal.Job')}</Typography>} variant="outlined"
                         onChange={(e) => {
                             dispatch.welcomePageModel.setAccount({
                                 ...account,
@@ -178,7 +181,7 @@ export default function Personal() {
 
             <Grid item xs={4}>
                 <FormControl sx={{ m: 1, width: 300 }}>
-                    <TextField label="Instagram adresin?" variant="outlined"
+                    <TextField label={<Typography>{t('Pages.Welcome.Personal.Instagram')}</Typography>} variant="outlined"
                         onChange={(e) => {
                             dispatch.welcomePageModel.setAccount({
                                 ...account,

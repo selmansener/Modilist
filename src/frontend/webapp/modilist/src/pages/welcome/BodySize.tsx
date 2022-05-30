@@ -1,23 +1,29 @@
 import { Divider, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import i18n from "i18next";
+import { useTranslation } from "react-i18next";
+
 
 export default function BodySize() {
+
+    const { t } = useTranslation();
+
     return (
         <>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Typography variant='h6' align='left' sx={{ m: 1 }}>
-                        Kıyafet Ölçüleri
+                        {t('Pages.Welcome.BodySize.HeaderClothingSize')}
                     </Typography>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="tshirt-label">Tişört & Bluz</InputLabel>
+                        <InputLabel id="tshirt-label">{t('Pages.Welcome.BodySize.TShirtBlouse')}</InputLabel>
                         <Select
                             labelId="tshirt-label"
                             id="tshirt"
                             value={null}
-                            label="Tişört & Bluz"
+                            label={t('Pages.Welcome.BodySize.TShirtBlouse')}
                             onChange={() => { }}
                         >
                             <MenuItem value={"XXS"}>XS - 32</MenuItem>
@@ -33,12 +39,12 @@ export default function BodySize() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="skirt-dress-label">Etek & Elbise</InputLabel>
+                        <InputLabel id="skirt-dress-label">{t('Pages.Welcome.BodySize.SkirtDress')}</InputLabel>
                         <Select
                             labelId="skirt-dress-label"
                             id="skirt-dress"
                             value={null}
-                            label="Etek & Elbise"
+                            label={t('Pages.Welcome.BodySize.SkirtDress')}
                             onChange={() => { }}
                         >
                             <MenuItem value={"XXS"}>XS - 32</MenuItem>
@@ -54,12 +60,12 @@ export default function BodySize() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="jean-label">Pantolon & Jean</InputLabel>
+                        <InputLabel id="jean-label">{t('Pages.Welcome.BodySize.PantsJean')}</InputLabel>
                         <Select
                             labelId="jean-label"
                             id="jean"
                             value={null}
-                            label="Pantolon & Jean"
+                            label={t('Pages.Welcome.BodySize.PantsJean')}
                             onChange={() => { }}
                         >
                             <MenuItem value={"XXS"}>XS - 32</MenuItem>
@@ -75,12 +81,12 @@ export default function BodySize() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="bra-size-label">Sütyen - (Cup)</InputLabel>
+                        <InputLabel id="bra-size-label">{t('Pages.Welcome.BodySize.Bra')}</InputLabel>
                         <Select
                             labelId="bra-size-label"
                             id="bra-size"
                             value={null}
-                            label="Sütyen - (Cup)"
+                            label={t('Pages.Welcome.BodySize.Bra')}
                             onChange={() => { }}
                         >
                             <MenuItem value={"A"}>A</MenuItem>
@@ -93,12 +99,12 @@ export default function BodySize() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="bra-belt-label">Sütyen - (Sırt Çevresi)</InputLabel>
+                        <InputLabel id="bra-belt-label">{t('Pages.Welcome.BodySize.BraBelt')}</InputLabel>
                         <Select
                             labelId="bra-belt-label"
                             id="bra-belt"
                             value={null}
-                            label="Sütyen - (Sırt Çevresi)"
+                            label={t('Pages.Welcome.BodySize.BraBelt')}
                             onChange={() => { }}
                         >
                             <MenuItem value={"70"}>70</MenuItem>
@@ -113,15 +119,15 @@ export default function BodySize() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="shoes-label">Ayakabı</InputLabel>
+                        <InputLabel id="shoes-label">{t('Pages.Welcome.BodySize.Shoes')}</InputLabel>
                         <Select
                             labelId="shoes-label"
                             id="shoes"
                             value={null}
-                            label="Ayakabı"
+                            label={t('Pages.Welcome.BodySize.Shoes')}
                             onChange={() => { }}
                         >
-                            <MenuItem value={"35"}>35</MenuItem>
+                            <MenuItem value={"35"}>35</MenuItem> 
                             <MenuItem value={"36"}>36</MenuItem>
                             <MenuItem value={"37"}>37</MenuItem>
                             <MenuItem value={"38"}>38</MenuItem>
@@ -142,54 +148,54 @@ export default function BodySize() {
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant='h6' align='left' sx={{ m: 1 }}>
-                        Beden Ölçüleri
+                    {t('Pages.Welcome.BodySize.HeaderBodySize')}
                     </Typography>
                 </Grid>
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Boyun Çevresi (cm)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                        <TextField label={t('Pages.Welcome.BodySize.NeckCircumference')} type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Omuz Genişliği (cm)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                        <TextField label={t('Pages.Welcome.BodySize.ShoulderWidth')} type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Göğüs Çevresi (cm)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                        <TextField label={t('Pages.Welcome.BodySize.BustCircumference')} type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Bel Çevresi (cm)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                        <TextField label={t('Pages.Welcome.BodySize.WaistCircumference')} type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Kalça Çevresi (cm)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                        <TextField label={t('Pages.Welcome.BodySize.HipCircumference')} type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Bacak Uzunluğu (cm)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                        <TextField label={t('Pages.Welcome.BodySize.LegLength')} type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Boy (cm)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                        <TextField label={t('Pages.Welcome.BodySize.Height')} type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label="Kilo (kg)" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                        <TextField label={t('Pages.Welcome.BodySize.Weight')} type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
                     </FormControl>
                 </Grid>
             </Grid>
