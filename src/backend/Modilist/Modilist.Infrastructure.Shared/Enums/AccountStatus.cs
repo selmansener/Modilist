@@ -9,8 +9,9 @@ namespace Modilist.Infrastructure.Shared.Enums
     public enum AccountStatus
     {
         None = 0,
-        Active = 1,
-        Deactive = 2,
-        Blocked = 3
+        Created = 1,
+        Active = 2,
+        Deactive = 3,
+        Blocked = 4
     }
 }

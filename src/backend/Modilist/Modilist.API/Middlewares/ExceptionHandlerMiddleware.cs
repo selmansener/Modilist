@@ -28,8 +28,16 @@ namespace Modilist.API.Middlewares
 
                 await _next.Invoke(context);
             }
-            catch (Exception clientException) when (clientException is IClientException)
+            catch (Exception exception) when (exception is IClientException clientException)
             {
+                var exceptionResponse = new ExceptionResponse
+                {
+                    ErrorType = exception.GetType().Name,
+                    Message = exception.Message
+                };
+
+                context.Response.StatusCode = clientException.StatusCode;
+                await SendErrorResponse(context, exceptionResponse);
             }
             catch (Exception exception) when (exception is ValidationException validationException)
             {

@@ -2,5 +2,6 @@
 {
     public interface IClientException
     {
+        int StatusCode { get; }
     }
 }

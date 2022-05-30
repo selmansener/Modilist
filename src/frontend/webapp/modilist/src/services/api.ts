@@ -19,10 +19,10 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
         async options => {
             const account = msalInstance.getActiveAccount();
 
-            if (!account) {
-                await msalInstance.logoutRedirect();
-                return;
-            }
+            // if (!account) {
+            //     await msalInstance.loginRedirect(config.loginRequest);
+            //     return;
+            // }
 
             const response = await msalInstance.acquireTokenSilent({
                 ...config.loginRequest,

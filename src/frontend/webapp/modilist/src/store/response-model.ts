@@ -6,6 +6,7 @@ export interface ResponseModel<T> {
     message?: string;
     errors?: Dictonary;
     errorType?: string;
+    status?: number
 }
 
 export interface ErrorResponse {

@@ -18,6 +18,7 @@
  */
 export enum AccountStatus {
     None = 'None',
+    Created = 'Created',
     Active = 'Active',
     Deactive = 'Deactive',
     Blocked = 'Blocked'

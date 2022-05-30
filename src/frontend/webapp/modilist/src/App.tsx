@@ -3,13 +3,18 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/
 import Dashboard from './layouts/dashboard/DashboardLayout';
 import Unauthenticated from './layouts/unauthenticated/UnauthenticatedLayout';
 import Welcome from './layouts/welcome/WelcomeLayout';
-import { Backdrop, CircularProgress, createTheme, ThemeOptions, ThemeProvider } from '@mui/material';
+import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material';
 import i18n from "i18next";
-import { getDefaults, initReactI18next } from "react-i18next";
+import { initReactI18next } from "react-i18next";
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { config } from './config';
 import ComingSoonLayout from './layouts/comingSoon/ComingSoonLayout';
+import { useEffect } from 'react';
+import { AccountStatus } from './services/swagger/api';
+import { Dispatch, RootState } from './store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import LoadingLayout from './layouts/loading/LoadingLayout';
 
 
 const themeOptions: ThemeOptions = {
@@ -45,31 +50,77 @@ i18n
     }
   });
 
-function App() {
-  const { instance } = useMsal();
-  const { isProduction } = config;
 
-  const account = instance.getActiveAccount();
-  let newUser = false;
-  if (account) {
-    newUser = (account.idTokenClaims as any)["newUser"];
+function Callback() {
+  const { instance: msal } = useMsal();
+  const { isBusy, status } = useSelector((state: RootState) => state.account);
+  const dispatch = useDispatch<Dispatch>();
+
+  useEffect(() => {
+    dispatch.account.getAccount();
+  }, []);
+
+  useEffect(() => {
+    if (status === 404) {
+      const activeAccount = msal.getActiveAccount();
+
+      if (activeAccount && activeAccount.idTokenClaims) {
+        dispatch.account.createAccount({
+          id: (activeAccount.idTokenClaims as any)["oid"],
+          email: (activeAccount.idTokenClaims as any)["emails"][0]
+        });
+      }
+    }
+    else {
+      console.log(window.location.origin);
+      window.location.replace(window.location.origin);
+    }
+  }, [status])
+
+  if (isBusy) {
+    return <LoadingLayout />
   }
-  
-  console.log(isProduction);
+
+  return <></>
+}
+
+
+function App() {
+  const { isProduction } = config;
+  const { isBusy, data: currentAccount } = useSelector((state: RootState) => state.account);
+  const dispatch = useDispatch<Dispatch>();
+
+  useEffect(() => {
+    document.title = "Modilist";
+  }, []);
+
+  useEffect(() => {
+    if (currentAccount === undefined && !isBusy) {
+      dispatch.account.getAccount();
+    }
+  }, [])
+
+  const RenderLayout = () => {
+    if (isBusy) {
+      return <LoadingLayout />
+    }
+
+    if (window.location.pathname === "/callback") {
+      return <Callback />
+    }
+
+    if (currentAccount?.state === AccountStatus.Created) {
+      return <Welcome />
+    }
+
+    return <Dashboard />
+  }
 
   return (
     <div className="App">
       <ThemeProvider theme={mdTheme} >
         <AuthenticatedTemplate>
-          {isProduction ? <ComingSoonLayout /> :
-            /* {(newUser === false ?
-            <Backdrop open={true}
-              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-              <CircularProgress color="inherit" />
-            </Backdrop> : newUser === undefined ? <Dashboard /> : <Welcome />
-          )} */
-            <Welcome />
-          }
+          {isProduction ? <ComingSoonLayout /> : <RenderLayout />}
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
           <Unauthenticated />

@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Modilist.Business.Seed.Data;
 using Modilist.Data.DataAccess;
 using Modilist.Domains.UserDomain.Models;
 
 namespace Modilist.Business.Seed.Services
 {
-    internal class UsersSeedService : BaseSeedService
+    internal class UsersCreatedSeedService : BaseSeedService
     {
         private readonly SeedData _seedData;
 
-        public UsersSeedService(ModilistDbContext dbContext, SeedData seedData)
+        public UsersCreatedSeedService(ModilistDbContext dbContext, SeedData seedData)
             : base(dbContext)
         {
             _seedData = seedData;
@@ -35,8 +30,6 @@ namespace Modilist.Business.Seed.Services
                     user.InstagramUserName,
                     user.Phone,
                     user.JobTitle);
-
-                account.Activate();
 
                 await _dbContext.AddAsync(account, cancellationToken);
             }

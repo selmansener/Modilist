@@ -16,6 +16,39 @@
       "Email": "selmansenerr@gmail.com",
       "Phone": "5542503058",
       "JobTitle": "Software Developer"
+    },
+    {
+      "Id": "38c1a896-7100-47bc-9426-36f4b05b975a",
+      "FirstName": "Harun",
+      "LastName": "Uğurlu",
+      "BirthDate": "1989-07-16",
+      "Gender": "Male",
+      "InstagramUserName": "@aselmansener",
+      "Email": "harunugurlu1@gmail.com",
+      "Phone": "5542503058",
+      "JobTitle": "Software Developer"
+    },
+    {
+      "Id": "dca2653c-f8b2-4752-8297-f83e33487afe",
+      "FirstName": "Beyza Naz",
+      "LastName": "Elçiçek",
+      "BirthDate": "1989-07-16",
+      "Gender": "Female",
+      "InstagramUserName": "@aselmansener",
+      "Email": "beyza.elcicek@modilist.com",
+      "Phone": "5542503058",
+      "JobTitle": "Product Owner"
+    },
+    {
+      "Id": "ffbebbff-ed0d-4d13-a1e6-a0215694af11",
+      "FirstName": "Tuğçe",
+      "LastName": "Ulusoy",
+      "BirthDate": "1989-07-16",
+      "Gender": "Female",
+      "InstagramUserName": "@aselmansener",
+      "Email": "tugceee1405@gmail.com",
+      "Phone": "5542503058",
+      "JobTitle": "Product Owner"
     }
   ]
 }

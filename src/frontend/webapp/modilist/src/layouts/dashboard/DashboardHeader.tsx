@@ -45,6 +45,14 @@ const supportedLanguages = [
   {
     code: "us",
     lang: "en"
+  },
+  {
+    code: "us",
+    lang: "en-US"
+  },
+  {
+    code: "us",
+    lang: "en-GB"
   }
 ]
 

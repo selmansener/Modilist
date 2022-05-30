@@ -26,7 +26,7 @@ namespace Modilist.Domains.UserDomain.Models
             Email = email;
             Phone = phone;
             JobTitle = jobTitle;
-            Status = AccountStatus.Active;
+            State = AccountStatus.Created;
         }
 
         public new Guid Id { get; private set; }
@@ -49,7 +49,7 @@ namespace Modilist.Domains.UserDomain.Models
 
         public string? JobTitle { get; private set; }
 
-        public AccountStatus Status { get; private set; }
+        public AccountStatus State { get; private set; }
 
         public void Update(string firstName,
                        string lastName,
@@ -66,6 +66,18 @@ namespace Modilist.Domains.UserDomain.Models
             InstagramUserName = instagramUserName;
             Phone = phone;
             JobTitle = jobTitle;
+        }
+
+        public void Activate()
+        {
+            if (State == AccountStatus.Active)
+            {
+                // TODO: change exception type
+
+                throw new Exception("Account already active");
+            }
+
+            State = AccountStatus.Active;
         }
     }
 }

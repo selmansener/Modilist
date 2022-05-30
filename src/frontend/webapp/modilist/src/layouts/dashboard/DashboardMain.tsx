@@ -23,7 +23,6 @@ export function DashboardMain() {
                         )} />
                     })}
                 </Routes>
-
             </Container>
         </Box>
     )

@@ -34,7 +34,11 @@ export const createAccountModel = createModel<RootModel>()({
 
                 if (response.status === 200) {
 
-                    createAccountModel.HANDLE_RESPONSE(response.data)
+                    createAccountModel.HANDLE_RESPONSE(response.data);
+
+                    if (response.data) {
+                        localStorage.setItem("account", JSON.stringify(response.data));
+                    }
                 }
                 // TODO: handle exceptions
             }

@@ -4,6 +4,7 @@ using Mapster;
 using MediatR;
 
 using Modilist.Business.CQRS.UserDomain.DTOs;
+using Modilist.Business.Exceptions;
 using Modilist.Data.Repositories.UserDomain;
 using Modilist.Domains.UserDomain.Models;
 
@@ -25,14 +26,11 @@ namespace Modilist.Business.CQRS.UserDomain.Queries
 
         public async Task<AccountDTO> Handle(GetAccount request, CancellationToken cancellationToken)
         {
-            // Check id with user claims
-
             Account account = await _accountReadRepository.GetByIdAsync(request.Id, cancellationToken);
 
-            // TODO: change response type
             if (account == null)
             {
-                throw new Exception("account not found");
+                throw new AccountNotFoundException(request.Id);
             }
 
             return account.Adapt<AccountDTO>();

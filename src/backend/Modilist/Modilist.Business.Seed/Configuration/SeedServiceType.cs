@@ -8,7 +8,8 @@ namespace Modilist.Business.Seed.Configuration
 {
     public enum SeedServiceType
     {
-        Users = 0,
-        StylePreferences = 1
+        UsersCreated = 0,
+        Users = 1,
+        StylePreferences = 2
     }
 }
