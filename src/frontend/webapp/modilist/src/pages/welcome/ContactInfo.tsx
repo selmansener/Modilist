@@ -1,4 +1,3 @@
-import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 import { useFormik } from "formik";
@@ -8,8 +7,7 @@ import { useEffect, useState } from "react";
 import { AddressDTO, City } from "../../services/swagger/api";
 import { Cities } from "./address/Cities";
 import { Districts } from "./address/Districts";
-import { FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
+import { FormControl, Grid, InputLabel, TextField, Typography, FormHelperText } from "@mui/material";
 
 export default function ContactInfo() {
     const { t } = useTranslation();
@@ -19,7 +17,7 @@ export default function ContactInfo() {
     const { isBusy: upsertAddressIsBusy, data: upsertAddressResponse } = useSelector((state: RootState) => state.upsertAddressModel);
     const dispatch = useDispatch<Dispatch>();
     const [selectedCity, setSelectedCity] = useState<City | undefined>({});
-    
+
     const requiredField = t("FormValidation.RequiredField");
 
     const schema = Yup.object({
@@ -154,7 +152,7 @@ export default function ContactInfo() {
                         sx={{ m: 1, width: 300 }}
                         error={touched.district && errors.district !== undefined}>
                         <InputLabel id="district-label">{t("Generic.District")}</InputLabel>
-                        <Districts 
+                        <Districts
                             selectedCity={selectedCity?.code}
                             value={getDefaultAddressResponse?.district}
                             onChange={handleChange}
