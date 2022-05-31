@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CQRS\PaymentDomain\Queries\" />
     <Folder Include="CQRS\UserDomain\Queries\DTOs\" />
   </ItemGroup>
 

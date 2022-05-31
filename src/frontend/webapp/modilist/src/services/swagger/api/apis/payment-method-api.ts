@@ -16,27 +16,23 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { SeedServiceType } from '../models';
+import { CreatePaymentMethod } from '../models';
+import { PaymentMethodDTO } from '../models';
 /**
- * DevelopmentApi - axios parameter creator
+ * PaymentMethodApi - axios parameter creator
  * @export
  */
-export const DevelopmentApiAxiosParamCreator = function (configuration?: Configuration) {
+export const PaymentMethodApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} xApiKey X-ApiKey
-         * @param {SeedServiceType} [seedServiceType] 
-         * @param {boolean} [recreateDb] 
+         * @param {CreatePaymentMethod} [body] 
+         * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1SeedPost: async (xApiKey: string, seedServiceType?: SeedServiceType, recreateDb?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'xApiKey' is not null or undefined
-            if (xApiKey === null || xApiKey === undefined) {
-                throw new RequiredError('xApiKey','Required parameter xApiKey was null or undefined when calling apiV1SeedPost.');
-            }
-            const localVarPath = `/api/v1/Seed`;
+        apiV1PaymentMethodCreatePost: async (body?: CreatePaymentMethod, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/PaymentMethod/Create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -56,17 +52,11 @@ export const DevelopmentApiAxiosParamCreator = function (configuration?: Configu
                 localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
             }
 
-            if (seedServiceType !== undefined) {
-                localVarQueryParameter['seedServiceType'] = seedServiceType;
+            if (apiVersion !== undefined) {
+                localVarQueryParameter['api-version'] = apiVersion;
             }
 
-            if (recreateDb !== undefined) {
-                localVarQueryParameter['recreateDb'] = recreateDb;
-            }
-
-            if (xApiKey !== undefined && xApiKey !== null) {
-                localVarHeaderParameter['X-ApiKey'] = String(xApiKey);
-            }
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -78,6 +68,8 @@ export const DevelopmentApiAxiosParamCreator = function (configuration?: Configu
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || (localVarRequestOptions.headers && localVarRequestOptions.headers['Content-Type'] === 'application/json');
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -88,21 +80,20 @@ export const DevelopmentApiAxiosParamCreator = function (configuration?: Configu
 };
 
 /**
- * DevelopmentApi - functional programming interface
+ * PaymentMethodApi - functional programming interface
  * @export
  */
-export const DevelopmentApiFp = function(configuration?: Configuration) {
+export const PaymentMethodApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} xApiKey X-ApiKey
-         * @param {SeedServiceType} [seedServiceType] 
-         * @param {boolean} [recreateDb] 
+         * @param {CreatePaymentMethod} [body] 
+         * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1SeedPost(xApiKey: string, seedServiceType?: SeedServiceType, recreateDb?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await DevelopmentApiAxiosParamCreator(configuration).apiV1SeedPost(xApiKey, seedServiceType, recreateDb, options);
+        async apiV1PaymentMethodCreatePost(body?: CreatePaymentMethod, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PaymentMethodDTO>>> {
+            const localVarAxiosArgs = await PaymentMethodApiAxiosParamCreator(configuration).apiV1PaymentMethodCreatePost(body, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -112,42 +103,40 @@ export const DevelopmentApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * DevelopmentApi - factory interface
+ * PaymentMethodApi - factory interface
  * @export
  */
-export const DevelopmentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+export const PaymentMethodApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
          * 
-         * @param {string} xApiKey X-ApiKey
-         * @param {SeedServiceType} [seedServiceType] 
-         * @param {boolean} [recreateDb] 
+         * @param {CreatePaymentMethod} [body] 
+         * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1SeedPost(xApiKey: string, seedServiceType?: SeedServiceType, recreateDb?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return DevelopmentApiFp(configuration).apiV1SeedPost(xApiKey, seedServiceType, recreateDb, options).then((request) => request(axios, basePath));
+        async apiV1PaymentMethodCreatePost(body?: CreatePaymentMethod, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<PaymentMethodDTO>> {
+            return PaymentMethodApiFp(configuration).apiV1PaymentMethodCreatePost(body, apiVersion, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * DevelopmentApi - object-oriented interface
+ * PaymentMethodApi - object-oriented interface
  * @export
- * @class DevelopmentApi
+ * @class PaymentMethodApi
  * @extends {BaseAPI}
  */
-export class DevelopmentApi extends BaseAPI {
+export class PaymentMethodApi extends BaseAPI {
     /**
      * 
-     * @param {string} xApiKey X-ApiKey
-     * @param {SeedServiceType} [seedServiceType] 
-     * @param {boolean} [recreateDb] 
+     * @param {CreatePaymentMethod} [body] 
+     * @param {string} [apiVersion] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DevelopmentApi
+     * @memberof PaymentMethodApi
      */
-    public async apiV1SeedPost(xApiKey: string, seedServiceType?: SeedServiceType, recreateDb?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return DevelopmentApiFp(this.configuration).apiV1SeedPost(xApiKey, seedServiceType, recreateDb, options).then((request) => request(this.axios, this.basePath));
+    public async apiV1PaymentMethodCreatePost(body?: CreatePaymentMethod, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<PaymentMethodDTO>> {
+        return PaymentMethodApiFp(this.configuration).apiV1PaymentMethodCreatePost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
 }

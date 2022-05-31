@@ -18,6 +18,8 @@
         public const string CreateAddress = "Address.Create";
         public const string UpdateAddress = "Address.Update";
 
+        public const string CreatePaymentMethod = "PaymentMethods.Create";
+
         public const string Development = "Development";
     }
 }

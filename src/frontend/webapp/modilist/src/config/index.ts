@@ -1,13 +1,27 @@
+import { RedirectRequest } from "@azure/msal-browser";
+import { ApiConfig, MsalConfig } from "./auth/msalConfig.development";
+import { EnvConfig } from "./config.development";
+
 const env = process.env.REACT_APP_ENV ?? process.env.NODE_ENV ?? "development";
 
-console.log(env);
+export interface AppConfig extends ApiConfig, EnvConfig {
+    isDev: boolean;
+    isInt: boolean;
+    isStaging: boolean;
+    isProduction: boolean;
+    iyzicoApiKey: string;
+    iyzicoSecretKey: string;
+    msalConfig: MsalConfig;
+    loginRequest: RedirectRequest;
+    imgBaseHost: string;
+}
 
-const envConfig = require(`./config.${env}`).config;
-const msalConfig = require(`./auth/msalConfig.${env}`).msalConfig;
-const webApiConfig = require(`./auth/msalConfig.${env}`).apiConfig;
-const loginRequest = require(`./auth/msalConfig.${env}`).loginRequest;
+const envConfig = require(`./config.${env}`).config as EnvConfig;
+const msalConfig = require(`./auth/msalConfig.${env}`).msalConfig as MsalConfig;
+const webApiConfig = require(`./auth/msalConfig.${env}`).apiConfig as ApiConfig;
+const loginRequest = require(`./auth/msalConfig.${env}`).loginRequest as RedirectRequest;
 
-export const config = {
+export const config: AppConfig = {
     isDev: env === "development",
     isInt: env === "int",
     isStaging: env === "staging",

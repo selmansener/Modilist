@@ -1,6 +1,14 @@
-import { LogLevel } from "@azure/msal-browser";
+import { Configuration, LogLevel } from "@azure/msal-browser";
 
-export const apiConfig = {
+export interface MsalConfig extends Configuration {
+}
+
+export interface ApiConfig {
+    b2cScopes: string[];
+    webApi: string;
+}
+
+export const apiConfig: ApiConfig = {
     b2cScopes: [
         "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create",
         "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update",
@@ -36,7 +44,7 @@ export const b2cPolicies = {
  * For a full list of MSAL.js configuration parameters, visit:
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md 
  */
-export const msalConfig = {
+export const msalConfig: MsalConfig = {
     auth: {
         clientId: "70773d38-9a72-4f72-af81-17eb6737353c", // This is the ONLY mandatory field; everything else is optional.
         authority: b2cPolicies.authorities.signUpSignIn.authority, // Choose sign-up/sign-in user-flow as your default.
@@ -75,7 +83,7 @@ export const msalConfig = {
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-    scopes: [...apiConfig.b2cScopes, "openid", "offline_access" ]
+    scopes: [...apiConfig.b2cScopes, "openid", "offline_access"]
 };
 
 /**

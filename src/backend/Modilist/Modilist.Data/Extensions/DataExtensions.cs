@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 using Modilist.Data.DataAccess;
 using Modilist.Data.Repositories.AddressDomain;
+using Modilist.Data.Repositories.PaymentDomain;
 using Modilist.Data.Repositories.StylePreferencesDomain;
 using Modilist.Data.Repositories.UserDomain;
 using Modilist.Data.Transactions;
@@ -51,6 +52,8 @@ namespace Modilist.Data.Extensions
 
             services.AddScoped<IAddressReadRepository, AddressReadRepository>();
             services.AddScoped<IAddressWriteRepository, AddressWriteRepository>();
+
+            services.AddScoped<IPaymentMethodWriteRepository, PaymentMethodWriteRepository>();
 
             return services;
         }
