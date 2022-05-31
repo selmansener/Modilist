@@ -1,6 +1,5 @@
 
 import { Button, FormControl, Grid, TextField, Typography } from "@mui/material";
-import Iyzipay from 'iyzipay';
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { config } from '../../config/';
@@ -22,11 +21,6 @@ interface CreateCardRequest {
 }
 
 export default function PaymentMethod() {
-    const [iyzipay] = useState<Iyzipay>(new Iyzipay({
-        apiKey: config.iyzicoApiKey,
-        secretKey: config.iyzicoSecretKey,
-        uri: 'https://sandbox-api.iyzipay.com'
-    }));
 
     const [createCardRequest, setCreateCardRequest] = useState<CreateCardRequest>({
         locale: 'TR',
@@ -43,9 +37,6 @@ export default function PaymentMethod() {
     });
 
     const sendRequest = () => {
-        iyzipay.card.create(createCardRequest, (err, result) => {
-            console.log(err, result);
-        });
     }
 
     return (
