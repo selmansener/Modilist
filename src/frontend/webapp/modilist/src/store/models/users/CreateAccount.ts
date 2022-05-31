@@ -7,7 +7,8 @@ import { ResponseModel } from "../../response-model";
 export const createAccountModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined
+        data: undefined,
+        status: 0
     } as ResponseModel<AccountDTO>,
     reducers: {
         BUSY: (state: ResponseModel<AccountDTO>) => {
@@ -16,13 +17,20 @@ export const createAccountModel = createModel<RootModel>()({
                 isBusy: true
             }
         },
-        HANDLE_RESPONSE: (state: ResponseModel<AccountDTO>, data: AccountDTO) => {
+        HANDLE_RESPONSE: (state: ResponseModel<AccountDTO>, data: AccountDTO, status: number) => {
             return {
                 ...state,
                 data,
-                isBusy: false
+                isBusy: false,
+                status
             }
         },
+        HANDLE_EXCEPTION: (state: ResponseModel<AccountDTO>, status: number) => {
+            return {
+                ...state,
+                status
+            }
+        }
     },
     effects: (dispatch) => {
         const { createAccountModel } = dispatch
@@ -33,14 +41,11 @@ export const createAccountModel = createModel<RootModel>()({
                 const response = await api.users.apiV1UserCreatePost(input);
 
                 if (response.status === 200) {
-
-                    createAccountModel.HANDLE_RESPONSE(response.data);
-
-                    if (response.data) {
-                        localStorage.setItem("account", JSON.stringify(response.data));
-                    }
+                    createAccountModel.HANDLE_RESPONSE(response.data, response.status);
                 }
-                // TODO: handle exceptions
+                else {
+                    createAccountModel.HANDLE_EXCEPTION(response.status);
+                }
             }
         }
     }

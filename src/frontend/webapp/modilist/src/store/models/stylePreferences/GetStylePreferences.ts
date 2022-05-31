@@ -7,7 +7,8 @@ import { ResponseModel } from "../../response-model";
 export const getStylePreferencesModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined
+        data: undefined,
+        status: 0
     } as ResponseModel<StylePreferencesDTO>,
     reducers: {
         BUSY: (state: ResponseModel<StylePreferencesDTO>) => {
@@ -16,11 +17,19 @@ export const getStylePreferencesModel = createModel<RootModel>()({
                 isBusy: true
             }
         },
-        HANDLE_RESPONSE: (state: ResponseModel<StylePreferencesDTO>, data: StylePreferencesDTO) => {
+        HANDLE_RESPONSE: (state: ResponseModel<StylePreferencesDTO>, data: StylePreferencesDTO, status: number) => {
             return {
                 ...state,
                 data,
-                isBusy: false
+                isBusy: false,
+                status
+            }
+        },
+        HANDLE_EXCEPTIONS: (state: ResponseModel<StylePreferencesDTO>, status: number) => {
+            return {
+                ...state,
+                isBusy: false,
+                status
             }
         }
     },
@@ -33,9 +42,11 @@ export const getStylePreferencesModel = createModel<RootModel>()({
                 const response = await api.stylePreferences.apiV1StylePreferencesGetGet();
 
                 if (response.status === 200) {
-                    getStylePreferencesModel.HANDLE_RESPONSE(response.data);
+                    getStylePreferencesModel.HANDLE_RESPONSE(response.data, response.status);
                 }
-                // TODO: handle exceptions
+                else {
+                    getStylePreferencesModel.HANDLE_EXCEPTIONS(response.status);
+                }
             }
         }
     }

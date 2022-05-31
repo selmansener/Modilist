@@ -7,7 +7,8 @@ import { Dictonary, ErrorResponse, ResponseModel } from "../../response-model";
 export const updateAccountModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined
+        data: undefined,
+        status: 0
     } as ResponseModel<AccountDTO>,
     reducers: {
         BUSY: (state: ResponseModel<AccountDTO>) => {
@@ -16,19 +17,35 @@ export const updateAccountModel = createModel<RootModel>()({
                 isBusy: true
             }
         },
-        HANDLE_RESPONSE: (state: ResponseModel<AccountDTO>, data?: AccountDTO) => {
+        HANDLE_RESPONSE: (state: ResponseModel<AccountDTO>, status: number, data?: AccountDTO) => {
             return {
                 ...state,
                 data,
-                isBusy: false
+                isBusy: false,
+                status
             }
         },
-        HANDLE_VALIDATION_EXCEPTIONS: (state: ResponseModel<AccountDTO>, errors: Dictonary) => {
+        HANDLE_VALIDATION_EXCEPTIONS: (state: ResponseModel<AccountDTO>, errors: Dictonary, status: number) => {
             return {
                 ...state,
                 errors,
                 type: "ValidationException",
-                isBusy: false
+                isBusy: false,
+                status
+            }
+        },
+        HANDLE_EXCEPTIONS: (state: ResponseModel<AccountDTO>, status: number) => {
+            return {
+                ...state,
+                isBusy: false,
+                status
+            }
+        },
+        RESET: (state: ResponseModel<AccountDTO>) => {
+            return {
+                isBusy: false,
+                data: undefined,
+                status: 0
             }
         }
     },
@@ -43,17 +60,19 @@ export const updateAccountModel = createModel<RootModel>()({
                 if (response) {
 
                     if (response && response.status === 200) {
-                        updateAccountModel.HANDLE_RESPONSE(response.data);
+                        updateAccountModel.HANDLE_RESPONSE(response.status, response.data);
                     }
-                    // TODO: handle exceptions
                     else if (response.status === 400) {
 
                         const { errorType, errors } = response.data as ErrorResponse;
 
                         if (errorType === "ValidationException" && errors) {
 
-                            updateAccountModel.HANDLE_VALIDATION_EXCEPTIONS(errors);
+                            updateAccountModel.HANDLE_VALIDATION_EXCEPTIONS(errors, response.status);
                         }
+                    }
+                    else {
+                        updateAccountModel.HANDLE_EXCEPTIONS(response.status);
                     }
                 }
             }

@@ -1,11 +1,49 @@
 import { Divider, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
-import i18n from "i18next";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { AccountDTO } from "../../services/swagger/api";
+import { Dispatch, RootState } from "../../store/store";
 
 
 export default function BodySize() {
-
     const { t } = useTranslation();
+    const { isBusy, data: initialAccount, status } = useSelector((state: RootState) => state.getAccountModel);
+    const { activeStep, skipped } = useSelector((state: RootState) => state.welcomeStepsModel);
+    const [account] = useState<AccountDTO>({});
+    const [isValid, setIsValid] = useState<boolean>(false);
+    const dispatch = useDispatch<Dispatch>();
+
+    const isStepSkipped = (step: number) => {
+        return skipped.has(step);
+    };
+
+    useEffect(() => {
+        dispatch.welcomeStepsModel.setNextCallback(() => {
+            let newSkipped = skipped;
+            if (isStepSkipped(activeStep)) {
+                newSkipped = new Set(newSkipped.values());
+                newSkipped.delete(activeStep);
+            }
+
+            dispatch.welcomeStepsModel.setActiveStep(activeStep + 1);
+            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        });
+
+        dispatch.welcomeStepsModel.setBackCallback(() => {
+            console.log(activeStep);
+
+            let newSkipped = skipped;
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+
+            console.log(newSkipped);
+            const newStep = activeStep - 1;
+            console.log(newStep);
+            dispatch.welcomeStepsModel.setActiveStep(newStep);
+            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        });
+    }, []);
 
     return (
         <>
@@ -127,7 +165,7 @@ export default function BodySize() {
                             label={t('Pages.Welcome.BodySize.Shoes')}
                             onChange={() => { }}
                         >
-                            <MenuItem value={"35"}>35</MenuItem> 
+                            <MenuItem value={"35"}>35</MenuItem>
                             <MenuItem value={"36"}>36</MenuItem>
                             <MenuItem value={"37"}>37</MenuItem>
                             <MenuItem value={"38"}>38</MenuItem>
@@ -148,7 +186,7 @@ export default function BodySize() {
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant='h6' align='left' sx={{ m: 1 }}>
-                    {t('Pages.Welcome.BodySize.HeaderBodySize')}
+                        {t('Pages.Welcome.BodySize.HeaderBodySize')}
                     </Typography>
                 </Grid>
                 <Grid item xs={4}>

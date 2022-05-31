@@ -1,7 +1,7 @@
 import { Stepper, Typography, Step, StepLabel, Box, Button, Paper } from "@mui/material";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../store/store";
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
 
@@ -17,36 +17,41 @@ export function WelcomeSteps(props: WelcomeStepProps) {
     const {t} = useTranslation();
     const steps = props.steps;
 
-    const [activeStep, setActiveStep] = useState(0);
-    const [skipped, setSkipped] = useState(new Set<number>());
-    const { validator, onSubmit } = useSelector((state: RootState) => state.welcomeStepsModel);
+    // const [activeStep, setActiveStep] = useState(0);
+    // const [skipped, setSkipped] = useState(new Set<number>());
+    const { activeStep, skipped, nextCallback, backCallback } = useSelector((state: RootState) => state.welcomeStepsModel);
+    const dispatch = useDispatch<Dispatch>();
 
     const isStepSkipped = (step: number) => {
         return skipped.has(step);
     };
 
     const handleNext = () => {
-        onSubmit();
+        //onSubmit();
 
-        console.log(validator());
+        //console.log(validator());
 
-        if (!validator()) {
-            return;
-        }
+        // if (!validator()) {
+        //     return;
+        // }
 
-        let newSkipped = skipped;
-        if (isStepSkipped(activeStep)) {
-            newSkipped = new Set(newSkipped.values());
-            newSkipped.delete(activeStep);
-        }
+        // let newSkipped = skipped;
+        // if (isStepSkipped(activeStep)) {
+        //     newSkipped = new Set(newSkipped.values());
+        //     newSkipped.delete(activeStep);
+        // }
 
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setSkipped(newSkipped);
+        // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        // setSkipped(newSkipped);
     };
 
     const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        //setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+
+    useEffect(() => {
+        console.log(steps[activeStep]);
+    }, [activeStep]);
 
     return (
         <>
@@ -88,13 +93,13 @@ export function WelcomeSteps(props: WelcomeStepProps) {
                         <Button
                             color="inherit"
                             disabled={activeStep === 0}
-                            onClick={handleBack}
+                            onClick={backCallback}
                             sx={{ mr: 1 }}
                         >
                             {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
                         </Button>
                         <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleNext} variant="outlined">
+                        <Button onClick={nextCallback} variant="outlined">
                             {activeStep === steps.length - 1 ? t('Layouts.Welcome.WelcomeSteps.Buttons.Finish') : t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
                         </Button>
                     </Box>

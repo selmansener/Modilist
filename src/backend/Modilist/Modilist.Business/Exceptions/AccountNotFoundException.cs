@@ -3,7 +3,7 @@ using Modilist.Infrastructure.Shared.Interfaces;
 
 namespace Modilist.Business.Exceptions
 {
-    public class AccountNotFoundException : Exception, IClientException
+    internal class AccountNotFoundException : Exception, IClientException
     {
         public AccountNotFoundException(Guid id)
             : base($"Account not found with Id: {id}")

@@ -10,7 +10,7 @@ import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { config } from './config';
 import ComingSoonLayout from './layouts/comingSoon/ComingSoonLayout';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { AccountStatus } from './services/swagger/api';
 import { Dispatch, RootState } from './store/store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,44 +51,13 @@ i18n
   });
 
 
-function Callback() {
-  const { instance: msal } = useMsal();
-  const { isBusy, status } = useSelector((state: RootState) => state.account);
-  const dispatch = useDispatch<Dispatch>();
-
-  useEffect(() => {
-    dispatch.account.getAccount();
-  }, []);
-
-  useEffect(() => {
-    if (status === 404) {
-      const activeAccount = msal.getActiveAccount();
-
-      if (activeAccount && activeAccount.idTokenClaims) {
-        dispatch.account.createAccount({
-          id: (activeAccount.idTokenClaims as any)["oid"],
-          email: (activeAccount.idTokenClaims as any)["emails"][0]
-        });
-      }
-    }
-    else {
-      console.log(window.location.origin);
-      window.location.replace(window.location.origin);
-    }
-  }, [status])
-
-  if (isBusy) {
-    return <LoadingLayout />
-  }
-
-  return <></>
-}
-
-
 function App() {
+  const { instance: msal } = useMsal();
   const { isProduction } = config;
-  const { isBusy, data: currentAccount } = useSelector((state: RootState) => state.account);
+  const { isBusy: getAccountIsBusy, data: currentAccount, status: getAccountStatus } = useSelector((state: RootState) => state.getAccountModel);
+  const { isBusy: createAccountIsBusy, data: createAccount, status: createAccountStatus } = useSelector((state: RootState) => state.createAccountModel);
   const dispatch = useDispatch<Dispatch>();
+  const [isBusy]  = useState<boolean>(getAccountIsBusy || createAccountIsBusy);
 
   useEffect(() => {
     document.title = "Modilist";
@@ -96,17 +65,32 @@ function App() {
 
   useEffect(() => {
     if (currentAccount === undefined && !isBusy) {
-      dispatch.account.getAccount();
+      dispatch.getAccountModel.getAccount();
     }
-  }, [])
+  }, [currentAccount]);
+
+  useEffect(() => {
+    if (createAccountStatus === 200 && createAccount) {
+      dispatch.getAccountModel.HANDLE_RESPONSE(createAccount, createAccountStatus);
+    }
+  }, [createAccountStatus])
+
+  useEffect(() => {
+    if (getAccountStatus === 404) {
+      const activeAccount = msal.getActiveAccount();
+      
+      if (activeAccount && activeAccount.idTokenClaims) {
+        dispatch.createAccountModel.createAccount({
+          id: (activeAccount.idTokenClaims as any)["oid"],
+          email: (activeAccount.idTokenClaims as any)["emails"][0]
+        });
+      }
+    }
+  }, [getAccountStatus]);
 
   const RenderLayout = () => {
-    if (isBusy) {
+    if (isBusy || !currentAccount) {
       return <LoadingLayout />
-    }
-
-    if (window.location.pathname === "/callback") {
-      return <Callback />
     }
 
     if (currentAccount?.state === AccountStatus.Created) {

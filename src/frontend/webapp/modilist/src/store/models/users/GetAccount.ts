@@ -7,7 +7,8 @@ import { ResponseModel } from "../../response-model";
 export const getAccountModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined
+        data: undefined,
+        status: 0
     } as ResponseModel<AccountDTO>,
     reducers: {
         BUSY: (state: ResponseModel<AccountDTO>) => {
@@ -16,11 +17,18 @@ export const getAccountModel = createModel<RootModel>()({
                 isBusy: true
             }
         },
-        HANDLE_RESPONSE: (state: ResponseModel<AccountDTO>, data: AccountDTO) => {
+        HANDLE_RESPONSE: (state: ResponseModel<AccountDTO>, data: AccountDTO, status: number) => {
             return {
                 ...state,
                 data,
-                isBusy: false
+                isBusy: false,
+                status
+            }
+        },
+        HANDLE_EXCEPTION: (state: ResponseModel<AccountDTO>, status: number) => {
+            return {
+                ...state,
+                status
             }
         }
     },
@@ -33,9 +41,11 @@ export const getAccountModel = createModel<RootModel>()({
                 const response = await api.users.apiV1UserGetGet();
 
                 if (response.status === 200) {
-                    getAccountModel.HANDLE_RESPONSE(response.data);
+                    getAccountModel.HANDLE_RESPONSE(response.data, response.status);
                 }
-                // TODO: handle exceptions
+                else {
+                    getAccountModel.HANDLE_EXCEPTION(response.status);
+                }
             }
         }
     }

@@ -37,11 +37,52 @@ export default function StylePreferences() {
     const { t } = useTranslation();
     const [selectedChoiseReasons, setSelectedChoiseReasons] = useState<string[]>([]);
     const { data: account } = useSelector((state: RootState) => state.getAccountModel);
-    const { isBusy: getStylePreferencesIsBusy, data: getStylePreferencesResponse } = useSelector((state: RootState) => state.getStylePreferencesModel);
-    const { isBusy: updateStylePreferencesIsBusy, data: updateStylePreferencesResponse, errors: validationErrors } = useSelector((state: RootState) => state.updateStylePreferencesModel);
+    const { isBusy: getStylePreferencesIsBusy, data: getStylePreferences, status: getStylePreferencesStatus } = useSelector((state: RootState) => state.getStylePreferencesModel);
+    const { isBusy: createStylePreferencesIsBusy, data: createStylePreferences, status: createStylePreferencesStatus } = useSelector((state: RootState) => state.createStylePreferencesModel);
+    const { isBusy: updateStylePreferencesIsBusy, data: updateStylePreferences, errors: validationErrors } = useSelector((state: RootState) => state.updateStylePreferencesModel);
+    const { activeStep, skipped } = useSelector((state: RootState) => state.welcomeStepsModel);
     const dispatch = useDispatch<Dispatch>();
     const { imgBaseHost } = config;
     const { gender } = account as AccountDTO;
+    
+    const isStepSkipped = (step: number) => {
+        return skipped.has(step);
+    };
+
+    useEffect(() => {
+        dispatch.welcomeStepsModel.setNextCallback(() => {
+            let newSkipped = skipped;
+            if (isStepSkipped(activeStep)) {
+                newSkipped = new Set(newSkipped.values());
+                newSkipped.delete(activeStep);
+            }
+
+            dispatch.welcomeStepsModel.setActiveStep(activeStep + 1);
+            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        });
+
+        dispatch.welcomeStepsModel.setBackCallback(() => {
+            let newSkipped = skipped;
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+
+            const newStep = activeStep - 1;
+            dispatch.welcomeStepsModel.setActiveStep(newStep);
+            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        });
+    }, []);
+
+    useEffect(() => {
+        if (getStylePreferences === undefined && getStylePreferencesStatus === 404) {
+            dispatch.createStylePreferencesModel.createStylePreferences();
+        }
+    }, [getStylePreferencesStatus]);
+
+    useEffect(() => {
+        if (createStylePreferencesStatus === 200 && createStylePreferences) {
+            dispatch.getStylePreferencesModel.HANDLE_RESPONSE(createStylePreferences, createStylePreferencesStatus);
+        }
+    }, [createStylePreferencesStatus])
 
     const commonProductCategories: ProductCategory[] = [
         {
@@ -513,10 +554,6 @@ export default function StylePreferences() {
             },
         },
     };
-
-    useEffect(() => {
-        dispatch.getStylePreferencesModel.getStylePreferences();
-    }, []);
 
     const handleChoiseReasonChange = (event: SelectChangeEvent<typeof choiseReasons>) => {
         const {

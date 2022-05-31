@@ -6,6 +6,7 @@ using Mapster;
 using MediatR;
 
 using Modilist.Business.CQRS.StylePreferencesDomain.DTOs;
+using Modilist.Business.Exceptions;
 using Modilist.Data.Repositories.StylePreferencesDomain;
 
 namespace Modilist.Business.CQRS.StylePreferencesDomain.Queries
@@ -38,8 +39,7 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Queries
 
             if (stylePreference == null)
             {
-                // TODO: change exception type
-                throw new Exception("StylePreferences not found for account.");
+                throw new StylePreferencesNotFoundException(request.AccountId);
             }
 
             return stylePreference.Adapt<StylePreferencesDTO>();

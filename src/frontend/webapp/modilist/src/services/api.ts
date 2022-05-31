@@ -6,14 +6,14 @@ import { config } from "../config";
 export const apiFactory = function (msalInstance: IPublicClientApplication) {
     axios.interceptors.request.use(
         async (config: AxiosRequestConfig) => {
-          if (config.headers === undefined) {
-            config.headers = {};
-          }
-          // ...
-          return config;
+            if (config.headers === undefined) {
+                config.headers = {};
+            }
+            // ...
+            return config;
         },
         (error) => error
-      );
+    );
 
     axios.interceptors.request.use(
         async options => {
@@ -26,13 +26,19 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
             const response = await msalInstance.acquireTokenSilent({
                 ...config.loginRequest,
                 account
+            }).catch(error => {
+                if (error instanceof InteractionRequiredAuthError) {
+                    msalInstance.logoutRedirect({
+                        account
+                    });
+                }
             });
 
             if (!options || !options.headers) {
                 throw Error("Cannot initialize api client");
             }
 
-            options.headers.authorization = `Bearer ${response.accessToken}`;
+            options.headers.authorization = `Bearer ${response?.accessToken}`;
             return options;
         },
         error => {

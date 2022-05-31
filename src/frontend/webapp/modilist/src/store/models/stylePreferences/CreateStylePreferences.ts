@@ -7,7 +7,8 @@ import { ResponseModel } from "../../response-model";
 export const createStylePreferencesModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined
+        data: undefined,
+        status: 0
     } as ResponseModel<StylePreferencesDTO>,
     reducers: {
         BUSY: (state: ResponseModel<StylePreferencesDTO>) => {
@@ -16,25 +17,25 @@ export const createStylePreferencesModel = createModel<RootModel>()({
                 isBusy: true
             }
         },
-        HANDLE_RESPONSE: (state: ResponseModel<StylePreferencesDTO>, data: StylePreferencesDTO) => {
+        HANDLE_RESPONSE: (state: ResponseModel<StylePreferencesDTO>, data: StylePreferencesDTO, status: number) => {
             return {
                 ...state,
                 data,
-                isBusy: false
+                isBusy: false,
+                status
             }
         },
     },
     effects: (dispatch) => {
         const { createStylePreferencesModel } = dispatch
         return {
-            async createAccount(): Promise<any> {
+            async createStylePreferences(): Promise<any> {
                 createStylePreferencesModel.BUSY();
 
                 const response = await api.stylePreferences.apiV1StylePreferencesCreatePost();
 
                 if (response.status === 200) {
-
-                    createStylePreferencesModel.HANDLE_RESPONSE(response.data)
+                    createStylePreferencesModel.HANDLE_RESPONSE(response.data, response.status);
                 }
                 // TODO: handle exceptions
             }

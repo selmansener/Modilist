@@ -15,6 +15,7 @@ export default function ContactInfo() {
     const { data: districts } = useSelector((state: RootState) => state.districtsModel);
     const { isBusy: getDefaultAddressIsBusy, data: getDefaultAddressResponse } = useSelector((state: RootState) => state.getDefaultAddressModel);
     const { isBusy: upsertAddressIsBusy, data: upsertAddressResponse } = useSelector((state: RootState) => state.upsertAddressModel);
+    const { activeStep, skipped } = useSelector((state: RootState) => state.welcomeStepsModel);
     const dispatch = useDispatch<Dispatch>();
     const [selectedCity, setSelectedCity] = useState<City | undefined>({});
 
@@ -58,6 +59,34 @@ export default function ContactInfo() {
                 }
             },
         });
+
+
+    const isStepSkipped = (step: number) => {
+        return skipped.has(step);
+    };
+
+    useEffect(() => {
+        dispatch.welcomeStepsModel.setNextCallback(() => {
+            let newSkipped = skipped;
+            if (isStepSkipped(activeStep)) {
+                newSkipped = new Set(newSkipped.values());
+                newSkipped.delete(activeStep);
+            }
+
+            dispatch.welcomeStepsModel.setActiveStep(activeStep + 1);
+            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        });
+
+        dispatch.welcomeStepsModel.setBackCallback(() => {
+            let newSkipped = skipped;
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+
+            const newStep = activeStep - 1;
+            dispatch.welcomeStepsModel.setActiveStep(newStep);
+            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        });
+    }, []);
 
     useEffect(() => {
         if (getDefaultAddressResponse) {

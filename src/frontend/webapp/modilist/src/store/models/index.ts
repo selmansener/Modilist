@@ -9,7 +9,6 @@ import { upsertAddressModel } from "./addresses/UpsertAddress"
 import { createStylePreferencesModel } from "./stylePreferences/CreateStylePreferences"
 import { getStylePreferencesModel } from "./stylePreferences/GetStylePreferences"
 import { updateStylePreferencesModel } from "./stylePreferences/UpdateStylePreferences"
-import { account } from "./users/Account"
 import { createAccountModel } from "./users/CreateAccount"
 import { getAccountModel } from "./users/GetAccount"
 import { updateAccountModel } from "./users/UpdateAccount"
@@ -30,8 +29,7 @@ export interface RootModel extends Models<RootModel> {
   updateAddressModel: typeof updateAddressModel,
   upsertAddressModel: typeof upsertAddressModel,
   citiesModel: typeof citiesModel,
-  districtsModel: typeof districtsModel,
-  account: typeof account
+  districtsModel: typeof districtsModel
 }
 
 export const models: RootModel = {
@@ -48,6 +46,5 @@ export const models: RootModel = {
   updateAddressModel,
   upsertAddressModel,
   citiesModel,
-  districtsModel,
-  account
+  districtsModel
 }

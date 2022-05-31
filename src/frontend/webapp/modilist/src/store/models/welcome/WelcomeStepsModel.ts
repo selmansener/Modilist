@@ -1,38 +1,44 @@
 import { createModel } from "@rematch/core";
+import { number } from "yup";
 import { RootModel } from "..";
 
 export type WelcomeStepState = {
-    onSubmit: () => void;
-    validator: () => boolean;
+    activeStep: 0;
+    skipped: Set<number>;
+    nextCallback: () => void;
+    backCallback: () => void;
 }
 
 export const welcomeStepsModel = createModel<RootModel>()({
     state: {
-        onSubmit: () => {},
-        validator: () => true
+        activeStep: 0,
+        skipped: new Set<number>(),
+        nextCallback: () => {},
+        backCallback: () => {}
     } as WelcomeStepState,
     reducers: {
-        SET_ONSUBMIT: (state: WelcomeStepState, onSubmit: () => void) => {
+        setBackCallback: (state: WelcomeStepState, backCallback: () => void) => {
             return {
                 ...state,
-                onSubmit
+                backCallback
             }
         },
-        SET_VALIDATOR: (state: WelcomeStepState, validator: () => boolean) => {
+        setNextCallback: (state: WelcomeStepState, nextCallback: () => void) => {
             return {
                 ...state,
-                validator
+                nextCallback
             }
-        }
-    },
-    effects: (dispatch) => {
-        const { welcomeStepsModel } = dispatch
-        return {
-            setValidator(validator: () => boolean) {
-                welcomeStepsModel.SET_VALIDATOR(validator);
-            },
-            setOnSubmit(onSubmit: () => void) {
-                welcomeStepsModel.SET_ONSUBMIT(onSubmit);
+        },
+        setActiveStep: (state: WelcomeStepState, activeStep) => {
+            return {
+                ...state,
+                activeStep
+            }
+        },
+        setSkipped: (state: WelcomeStepState, skipped: Set<number>) => {
+            return {
+                ...state,
+                skipped
             }
         }
     }

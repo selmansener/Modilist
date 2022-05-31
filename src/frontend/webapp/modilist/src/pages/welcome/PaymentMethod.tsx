@@ -1,8 +1,9 @@
 
 import { Button, FormControl, Grid, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { config } from '../../config/';
+import { Dispatch, RootState } from "../../store/store";
 
 interface Card {
     cardAlias: string;
@@ -21,6 +22,8 @@ interface CreateCardRequest {
 }
 
 export default function PaymentMethod() {
+    const { activeStep, skipped } = useSelector((state: RootState) => state.welcomeStepsModel);
+    const dispatch = useDispatch<Dispatch>();
 
     const [createCardRequest, setCreateCardRequest] = useState<CreateCardRequest>({
         locale: 'TR',
@@ -35,6 +38,35 @@ export default function PaymentMethod() {
             expireYear: ''
         }
     });
+
+
+    const isStepSkipped = (step: number) => {
+        return skipped.has(step);
+    };
+
+    useEffect(() => {
+        dispatch.welcomeStepsModel.setNextCallback(() => {
+            // TODO: activate account at this step
+            let newSkipped = skipped;
+            if (isStepSkipped(activeStep)) {
+                newSkipped = new Set(newSkipped.values());
+                newSkipped.delete(activeStep);
+            }
+
+            dispatch.welcomeStepsModel.setActiveStep(activeStep + 1);
+            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        });
+
+        dispatch.welcomeStepsModel.setBackCallback(() => {
+            let newSkipped = skipped;
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+
+            const newStep = activeStep - 1;
+            dispatch.welcomeStepsModel.setActiveStep(newStep);
+            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        });
+    }, []);
 
     const sendRequest = () => {
     }

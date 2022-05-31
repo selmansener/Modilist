@@ -1,7 +1,7 @@
 import { Box, Card, CardActionArea, CardContent, CardMedia, Chip, Grid, Paper, styled, TextField, Typography, useTheme } from '@mui/material';
 import { LocalizationProvider, PickersDay, PickersDayProps, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import React from 'react';
+import React, { useEffect } from 'react';
 import endOfWeek from 'date-fns/endOfWeek';
 import isSameDay from 'date-fns/isSameDay';
 import isWithinInterval from 'date-fns/isWithinInterval';
@@ -9,6 +9,8 @@ import startOfWeek from 'date-fns/startOfWeek';
 import { useTranslation } from 'react-i18next';
 import add from 'date-fns/add';
 import CurrencyLiraIcon from '@mui/icons-material/CurrencyLira';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch, RootState } from '../../store/store';
 
 type CustomPickerDayProps = PickersDayProps<Date> & {
     dayIsBetween: boolean;
@@ -41,12 +43,41 @@ const CustomPickersDay = styled(PickersDay, {
 export default function Subscription() {
     const theme = useTheme();
     const { t } = useTranslation();
+    const { activeStep, skipped } = useSelector((state: RootState) => state.welcomeStepsModel);
+    const dispatch = useDispatch<Dispatch>();
     // TODO: get this from i18n
     const [locale, setLocale] = React.useState<string>('tr');
     const [value, setValue] = React.useState<Date | null>(new Date());
     const [minDate] = React.useState<Date>(add(new Date(), {
         weeks: 2
     }));
+
+    const isStepSkipped = (step: number) => {
+        return skipped.has(step);
+    };
+
+    useEffect(() => {
+        dispatch.welcomeStepsModel.setNextCallback(() => {
+            let newSkipped = skipped;
+            if (isStepSkipped(activeStep)) {
+                newSkipped = new Set(newSkipped.values());
+                newSkipped.delete(activeStep);
+            }
+
+            dispatch.welcomeStepsModel.setActiveStep(activeStep + 1);
+            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        });
+
+        dispatch.welcomeStepsModel.setBackCallback(() => {
+            let newSkipped = skipped;
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+
+            const newStep = activeStep - 1;
+            dispatch.welcomeStepsModel.setActiveStep(newStep);
+            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        });
+    }, []);
 
     const renderWeekPickerDay = (
         date: Date,
