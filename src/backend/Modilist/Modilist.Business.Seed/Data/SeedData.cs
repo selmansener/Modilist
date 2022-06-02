@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Immutable;
 
-using Modilist.Domains.ProductDomain.Models;
-using Modilist.Domains.UserDomain.Models;
+using Modilist.Domains.Models.AccountDomain;
+using Modilist.Domains.Models.ProductDomain;
 
 namespace Modilist.Business.Seed.Data
 {

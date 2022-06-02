@@ -7,7 +7,7 @@ using Modilist.Domains.Base;
 
 namespace Modilist.Data.Repositories.Base
 {
-    public interface IWriteRepository<TEntity> where TEntity : BaseEntity
+    public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         Task<int> AddAsync(TEntity entity, CancellationToken cancellationToken, bool saveChanges = false);
         Task<int> AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveChanges = false);
@@ -23,11 +23,11 @@ namespace Modilist.Data.Repositories.Base
         Task<int> UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveChanges = false);
     }
 
-    internal abstract class WriteRepository<TEntity> : IWriteRepository<TEntity> where TEntity : BaseEntity
+    internal abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         protected readonly ModilistDbContext _baseDb;
 
-        public WriteRepository(ModilistDbContext baseDb)
+        public BaseRepository(ModilistDbContext baseDb)
         {
             _baseDb = baseDb;
         }

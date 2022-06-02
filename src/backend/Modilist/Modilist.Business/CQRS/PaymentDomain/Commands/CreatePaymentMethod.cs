@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using FluentValidation;
 
 using Mapster;
@@ -12,7 +7,7 @@ using MediatR;
 
 using Modilist.Business.CQRS.PaymentDomain.DTOs;
 using Modilist.Data.Repositories.PaymentDomain;
-using Modilist.Domains.PaymentDomain.Models;
+using Modilist.Domains.Models.PaymentDomain;
 
 using Newtonsoft.Json;
 
@@ -39,16 +34,16 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
     internal class CreatePaymentMethodHandler : IRequestHandler<CreatePaymentMethod, PaymentMethodDTO>
     {
-        private readonly IPaymentMethodWriteRepository _paymentMethodWriteRepository;
+        private readonly IPaymentMethodRepository _paymentMethodRepository;
 
-        public CreatePaymentMethodHandler(IPaymentMethodWriteRepository paymentMethodWriteRepository)
+        public CreatePaymentMethodHandler(IPaymentMethodRepository paymentMethodRepository)
         {
-            _paymentMethodWriteRepository = paymentMethodWriteRepository;
+            _paymentMethodRepository = paymentMethodRepository;
         }
 
         public async Task<PaymentMethodDTO> Handle(CreatePaymentMethod request, CancellationToken cancellationToken)
         {
-            PaymentMethod? paymentMethod = await _paymentMethodWriteRepository.GetByCardKey(request.AccountId, request.CardUserKey, cancellationToken);
+            PaymentMethod? paymentMethod = await _paymentMethodRepository.GetByCardKey(request.AccountId, request.CardUserKey, cancellationToken);
 
             if (paymentMethod != null)
             {
@@ -61,17 +56,17 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
             if (request.IsDefault)
             {
-                var defaultPaymentMethod = await _paymentMethodWriteRepository.GetDefaultByAccountIdAsync(request.AccountId, cancellationToken);
+                var defaultPaymentMethod = await _paymentMethodRepository.GetDefaultByAccountIdAsync(request.AccountId, cancellationToken);
 
                 if (defaultPaymentMethod != null)
                 {
                     defaultPaymentMethod.ChangeDefault(false);
 
-                    await _paymentMethodWriteRepository.UpdateAsync(defaultPaymentMethod, cancellationToken);
+                    await _paymentMethodRepository.UpdateAsync(defaultPaymentMethod, cancellationToken);
                 }
             }
 
-            await _paymentMethodWriteRepository.AddAsync(paymentMethod, cancellationToken);
+            await _paymentMethodRepository.AddAsync(paymentMethod, cancellationToken);
 
             return paymentMethod.Adapt<PaymentMethodDTO>();
         }

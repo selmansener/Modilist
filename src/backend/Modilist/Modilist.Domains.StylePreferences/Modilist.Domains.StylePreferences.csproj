@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modilist.Domains.Base\Modilist.Domains.Base.csproj" />
     <ProjectReference Include="..\Modilist.Domains.UserDomain\Modilist.Domains.UserDomain.csproj" />
   </ItemGroup>
 

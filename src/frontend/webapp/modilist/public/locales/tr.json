@@ -35,8 +35,11 @@
       }
     },
     "Welcome": {
-      "BodySize": {
-        "HeaderClothingSize": "Kıyafet Ölçüleri",
+      "BodySize": {        
+        "UpperWear": "Üst Giyim Kıyafet Ölçüleri",
+        "LowerWear": "Alt Giyim Kıyafet Ölçüleri",
+        "UnderWear": "İç Giyim Kıyafet Ölçüleri",
+        "UnderWearsBra": "Üst İç Giyim Kıyafet Ölçüleri",
         "TShirtBlouse": "Tişört & Bluz",
         "SkirtDress": "Etek & Elbise",
         "PantsJean": "Pantolon & Jean",
@@ -52,8 +55,6 @@
         "LegLength": "Bacak Uzunluğu (cm)",
         "Height": "Boy (cm)",
         "Weight": "Kilo (cm)"
-
-
       },
       "ContactInfo": {
 
@@ -173,7 +174,16 @@
     "Panties": "Panties",
     "HighHeels": "Topuklu",
     "FlatShoes": "Babet",
-    "Boxer": "Boxer"
+    "Boxer": "Boxer",
+    "SleevelessUnderShirt": "Atlet",
+    "Skirt": "Etek",
+    "Bustier": "Büstiyer",
+    "Crop": "Crop",
+    "Tunik": "Tunik",
+    "Bralet": "Bralet",
+    "Overalls": "Tulum",
+    "Leggings": "Tayt",
+    "Shoes": "Ayakkabı"
   },
   "MainCategories": {
     "Upper": "Üst Giyim",
@@ -218,7 +228,7 @@
   },
   "Fabric": {
     "Leather": "Deri",
-    "Wool": "Yüm",
+    "Wool": "Yün",
     "Satin": "Saten",
     "FauxFur": "Suni Kürk",
     "Velvet": "Kadife",
@@ -228,6 +238,9 @@
     "RequiredField": "* Gerekli Alan"
   },
   "Generic": {
+    "Forms": {
+      "Select": "Seçiniz"
+    },
     "PersonalInfo": {
       "FirstName": "Ad",
       "LastName": "Soyad",

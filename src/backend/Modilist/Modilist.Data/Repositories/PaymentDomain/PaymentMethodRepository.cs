@@ -3,20 +3,20 @@ using Microsoft.EntityFrameworkCore;
 
 using Modilist.Data.DataAccess;
 using Modilist.Data.Repositories.Base;
-using Modilist.Domains.PaymentDomain.Models;
+using Modilist.Domains.Models.PaymentDomain;
 
 namespace Modilist.Data.Repositories.PaymentDomain
 {
-    public interface IPaymentMethodWriteRepository : IWriteRepository<PaymentMethod>
+    public interface IPaymentMethodRepository : IBaseRepository<PaymentMethod>
     {
-        Task<PaymentMethod> GetDefaultByAccountIdAsync(Guid accountId, CancellationToken cancellationToken);
+        Task<PaymentMethod?> GetDefaultByAccountIdAsync(Guid accountId, CancellationToken cancellationToken);
 
         Task<PaymentMethod?> GetByCardKey(Guid accountId, string cardUserKey, CancellationToken cancellationToken);
     }
 
-    internal class PaymentMethodWriteRepository : WriteRepository<PaymentMethod>, IPaymentMethodWriteRepository
+    internal class PaymentMethodRepository : BaseRepository<PaymentMethod>, IPaymentMethodRepository
     {
-        public PaymentMethodWriteRepository(ModilistDbContext baseDb)
+        public PaymentMethodRepository(ModilistDbContext baseDb)
             : base(baseDb)
         {
         }
@@ -26,7 +26,7 @@ namespace Modilist.Data.Repositories.PaymentDomain
             return await GetAll().FirstOrDefaultAsync(x => x.AccountId == accountId && x.CardUserKey == cardUserKey, cancellationToken);
         }
 
-        public async Task<PaymentMethod> GetDefaultByAccountIdAsync(Guid accountId, CancellationToken cancellationToken)
+        public async Task<PaymentMethod?> GetDefaultByAccountIdAsync(Guid accountId, CancellationToken cancellationToken)
         {
             return await GetAll().FirstOrDefaultAsync(x => x.IsDefault && x.AccountId == accountId, cancellationToken);
         }

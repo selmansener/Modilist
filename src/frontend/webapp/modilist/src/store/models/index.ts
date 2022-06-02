@@ -6,6 +6,8 @@ import { districtsModel } from "./addresses/Districts"
 import { getDefaultAddressModel } from "./addresses/GetDefaultAddress"
 import { updateAddressModel } from "./addresses/UpdateAddress"
 import { upsertAddressModel } from "./addresses/UpsertAddress"
+import { getSizeInfoModel } from "./sizeInfo/GetSizeInfo"
+import { upsertSizeInfoModel } from "./sizeInfo/UpsertSizeInfo"
 import { createStylePreferencesModel } from "./stylePreferences/CreateStylePreferences"
 import { getStylePreferencesModel } from "./stylePreferences/GetStylePreferences"
 import { updateStylePreferencesModel } from "./stylePreferences/UpdateStylePreferences"
@@ -29,7 +31,9 @@ export interface RootModel extends Models<RootModel> {
   updateAddressModel: typeof updateAddressModel,
   upsertAddressModel: typeof upsertAddressModel,
   citiesModel: typeof citiesModel,
-  districtsModel: typeof districtsModel
+  districtsModel: typeof districtsModel,
+  getSizeInfoModel: typeof getSizeInfoModel,
+  upsertSizeInfoModel: typeof upsertSizeInfoModel
 }
 
 export const models: RootModel = {
@@ -46,5 +50,7 @@ export const models: RootModel = {
   updateAddressModel,
   upsertAddressModel,
   citiesModel,
-  districtsModel
+  districtsModel,
+  getSizeInfoModel,
+  upsertSizeInfoModel
 }

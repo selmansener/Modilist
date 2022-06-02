@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using FluentValidation;
 
 using Mapster;
@@ -12,7 +7,7 @@ using MediatR;
 
 using Modilist.Business.CQRS.AddressDomain.DTOs;
 using Modilist.Data.Repositories.AddressDomain;
-using Modilist.Domains.AddressDomain.Models;
+using Modilist.Domains.Models.AddressDomain;
 
 namespace Modilist.Business.CQRS.AddressDomain.Queries
 {
@@ -34,16 +29,16 @@ namespace Modilist.Business.CQRS.AddressDomain.Queries
 
     internal class GetAddressHandler : IRequestHandler<GetAddress, AddressDTO>
     {
-        private readonly IAddressReadRepository _addressReadRepository;
+        private readonly IAddressRepository _addressRepository;
 
-        public GetAddressHandler(IAddressReadRepository addressReadRepository)
+        public GetAddressHandler(IAddressRepository addressRepository)
         {
-            _addressReadRepository = addressReadRepository;
+            _addressRepository = addressRepository;
         }
 
         public async Task<AddressDTO> Handle(GetAddress request, CancellationToken cancellationToken)
         {
-            Address address = await _addressReadRepository.GetByAccountIdAsync(request.Id, request.AccountId, cancellationToken);
+            Address? address = await _addressRepository.GetByAccountIdAsync(request.Id, request.AccountId, cancellationToken);
 
             if (address == null)
             {

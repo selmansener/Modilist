@@ -26,16 +26,16 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Queries
 
     internal class GetStylePreferencesHandler : IRequestHandler<GetStylePreferences, StylePreferencesDTO>
     {
-        private readonly IStylePreferencesReadRepository _stylePreferencesReadRepository;
+        private readonly IStylePreferencesRepository _stylePreferencesRepository;
 
-        public GetStylePreferencesHandler(IStylePreferencesReadRepository stylePreferencesReadRepository)
+        public GetStylePreferencesHandler(IStylePreferencesRepository stylePreferencesRepository)
         {
-            _stylePreferencesReadRepository = stylePreferencesReadRepository;
+            _stylePreferencesRepository = stylePreferencesRepository;
         }
 
         public async Task<StylePreferencesDTO> Handle(GetStylePreferences request, CancellationToken cancellationToken)
         {
-            var stylePreference = await _stylePreferencesReadRepository.GetByAccountIdAsync(request.AccountId, cancellationToken);
+            var stylePreference = await _stylePreferencesRepository.GetByAccountIdAsync(request.AccountId, cancellationToken);
 
             if (stylePreference == null)
             {

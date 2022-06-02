@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using FluentValidation;
 
 using Mapster;
@@ -12,7 +7,7 @@ using MediatR;
 
 using Modilist.Business.CQRS.AddressDomain.DTOs;
 using Modilist.Data.Repositories.AddressDomain;
-using Modilist.Domains.AddressDomain.Models;
+using Modilist.Domains.Models.AddressDomain;
 
 using Newtonsoft.Json;
 
@@ -60,16 +55,16 @@ namespace Modilist.Business.CQRS.AddressDomain.Commands
 
     internal class UpdateAddressHandler : IRequestHandler<UpdateAddress, AddressDTO>
     {
-        private readonly IAddressWriteRepository _addressWriteRepository;
+        private readonly IAddressRepository _addressWriteRepository;
 
-        public UpdateAddressHandler(IAddressWriteRepository addressWriteRepository)
+        public UpdateAddressHandler(IAddressRepository addressWriteRepository)
         {
             _addressWriteRepository = addressWriteRepository;
         }
 
         public async Task<AddressDTO> Handle(UpdateAddress request, CancellationToken cancellationToken)
         {
-            Address address = await _addressWriteRepository.GetByNameAsync(request.Name, request.AccountId, cancellationToken);
+            Address? address = await _addressWriteRepository.GetByNameAsync(request.Name, request.AccountId, cancellationToken);
 
             if (address == null)
             {

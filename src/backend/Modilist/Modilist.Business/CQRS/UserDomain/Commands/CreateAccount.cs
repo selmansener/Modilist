@@ -7,7 +7,7 @@ using MediatR;
 
 using Modilist.Business.CQRS.UserDomain.DTOs;
 using Modilist.Data.Repositories.UserDomain;
-using Modilist.Domains.UserDomain.Models;
+using Modilist.Domains.Models.AccountDomain;
 
 namespace Modilist.Business.CQRS.UserDomain.Commands
 {
@@ -35,16 +35,16 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
 
     internal class CreateAccountHandler : IRequestHandler<CreateAccount, AccountDTO>
     {
-        private readonly IAccountWriteRepository _accountWriteRepository;
+        private readonly IAccountRepository _accountWriteRepository;
 
-        public CreateAccountHandler(IAccountWriteRepository accountWriteRepository)
+        public CreateAccountHandler(IAccountRepository accountWriteRepository)
         {
             _accountWriteRepository = accountWriteRepository;
         }
 
         public async Task<AccountDTO> Handle(CreateAccount request, CancellationToken cancellationToken)
         {
-            Account account = await _accountWriteRepository.GetByIdAsync(request.Id, cancellationToken);
+            Account? account = await _accountWriteRepository.GetByIdAsync(request.Id, cancellationToken);
 
             if (account != null)
             {

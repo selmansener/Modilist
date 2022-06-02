@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Immutable;
 
 using Microsoft.EntityFrameworkCore;
 
 using Modilist.Business.Seed.Configuration;
 using Modilist.Data.DataAccess;
-using Modilist.Domains.StylePreferences.Models;
+using Modilist.Domains.Models.StylePreferencesDomain;
 
 namespace Modilist.Business.Seed.Services
 {
@@ -17,7 +12,7 @@ namespace Modilist.Business.Seed.Services
     {
         protected override ImmutableList<SeedServiceType> Dependencies => ImmutableList.Create(SeedServiceType.Users);
 
-        public StylePreferencesSeedService(ModilistDbContext dbContext) 
+        public StylePreferencesSeedService(ModilistDbContext dbContext)
             : base(dbContext)
         {
         }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using Modilist.Domains.ProductDomain.Models;
+using Modilist.Domains.Models.ProductDomain;
 
 namespace Modilist.Data.EntityConfigurations.ProductDomain
 {

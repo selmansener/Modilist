@@ -44,16 +44,15 @@ namespace Modilist.Data.Extensions
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IAccountReadRepository, AccountReadRepository>();
-            services.AddScoped<IAccountWriteRepository, AccountWriteRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
 
-            services.AddScoped<IStylePreferencesReadRepository, StylePreferencesReadRepository>();
-            services.AddScoped<IStylePreferencesWriteRepository, StylePreferencesWriteRepository>();
+            services.AddScoped<IStylePreferencesRepository, StylePreferencesRepository>();
 
-            services.AddScoped<IAddressReadRepository, AddressReadRepository>();
-            services.AddScoped<IAddressWriteRepository, AddressWriteRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
 
-            services.AddScoped<IPaymentMethodWriteRepository, PaymentMethodWriteRepository>();
+            services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+
+            services.AddScoped<ISizeInfoRepository, SizeInfoRepository>();
 
             return services;
         }

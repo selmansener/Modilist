@@ -7,7 +7,7 @@ using MediatR;
 
 using Modilist.Business.CQRS.AddressDomain.DTOs;
 using Modilist.Data.Repositories.AddressDomain;
-using Modilist.Domains.AddressDomain.Models;
+using Modilist.Domains.Models.AddressDomain;
 
 using Newtonsoft.Json;
 
@@ -55,9 +55,9 @@ namespace Modilist.Business.CQRS.AddressDomain.Commands
 
     internal class UpsertAddressHandler : IRequestHandler<UpsertAddress, AddressDTO>
     {
-        private readonly IAddressWriteRepository _addressWriteRepository;
+        private readonly IAddressRepository _addressWriteRepository;
 
-        public UpsertAddressHandler(IAddressWriteRepository addressWriteRepository)
+        public UpsertAddressHandler(IAddressRepository addressWriteRepository)
         {
             _addressWriteRepository = addressWriteRepository;
         }

@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Modilist.Data\Modilist.Data.csproj" />
-    <ProjectReference Include="..\Modilist.Domains.ProductDomain\Modilist.Domains.ProductDomain.csproj" />
   </ItemGroup>
 
 </Project>

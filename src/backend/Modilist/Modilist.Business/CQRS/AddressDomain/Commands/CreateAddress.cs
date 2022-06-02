@@ -7,7 +7,7 @@ using MediatR;
 
 using Modilist.Business.CQRS.AddressDomain.DTOs;
 using Modilist.Data.Repositories.AddressDomain;
-using Modilist.Domains.AddressDomain.Models;
+using Modilist.Domains.Models.AddressDomain;
 
 using Newtonsoft.Json;
 
@@ -54,16 +54,16 @@ namespace Modilist.Business.CQRS.AddressDomain.Commands
 
     internal class CreateAddressHandler : IRequestHandler<CreateAddress, AddressDTO>
     {
-        private readonly IAddressWriteRepository _addressWriteRepository;
+        private readonly IAddressRepository _addressWriteRepository;
 
-        public CreateAddressHandler(IAddressWriteRepository addressWriteRepository)
+        public CreateAddressHandler(IAddressRepository addressWriteRepository)
         {
             _addressWriteRepository = addressWriteRepository;
         }
 
         public async Task<AddressDTO> Handle(CreateAddress request, CancellationToken cancellationToken)
         {
-            Address address = await _addressWriteRepository.GetByNameAsync(request.Name, request.AccountId, cancellationToken);
+            Address? address = await _addressWriteRepository.GetByNameAsync(request.Name, request.AccountId, cancellationToken);
 
             if (address != null)
             {

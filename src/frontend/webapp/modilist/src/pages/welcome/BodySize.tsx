@@ -1,25 +1,138 @@
-import { Divider, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Button, ButtonGroup, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { AccountDTO } from "../../services/swagger/api";
+import { Gender, SizeInfoDTO } from "../../services/swagger/api";
 import { Dispatch, RootState } from "../../store/store";
-
+import { useFormik } from 'formik';
+import * as Yup from "yup";
+import { camelCase } from "change-case";
 
 export default function BodySize() {
     const { t } = useTranslation();
-    const { isBusy, data: initialAccount, status } = useSelector((state: RootState) => state.getAccountModel);
+    const { isBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
+    const { isBusy: getSizeInfoIsBusy, data: initialSizeInfo } = useSelector((state: RootState) => state.getSizeInfoModel);
+    const { isBusy: upsertSizeInfoIsBusy, data: upsertSizeInfo, status: upsertStatus } = useSelector((state: RootState) => state.upsertSizeInfoModel);
     const { activeStep, skipped } = useSelector((state: RootState) => state.welcomeStepsModel);
-    const [account] = useState<AccountDTO>({});
+    const [sizeInfo, setSizeInfo] = useState<SizeInfoDTO>({});
     const [isValid, setIsValid] = useState<boolean>(false);
+    const [requiredField] = useState(t("FormValidation.RequiredField"));
+
+    const [schema, setSchema] = useState(Yup.object({
+        tshirt: Yup.string().required(requiredField),
+        sweater: Yup.string().required(requiredField),
+        sweatshirt: Yup.string().required(requiredField),
+        shirt: Yup.string().required(requiredField),
+        sleevelessUnderShirt: Yup.string().required(requiredField),
+        pants: Yup.string().required(requiredField),
+        jeans: Yup.string().required(requiredField),
+        shorts: Yup.string().required(requiredField),
+        sweatpants: Yup.string().required(requiredField),
+    }));
+
     const dispatch = useDispatch<Dispatch>();
+
+    const [sizeSymbols] = useState<string[]>(["XXS", "XS", "S", "M", "L", "XL", "XXL"]);
+
+    const [braSizes] = useState<string[]>(["70", "75", "80", "85", "90", "95", "100", "105", "110"]);
+
+    const [braSuffixes] = useState<string[]>(["A", "B", "C", "D", "DD"]);
+
+    const [upperWears, setUpperWears] = useState<string[]>([
+        "Tshirt",
+        "Sweater",
+        "Sweatshirt",
+        "Shirt",
+    ]);
+
+    const [lowerWears, setLowerWears] = useState<string[]>([
+        "Pants",
+        "Jeans",
+        "Shorts",
+        "Sweatpants"
+    ]);
+
+    const [underWears, setUnderWears] = useState<string[]>([
+        "SleevelessUnderShirt",
+    ]);
+
+    const [underWearsBra] = useState<string[]>([
+        "Bralet",
+        "Bustier"
+    ]);
+
+    useEffect(() => {
+        if (account && account.gender === Gender.Female) {
+            setUpperWears([
+                ...upperWears,
+                "Crop",
+                "Blouse",
+                "Tunik",
+                "Dress",
+                "Overalls"
+            ]);
+
+            setLowerWears([
+                ...lowerWears,
+                "Skirt",
+                "Leggings"
+            ]);
+
+            setUnderWears([
+                ...underWears,
+                "Panties"
+            ]);
+
+            const newSchema = schema.shape({
+                crop: Yup.string().required(requiredField),
+                blouse: Yup.string().required(requiredField),
+                bustier: Yup.string().required(requiredField),
+                bralet: Yup.string().required(requiredField),
+                tunik: Yup.string().required(requiredField),
+                dress: Yup.string().required(requiredField),
+                overalls: Yup.string().required(requiredField),
+                skirt: Yup.string().required(requiredField),
+                leggings: Yup.string().required(requiredField),
+            });
+
+            setSchema(newSchema);
+        }
+        else if (account && account.gender === Gender.Male) {
+            setUnderWears([
+                ...underWears,
+                "Boxer"
+            ]);
+            
+            const newSchema = schema.shape({
+                boxer: Yup.string().required(requiredField),
+            });
+            
+            setSchema(newSchema);
+        }
+    }, [account]);
+
+    useEffect(() => {
+        if (initialSizeInfo === undefined && !getSizeInfoIsBusy) {
+            dispatch.getSizeInfoModel.getSizeInfo();
+        }
+    }, []);
+
+    useEffect(() => {
+        if (initialSizeInfo) {
+            setSizeInfo(initialSizeInfo);
+        }
+    }, [initialSizeInfo]);
 
     const isStepSkipped = (step: number) => {
         return skipped.has(step);
     };
 
     useEffect(() => {
-        dispatch.welcomeStepsModel.setNextCallback(() => {
+        if (upsertStatus === 200 && upsertSizeInfo) {
+            dispatch.getSizeInfoModel.HANDLE_RESPONSE(upsertSizeInfo, upsertStatus);
+
+            dispatch.upsertSizeInfoModel.RESET();
+
             let newSkipped = skipped;
             if (isStepSkipped(activeStep)) {
                 newSkipped = new Set(newSkipped.values());
@@ -28,162 +141,191 @@ export default function BodySize() {
 
             dispatch.welcomeStepsModel.setActiveStep(activeStep + 1);
             dispatch.welcomeStepsModel.setSkipped(newSkipped);
+        }
+    }, [upsertSizeInfo])
+
+    useEffect(() => {
+        if (isValid && !upsertSizeInfoIsBusy && sizeInfo) {
+            dispatch.upsertSizeInfoModel.upsertSizeInfo({
+                ...sizeInfo,
+                gender: account?.gender,
+            });
+        }
+    }, [isValid]);
+
+    useEffect(() => {
+        dispatch.welcomeStepsModel.setNextCallback(() => {
+            validateForm(sizeInfo).then((errors) => {
+                setIsValid(Object.keys(errors).length === 0);
+            });
         });
 
         dispatch.welcomeStepsModel.setBackCallback(() => {
-            console.log(activeStep);
-
             let newSkipped = skipped;
             newSkipped = new Set(newSkipped.values());
             newSkipped.delete(activeStep);
 
-            console.log(newSkipped);
             const newStep = activeStep - 1;
-            console.log(newStep);
+
             dispatch.welcomeStepsModel.setActiveStep(newStep);
             dispatch.welcomeStepsModel.setSkipped(newSkipped);
         });
-    }, []);
+    }, [sizeInfo]);
+
+    const {
+        handleChange,
+        handleBlur,
+        touched,
+        errors,
+        validateForm,
+        //setValues,
+    } = useFormik({
+        enableReinitialize: true,
+        initialValues: sizeInfo,
+        validationSchema: schema,
+        onSubmit: (values) => {
+        },
+    });
+
+    // const underwearSizes = () => {
+    //     const sizes: string[] = [];
+    //     braSuffixes.map(suffix => {
+    //         braSizes.map(size => {
+    //             sizes.push(`${size}${suffix}`)
+    //         })
+    //     })
+
+    //     return sizes;
+    // }
+
+    type SectionProps = {
+        sectionData: string[],
+        sizeData: string[],
+        title: string
+    }
+
+    useEffect(() => {
+        console.log("sizeInfo", sizeInfo);
+    }, [sizeInfo])
+
+    const Section = (props: SectionProps) => {
+        const { sectionData, sizeData, title } = props;
+
+        return <>
+            <Grid item xs={12}>
+                <Typography variant='h6' align='left' sx={{ m: 1 }}>
+                    {t(`Pages.Welcome.BodySize.${title}`)}
+                </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+                <Typography>Hepsini Değiştir</Typography>
+                <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                    {sizeData.map(size => {
+                        return <Button
+                            key={size}
+                            onClick={() => {
+                                const newSizeInfo: SizeInfoDTO = {};
+                                sectionData.map((section: string) => {
+                                    newSizeInfo[camelCase(section) as keyof typeof sizeInfo] = size as any;
+                                });
+
+                                setSizeInfo({
+                                    ...sizeInfo,
+                                    ...newSizeInfo
+                                });
+
+                                // setValues({
+                                //     ...sizeInfo,
+                                //     ...newSizeInfo
+                                // });
+                            }}
+                        >
+                            {size}
+                        </Button>
+                    })}
+                </ButtonGroup>
+            </Grid>
+
+            {sectionData.map(_section => {
+                const section = camelCase(_section);
+
+                return (
+                    <Grid item key={section} xs={4}>
+                        <FormControl sx={{ m: 1, width: 300 }} error={touched[section as keyof typeof touched] && errors[section as keyof typeof errors] !== undefined}>
+                            <InputLabel id={`${section}-label`}>{t(`ProductCategories.${_section}`)}</InputLabel>
+                            <Select
+                                name={section}
+                                labelId={`${section}-label`}
+                                id={section}
+                                value={sizeInfo[section as keyof typeof sizeInfo]}
+                                label={t(`ProductCategories.${_section}`)}
+                                onChange={(e) => {
+                                    handleChange(e);
+
+                                    if (e.target.value) {
+                                        setSizeInfo({
+                                            ...sizeInfo,
+                                            [section]: e.target.value
+                                        })
+                                    }
+                                }}
+                                onBlur={(e) => {
+                                    handleBlur(e);
+
+                                    if (e.target.value) {
+                                        setSizeInfo({
+                                            ...sizeInfo,
+                                            [section]: e.target.value
+                                        })
+                                    }
+                                }}
+                            >
+                                <MenuItem disabled value={"None"}>
+                                    <em>{t('Pages.Welcome.Personal.MenuItem')}</em>
+                                </MenuItem>
+                                {sizeData.map(size => {
+                                    return <MenuItem key={size} value={size}>{size}</MenuItem>
+                                })}
+                            </Select>
+                            <FormHelperText>{touched[section as keyof typeof touched] && errors[section as keyof typeof errors]}</FormHelperText>
+                        </FormControl>
+                    </Grid>
+                )
+            })}
+
+            <Grid item xs={12}>
+                <Divider variant="middle" />
+            </Grid>
+        </>
+    }
 
     return (
         <>
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Typography variant='h6' align='left' sx={{ m: 1 }}>
-                        {t('Pages.Welcome.BodySize.HeaderClothingSize')}
-                    </Typography>
-                </Grid>
 
-                <Grid item xs={4}>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="tshirt-label">{t('Pages.Welcome.BodySize.TShirtBlouse')}</InputLabel>
-                        <Select
-                            labelId="tshirt-label"
-                            id="tshirt"
-                            value={null}
-                            label={t('Pages.Welcome.BodySize.TShirtBlouse')}
-                            onChange={() => { }}
-                        >
-                            <MenuItem value={"XXS"}>XS - 32</MenuItem>
-                            <MenuItem value={"XS"}>XS - 34</MenuItem>
-                            <MenuItem value={"S"}>S - 36</MenuItem>
-                            <MenuItem value={"M"}>M - 38</MenuItem>
-                            <MenuItem value={"L"}>L - 40</MenuItem>
-                            <MenuItem value={"XL"}>XL - 42</MenuItem>
-                            <MenuItem value={"XXL"}>XXL - 44</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={4}>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="skirt-dress-label">{t('Pages.Welcome.BodySize.SkirtDress')}</InputLabel>
-                        <Select
-                            labelId="skirt-dress-label"
-                            id="skirt-dress"
-                            value={null}
-                            label={t('Pages.Welcome.BodySize.SkirtDress')}
-                            onChange={() => { }}
-                        >
-                            <MenuItem value={"XXS"}>XS - 32</MenuItem>
-                            <MenuItem value={"XS"}>XS - 34</MenuItem>
-                            <MenuItem value={"S"}>S - 36</MenuItem>
-                            <MenuItem value={"M"}>M - 38</MenuItem>
-                            <MenuItem value={"L"}>L - 40</MenuItem>
-                            <MenuItem value={"XL"}>XL - 42</MenuItem>
-                            <MenuItem value={"XXL"}>XXL - 44</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={4}>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="jean-label">{t('Pages.Welcome.BodySize.PantsJean')}</InputLabel>
-                        <Select
-                            labelId="jean-label"
-                            id="jean"
-                            value={null}
-                            label={t('Pages.Welcome.BodySize.PantsJean')}
-                            onChange={() => { }}
-                        >
-                            <MenuItem value={"XXS"}>XS - 32</MenuItem>
-                            <MenuItem value={"XS"}>XS - 34</MenuItem>
-                            <MenuItem value={"S"}>S - 36</MenuItem>
-                            <MenuItem value={"M"}>M - 38</MenuItem>
-                            <MenuItem value={"L"}>L - 40</MenuItem>
-                            <MenuItem value={"XL"}>XL - 42</MenuItem>
-                            <MenuItem value={"XXL"}>XXL - 44</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={4}>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="bra-size-label">{t('Pages.Welcome.BodySize.Bra')}</InputLabel>
-                        <Select
-                            labelId="bra-size-label"
-                            id="bra-size"
-                            value={null}
-                            label={t('Pages.Welcome.BodySize.Bra')}
-                            onChange={() => { }}
-                        >
-                            <MenuItem value={"A"}>A</MenuItem>
-                            <MenuItem value={"B"}>B</MenuItem>
-                            <MenuItem value={"C"}>C</MenuItem>
-                            <MenuItem value={"D"}>D</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={4}>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="bra-belt-label">{t('Pages.Welcome.BodySize.BraBelt')}</InputLabel>
-                        <Select
-                            labelId="bra-belt-label"
-                            id="bra-belt"
-                            value={null}
-                            label={t('Pages.Welcome.BodySize.BraBelt')}
-                            onChange={() => { }}
-                        >
-                            <MenuItem value={"70"}>70</MenuItem>
-                            <MenuItem value={"75"}>75</MenuItem>
-                            <MenuItem value={"80"}>80</MenuItem>
-                            <MenuItem value={"85"}>85</MenuItem>
-                            <MenuItem value={"90"}>90</MenuItem>
-                            <MenuItem value={"95"}>95</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={4}>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="shoes-label">{t('Pages.Welcome.BodySize.Shoes')}</InputLabel>
-                        <Select
-                            labelId="shoes-label"
-                            id="shoes"
-                            value={null}
-                            label={t('Pages.Welcome.BodySize.Shoes')}
-                            onChange={() => { }}
-                        >
-                            <MenuItem value={"35"}>35</MenuItem>
-                            <MenuItem value={"36"}>36</MenuItem>
-                            <MenuItem value={"37"}>37</MenuItem>
-                            <MenuItem value={"38"}>38</MenuItem>
-                            <MenuItem value={"39"}>39</MenuItem>
-                            <MenuItem value={"40"}>40</MenuItem>
-                            <MenuItem value={"41"}>41</MenuItem>
-                            <MenuItem value={"42"}>42</MenuItem>
-                            <MenuItem value={"43"}>43</MenuItem>
-                            <MenuItem value={"44"}>44</MenuItem>
-                            <MenuItem value={"45"}>45</MenuItem>
-                            <MenuItem value={"46"}>46</MenuItem>
-                            <MenuItem value={"47"}>47</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                    <Divider variant="middle" />
-                </Grid>
+                <Section
+                    sectionData={upperWears}
+                    sizeData={sizeSymbols}
+                    title={"UpperWear"}
+                />
+                <Section
+                    sectionData={lowerWears}
+                    sizeData={sizeSymbols}
+                    title={"LowerWear"}
+                />
+                <Section
+                    sectionData={underWears}
+                    sizeData={sizeSymbols}
+                    title={"UnderWear"}
+                />
+                {account?.gender === Gender.Female &&
+                    <Section
+                        sectionData={underWearsBra}
+                        sizeData={braSuffixes}
+                        title={"UnderWearsBra"}
+                    />
+                }
                 <Grid item xs={12}>
                     <Typography variant='h6' align='left' sx={{ m: 1 }}>
                         {t('Pages.Welcome.BodySize.HeaderBodySize')}

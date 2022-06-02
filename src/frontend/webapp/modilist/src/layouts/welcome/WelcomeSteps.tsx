@@ -49,10 +49,6 @@ export function WelcomeSteps(props: WelcomeStepProps) {
         //setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    useEffect(() => {
-        console.log(steps[activeStep]);
-    }, [activeStep]);
-
     return (
         <>
             <Stepper activeStep={activeStep}>

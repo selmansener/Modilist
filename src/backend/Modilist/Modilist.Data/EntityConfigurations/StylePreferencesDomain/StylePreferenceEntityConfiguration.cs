@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using Modilist.Domains.StylePreferences.Models;
+using Modilist.Domains.Models.AccountDomain;
+using Modilist.Domains.Models.StylePreferencesDomain;
 
 namespace Modilist.Data.EntityConfigurations.StylePreferencesDomain
 {
@@ -19,9 +15,11 @@ namespace Modilist.Data.EntityConfigurations.StylePreferencesDomain
             builder.Property(x => x.Id).UseHiLo(nameof(StylePreference));
 
             builder.HasOne(x => x.Account)
-                .WithOne()
+                .WithOne(x => x.StylePreferences)
+                .HasPrincipalKey<Account>(x => x.Id)
                 .HasForeignKey<StylePreference>(x => x.AccountId)
-                .IsRequired(false);
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(x => x.PrefersHijabClothing).IsRequired().HasDefaultValue(false);
             builder.Property(x => x.LovesShopping).IsRequired().HasDefaultValue(0);

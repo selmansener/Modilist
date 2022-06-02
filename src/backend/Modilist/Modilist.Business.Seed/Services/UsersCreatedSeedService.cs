@@ -1,7 +1,7 @@
 ﻿
 using Modilist.Business.Seed.Data;
 using Modilist.Data.DataAccess;
-using Modilist.Domains.UserDomain.Models;
+using Modilist.Domains.Models.AccountDomain;
 
 namespace Modilist.Business.Seed.Services
 {

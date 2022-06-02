@@ -5,11 +5,12 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-using Modilist.Domains.AddressDomain.Models;
 using Modilist.Domains.Base;
-using Modilist.Domains.ProductDomain.Models;
-using Modilist.Domains.StylePreferences.Models;
-using Modilist.Domains.UserDomain.Models;
+using Modilist.Domains.Models.AccountDomain;
+using Modilist.Domains.Models.AddressDomain;
+using Modilist.Domains.Models.PaymentDomain;
+using Modilist.Domains.Models.ProductDomain;
+using Modilist.Domains.Models.StylePreferencesDomain;
 using Modilist.Infrastructure.Shared.Constants;
 using Modilist.Infrastructure.Shared.Models;
 
@@ -31,6 +32,10 @@ namespace Modilist.Data.DataAccess
         public virtual DbSet<StylePreference> StylePreferences { get; set; }
 
         public virtual DbSet<Address> Addresses { get; set; }
+
+        public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
+
+        public virtual DbSet<SizeInfo> SizeInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

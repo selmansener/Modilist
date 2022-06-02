@@ -66,7 +66,7 @@ export default function Personal() {
     });
 
     useEffect(() => {
-        if (isValid) {
+        if (isValid && !updateAccountIsBusy) {
             dispatch.updateAccountModel.updateAccount(account)
         }
     }, [isValid]);

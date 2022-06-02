@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Mapster;
 
-using Modilist.Domains.UserDomain.Models;
+using Modilist.Domains.Models.AccountDomain;
 using Modilist.Infrastructure.Shared.Enums;
 using Modilist.Infrastructure.Shared.Interfaces.Enums;
 

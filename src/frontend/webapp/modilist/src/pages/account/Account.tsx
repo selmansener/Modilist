@@ -86,10 +86,11 @@ export function Account() {
                 return state;
             });
         }
+        
     }, [getAccountResponse]);
 
     useEffect(() => {
-        if (getAccountIsBusy == false) {
+        if (getAccountResponse === undefined && getAccountIsBusy === false) {
             dispatch.getAccountModel.getAccount();
         }
     }, []);
@@ -193,13 +194,13 @@ export function Account() {
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label= {t('Pages.Account.Job')} value={account?.jobTitle} variant="outlined" />
+                        <TextField label={t('Pages.Account.Job')} value={account?.jobTitle} variant="outlined" />
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={4}>
                     <FormControl sx={{ m: 1, width: 300 }}>
-                        <TextField label={t('Pages.Account.Instagram')}  value={account?.instagramUserName} variant="outlined" />
+                        <TextField label={t('Pages.Account.Instagram')} value={account?.instagramUserName} variant="outlined" />
                     </FormControl>
                 </Grid>
 
@@ -215,8 +216,8 @@ export function Account() {
                             onClick={() => {
                                 handleSubmit();
                             }}
-                            color="secondary"> 
-                            <Typography>{t('Pages.Account.Button.Save')}</Typography> 
+                            color="secondary">
+                            <Typography>{t('Pages.Account.Button.Save')}</Typography>
                         </Button>
                     </FormControl>
                 </Grid>

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using Modilist.Domains.PaymentDomain.Models;
+using Modilist.Domains.Models.PaymentDomain;
 
 namespace Modilist.Data.EntityConfigurations.PaymentDomain
 {
@@ -16,9 +11,10 @@ namespace Modilist.Data.EntityConfigurations.PaymentDomain
         public void Configure(EntityTypeBuilder<PaymentMethod> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).UseHiLo(nameof(PaymentMethod));
 
             builder.HasOne(x => x.Account)
-                .WithMany()
+                .WithMany(x => x.PaymentMethods)
                 .HasForeignKey(x => x.AccountId)
                 .IsRequired();
 

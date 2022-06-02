@@ -17,6 +17,7 @@
  * @enum {string}
  */
 export enum SeedServiceType {
+    UsersCreated = 'UsersCreated',
     Users = 'Users',
     StylePreferences = 'StylePreferences'
 }

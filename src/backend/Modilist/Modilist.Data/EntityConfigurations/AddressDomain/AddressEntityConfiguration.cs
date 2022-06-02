@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using Modilist.Domains.AddressDomain.Models;
+using Modilist.Domains.Models.AddressDomain;
 
 namespace Modilist.Data.EntityConfigurations.AddressDomain
 {
@@ -19,7 +14,7 @@ namespace Modilist.Data.EntityConfigurations.AddressDomain
             builder.Property(x => x.Id).UseHiLo(nameof(Address));
 
             builder.HasOne(x => x.Account)
-                .WithMany()
+                .WithMany(x => x.Addresses)
                 .HasForeignKey(x => x.AccountId)
                 .IsRequired();
 

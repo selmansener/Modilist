@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using FluentValidation;
 
 using Mapster;
@@ -12,7 +7,7 @@ using MediatR;
 
 using Modilist.Business.CQRS.StylePreferencesDomain.DTOs;
 using Modilist.Data.Repositories.StylePreferencesDomain;
-using Modilist.Domains.StylePreferences.Models;
+using Modilist.Domains.Models.StylePreferencesDomain;
 
 using Newtonsoft.Json;
 
@@ -34,16 +29,16 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
 
     internal class CreateStylePreferencesHandler : IRequestHandler<CreateStylePreferences, StylePreferencesDTO>
     {
-        private readonly IStylePreferencesWriteRepository _stylePreferencesWriteRepository;
+        private readonly IStylePreferencesRepository _stylePreferencesRepository;
 
-        public CreateStylePreferencesHandler(IStylePreferencesWriteRepository stylePreferencesWriteRepository)
+        public CreateStylePreferencesHandler(IStylePreferencesRepository stylePreferencesRepository)
         {
-            _stylePreferencesWriteRepository = stylePreferencesWriteRepository;
+            _stylePreferencesRepository = stylePreferencesRepository;
         }
 
         public async Task<StylePreferencesDTO> Handle(CreateStylePreferences request, CancellationToken cancellationToken)
         {
-            var stylePreference = await _stylePreferencesWriteRepository.GetByAccountIdAsync(request.AccountId, cancellationToken);
+            var stylePreference = await _stylePreferencesRepository.GetByAccountIdAsync(request.AccountId, cancellationToken);
 
             if (stylePreference != null)
             {
@@ -53,7 +48,7 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
 
             stylePreference = new StylePreference(request.AccountId);
 
-            await _stylePreferencesWriteRepository.AddAsync(stylePreference, cancellationToken, true);
+            await _stylePreferencesRepository.AddAsync(stylePreference, cancellationToken, true);
 
             return stylePreference.Adapt<StylePreferencesDTO>();
         }

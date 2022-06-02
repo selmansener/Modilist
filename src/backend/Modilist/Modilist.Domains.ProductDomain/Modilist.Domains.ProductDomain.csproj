@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Modilist.Domains.Base\Modilist.Domains.Base.csproj" />
-  </ItemGroup>
-
 </Project>

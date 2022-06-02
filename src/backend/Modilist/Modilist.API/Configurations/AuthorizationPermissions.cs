@@ -18,6 +18,9 @@
         public const string CreateAddress = "Address.Create";
         public const string UpdateAddress = "Address.Update";
 
+        public const string GetSizeInfo = "SizeInfo.Get";
+        public const string UpsertSizeInfo = "SizeInfo.Upsert";
+
         public const string CreatePaymentMethod = "PaymentMethods.Create";
 
         public const string Development = "Development";

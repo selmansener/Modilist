@@ -7,7 +7,7 @@ using MediatR;
 
 using Modilist.Business.CQRS.UserDomain.DTOs;
 using Modilist.Data.Repositories.UserDomain;
-using Modilist.Domains.UserDomain.Models;
+using Modilist.Domains.Models.AccountDomain;
 using Modilist.Infrastructure.Shared.Interfaces.Enums;
 
 using Newtonsoft.Json;
@@ -45,16 +45,16 @@ namespace Modilist.Business.CQRS.UserDomain.Commands
 
     internal class UpdateAccountHandler : IRequestHandler<UpdateAccount, AccountDTO>
     {
-        private readonly IAccountWriteRepository _accountWriteRepository;
+        private readonly IAccountRepository _accountWriteRepository;
 
-        public UpdateAccountHandler(IAccountWriteRepository accountWriteRepository)
+        public UpdateAccountHandler(IAccountRepository accountWriteRepository)
         {
             _accountWriteRepository = accountWriteRepository;
         }
 
         public async Task<AccountDTO> Handle(UpdateAccount request, CancellationToken cancellationToken)
         {
-            Account account = await _accountWriteRepository.GetByIdAsync(request.Id.Value, cancellationToken);
+            Account? account = await _accountWriteRepository.GetByIdAsync(request.Id.Value, cancellationToken);
 
             // TODO: change exception type
             if (account == null)
