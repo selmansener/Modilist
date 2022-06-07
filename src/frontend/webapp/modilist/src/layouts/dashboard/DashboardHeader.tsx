@@ -1,7 +1,6 @@
 import AccountCircle from "@mui/icons-material/AccountCircle"
 import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent } from "@mui/material"
 import React from "react";
-import { dashboardMenu, MenuLinkItem } from "./MenuItems"
 import { styled } from '@mui/material/styles';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
@@ -82,13 +81,24 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export function DashboardHeader() {
+export interface MenuItem {
+  name: string;
+  icon: React.ReactNode;
+  route: string;
+}
+
+interface DashboardHeaderProps {
+  menuItems: MenuItem[];
+}
+
+export function DashboardHeader(props: DashboardHeaderProps) {
   const { t, i18n } = useTranslation();
   const { instance, accounts } = useMsal();
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const { menuItems } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -136,7 +146,7 @@ export function DashboardHeader() {
           <Select
             value={i18n.language}
             onChange={handleLanguageChange}
-            sx={{mr:2}}
+            sx={{ mr: 2 }}
           >
             {supportedLanguages.map(supportedLang => (
               <MenuItem value={supportedLang.lang} key={supportedLang.lang}>
@@ -201,20 +211,14 @@ export function DashboardHeader() {
         </Toolbar>
         <Divider />
         <List component="nav">
-          {dashboardMenu.map((item: MenuLinkItem) => {
+          {menuItems.map((item: MenuItem) => {
             return (
               <Link key={item.route} to={item.route}>
                 <ListItemButton>
-
-                  <Badge badgeContent="" variant="dot" anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                  }} color="error">
-                    <ListItemIcon>
-                      {item.icon}
-                    </ListItemIcon>
-                  </Badge>
-                  <ListItemText primary={item.title} />
+                  <ListItemIcon>
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.name} />
                 </ListItemButton>
               </Link>
             )

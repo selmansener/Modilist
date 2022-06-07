@@ -1,7 +1,7 @@
 import { Box, CircularProgress } from "@mui/material";
 import useWindowDimensions from "../../utils/windowDimensions";
 
-export default function LoadingLayout() {
+export default function Loading() {
     const { height, width } = useWindowDimensions();
 
     return <Box sx={{

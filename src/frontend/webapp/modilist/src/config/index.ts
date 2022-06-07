@@ -4,7 +4,10 @@ import { EnvConfig } from "./config.development";
 
 const env = process.env.REACT_APP_ENV ?? process.env.NODE_ENV ?? "development";
 
+export type Environment = "production" | "staging" | "int" | "development";
+
 export interface AppConfig extends ApiConfig, EnvConfig {
+    environment: Environment;
     isDev: boolean;
     isInt: boolean;
     isStaging: boolean;
@@ -22,6 +25,7 @@ const webApiConfig = require(`./auth/msalConfig.${env}`).apiConfig as ApiConfig;
 const loginRequest = require(`./auth/msalConfig.${env}`).loginRequest as RedirectRequest;
 
 export const config: AppConfig = {
+    environment: env as Environment,
     isDev: env === "development",
     isInt: env === "int",
     isStaging: env === "staging",

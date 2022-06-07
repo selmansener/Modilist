@@ -78,6 +78,12 @@ export default function Personal() {
     }, [initialAccount]);
 
     useEffect(() => {
+        if (initialAccount === undefined && !getAccountIsBusy) {
+            dispatch.getAccountModel.getAccount();
+        }
+    }, []);
+
+    useEffect(() => {
         if (updateAccountStatus === 200) {
             if (updateAccount) {
                 dispatch.getAccountModel.HANDLE_RESPONSE(updateAccount, updateAccountStatus);

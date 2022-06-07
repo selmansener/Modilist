@@ -7,7 +7,7 @@ export type PageProps = {
 export default function Page(props: React.PropsWithChildren<PageProps>) {
     const { title } = props;
     useEffect(() => {
-        document.title = `Modilist | ${title}`;
+        document.title = `${title} | Modilist`;
     });
 
     return (

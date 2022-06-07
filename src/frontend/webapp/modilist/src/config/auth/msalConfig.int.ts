@@ -44,7 +44,7 @@ export const msalConfig = {
         clientId: "70773d38-9a72-4f72-af81-17eb6737353c", // This is the ONLY mandatory field; everything else is optional.
         authority: b2cPolicies.authorities.signUpSignIn.authority, // Choose sign-up/sign-in user-flow as your default.
         knownAuthorities: [b2cPolicies.authorityDomain], // You must identify your tenant's domain as a known authority.
-        redirectUri: "https://int.modilist.com", // You must register this URI on Azure Portal/App Registration. Defaults to "window.location.href".
+        redirectUri: "https://int.modilist.com/callback", // You must register this URI on Azure Portal/App Registration. Defaults to "window.location.href".
         postLogoutRedirectUri: "https://int.modilist.com",
         navigateToLoginRequestUrl: true
     },
