@@ -49,6 +49,17 @@
       "Email": "tugceee1405@gmail.com",
       "Phone": "5542503058",
       "JobTitle": "Product Owner"
+    },
+    {
+      "Id": "f8dc6020-414b-459a-982a-0f804b9dd01a",
+      "FirstName": "Demet",
+      "LastName": "ÖZKAN ÇETİNKAYA",
+      "BirthDate": "1989-07-16",
+      "Gender": "Female",
+      "InstagramUserName": "@aselmansener",
+      "Email": "demet.cetinkaya@modilist.com",
+      "Phone": "5542503058",
+      "JobTitle": "UI/UX Designer"
     }
   ]
 }
