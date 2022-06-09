@@ -19,11 +19,13 @@ import { Environment } from '../config';
 import { Route, Routes } from 'react-router-dom';
 import Page from '../pages/Page';
 import Dashboard from './dashboard/DashboardLayout';
-import Welcome from './welcome/WelcomeLayout';
+import WelcomeLayout from './welcome/WelcomeLayout';
 import Callback from './callback/CallbackLayout';
 import ComingSoonLayout from './comingSoon/ComingSoonLayout';
 import NotFound from './notFound/NotFound';
 import Unauthenticated from './unauthenticated/UnauthenticatedLayout';
+import { GenderSelection } from '../pages/welcome/GenderSelection';
+import { WelcomeSteps } from '../pages/welcome/WelcomeSteps';
 
 interface RouterOptions {
   title: string,
@@ -162,9 +164,17 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Hoşgeldiniz",
+    route: "/welcome/gender",
+    layout: "welcome",
+    component: <GenderSelection />,
+    isPublic: false,
+    environments: ["development", "int", "staging"]
+  },
+  {
+    title: "Hoşgeldiniz",
     route: "/welcome",
     layout: "welcome",
-    component: <></>,
+    component: <WelcomeSteps />,
     isPublic: false,
     environments: ["development", "int", "staging"]
   },
@@ -219,7 +229,9 @@ export function Router(props: RouterProps) {
           {routeOptions.component}
         </Dashboard>);
       case "welcome":
-        return (<Welcome />)
+        return (<WelcomeLayout>
+          {routeOptions.component}
+        </WelcomeLayout>)
       case "callback":
         return (<Callback />)
       case "comingsoon":

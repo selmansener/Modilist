@@ -1,10 +1,12 @@
 import { Box, Skeleton } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export interface ImageProps {
-    src: string,
-    alt?: string,
+    className?: string;
+    src: string;
+    alt?: string;
+    onClick?: React.MouseEventHandler<HTMLImageElement>;
 }
 
 export function ImageComponent(props: ImageProps) {

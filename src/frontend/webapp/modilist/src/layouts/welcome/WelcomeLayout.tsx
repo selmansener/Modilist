@@ -1,43 +1,12 @@
 import { AppBar, Box, Container, Grid, Paper, Toolbar, Typography } from "@mui/material";
-import { WelcomeSteps } from "./WelcomeSteps";
-import Personal from "../../pages/welcome/Personal";
+import { WelcomeSteps } from "../../pages/welcome/WelcomeSteps";
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
-import BodySize from "../../pages/welcome/BodySize";
-import StylePreferences from "../../pages/welcome/StylePreferences";
-import Subscription from "../../pages/welcome/Subscription";
-import PaymentMethod from "../../pages/welcome/PaymentMethod";
-import ContactInfo from "../../pages/welcome/ContactInfo";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-const steps = [
-    {
-        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePersonal',
-        component: <Personal />
-    },
-    {
-        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleBodySize',
-        component: <BodySize />
-    },
-    {
-        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleStylePreferences',
-        component: <StylePreferences />
-    },
-    {
-        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleContactInfo',
-        component: <ContactInfo />
-    },
-    {
-        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleSubscription',
-        component: <Subscription />
-    },
-    {
-        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePaymentMethod',
-        component: <PaymentMethod />
-    }
-];
+export interface WelcomeLayoutProps { }
 
-export default function Welcome() {
+export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayoutProps>) {
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -58,30 +27,16 @@ export default function Welcome() {
                     {
                         <>
                             <Grid item xs={12}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240,
-                                    }}
-                                >
-                                    <Typography variant="h4" component="div" sx={{ mt: 2 }}>
-                                        {t('Layouts.Welcome.WelcomeLayout.Welcome')}
-                                    </Typography>
-                                    <Typography variant="h6" component="div">
-                                        {t('Layouts.Welcome.WelcomeLayout.Description1')}
-                                    </Typography>
-                                    <Typography variant="h6" component="div">
-                                        {t('Layouts.Welcome.WelcomeLayout.Description2')}
-                                    </Typography>
-                                    <Typography component="div">
-                                        <ExpandCircleDownIcon sx={{ fontSize: 72, mt: 5 }} color="primary" />
-                                    </Typography>
-                                </Paper>
+
+                                <Typography variant="h4" component="div" sx={{ mt: 2 }}>
+                                    {t('Layouts.Welcome.WelcomeLayout.Welcome')}
+                                </Typography>
+                                <Typography variant="h6" component="div">
+                                    {t('Layouts.Welcome.WelcomeLayout.Description1')}
+                                </Typography>
                             </Grid>
                             <Grid item xs={12} sx={{ mt: 5 }}>
-                                <WelcomeSteps steps={steps} />
+                                {props.children}
                             </Grid>
                         </>
                     }

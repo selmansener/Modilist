@@ -4,18 +4,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
+import BodySize from "./BodySize";
+import ContactInfo from "./ContactInfo";
+import PaymentMethod from "./PaymentMethod";
+import Personal from "./Personal";
+import StylePreferences from "./StylePreferences";
+import Subscription from "./Subscription";
 
-type WelcomeStepProps = {
-    steps: {
-        title: string,
-        component: React.ReactNode
-    }[]
-}
+const steps = [
+    {
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePersonal',
+        component: <Personal />
+    },
+    {
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleBodySize',
+        component: <BodySize />
+    },
+    {
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleStylePreferences',
+        component: <StylePreferences />
+    },
+    {
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleContactInfo',
+        component: <ContactInfo />
+    },
+    {
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleSubscription',
+        component: <Subscription />
+    },
+    {
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePaymentMethod',
+        component: <PaymentMethod />
+    }
+];
 
-export function WelcomeSteps(props: WelcomeStepProps) {
+
+export function WelcomeSteps() {
     
     const {t} = useTranslation();
-    const steps = props.steps;
 
     // const [activeStep, setActiveStep] = useState(0);
     // const [skipped, setSkipped] = useState(new Set<number>());

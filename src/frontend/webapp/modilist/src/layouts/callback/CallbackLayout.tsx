@@ -22,7 +22,7 @@ export default function Callback() {
 
     useEffect(() => {
         if (currentAccount && currentAccount.state === AccountStatus.Created && !isBusy) {
-            navigate("/welcome", { replace: true });
+            navigate("/welcome/gender", { replace: true });
         }
         else {
             navigate("/", { replace: true });
