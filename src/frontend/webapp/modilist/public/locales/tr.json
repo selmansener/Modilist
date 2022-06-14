@@ -23,7 +23,6 @@
       }
     }
   },
-
   "Pages": {
     "Account": {
       "PersonalInfo": "Kişisel Bilgiler",
@@ -37,7 +36,16 @@
       "GenderSelection": {
         "Gender": "Cinsiyetin?"
       },
-      "BodySize": {        
+      "BodySize": {
+        "CategorySizes": "Kıyafet beden ölçüleri",
+        "BodyType": "Hangi vücut tipine sahipsin?",
+        "UpperBody": "Üst Giyim",
+        "LowerBody": "Alt Giyim",
+        "OutWear": "Dış Giyim",
+        "FootWear": "Ayakkabı",
+        "WomenUnderWearCup": "İç Giyim (Cup)",
+        "WomenUnderWearSize": "İç Giyim (Beden)",
+        "MenUnderWear": "İç Giyim",
         "UpperWear": "Üst Giyim Kıyafet Ölçüleri",
         "LowerWear": "Alt Giyim Kıyafet Ölçüleri",
         "UnderWear": "İç Giyim Kıyafet Ölçüleri",
@@ -48,36 +56,31 @@
         "Bra": "Sutyen - (Cup)",
         "BraBelt": "Sutyen - (Sırt Çevresi)",
         "Shoes": "Ayakkabı",
-        "HeaderBodySize": "Beden Ölçüleri",
-        "NeckCircumference": "Boyun Çevresi (cm)",
+        "HeaderBodySize": "Hayal ettiğin stile kavuşmak istiyorsan, detaylı ve doğru beden ölçülerini girmelisin.",
+        "BodyLength": "Üst Beden Uzunluğu (cm)",
+        "HeadRadius": "Baş Çevresi (cm)",
+        "ArmLength": "Kol Uzunluğu (cm)",
+        "NeckRadius": "Boyun Çevresi (cm)",
         "ShoulderWidth": "Omuz Genişliği (cm)",
-        "BustCircumference": "Göğüs Çevresi (cm)",
-        "WaistCircumference": "Bel Çevresi (cm)",
-        "HipCircumference": "Kalça Çevresi (cm)",
+        "BreastRadius": "Göğüs Çevresi (cm)",
+        "WaistRadius": "Bel Çevresi (cm)",
+        "HipRadius": "Kalça Çevresi (cm)",
         "LegLength": "Bacak Uzunluğu (cm)",
+        "FootLength": "Ayak Uzunluğu (cm)",
         "Height": "Boy (cm)",
-        "Weight": "Kilo (cm)"
+        "Weight": "Kilo (kg)",
+        "AdditionalNotes": "Kıyafet ve Beden ölçüleri ile ilgili eklemek istedikleriniz;"
       },
-      "ContactInfo": {
-
-      },
-      "PaymentMethod": {
-
-      },
+      "ContactInfo": {},
+      "PaymentMethod": {},
       "Personal": {
         "HeaderPersonalInfo": "Kişisel Bilgiler",
         "MenuItem": "Seçiniz",
         "Job": "Mesleğin Nedir?",
         "Instagram": "Instagram adresin?"
       },
-      "StylePreferences": {
-
-      },
-      "Subscription": {
-
-      }
-
-
+      "StylePreferences": {},
+      "Subscription": {}
     }
   },
   "WelcomeSteps": {

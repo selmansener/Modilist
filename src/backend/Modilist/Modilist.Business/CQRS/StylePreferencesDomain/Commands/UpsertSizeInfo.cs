@@ -11,6 +11,7 @@ using Modilist.Data.Repositories.StylePreferencesDomain;
 using Modilist.Data.Repositories.UserDomain;
 using Modilist.Domains.Models.AccountDomain;
 using Modilist.Domains.Models.StylePreferencesDomain;
+using Modilist.Infrastructure.Shared.Enums;
 using Modilist.Infrastructure.Shared.Interfaces.Enums;
 
 using Newtonsoft.Json;
@@ -24,45 +25,35 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
 
         public Gender Gender { get; set; }
 
-        public string Tshirt { get; set; }
+        public BodyType BodyType { get; set; }
 
-        public string Sweater { get; set; }
+        public string UpperBody { get; set; }
 
-        public string Sweatshirt { get; set; }
+        public string LowerBody { get; set; }
 
-        public string Crop { get; set; }
+        public string WomenUnderWearCup { get; set; }
 
-        public string Blouse { get; set; }
+        public string WomenUnderWearSize { get; set; }
 
-        public string Shirt { get; set; }
+        public string MenUnderWear { get; set; }
 
-        public string SleevelessUnderShirt { get; set; }
+        public string OutWear { get; set; }
 
-        public string Bustier { get; set; }
+        public string FootWear { get; set; }
 
-        public string Bralet { get; set; }
-
-        public string Tunik { get; set; }
-
-        public string Dress { get; set; }
-
-        public string Overalls { get; set; }
-
-        public string Pants { get; set; }
-
-        public string Jeans { get; set; }
-
-        public string Skirt { get; set; }
-
-        public string Shorts { get; set; }
-
-        public string Leggings { get; set; }
-
-        public string Sweatpants { get; set; }
+        public string AdditionalNotes { get; set; }
 
         public int Weight { get; set; }
 
         public int Height { get; set; }
+
+        public int ShoulderWidth { get; set; }
+
+        public int HeadRadius { get; set; }
+
+        public int ArmLength { get; set; }
+
+        public int BodyLength { get; set; }
 
         public int NeckRadius { get; set; }
 
@@ -73,6 +64,10 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
         public int HipRadius { get; set; }
 
         public int LegLength { get; set; }
+
+        public int FootLength { get; set; }
+
+        public int FootWidth { get; set; }
     }
 
     internal class UpsertSizeInfoValidator : AbstractValidator<UpsertSizeInfo>
@@ -80,51 +75,16 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
         public UpsertSizeInfoValidator()
         {
             RuleFor(x => x.Gender).IsInEnum().NotEqual(Gender.None);
-
-            RuleFor(x => x.Tshirt).NotEmpty();
-
-            RuleFor(x => x.Sweater).NotEmpty();
-
-            RuleFor(x => x.Sweatshirt).NotEmpty();
-
-            RuleFor(x => x.Crop).NotEmpty()
-                .When(x => x.Gender == Gender.Female);
-
-            RuleFor(x => x.Blouse).NotEmpty()
-                .When(x => x.Gender == Gender.Female);
-
-            RuleFor(x => x.Shirt).NotEmpty();
-
-            RuleFor(x => x.SleevelessUnderShirt).NotEmpty();
-
-            RuleFor(x => x.Bustier).NotEmpty()
-                .When(x => x.Gender == Gender.Female);
-
-            RuleFor(x => x.Bralet).NotEmpty()
-                .When(x => x.Gender == Gender.Female);
-
-            RuleFor(x => x.Tunik).NotEmpty()
-                .When(x => x.Gender == Gender.Female);
-
-            RuleFor(x => x.Dress).NotEmpty()
-                .When(x => x.Gender == Gender.Female);
-
-            RuleFor(x => x.Overalls).NotEmpty()
-                .When(x => x.Gender == Gender.Female);
-
-            RuleFor(x => x.Pants).NotEmpty();
-
-            RuleFor(x => x.Jeans).NotEmpty();
-
-            RuleFor(x => x.Skirt).NotEmpty()
-                .When(x => x.Gender == Gender.Female);
-
-            RuleFor(x => x.Shorts).NotEmpty();
-
-            RuleFor(x => x.Leggings).NotEmpty()
-                .When(x => x.Gender == Gender.Female);
-
-            RuleFor(x => x.Sweatpants).NotEmpty();
+            RuleFor(x => x.BodyType).IsInEnum().NotEqual(BodyType.None);
+            RuleFor(x => x.UpperBody).NotEmpty();
+            RuleFor(x => x.LowerBody).NotEmpty();
+            RuleFor(x => x.OutWear).NotEmpty();
+            RuleFor(x => x.FootWear).NotEmpty();
+            RuleFor(x => x.WomenUnderWearCup).NotEmpty().When(x => x.Gender == Gender.Female);
+            RuleFor(x => x.WomenUnderWearSize).NotEmpty().When(x => x.Gender == Gender.Female);
+            RuleFor(x => x.MenUnderWear).NotEmpty().When(x => x.Gender == Gender.Male);
+            RuleFor(x => x.Weight).NotEmpty();
+            RuleFor(x => x.Height).NotEmpty();
         }
     }
 
@@ -147,31 +107,27 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
             {
                 sizeInfo = new SizeInfo(
                     request.AccountId,
-                    request.Tshirt,
-                    request.Sweater,
-                    request.Sweatshirt,
-                    request.Crop,
-                    request.Blouse,
-                    request.Shirt,
-                    request.SleevelessUnderShirt,
-                    request.Bustier,
-                    request.Bralet,
-                    request.Tunik,
-                    request.Dress,
-                    request.Overalls,
-                    request.Pants,
-                    request.Jeans,
-                    request.Skirt,
-                    request.Shorts,
-                    request.Leggings,
-                    request.Sweatpants,
+                    request.BodyType,
                     request.Weight,
                     request.Height,
+                    request.ShoulderWidth,
+                    request.HeadRadius,
+                    request.ArmLength,
+                    request.BodyLength,
                     request.NeckRadius,
                     request.BreastRadius,
                     request.WaistRadius,
                     request.HipRadius,
-                    request.LegLength);
+                    request.LegLength,
+                    request.FootLength,
+                    request.UpperBody,
+                    request.LowerBody,
+                    request.WomenUnderWearCup,
+                    request.WomenUnderWearSize,
+                    request.MenUnderWear,
+                    request.OutWear,
+                    request.FootWear,
+                    request.AdditionalNotes);
 
                 await _sizeInfoRepository.AddAsync(sizeInfo, cancellationToken);
 
@@ -189,31 +145,27 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
             else
             {
                 sizeInfo.Update(
+                    request.BodyType,
                     request.Weight,
                     request.Height,
+                    request.ShoulderWidth,
+                    request.HeadRadius,
+                    request.ArmLength,
+                    request.BodyLength,
                     request.NeckRadius,
                     request.BreastRadius,
                     request.WaistRadius,
                     request.HipRadius,
                     request.LegLength,
-                    request.Tshirt,
-                    request.Sweater,
-                    request.Sweatshirt,
-                    request.Crop,
-                    request.Blouse,
-                    request.Shirt,
-                    request.SleevelessUnderShirt,
-                    request.Bustier,
-                    request.Bralet,
-                    request.Tunik,
-                    request.Dress,
-                    request.Overalls,
-                    request.Pants,
-                    request.Jeans,
-                    request.Skirt,
-                    request.Shorts,
-                    request.Leggings,
-                    request.Sweatpants);
+                    request.FootLength,
+                    request.UpperBody,
+                    request.LowerBody,
+                    request.WomenUnderWearCup,
+                    request.WomenUnderWearSize,
+                    request.MenUnderWear,
+                    request.OutWear,
+                    request.FootWear,
+                    request.AdditionalNotes);
 
                 await _sizeInfoRepository.UpdateAsync(sizeInfo, cancellationToken);
             }

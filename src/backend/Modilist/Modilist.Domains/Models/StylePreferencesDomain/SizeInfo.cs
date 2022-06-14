@@ -1,6 +1,7 @@
 ﻿
 using Modilist.Domains.Base;
 using Modilist.Domains.Models.AccountDomain;
+using Modilist.Infrastructure.Shared.Enums;
 
 namespace Modilist.Domains.Models.StylePreferencesDomain
 {
@@ -8,103 +9,83 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
     {
         public SizeInfo(
             Guid accountId,
-            string? tshirt = null,
-            string? sweater = null,
-            string? sweatshirt = null,
-            string? crop = null,
-            string? blouse = null,
-            string? shirt = null,
-            string? sleevelessUnderShirt = null,
-            string? bustier = null,
-            string? bralet = null,
-            string? tunik = null,
-            string? dress = null,
-            string? overalls = null,
-            string? pants = null,
-            string? jeans = null,
-            string? skirt = null,
-            string? shorts = null,
-            string? leggings = null,
-            string? sweatpants = null,
+            BodyType bodyType,
             int weight = 0,
             int height = 0,
+            int shoulderWidth = 0,
+            int headRadius = 0,
+            int armLength = 0,
+            int bodyLength = 0,
             int neckRadius = 0,
             int breastRadius = 0,
             int waistRadius = 0,
             int hipRadius = 0,
-            int legLength = 0)
+            int legLength = 0,
+            int footLength = 0,
+            string? upperBody = null,
+            string? lowerBody = null,
+            string? womenUnderWearCup = null,
+            string? womenUnderWearSize = null,
+            string? menUnderWear = null,
+            string? outWear = null,
+            string? footWear = null,
+            string? additionalNotes = null)
         {
             AccountId = accountId;
-            Tshirt = tshirt;
-            Sweater = sweater;
-            Sweatshirt = sweatshirt;
-            Crop = crop;
-            Blouse = blouse;
-            Shirt = shirt;
-            SleevelessUnderShirt = sleevelessUnderShirt;
-            Bustier = bustier;
-            Bralet = bralet;
-            Tunik = tunik;
-            Dress = dress;
-            Overalls = overalls;
-            Pants = pants;
-            Jeans = jeans;
-            Skirt = skirt;
-            Shorts = shorts;
-            Leggings = leggings;
-            Sweatpants = sweatpants;
+            BodyType = bodyType;
             Weight = weight;
             Height = height;
+            ShoulderWidth = shoulderWidth;
+            HeadRadius = headRadius;
+            ArmLength = armLength;
+            BodyLength = bodyLength;
             NeckRadius = neckRadius;
             BreastRadius = breastRadius;
             WaistRadius = waistRadius;
             HipRadius = hipRadius;
             LegLength = legLength;
+            FootLength = footLength;
+            UpperBody = upperBody;
+            LowerBody = lowerBody;
+            WomenUnderWearCup = womenUnderWearCup;
+            WomenUnderWearSize = womenUnderWearSize;
+            MenUnderWear = menUnderWear;
+            OutWear = outWear;
+            FootWear = footWear;
+            AdditionalNotes = additionalNotes;
         }
 
         public Guid AccountId { get; private set; }
 
         public Account Account { get; private set; }
 
-        public string? Tshirt { get; private set; }
+        public BodyType BodyType { get; private set; }
 
-        public string? Sweater { get; private set; }
+        public string? UpperBody { get; private set; }
 
-        public string? Sweatshirt { get; private set; }
+        public string? LowerBody { get; private set; }
 
-        public string? Crop { get; private set; }
+        public string? WomenUnderWearCup { get; private set; }
 
-        public string? Blouse { get; private set; }
+        public string? WomenUnderWearSize { get; private set; }
 
-        public string? Shirt { get; private set; }
+        public string? MenUnderWear { get; private set; }
 
-        public string? SleevelessUnderShirt { get; private set; }
+        public string? OutWear { get; private set; }
 
-        public string? Bustier { get; private set; }
-
-        public string? Bralet { get; private set; }
-
-        public string? Tunik { get; private set; }
-
-        public string? Dress { get; private set; }
-
-        public string? Overalls { get; private set; }
-
-        public string? Pants { get; private set; }
-
-        public string? Jeans { get; private set; }
-
-        public string? Skirt { get; private set; }
-
-        public string? Shorts { get; private set; }
-
-        public string? Leggings { get; private set; }
-
-        public string? Sweatpants { get; private set; }
+        public string? FootWear { get; private set; }
 
         public int Weight { get; private set; }
 
         public int Height { get; private set; }
+
+        public int ShoulderWidth { get; private set; }
+
+        public int HeadRadius { get; private set; }
+
+        public int ArmLength { get; private set; }
+
+        public int BodyLength { get; private set; }
 
         public int NeckRadius { get; private set; }
 
@@ -116,58 +97,54 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
 
         public int LegLength { get; private set; }
 
+        public int FootLength { get; private set; }
+
+        public string? AdditionalNotes { get; private set; }
+
         public void Update(
+            BodyType bodyType,
             int weight,
             int height,
+            int shoulderWidth,
+            int headRadius,
+            int armLength,
+            int bodyLength,
             int neckRadius,
             int breastRadius,
             int waistRadius,
             int hipRadius,
             int legLength,
-            string? tshirt = null,
-            string? sweater = null,
-            string? sweatshirt = null,
-            string? crop = null,
-            string? blouse = null,
-            string? shirt = null,
-            string? sleevelessUnderShirt = null,
-            string? bustier = null,
-            string? bralet = null,
-            string? tunik = null,
-            string? dress = null,
-            string? overalls = null,
-            string? pants = null,
-            string? jeans = null,
-            string? skirt = null,
-            string? shorts = null,
-            string? leggings = null,
-            string? sweatpants = null)
+            int footLength,
+            string? upperBody = null,
+            string? lowerBody = null,
+            string? womenUnderWearCup = null,
+            string? womenUnderWearSize = null,
+            string? menUnderWear = null,
+            string? outWear = null,
+            string? footWear = null,
+            string? additionalNotes = null)
         {
-            Tshirt = tshirt;
-            Sweater = sweater;
-            Sweatshirt = sweatshirt;
-            Crop = crop;
-            Blouse = blouse;
-            Shirt = shirt;
-            SleevelessUnderShirt = sleevelessUnderShirt;
-            Bustier = bustier;
-            Bralet = bralet;
-            Tunik = tunik;
-            Dress = dress;
-            Overalls = overalls;
-            Pants = pants;
-            Jeans = jeans;
-            Skirt = skirt;
-            Shorts = shorts;
-            Leggings = leggings;
-            Sweatpants = sweatpants;
+            BodyType = bodyType;
             Weight = weight;
             Height = height;
+            ShoulderWidth = shoulderWidth;
+            HeadRadius = headRadius;
+            ArmLength = armLength;
+            BodyLength = bodyLength;
             NeckRadius = neckRadius;
             BreastRadius = breastRadius;
             WaistRadius = waistRadius;
             HipRadius = hipRadius;
             LegLength = legLength;
+            FootLength = footLength;
+            UpperBody = upperBody;
+            LowerBody = lowerBody;
+            WomenUnderWearCup = womenUnderWearCup;
+            WomenUnderWearSize = womenUnderWearSize;
+            MenUnderWear = menUnderWear;
+            OutWear = outWear;
+            FootWear = footWear;
+            AdditionalNotes = additionalNotes;
         }
     }
 }

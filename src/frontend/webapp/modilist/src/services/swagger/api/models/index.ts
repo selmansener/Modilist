@@ -1,6 +1,7 @@
 export * from './account-dto';
 export * from './account-status';
 export * from './address-dto';
+export * from './body-type';
 export * from './city';
 export * from './create-account';
 export * from './create-address';

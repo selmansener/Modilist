@@ -45,7 +45,7 @@ export const getSizeInfoModel = createModel<RootModel>()({
                     getSizeInfoModel.HANDLE_RESPONSE(response.data, response.status);
                 }
                 else {
-
+                    getSizeInfoModel.HANDLE_EXCEPTIONS(response.status);
                 }
             }
         }

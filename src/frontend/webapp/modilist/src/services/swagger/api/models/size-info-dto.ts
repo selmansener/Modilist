@@ -11,6 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { BodyType } from './body-type';
 /**
  * 
  * @export
@@ -19,112 +20,58 @@
 export interface SizeInfoDTO {
     /**
      * 
-     * @type {string}
+     * @type {BodyType}
      * @memberof SizeInfoDTO
      */
-    tshirt?: string;
+    bodyType?: BodyType;
     /**
      * 
      * @type {string}
      * @memberof SizeInfoDTO
      */
-    sweater?: string;
+    upperBody?: string;
     /**
      * 
      * @type {string}
      * @memberof SizeInfoDTO
      */
-    sweatshirt?: string;
+    lowerBody?: string;
     /**
      * 
      * @type {string}
      * @memberof SizeInfoDTO
      */
-    crop?: string;
+    womenUnderWearCup?: string;
     /**
      * 
      * @type {string}
      * @memberof SizeInfoDTO
      */
-    blouse?: string;
+    womenUnderWearSize?: string;
     /**
      * 
      * @type {string}
      * @memberof SizeInfoDTO
      */
-    shirt?: string;
+    menUnderWear?: string;
     /**
      * 
      * @type {string}
      * @memberof SizeInfoDTO
      */
-    sleevelessUnderShirt?: string;
+    outWear?: string;
     /**
      * 
      * @type {string}
      * @memberof SizeInfoDTO
      */
-    bustier?: string;
+    footWear?: string;
     /**
      * 
      * @type {string}
      * @memberof SizeInfoDTO
      */
-    bralet?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SizeInfoDTO
-     */
-    tunik?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SizeInfoDTO
-     */
-    dress?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SizeInfoDTO
-     */
-    overalls?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SizeInfoDTO
-     */
-    pants?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SizeInfoDTO
-     */
-    jeans?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SizeInfoDTO
-     */
-    skirt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SizeInfoDTO
-     */
-    shorts?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SizeInfoDTO
-     */
-    leggings?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SizeInfoDTO
-     */
-    sweatpants?: string;
+    additionalNotes?: string;
     /**
      * 
      * @type {number}
@@ -137,6 +84,30 @@ export interface SizeInfoDTO {
      * @memberof SizeInfoDTO
      */
     height?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SizeInfoDTO
+     */
+    shoulderWidth?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SizeInfoDTO
+     */
+    headRadius?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SizeInfoDTO
+     */
+    armLength?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SizeInfoDTO
+     */
+    bodyLength?: number;
     /**
      * 
      * @type {number}
@@ -167,4 +138,10 @@ export interface SizeInfoDTO {
      * @memberof SizeInfoDTO
      */
     legLength?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SizeInfoDTO
+     */
+    footLength?: number;
 }

@@ -11,6 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { BodyType } from './body-type';
 import { Gender } from './gender';
 /**
  * 
@@ -26,112 +27,58 @@ export interface UpsertSizeInfo {
     gender?: Gender;
     /**
      * 
-     * @type {string}
+     * @type {BodyType}
      * @memberof UpsertSizeInfo
      */
-    tshirt?: string;
+    bodyType?: BodyType;
     /**
      * 
      * @type {string}
      * @memberof UpsertSizeInfo
      */
-    sweater?: string;
+    upperBody?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertSizeInfo
      */
-    sweatshirt?: string;
+    lowerBody?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertSizeInfo
      */
-    crop?: string;
+    womenUnderWearCup?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertSizeInfo
      */
-    blouse?: string;
+    womenUnderWearSize?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertSizeInfo
      */
-    shirt?: string;
+    menUnderWear?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertSizeInfo
      */
-    sleevelessUnderShirt?: string;
+    outWear?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertSizeInfo
      */
-    bustier?: string;
+    footWear?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertSizeInfo
      */
-    bralet?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertSizeInfo
-     */
-    tunik?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertSizeInfo
-     */
-    dress?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertSizeInfo
-     */
-    overalls?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertSizeInfo
-     */
-    pants?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertSizeInfo
-     */
-    jeans?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertSizeInfo
-     */
-    skirt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertSizeInfo
-     */
-    shorts?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertSizeInfo
-     */
-    leggings?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertSizeInfo
-     */
-    sweatpants?: string;
+    additionalNotes?: string;
     /**
      * 
      * @type {number}
@@ -144,6 +91,30 @@ export interface UpsertSizeInfo {
      * @memberof UpsertSizeInfo
      */
     height?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpsertSizeInfo
+     */
+    shoulderWidth?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpsertSizeInfo
+     */
+    headRadius?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpsertSizeInfo
+     */
+    armLength?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpsertSizeInfo
+     */
+    bodyLength?: number;
     /**
      * 
      * @type {number}
@@ -174,4 +145,16 @@ export interface UpsertSizeInfo {
      * @memberof UpsertSizeInfo
      */
     legLength?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpsertSizeInfo
+     */
+    footLength?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpsertSizeInfo
+     */
+    footWidth?: number;
 }

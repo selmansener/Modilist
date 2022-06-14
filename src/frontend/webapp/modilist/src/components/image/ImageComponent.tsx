@@ -1,5 +1,5 @@
 import { Box, Skeleton } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 export interface ImageProps {
@@ -10,10 +10,20 @@ export interface ImageProps {
 }
 
 export function ImageComponent(props: ImageProps) {
+    const ref = useRef<HTMLElement>();
     const [loading, setLoading] = useState(true);
+    const [height, setHeight] = useState(0);
+    const [width, setWidth] = useState(0);
 
-    return <Box>
-        {loading && <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />}
+    useEffect(() => {
+        if (ref && ref?.current && ref.current.parentElement) {
+            setHeight(ref.current.parentElement.offsetHeight);
+            setWidth(ref.current.parentElement.offsetWidth);
+        }
+    }, []);
+
+    return <Box ref={ref}>
+        {loading && <Skeleton sx={{ width: width, height: height }} animation="wave" variant="rectangular" />}
         <img {...props} onLoad={() => {
             setLoading(false);
         }} />

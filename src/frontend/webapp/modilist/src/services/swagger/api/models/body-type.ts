@@ -16,10 +16,12 @@
  * @export
  * @enum {string}
  */
-export enum SeedServiceType {
-    UsersCreatedEmpty = 'UsersCreatedEmpty',
-    UsersCreated = 'UsersCreated',
-    Users = 'Users',
-    StylePreferences = 'StylePreferences'
+export enum BodyType {
+    None = 'None',
+    Round = 'Round',
+    Straight = 'Straight',
+    Fit = 'Fit',
+    Spoon = 'Spoon',
+    Triangle = 'Triangle'
 }
 

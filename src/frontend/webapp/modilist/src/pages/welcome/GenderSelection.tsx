@@ -55,6 +55,10 @@ export function GenderSelection() {
 
     useEffect(() => {
         if (!updateAccountIsBusy && updateAccountStatus === 200) {
+            if (updateAccount) {
+                dispatch.getAccountModel.HANDLE_RESPONSE(updateAccount, updateAccountStatus);
+            }
+            
             dispatch.updateAccountModel.RESET();
             navigate("/welcome");
         }

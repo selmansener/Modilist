@@ -13,12 +13,12 @@ import Subscription from "./Subscription";
 
 const steps = [
     {
-        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePersonal',
-        component: <Personal />
-    },
-    {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleBodySize',
         component: <BodySize />
+    },
+    {
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePersonal',
+        component: <Personal />
     },
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleStylePreferences',
