@@ -37,6 +37,8 @@ namespace Modilist.Data.DataAccess
 
         public virtual DbSet<SizeInfo> SizeInfos { get; set; }
 
+        public virtual DbSet<PreferedFabricProperties> PreferedFabricProperties { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var entityTypes = GetEntityTypes(builder).ToList();

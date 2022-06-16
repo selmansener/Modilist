@@ -9,6 +9,7 @@
           "TitlePersonal": "Kişisel",
           "TitleBodySize": "Beden Ölçüleri",
           "TitleStylePreferences": "Stil Tercihleri",
+          "TitleFabricProperties": "Kumaş ve Doku<br/>Tercihleri",
           "TitleContactInfo": "İletişim Bilgileri",
           "TitleSubscription": "Abonelik",
           "TitlePaymentMethod": "Ödeme Yöntemi"
@@ -70,6 +71,33 @@
         "Height": "Boy (cm)",
         "Weight": "Kilo (kg)",
         "AdditionalNotes": "Kıyafet ve Beden ölçüleri ile ilgili eklemek istedikleriniz;"
+      },
+      "FabricProperties": {
+        "ExcludedColors": {
+          "1": "Kombinlerinizde ",
+          "2": "kesinlikle olmasını istemediğiniz ",
+          "3": "renkleri seçiniz."
+        },
+        "ExcludedColorTypes": {
+          "1": "Kombinlerinizde ",
+          "2": "kesinlikle olmasını istemediğiniz ",
+          "3": "renk tonlarını seçiniz."
+        },
+        "ExcludedPatterns": {
+          "1": "Kombinlerinizde ",
+          "2": "kesinlikle olmasını istemediğiniz ",
+          "3": "desenleri seçiniz."
+        },
+        "ExcludedFabrics": {
+          "1": "Kombinlerinizde ",
+          "2": "kesinlikle olmasını istemediğiniz ",
+          "3": "dokuları seçiniz."
+        },
+        "Allergens": {
+          "1": " Alerjiniz ",
+          "2": "olan herhangi bir madde ya da kumaş türü varsa belirtiniz."
+        },
+        "AdditionalNotes": "Eklemek istediğiniz notunuz varsa belirtiniz."
       },
       "ContactInfo": {},
       "PaymentMethod": {},

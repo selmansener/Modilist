@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { CustomCheckboxGroup } from "../../../components/customCheckbox/CustomCheckbox";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
@@ -15,65 +15,54 @@ enum ColorType {
 
 interface ColorTypeElement {
     name: string,
-    value: ColorType,
+    value: string,
     img: string
 }
 
-export function ColorTypes() {
+export interface ColorTypesProps {
+    value?: string | null;
+    onChange: (values: string) => void;
+}
+
+export function ColorTypes(props: ColorTypesProps) {
     const { t } = useTranslation();
     const { imgBaseHost } = config;
+    const { value, onChange } = props;
 
-    const colorTypes: ColorTypeElement[] = [
-        {
-            name: t("ColorType.BlackWhite"),
-            value: ColorType.BlackWhite,
-            img: `${imgBaseHost}/color-types/BlackWhite.svg`
-        },
-        {
-            name: t("ColorType.Cold"),
-            value: ColorType.Cold,
-            img: `${imgBaseHost}/color-types/Cold.svg`
-        },
-        {
-            name: t("ColorType.Dark"),
-            value: ColorType.Dark,
-            img: `${imgBaseHost}/color-types/Dark.svg`
-        },
-        {
-            name: t("ColorType.Hot"),
-            value: ColorType.Hot,
-            img: `${imgBaseHost}/color-types/Hot.svg`
-        },
-        {
-            name: t("ColorType.Nude"),
-            value: ColorType.Nude,
-            img: `${imgBaseHost}/color-types/Nude.svg`
-        },
-        {
-            name: t("ColorType.Pastel"),
-            value: ColorType.Pastel,
-            img: `${imgBaseHost}/color-types/Pastel.svg`
+    const colorTypes: ColorTypeElement[] = Object.keys(ColorType).map(colorType => {
+        return {
+            name: t(`ColorType.${colorType}`),
+            value: colorType,
+            img: `${imgBaseHost}/color-types/${colorType}.svg`
         }
-    ]
+    });
 
     return <CustomCheckboxGroup
-        label={<Box sx={{
+        sx={{
             display: 'flex',
-            flexDirection: 'row',
-            ml: 5,
-            mb: 2
-        }}>
-            <Typography sx={{ mr: 1 }}>
-                {t("WelcomeSteps.StylePreferences.ExcludedColorTypes.1")}
-            </Typography>
-            <Typography color={"error"} sx={{ mr: 1 }}>
-                {t("WelcomeSteps.StylePreferences.ExcludedColorTypes.2")}
-            </Typography>
-            <Typography>
-                {t("WelcomeSteps.StylePreferences.ExcludedColorTypes.3")}
-            </Typography>
-        </Box>
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+        }}
+        value={value ? value : ""}
+        label={
+            <Box sx={{
+                mb: 2
+            }}>
+                <Trans>
+                    <Typography variant={"h5"} display="inline" >
+                        {t("Pages.Welcome.FabricProperties.ExcludedColorTypes.1")}
+                    </Typography>
+                    <Typography variant={"h5"} display="inline" color={"error"} >
+                        {t("Pages.Welcome.FabricProperties.ExcludedColorTypes.2")}
+                    </Typography>
+                    <Typography variant={"h5"} display="inline">
+                        {t("Pages.Welcome.FabricProperties.ExcludedColorTypes.3")}
+                    </Typography>
+                </Trans>
+            </Box>
         }
+        isNegative
         contents={
             colorTypes.map(colorType => {
                 return {
@@ -90,5 +79,6 @@ export function ColorTypes() {
             })
         }
         onChange={(values: string[]) => {
+            onChange(values.join(','));
         }} />
 }

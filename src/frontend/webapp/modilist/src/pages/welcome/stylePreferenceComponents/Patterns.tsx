@@ -1,8 +1,10 @@
 import { Box, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { CustomCheckboxGroup } from "../../../components/customCheckbox/CustomCheckbox";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
+import { Gender } from "../../../services/swagger/api";
 
 enum Pattern {
     Plaid = "Plaid",
@@ -24,88 +26,55 @@ interface PatternElement {
     img: string
 }
 
-export function Patterns() {
+export interface PatternsProps {
+    gender: Gender;
+    value?: string | null;
+    onChange: (value: string) => void;
+}
+
+export function Patterns(props: PatternsProps) {
     const { t } = useTranslation();
     const { imgBaseHost } = config;
+    const { gender, value, onChange } = props;
 
-    const colors: PatternElement[] = [
-        {
-            name: t("Pattern.Plaid"),
-            value: Pattern.Plaid,
-            img: `${imgBaseHost}/patterns/Plaid.svg`
-        },
-        {
-            name: t("Pattern.Striped"),
-            value: Pattern.Striped,
-            img: `${imgBaseHost}/patterns/Striped.svg`
-        },
-        {
-            name: t("Pattern.PolkaDot"),
-            value: Pattern.PolkaDot,
-            img: `${imgBaseHost}/patterns/PolkaDot.svg`
-        },
-        {
-            name: t("Pattern.Shawl"),
-            value: Pattern.Shawl,
-            img: `${imgBaseHost}/patterns/Shawl.svg`
-        },
-        {
-            name: t("Pattern.Camouflage"),
-            value: Pattern.Camouflage,
-            img: `${imgBaseHost}/patterns/Camouflage.svg`
-        },
-        {
-            name: t("Pattern.AnimalPattern"),
-            value: Pattern.AnimalPattern,
-            img: `${imgBaseHost}/patterns/AnimalPattern.svg`
-        },
-        {
-            name: t("Pattern.Squared"),
-            value: Pattern.Squared,
-            img: `${imgBaseHost}/patterns/Squared.svg`
-        },
-        {
-            name: t("Pattern.AnimalFigured"),
-            value: Pattern.AnimalFigured,
-            img: `${imgBaseHost}/patterns/AnimalFigured.svg`
-        },
-        {
-            name: t("Pattern.BigFlower"),
-            value: Pattern.BigFlower,
-            img: `${imgBaseHost}/patterns/BigFlower.svg`
-        },
-        {
-            name: t("Pattern.SmallFlower"),
-            value: Pattern.SmallFlower,
-            img: `${imgBaseHost}/patterns/SmallFlower.svg`
-        },
-        {
-            name: t("Pattern.Printed"),
-            value: Pattern.Printed,
-            img: `${imgBaseHost}/patterns/Printed.svg`
-        },
-    ]
+    const patterns: PatternElement[] = (gender === Gender.Female
+        ? Object.keys(Pattern) 
+        : Object.keys(Pattern).filter(x => x !== Pattern.Shawl 
+            && x !== Pattern.BigFlower 
+            && x !== Pattern.SmallFlower))
+        .map(pattern => {
+            return {
+                name: t(`Pattern.${pattern}`),
+                value: pattern,
+                img: `${imgBaseHost}/patterns/${pattern}.svg`
+            }
+        });
 
     return <CustomCheckboxGroup
-        label={<Box sx={{
+        sx={{
             display: 'flex',
-            flexDirection: 'row',
-            ml: 5,
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+        }}
+        value={value ?? ""}
+        label={<Box sx={{
             mb: 2
         }}>
-            <Typography sx={{ mr: 1 }}>
-                {t("WelcomeSteps.StylePreferences.ExcludedPatterns.1")}
+            <Typography variant={"h5"} display="inline">
+                {t("Pages.Welcome.FabricProperties.ExcludedPatterns.1")}
             </Typography>
-            <Typography color={"error"} sx={{ mr: 1 }}>
-                {t("WelcomeSteps.StylePreferences.ExcludedPatterns.2")}
+            <Typography variant={"h5"} color={"error"} display="inline">
+                {t("Pages.Welcome.FabricProperties.ExcludedPatterns.2")}
             </Typography>
-            <Typography>
-                {t("WelcomeSteps.StylePreferences.ExcludedPatterns.3")}
+            <Typography variant={"h5"} display="inline">
+                {t("Pages.Welcome.FabricProperties.ExcludedPatterns.3")}
             </Typography>
         </Box>
         }
+        isNegative
         contents={
-            colors.map(colorType => {
+            patterns.map(colorType => {
                 return {
                     value: colorType.value,
                     element: <Box sx={{
@@ -120,5 +89,6 @@ export function Patterns() {
             })
         }
         onChange={(values: string[]) => {
+            onChange(values.join(','));
         }} />
 }

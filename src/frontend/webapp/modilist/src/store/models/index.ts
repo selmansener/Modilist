@@ -6,6 +6,8 @@ import { districtsModel } from "./addresses/Districts"
 import { getDefaultAddressModel } from "./addresses/GetDefaultAddress"
 import { updateAddressModel } from "./addresses/UpdateAddress"
 import { upsertAddressModel } from "./addresses/UpsertAddress"
+import { getPreferedFabricPropertiesModel } from "./fabricProperties/GetFabricProperties"
+import { upsertPreferedFabricPropertiesModel } from "./fabricProperties/UpsertFabricProperties"
 import { getSizeInfoModel } from "./sizeInfo/GetSizeInfo"
 import { upsertSizeInfoModel } from "./sizeInfo/UpsertSizeInfo"
 import { createStylePreferencesModel } from "./stylePreferences/CreateStylePreferences"
@@ -33,7 +35,9 @@ export interface RootModel extends Models<RootModel> {
   citiesModel: typeof citiesModel,
   districtsModel: typeof districtsModel,
   getSizeInfoModel: typeof getSizeInfoModel,
-  upsertSizeInfoModel: typeof upsertSizeInfoModel
+  upsertSizeInfoModel: typeof upsertSizeInfoModel,
+  getPreferedFabricPropertiesModel: typeof getPreferedFabricPropertiesModel,
+  upsertPreferedFabricPropertiesModel: typeof upsertPreferedFabricPropertiesModel
 }
 
 export const models: RootModel = {
@@ -52,5 +56,7 @@ export const models: RootModel = {
   citiesModel,
   districtsModel,
   getSizeInfoModel,
-  upsertSizeInfoModel
+  upsertSizeInfoModel,
+  getPreferedFabricPropertiesModel,
+  upsertPreferedFabricPropertiesModel
 }

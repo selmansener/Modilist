@@ -1,19 +1,22 @@
 import { Box, Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { CustomCheckboxGroup } from "../../../components/customCheckbox/CustomCheckbox";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
 
 enum Color {
-    Red= "Red",
-    Green= "Green",
-    Blue= "Blue",
-    Yellow= "Yellow",
-    Orange= "Orange",
-    Pink= "Pink",
-    Purple= "Purple",
-    Brown= "Brown",
-
+    Red = "Red",
+    Green = "Green",
+    Blue = "Blue",
+    Yellow = "Yellow",
+    Orange = "Orange",
+    Pink = "Pink",
+    NavyBlue = "NavyBlue",
+    Purple = "Purple",
+    Brown = "Brown",
+    Grey = "Grey",
+    White = "White",
+    Black = "Black"
 }
 
 interface ColorElement {
@@ -22,71 +25,52 @@ interface ColorElement {
     img: string
 }
 
-export function Colors() {
+export interface ColorsProps {
+    value?: string | null;
+    onChange: (values: string) => void;
+}
+
+export function Colors(props: ColorsProps) {
     const { t } = useTranslation();
     const { imgBaseHost } = config;
+    const { value, onChange } = props;
 
-    const colors: ColorElement[] = [
-        {
-            name: t("Color.Red"),
-            value: Color.Red,
-            img: `${imgBaseHost}/colors/Red.svg`
-        },
-        {
-            name: t("Color.Green"),
-            value: Color.Green,
-            img: `${imgBaseHost}/colors/Green.svg`
-        },
-        {
-            name: t("Color.Blue"),
-            value: Color.Blue,
-            img: `${imgBaseHost}/colors/Blue.svg`
-        },
-        {
-            name: t("Color.Yellow"),
-            value: Color.Yellow,
-            img: `${imgBaseHost}/colors/Yellow.svg`
-        },
-        {
-            name: t("Color.Orange"),
-            value: Color.Orange,
-            img: `${imgBaseHost}/colors/Orange.svg`
-        },
-        {
-            name: t("Color.Pink"),
-            value: Color.Pink,
-            img: `${imgBaseHost}/colors/Pink.svg`
-        },
-        {
-            name: t("Color.Purple"),
-            value: Color.Purple,
-            img: `${imgBaseHost}/colors/Purple.svg`
-        },
-        {
-            name: t("Color.Brown"),
-            value: Color.Brown,
-            img: `${imgBaseHost}/colors/Brown.svg`
+    const colors: ColorElement[] = Object.keys(Color).map(color => {
+        return {
+            name: t(`Color.${color}`),
+            value: color,
+            img: `${imgBaseHost}/colors/${color}.svg`
         }
-    ]
+    });
 
     return <CustomCheckboxGroup
-        label={<Box sx={{
+        sx={{
             display: 'flex',
-            flexDirection: 'row',
-            ml: 5,
-            mb: 2
-        }}>
-            <Typography sx={{ mr: 1 }}>
-                {t("WelcomeSteps.StylePreferences.ExcludedColors.1")}
-            </Typography>
-            <Typography color={"error"} sx={{ mr: 1 }}>
-                {t("WelcomeSteps.StylePreferences.ExcludedColors.2")}
-            </Typography>
-            <Typography>
-                {t("WelcomeSteps.StylePreferences.ExcludedColors.3")}
-            </Typography>
-        </Box>
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            columnCount: 4
+        }}
+        value={value ?? ""}
+        label={
+            <Box sx={{
+                mb: 2
+            }}>
+
+                <Trans>
+                    <Typography variant={"h5"} display="inline">
+                        {t("Pages.Welcome.FabricProperties.ExcludedColors.1")}
+                    </Typography>
+                    <Typography variant={"h5"} display="inline" color={"error"} >
+                        {t("Pages.Welcome.FabricProperties.ExcludedColors.2")}
+                    </Typography>
+                    <Typography variant={"h5"} display="inline">
+                        {t("Pages.Welcome.FabricProperties.ExcludedColors.3")}
+                    </Typography>
+                </Trans>
+            </ Box>
         }
+        isNegative
         contents={
             colors.map(colorType => {
                 return {
@@ -103,5 +87,6 @@ export function Colors() {
             })
         }
         onChange={(values: string[]) => {
+            onChange(values.join(','));
         }} />
 }

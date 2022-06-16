@@ -21,6 +21,9 @@
         public const string GetSizeInfo = "SizeInfo.Get";
         public const string UpsertSizeInfo = "SizeInfo.Upsert";
 
+        public const string GetPreferedFabricProperties = "PreferedFabricProperties.Get";
+        public const string UpsertPreferedFabricProperties = "PreferedFabricProperties.Upsert";
+
         public const string CreatePaymentMethod = "PaymentMethods.Create";
 
         public const string Development = "Development";

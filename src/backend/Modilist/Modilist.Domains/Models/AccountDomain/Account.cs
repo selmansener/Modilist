@@ -44,6 +44,10 @@ namespace Modilist.Domains.Models.AccountDomain
 
         public StylePreference? StylePreferences { get; private set; }
 
+        public int? PreferedFabricPropertiesId { get; private set; }
+
+        public PreferedFabricProperties PreferedFabricProperties { get; private set; }
+
         public IImmutableList<Address> Addresses { get; private set; }
 
         public IImmutableList<PaymentMethod> PaymentMethods { get; private set; }
@@ -108,6 +112,21 @@ namespace Modilist.Domains.Models.AccountDomain
             }
 
             SizeInfoId = sizeInfoId;
+        }
+
+        public void SetPreferedFabricProperties(int preferedFabricPropertiesId)
+        {
+            if (PreferedFabricPropertiesId.HasValue)
+            {
+                throw new InvalidOperationException("Account already has a PreferedFabricProperties");
+            }
+
+            if (preferedFabricPropertiesId == 0)
+            {
+                throw new InvalidOperationException("PreferedFabricPropertiesId cannot be null or default");
+            }
+
+            PreferedFabricPropertiesId = preferedFabricPropertiesId;
         }
     }
 }

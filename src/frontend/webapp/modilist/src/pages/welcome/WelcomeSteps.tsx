@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 import i18n from "i18next";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import BodySize from "./BodySize";
 import ContactInfo from "./ContactInfo";
 import PaymentMethod from "./PaymentMethod";
 import Personal from "./Personal";
 import StylePreferences from "./StylePreferences";
 import Subscription from "./Subscription";
+import { FabricProperties } from "./FabricProperties";
 
 const steps = [
     {
@@ -25,6 +26,10 @@ const steps = [
         component: <StylePreferences />
     },
     {
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleFabricProperties',
+        component: <FabricProperties />
+    },
+    {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleContactInfo',
         component: <ContactInfo />
     },
@@ -35,13 +40,13 @@ const steps = [
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePaymentMethod',
         component: <PaymentMethod />
-    }
+    },
 ];
 
 
 export function WelcomeSteps() {
-    
-    const {t} = useTranslation();
+
+    const { t } = useTranslation();
 
     // const [activeStep, setActiveStep] = useState(0);
     // const [skipped, setSkipped] = useState(new Set<number>());
@@ -88,7 +93,11 @@ export function WelcomeSteps() {
                     }
                     return (
                         <Step key={step.title} {...stepProps}>
-                            <StepLabel {...labelProps}>{t(step.title)}</StepLabel>
+                            <StepLabel {...labelProps}>
+                                <Trans>
+                                    {t(step.title)}
+                                </Trans>
+                            </StepLabel>
                         </Step>
                     );
                 })}

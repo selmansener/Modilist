@@ -1,8 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { CustomCheckboxGroup } from "../../../components/customCheckbox/CustomCheckbox";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
+import { Gender } from "../../../services/swagger/api";
 
 enum Fabric {
     Leather = "Leather",
@@ -19,72 +20,65 @@ interface FabricElement {
     img: string
 }
 
-export function Fabrics() {
+export interface FabricsProps {
+    gender: Gender;
+    value?: string | null;
+    onChange: (value: string) => void;
+}
+
+export function Fabrics(props: FabricsProps) {
     const { t } = useTranslation();
     const { imgBaseHost } = config;
+    const { gender, value, onChange } = props;
 
-    const colors: FabricElement[] = [
-        { 
-            name: t("Fabric.Leather"),
-            value: Fabric.Leather,
-            img: `${imgBaseHost}/fabrics/ekose.jpg`
-        },
-        { 
-            name: t("Fabric.Wool"),
-            value: Fabric.Wool,
-            img: `${imgBaseHost}/fabrics/ekose.jpg`
-        },
-        { 
-            name: t("Fabric.Satin"),
-            value: Fabric.Satin,
-            img: `${imgBaseHost}/fabrics/ekose.jpg`
-        },
-        { 
-            name: t("Fabric.FauxFur"),
-            value: Fabric.FauxFur,
-            img: `${imgBaseHost}/fabrics/ekose.jpg`
-        },
-        { 
-            name: t("Fabric.Velvet"),
-            value: Fabric.Velvet,
-            img: `${imgBaseHost}/fabrics/ekose.jpg`
-        },
-        { 
-            name: t("Fabric.Lace"),
-            value: Fabric.Lace,
-            img: `${imgBaseHost}/fabrics/ekose.jpg`
-        },
-    ]
+    const fabrics: FabricElement[] = (gender === Gender.Female
+        ? Object.keys(Fabric)
+        : Object.keys(Fabric).filter(x => x !== Fabric.Lace))
+        .map(fabric => {
+            return {
+                name: t(`Fabric.${fabric}`),
+                value: fabric,
+                img: `${imgBaseHost}/fabrics/${fabric}.svg`
+            }
+        })
 
     return <CustomCheckboxGroup
-        label={<Box sx={{
+        sx={{
             display: 'flex',
-            flexDirection: 'row',
-            ml: 5,
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+        }}
+        value={value ?? ""}
+        label={<Box sx={{
             mb: 2
         }}>
-            <Typography sx={{ mr: 1 }}>
-                {t("WelcomeSteps.StylePreferences.ExcludedFabrics.1")}
-            </Typography>
-            <Typography color={"error"} sx={{ mr: 1 }}>
-                {t("WelcomeSteps.StylePreferences.ExcludedFabrics.2")}
-            </Typography>
-            <Typography>
-                {t("WelcomeSteps.StylePreferences.ExcludedFabrics.3")}
-            </Typography>
+            <Trans>
+                <Typography variant={"h5"} display="inline">
+                    {t("Pages.Welcome.FabricProperties.ExcludedFabrics.1")}
+                </Typography>
+                <Typography variant={"h5"} display="inline" color={"error"} >
+                    {t("Pages.Welcome.FabricProperties.ExcludedFabrics.2")}
+                </Typography>
+                <Typography variant={"h5"} display="inllne">
+                    {t("Pages.Welcome.FabricProperties.ExcludedFabrics.3")}
+                </Typography>
+            </Trans>
         </Box>
         }
+        isNegative
         contents={
-            colors.map(colorType => {
+            fabrics.map(fabric => {
                 return {
-                    value: colorType.value,
+                    value: fabric.value,
                     element: <Box>
-                        <ImageComponent src={colorType.img} />
-                        <Typography>{colorType.name}</Typography>
+                        <ImageComponent src={fabric.img} />
+                        <Typography>{fabric.name}</Typography>
                     </Box>
                 }
             })
         }
         onChange={(values: string[]) => {
+            onChange(values.join(','));
         }} />
 }

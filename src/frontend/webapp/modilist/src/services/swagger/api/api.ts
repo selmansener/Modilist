@@ -13,6 +13,7 @@
  */export * from './apis/address-api';
 export * from './apis/development-api';
 export * from './apis/payment-method-api';
+export * from './apis/prefered-fabric-properties-api';
 export * from './apis/size-info-api';
 export * from './apis/style-preferences-api';
 export * from './apis/user-api';

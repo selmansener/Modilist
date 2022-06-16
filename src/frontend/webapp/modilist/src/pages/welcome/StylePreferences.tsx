@@ -44,7 +44,7 @@ export default function StylePreferences() {
     const dispatch = useDispatch<Dispatch>();
     const { imgBaseHost } = config;
     const { gender } = account as AccountDTO;
-    
+
     const isStepSkipped = (step: number) => {
         return skipped.has(step);
     };
@@ -359,6 +359,7 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            value=""
             label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Upper")}</Typography>}
             contents={upperCategories}
             isNegative
@@ -383,6 +384,7 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            value=""
             label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Lower")}</Typography>}
             contents={lowerCategories}
             isNegative
@@ -407,6 +409,7 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            value=""
             label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Accessories")}</Typography>}
             contents={accessoriesCategories}
             isNegative
@@ -431,6 +434,7 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            value=""
             label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Underwear")}</Typography>}
             contents={underwearCategories}
             isNegative
@@ -455,6 +459,7 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            value=""
             label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Bags")}</Typography>}
             contents={bagsCategories}
             isNegative
@@ -479,6 +484,7 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            value=""
             label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Beach")}</Typography>}
             contents={categories}
             isNegative
@@ -503,6 +509,7 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            value=""
             label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.Footwear")}</Typography>}
             contents={categories}
             isNegative
@@ -527,6 +534,7 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            value=""
             label={<Typography variant="h6" sx={{ mb: 3 }}>{t("MainCategories.SportOutdoor")}</Typography>}
             contents={categories}
             isNegative
@@ -640,6 +648,7 @@ export default function StylePreferences() {
             <Grid item xs={12}>
                 <FormControl>
                     <CustomCheckboxGroup
+                        value=""
                         label={
                             <Typography>{t("WelcomeSteps.StylePreferences.BodyPartsToHighlight")}</Typography>
                         }
@@ -683,6 +692,7 @@ export default function StylePreferences() {
             <Grid item xs={12}>
                 <FormControl>
                     <CustomCheckboxGroup
+                        value=""
                         label={
                             <Typography>{t("WelcomeSteps.StylePreferences.BodyPartsToHide")}</Typography>
                         }
@@ -767,22 +777,36 @@ export default function StylePreferences() {
             </Grid>
             <Grid item xs={12}>
                 <FormControl>
-                    <ColorTypes />
+                    <ColorTypes 
+                        value=""
+                        onChange={() => {}}
+                    />
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
                 <FormControl>
-                    <Colors />
+                    <Colors
+                        value=""
+                        onChange={() => { }}
+                    />
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
                 <FormControl>
-                    <Patterns />
+                    <Patterns 
+                        value=""
+                        gender={Gender.None}
+                        onChange={() => {}}
+                    />
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
                 <FormControl>
-                    <Fabrics />
+                    <Fabrics
+                        value=""
+                        gender={Gender.None}
+                        onChange={() => {}}
+                    />
                 </FormControl>
             </Grid>
         </Grid>

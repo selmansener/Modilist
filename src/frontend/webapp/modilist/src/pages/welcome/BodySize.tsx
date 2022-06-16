@@ -161,7 +161,6 @@ export default function BodySize() {
 
     useEffect(() => {
         if (initialSizeInfo && !getSizeInfoIsBusy && getSizeInfoStatus === 200) {
-            console.log("initialSizeInfo", initialSizeInfo)
             setSizeInfo(initialSizeInfo);
         }
     }, [initialSizeInfo]);
