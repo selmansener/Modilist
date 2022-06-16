@@ -56,6 +56,8 @@ namespace Modilist.Data.Extensions
 
             services.AddScoped<IPreferedFabricPropertiesRepository, PreferedFabricPropertiesRepository>();
 
+            services.AddScoped<IFitPreferencesRepository, FitPreferencesRepository>();
+
             return services;
         }
 

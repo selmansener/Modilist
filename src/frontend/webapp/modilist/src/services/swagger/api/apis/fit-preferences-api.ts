@@ -16,13 +16,13 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { StylePreferencesDTO } from '../models';
-import { UpdateStylePreferences } from '../models';
+import { FitPreferencesDTO } from '../models';
+import { UpsertFitPreferences } from '../models';
 /**
- * StylePreferencesApi - axios parameter creator
+ * FitPreferencesApi - axios parameter creator
  * @export
  */
-export const StylePreferencesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const FitPreferencesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
@@ -30,55 +30,8 @@ export const StylePreferencesApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1StylePreferencesCreatePost: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/StylePreferences/Create`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Bearer required
-            // oauth required
-            if (configuration && configuration.accessToken) {
-                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
-            }
-
-            if (apiVersion !== undefined) {
-                localVarQueryParameter['api-version'] = apiVersion;
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.params) {
-                query.set(key, options.params[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} [apiVersion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        apiV1StylePreferencesGetGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/StylePreferences/Get`;
+        apiV1FitPreferencesGetGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/FitPreferences/Get`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -120,13 +73,13 @@ export const StylePreferencesApiAxiosParamCreator = function (configuration?: Co
         },
         /**
          * 
-         * @param {UpdateStylePreferences} [body] 
+         * @param {UpsertFitPreferences} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1StylePreferencesUpdatePost: async (body?: UpdateStylePreferences, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/StylePreferences/Update`;
+        apiV1FitPreferencesUpsertPost: async (body?: UpsertFitPreferences, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/FitPreferences/Upsert`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -174,10 +127,10 @@ export const StylePreferencesApiAxiosParamCreator = function (configuration?: Co
 };
 
 /**
- * StylePreferencesApi - functional programming interface
+ * FitPreferencesApi - functional programming interface
  * @export
  */
-export const StylePreferencesApiFp = function(configuration?: Configuration) {
+export const FitPreferencesApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
@@ -185,8 +138,8 @@ export const StylePreferencesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1StylePreferencesCreatePost(apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<StylePreferencesDTO>>> {
-            const localVarAxiosArgs = await StylePreferencesApiAxiosParamCreator(configuration).apiV1StylePreferencesCreatePost(apiVersion, options);
+        async apiV1FitPreferencesGetGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<FitPreferencesDTO>>> {
+            const localVarAxiosArgs = await FitPreferencesApiAxiosParamCreator(configuration).apiV1FitPreferencesGetGet(apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -194,26 +147,13 @@ export const StylePreferencesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {UpsertFitPreferences} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1StylePreferencesGetGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<StylePreferencesDTO>>> {
-            const localVarAxiosArgs = await StylePreferencesApiAxiosParamCreator(configuration).apiV1StylePreferencesGetGet(apiVersion, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @param {UpdateStylePreferences} [body] 
-         * @param {string} [apiVersion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async apiV1StylePreferencesUpdatePost(body?: UpdateStylePreferences, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<StylePreferencesDTO>>> {
-            const localVarAxiosArgs = await StylePreferencesApiAxiosParamCreator(configuration).apiV1StylePreferencesUpdatePost(body, apiVersion, options);
+        async apiV1FitPreferencesUpsertPost(body?: UpsertFitPreferences, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<FitPreferencesDTO>>> {
+            const localVarAxiosArgs = await FitPreferencesApiAxiosParamCreator(configuration).apiV1FitPreferencesUpsertPost(body, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -223,10 +163,10 @@ export const StylePreferencesApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * StylePreferencesApi - factory interface
+ * FitPreferencesApi - factory interface
  * @export
  */
-export const StylePreferencesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+export const FitPreferencesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
          * 
@@ -234,67 +174,48 @@ export const StylePreferencesApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1StylePreferencesCreatePost(apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StylePreferencesDTO>> {
-            return StylePreferencesApiFp(configuration).apiV1StylePreferencesCreatePost(apiVersion, options).then((request) => request(axios, basePath));
+        async apiV1FitPreferencesGetGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<FitPreferencesDTO>> {
+            return FitPreferencesApiFp(configuration).apiV1FitPreferencesGetGet(apiVersion, options).then((request) => request(axios, basePath));
         },
         /**
          * 
+         * @param {UpsertFitPreferences} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1StylePreferencesGetGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StylePreferencesDTO>> {
-            return StylePreferencesApiFp(configuration).apiV1StylePreferencesGetGet(apiVersion, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {UpdateStylePreferences} [body] 
-         * @param {string} [apiVersion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async apiV1StylePreferencesUpdatePost(body?: UpdateStylePreferences, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StylePreferencesDTO>> {
-            return StylePreferencesApiFp(configuration).apiV1StylePreferencesUpdatePost(body, apiVersion, options).then((request) => request(axios, basePath));
+        async apiV1FitPreferencesUpsertPost(body?: UpsertFitPreferences, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<FitPreferencesDTO>> {
+            return FitPreferencesApiFp(configuration).apiV1FitPreferencesUpsertPost(body, apiVersion, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * StylePreferencesApi - object-oriented interface
+ * FitPreferencesApi - object-oriented interface
  * @export
- * @class StylePreferencesApi
+ * @class FitPreferencesApi
  * @extends {BaseAPI}
  */
-export class StylePreferencesApi extends BaseAPI {
+export class FitPreferencesApi extends BaseAPI {
     /**
      * 
      * @param {string} [apiVersion] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof StylePreferencesApi
+     * @memberof FitPreferencesApi
      */
-    public async apiV1StylePreferencesCreatePost(apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<StylePreferencesDTO>> {
-        return StylePreferencesApiFp(this.configuration).apiV1StylePreferencesCreatePost(apiVersion, options).then((request) => request(this.axios, this.basePath));
+    public async apiV1FitPreferencesGetGet(apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<FitPreferencesDTO>> {
+        return FitPreferencesApiFp(this.configuration).apiV1FitPreferencesGetGet(apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
+     * @param {UpsertFitPreferences} [body] 
      * @param {string} [apiVersion] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof StylePreferencesApi
+     * @memberof FitPreferencesApi
      */
-    public async apiV1StylePreferencesGetGet(apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<StylePreferencesDTO>> {
-        return StylePreferencesApiFp(this.configuration).apiV1StylePreferencesGetGet(apiVersion, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * 
-     * @param {UpdateStylePreferences} [body] 
-     * @param {string} [apiVersion] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof StylePreferencesApi
-     */
-    public async apiV1StylePreferencesUpdatePost(body?: UpdateStylePreferences, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<StylePreferencesDTO>> {
-        return StylePreferencesApiFp(this.configuration).apiV1StylePreferencesUpdatePost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    public async apiV1FitPreferencesUpsertPost(body?: UpsertFitPreferences, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<FitPreferencesDTO>> {
+        return FitPreferencesApiFp(this.configuration).apiV1FitPreferencesUpsertPost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -12,6 +12,7 @@
  * Do not edit the class manually.
  */export * from './apis/address-api';
 export * from './apis/development-api';
+export * from './apis/fit-preferences-api';
 export * from './apis/payment-method-api';
 export * from './apis/prefered-fabric-properties-api';
 export * from './apis/size-info-api';

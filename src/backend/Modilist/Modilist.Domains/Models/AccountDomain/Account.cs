@@ -48,6 +48,10 @@ namespace Modilist.Domains.Models.AccountDomain
 
         public PreferedFabricProperties PreferedFabricProperties { get; private set; }
 
+        public int? FitPreferencesId { get; private set; }
+
+        public FitPreferences FitPreferences { get; private set; }
+
         public IImmutableList<Address> Addresses { get; private set; }
 
         public IImmutableList<PaymentMethod> PaymentMethods { get; private set; }
@@ -127,6 +131,21 @@ namespace Modilist.Domains.Models.AccountDomain
             }
 
             PreferedFabricPropertiesId = preferedFabricPropertiesId;
+        }
+
+        public void SetFitPreferences(int fitPreferencesId)
+        {
+            if (FitPreferencesId.HasValue)
+            {
+                throw new InvalidOperationException("Account already has a FitPreferences");
+            }
+
+            if (FitPreferencesId == 0)
+            {
+                throw new InvalidOperationException("FitPreferencesId cannot be null or default");
+            }
+
+            FitPreferencesId = fitPreferencesId;
         }
     }
 }

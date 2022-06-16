@@ -24,6 +24,9 @@
         public const string GetPreferedFabricProperties = "PreferedFabricProperties.Get";
         public const string UpsertPreferedFabricProperties = "PreferedFabricProperties.Upsert";
 
+        public const string GetFitPreferences = "FitPreferences.Get";
+        public const string UpsertFitPreferences = "FitPreferences.Upsert";
+
         public const string CreatePaymentMethod = "PaymentMethods.Create";
 
         public const string Development = "Development";

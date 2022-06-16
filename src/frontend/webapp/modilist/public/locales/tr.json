@@ -9,6 +9,7 @@
           "TitlePersonal": "Kişisel",
           "TitleBodySize": "Beden Ölçüleri",
           "TitleStylePreferences": "Stil Tercihleri",
+          "TitleFitPreferences": "Kalıp ve Boy<br/>Tercihleri",
           "TitleFabricProperties": "Kumaş ve Doku<br/>Tercihleri",
           "TitleContactInfo": "İletişim Bilgileri",
           "TitleSubscription": "Abonelik",
@@ -71,6 +72,53 @@
         "Height": "Boy (cm)",
         "Weight": "Kilo (kg)",
         "AdditionalNotes": "Kıyafet ve Beden ölçüleri ile ilgili eklemek istedikleriniz;"
+      },
+      "FitPreferences": {
+        "WaistHeightPreference": "Alt giyimde tercih ettiğin bel çeşitleri",
+        "WaistHeights": {
+          "UltraHighWaist": "UltraHighWaist",
+          "HighWaist": "HighWaist",
+          "Original": "Original",
+          "Regular": "Regular",
+          "Medium": "Medium",
+          "Low": "Low",
+          "UltraLow": "UltraLow"
+        },
+        "LowerFitPreference": "Alt giyimde tercih ettiğin kalıp tercihleri",
+        "LowerFits": {
+          "Straight": "Straight",
+          "Skinny": "Skinny",
+          "Slim": "Slim",
+          "Regular": "Regular",
+          "Relaxed": "Relaxed",
+          "Loose": "Loose"
+        },
+        "SkirtDressLengthPreference": "Alt giyimde tercih ettiğin etek - elbise uzunluğu",
+        "SkirtDressLengths": {
+          "Mini": "Mini",
+          "Midi": "Midi",
+          "Long": "Uzun"
+        },
+        "LegFitPreference": "Alt giyimde tercih ettiğin paça çeşitleri",
+        "LegFits": {
+          "Spanish": "İspanyol Paça",
+          "Straight":  "Boru Paça",
+          "Loose": "Geniş Paça",
+          "Skinny": "Dar Paça"
+        },
+        "ShortsLengthPreference": "Alt giyimde tercih ettiğin şort uzunluğu",
+        "ShortsLengths": {
+          "SuperMini": "Süper Mini",
+          "Mini": "Mini",
+          "Short": "Kısa",
+          "Midi": "Midi",
+          "Long": "Uzun"
+        },
+        "FootTypePreference": "Tercih ettiğin ayakkabı çeşitleri",
+        "FootTypes": {
+          "Narrow": "İnce",
+          "Wide": "Taraklı"
+        }
       },
       "FabricProperties": {
         "ExcludedColors": {

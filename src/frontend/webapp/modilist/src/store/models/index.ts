@@ -8,6 +8,8 @@ import { updateAddressModel } from "./addresses/UpdateAddress"
 import { upsertAddressModel } from "./addresses/UpsertAddress"
 import { getPreferedFabricPropertiesModel } from "./fabricProperties/GetFabricProperties"
 import { upsertPreferedFabricPropertiesModel } from "./fabricProperties/UpsertFabricProperties"
+import { getFitPreferencesModel } from "./fitPreferences/GetFitPreferences"
+import { upsertFitPreferencesModel } from "./fitPreferences/UpsertFitPreferences"
 import { getSizeInfoModel } from "./sizeInfo/GetSizeInfo"
 import { upsertSizeInfoModel } from "./sizeInfo/UpsertSizeInfo"
 import { createStylePreferencesModel } from "./stylePreferences/CreateStylePreferences"
@@ -37,7 +39,9 @@ export interface RootModel extends Models<RootModel> {
   getSizeInfoModel: typeof getSizeInfoModel,
   upsertSizeInfoModel: typeof upsertSizeInfoModel,
   getPreferedFabricPropertiesModel: typeof getPreferedFabricPropertiesModel,
-  upsertPreferedFabricPropertiesModel: typeof upsertPreferedFabricPropertiesModel
+  upsertPreferedFabricPropertiesModel: typeof upsertPreferedFabricPropertiesModel,
+  getFitPreferencesModel: typeof getFitPreferencesModel,
+  upsertFitPreferencesModel: typeof upsertFitPreferencesModel
 }
 
 export const models: RootModel = {
@@ -58,5 +62,7 @@ export const models: RootModel = {
   getSizeInfoModel,
   upsertSizeInfoModel,
   getPreferedFabricPropertiesModel,
-  upsertPreferedFabricPropertiesModel
+  upsertPreferedFabricPropertiesModel,
+  getFitPreferencesModel,
+  upsertFitPreferencesModel,
 }

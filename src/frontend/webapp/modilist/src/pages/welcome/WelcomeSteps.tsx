@@ -11,6 +11,7 @@ import Personal from "./Personal";
 import StylePreferences from "./StylePreferences";
 import Subscription from "./Subscription";
 import { FabricProperties } from "./FabricProperties";
+import { FitPreferences } from "./FitPreferences";
 
 const steps = [
     {
@@ -24,6 +25,10 @@ const steps = [
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleStylePreferences',
         component: <StylePreferences />
+    },
+    {
+        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleFitPreferences',
+        component: <FitPreferences />
     },
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleFabricProperties',

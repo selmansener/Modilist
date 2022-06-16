@@ -1,4 +1,4 @@
-import { AddressApiFactory, PreferedFabricPropertiesApiFactory, SizeInfoApiFactory, StylePreferencesApiFactory, UserApiFactory } from "./swagger/api";
+import { AddressApiFactory, FitPreferencesApiFactory, PreferedFabricPropertiesApiFactory, SizeInfoApiFactory, StylePreferencesApiFactory, UserApiFactory } from "./swagger/api";
 import axios, { AxiosRequestConfig } from 'axios';
 import { InteractionRequiredAuthError, IPublicClientApplication } from "@azure/msal-browser";
 import { config } from "../config";
@@ -63,6 +63,7 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
         stylePreferences: StylePreferencesApiFactory(undefined, config.webApi, axios),
         addresses: AddressApiFactory(undefined, config.webApi, axios),
         sizeInfos: SizeInfoApiFactory(undefined, config.webApi, axios),
-        preferedFabricProperties: PreferedFabricPropertiesApiFactory(undefined, config.webApi, axios)
+        preferedFabricProperties: PreferedFabricPropertiesApiFactory(undefined, config.webApi, axios),
+        fitPreferences: FitPreferencesApiFactory(undefined, config.webApi, axios),
     }
 }
