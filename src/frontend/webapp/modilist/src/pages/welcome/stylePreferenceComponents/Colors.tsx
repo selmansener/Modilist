@@ -49,7 +49,6 @@ export function Colors(props: ColorsProps) {
             justifyContent: 'space-evenly',
             alignItems: 'center',
             flexWrap: 'wrap',
-            columnCount: 4
         }}
         value={value ?? ""}
         label={
@@ -78,7 +77,6 @@ export function Colors(props: ColorsProps) {
                     element: <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: 100
                     }}>
                         <ImageComponent src={colorType.img} />
                         <Typography>{colorType.name}</Typography>

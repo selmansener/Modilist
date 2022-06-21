@@ -11,6 +11,7 @@ using Modilist.Domains.Models.AddressDomain;
 using Modilist.Domains.Models.PaymentDomain;
 using Modilist.Domains.Models.ProductDomain;
 using Modilist.Domains.Models.StylePreferencesDomain;
+using Modilist.Domains.Models.SubscriptionDomain;
 using Modilist.Infrastructure.Shared.Constants;
 using Modilist.Infrastructure.Shared.Models;
 
@@ -29,7 +30,7 @@ namespace Modilist.Data.DataAccess
 
         public virtual DbSet<Account> Accounts { get; set; }
 
-        public virtual DbSet<StylePreference> StylePreferences { get; set; }
+        public virtual DbSet<StylePreferences> StylePreferences { get; set; }
 
         public virtual DbSet<Address> Addresses { get; set; }
 
@@ -38,6 +39,8 @@ namespace Modilist.Data.DataAccess
         public virtual DbSet<SizeInfo> SizeInfos { get; set; }
 
         public virtual DbSet<PreferedFabricProperties> PreferedFabricProperties { get; set; }
+
+        public virtual DbSet<Subscription> Subscriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -62,7 +62,6 @@ export function ShortsLengths(props: ShortsLengthsProps) {
                     element: <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: 100
                     }}>
                         <ImageComponent src={shortsLength.img} />
                         <Typography>{shortsLength.name}</Typography>

@@ -62,7 +62,7 @@ export interface CustomCheckboxGroupProps {
 
 export function CustomCheckboxGroup(props: CustomCheckboxGroupProps) {
     const { value, label, contents, isNegative, onChange, sx } = props;
-    const [values, setValues] = useState<string[]>(value.split(','));
+    const [values, setValues] = useState<string[]>(value === "" ? [] : value.split(','));
 
     const handleChange = (checked: boolean, value: string) => {
         const index = values.indexOf(value);
@@ -82,7 +82,6 @@ export function CustomCheckboxGroup(props: CustomCheckboxGroupProps) {
             setValues(newValues);
         }
 
-        
         onChange(newValues);
     }
 

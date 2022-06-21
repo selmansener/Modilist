@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { ImageComponent, ImageProps } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 import { alpha, styled } from '@mui/material/styles';
-import { Gender } from "../../services/swagger/api";
+import { AccountState, Gender } from "../../services/swagger/api";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
@@ -20,6 +20,9 @@ function GenderImage(props: GenderProps) {
     const src = gender === Gender.Female ? `${config.imgBaseHost}/gender/female.svg` : `${config.imgBaseHost}/gender/male.svg`;
     const StyledImage = styled(ImageComponent)<ImageProps>(({ theme }) => ({
         '&:hover': {
+            transition: theme.transitions.create('filter', {
+                duration: 200
+            }),
             filter: 'grayscale(0%)',
             cursor: 'pointer'
         },
@@ -54,11 +57,17 @@ export function GenderSelection() {
     }
 
     useEffect(() => {
+        if (account?.state === AccountState.Active) {
+            navigate("/");
+        }
+    }, []);
+
+    useEffect(() => {
         if (!updateAccountIsBusy && updateAccountStatus === 200) {
             if (updateAccount) {
                 dispatch.getAccountModel.HANDLE_RESPONSE(updateAccount, updateAccountStatus);
             }
-            
+
             dispatch.updateAccountModel.RESET();
             navigate("/welcome");
         }
@@ -66,20 +75,26 @@ export function GenderSelection() {
     }, [updateAccountStatus])
 
     useEffect(() => {
-        if (!getAccountIsBusy && account === undefined) {
+        if (!getAccountIsBusy && account?.id === "") {
             dispatch.getAccountModel.getAccount();
         }
     }, [])
 
     return <Grid container spacing={2}>
         <Grid xs={12}>
+            <Typography variant="h4" gutterBottom sx={{ mt: 2 }}>
+                {t('Layouts.Welcome.WelcomeLayout.Welcome')}
+            </Typography>
+            <Typography variant="h6" gutterBottom>
+                {t('Layouts.Welcome.WelcomeLayout.Description1')}
+            </Typography>
             <Typography variant={"h4"}>{t("Pages.Welcome.GenderSelection.Gender")}</Typography>
         </Grid>
         <Grid xs={6}>
-            <GenderImage isSelected={(updateAccount?.gender ?? account?.gender ?? Gender.None) === Gender.Female} gender={Gender.Female} onClick={handleClick} />
+            <GenderImage isSelected={account?.gender === Gender.Female} gender={Gender.Female} onClick={handleClick} />
         </Grid>
         <Grid xs={6}>
-            <GenderImage isSelected={(updateAccount?.gender ?? account?.gender ?? Gender.None) === Gender.Male} gender={Gender.Male} onClick={handleClick} />
+            <GenderImage isSelected={account?.gender === Gender.Male} gender={Gender.Male} onClick={handleClick} />
         </Grid>
     </Grid>
 }

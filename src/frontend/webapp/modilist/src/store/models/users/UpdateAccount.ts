@@ -1,13 +1,24 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../..";
-import { AccountDTO, UpdateAccount } from "../../../services/swagger/api";
+import { AccountDTO, AccountState, Gender, UpdateAccount } from "../../../services/swagger/api";
 import { Dictonary, ErrorResponse, ResponseModel } from "../../response-model";
 
 export const updateAccountModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined,
+        data: {
+            birthDate: null,
+            email: "",
+            firstName: "",
+            lastName: "",
+            gender: Gender.None,
+            id: "",
+            instagramUserName: "",
+            jobTitle: "",
+            phone: "",
+            state: AccountState.None
+        },
         status: 0
     } as ResponseModel<AccountDTO>,
     reducers: {
@@ -20,7 +31,10 @@ export const updateAccountModel = createModel<RootModel>()({
         HANDLE_RESPONSE: (state: ResponseModel<AccountDTO>, status: number, data?: AccountDTO) => {
             return {
                 ...state,
-                data,
+                data: {
+                    ...state.data,
+                    ...data
+                },
                 isBusy: false,
                 status
             }
@@ -44,7 +58,18 @@ export const updateAccountModel = createModel<RootModel>()({
         RESET: (state: ResponseModel<AccountDTO>) => {
             return {
                 isBusy: false,
-                data: undefined,
+                data: {
+                    birthDate: new Date(),
+                    email: "",
+                    firstName: "",
+                    lastName: "",
+                    gender: Gender.None,
+                    id: "",
+                    instagramUserName: "",
+                    jobTitle: "",
+                    phone: "",
+                    state: AccountState.None
+                },
                 status: 0
             }
         }
@@ -55,7 +80,7 @@ export const updateAccountModel = createModel<RootModel>()({
             async updateAccount(input: UpdateAccount): Promise<any> {
                 updateAccountModel.BUSY();
 
-                const response = await api.users.apiV1UserUpdatePost(input);
+                const response = await api.accounts.apiV1AccountUpdatePost(input);
 
                 if (response) {
 

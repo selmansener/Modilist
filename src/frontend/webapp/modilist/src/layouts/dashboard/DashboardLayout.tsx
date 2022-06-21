@@ -6,7 +6,7 @@ import { DashboardFooter } from './DashboardFooter';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch, RootState } from '../../store/store';
-import { AccountStatus } from '../../services/swagger/api';
+import { AccountState } from '../../services/swagger/api';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../callback/Loading';
 
@@ -21,21 +21,21 @@ export default function Dashboard(props: React.PropsWithChildren<DashboardProps>
   const { menuItems } = props;
 
   useEffect(() => {
-    if (currentAccount === undefined && !getAccountIsBusy) {
+    if (!getAccountIsBusy && currentAccount?.id === "") {
       dispatch.getAccountModel.getAccount();
     }
   }, []);
 
 
   useEffect(() => {
-    if (currentAccount && !getAccountIsBusy && currentAccount.state === AccountStatus.Created) {
+    if (currentAccount && currentAccount?.id !== "" && !getAccountIsBusy && currentAccount.state === AccountState.Created) {
       navigate("/callback", { replace: true });
     }
-  }, [currentAccount]);
+  }, [getAccountStatus]);
 
   return (
     (
-      getAccountIsBusy || currentAccount?.state === AccountStatus.Created ? <Loading /> :
+      getAccountIsBusy || currentAccount?.state === AccountState.Created ? <Loading /> :
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <DashboardHeader menuItems={menuItems} />

@@ -2,7 +2,7 @@ import { useMsal } from "@azure/msal-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AccountStatus } from "../../services/swagger/api";
+import { AccountState } from "../../services/swagger/api";
 import { Dispatch, RootState } from "../../store/store";
 import Loading from "./Loading";
 
@@ -21,7 +21,7 @@ export default function Callback() {
     }, []);
 
     useEffect(() => {
-        if (currentAccount && currentAccount.state === AccountStatus.Created && !isBusy) {
+        if (currentAccount && currentAccount.state === AccountState.Created && !isBusy) {
             navigate("/welcome/gender", { replace: true });
         }
         else {

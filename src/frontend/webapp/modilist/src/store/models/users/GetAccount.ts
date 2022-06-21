@@ -1,13 +1,24 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../..";
-import { AccountDTO } from "../../../services/swagger/api";
+import { AccountDTO, AccountState, Gender } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 
 export const getAccountModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined,
+        data: {
+            birthDate: null,
+            email: "",
+            firstName: "",
+            lastName: "",
+            gender: Gender.None,
+            id: "",
+            instagramUserName: "",
+            jobTitle: "",
+            phone: "",
+            state: AccountState.None
+        },
         status: 0
     } as ResponseModel<AccountDTO>,
     reducers: {
@@ -20,10 +31,13 @@ export const getAccountModel = createModel<RootModel>()({
         HANDLE_RESPONSE: (state: ResponseModel<AccountDTO>, data: AccountDTO, status: number) => {
             return {
                 ...state,
-                data,
+                data: {
+                    ...state.data,
+                    ...data
+                },
                 isBusy: false,
                 status
-            }
+            };
         },
         HANDLE_EXCEPTION: (state: ResponseModel<AccountDTO>, status: number) => {
             return {
@@ -38,7 +52,7 @@ export const getAccountModel = createModel<RootModel>()({
             async getAccount(): Promise<any> {
                 getAccountModel.BUSY();
 
-                const response = await api.users.apiV1UserGetGet();
+                const response = await api.accounts.apiV1AccountGetGet();
 
                 if (response.status === 200) {
                     getAccountModel.HANDLE_RESPONSE(response.data, response.status);

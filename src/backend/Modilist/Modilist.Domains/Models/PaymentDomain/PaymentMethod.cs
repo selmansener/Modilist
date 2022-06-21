@@ -6,10 +6,9 @@ namespace Modilist.Domains.Models.PaymentDomain
 {
     public class PaymentMethod : BaseEntity
     {
-        public PaymentMethod(Guid accountId, string cardUserKey, bool isDefault = false)
+        public PaymentMethod(Guid accountId, bool isDefault = false)
         {
             AccountId = accountId;
-            CardUserKey = cardUserKey;
             IsDefault = isDefault;
         }
 
@@ -17,13 +16,23 @@ namespace Modilist.Domains.Models.PaymentDomain
 
         public Account Account { get; private set; }
 
-        public string CardUserKey { get; private set; }
+        public string? CardUserKey { get; private set; }
 
         public bool IsDefault { get; private set; }
 
         public void ChangeDefault(bool isDefault)
         {
             IsDefault = isDefault;
+        }
+
+        public void UpdateCardUserKey(string cardUserKey)
+        {
+            if (string.IsNullOrEmpty(cardUserKey))
+            {
+                throw new InvalidOperationException("CardUserKey can not be null or default");
+            }
+
+            CardUserKey = cardUserKey;
         }
     }
 }

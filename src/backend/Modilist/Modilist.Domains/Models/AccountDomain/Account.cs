@@ -5,6 +5,7 @@ using Modilist.Domains.Base;
 using Modilist.Domains.Models.AddressDomain;
 using Modilist.Domains.Models.PaymentDomain;
 using Modilist.Domains.Models.StylePreferencesDomain;
+using Modilist.Domains.Models.SubscriptionDomain;
 using Modilist.Infrastructure.Shared.Enums;
 using Modilist.Infrastructure.Shared.Interfaces.Enums;
 
@@ -12,6 +13,9 @@ namespace Modilist.Domains.Models.AccountDomain
 {
     public class Account : BaseEntity
     {
+        private readonly List<Address> _addresses = new List<Address>();
+        private readonly List<PaymentMethod> _paymentMethods = new List<PaymentMethod>();
+
         public Account(Guid id,
             string email,
             string? firstName = null,
@@ -31,7 +35,7 @@ namespace Modilist.Domains.Models.AccountDomain
             Email = email;
             Phone = phone;
             JobTitle = jobTitle;
-            State = AccountStatus.Created;
+            State = AccountState.Created;
         }
 
         public new Guid Id { get; private set; }
@@ -40,9 +44,9 @@ namespace Modilist.Domains.Models.AccountDomain
 
         public SizeInfo? SizeInfo { get; private set; }
 
-        public int? StylePreferenceId { get; private set; }
+        public int? StylePreferencesId { get; private set; }
 
-        public StylePreference? StylePreferences { get; private set; }
+        public StylePreferences? StylePreferences { get; private set; }
 
         public int? PreferedFabricPropertiesId { get; private set; }
 
@@ -52,9 +56,13 @@ namespace Modilist.Domains.Models.AccountDomain
 
         public FitPreferences FitPreferences { get; private set; }
 
-        public IImmutableList<Address> Addresses { get; private set; }
+        public int? SubscriptionId { get; private set; }
 
-        public IImmutableList<PaymentMethod> PaymentMethods { get; private set; }
+        public Subscription Subscription { get; private set; }
+
+        public IReadOnlyList<Address> Addresses => _addresses;
+
+        public IReadOnlyList<PaymentMethod> PaymentMethods => _paymentMethods;
 
         public string? FirstName { get; private set; }
 
@@ -72,7 +80,13 @@ namespace Modilist.Domains.Models.AccountDomain
 
         public string? JobTitle { get; private set; }
 
-        public AccountStatus State { get; private set; }
+        public AccountState State { get; private set; }
+
+        public DateTime? ActivatedAt { get; private set; }
+
+        public DateTime? DeactivatedAt { get; private set; }
+
+        public DateTime? BlockedAt { get; private set; }
 
         public void Update(string firstName,
                        string lastName,
@@ -89,18 +103,6 @@ namespace Modilist.Domains.Models.AccountDomain
             InstagramUserName = instagramUserName;
             Phone = phone;
             JobTitle = jobTitle;
-        }
-
-        public void Activate()
-        {
-            if (State == AccountStatus.Active)
-            {
-                // TODO: change exception type
-
-                throw new Exception("Account already active");
-            }
-
-            State = AccountStatus.Active;
         }
 
         public void SetSizeInfo(int sizeInfoId)
@@ -140,12 +142,53 @@ namespace Modilist.Domains.Models.AccountDomain
                 throw new InvalidOperationException("Account already has a FitPreferences");
             }
 
-            if (FitPreferencesId == 0)
+            if (fitPreferencesId == 0)
             {
                 throw new InvalidOperationException("FitPreferencesId cannot be null or default");
             }
 
             FitPreferencesId = fitPreferencesId;
+        }
+
+        public void SetStylePreferences(int stylePreferencesId)
+        {
+            if (StylePreferencesId.HasValue)
+            {
+                throw new InvalidOperationException("Account already has a StylePreferences");
+            }
+
+            if (stylePreferencesId == 0)
+            {
+                throw new InvalidOperationException("StylePreferencesId cannot be null or default");
+            }
+
+            StylePreferencesId = stylePreferencesId;
+        }
+
+        public void SetSubscription(int subscriptionId)
+        {
+            if (SubscriptionId.HasValue)
+            {
+                throw new InvalidOperationException("Account already has a StylePreferences");
+            }
+
+            if (subscriptionId == 0)
+            {
+                throw new InvalidOperationException("StylePreferencesId cannot be null or default");
+            }
+
+            SubscriptionId = subscriptionId;
+        }
+
+        public void Activate()
+        {
+            if (State == AccountState.Active)
+            {
+                throw new InvalidOperationException("Account is already Active");
+            }
+
+            State = AccountState.Active;
+            ActivatedAt = DateTime.UtcNow;
         }
     }
 }

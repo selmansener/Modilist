@@ -20,8 +20,6 @@ namespace Modilist.Data.EntityConfigurations.PaymentDomain
 
             builder.HasIndex(x => new { x.AccountId, x.CardUserKey, x.DeletedAt })
                 .IsUnique();
-
-            builder.Property(x => x.CardUserKey).IsRequired();
         }
     }
 }

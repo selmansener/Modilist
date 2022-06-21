@@ -19,7 +19,6 @@ namespace Modilist.API.Area.API.Controllers
             _mediator = mediator;
         }
 
-
         [Authorize(nameof(AuthorizationPermissions.CreatePaymentMethod))]
         [HttpPost("Create")]
         [ProducesResponseType(typeof(PaymentMethodDTO), 200)]

@@ -30,23 +30,10 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [Authorize(nameof(AuthorizationPermissions.CreateStylePreferences))]
-        [HttpPost("Create")]
-        [ProducesResponseType(typeof(StylePreferencesDTO), 200)]
-        public async Task<IActionResult> Create(CancellationToken cancellationToken)
-        {
-            var response = await _mediator.Send(new CreateStylePreferences
-            {
-                AccountId = User.GetUserId()
-            }, cancellationToken);
-
-            return Ok(response);
-        }
-
         [Authorize(nameof(AuthorizationPermissions.UpdateStylePreferences))]
-        [HttpPost("Update")]
+        [HttpPost("Upsert")]
         [ProducesResponseType(typeof(StylePreferencesDTO), 200)]
-        public async Task<IActionResult> Update(UpdateStylePreferences input, CancellationToken cancellationToken)
+        public async Task<IActionResult> Upsert(UpsertStylePreferences input, CancellationToken cancellationToken)
         {
             input.AccountId = User.GetUserId();
 

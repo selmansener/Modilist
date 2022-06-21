@@ -1,26 +1,21 @@
-import { Stepper, Typography, Step, StepLabel, Box, Button, Paper } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Stepper, Typography, Step, StepLabel, styled, StepIconProps, Box, CircularProgress } from "@mui/material";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
-import i18n from "i18next";
 import { Trans, useTranslation } from "react-i18next";
-import BodySize from "./BodySize";
-import ContactInfo from "./ContactInfo";
-import PaymentMethod from "./PaymentMethod";
-import Personal from "./Personal";
+import SizeInfo from "./SizeInfo";
 import StylePreferences from "./StylePreferences";
 import Subscription from "./Subscription";
 import { FabricProperties } from "./FabricProperties";
 import { FitPreferences } from "./FitPreferences";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import Loading from "../../layouts/callback/Loading";
+import { useNavigate } from "react-router-dom";
 
 const steps = [
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleBodySize',
-        component: <BodySize />
-    },
-    {
-        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePersonal',
-        component: <Personal />
+        component: <SizeInfo />
     },
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleStylePreferences',
@@ -35,55 +30,83 @@ const steps = [
         component: <FabricProperties />
     },
     {
-        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleContactInfo',
-        component: <ContactInfo />
-    },
-    {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleSubscription',
         component: <Subscription />
-    },
-    {
-        title: 'Layouts.Welcome.WelcomeLayout.Steps.TitlePaymentMethod',
-        component: <PaymentMethod />
     },
 ];
 
 
 export function WelcomeSteps() {
-
     const { t } = useTranslation();
-
-    // const [activeStep, setActiveStep] = useState(0);
-    // const [skipped, setSkipped] = useState(new Set<number>());
-    const { activeStep, skipped, nextCallback, backCallback } = useSelector((state: RootState) => state.welcomeStepsModel);
+    const navigate = useNavigate();
+    const { activeStep, skipped } = useSelector((state: RootState) => state.welcomePageStepper);
+    const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
+    const { isBusy: activateAccountIsBusy, data: activateAccount, status: activateAccountStatus } = useSelector((state: RootState) => state.activateAccountModel);
     const dispatch = useDispatch<Dispatch>();
+
+    useEffect(() => {
+        if (!getAccountIsBusy && account?.id === "") {
+            dispatch.getAccountModel.getAccount();
+        }
+    }, []);
+
+    useEffect(() => {
+        if (activateAccountStatus === 200 && activateAccount) {
+            dispatch.getAccountModel.HANDLE_RESPONSE(activateAccount, activateAccountStatus);
+            navigate("/");
+        }
+    }, [activateAccountStatus]);
 
     const isStepSkipped = (step: number) => {
         return skipped.has(step);
     };
 
-    const handleNext = () => {
-        //onSubmit();
+    const StepIconRoot = styled('div')<{
+        ownerState: { completed?: boolean; active?: boolean };
+    }>(({ theme, ownerState }) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+        zIndex: 1,
+        color: '#fff',
+        width: 50,
+        height: 50,
+        display: 'flex',
+        borderRadius: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        ...(ownerState.active && {
+            backgroundImage:
+                'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+            boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+        }),
+        ...(ownerState.completed && {
+            backgroundImage:
+                'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+        }),
+    }));
 
-        //console.log(validator());
+    function ColorlibStepIcon(props: StepIconProps) {
+        const { active, completed, className } = props;
 
-        // if (!validator()) {
-        //     return;
-        // }
+        const icons: { [index: string]: React.ReactElement } = {
+            1: <AccountBoxIcon />,
+            2: <AccountBoxIcon />,
+            3: <AccountBoxIcon />,
+            4: <AccountBoxIcon />,
+            5: <AccountBoxIcon />,
+        };
 
-        // let newSkipped = skipped;
-        // if (isStepSkipped(activeStep)) {
-        //     newSkipped = new Set(newSkipped.values());
-        //     newSkipped.delete(activeStep);
-        // }
+        return (
+            <StepIconRoot ownerState={{ completed, active }} className={className}>
+                {icons[String(props.icon)]}
+            </StepIconRoot>
+        );
+    }
 
-        // setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        // setSkipped(newSkipped);
-    };
-
-    const handleBack = () => {
-        //setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
+    useEffect(() => {
+        if (!activateAccountIsBusy && activeStep === steps.length && activateAccountStatus === 0) {
+            dispatch.activateAccountModel.activateAccount();
+        }
+    }, [activeStep]);
 
     return (
         <>
@@ -97,50 +120,40 @@ export function WelcomeSteps() {
                         stepProps.completed = false;
                     }
                     return (
-                        <Step key={step.title} {...stepProps}>
-                            <StepLabel {...labelProps}>
+                        <Step key={step.title} {...stepProps} sx={{
+                            minHeight: '120px',
+                            mb: 2
+                        }}>
+                            <StepLabel {...labelProps} StepIconComponent={ColorlibStepIcon}
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                }}>
                                 <Trans>
-                                    {t(step.title)}
+                                    <Typography sx={{
+                                        mt: 1
+                                    }}>{t(step.title)}</Typography>
                                 </Trans>
                             </StepLabel>
                         </Step>
                     );
                 })}
             </Stepper>
-            {activeStep === steps.length ? (
-                <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                        All steps completed - you&apos;re finished
-                    </Typography>
-                </React.Fragment>
-            ) : (
-                <React.Fragment>
-                    <Paper
-                        sx={{
-                            p: 2,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            mt: 2
-                        }}
-                    >
-                        {steps[activeStep].component}
-                    </Paper>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Button
-                            color="inherit"
-                            disabled={activeStep === 0}
-                            onClick={backCallback}
-                            sx={{ mr: 1 }}
-                        >
-                            {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
-                        </Button>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={nextCallback} variant="outlined">
-                            {activeStep === steps.length - 1 ? t('Layouts.Welcome.WelcomeSteps.Buttons.Finish') : t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
-                        </Button>
-                    </Box>
-                </React.Fragment>
-            )}
+
+            <Typography variant="h6" component="div">
+                {t('Layouts.Welcome.WelcomeLayout.Description1')}
+            </Typography>
+            {activeStep === steps.length
+                ? <Box sx={{
+                    display: 'flex',
+                    height: '300px',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <CircularProgress />
+                </Box>
+                : <>{steps[activeStep].component}</>}
+
         </>
     );
 }

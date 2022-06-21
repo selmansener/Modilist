@@ -32,6 +32,15 @@ root.render(
     </Provider>
   </MsalProvider>
 );
+root.render(
+  <MsalProvider instance={msalInstance}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </MsalProvider>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -7,7 +7,18 @@ import { ResponseModel } from "../../response-model";
 export const getDefaultAddressModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined
+        data: {
+            accountId: "",
+            city: "",
+            district: "",
+            firstName: "",
+            fullAddress: "",
+            isDefault: true,
+            lastName: "",
+            name: "",
+            phone: "",
+            zipCode: ""
+        }
     } as ResponseModel<AddressDTO>,
     reducers: {
         BUSY: (state: ResponseModel<AddressDTO>) => {
@@ -16,10 +27,21 @@ export const getDefaultAddressModel = createModel<RootModel>()({
                 isBusy: true
             }
         },
-        HANDLE_RESPONSE: (state: ResponseModel<AddressDTO>, data: AddressDTO) => {
+        HANDLE_RESPONSE: (state: ResponseModel<AddressDTO>, data: AddressDTO, status: number) => {
             return {
                 ...state,
-                data,
+                data: {
+                    ...state.data,
+                    ...data
+                },
+                status,
+                isBusy: false
+            }
+        },
+        HANDLE_EXCEPTIONS: (state: ResponseModel<AddressDTO>, status: number) => {
+            return {
+                ...state,
+                status,
                 isBusy: false
             }
         }
@@ -33,9 +55,12 @@ export const getDefaultAddressModel = createModel<RootModel>()({
                 const response = await api.addresses.apiV1AddressGetDefaultGet();
 
                 if (response.status === 200) {
-                    getDefaultAddressModel.HANDLE_RESPONSE(response.data);
+                    getDefaultAddressModel.HANDLE_RESPONSE(response.data, response.status);
                 }
-                // TODO: handle exceptions
+                else {
+                    getDefaultAddressModel.HANDLE_EXCEPTIONS(response.status);
+
+                }
             }
         }
     }

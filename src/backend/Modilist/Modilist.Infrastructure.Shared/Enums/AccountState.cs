@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Modilist.Infrastructure.Shared.Enums
 {
-    public enum AccountStatus
+    public enum AccountState
     {
         None = 0,
         Created = 1,

@@ -1,10 +1,10 @@
-import { Box, Button, ButtonGroup, Divider, FormControl, FormHelperText, Grid, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Button, CircularProgress, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { BodyType, Gender, SizeInfoDTO } from "../../services/swagger/api";
+import { Gender } from "../../services/swagger/api";
 import { Dispatch, RootState } from "../../store/store";
-import { FormikTouched, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { camelCase } from "change-case";
 import { CustomRadioButtonGroup } from "../../components/customRadioButton/CustomRadioButton";
@@ -13,45 +13,28 @@ import { config } from "../../config";
 import { WeigthIcon } from "../../components/customIcons/WeightIcon";
 import { MeasureIcon } from "../../components/customIcons/MeasureIcon";
 
-type BodyTypeElement = {
-    name: string;
-    img: string;
+let footWearSizes: number[] = [];
+
+if (footWearSizes.length === 0) {
+    const sizes = [];
+    for (let i = 35; i <= 45; i++) {
+        sizes.push(i);
+    }
+
+    footWearSizes = sizes;
 }
 
-export default function BodySize() {
+export default function SizeInfo() {
     const { imgBaseHost } = config;
+    const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: getSizeInfoIsBusy, data: initialSizeInfo, status: getSizeInfoStatus } = useSelector((state: RootState) => state.getSizeInfoModel);
     const { isBusy: upsertSizeInfoIsBusy, data: upsertSizeInfo, status: upsertStatus } = useSelector((state: RootState) => state.upsertSizeInfoModel);
-    const { activeStep, skipped } = useSelector((state: RootState) => state.welcomeStepsModel);
-    const [sizeInfo, setSizeInfo] = useState<SizeInfoDTO>({
-        bodyType: BodyType.None,
-        weight: 0,
-        height: 0,
-        upperBody: "",
-        lowerBody: "",
-        outWear: "",
-        footWear: "",
-        menUnderWear: "",
-        womenUnderWearCup: "",
-        womenUnderWearSize: "",
-        additionalNotes: "",
-        armLength: 0,
-        bodyLength: 0,
-        breastRadius: 0,
-        footLength: 0,
-        headRadius: 0,
-        hipRadius: 0,
-        legLength: 0,
-        neckRadius: 0,
-        shoulderWidth: 0,
-        waistRadius: 0
-    });
-    const [isValid, setIsValid] = useState<boolean>(false);
-    const [requiredField] = useState(t("FormValidation.RequiredField"));
+    const isBusy = getAccountIsBusy || getSizeInfoIsBusy || upsertSizeInfoIsBusy;
+    const requiredField = t("FormValidation.RequiredField");
 
-    const [schema, setSchema] = useState(Yup.object({
+    const schema = Yup.object({
         upperBody: Yup.string().required(requiredField),
         lowerBody: Yup.string().required(requiredField),
         outWear: Yup.string().required(requiredField),
@@ -59,27 +42,52 @@ export default function BodySize() {
         bodyType: Yup.string().notOneOf(["None"], requiredField).required(requiredField),
         weight: Yup.number().integer().moreThan(0, requiredField).required(requiredField),
         height: Yup.number().integer().moreThan(0, requiredField).required(requiredField),
-    }));
+        womenUnderWearCup: account?.gender === Gender.Female ? Yup.string().required(requiredField) : Yup.string().optional(),
+        womenUnderWearSize: account?.gender === Gender.Female ? Yup.string().required(requiredField) : Yup.string().optional(),
+        menUnderWear: account?.gender === Gender.Male ? Yup.string().required(requiredField) : Yup.string().optional()
+    });
 
-    const dispatch = useDispatch<Dispatch>();
+    const sizeSymbols = ["XXS", "XS", "S", "M", "L", "XL", "XXL"];
 
-    const [sizeSymbols] = useState<string[]>(["XXS", "XS", "S", "M", "L", "XL", "XXL"]);
+    const braSizes = ["70", "75", "80", "85", "90", "95", "100", "105", "110"];
 
-    const [braSizes] = useState<string[]>(["70", "75", "80", "85", "90", "95", "100", "105", "110"]);
+    const braCup = ["A", "B", "C", "D"];
 
-    const [braCup] = useState<string[]>(["A", "B", "C", "D"]);
+    const bodyTypes = account?.gender ? [
+        {
+            name: "Round",
+            img: `${imgBaseHost}/body-types/${account?.gender}Round.svg`
+        },
+        {
+            name: "Straight",
+            img: `${imgBaseHost}/body-types/${account?.gender}Straight.svg`
+        },
+        {
+            name: "Fit",
+            img: `${imgBaseHost}/body-types/${account?.gender}Fit.svg`
+        },
+        {
+            name: "Spoon",
+            img: `${imgBaseHost}/body-types/${account?.gender}Spoon.svg`
+        },
+        {
+            name: "Triangle",
+            img: `${imgBaseHost}/body-types/${account?.gender}Triangle.svg`
+        },
+    ] : [];
 
-    const [footWearSizes, setFootWearSizes] = useState<number[]>([]);
-
-    const [bodyTypes, setBodyTypes] = useState<BodyTypeElement[]>([])
-
-    const [sections, setSections] = useState<string[]>([
+    const sections = account?.gender === Gender.Male ? [
         "UpperBody",
         "LowerBody",
         "OutWear",
-    ]);
+        "MenUnderWear"
+    ] : [
+        "UpperBody",
+        "LowerBody",
+        "OutWear",
+    ];
 
-    const [bodySizes] = useState<string[]>([
+    const bodySizes = [
         "BodyLength",
         "HeadRadius",
         "ArmLength",
@@ -90,84 +98,17 @@ export default function BodySize() {
         "HipRadius",
         "LegLength",
         "FootLength",
-    ]);
+    ];
 
     useEffect(() => {
-        if (account) {
-            setBodyTypes([
-                {
-                    name: "Round",
-                    img: `${imgBaseHost}/body-types/${account?.gender}Round.svg`
-                },
-                {
-                    name: "Straight",
-                    img: `${imgBaseHost}/body-types/${account?.gender}Straight.svg`
-                },
-                {
-                    name: "Fit",
-                    img: `${imgBaseHost}/body-types/${account?.gender}Fit.svg`
-                },
-                {
-                    name: "Spoon",
-                    img: `${imgBaseHost}/body-types/${account?.gender}Spoon.svg`
-                },
-                {
-                    name: "Triangle",
-                    img: `${imgBaseHost}/body-types/${account?.gender}Triangle.svg`
-                },
-            ]);
-        }
-
-        if (account && account.gender === Gender.Female) {
-            const newSchema = schema.shape({
-                womenUnderWearCup: Yup.string().required(requiredField),
-                womenUnderWearSize: Yup.string().required(requiredField),
-            });
-
-            setSchema(newSchema);
-        }
-        else if (account && account.gender === Gender.Male) {
-            setSections([
-                ...sections,
-                "MenUnderWear"
-            ]);
-
-            const newSchema = schema.shape({
-                menUnderWear: Yup.string().required(requiredField),
-            });
-
-            setSchema(newSchema);
-        }
-    }, [account]);
-
-    useEffect(() => {
-        if (initialSizeInfo === undefined && !getSizeInfoIsBusy) {
-            dispatch.getSizeInfoModel.getSizeInfo();
-        }
-
         if (!getAccountIsBusy && account === undefined) {
             dispatch.getAccountModel.getAccount();
         }
 
-        if (footWearSizes.length === 0) {
-            const sizes = [];
-            for (let i = 35; i <= 45; i++) {
-                sizes.push(i);
-            }
-
-            setFootWearSizes(sizes);
+        if (!getSizeInfoIsBusy) {
+            dispatch.getSizeInfoModel.getSizeInfo();
         }
     }, []);
-
-    useEffect(() => {
-        if (initialSizeInfo && !getSizeInfoIsBusy && getSizeInfoStatus === 200) {
-            setSizeInfo(initialSizeInfo);
-        }
-    }, [initialSizeInfo]);
-
-    const isStepSkipped = (step: number) => {
-        return skipped.has(step);
-    };
 
     useEffect(() => {
         if (upsertStatus === 200 && upsertSizeInfo) {
@@ -175,59 +116,28 @@ export default function BodySize() {
 
             dispatch.upsertSizeInfoModel.RESET();
 
-            let newSkipped = skipped;
-            if (isStepSkipped(activeStep)) {
-                newSkipped = new Set(newSkipped.values());
-                newSkipped.delete(activeStep);
-            }
-
-            dispatch.welcomeStepsModel.setActiveStep(activeStep + 1);
-            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+            dispatch.welcomePageStepper.next();
         }
-    }, [upsertSizeInfo])
-
-    useEffect(() => {
-        if (isValid && !upsertSizeInfoIsBusy && sizeInfo) {
-            dispatch.upsertSizeInfoModel.upsertSizeInfo({
-                ...sizeInfo,
-                gender: account?.gender,
-            });
-        }
-    }, [isValid]);
-
-    useEffect(() => {
-        dispatch.welcomeStepsModel.setNextCallback(() => {
-            handleSubmit();
-
-            validateForm(sizeInfo).then((errors) => {
-                setIsValid(Object.keys(errors).length === 0);
-            });
-        });
-
-        dispatch.welcomeStepsModel.setBackCallback(() => {
-            let newSkipped = skipped;
-            newSkipped = new Set(newSkipped.values());
-            newSkipped.delete(activeStep);
-
-            const newStep = activeStep - 1;
-
-            dispatch.welcomeStepsModel.setActiveStep(newStep);
-            dispatch.welcomeStepsModel.setSkipped(newSkipped);
-        });
-    }, [sizeInfo]);
+    }, [upsertSizeInfo]);
 
     const {
         handleChange,
         handleBlur,
         touched,
         errors,
-        validateForm,
-        handleSubmit,
+        values: sizeInfo,
+        submitForm,
     } = useFormik({
         enableReinitialize: true,
-        initialValues: sizeInfo,
+        initialValues: initialSizeInfo ?? {},
         validationSchema: schema,
         onSubmit: (values) => {
+            if (!upsertSizeInfoIsBusy) {
+                dispatch.upsertSizeInfoModel.upsertSizeInfo({
+                    ...values,
+                    gender: account?.gender
+                });
+            }
         },
     });
 
@@ -261,31 +171,14 @@ export default function BodySize() {
                             <FormControl fullWidth error={touched[sectionName as keyof typeof touched] && errors[sectionName as keyof typeof errors] !== undefined}>
                                 <InputLabel id={`${sectionName}-label`}>{t(`Pages.Welcome.BodySize.${_section}`)}</InputLabel>
                                 <Select
+                                    disabled={isBusy}
                                     name={sectionName}
                                     labelId={`${sectionName}-label`}
                                     id={sectionName}
                                     value={sizeInfo[sectionName as keyof typeof sizeInfo]}
                                     label={t(`Pages.Welcome.BodySize.${_section}`)}
-                                    onChange={(e) => {
-                                        handleChange(e);
-
-                                        if (e.target.value) {
-                                            setSizeInfo({
-                                                ...sizeInfo,
-                                                [sectionName]: e.target.value
-                                            })
-                                        }
-                                    }}
-                                    onBlur={(e) => {
-                                        handleBlur(e);
-
-                                        if (e.target.value) {
-                                            setSizeInfo({
-                                                ...sizeInfo,
-                                                [sectionName]: e.target.value
-                                            })
-                                        }
-                                    }}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
                                 >
                                     <MenuItem disabled value={"None"}>
                                         <em>{t('Pages.Welcome.Personal.MenuItem')}</em>
@@ -325,13 +218,10 @@ export default function BodySize() {
                             </Box>
                             <FormControl fullWidth>
                                 <TextField
+                                    disabled={isBusy}
                                     value={sizeInfo[sizeName as keyof typeof sizeInfo]}
-                                    onChange={(e) => {
-                                        setSizeInfo({
-                                            ...sizeInfo,
-                                            [sizeName as keyof typeof sizeInfo]: e.target.value
-                                        });
-                                    }}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
                                     label={t(`Pages.Welcome.BodySize.${bodySize}`)} type="number"
                                     inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                     variant="outlined" />
@@ -346,44 +236,42 @@ export default function BodySize() {
     return (
         <>
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Typography variant="h4">{t("Pages.Welcome.BodySize.BodyType")}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <FormControl fullWidth error={touched.bodyType && errors.bodyType !== undefined}>
-                        <FormHelperText>
-                            <Typography variant={"h4"} align={"center"}>{touched.bodyType && errors?.bodyType}</Typography>
-                        </FormHelperText>
-                        <Box sx={{
-                            display: 'flex',
-                            justifyContent: 'center'
-                        }}>
-                            <CustomRadioButtonGroup
-                                name="bodyType"
-                                value={sizeInfo?.bodyType}
-                                onChange={(value) => {
-                                    setSizeInfo({
-                                        ...sizeInfo,
-                                        bodyType: value as BodyType
-                                    });
-
-                                    handleChange(value);
-                                }}
-                                contents={
-                                    bodyTypes.map(type => {
-                                        return {
-                                            value: type.name,
-                                            element: <Box sx={{
-                                                width: '150px',
-                                            }}>
-                                                <ImageComponent src={type.img} />
-                                            </Box>
-                                        }
-                                    })}
-                            />
-                        </Box>
-                    </FormControl>
-                </Grid>
+                {account?.gender !== Gender.None &&
+                    <>
+                        <Grid item xs={12}>
+                            <Typography variant="h4">{t("Pages.Welcome.BodySize.BodyType")}</Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FormControl fullWidth error={touched.bodyType && errors.bodyType !== undefined}>
+                                <FormHelperText>
+                                    <Typography variant={"h4"} align={"center"}>{touched.bodyType && errors?.bodyType}</Typography>
+                                </FormHelperText>
+                                <Box sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}>
+                                    <CustomRadioButtonGroup
+                                        name="bodyType"
+                                        value={sizeInfo?.bodyType}
+                                        onChange={(value) => {
+                                            handleChange("bodyType")(value);
+                                        }}
+                                        contents={
+                                            bodyTypes.map(type => {
+                                                return {
+                                                    value: type.name,
+                                                    element: <Box sx={{
+                                                        width: '150px',
+                                                    }}>
+                                                        <ImageComponent src={type.img} />
+                                                    </Box>
+                                                }
+                                            })}
+                                    />
+                                </Box>
+                            </FormControl>
+                        </Grid>
+                    </>}
 
                 <Grid item xs={6}>
                     <Typography variant={"h4"}
@@ -407,6 +295,7 @@ export default function BodySize() {
 
                         <FormControl fullWidth>
                             <TextField
+                                disabled={isBusy}
                                 name="weight"
                                 label={t('Pages.Welcome.BodySize.Weight')}
                                 type="number"
@@ -415,15 +304,8 @@ export default function BodySize() {
                                 variant="outlined"
                                 error={touched.weight && errors.weight !== undefined}
                                 helperText={touched.weight && errors.weight}
-                                onChange={(e) => {
-                                    setSizeInfo({
-                                        ...sizeInfo,
-                                        weight: parseInt(e.target.value)
-                                    })
-
-                                    handleChange(e);
-                                }}
-                                onBlur={(handleBlur)}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
                             />
                         </FormControl>
                     </Box>
@@ -452,6 +334,7 @@ export default function BodySize() {
 
                         <FormControl fullWidth>
                             <TextField
+                                disabled={isBusy}
                                 name="height"
                                 label={t('Pages.Welcome.BodySize.Height')}
                                 type="number"
@@ -460,15 +343,8 @@ export default function BodySize() {
                                 helperText={touched.height && errors.height}
                                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                 variant="outlined"
-                                onChange={(e) => {
-                                    setSizeInfo({
-                                        ...sizeInfo,
-                                        height: parseInt(e.target.value)
-                                    })
-
-                                    handleChange(e);
-                                }}
-                                onBlur={(handleBlur)}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
                             />
                         </FormControl>
                     </Box>
@@ -505,29 +381,14 @@ export default function BodySize() {
                         <FormControl fullWidth error={touched.footWear && errors.footWear !== undefined}>
                             <InputLabel id={`footWear-label`}>{t(`Pages.Welcome.BodySize.FootWear`)}</InputLabel>
                             <Select
+                                disabled={isBusy}
                                 name={'footWear'}
                                 labelId={`footWear-label`}
                                 id={'footWear'}
                                 value={sizeInfo.footWear}
                                 label={t(`Pages.Welcome.BodySize.FootWear`)}
-                                onChange={(e) => {
-                                    if (e.target.value) {
-                                        setSizeInfo({
-                                            ...sizeInfo,
-                                            footWear: e.target.value
-                                        })
-                                    }
-
-                                    handleChange(e);
-                                }}
-                                onBlur={(e) => {
-                                    setSizeInfo({
-                                        ...sizeInfo,
-                                        footWear: e.target.value
-                                    })
-
-                                    handleBlur(e);
-                                }}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
                             >
                                 <MenuItem disabled>
                                     <em>{t('Pages.Welcome.Personal.MenuItem')}</em>
@@ -560,21 +421,13 @@ export default function BodySize() {
                             <FormControl fullWidth error={touched.womenUnderWearCup && errors.womenUnderWearCup !== undefined}>
                                 <InputLabel id={`womenUnderWearCup-label`}>{t(`Pages.Welcome.BodySize.WomenUnderWearCup`)}</InputLabel>
                                 <Select
+                                    disabled={isBusy}
                                     name={'womenUnderWearCup'}
                                     labelId={`womenUnderWearCup-label`}
                                     id={'womenUnderWearCup'}
                                     value={sizeInfo?.womenUnderWearCup}
                                     label={t(`Pages.Welcome.BodySize.WomenUnderWearCup`)}
-                                    onChange={(e) => {
-                                        handleChange(e);
-
-                                        if (e.target.value) {
-                                            setSizeInfo({
-                                                ...sizeInfo,
-                                                womenUnderWearCup: e.target.value
-                                            })
-                                        }
-                                    }}
+                                    onChange={handleChange}
                                     onBlur={handleBlur}
                                 >
                                     <MenuItem disabled>
@@ -607,21 +460,13 @@ export default function BodySize() {
                             <FormControl fullWidth error={touched.womenUnderWearSize && errors.womenUnderWearSize !== undefined}>
                                 <InputLabel id={`womenUnderWearSize-label`}>{t(`Pages.Welcome.BodySize.WomenUnderWearSize`)}</InputLabel>
                                 <Select
+                                    disabled={isBusy}
                                     name={'womenUnderWearSize'}
                                     labelId={`womenUnderWearSize-label`}
                                     id={'womenUnderWearSize'}
                                     value={sizeInfo.womenUnderWearSize}
                                     label={t(`Pages.Welcome.BodySize.WomenUnderWearSize`)}
-                                    onChange={(e) => {
-                                        handleChange(e);
-
-                                        if (e.target.value) {
-                                            setSizeInfo({
-                                                ...sizeInfo,
-                                                womenUnderWearSize: e.target.value
-                                            })
-                                        }
-                                    }}
+                                    onChange={handleChange}
                                     onBlur={handleBlur}
                                 >
                                     <MenuItem disabled value={""}>
@@ -658,18 +503,37 @@ export default function BodySize() {
                 <Grid item xs={12}>
                     <FormControl fullWidth>
                         <TextField
+                            disabled={isBusy}
                             value={sizeInfo?.additionalNotes}
-                            onChange={(e) => {
-                                setSizeInfo({
-                                    ...sizeInfo,
-                                    additionalNotes: e.target.value
-                                })
-                            }}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
                             variant="outlined"
                             multiline
                             rows={5}
                             maxRows={8} />
                     </FormControl>
+                </Grid>
+                <Grid item container xs={6} justifyContent="flex-start">
+                    <Button
+                        disabled
+                    >
+                        {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
+                    </Button>
+                </Grid>
+                <Grid item container xs={6} justifyContent="flex-end">
+                    <Button
+                        disabled={isBusy}
+                        onClick={() => {
+                            submitForm();
+                        }}
+                        variant="outlined">
+                        {isBusy && <CircularProgress sx={{
+                            width: "18px !important",
+                            height: "18px !important",
+                            mr: 2
+                        }} />}
+                        {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
+                    </Button>
                 </Grid>
             </Grid>
         </>

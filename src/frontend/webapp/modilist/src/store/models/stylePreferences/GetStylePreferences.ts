@@ -7,7 +7,21 @@ import { ResponseModel } from "../../response-model";
 export const getStylePreferencesModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined,
+        data: {
+            bodyPartsToHide: "",
+            bodyPartsToHighlight: "",
+            choiceReasons: "",
+            excludedAccessoryCategories: "",
+            excludedBagCategories: "",
+            excludedFootwearCategories: "",
+            excludedLowerCategories: "",
+            excludedOuterCategories: "",
+            excludedUnderwearCategories: "",
+            excludedUpperCategories: "",
+            lovesShopping: 0,
+            openToSuggestions: 0,
+            prefersHijabClothing: false
+        },
         status: 0
     } as ResponseModel<StylePreferencesDTO>,
     reducers: {

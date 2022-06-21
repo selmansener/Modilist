@@ -1,36 +1,60 @@
-import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { useEffect } from "react";
+import { Autocomplete, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../../store/store";
 
 export interface CitiesProps {
     value?: string,
-    onChange: (event: SelectChangeEvent<string>, child: React.ReactNode) => void,
-    onBlur: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
+    error?: boolean,
+    helperText?: string | false,
+    onChange: (value: { code?: string, name?: string }) => void;
+    onBlur: (value: { code?: string, name?: string }) => void;
 }
 
 export function Cities(props: CitiesProps) {
     const { t } = useTranslation();
     const { data: cities } = useSelector((state: RootState) => state.citiesModel);
     const dispatch = useDispatch<Dispatch>();
-    const { value, onChange, onBlur } = props;
+    const { value, error, helperText, onChange, onBlur } = props;
+    const ref = useRef<HTMLInputElement>();
 
     useEffect(() => {
         dispatch.citiesModel.getCities();
     }, []);
 
-    return (<Select
-        name={"city"}
-        labelId="city-label"
-        id="city"
-        value={value}
-        label={t("Generic.City")}
-        onChange={onChange}
-        onBlur={onBlur}
-    >
-        {cities?.map(city => {
-            return <MenuItem value={city.code}>{city?.name}</MenuItem>
-        })}
-    </Select>);
+    return (
+        <Autocomplete
+            id="city"
+            value={cities?.find(x => x.name === value)}
+            onChange={(e, value) => {
+                onChange({
+                    code: value?.code,
+                    name: value?.name
+                })
+            }}
+            onBlur={(e) => {
+                const city = cities?.find(x => x.name === ref?.current?.value);
+                onBlur({
+                    code: city?.code,
+                    name: city?.name
+                })
+            }}
+            disablePortal
+            options={cities && cities?.length > 0 ? cities?.map(city => {
+                return {
+                    ...city,
+                    label: city.name
+                }
+            }) : []}
+            renderInput={(params) => <TextField
+                inputRef={ref}
+                {...params}
+                name={"city"}
+                error={error}
+                helperText={helperText}
+                label={t("Generic.Address.City")}
+            />}
+        />
+    );
 }

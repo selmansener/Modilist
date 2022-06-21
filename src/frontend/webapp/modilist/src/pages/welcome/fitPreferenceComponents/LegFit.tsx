@@ -7,8 +7,9 @@ import { config } from "../../../config";
 enum LegFit {
     Spanish = "Spanish",
     Straight = "Straight",
+    Wide = "Wide",
     Loose = "Loose",
-    Skinny = "Skinny"
+    Slim = "Slim"
 }
 
 interface LegFitElement {
@@ -56,7 +57,6 @@ export function LegFits(props: LegFitsProps) {
                     element: <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: 100
                     }}>
                         <ImageComponent src={legFit.img} />
                         <Typography>{legFit.name}</Typography>

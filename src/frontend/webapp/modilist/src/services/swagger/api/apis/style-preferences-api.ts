@@ -17,60 +17,13 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { StylePreferencesDTO } from '../models';
-import { UpdateStylePreferences } from '../models';
+import { UpsertStylePreferences } from '../models';
 /**
  * StylePreferencesApi - axios parameter creator
  * @export
  */
 export const StylePreferencesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * 
-         * @param {string} [apiVersion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        apiV1StylePreferencesCreatePost: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/StylePreferences/Create`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Bearer required
-            // oauth required
-            if (configuration && configuration.accessToken) {
-                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
-            }
-
-            if (apiVersion !== undefined) {
-                localVarQueryParameter['api-version'] = apiVersion;
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.params) {
-                query.set(key, options.params[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * 
          * @param {string} [apiVersion] 
@@ -93,7 +46,7 @@ export const StylePreferencesApiAxiosParamCreator = function (configuration?: Co
             // oauth required
             if (configuration && configuration.accessToken) {
                 const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
             }
@@ -120,13 +73,13 @@ export const StylePreferencesApiAxiosParamCreator = function (configuration?: Co
         },
         /**
          * 
-         * @param {UpdateStylePreferences} [body] 
+         * @param {UpsertStylePreferences} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1StylePreferencesUpdatePost: async (body?: UpdateStylePreferences, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/StylePreferences/Update`;
+        apiV1StylePreferencesUpsertPost: async (body?: UpsertStylePreferences, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/StylePreferences/Upsert`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -141,7 +94,7 @@ export const StylePreferencesApiAxiosParamCreator = function (configuration?: Co
             // oauth required
             if (configuration && configuration.accessToken) {
                 const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
             }
@@ -185,19 +138,6 @@ export const StylePreferencesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1StylePreferencesCreatePost(apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<StylePreferencesDTO>>> {
-            const localVarAxiosArgs = await StylePreferencesApiAxiosParamCreator(configuration).apiV1StylePreferencesCreatePost(apiVersion, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @param {string} [apiVersion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
         async apiV1StylePreferencesGetGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<StylePreferencesDTO>>> {
             const localVarAxiosArgs = await StylePreferencesApiAxiosParamCreator(configuration).apiV1StylePreferencesGetGet(apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
@@ -207,13 +147,13 @@ export const StylePreferencesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {UpdateStylePreferences} [body] 
+         * @param {UpsertStylePreferences} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1StylePreferencesUpdatePost(body?: UpdateStylePreferences, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<StylePreferencesDTO>>> {
-            const localVarAxiosArgs = await StylePreferencesApiAxiosParamCreator(configuration).apiV1StylePreferencesUpdatePost(body, apiVersion, options);
+        async apiV1StylePreferencesUpsertPost(body?: UpsertStylePreferences, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<StylePreferencesDTO>>> {
+            const localVarAxiosArgs = await StylePreferencesApiAxiosParamCreator(configuration).apiV1StylePreferencesUpsertPost(body, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -234,27 +174,18 @@ export const StylePreferencesApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1StylePreferencesCreatePost(apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StylePreferencesDTO>> {
-            return StylePreferencesApiFp(configuration).apiV1StylePreferencesCreatePost(apiVersion, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} [apiVersion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
         async apiV1StylePreferencesGetGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StylePreferencesDTO>> {
             return StylePreferencesApiFp(configuration).apiV1StylePreferencesGetGet(apiVersion, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {UpdateStylePreferences} [body] 
+         * @param {UpsertStylePreferences} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1StylePreferencesUpdatePost(body?: UpdateStylePreferences, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StylePreferencesDTO>> {
-            return StylePreferencesApiFp(configuration).apiV1StylePreferencesUpdatePost(body, apiVersion, options).then((request) => request(axios, basePath));
+        async apiV1StylePreferencesUpsertPost(body?: UpsertStylePreferences, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StylePreferencesDTO>> {
+            return StylePreferencesApiFp(configuration).apiV1StylePreferencesUpsertPost(body, apiVersion, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -273,28 +204,18 @@ export class StylePreferencesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StylePreferencesApi
      */
-    public async apiV1StylePreferencesCreatePost(apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<StylePreferencesDTO>> {
-        return StylePreferencesApiFp(this.configuration).apiV1StylePreferencesCreatePost(apiVersion, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * 
-     * @param {string} [apiVersion] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof StylePreferencesApi
-     */
     public async apiV1StylePreferencesGetGet(apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<StylePreferencesDTO>> {
         return StylePreferencesApiFp(this.configuration).apiV1StylePreferencesGetGet(apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
-     * @param {UpdateStylePreferences} [body] 
+     * @param {UpsertStylePreferences} [body] 
      * @param {string} [apiVersion] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof StylePreferencesApi
      */
-    public async apiV1StylePreferencesUpdatePost(body?: UpdateStylePreferences, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<StylePreferencesDTO>> {
-        return StylePreferencesApiFp(this.configuration).apiV1StylePreferencesUpdatePost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    public async apiV1StylePreferencesUpsertPost(body?: UpsertStylePreferences, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<StylePreferencesDTO>> {
+        return StylePreferencesApiFp(this.configuration).apiV1StylePreferencesUpsertPost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
 }

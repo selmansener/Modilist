@@ -9,8 +9,11 @@ enum ColorType {
     Cold = "Cold",
     Pastel = "Pastel",
     Nude = "Nude",
-    BlackWhite = "BlackWhite",
-    Dark = "Dark"
+    BlackAndWhite = "BlackAndWhite",
+    Dark = "Dark",
+    Vivid = "Vivid",
+    Neon = "Neon",
+    Light = "Light",
 }
 
 interface ColorTypeElement {
@@ -70,7 +73,6 @@ export function ColorTypes(props: ColorTypesProps) {
                     element: <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: 100
                     }}>
                         <ImageComponent src={colorType.img} />
                         <Typography>{colorType.name}</Typography>

@@ -7,19 +7,19 @@ using Modilist.Domains.Models.StylePreferencesDomain;
 
 namespace Modilist.Data.Repositories.StylePreferencesDomain
 {
-    public interface IStylePreferencesRepository : IBaseRepository<StylePreference>
+    public interface IStylePreferencesRepository : IBaseRepository<StylePreferences>
     {
-        Task<StylePreference?> GetByAccountIdAsync(Guid accountId, CancellationToken cancellationToken);
+        Task<StylePreferences?> GetByAccountIdAsync(Guid accountId, CancellationToken cancellationToken);
     }
 
-    internal class StylePreferencesRepository : BaseRepository<StylePreference>, IStylePreferencesRepository
+    internal class StylePreferencesRepository : BaseRepository<StylePreferences>, IStylePreferencesRepository
     {
         public StylePreferencesRepository(ModilistDbContext baseDb)
             : base(baseDb)
         {
         }
 
-        public async Task<StylePreference?> GetByAccountIdAsync(Guid accountId, CancellationToken cancellationToken)
+        public async Task<StylePreferences?> GetByAccountIdAsync(Guid accountId, CancellationToken cancellationToken)
         {
             return await GetAll().FirstOrDefaultAsync(x => x.AccountId == accountId, cancellationToken);
         }

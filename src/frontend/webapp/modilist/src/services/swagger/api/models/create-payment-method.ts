@@ -22,7 +22,25 @@ export interface CreatePaymentMethod {
      * @type {string}
      * @memberof CreatePaymentMethod
      */
-    cardUserKey?: string;
+    cardNumber?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePaymentMethod
+     */
+    cardHolderName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePaymentMethod
+     */
+    expireMonth?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePaymentMethod
+     */
+    expireYear?: string;
     /**
      * 
      * @type {boolean}

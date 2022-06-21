@@ -12,6 +12,9 @@ enum Fabric {
     FauxFur = "Faux Fur",
     Velvet = "Velvet",
     Lace = "Lace",
+    Guipure = "Guipure",
+    Parachute = "Parachute",
+    Jute = "Jute"
 }
 
 interface FabricElement {

@@ -6,6 +6,7 @@ using Mapster;
 using MediatR;
 
 using Modilist.Business.CQRS.AddressDomain.DTOs;
+using Modilist.Business.Exceptions;
 using Modilist.Data.Repositories.AddressDomain;
 using Modilist.Domains.Models.AddressDomain;
 
@@ -39,9 +40,7 @@ namespace Modilist.Business.CQRS.AddressDomain.Queries
 
             if (address == null)
             {
-                // TODO: change exception type
-
-                throw new Exception("Default address not found for account");
+                throw new DefaultAddressNotFoundException(request.AccountId);
             }
 
             return address.Adapt<AddressDTO>();

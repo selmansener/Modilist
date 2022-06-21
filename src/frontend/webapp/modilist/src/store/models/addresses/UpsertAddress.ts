@@ -7,7 +7,18 @@ import { ResponseModel } from "../../response-model";
 export const upsertAddressModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined
+        data: {
+            accountId: "",
+            city: "",
+            district: "",
+            firstName: "",
+            fullAddress: "",
+            isDefault: true,
+            lastName: "",
+            name: "",
+            phone: "",
+            zipCode: ""
+        }
     } as ResponseModel<AddressDTO>,
     reducers: {
         BUSY: (state: ResponseModel<AddressDTO>) => {
@@ -16,10 +27,14 @@ export const upsertAddressModel = createModel<RootModel>()({
                 isBusy: true
             }
         },
-        HANDLE_RESPONSE: (state: ResponseModel<AddressDTO>, data: AddressDTO) => {
+        HANDLE_RESPONSE: (state: ResponseModel<AddressDTO>, data: AddressDTO, status: number) => {
             return {
                 ...state,
-                data,
+                data: {
+                    ...state.data,
+                    ...data
+                },
+                status,
                 isBusy: false
             }
         },
@@ -34,7 +49,7 @@ export const upsertAddressModel = createModel<RootModel>()({
 
                 if (response.status === 200) {
 
-                    upsertAddressModel.HANDLE_RESPONSE(response.data)
+                    upsertAddressModel.HANDLE_RESPONSE(response.data, response.status)
                 }
                 // TODO: handle exceptions
             }

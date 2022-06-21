@@ -1,5 +1,5 @@
-import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { useEffect } from "react";
+import { Autocomplete, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { Dispatch, RootState } from "../../../store/store";
@@ -7,15 +7,18 @@ import { Dispatch, RootState } from "../../../store/store";
 export interface DistrictsProps {
     selectedCity?: string,
     value?: string,
-    onChange: (event: SelectChangeEvent<string>, child: React.ReactNode) => void,
-    onBlur: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
+    error?: boolean,
+    helperText?: string | false,
+    onChange: (value: { code?: string, name?: string }) => void;
+    onBlur: (value: { code?: string, name?: string }) => void;
 }
 
 export function Districts(props: DistrictsProps) {
     const { t } = useTranslation();
     const { data: districts } = useSelector((state: RootState) => state.districtsModel);
     const dispatch = useDispatch<Dispatch>();
-    const { value, onChange, onBlur, selectedCity } = props;
+    const { value, error, helperText, onChange, onBlur, selectedCity } = props;
+    const ref = useRef<HTMLInputElement>();
 
     useEffect(() => {
         if (selectedCity) {
@@ -23,17 +26,39 @@ export function Districts(props: DistrictsProps) {
         }
     }, [selectedCity]);
 
-    return (<Select
-        name={"district"}
-        labelId="district-label"
-        id="district"
-        value={value}
-        label={t("Generic.District")}
-        onChange={onChange}
-        onBlur={onBlur}
-    >
-        {districts?.map(district => {
-            return <MenuItem value={district.code}>{district?.name}</MenuItem>
-        })}
-    </Select>);
+    return (
+    
+        <Autocomplete
+            id="district"
+            value={districts?.find(x => x.name === value)}
+            onChange={(e, value) => {
+                onChange({
+                    code: value?.code,
+                    name: value?.name
+                })
+            }}
+            onBlur={(e) => {
+                const city = districts?.find(x => x.name === ref?.current?.value);
+                onBlur({
+                    code: city?.code,
+                    name: city?.name
+                })
+            }}
+            disablePortal
+            options={districts && districts?.length > 0 ? districts?.map(district => {
+                return {
+                    ...district,
+                    label: district.name
+                }
+            }) : []}
+            renderInput={(params) => <TextField
+                inputRef={ref}
+                {...params}
+                name={"district"}
+                error={error}
+                helperText={helperText}
+                label={t("Generic.Address.District")}
+            />}
+        />
+    );
 }

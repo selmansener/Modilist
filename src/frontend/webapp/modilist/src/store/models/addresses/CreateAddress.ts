@@ -7,7 +7,18 @@ import { ResponseModel } from "../../response-model";
 export const createAddressModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: undefined
+        data: {
+            accountId: "",
+            city: "",
+            district: "",
+            firstName: "",
+            fullAddress: "",
+            isDefault: true,
+            lastName: "",
+            name: "",
+            phone: "",
+            zipCode: ""
+        }
     } as ResponseModel<AddressDTO>,
     reducers: {
         BUSY: (state: ResponseModel<AddressDTO>) => {
@@ -19,7 +30,10 @@ export const createAddressModel = createModel<RootModel>()({
         HANDLE_RESPONSE: (state: ResponseModel<AddressDTO>, data: AddressDTO) => {
             return {
                 ...state,
-                data,
+                data: {
+                    ...state.data,
+                    ...data
+                },
                 isBusy: false
             }
         },

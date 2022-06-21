@@ -10,26 +10,29 @@ import { getPreferedFabricPropertiesModel } from "./fabricProperties/GetFabricPr
 import { upsertPreferedFabricPropertiesModel } from "./fabricProperties/UpsertFabricProperties"
 import { getFitPreferencesModel } from "./fitPreferences/GetFitPreferences"
 import { upsertFitPreferencesModel } from "./fitPreferences/UpsertFitPreferences"
+import { createPaymentMethodModel } from "./paymentMethods/CreatePaymentMethod"
 import { getSizeInfoModel } from "./sizeInfo/GetSizeInfo"
 import { upsertSizeInfoModel } from "./sizeInfo/UpsertSizeInfo"
-import { createStylePreferencesModel } from "./stylePreferences/CreateStylePreferences"
 import { getStylePreferencesModel } from "./stylePreferences/GetStylePreferences"
-import { updateStylePreferencesModel } from "./stylePreferences/UpdateStylePreferences"
+import { upsertStylePreferencesModel } from "./stylePreferences/UpsertStylePreferences"
+import { createSubscriptionModel } from "./subscriptions/CreateSubscription"
+import { getSubscriptionModel } from "./subscriptions/GetSubscription"
+import { updateSubscriptionMaxPricingLimitModel } from "./subscriptions/UpdateSubscriptionMaxPricingLimit"
+import { activateAccountModel } from "./users/ActivateAccount"
 import { createAccountModel } from "./users/CreateAccount"
 import { getAccountModel } from "./users/GetAccount"
 import { updateAccountModel } from "./users/UpdateAccount"
-import { welcomePageModel } from "./welcome/WelcomePageModel"
-import { welcomeStepsModel } from "./welcome/WelcomeStepsModel"
+import { stepperSubscription } from "./welcome/StepperSubscription"
+import { welcomePageStepper } from "./welcome/WelcomePageStepper"
 
 export interface RootModel extends Models<RootModel> {
   createAccountModel: typeof createAccountModel,
   updateAccountModel: typeof updateAccountModel,
   getAccountModel: typeof getAccountModel,
-  welcomeStepsModel: typeof welcomeStepsModel,
-  welcomePageModel: typeof welcomePageModel,
+  activateAccountModel: typeof activateAccountModel,
+  welcomePageStepper: typeof welcomePageStepper,
   getStylePreferencesModel: typeof getStylePreferencesModel,
-  createStylePreferencesModel: typeof createStylePreferencesModel,
-  updateStylePreferencesModel: typeof updateStylePreferencesModel,
+  upsertStylePreferencesModel: typeof upsertStylePreferencesModel,
   getDefaultAddressModel: typeof getDefaultAddressModel,
   createAddressModel: typeof createAddressModel,
   updateAddressModel: typeof updateAddressModel,
@@ -41,18 +44,22 @@ export interface RootModel extends Models<RootModel> {
   getPreferedFabricPropertiesModel: typeof getPreferedFabricPropertiesModel,
   upsertPreferedFabricPropertiesModel: typeof upsertPreferedFabricPropertiesModel,
   getFitPreferencesModel: typeof getFitPreferencesModel,
-  upsertFitPreferencesModel: typeof upsertFitPreferencesModel
+  upsertFitPreferencesModel: typeof upsertFitPreferencesModel,
+  getSubscriptionModel: typeof getSubscriptionModel,
+  createSubscriptionModel: typeof createSubscriptionModel,
+  updateSubscriptionMaxPricingLimitModel: typeof updateSubscriptionMaxPricingLimitModel,
+  createPaymentMethodModel: typeof createPaymentMethodModel,
+  stepperSubscription: typeof stepperSubscription,
 }
 
 export const models: RootModel = {
   createAccountModel,
   updateAccountModel,
   getAccountModel,
-  welcomeStepsModel,
-  welcomePageModel,
+  activateAccountModel,
+  welcomePageStepper,
   getStylePreferencesModel,
-  createStylePreferencesModel,
-  updateStylePreferencesModel,
+  upsertStylePreferencesModel,
   getDefaultAddressModel,
   createAddressModel,
   updateAddressModel,
@@ -65,4 +72,9 @@ export const models: RootModel = {
   upsertPreferedFabricPropertiesModel,
   getFitPreferencesModel,
   upsertFitPreferencesModel,
+  getSubscriptionModel,
+  createSubscriptionModel,
+  updateSubscriptionMaxPricingLimitModel,
+  createPaymentMethodModel,
+  stepperSubscription,
 }

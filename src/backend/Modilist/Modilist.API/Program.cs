@@ -21,6 +21,7 @@ using Newtonsoft.Json.Converters;
 using Modilist.API.Extensions;
 using FluentValidation.AspNetCore;
 using Modilist.Business.Utils.Extensions;
+using Modilist.Infrastructure.Shared.Configurations;
 
 const string CorsPolicyName = "Default";
 const string ApiTitle = "ModilistAPI";
@@ -40,6 +41,8 @@ builder.Services.Configure<ConfigurationOptions>(configuration =>
     configuration.AzureAdB2COptions= config.AzureAdB2COptions;
     configuration.ModilistDbConnectionOptions = config.ModilistDbConnectionOptions;
 });
+
+builder.Services.Configure<IyzicoAPIOptions>(builder.Configuration.GetSection("AppSettings:IyzicoAPIOptions"));
 
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpContextAccessor();

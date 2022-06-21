@@ -8,7 +8,7 @@ using Modilist.Business.Seed.Configuration;
 namespace Modilist.API.Area.Dev.Controllers
 {
     [ApiController]
-    [Area("api")]
+    [Area("dev")]
     [Route("[area]/v{v:apiVersion}")]
     [Authorize("Development")]
     [ApiKey]

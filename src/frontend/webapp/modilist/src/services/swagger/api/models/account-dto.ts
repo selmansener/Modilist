@@ -11,7 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AccountStatus } from './account-status';
+import { AccountState } from './account-state';
 import { Gender } from './gender';
 /**
  * 
@@ -75,8 +75,8 @@ export interface AccountDTO {
     jobTitle?: string | null;
     /**
      * 
-     * @type {AccountStatus}
+     * @type {AccountState}
      * @memberof AccountDTO
      */
-    state?: AccountStatus;
+    state?: AccountState;
 }

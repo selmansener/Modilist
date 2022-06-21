@@ -9,6 +9,7 @@
           "TitlePersonal": "Kişisel",
           "TitleBodySize": "Beden Ölçüleri",
           "TitleStylePreferences": "Stil Tercihleri",
+          "TitleFitPreferences": "Kalıp ve Boy<br/>Tercihleri",
           "TitleFabricProperties": "Kumaş ve Doku<br/>Tercihleri",
           "TitleContactInfo": "İletişim Bilgileri",
           "TitleSubscription": "Abonelik",
@@ -57,7 +58,7 @@
         "Bra": "Sutyen - (Cup)",
         "BraBelt": "Sutyen - (Sırt Çevresi)",
         "Shoes": "Ayakkabı",
-        "HeaderBodySize": "Hayal ettiğin stile kavuşmak istiyorsan, detaylı ve doğru beden ölçülerini girmelisin.",
+        "HeaderBodySize": "Hayal ettiğin stile kavuşmak istiyorsan, detaylı ve doğru beden ölçülerini girmelisin. (Opsiyonel)",
         "BodyLength": "Üst Beden Uzunluğu (cm)",
         "HeadRadius": "Baş Çevresi (cm)",
         "ArmLength": "Kol Uzunluğu (cm)",
@@ -70,65 +71,147 @@
         "FootLength": "Ayak Uzunluğu (cm)",
         "Height": "Boy (cm)",
         "Weight": "Kilo (kg)",
-        "AdditionalNotes": "Kıyafet ve Beden ölçüleri ile ilgili eklemek istedikleriniz;"
+        "AdditionalNotes": "Kıyafet ve Beden ölçüleri ile ilgili eklemek istedikleriniz; (Opsiyonel)"
+      },
+      "FitPreferences": {
+        "WaistHeightPreference": "Alt giyimde tercih ettiğin bel çeşitleri",
+        "WaistHeights": {
+          "UltraHighWaist": "UltraHighWaist",
+          "HighWaist": "HighWaist",
+          "Original": "Original",
+          "Regular": "Regular",
+          "Medium": "Medium",
+          "Low": "Low",
+          "UltraLow": "UltraLow"
+        },
+        "LowerFitPreference": "Alt giyimde tercih ettiğin kalıp tercihleri",
+        "LowerFits": {
+          "Straight": "Straight",
+          "Skinny": "Skinny",
+          "Slim": "Slim",
+          "Regular": "Regular",
+          "Relaxed": "Relaxed",
+          "Loose": "Loose"
+        },
+        "UpperFitPreference": "Üst giyimde tercih ettiğin kalıp çeşitleri",
+        "UpperFits": {
+          "Skinny": "Skinny",
+          "Regular": "Regular",
+          "Loose": "Loose"
+        },
+        "SkirtDressLengthPreference": "Alt giyimde tercih ettiğin etek - elbise uzunluğu",
+        "SkirtDressLengths": {
+          "Mini": "Mini",
+          "Midi": "Midi",
+          "Long": "Uzun"
+        },
+        "LegFitPreference": "Alt giyimde tercih ettiğin paça çeşitleri",
+        "LegFits": {
+          "Spanish": "İspanyol Paça",
+          "Straight": "Boru Paça",
+          "Loose": "Geniş Paça",
+          "Skinny": "Dar Paça"
+        },
+        "ShortsLengthPreference": "Alt giyimde tercih ettiğin şort uzunluğu",
+        "ShortsLengths": {
+          "SuperMini": "Süper Mini",
+          "Mini": "Mini",
+          "Short": "Kısa",
+          "Midi": "Midi",
+          "Long": "Uzun"
+        },
+        "FootTypePreference": "Tercih ettiğin ayakkabı çeşitleri",
+        "FootTypes": {
+          "Narrow": "İnce",
+          "Wide": "Taraklı"
+        }
+      },
+      "FabricProperties": {
+        "ExcludedColors": {
+          "1": "Kombinlerinizde ",
+          "2": "kesinlikle olmasını istemediğiniz ",
+          "3": "renkleri seçiniz."
+        },
+        "ExcludedColorTypes": {
+          "1": "Kombinlerinizde ",
+          "2": "kesinlikle olmasını istemediğiniz ",
+          "3": "renk tonlarını seçiniz."
+        },
+        "ExcludedPatterns": {
+          "1": "Kombinlerinizde ",
+          "2": "kesinlikle olmasını istemediğiniz ",
+          "3": "desenleri seçiniz."
+        },
+        "ExcludedFabrics": {
+          "1": "Kombinlerinizde ",
+          "2": "kesinlikle olmasını istemediğiniz ",
+          "3": "dokuları seçiniz."
+        },
+        "Allergens": {
+          "1": " Alerjiniz ",
+          "2": "olan herhangi bir madde ya da kumaş türü varsa belirtiniz."
+        },
+        "AdditionalNotes": "Eklemek istediğiniz notunuz varsa belirtiniz."
       },
       "ContactInfo": {},
-      "PaymentMethod": {},
       "Personal": {
         "HeaderPersonalInfo": "Kişisel Bilgiler",
         "MenuItem": "Seçiniz",
-        "Job": "Mesleğin Nedir?",
-        "Instagram": "Instagram adresin?"
+        "Job": "Mesleğin Nedir? (Opsiyonel)",
+        "Instagram": "Instagram adresin? (Opsiyonel)"
       },
-      "StylePreferences": {},
-      "Subscription": {}
+      "StylePreferences": {
+        "Title": "Stil Tercihleri",
+        "LikesShoping": "Alışveriş yapmayı seviyor musun?",
+        "OpenToSuggestions": "Stilin dışında önerilere açık mısın?",
+        "ChoiceReasonsQuestion": "Bizi tercih etme sebebiniz?",
+        "UnwantedPieces1": "Kombinlerinizde ",
+        "UnwantedPieces2": "kesinlikle olmasını istemediğiniz ",
+        "UnwantedPieces3": "parçaları seçiniz.",
+        "Hijab": "Tesettür giyim tercih ediyorum.",
+        "BodyPartsToHighlight": "Özellikle öne çıkarmak istediğiniz bölgeler var mı? (Opsiyonel)",
+        "BodyPartsToHide": "Özellikle saklamak istediğiniz bölgeler var mı? (Opsiyonel)",
+        "BodyParts": {
+          "Arms": "Kollar",
+          "Shoulders": "Omuzlar",
+          "Back": "Sırt",
+          "Chest": "Göğüs",
+          "Abdoment": "Karın",
+          "Hips": "Basen",
+          "Legs": "Bacaklar"
+        },
+        "ChoiceReasons": {
+          "FollowingTrends": "Trendleri Takip Etmek",
+          "TimeProblem": "Alışverişten Zaman Kazanmak",
+          "HavingPersonalStyleAdvisor": "Özel Stil Danışmanım Olması",
+          "TryingLocalBrands": "Yerel ve Butik Markaları Denemek",
+          "LikesSurprizes": "Süprizlerle Kendimi Şımartmak",
+          "MakingNewStyle": "Kendime Yeni Bir Stil Oluşturmak"
+        },
+        "ExcludedCategoriesTitle": "Asla giymem dediklerin (Opsiyonel)"
+      },
+      "Subscription": {
+        "SubscriptionDetails": {
+          "PriceTitle": "Kombinleriniz için maksimum harcama limiti"
+        }
+      },
+      "PaymentMethod": {
+        "Title": "Ödeme Yöntemi",
+        "CardHolderName": "Kart Üzerindeki İsim",
+        "CardNumber": "Kart Numarası",
+        "ExpireMonth": "Son Kullanma Tarihi (Ay)",
+        "ExpireYear": "Son Kullanma Tarihi (Yıl)"
+      }
     }
   },
   "WelcomeSteps": {
-    "StylePreferences": {
-      "Title": "Stil Tercihleri",
-      "UnwantedPieces1": "Kombinlerinizde ",
-      "UnwantedPieces2": "kesinlikle olmasını istemediğiniz ",
-      "UnwantedPieces3": "parçaları seçiniz.",
-      "Hijab": "Tesettür giyim tercih ediyorum.",
-      "BodyPartsToHighlight": "Özellikle öne çıkarmak istediğiniz bölgeler var mı?",
-      "BodyPartsToHide": "Özellikle saklamak istediğiniz bölgeler var mı?",
-      "BodyParts": {
-        "Arms": "Kollar",
-        "Shoulders": "Omuzlar",
-        "Back": "Sırt",
-        "Chest": "Göğüs",
-        "Abdoment": "Karın",
-        "Hips": "Basen",
-        "Legs": "Bacaklar"
-      },
-      "ExcludedColorTypes": {
-        "1": "Kombinlerinizde ",
-        "2": "kesinlikle olmasını istemediğiniz ",
-        "3": "renk tonlarını seçiniz."
-      },
-      "ExcludedColors": {
-        "1": "Kombinlerinizde ",
-        "2": "kesinlikle olmasını istemediğiniz ",
-        "3": "renkleri seçiniz."
-      },
-      "ExcludedPatterns": {
-        "1": "Kombinlerinizde ",
-        "2": "kesinlikle olmasını istemediğiniz ",
-        "3": "desenleri seçiniz."
-      },
-      "ExcludedFabrics": {
-        "1": "Kombinlerinizde ",
-        "2": "kesinlikle olmasını istemediğiniz ",
-        "3": "dokuları seçiniz."
-      }
-    },
+    "StylePreferences": {},
     "ContactInfo": {
       "AddressName": "Adres Adı"
     },
     "Subscription": {
-      "StartDateTitle": "Abonelik başlangıç tarihinizi seçiniz.",
-      "StartDateSubtitle": "İlk kombininizi seçtiğiniz hafta içerisinde göndereceğiz. Abonelik tercihinize göre kombinleriniz abonelik başlangıcı baz alınarak size ulaştırılacaktır.",
+      "StartDateTitle": "İlk kombin alma tarihinizi seçiniz.",
+      "StartDateSubtitle": "İlk kombininizi seçtiğiniz hafta içerisinde göndereceğiz. ",
       "Title": "Abonelik tercihinizi seçiniz.",
       "Subtitle": "Aboneliğinizi dilediğiniz zaman dondurabilir ya da tercihinizi değiştirebilirsiniz. Abonelik dondurma ya da değişikliğinden ekstra bir ücret alınmaz.",
       "TwoWeeks": "2 Haftada Bir",
@@ -147,55 +230,90 @@
     "Blouse": "Bluz",
     "Sweatshirt": "Sweatşört",
     "Sweater": "Kazak",
+    "Jersey": "Suveter",
     "Blazer": "Blazer",
     "Jacket": "Çeket",
     "Coats": "Mont",
+    "Parka": "Parka",
+    "Coat": "Kaban",
     "TrenchCoat": "Trençkot",
+    "Raincoat": "Yağmurluk",
     "Pyjamas": "Pijama",
     "Socks": "Çorap",
     "Pants": "Pantolon",
     "Jeans": "Kot Pantolon",
     "Shorts": "Şort",
     "Sweatpants": "Eşofman",
-    "SportBag": "Spor Çantası",
+    "SportBag": "Spor",
     "RunningShoes": "Koşu Ayakkabısı",
     "SnowBoots": "Kar Botu",
-    "Satchel": "Omuz Çantası",
-    "HandBags": "El Çantası",
+    "Satchel": "Omuz",
+    "HandBags": "El",
     "Wallet": "Cüzdan",
-    "Backpack": "SırtÇantası",
+    "CardHolder": "Kartlık",
+    "Backpack": "Sırt",
     "Swimsuit": "Mayo",
     "CasualShoes": "Günlük Ayakkabı",
     "Sandals": "Sandalet",
-    "Boots": "Çizme",
+    "TopBoots": "Çizme",
+    "Boots": "Bot",
     "Watch": "Saat",
+    "Glove": "Eldiven",
     "Sunglasses": "Güneş Gözlüğü",
+    "Glasses": "Gözlük",
+    "Necklace": "Kolye",
+    "Earring": "Küpe",
+    "Ring": "Yüzük",
+    "Tie": "Kravat",
+    "BowTie": "Papyon",
     "Belt": "Kemer",
     "Hat": "Şapka",
+    "Cap": "Kep",
+    "HairBand": "Saç Bandı",
+    "Clasp": "Toka",
     "Beanie": "Bere",
     "Jewelery": "Takı",
-    "Scarf": "Atkı&Fular",
+    "Scarf": "Atkı",
+    "Foulard": "Fular",
+    "ShawlScarf": "Şal & Eşarp",
+    "Underwear": "İç Çamaşırı",
     "Nightwear": "Gecelik",
     "Bra": "Bra",
     "Panties": "Panties",
     "HighHeels": "Topuklu",
     "FlatShoes": "Babet",
+    "Espadrilles": "Espadril",
+    "Loafer": "Loafer",
+    "Oxford": "Oxford",
     "Boxer": "Boxer",
-    "SleevelessUnderShirt": "Atlet",
+    "SleevelessUndershirt": "Atlet",
     "Skirt": "Etek",
     "Bustier": "Büstiyer",
     "Crop": "Crop",
-    "Tunik": "Tunik",
+    "Tunic": "Tunik",
     "Bralet": "Bralet",
     "Overalls": "Tulum",
     "Leggings": "Tayt",
-    "Shoes": "Ayakkabı"
+    "Shoes": "Ayakkabı",
+    "Sneakers": "Sneakers",
+    "Slippers": "Terlik",
+    "ShortHeels": "Klasik",
+    "WaistBag": "Bel",
+    "PostmanBag": "Postacı",
+    "Capri": "Kapri",
+    "Cardigan": "Hırka",
+    "Portfolio": "Portföy",
+    "Headband": "Taç",
+    "Poncho": "Panço",
+    "Bikini": "Bikini",
+    "Waistcoat": "Yelek"
   },
   "MainCategories": {
     "Upper": "Üst Giyim",
     "Lower": "Alt Giyim",
+    "Outer": "Dış Giyim",
     "Accessories": "Aksesuar",
-    "Underwear": "İç Giyim",
+    "UnderwearPyjamasBeach": "İç Giyim & Pijama & Plaj",
     "Bags": "Bags",
     "Beach": "Plaj",
     "Footwear": "Ayakkabı",
@@ -252,7 +370,7 @@
       "LastName": "Soyad",
       "BirthDate": "Doğum Tarihi",
       "PhoneNumber": "Telefon",
-      "Job": "Mesleğin Nedir?",
+      "Job": "Mesleğin Nedir? (Opsiyonel)",
       "Gender": {
         "Gender": "Cinsiyet",
         "Male": "Erkek",
@@ -279,6 +397,9 @@
       "95": "95"
     },
     "Address": {
+      "FirstName": "Ad",
+      "LastName": "Soyad",
+      "Phone": "Telefon",
       "City": "İl",
       "District": "İlçe",
       "Address": "Adres",

@@ -15,6 +15,13 @@ namespace Modilist.Data.EntityConfigurations.UserDomain
 
             builder.Property(x => x.State).HasConversion<string>().IsRequired();
             builder.Property(x => x.Gender).HasConversion<string>().IsRequired();
+
+            //builder.Navigation(x => x.Addresses)
+            //    .HasField("_addresses")
+            //    .UsePropertyAccessMode(PropertyAccessMode.Field);
+            //builder.Navigation(x => x.PaymentMethods)
+            //    .HasField("_paymentMethods")
+            //    .UsePropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

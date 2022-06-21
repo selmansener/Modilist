@@ -8,6 +8,7 @@ using Modilist.Data.DataAccess;
 using Modilist.Data.Repositories.AddressDomain;
 using Modilist.Data.Repositories.PaymentDomain;
 using Modilist.Data.Repositories.StylePreferencesDomain;
+using Modilist.Data.Repositories.SubscriptionDomain;
 using Modilist.Data.Repositories.UserDomain;
 using Modilist.Data.Transactions;
 using Modilist.Infrastructure.Shared.Configurations;
@@ -57,6 +58,8 @@ namespace Modilist.Data.Extensions
             services.AddScoped<IPreferedFabricPropertiesRepository, PreferedFabricPropertiesRepository>();
 
             services.AddScoped<IFitPreferencesRepository, FitPreferencesRepository>();
+
+            services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 
             return services;
         }

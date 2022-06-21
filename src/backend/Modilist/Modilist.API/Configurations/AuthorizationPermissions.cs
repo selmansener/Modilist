@@ -29,6 +29,10 @@
 
         public const string CreatePaymentMethod = "PaymentMethods.Create";
 
+        public const string GetSubscriptions = "Subscriptions.Get";
+        public const string CreateSubscriptions = "Subscriptions.Create";
+        public const string UpdateSubscriptions = "Subscriptions.Update";
+
         public const string Development = "Development";
     }
 }

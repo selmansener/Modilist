@@ -58,7 +58,6 @@ export function LowerFits(props: LowerFitsProps) {
                     element: <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: 100
                     }}>
                         <ImageComponent src={lowerFit.img} />
                         <Typography>{lowerFit.name}</Typography>

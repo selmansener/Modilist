@@ -11,11 +11,11 @@ using Modilist.Infrastructure.Shared.Extensions;
 
 namespace Modilist.API.Area.API.Controllers
 {
-    public class UserController : APIBaseController
+    public class AccountController : APIBaseController
     {
         private readonly IMediator _mediator;
 
-        public UserController(IMediator mediator)
+        public AccountController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -24,9 +24,9 @@ namespace Modilist.API.Area.API.Controllers
         [Authorize(nameof(AuthorizationPermissions.GetAccount))]
         [HttpGet("Get")]
         [ProducesResponseType(typeof(AccountDTO), 200)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(CancellationToken cancellationToken)
         {
-            var account = await _mediator.Send(new GetAccount { Id = User.GetUserId() });
+            var account = await _mediator.Send(new GetAccount { Id = User.GetUserId() }, cancellationToken);
 
             return Ok(account);
         }
@@ -49,6 +49,19 @@ namespace Modilist.API.Area.API.Controllers
             input.Id = User.GetUserId();
 
             var response = await _mediator.Send(input, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [Authorize(nameof(AuthorizationPermissions.UpdateAccount))]
+        [HttpPost("Activate")]
+        [ProducesResponseType(typeof(AccountDTO), 200)]
+        public async Task<IActionResult> Activate(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new ActivateAccount
+            {
+                AccountId = User.GetUserId()
+            }, cancellationToken);
 
             return Ok(response);
         }

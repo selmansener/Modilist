@@ -24,22 +24,9 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
             </AppBar>
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                 <Grid container spacing="2">
-                    {
-                        <>
-                            <Grid item xs={12}>
-
-                                <Typography variant="h4" component="div" sx={{ mt: 2 }}>
-                                    {t('Layouts.Welcome.WelcomeLayout.Welcome')}
-                                </Typography>
-                                <Typography variant="h6" component="div">
-                                    {t('Layouts.Welcome.WelcomeLayout.Description1')}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={12} sx={{ mt: 5 }}>
-                                {props.children}
-                            </Grid>
-                        </>
-                    }
+                    <Grid item xs={12} sx={{ mt: 5 }}>
+                        {props.children}
+                    </Grid>
                 </Grid>
             </Container>
         </Box>

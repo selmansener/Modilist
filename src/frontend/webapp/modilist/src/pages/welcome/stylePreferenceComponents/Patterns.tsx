@@ -15,9 +15,10 @@ enum Pattern {
     AnimalPattern = "Animal",
     Squared = "Squared",
     AnimalFigured = "Animal",
-    BigFlower = "Big",
-    SmallFlower = "Small",
+    BigFlowers = "Big",
+    SmallFlowers = "Small",
     Printed = "Printed",
+    GooseFoot = "GooseFoot"
 }
 
 interface PatternElement {
@@ -40,8 +41,8 @@ export function Patterns(props: PatternsProps) {
     const patterns: PatternElement[] = (gender === Gender.Female
         ? Object.keys(Pattern) 
         : Object.keys(Pattern).filter(x => x !== Pattern.Shawl 
-            && x !== Pattern.BigFlower 
-            && x !== Pattern.SmallFlower))
+            && x !== Pattern.BigFlowers 
+            && x !== Pattern.SmallFlowers))
         .map(pattern => {
             return {
                 name: t(`Pattern.${pattern}`),
@@ -80,7 +81,6 @@ export function Patterns(props: PatternsProps) {
                     element: <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: 100
                     }}>
                         <ImageComponent src={colorType.img} />
                         <Typography>{colorType.name}</Typography>

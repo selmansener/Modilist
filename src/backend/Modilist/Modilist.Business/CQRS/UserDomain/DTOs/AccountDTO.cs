@@ -27,7 +27,7 @@ namespace Modilist.Business.CQRS.UserDomain.DTOs
 
         public string? JobTitle { get; private set; }
 
-        public AccountStatus State { get; private set; }
+        public AccountState State { get; private set; }
     }
 
     public class AccountDTOMapper : IRegister

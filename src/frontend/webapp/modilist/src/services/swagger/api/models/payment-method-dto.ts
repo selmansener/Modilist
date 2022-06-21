@@ -17,4 +17,28 @@
  * @interface PaymentMethodDTO
  */
 export interface PaymentMethodDTO {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodDTO
+     */
+    cardNumber?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodDTO
+     */
+    cardHolderName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodDTO
+     */
+    expireMonth?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodDTO
+     */
+    expireYear?: string;
 }

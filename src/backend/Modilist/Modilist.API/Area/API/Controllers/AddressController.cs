@@ -56,13 +56,13 @@ namespace Modilist.API.Area.API.Controllers
         [Authorize(nameof(AuthorizationPermissions.GetAddress))]
         [HttpGet("Get/{id}")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(int id, CancellationToken cancellationToken)
         {
             var account = await _mediator.Send(new GetAddress
             {
                 Id = id,
                 AccountId = User.GetUserId()
-            });
+            }, cancellationToken);
 
             return Ok(account);
         }

@@ -22,13 +22,7 @@ export interface StylePreferencesDTO {
      * @type {string}
      * @memberof StylePreferencesDTO
      */
-    accountId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StylePreferencesDTO
-     */
-    choiseReasons?: string;
+    choiceReasons?: string;
     /**
      * 
      * @type {number}
@@ -52,41 +46,53 @@ export interface StylePreferencesDTO {
      * @type {string}
      * @memberof StylePreferencesDTO
      */
-    bodyPartsToHighlight?: string;
+    bodyPartsToHighlight?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StylePreferencesDTO
      */
-    bodyPartsToHide?: string;
+    bodyPartsToHide?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StylePreferencesDTO
      */
-    excludedCategories?: string;
+    excludedUpperCategories?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StylePreferencesDTO
      */
-    excludedColors?: string;
+    excludedLowerCategories?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StylePreferencesDTO
      */
-    excludedColorCategories?: string;
+    excludedOuterCategories?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StylePreferencesDTO
      */
-    excludedPatterns?: string;
+    excludedUnderwearCategories?: string | null;
     /**
      * 
      * @type {string}
      * @memberof StylePreferencesDTO
      */
-    excludedFabrics?: string;
+    excludedAccessoryCategories?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof StylePreferencesDTO
+     */
+    excludedFootwearCategories?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof StylePreferencesDTO
+     */
+    excludedBagCategories?: string | null;
 }

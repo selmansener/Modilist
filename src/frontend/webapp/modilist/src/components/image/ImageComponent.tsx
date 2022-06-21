@@ -11,7 +11,7 @@ export interface ImageProps {
 
 export function ImageComponent(props: ImageProps) {
     const ref = useRef<HTMLElement>();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [height, setHeight] = useState(0);
     const [width, setWidth] = useState(0);
@@ -33,6 +33,9 @@ export function ImageComponent(props: ImageProps) {
             }}
         />}
         {!error && <img {...props}
+            onLoadStart={() => {
+                setLoading(true);
+            }}
             onLoad={() => {
                 setLoading(false);
             }}

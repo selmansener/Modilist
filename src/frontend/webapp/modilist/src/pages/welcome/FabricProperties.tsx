@@ -1,4 +1,4 @@
-import { FormControl, Grid, TextField, Typography } from "@mui/material";
+import { Button, CircularProgress, FormControl, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Colors } from "./stylePreferenceComponents/Colors";
@@ -17,7 +17,7 @@ export function FabricProperties() {
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: getPreferedFabricPropertiesIsBusy, data: initialPreferedFabricProperties, status: getPreferedFabricPropertiesStatus } = useSelector((state: RootState) => state.getPreferedFabricPropertiesModel);
     const { isBusy: upsertPreferedFabricPropertiesIsBusy, data: upsertPreferedFabricProperties, status: upsertStatus } = useSelector((state: RootState) => state.upsertPreferedFabricPropertiesModel);
-    const { activeStep, skipped } = useSelector((state: RootState) => state.welcomeStepsModel);
+    const isBusy = getAccountIsBusy || getPreferedFabricPropertiesIsBusy || upsertPreferedFabricPropertiesIsBusy;
     const [fabricProps, setFabricProps] = useState<PreferedFabricPropertiesDTO>({
         excludedColors: "",
         excludedColorCategories: "",
@@ -27,10 +27,6 @@ export function FabricProperties() {
         additionalNotes: ""
     });
 
-    const isStepSkipped = (step: number) => {
-        return skipped.has(step);
-    };
-
     useEffect(() => {
         if (upsertStatus === 200) {
             if (upsertPreferedFabricProperties) {
@@ -39,35 +35,9 @@ export function FabricProperties() {
 
             dispatch.upsertPreferedFabricPropertiesModel.RESET();
 
-            let newSkipped = skipped;
-            if (isStepSkipped(activeStep)) {
-                newSkipped = new Set(newSkipped.values());
-                newSkipped.delete(activeStep);
-            }
-
-            dispatch.welcomeStepsModel.setActiveStep(activeStep + 1);
-            dispatch.welcomeStepsModel.setSkipped(newSkipped);
+            dispatch.welcomePageStepper.next();
         }
     }, [upsertStatus]);
-
-    useEffect(() => {
-        dispatch.welcomeStepsModel.setNextCallback(() => {
-            if (!upsertPreferedFabricPropertiesIsBusy) {
-                dispatch.upsertPreferedFabricPropertiesModel.upsertPreferedFabricProperties(fabricProps);
-            }
-        });
-
-        dispatch.welcomeStepsModel.setBackCallback(() => {
-            let newSkipped = skipped;
-            newSkipped = new Set(newSkipped.values());
-            newSkipped.delete(activeStep);
-
-            const newStep = activeStep - 1;
-
-            dispatch.welcomeStepsModel.setActiveStep(newStep);
-            dispatch.welcomeStepsModel.setSkipped(newSkipped);
-        });
-    }, [fabricProps]);
 
     useEffect(() => {
         if (initialPreferedFabricProperties && getPreferedFabricPropertiesStatus === 200) {
@@ -85,52 +55,68 @@ export function FabricProperties() {
         }
     }, []);
 
+    const Color = () => {
+        return <Colors
+            value={fabricProps?.excludedColors}
+            onChange={(value) => {
+                setFabricProps({
+                    ...fabricProps,
+                    excludedColors: value
+                });
+            }}
+        />
+    }
+
+    const ColorType = () => {
+        return <ColorTypes
+            value={fabricProps?.excludedColorCategories}
+            onChange={(value) => {
+                setFabricProps({
+                    ...fabricProps,
+                    excludedColorCategories: value
+                });
+            }}
+        />
+    }
+
+    const Pattern = () => {
+        return <Patterns
+            value={fabricProps?.excludedPatterns}
+            gender={account?.gender ?? Gender.None}
+            onChange={(value) => {
+                setFabricProps({
+                    ...fabricProps,
+                    excludedPatterns: value
+                });
+            }}
+        />
+    }
+
+    const Fabric = () => {
+        return <Fabrics
+            value={fabricProps?.excludedFabrics}
+            gender={account?.gender ?? Gender.None}
+            onChange={(value) => {
+                setFabricProps({
+                    ...fabricProps,
+                    excludedFabrics: value
+                });
+            }}
+        />
+    }
+
     return <Grid container spacing={2}>
         <Grid item xs={12}>
-            <Colors
-                value={fabricProps?.excludedColors}
-                onChange={(value) => {
-                    setFabricProps({
-                        ...fabricProps,
-                        excludedColors: value
-                    });
-                }}
-            />
+            <Color />
         </Grid>
         <Grid item xs={12}>
-            <ColorTypes
-                value={fabricProps?.excludedColorCategories}
-                onChange={(value) => {
-                    setFabricProps({
-                        ...fabricProps,
-                        excludedColorCategories: value
-                    });
-                }}
-            />
+            <ColorType />
         </Grid>
         <Grid item xs={12}>
-            <Patterns
-                value={fabricProps?.excludedPatterns}
-                gender={account?.gender ?? Gender.None}
-                onChange={(value) => {
-                    setFabricProps({
-                        ...fabricProps,
-                        excludedPatterns: value
-                    });
-                }}
-            />
+            <Pattern />
         </Grid>
         <Grid item xs={12}>
-            <Fabrics
-                value={fabricProps?.excludedFabrics}
-                gender={account?.gender ?? Gender.None}
-                onChange={(value) => {
-                    setFabricProps({
-                        ...fabricProps,
-                        excludedFabrics: value
-                    });
-                }}
-            />
+            <Fabric />
         </Grid>
         <Grid item xs={12}>
             <Trans>
@@ -183,6 +169,33 @@ export function FabricProperties() {
                     rows={5}
                     maxRows={8} />
             </FormControl>
+        </Grid>
+        <Grid item container xs={6} justifyContent="flex-start">
+            <Button
+                disabled={isBusy}
+                onClick={() => {
+                    dispatch.welcomePageStepper.back();
+                }}
+            >
+                {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
+            </Button>
+        </Grid>
+        <Grid item container xs={6} justifyContent="flex-end">
+            <Button
+                disabled={isBusy}
+                onClick={() => {
+                    if (!upsertPreferedFabricPropertiesIsBusy) {
+                        dispatch.upsertPreferedFabricPropertiesModel.upsertPreferedFabricProperties(fabricProps);
+                    }
+                }}
+                variant="outlined">
+                {isBusy && <CircularProgress sx={{
+                    width: "18px !important",
+                    height: "18px !important",
+                    mr: 2
+                }} />}
+                {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
+            </Button>
         </Grid>
     </Grid>
 }

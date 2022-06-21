@@ -55,7 +55,6 @@ export function SkirtDressLengths(props: SkirtDressLengthsProps) {
                     element: <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: 100
                     }}>
                         <ImageComponent src={skirtDressLength.img} />
                         <Typography>{skirtDressLength.name}</Typography>

@@ -54,7 +54,6 @@ export function FootTypes(props: FootTypesProps) {
                     element: <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: 100
                     }}>
                         <ImageComponent src={footType.img} />
                         <Typography>{footType.name}</Typography>

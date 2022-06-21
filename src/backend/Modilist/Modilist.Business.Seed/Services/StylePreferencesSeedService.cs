@@ -1,5 +1,7 @@
 ﻿using System.Collections.Immutable;
 
+using Bogus;
+
 using Microsoft.EntityFrameworkCore;
 
 using Modilist.Business.Seed.Configuration;
@@ -21,9 +23,37 @@ namespace Modilist.Business.Seed.Services
         {
             var accounts = await _dbContext.Accounts.ToListAsync();
 
+            var faker = new Faker();
+
+            var choiceReasons = new List<string>()
+            {
+                "Trendleri Takip Etmek",
+                "Alışverişten Zaman Kazanmak",
+                "Özel Stil Danışmanım Olması",
+                "Yerel ve Butik Markaları Denemek",
+                "Süprizlerle Kendimi Şımartmak",
+                "Kendime Yeni Bir Stil Oluşturmak"
+            };
+
+            
+
             foreach (var account in accounts)
             {
-                var stylePreference = new StylePreference(account.Id);
+                var stylePreference = new StylePreferences(
+                    account.Id,
+                    faker.PickRandom<string>(choiceReasons),
+                    faker.Random.Float(),
+                    faker.Random.Float(),
+                    false,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty);
 
                 await _dbContext.AddAsync(stylePreference, cancellationToken);
             }

@@ -8,7 +8,6 @@ import { config } from "../../../config";
 enum WaistHeight {
     UltraHighWaist = "UltraHighWaist",
     HighWaist = "HighWaist",
-    Original = "Original",
     Regular = "Regular",
     Medium = "Medium",
     Low = "Low",
@@ -60,7 +59,6 @@ export function WaistHeights(props: WaistHeightsProps) {
                     element: <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: 100
                     }}>
                         <ImageComponent src={waistHeight.img} />
                         <Typography>{waistHeight.name}</Typography>
