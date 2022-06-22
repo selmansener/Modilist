@@ -15,10 +15,10 @@ enum Pattern {
     AnimalPattern = "Animal",
     Squared = "Squared",
     AnimalFigured = "Animal",
+    GooseFoot = "GooseFoot",
     BigFlowers = "Big",
     SmallFlowers = "Small",
     Printed = "Printed",
-    GooseFoot = "GooseFoot"
 }
 
 interface PatternElement {
@@ -39,9 +39,9 @@ export function Patterns(props: PatternsProps) {
     const { gender, value, onChange } = props;
 
     const patterns: PatternElement[] = (gender === Gender.Female
-        ? Object.keys(Pattern) 
-        : Object.keys(Pattern).filter(x => x !== Pattern.Shawl 
-            && x !== Pattern.BigFlowers 
+        ? Object.keys(Pattern)
+        : Object.keys(Pattern).filter(x => x !== Pattern.Shawl
+            && x !== Pattern.BigFlowers
             && x !== Pattern.SmallFlowers))
         .map(pattern => {
             return {
@@ -52,23 +52,17 @@ export function Patterns(props: PatternsProps) {
         });
 
     return <CustomCheckboxGroup
-        sx={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-        }}
         value={value ?? ""}
         label={<Box sx={{
             mb: 2
         }}>
-            <Typography variant={"h5"} display="inline">
+            <Typography variant="h4" display="inline">
                 {t("Pages.Welcome.FabricProperties.ExcludedPatterns.1")}
             </Typography>
-            <Typography variant={"h5"} color={"error"} display="inline">
+            <Typography color={"error"} variant="h4" display="inline">
                 {t("Pages.Welcome.FabricProperties.ExcludedPatterns.2")}
             </Typography>
-            <Typography variant={"h5"} display="inline">
+            <Typography variant="h4" display="inline">
                 {t("Pages.Welcome.FabricProperties.ExcludedPatterns.3")}
             </Typography>
         </Box>
@@ -83,7 +77,7 @@ export function Patterns(props: PatternsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={colorType.img} />
-                        <Typography>{colorType.name}</Typography>
+                        <Typography variant="h4">{colorType.name}</Typography>
                     </Box>
                 }
             })

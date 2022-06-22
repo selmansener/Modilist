@@ -41,18 +41,21 @@ export function SubscriptionDetails() {
         });
     }, []);
 
-    return <Grid item container spacing={2}>
-        <Grid item xs={8}>
+    return <Grid item container spacing={4}>
+        <Grid item xs={10}>
             <FormControl fullWidth>
                 <FormControlLabel
-                    labelPlacement="top"
+                    labelPlacement="bottom"
                     label={
-                        <Typography variant="h6" gutterBottom>
+                        <Typography variant="h4" sx={{
+                            mt: 2
+                        }}>
                             {t("Pages.Welcome.Subscription.SubscriptionDetails.PriceTitle")}
                         </Typography>
                     }
                     control={
                         <Slider
+                            color="secondary"
                             aria-label="Temperature"
                             value={maxLimit}
                             getAriaValueText={(val, index) => val.toString()}
@@ -72,12 +75,12 @@ export function SubscriptionDetails() {
                     } />
             </FormControl>
         </Grid>
-        <Grid xs={4} sx={{
+        <Grid xs={2} sx={{
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'flex-end'
+            alignItems: 'center'
         }} >
-            <Typography variant="h3">{maxLimit}<CurrencyLiraIcon fontSize="large" /></Typography>
+            <Typography variant="h2" color="secondary">{maxLimit}<CurrencyLiraIcon fontSize="large" /></Typography>
         </Grid>
     </Grid>
 }

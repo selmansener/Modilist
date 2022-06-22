@@ -6,13 +6,13 @@ import { config } from "../../../config";
 
 enum Color {
     Red = "Red",
+    Orange = "Orange",
+    Yellow = "Yellow",
     Green = "Green",
     Blue = "Blue",
-    Yellow = "Yellow",
-    Orange = "Orange",
-    Pink = "Pink",
     NavyBlue = "NavyBlue",
     Purple = "Purple",
+    Pink = "Pink",
     Brown = "Brown",
     Grey = "Grey",
     White = "White",
@@ -44,26 +44,19 @@ export function Colors(props: ColorsProps) {
     });
 
     return <CustomCheckboxGroup
-        sx={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-        }}
         value={value ?? ""}
         label={
             <Box sx={{
                 mb: 2
             }}>
-
                 <Trans>
-                    <Typography variant={"h5"} display="inline">
+                    <Typography variant="h4" display="inline">
                         {t("Pages.Welcome.FabricProperties.ExcludedColors.1")}
                     </Typography>
-                    <Typography variant={"h5"} display="inline" color={"error"} >
+                    <Typography variant="h4" display="inline" color={"error"} >
                         {t("Pages.Welcome.FabricProperties.ExcludedColors.2")}
                     </Typography>
-                    <Typography variant={"h5"} display="inline">
+                    <Typography variant="h4" display="inline">
                         {t("Pages.Welcome.FabricProperties.ExcludedColors.3")}
                     </Typography>
                 </Trans>
@@ -79,7 +72,7 @@ export function Colors(props: ColorsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={colorType.img} />
-                        <Typography>{colorType.name}</Typography>
+                        <Typography  variant="h4">{colorType.name}</Typography>
                     </Box>
                 }
             })

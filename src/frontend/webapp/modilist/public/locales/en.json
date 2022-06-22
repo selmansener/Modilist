@@ -71,7 +71,8 @@
         "FootLength": "Ayak Uzunluğu (cm)",
         "Height": "Boy (cm)",
         "Weight": "Kilo (kg)",
-        "AdditionalNotes": "Kıyafet ve Beden ölçüleri ile ilgili eklemek istedikleriniz; (Opsiyonel)"
+        "AdditionalNotes": "Kıyafet ve Beden ölçüleri ile ilgili eklemek istedikleriniz; ",
+        "Optional": "(Opsiyonel)"
       },
       "FitPreferences": {
         "WaistHeightPreference": "Alt giyimde tercih ettiğin bel çeşitleri",
@@ -110,7 +111,8 @@
           "Spanish": "İspanyol Paça",
           "Straight": "Boru Paça",
           "Loose": "Geniş Paça",
-          "Skinny": "Dar Paça"
+          "Slim": "Dar Paça",
+          "Wide": "Çizme Paça"
         },
         "ShortsLengthPreference": "Alt giyimde tercih ettiğin şort uzunluğu",
         "ShortsLengths": {
@@ -153,7 +155,9 @@
         },
         "AdditionalNotes": "Eklemek istediğiniz notunuz varsa belirtiniz."
       },
-      "ContactInfo": {},
+      "ContactInfo": {
+        "Title": "Teslimat Adresi"
+      },
       "Personal": {
         "HeaderPersonalInfo": "Kişisel Bilgiler",
         "MenuItem": "Seçiniz",
@@ -320,12 +324,15 @@
     "SportOutdoor": "Spor&Outdoor"
   },
   "ColorType": {
-    "Hot": "Canlı",
+    "Hot": "Sıcak",
     "Cold": "Soğuk",
     "Pastel": "Pastel",
     "Nude": "Nude",
-    "BlackWhite": "Siyah&Beyaz",
-    "Dark": "Koyu"
+    "BlackAndWhite": "Siyah&Beyaz",
+    "Dark": "Koyu",
+    "Vivid": "Canlı",
+    "Neon": "Neon",
+    "Light": "Açık"
   },
   "Color": {
     "Red": "Kırmızı",
@@ -335,7 +342,11 @@
     "Orange": "Turuncu",
     "Pink": "Pembe",
     "Purple": "Mor",
-    "Brown": "Kahverengi"
+    "Brown": "Kahverengi",
+    "Grey": "Gri",
+    "White": "Beyaz",
+    "Black": "Siyah",
+    "NavyBlue": "Lacivert"
   },
   "Pattern": {
     "Plaid": "Ekose",
@@ -346,9 +357,10 @@
     "AnimalPattern": "Hayvan Deseni",
     "Squared": "Kareli",
     "AnimalFigured": "Hayvan Figürlü",
-    "BigFlower": "Büyük Çiçekli",
-    "SmallFlower": "Küçük Çiçekli",
-    "Printed": "Baskılı"
+    "BigFlowers": "Büyük Çiçekli",
+    "SmallFlowers": "Küçük Çiçekli",
+    "Printed": "Baskılı",
+    "GooseFoot": "Kazayağı"
   },
   "Fabric": {
     "Leather": "Deri",
@@ -356,7 +368,10 @@
     "Satin": "Saten",
     "FauxFur": "Suni Kürk",
     "Velvet": "Kadife",
-    "Lace": "Dantel"
+    "Lace": "Dantel",
+    "Guipure": "Güpür",
+    "Parachute": "Paraşüt",
+    "Jute": "Jüt"
   },
   "FormValidation": {
     "RequiredField": "* Gerekli Alan"

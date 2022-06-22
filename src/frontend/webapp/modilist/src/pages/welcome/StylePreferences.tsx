@@ -554,8 +554,7 @@ export default function StylePreferences() {
                 value: category.value,
                 element: <Box sx={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    width: 100
+                    flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
                     <Typography sx={{ mt: 2 }}>{category.name}</Typography>
@@ -564,8 +563,11 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            sx={{
+                justifyContent: 'center'
+            }}
             value={stylePreferences?.excludedUpperCategories ?? ""}
-            label={<Typography variant="h4" sx={{ mb: 3 }}>{t("MainCategories.Upper")}</Typography>}
+            label={<Typography variant="h4">{t("MainCategories.Upper")}</Typography>}
             contents={upperCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -580,8 +582,7 @@ export default function StylePreferences() {
                 value: category.value,
                 element: <Box sx={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    width: 100
+                    flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
                     <Typography sx={{ mt: 2 }}>{category.name}</Typography>
@@ -590,8 +591,11 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            sx={{
+                justifyContent: 'center'
+            }}
             value={stylePreferences?.excludedLowerCategories ?? ""}
-            label={<Typography variant="h4" sx={{ mb: 3, ml: 2 }} align="left">{t("MainCategories.Lower")}</Typography>}
+            label={<Typography variant="h4">{t("MainCategories.Lower")}</Typography>}
             contents={lowerCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -606,8 +610,7 @@ export default function StylePreferences() {
                 value: category.value,
                 element: <Box sx={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    width: 100
+                    flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
                     <Typography sx={{ mt: 2 }}>{category.name}</Typography>
@@ -616,8 +619,11 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            sx={{
+                justifyContent: 'center'
+            }}
             value={stylePreferences?.excludedOuterCategories ?? ""}
-            label={<Typography variant="h4" sx={{ mb: 3 }}>{t("MainCategories.Outer")}</Typography>}
+            label={<Typography variant="h4">{t("MainCategories.Outer")}</Typography>}
             contents={outerCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -631,8 +637,7 @@ export default function StylePreferences() {
                 value: category.value,
                 element: <Box sx={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    width: 100
+                    flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
                     <Typography sx={{ mt: 2 }}>{category.name}</Typography>
@@ -641,8 +646,11 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            sx={{
+                justifyContent: 'center'
+            }}
             value={stylePreferences?.excludedUnderwearCategories ?? ""}
-            label={<Typography variant="h4" sx={{ mb: 3 }}>{t("MainCategories.UnderwearPyjamasBeach")}</Typography>}
+            label={<Typography variant="h4">{t("MainCategories.UnderwearPyjamasBeach")}</Typography>}
             contents={accessoriesCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -657,8 +665,7 @@ export default function StylePreferences() {
                 value: category.value,
                 element: <Box sx={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    width: 100
+                    flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
                     <Typography sx={{ mt: 2 }}>{category.name}</Typography>
@@ -667,8 +674,11 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            sx={{
+                justifyContent: 'center'
+            }}
             value={stylePreferences?.excludedAccessoryCategories ?? ""}
-            label={<Typography variant="h4" sx={{ mb: 3 }}>{t("MainCategories.Accessories")}</Typography>}
+            label={<Typography variant="h4">{t("MainCategories.Accessories")}</Typography>}
             contents={accessoriesCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -683,8 +693,7 @@ export default function StylePreferences() {
                 value: category.value,
                 element: <Box sx={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    width: 100
+                    flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
                     <Typography sx={{ mt: 2 }}>{category.name}</Typography>
@@ -693,8 +702,11 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            sx={{
+                justifyContent: 'center'
+            }}
             value={stylePreferences?.excludedBagCategories ?? ""}
-            label={<Typography variant="h4" sx={{ mb: 3 }}>{t("MainCategories.Bags")}</Typography>}
+            label={<Typography variant="h4">{t("MainCategories.Bags")}</Typography>}
             contents={bagsCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -709,8 +721,7 @@ export default function StylePreferences() {
                 value: category.value,
                 element: <Box sx={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    width: 100
+                    flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
                     <Typography sx={{ mt: 2 }}>{category.name}</Typography>
@@ -719,8 +730,11 @@ export default function StylePreferences() {
         });
 
         return <CustomCheckboxGroup
+            sx={{
+                justifyContent: 'center'
+            }}
             value={stylePreferences?.excludedFootwearCategories ?? ""}
-            label={<Typography variant="h4" sx={{ mb: 3 }}>{t("MainCategories.Footwear")}</Typography>}
+            label={<Typography variant="h4">{t("MainCategories.Footwear")}</Typography>}
             contents={categories}
             isNegative
             onChange={(values: string[]) => {
@@ -767,10 +781,12 @@ export default function StylePreferences() {
     };
 
     const BodyPartsToHighlight = () => {
-        return <FormControl>
+        return <FormControl fullWidth>
             <CustomCheckboxGroup
                 value={stylePreferences?.bodyPartsToHighlight ?? ""}
-                label={<Typography variant="h4" align="left" sx={{ m: 2 }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>}
+                label={<Typography variant="h3" sx={{
+                    mb: 4
+                }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>}
                 contents={bodyParts}
                 onChange={(values: string[]) => {
                     setFieldValue("bodyPartsToHighlight", values.length > 0 ? values.join(',') : "");
@@ -780,10 +796,12 @@ export default function StylePreferences() {
     }
 
     const BodyPartsToHide = () => {
-        return <FormControl>
+        return <FormControl fullWidth>
             <CustomCheckboxGroup
                 value={stylePreferences?.bodyPartsToHide ?? ""}
-                label={<Typography variant="h4" align="left" sx={{ m: 2 }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>}
+                label={<Typography variant="h3" sx={{
+                    mb: 4
+                }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>}
                 isNegative
                 contents={bodyParts}
                 onChange={(values: string[]) => {
@@ -808,8 +826,7 @@ export default function StylePreferences() {
             value: bodyPart,
             element: <Box sx={{
                 display: 'flex',
-                flexDirection: 'column',
-                width: 100
+                flexDirection: 'column'
             }}>
                 <ImageComponent src={`${imgBaseHost}/body-parts/${bodyPart}.svg`} />
                 <Typography>{t(`Pages.Welcome.StylePreferences.BodyParts.${bodyPart}`)}</Typography>
@@ -818,173 +835,196 @@ export default function StylePreferences() {
     });
 
     return (
-        <Grid container spacing={2}>
+        <Grid item container xs={12} spacing={12}>
             <Grid item xs={6}>
                 <ImageComponent src={`${imgBaseHost}/style-preferences-general/ShoppingIllustration.svg`}></ImageComponent>
             </Grid>
-            <Grid item xs={6}>
-                <Stack spacing={3}>
-                    <Box sx={{ align: 'center' }}>
-                        <FormControl sx={{ m: 2 }} error={touched.lovesShopping && errors.lovesShopping !== undefined}>
-                            <Typography variant="h6" sx={{ mb: 1 }}>
-                                {t(`Pages.Welcome.StylePreferences.LikesShoping`)}
-                            </Typography>
-                            <Box sx={{
-                                display: 'flex',
-                                justifyContent: 'space-evenly'
-                            }}>
-                                <Rating
-                                    disabled={isBusy}
-                                    name="lovesShopping"
-                                    value={stylePreferences.lovesShopping}
-                                    onChange={handleChange}
-                                    getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
-                                    precision={0.5}
-                                    size="large"
-                                    icon={<FavoriteIcon fontSize="inherit" />}
-                                    emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
-                                />
-                            </Box>
-                            <FormHelperText>{touched.lovesShopping && errors.lovesShopping}</FormHelperText>
-                        </FormControl>
-                    </Box>
-                    <Box>
-                        <FormControl sx={{ m: 2 }} error={touched.openToSuggestions && errors.openToSuggestions !== undefined}>
-                            <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
-                                {t(`Pages.Welcome.StylePreferences.OpenToSuggestions`)}
-                            </Typography>
-                            <Box sx={{
-                                display: 'flex',
-                                justifyContent: 'space-evenly'
-                            }}>
-                                <Rating
-                                    disabled={isBusy}
-                                    name="openToSuggestions"
-                                    value={stylePreferences.openToSuggestions}
-                                    onChange={handleChange}
-                                    getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
-                                    precision={0.5}
-                                    size="large"
-                                    icon={<FavoriteIcon fontSize="inherit" />}
-                                    emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
-                                />
-                            </Box>
-                            <FormHelperText>{touched.openToSuggestions && errors.openToSuggestions}</FormHelperText>
-                        </FormControl>
-                    </Box>
-                </Stack>
+            <Grid item container xs={6}>
+                <Grid item xs={12} sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <FormControl error={touched.lovesShopping && errors.lovesShopping !== undefined}>
+                        <Typography variant="h3">
+                            {t(`Pages.Welcome.StylePreferences.LikesShoping`)}
+                        </Typography>
+                        <Box sx={{
+                            display: 'flex',
+                            justifyContent: 'space-evenly',
+                            mt: 2
+                        }}>
+                            <Rating
+                                disabled={isBusy}
+                                name="lovesShopping"
+                                value={stylePreferences.lovesShopping}
+                                onChange={handleChange}
+                                getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                precision={0.5}
+                                size="large"
+                                icon={<FavoriteIcon
+                                    color="secondary"
+                                    fontSize="inherit"
+                                    sx={{
+                                        width: '48px',
+                                        height: '48px'
+                                    }} />}
+                                emptyIcon={<FavoriteBorderIcon fontSize="inherit"
+                                    sx={{
+                                        width: '48px',
+                                        height: '48px'
+                                    }}
+                                />}
+                            />
+                        </Box>
+                        <FormHelperText>{touched.lovesShopping && errors.lovesShopping}</FormHelperText>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <FormControl error={touched.openToSuggestions && errors.openToSuggestions !== undefined}>
+                        <Typography variant="h3">
+                            {t(`Pages.Welcome.StylePreferences.OpenToSuggestions`)}
+                        </Typography>
+                        <Box sx={{
+                            display: 'flex',
+                            justifyContent: 'space-evenly',
+                            mt: 2
+                        }}>
+                            <Rating
+                                disabled={isBusy}
+                                name="openToSuggestions"
+                                value={stylePreferences.openToSuggestions}
+                                onChange={handleChange}
+                                getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                precision={0.5}
+                                size="large"
+                                icon={<FavoriteIcon
+                                    color="secondary"
+                                    fontSize="inherit"
+                                    sx={{
+                                        width: '48px',
+                                        height: '48px'
+                                    }} />}
+                                emptyIcon={<FavoriteBorderIcon
+                                    fontSize="inherit"
+                                    sx={{
+                                        width: '48px',
+                                        height: '48px'
+                                    }} />}
+                            />
+                        </Box>
+                        <FormHelperText>{touched.openToSuggestions && errors.openToSuggestions}</FormHelperText>
+                    </FormControl>
+                </Grid>
             </Grid>
 
-            <Grid item xs={5} sx={{ mt: 4 }}>
-                <Typography variant="h4" align="left">
-                    {t(`Pages.Welcome.StylePreferences.ChoiceReasonsQuestion`)}
-                </Typography>
-                <FormControl fullWidth error={touched.choiceReasons && errors.choiceReasons !== undefined}>
-                    <FormGroup sx={{ mt: 2 }} >
-                        {choiseReasons.map(reason => (
-                            <FormControlLabel control={
-                                <Checkbox
-                                    disabled={isBusy}
-                                    value={reason}
-                                    checked={stylePreferences?.choiceReasons !== undefined && stylePreferences?.choiceReasons?.split(',').indexOf(reason) > -1}
-                                    onChange={handleChoiseReasonChange}
-                                />} label={
-                                    t(`Pages.Welcome.StylePreferences.ChoiceReasons.${reason}`)
-                                } />
-                        ))}
-                    </FormGroup>
-                    <FormHelperText>{touched.choiceReasons && errors.choiceReasons}</FormHelperText>
-                </FormControl>
+            <Grid item container xs={6}>
+                <Grid item xs={4}></Grid>
+                <Grid item xs={8}>
+                    <Typography variant="h3" align="left">
+                        {t(`Pages.Welcome.StylePreferences.ChoiceReasonsQuestion`)}
+                    </Typography>
+                </Grid>
+                <Grid item xs={4}></Grid>
+                <Grid item xs={8}>
+                    <FormControl fullWidth error={touched.choiceReasons && errors.choiceReasons !== undefined}>
+                        <FormGroup>
+                            {choiseReasons.map(reason => (
+                                <FormControlLabel control={
+                                    <Checkbox
+                                        disabled={isBusy}
+                                        value={reason}
+                                        checked={stylePreferences?.choiceReasons !== undefined && stylePreferences?.choiceReasons?.split(',').indexOf(reason) > -1}
+                                        onChange={handleChoiseReasonChange}
+                                    />} label={
+                                        <Typography variant="subtitle1">
+                                            {t(`Pages.Welcome.StylePreferences.ChoiceReasons.${reason}`)}
+                                        </Typography>
+
+                                    } />
+                            ))}
+                        </FormGroup>
+                        <FormHelperText>{touched.choiceReasons && errors.choiceReasons}</FormHelperText>
+                    </FormControl>
+                </Grid>
             </Grid>
-            <Grid item xs={7} sx={{}} >
+            <Grid item xs={6}>
                 <ImageComponent src={`${imgBaseHost}/style-preferences-general/WhyModilist1.svg`}></ImageComponent>
             </Grid>
             <Grid item xs={12}>
-                {/* <FormControl>
-                    <CustomCheckboxGroup
-                        value={stylePreferences?.bodyPartsToHighlight ?? ""}
-                        label={<Typography variant="h4" align="left" sx={{ m: 2 }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>}
-                        contents={bodyParts}
-                        onChange={(values: string[]) => {
-                            setFieldValue("bodyPartsToHighlight", values.length > 0 ? values.join(',') : "");
-                        }}
-                    />
-                </FormControl> */}
                 <BodyPartsToHighlight />
             </Grid>
             <Grid item xs={12}>
-                {/* <FormControl>
-                    <CustomCheckboxGroup
-                        value={stylePreferences?.bodyPartsToHide ?? ""}
-                        label={<Typography variant="h4" align="left" sx={{ m: 2 }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>}
-                        isNegative
-                        contents={bodyParts}
-                        onChange={(values: string[]) => {
-                            setFieldValue("bodyPartsToHide", values.length > 0 ? values.join(',') : "");
-                        }}
-                    />
-                </FormControl> */}
                 <BodyPartsToHide />
-                {account?.gender === Gender.Female && <Grid container xs={12} alignItems="flex-start" sx={{ m: 2 }}>
-                    <FormControl>
-                        <FormControlLabel control={<Checkbox
-                            onChange={handleChange}
-                            checked={stylePreferences.prefersHijabClothing}
-                        />} label={t("Pages.Welcome.StylePreferences.Hijab")} />
-                    </FormControl>
-                </Grid>}
+                {account?.gender === Gender.Female &&
+                    <FormControl fullWidth sx={{
+                        mt:4
+                    }}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    onChange={handleChange}
+                                    checked={stylePreferences.prefersHijabClothing}
+                                />
+                            }
+                            label={<Typography variant="subtitle1">{t("Pages.Welcome.StylePreferences.Hijab")}</Typography>} />
+                    </FormControl>}
             </Grid>
             <Grid item xs={12}>
-                <Typography variant="h4" align="left">{t("Pages.Welcome.StylePreferences.ExcludedCategoriesTitle")}</Typography>
+                <Typography variant="h3" sx={{
+                    mb: 4
+                }}>{t("Pages.Welcome.StylePreferences.ExcludedCategoriesTitle")}</Typography>
+                <Trans>
+                    <Typography variant="subtitle1" display="inline">
+                        {t("Pages.Welcome.StylePreferences.UnwantedPieces1")}
+                    </Typography>
+                    <Typography variant="subtitle1" display="inline" color={"error"}>
+                        {t("Pages.Welcome.StylePreferences.UnwantedPieces2")}
+                    </Typography>
+                    <Typography variant="subtitle1" display="inline">
+                        {t("Pages.Welcome.StylePreferences.UnwantedPieces3")}
+                    </Typography>
+                </Trans>
             </Grid>
-            <Grid container xs={12}>
-                <Grid xs={12} textAlign="left">
-                    <Trans>
-                        <Typography display="inline" align="left">
-                            {t("Pages.Welcome.StylePreferences.UnwantedPieces1")}
-                        </Typography>
-                        <Typography display="inline" color={"error"} align="left">
-                            {t("Pages.Welcome.StylePreferences.UnwantedPieces2")}
-                        </Typography>
-                        <Typography display="inline" align="left">
-                            {t("Pages.Welcome.StylePreferences.UnwantedPieces3")}
-                        </Typography>
-                    </Trans>
-                </Grid>
-                <FormControl sx={{ m: 1 }}>
+            <Grid item xs={12}>
+                <FormControl fullWidth>
                     <LowerGroup />
                 </FormControl>
+            </Grid>
 
-                <Grid item xs={12}>
-                    <FormControl sx={{ m: 1 }}>
-                        <UpperGroup />
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                    <FormControl>
-                        <OuterGroup />
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                    <FormControl>
-                        <UnderwearPyjamasBeachGroup />
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                    <FormControl>
-                        <AccessoriesGroup />
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                    <FormControl>
-                        <FootwearGroup />
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                    <FormControl>
-                        <BagsGroup />
-                    </FormControl>
-                </Grid>
+            <Grid item xs={12}>
+                <FormControl fullWidth>
+                    <UpperGroup />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl fullWidth>
+                    <OuterGroup />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl fullWidth>
+                    <UnderwearPyjamasBeachGroup />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl fullWidth>
+                    <AccessoriesGroup />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl fullWidth>
+                    <FootwearGroup />
+                </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                <FormControl fullWidth>
+                    <BagsGroup />
+                </FormControl>
             </Grid>
             <Grid item container xs={6} justifyContent="flex-start">
                 <Button

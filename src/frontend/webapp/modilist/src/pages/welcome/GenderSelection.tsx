@@ -20,16 +20,17 @@ function GenderImage(props: GenderProps) {
     const src = gender === Gender.Female ? `${config.imgBaseHost}/gender/female.svg` : `${config.imgBaseHost}/gender/male.svg`;
     const StyledImage = styled(ImageComponent)<ImageProps>(({ theme }) => ({
         '&:hover': {
-            transition: theme.transitions.create('filter', {
-                duration: 200
+            transition: theme.transitions.create('opacity', {
+                easing: theme.transitions.easing.easeInOut,
+                duration: 500
             }),
-            filter: 'grayscale(0%)',
+            opacity: '1',
             cursor: 'pointer'
         },
         '&': isSelected ? {
-            filter: 'grayscale(0%)'
+            opacity: '1'
         } : {
-            filter: 'grayscale(100%)'
+            opacity: '0.5'
         },
     }));
 
@@ -80,20 +81,26 @@ export function GenderSelection() {
         }
     }, [])
 
-    return <Grid container spacing={2}>
-        <Grid xs={12}>
-            <Typography variant="h4" gutterBottom sx={{ mt: 2 }}>
+    return <Grid item container spacing={2}>
+        <Grid item xs={12}>
+            <Typography variant="h4" gutterBottom sx={{ mt: 2, mb: 4 }}>
                 {t('Layouts.Welcome.WelcomeLayout.Welcome')}
             </Typography>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="subtitle1" gutterBottom>
                 {t('Layouts.Welcome.WelcomeLayout.Description1')}
             </Typography>
-            <Typography variant={"h4"}>{t("Pages.Welcome.GenderSelection.Gender")}</Typography>
+            <Typography variant={"h3"}
+                sx={{
+                    mt: 6,
+                    mb: 5
+                }}>
+                {t("Pages.Welcome.GenderSelection.Gender")}
+            </Typography>
         </Grid>
-        <Grid xs={6}>
+        <Grid item xs={12} md={6}>
             <GenderImage isSelected={account?.gender === Gender.Female} gender={Gender.Female} onClick={handleClick} />
         </Grid>
-        <Grid xs={6}>
+        <Grid item xs={12} md={6}>
             <GenderImage isSelected={account?.gender === Gender.Male} gender={Gender.Male} onClick={handleClick} />
         </Grid>
     </Grid>

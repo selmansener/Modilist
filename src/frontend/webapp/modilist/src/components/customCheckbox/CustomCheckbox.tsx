@@ -7,11 +7,12 @@ interface CustomCheckboxProps {
     value: string;
     isNegative: boolean;
     checked: boolean;
+    greyscale?: boolean;
     onChange: (checked: boolean, value: string) => void;
 }
 
 function CustomCheckbox(props: React.PropsWithChildren<CustomCheckboxProps>) {
-    const { isNegative, onChange, value, checked: initialChecked } = props;
+    const { isNegative, onChange, value, checked: initialChecked, greyscale } = props;
     const theme = useTheme();
     const [checked, setChecked] = useState(initialChecked);
 
@@ -27,7 +28,6 @@ function CustomCheckbox(props: React.PropsWithChildren<CustomCheckboxProps>) {
                 : <></>)
         } sx={{
             m: 1,
-            flex: '0 0 20%',
             justifyContent: 'center',
             boxShadow: checked ? theme.shadows[1] : theme.shadows[0],
         }}>
@@ -39,7 +39,20 @@ function CustomCheckbox(props: React.PropsWithChildren<CustomCheckboxProps>) {
                     p: 1,
                     cursor: 'pointer',
                     flexGrow: 1,
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    '&:hover': {
+                        transition: theme.transitions.create('opacity', {
+                            easing: theme.transitions.easing.easeInOut,
+                            duration: 500
+                        }),
+                        opacity: (greyscale ? '1' : 'none'),
+                        cursor: 'pointer'
+                    },
+                    '&': checked ? {
+                        opacity: (greyscale ? '1' : 'none')
+                    } : {
+                        opacity: (greyscale ? '0.5' : 'none')
+                    },
                 }}
             >
                 {props.children}
@@ -58,10 +71,11 @@ export interface CustomCheckboxGroupProps {
     isNegative?: boolean;
     onChange: (values: string[]) => void;
     sx?: SxProps<Theme>;
+    greyscale?: boolean;
 }
 
 export function CustomCheckboxGroup(props: CustomCheckboxGroupProps) {
-    const { value, label, contents, isNegative, onChange, sx } = props;
+    const { value, label, contents, isNegative, onChange, sx, greyscale } = props;
     const [values, setValues] = useState<string[]>(value === "" ? [] : value.split(','));
 
     const handleChange = (checked: boolean, value: string) => {
@@ -85,18 +99,26 @@ export function CustomCheckboxGroup(props: CustomCheckboxGroupProps) {
         onChange(newValues);
     }
 
+    const defaultStyle: SxProps<Theme> = {
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        flexDirection: 'row', 
+        flexWrap: 'wrap'
+    }
+
     return (
         <>
             {label}
-            <Box sx={sx ?? {
-                display: 'flex',
-                alignContent: 'space-evenly',
-                flexWrap: 'wrap'
+            <Box sx={{
+                ...defaultStyle,
+                ...sx,
             }}
             >
                 {contents.map((content) => {
                     return (
-                        <CustomCheckbox isNegative={isNegative ?? false}
+                        <CustomCheckbox
+                            greyscale={greyscale}
+                            isNegative={isNegative ?? false}
                             onChange={handleChange}
                             value={content.value}
                             key={content.value}

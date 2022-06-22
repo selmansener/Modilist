@@ -36,15 +36,13 @@ export function UpperFits(props: UpperFitsProps) {
 
     return <CustomCheckboxGroup
         sx={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            columnCount: 4
+            justifyContent: 'space-evenly'
         }}
         value={value ?? ""}
         label={
-            <Typography variant={"h5"} display="inline">
+            <Typography variant="h3" sx={{
+                mb: 4
+            }}>
                 {t("Pages.Welcome.FitPreferences.UpperFitPreference")}
             </Typography>
         }
@@ -57,7 +55,7 @@ export function UpperFits(props: UpperFitsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={upperFit.img} />
-                        <Typography>{upperFit.name}</Typography>
+                        <Typography variant="h4">{upperFit.name}</Typography>
                     </Box>
                 }
             })

@@ -43,15 +43,13 @@ export function ShortsLengths(props: ShortsLengthsProps) {
 
     return <CustomCheckboxGroup
         sx={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            columnCount: 4
+            justifyContent: 'space-evenly'
         }}
         value={value ?? ""}
         label={
-            <Typography variant={"h5"} display="inline">
+            <Typography variant="h3" sx={{
+                mb: 4
+            }}>
                 {t("Pages.Welcome.FitPreferences.ShortsLengthPreference")}
             </Typography>
         }
@@ -64,7 +62,7 @@ export function ShortsLengths(props: ShortsLengthsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={shortsLength.img} />
-                        <Typography>{shortsLength.name}</Typography>
+                        <Typography variant="h4">{shortsLength.name}</Typography>
                     </Box>
                 }
             })

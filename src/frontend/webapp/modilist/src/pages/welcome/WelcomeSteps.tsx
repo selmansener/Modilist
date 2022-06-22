@@ -1,4 +1,4 @@
-import { Stepper, Typography, Step, StepLabel, styled, StepIconProps, Box, CircularProgress } from "@mui/material";
+import { Stepper, Typography, Step, StepLabel, styled, StepIconProps, Box, CircularProgress, useTheme, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
@@ -39,6 +39,7 @@ const steps = [
 export function WelcomeSteps() {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const theme = useTheme();
     const { activeStep, skipped } = useSelector((state: RootState) => state.welcomePageStepper);
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: activateAccountIsBusy, data: activateAccount, status: activateAccountStatus } = useSelector((state: RootState) => state.activateAccountModel);
@@ -109,51 +110,51 @@ export function WelcomeSteps() {
     }, [activeStep]);
 
     return (
-        <>
-            <Stepper activeStep={activeStep}>
-                {steps.map((step, index) => {
-                    const stepProps: { completed?: boolean } = {};
-                    const labelProps: {
-                        optional?: React.ReactNode;
-                    } = {};
-                    if (isStepSkipped(index)) {
-                        stepProps.completed = false;
-                    }
-                    return (
-                        <Step key={step.title} {...stepProps} sx={{
-                            minHeight: '120px',
-                            mb: 2
-                        }}>
-                            <StepLabel {...labelProps} StepIconComponent={ColorlibStepIcon}
-                                sx={{
-                                    display: 'flex',
-                                    flexDirection: 'column'
-                                }}>
-                                <Trans>
-                                    <Typography sx={{
-                                        mt: 1
-                                    }}>{t(step.title)}</Typography>
-                                </Trans>
-                            </StepLabel>
-                        </Step>
-                    );
-                })}
-            </Stepper>
-
-            <Typography variant="h6" component="div">
-                {t('Layouts.Welcome.WelcomeLayout.Description1')}
-            </Typography>
+        <Grid item container>
+            <Grid item xs={12}>
+                <Stepper activeStep={activeStep}>
+                    {steps.map((step, index) => {
+                        const stepProps: { completed?: boolean } = {};
+                        const labelProps: {
+                            optional?: React.ReactNode;
+                        } = {};
+                        if (isStepSkipped(index)) {
+                            stepProps.completed = false;
+                        }
+                        return (
+                            <Step key={step.title} {...stepProps} sx={{
+                                minHeight: '120px',
+                                mb: 2
+                            }}>
+                                <StepLabel {...labelProps} StepIconComponent={ColorlibStepIcon}
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column'
+                                    }}>
+                                    <Trans>
+                                        <Typography sx={{
+                                            mt: 1
+                                        }}>{t(step.title)}</Typography>
+                                    </Trans>
+                                </StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
+            </Grid>
+            <Grid item xs={12}>
+                <Typography variant="subtitle1" sx={{ mb: 4 }}>
+                    {t('Layouts.Welcome.WelcomeLayout.Description1')}
+                </Typography>
+            </Grid>
             {activeStep === steps.length
-                ? <Box sx={{
-                    display: 'flex',
-                    height: '300px',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
+                ? <Grid item xs={12}>
                     <CircularProgress />
-                </Box>
-                : <>{steps[activeStep].component}</>}
-
-        </>
+                </Grid>
+                : <Grid item container xs={12} spacing={2}>
+                    {steps[activeStep].component}
+                </Grid>
+            }
+        </Grid>
     );
 }

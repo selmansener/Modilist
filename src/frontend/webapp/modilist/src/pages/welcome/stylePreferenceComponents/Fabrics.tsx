@@ -13,8 +13,8 @@ enum Fabric {
     Velvet = "Velvet",
     Lace = "Lace",
     Guipure = "Guipure",
+    Jute = "Jute",
     Parachute = "Parachute",
-    Jute = "Jute"
 }
 
 interface FabricElement {
@@ -46,24 +46,18 @@ export function Fabrics(props: FabricsProps) {
         })
 
     return <CustomCheckboxGroup
-        sx={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-        }}
         value={value ?? ""}
         label={<Box sx={{
             mb: 2
         }}>
             <Trans>
-                <Typography variant={"h5"} display="inline">
+                <Typography variant="h4" display="inline">
                     {t("Pages.Welcome.FabricProperties.ExcludedFabrics.1")}
                 </Typography>
-                <Typography variant={"h5"} display="inline" color={"error"} >
+                <Typography variant="h4" display="inline" color={"error"} >
                     {t("Pages.Welcome.FabricProperties.ExcludedFabrics.2")}
                 </Typography>
-                <Typography variant={"h5"} display="inllne">
+                <Typography variant="h4" display="inline">
                     {t("Pages.Welcome.FabricProperties.ExcludedFabrics.3")}
                 </Typography>
             </Trans>
@@ -76,7 +70,7 @@ export function Fabrics(props: FabricsProps) {
                     value: fabric.value,
                     element: <Box>
                         <ImageComponent src={fabric.img} />
-                        <Typography>{fabric.name}</Typography>
+                        <Typography  variant="h4">{fabric.name}</Typography>
                     </Box>
                 }
             })

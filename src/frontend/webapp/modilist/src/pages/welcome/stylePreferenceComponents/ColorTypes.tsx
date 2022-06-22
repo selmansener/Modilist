@@ -5,15 +5,15 @@ import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
 
 enum ColorType {
-    Hot = "Hot",
-    Cold = "Cold",
     Pastel = "Pastel",
-    Nude = "Nude",
-    BlackAndWhite = "BlackAndWhite",
-    Dark = "Dark",
     Vivid = "Vivid",
     Neon = "Neon",
     Light = "Light",
+    Dark = "Dark",
+    Nude = "Nude",
+    Hot = "Hot",
+    Cold = "Cold",
+    BlackAndWhite = "BlackAndWhite",
 }
 
 interface ColorTypeElement {
@@ -41,25 +41,19 @@ export function ColorTypes(props: ColorTypesProps) {
     });
 
     return <CustomCheckboxGroup
-        sx={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-        }}
         value={value ? value : ""}
         label={
             <Box sx={{
                 mb: 2
             }}>
                 <Trans>
-                    <Typography variant={"h5"} display="inline" >
+                    <Typography variant="h4" display="inline" >
                         {t("Pages.Welcome.FabricProperties.ExcludedColorTypes.1")}
                     </Typography>
-                    <Typography variant={"h5"} display="inline" color={"error"} >
+                    <Typography variant="h4" display="inline" color={"error"} >
                         {t("Pages.Welcome.FabricProperties.ExcludedColorTypes.2")}
                     </Typography>
-                    <Typography variant={"h5"} display="inline">
+                    <Typography variant="h4" display="inline">
                         {t("Pages.Welcome.FabricProperties.ExcludedColorTypes.3")}
                     </Typography>
                 </Trans>
@@ -75,7 +69,7 @@ export function ColorTypes(props: ColorTypesProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={colorType.img} />
-                        <Typography>{colorType.name}</Typography>
+                        <Typography  variant="h4">{colorType.name}</Typography>
                     </Box>
                 }
             })

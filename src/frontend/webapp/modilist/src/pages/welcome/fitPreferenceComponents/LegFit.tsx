@@ -37,16 +37,11 @@ export function LegFits(props: LegFitsProps) {
     });
 
     return <CustomCheckboxGroup
-        sx={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            columnCount: 4
-        }}
         value={value ?? ""}
         label={
-            <Typography variant={"h5"} display="inline">
+            <Typography variant="h3" sx={{
+                mb: 4
+            }}>
                 {t("Pages.Welcome.FitPreferences.LegFitPreference")}
             </Typography>
         }
@@ -59,7 +54,7 @@ export function LegFits(props: LegFitsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={legFit.img} />
-                        <Typography>{legFit.name}</Typography>
+                        <Typography variant="h4">{legFit.name}</Typography>
                     </Box>
                 }
             })

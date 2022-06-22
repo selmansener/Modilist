@@ -142,28 +142,29 @@ export function FitPreferences() {
         />
     }
 
-    return <Grid container spacing={2}>
+    return <Grid item container xs={12} spacing={12}>
         <Grid item xs={12}>
             <Waist />
-        </Grid>
-        <Grid item xs={12}>
-            <Upper />
         </Grid>
         <Grid item xs={12}>
             <Lower />
         </Grid>
         <Grid item xs={12}>
-            <Shorts />
-        </Grid>
-        <Grid item xs={12}>
             <Legs />
-        </Grid>
-        <Grid item xs={12}>
-            <Foot />
         </Grid>
         {account?.gender === Gender.Female && <Grid item xs={12}>
             <Skirt />
         </Grid>}
+        <Grid item xs={12}>
+            <Shorts />
+        </Grid>
+        <Grid item xs={12}>
+            <Upper />
+        </Grid>
+        {/* TODO: Enable foot type later */}
+        {/* <Grid item xs={12}>
+            <Foot />
+        </Grid> */}
         <Grid item container xs={6} justifyContent="flex-start">
             <Button
                 disabled={isBusy}

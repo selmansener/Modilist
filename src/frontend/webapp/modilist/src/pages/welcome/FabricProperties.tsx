@@ -1,4 +1,4 @@
-import { Button, CircularProgress, FormControl, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, FormControl, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Colors } from "./stylePreferenceComponents/Colors";
@@ -105,7 +105,7 @@ export function FabricProperties() {
         />
     }
 
-    return <Grid container spacing={2}>
+    return <Grid item container spacing={12}>
         <Grid item xs={12}>
             <Color />
         </Grid>
@@ -120,19 +120,23 @@ export function FabricProperties() {
         </Grid>
         <Grid item xs={12}>
             <Trans>
-                <Typography display="inline" color={"error"} variant={"h5"}>
-                    <ErrorOutlineOutlinedIcon sx={{
-                        verticalAlign: 'text-top',
-                        display: 'inline-flex'
-                    }} />
-                    {t("Pages.Welcome.FabricProperties.Allergens.1")}
-                </Typography>
-                <Typography display="inline" variant={"h5"}>
-                    {t("Pages.Welcome.FabricProperties.Allergens.2")}
-                </Typography>
+                <Box textAlign={"left"} sx={{
+                    mb: 2
+                }}>
+                    <Typography display="inline" align="left" color={"error"} variant={"h4"}>
+                        <ErrorOutlineOutlinedIcon
+                            fontSize="large"
+                            sx={{
+                                verticalAlign: 'text-bottom',
+                                display: 'inline-flex'
+                            }} />
+                        {t("Pages.Welcome.FabricProperties.Allergens.1")}
+                    </Typography>
+                    <Typography display="inline" align="left" variant={"h4"}>
+                        {t("Pages.Welcome.FabricProperties.Allergens.2")}
+                    </Typography>
+                </Box>
             </Trans>
-        </Grid>
-        <Grid item xs={12}>
             <FormControl fullWidth>
                 <TextField
                     value={fabricProps.allergens}
@@ -149,12 +153,11 @@ export function FabricProperties() {
             </FormControl>
         </Grid>
         <Grid item xs={12}>
-            <Typography display="inline" variant={"h5"}>
+            <Typography align="left" variant={"h4"} sx={{
+                mb: 2
+            }}>
                 {t("Pages.Welcome.FabricProperties.AdditionalNotes")}
             </Typography>
-        </Grid>
-        <Grid item xs={12}>
-
             <FormControl fullWidth>
                 <TextField
                     value={fabricProps.additionalNotes}

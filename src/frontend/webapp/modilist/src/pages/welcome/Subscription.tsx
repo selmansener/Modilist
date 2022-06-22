@@ -27,7 +27,7 @@ export default function Subscription() {
     }, [updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionMaxPricingLimitStatus])
 
     return (
-        <Grid container spacing={2}>
+        <Grid item container spacing={12}>
             <Personal />
             <ContactInfo />
             <SubscriptionDetails />

@@ -39,16 +39,11 @@ export function WaistHeights(props: WaistHeightsProps) {
     });
 
     return <CustomCheckboxGroup
-        sx={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            columnCount: 4
-        }}
         value={value ?? ""}
         label={
-            <Typography variant={"h5"} display="inline">
+            <Typography variant="h3" sx={{
+                mb: 4
+            }}>
                 {t("Pages.Welcome.FitPreferences.WaistHeightPreference")}
             </Typography>
         }
@@ -61,7 +56,7 @@ export function WaistHeights(props: WaistHeightsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={waistHeight.img} />
-                        <Typography>{waistHeight.name}</Typography>
+                        <Typography variant="h4">{waistHeight.name}</Typography>
                     </Box>
                 }
             })

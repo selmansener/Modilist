@@ -1,6 +1,6 @@
 import { Box, Button, CircularProgress, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Gender } from "../../services/swagger/api";
 import { Dispatch, RootState } from "../../store/store";
@@ -155,9 +155,6 @@ export default function SizeInfo() {
 
                 return (
                     <Grid item key={sectionName} xs={4}>
-                        <Typography variant='h6' align='left' sx={{ mb: 2 }}>
-                            {t(`Pages.Welcome.BodySize.${_section}`)}
-                        </Typography>
                         <Box sx={{
                             display: 'flex',
                             justifyContent: 'space-evenly'
@@ -202,97 +199,90 @@ export default function SizeInfo() {
 
         return <>
             {
-                bodySizes.map(bodySize => {
+                bodySizes.map((bodySize, index) => {
                     const sizeName = camelCase(bodySize);
 
-                    return <Grid item key={sizeName} xs={6}>
-                        <Box sx={{
-                            display: 'flex',
-                            justifyContent: 'space-evenly'
-                        }}>
+                    return <>
+                        {index % 2 === 0 ? <Grid xs={2}></Grid> : <></>}
+                        <Grid item key={sizeName} xs={4}>
                             <Box sx={{
-                                width: '70px',
-                                mr: 2
+                                display: 'flex',
+                                justifyContent: 'space-evenly'
                             }}>
-                                {gender && <ImageComponent src={`${imgBaseHost}/body-size/${gender}/${bodySize}.svg`} />}
+                                <Box sx={{
+                                    width: '70px',
+                                    mr: 2
+                                }}>
+                                    {gender && <ImageComponent src={`${imgBaseHost}/body-size/${gender}/${bodySize}.svg`} />}
+                                </Box>
+                                <FormControl fullWidth>
+                                    <TextField
+                                        disabled={isBusy}
+                                        value={sizeInfo[sizeName as keyof typeof sizeInfo]}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        label={t(`Pages.Welcome.BodySize.${bodySize}`)} type="number"
+                                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                                        variant="outlined" />
+                                </FormControl>
                             </Box>
-                            <FormControl fullWidth>
-                                <TextField
-                                    disabled={isBusy}
-                                    value={sizeInfo[sizeName as keyof typeof sizeInfo]}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    label={t(`Pages.Welcome.BodySize.${bodySize}`)} type="number"
-                                    inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                                    variant="outlined" />
-                            </FormControl>
-                        </Box>
-                    </Grid>
+                        </Grid>
+                        {index % 2 === 0 ? <></> : <Grid xs={2}></Grid>}
+                    </>
                 })
             }
         </>
     }
 
     return (
-        <>
-            <Grid container spacing={2}>
-                {account?.gender !== Gender.None &&
-                    <>
-                        <Grid item xs={12}>
-                            <Typography variant="h4">{t("Pages.Welcome.BodySize.BodyType")}</Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormControl fullWidth error={touched.bodyType && errors.bodyType !== undefined}>
-                                <FormHelperText>
-                                    <Typography variant={"h4"} align={"center"}>{touched.bodyType && errors?.bodyType}</Typography>
-                                </FormHelperText>
-                                <Box sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center'
-                                }}>
-                                    <CustomRadioButtonGroup
-                                        name="bodyType"
-                                        value={sizeInfo?.bodyType}
-                                        onChange={(value) => {
-                                            handleChange("bodyType")(value);
-                                        }}
-                                        contents={
-                                            bodyTypes.map(type => {
-                                                return {
-                                                    value: type.name,
-                                                    element: <Box sx={{
-                                                        width: '150px',
-                                                    }}>
-                                                        <ImageComponent src={type.img} />
-                                                    </Box>
-                                                }
-                                            })}
-                                    />
-                                </Box>
-                            </FormControl>
-                        </Grid>
-                    </>}
-
-                <Grid item xs={6}>
-                    <Typography variant={"h4"}
-                        sx={{
-                            mb: 2
-                        }}
-                    >
-                        {t("Pages.Welcome.BodySize.Weight")}
-                    </Typography>
+        <Grid item container xs={12} spacing={8}>
+            {account?.gender !== Gender.None &&
+                <>
+                    <Grid item xs={12}>
+                        <Typography variant="h3" sx={{
+                            mt: 2
+                        }}>{t("Pages.Welcome.BodySize.BodyType")}</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl fullWidth error={touched.bodyType && errors.bodyType !== undefined}>
+                            <FormHelperText>
+                                <Typography>{touched.bodyType && errors?.bodyType}</Typography>
+                            </FormHelperText>
+                            <CustomRadioButtonGroup
+                                greyscale
+                                name="bodyType"
+                                value={sizeInfo?.bodyType}
+                                onChange={(value) => {
+                                    handleChange("bodyType")(value);
+                                }}
+                                contents={
+                                    bodyTypes.map(type => {
+                                        return {
+                                            value: type.name,
+                                            element: <ImageComponent src={type.img} />
+                                        }
+                                    })}
+                            />
+                        </FormControl>
+                    </Grid>
+                </>
+            }
+            <Grid item container xs={12} sx={{
+                display: 'flex',
+                justifyContent: 'space-around'
+            }}>
+                <Grid item xs={4}>
                     <Box sx={{
                         display: 'flex'
                     }}>
                         <Box sx={{
                             display: 'flex',
-                            alignItems: 'center',
+                            width: '70px',
+                            mr: 2,
+                            alignItems: 'center'
                         }}>
-                            <WeigthIcon fontSize="large" sx={{
-                                mr: 2
-                            }} />
+                            <ImageComponent src={`${imgBaseHost}/custom-icons/Weight.svg`} />
                         </Box>
-
                         <FormControl fullWidth>
                             <TextField
                                 disabled={isBusy}
@@ -311,27 +301,18 @@ export default function SizeInfo() {
                     </Box>
                 </Grid>
 
-                <Grid item xs={6}>
-                    <Typography variant={"h4"}
-                        sx={{
-                            mb: 2
-                        }}
-                    >
-                        {t("Pages.Welcome.BodySize.Height")}
-                    </Typography>
-
+                <Grid item xs={4}>
                     <Box sx={{
                         display: 'flex'
                     }}>
                         <Box sx={{
                             display: 'flex',
-                            alignItems: 'center',
+                            width: '70px',
+                            mr: 2,
+                            alignItems: 'center'
                         }}>
-                            <MeasureIcon fontSize="large" sx={{
-                                mr: 2
-                            }} />
+                            <ImageComponent src={`${imgBaseHost}/custom-icons/Measure.svg`} />
                         </Box>
-
                         <FormControl fullWidth>
                             <TextField
                                 disabled={isBusy}
@@ -349,193 +330,191 @@ export default function SizeInfo() {
                         </FormControl>
                     </Box>
                 </Grid>
+            </Grid>
 
-                <Grid item xs={12}>
-                    <Divider variant="middle" />
-                </Grid>
+            <Grid item xs={12}>
+                <Divider variant="middle" />
+            </Grid>
 
-                <Grid item xs={12}>
-                    <Typography variant={"h4"}>{t("Pages.Welcome.BodySize.CategorySizes")}</Typography>
-                </Grid>
+            <Grid item xs={12}>
+                <Typography variant="h3">{t("Pages.Welcome.BodySize.CategorySizes")}</Typography>
+            </Grid>
 
-                <Section
-                    sectionData={sections}
-                    sizeData={sizeSymbols}
-                />
+            <Section
+                sectionData={sections}
+                sizeData={sizeSymbols}
+            />
 
-                <Grid item xs={4}>
-                    <Typography variant='h6' align='left' sx={{ mb: 2 }}>
-                        {t(`Pages.Welcome.BodySize.FootWear`)}
-                    </Typography>
+            <Grid item xs={4}>
+                <Box sx={{
+                    display: 'flex',
+                }}>
                     <Box sx={{
                         display: 'flex',
+                        width: '70px',
+                        mr: 2,
+                        alignItems: 'center'
+                    }}>
+                        <ImageComponent src={`${imgBaseHost}/main-category/FootWear.svg`} />
+                    </Box>
+                    <FormControl fullWidth error={touched.footWear && errors.footWear !== undefined}>
+                        <InputLabel id={`footWear-label`}>{t(`Pages.Welcome.BodySize.FootWear`)}</InputLabel>
+                        <Select
+                            disabled={isBusy}
+                            name={'footWear'}
+                            labelId={`footWear-label`}
+                            id={'footWear'}
+                            value={sizeInfo.footWear}
+                            label={t(`Pages.Welcome.BodySize.FootWear`)}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        >
+                            <MenuItem disabled>
+                                <em>{t('Pages.Welcome.Personal.MenuItem')}</em>
+                            </MenuItem>
+                            {footWearSizes.map(size => {
+                                return <MenuItem key={size} value={size.toString()}>{size}</MenuItem>
+                            })}
+                        </Select>
+                        <FormHelperText>{touched.footWear && errors?.footWear}</FormHelperText>
+                    </FormControl>
+                </Box>
+            </Grid>
+
+            {account?.gender === Gender.Female && <>
+                <Grid item xs={4}>
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'space-evenly'
                     }}>
                         <Box sx={{
-                            display: 'flex',
                             width: '70px',
                             mr: 2,
-                            alignItems: 'center'
                         }}>
-                            <ImageComponent src={`${imgBaseHost}/main-category/FootWear.svg`} />
+                            <ImageComponent src={`${imgBaseHost}/main-category/WomenUnderWearCup.svg`} />
                         </Box>
-                        <FormControl fullWidth error={touched.footWear && errors.footWear !== undefined}>
-                            <InputLabel id={`footWear-label`}>{t(`Pages.Welcome.BodySize.FootWear`)}</InputLabel>
+                        <FormControl fullWidth error={touched.womenUnderWearCup && errors.womenUnderWearCup !== undefined}>
+                            <InputLabel id={`womenUnderWearCup-label`}>{t(`Pages.Welcome.BodySize.WomenUnderWearCup`)}</InputLabel>
                             <Select
                                 disabled={isBusy}
-                                name={'footWear'}
-                                labelId={`footWear-label`}
-                                id={'footWear'}
-                                value={sizeInfo.footWear}
-                                label={t(`Pages.Welcome.BodySize.FootWear`)}
+                                name={'womenUnderWearCup'}
+                                labelId={`womenUnderWearCup-label`}
+                                id={'womenUnderWearCup'}
+                                value={sizeInfo?.womenUnderWearCup}
+                                label={t(`Pages.Welcome.BodySize.WomenUnderWearCup`)}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             >
                                 <MenuItem disabled>
                                     <em>{t('Pages.Welcome.Personal.MenuItem')}</em>
                                 </MenuItem>
-                                {footWearSizes.map(size => {
-                                    return <MenuItem key={size} value={size.toString()}>{size}</MenuItem>
+                                {braCup.map(size => {
+                                    return <MenuItem key={size} value={size}>{size}</MenuItem>
                                 })}
                             </Select>
-                            <FormHelperText>{touched.footWear && errors?.footWear}</FormHelperText>
+                            <FormHelperText>{touched.womenUnderWearCup && errors?.womenUnderWearCup}</FormHelperText>
                         </FormControl>
                     </Box>
                 </Grid>
 
-                {account?.gender === Gender.Female && <>
-                    <Grid item xs={4}>
-                        <Typography variant='h6' align='left' sx={{ mb: 2 }}>
-                            {t(`Pages.Welcome.BodySize.WomenUnderWearCup`)}
-                        </Typography>
-
+                <Grid item xs={4}>
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'space-evenly'
+                    }}>
                         <Box sx={{
-                            display: 'flex',
-                            justifyContent: 'space-evenly'
+                            width: '70px',
+                            mr: 2,
                         }}>
-                            <Box sx={{
-                                width: '70px',
-                                mr: 2,
-                            }}>
-                                <ImageComponent src={`${imgBaseHost}/main-category/WomenUnderWearCup.svg`} />
-                            </Box>
-                            <FormControl fullWidth error={touched.womenUnderWearCup && errors.womenUnderWearCup !== undefined}>
-                                <InputLabel id={`womenUnderWearCup-label`}>{t(`Pages.Welcome.BodySize.WomenUnderWearCup`)}</InputLabel>
-                                <Select
-                                    disabled={isBusy}
-                                    name={'womenUnderWearCup'}
-                                    labelId={`womenUnderWearCup-label`}
-                                    id={'womenUnderWearCup'}
-                                    value={sizeInfo?.womenUnderWearCup}
-                                    label={t(`Pages.Welcome.BodySize.WomenUnderWearCup`)}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                >
-                                    <MenuItem disabled>
-                                        <em>{t('Pages.Welcome.Personal.MenuItem')}</em>
-                                    </MenuItem>
-                                    {braCup.map(size => {
-                                        return <MenuItem key={size} value={size}>{size}</MenuItem>
-                                    })}
-                                </Select>
-                                <FormHelperText>{touched.womenUnderWearCup && errors?.womenUnderWearCup}</FormHelperText>
-                            </FormControl>
+                            <ImageComponent src={`${imgBaseHost}/main-category/WomenUnderWearSize.svg`} />
                         </Box>
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <Typography variant='h6' align='left' sx={{ mb: 2 }}>
-                            {t(`Pages.Welcome.BodySize.WomenUnderWearSize`)}
-                        </Typography>
-
-                        <Box sx={{
-                            display: 'flex',
-                            justifyContent: 'space-evenly'
-                        }}>
-                            <Box sx={{
-                                width: '70px',
-                                mr: 2,
-                            }}>
-                                <ImageComponent src={`${imgBaseHost}/main-category/WomenUnderWearSize.svg`} />
-                            </Box>
-                            <FormControl fullWidth error={touched.womenUnderWearSize && errors.womenUnderWearSize !== undefined}>
-                                <InputLabel id={`womenUnderWearSize-label`}>{t(`Pages.Welcome.BodySize.WomenUnderWearSize`)}</InputLabel>
-                                <Select
-                                    disabled={isBusy}
-                                    name={'womenUnderWearSize'}
-                                    labelId={`womenUnderWearSize-label`}
-                                    id={'womenUnderWearSize'}
-                                    value={sizeInfo.womenUnderWearSize}
-                                    label={t(`Pages.Welcome.BodySize.WomenUnderWearSize`)}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                >
-                                    <MenuItem disabled value={""}>
-                                        <em>{t('Pages.Welcome.Personal.MenuItem')}</em>
-                                    </MenuItem>
-                                    {braSizes.map(size => {
-                                        return <MenuItem key={size} value={size}>{size}</MenuItem>
-                                    })}
-                                </Select>
-                                <FormHelperText>{touched.womenUnderWearSize && errors.womenUnderWearSize}</FormHelperText>
-                            </FormControl>
-                        </Box>
-                    </Grid>
-                </>}
-
-                <Grid item xs={12}>
-                    <Divider variant="middle" />
+                        <FormControl fullWidth error={touched.womenUnderWearSize && errors.womenUnderWearSize !== undefined}>
+                            <InputLabel id={`womenUnderWearSize-label`}>{t(`Pages.Welcome.BodySize.WomenUnderWearSize`)}</InputLabel>
+                            <Select
+                                disabled={isBusy}
+                                name={'womenUnderWearSize'}
+                                labelId={`womenUnderWearSize-label`}
+                                id={'womenUnderWearSize'}
+                                value={sizeInfo.womenUnderWearSize}
+                                label={t(`Pages.Welcome.BodySize.WomenUnderWearSize`)}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            >
+                                <MenuItem disabled value={""}>
+                                    <em>{t('Pages.Welcome.Personal.MenuItem')}</em>
+                                </MenuItem>
+                                {braSizes.map(size => {
+                                    return <MenuItem key={size} value={size}>{size}</MenuItem>
+                                })}
+                            </Select>
+                            <FormHelperText>{touched.womenUnderWearSize && errors.womenUnderWearSize}</FormHelperText>
+                        </FormControl>
+                    </Box>
                 </Grid>
+            </>}
 
-                <Grid item xs={12}>
-                    <Typography variant='h6' align='left' sx={{ m: 1 }}>
-                        {t('Pages.Welcome.BodySize.HeaderBodySize')}
-                    </Typography>
-                </Grid>
+            <Grid item xs={12}>
+                <Divider variant="middle" />
+            </Grid>
 
-                <BodySizes />
+            <Grid item xs={12}>
+                <Typography variant="h4">
+                    {t('Pages.Welcome.BodySize.HeaderBodySize')}
+                </Typography>
+            </Grid>
 
-                <Grid item xs={12}>
-                    <Typography variant='h6' align='left' sx={{ m: 1 }}>
+            <BodySizes />
+
+            <Grid item xs={12}>
+                <Trans>
+                    <Typography variant="h4" component={"span"}>
                         {t('Pages.Welcome.BodySize.AdditionalNotes')}
                     </Typography>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <FormControl fullWidth>
-                        <TextField
-                            disabled={isBusy}
-                            value={sizeInfo?.additionalNotes}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            variant="outlined"
-                            multiline
-                            rows={5}
-                            maxRows={8} />
-                    </FormControl>
-                </Grid>
-                <Grid item container xs={6} justifyContent="flex-start">
-                    <Button
-                        disabled
-                    >
-                        {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
-                    </Button>
-                </Grid>
-                <Grid item container xs={6} justifyContent="flex-end">
-                    <Button
-                        disabled={isBusy}
-                        onClick={() => {
-                            submitForm();
-                        }}
-                        variant="outlined">
-                        {isBusy && <CircularProgress sx={{
-                            width: "18px !important",
-                            height: "18px !important",
-                            mr: 2
-                        }} />}
-                        {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
-                    </Button>
-                </Grid>
+                    <Typography variant="h4" color="secondary" component={"span"}>
+                        {t('Pages.Welcome.BodySize.Optional')}
+                    </Typography>
+                </Trans>
             </Grid>
-        </>
+
+            <Grid item xs={12}>
+                <FormControl fullWidth>
+                    <TextField
+                        disabled={isBusy}
+                        value={sizeInfo?.additionalNotes}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        variant="outlined"
+                        multiline
+                        rows={5}
+                        maxRows={8} />
+                </FormControl>
+            </Grid>
+            <Grid item container xs={6} justifyContent="flex-start">
+                <Button
+                    disabled
+                    size="large"
+                >
+                    {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
+                </Button>
+            </Grid>
+            <Grid item container xs={6} justifyContent="flex-end">
+                <Button
+                    size="large"
+                    disabled={isBusy}
+                    onClick={() => {
+                        submitForm();
+                    }}
+                    variant="outlined">
+                    {isBusy && <CircularProgress 
+                    sx={{
+                        width: "18px !important",
+                        height: "18px !important",
+                        mr: 2
+                    }} 
+                    />}
+                    {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
+                </Button>
+            </Grid>
+        </Grid>
     )
 }

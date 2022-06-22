@@ -17,16 +17,17 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
         <Box component="main">
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography sx={{ flexGrow: 1 }}>
                         Modilist
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                <Grid container spacing="2">
-                    <Grid item xs={12} sx={{ mt: 5 }}>
-                        {props.children}
-                    </Grid>
+            <Container maxWidth="xl" sx={{
+                mt: 2,
+                mb: 2
+            }}>
+                <Grid container>
+                    {props.children}
                 </Grid>
             </Container>
         </Box>

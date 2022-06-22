@@ -71,7 +71,8 @@
         "FootLength": "Ayak Uzunluğu (cm)",
         "Height": "Boy (cm)",
         "Weight": "Kilo (kg)",
-        "AdditionalNotes": "Kıyafet ve Beden ölçüleri ile ilgili eklemek istedikleriniz; (Opsiyonel)"
+        "AdditionalNotes": "Kıyafet ve Beden ölçüleri ile ilgili eklemek istedikleriniz; ",
+        "Optional": "(Opsiyonel)"
       },
       "FitPreferences": {
         "WaistHeightPreference": "Alt giyimde tercih ettiğin bel çeşitleri",
