@@ -83,24 +83,26 @@ export function GenderSelection() {
 
     return <Grid item container spacing={2}>
         <Grid item xs={12}>
-            <Typography variant="h4" gutterBottom sx={{ mt: 2, mb: 4 }}>
+            <Typography variant="h4" gutterBottom sx={{ mt: 2, mb: 4 }} align="center">
                 {t('Layouts.Welcome.WelcomeLayout.Welcome')}
             </Typography>
-            <Typography variant="subtitle1" gutterBottom>
+            <Typography variant="subtitle1" gutterBottom align="center">
                 {t('Layouts.Welcome.WelcomeLayout.Description1')}
             </Typography>
             <Typography variant={"h3"}
                 sx={{
                     mt: 6,
                     mb: 5
-                }}>
+                }}
+                align="center"
+            >
                 {t("Pages.Welcome.GenderSelection.Gender")}
             </Typography>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item container xs={12} md={6} justifyContent="center">
             <GenderImage isSelected={account?.gender === Gender.Female} gender={Gender.Female} onClick={handleClick} />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item container xs={12} md={6} justifyContent="center">
             <GenderImage isSelected={account?.gender === Gender.Male} gender={Gender.Male} onClick={handleClick} />
         </Grid>
     </Grid>

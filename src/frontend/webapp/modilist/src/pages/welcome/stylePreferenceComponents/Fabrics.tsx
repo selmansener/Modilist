@@ -49,7 +49,7 @@ export function Fabrics(props: FabricsProps) {
         value={value ?? ""}
         label={<Box sx={{
             mb: 2
-        }}>
+        }} textAlign="center">
             <Trans>
                 <Typography variant="h4" display="inline">
                     {t("Pages.Welcome.FabricProperties.ExcludedFabrics.1")}
@@ -70,7 +70,7 @@ export function Fabrics(props: FabricsProps) {
                     value: fabric.value,
                     element: <Box>
                         <ImageComponent src={fabric.img} />
-                        <Typography  variant="h4">{fabric.name}</Typography>
+                        <Typography  variant="h4" align="center">{fabric.name}</Typography>
                     </Box>
                 }
             })

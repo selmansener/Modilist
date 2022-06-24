@@ -48,7 +48,7 @@ export function Colors(props: ColorsProps) {
         label={
             <Box sx={{
                 mb: 2
-            }}>
+            }} textAlign="center">
                 <Trans>
                     <Typography variant="h4" display="inline">
                         {t("Pages.Welcome.FabricProperties.ExcludedColors.1")}
@@ -72,7 +72,7 @@ export function Colors(props: ColorsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={colorType.img} />
-                        <Typography  variant="h4">{colorType.name}</Typography>
+                        <Typography variant="h4" align="center">{colorType.name}</Typography>
                     </Box>
                 }
             })

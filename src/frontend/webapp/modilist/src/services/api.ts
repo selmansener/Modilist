@@ -1,34 +1,34 @@
-import { AddressApiFactory, FitPreferencesApiFactory, PaymentMethodApiFactory, PreferedFabricPropertiesApiFactory, SizeInfoApiFactory, StylePreferencesApiFactory, SubscriptionApiFactory, AccountApiFactory } from "./swagger/api";
-import axios, { AxiosRequestConfig } from 'axios';
+import { AccountApi, StylePreferencesApi, AddressApi, SizeInfoApi, PreferedFabricPropertiesApi, FitPreferencesApi, SubscriptionApi, PaymentMethodApi } from "./swagger/api";
+import axios from 'axios';
 import { InteractionRequiredAuthError, IPublicClientApplication } from "@azure/msal-browser";
 import { config } from "../config";
 
-export const apiFactory = function (msalInstance: IPublicClientApplication) {
-    axios.interceptors.request.use(
-        async (config: AxiosRequestConfig) => {
-            if (config.headers === undefined) {
-                config.headers = {};
-            }
-            // ...
-            return config;
-        },
-        (error) => error
-    );
+export interface ModilistApi {
+    accounts: AccountApi,
+    stylePreferences: StylePreferencesApi,
+    addresses: AddressApi,
+    sizeInfos: SizeInfoApi,
+    preferedFabricProperties: PreferedFabricPropertiesApi,
+    fitPreferences: FitPreferencesApi,
+    subscriptions: SubscriptionApi,
+    paymentMethods: PaymentMethodApi
+}
 
+export function apiFactory(msal: IPublicClientApplication) {
     axios.interceptors.request.use(
         async options => {
-            const account = msalInstance.getActiveAccount();
+            const account = msal.getActiveAccount();
 
             if (!account) {
                 return options;
             }
 
-            const response = await msalInstance.acquireTokenSilent({
+            const response = await msal.acquireTokenSilent({
                 ...config.loginRequest,
                 account
             }).catch(error => {
                 if (error instanceof InteractionRequiredAuthError) {
-                    msalInstance.logoutRedirect({
+                    msal.logoutRedirect({
                         account
                     });
                 }
@@ -49,8 +49,10 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
     axios.interceptors.response.use(undefined,
         async error => {
             if (error instanceof InteractionRequiredAuthError) {
-                const account = msalInstance.getActiveAccount();
-                await msalInstance.logoutRedirect({
+                const account = msal.getActiveAccount();
+                console.log("response auth failed");
+                console.log("actAcc", account);
+                await msal.logoutRedirect({
                     account
                 });
             }
@@ -59,13 +61,13 @@ export const apiFactory = function (msalInstance: IPublicClientApplication) {
         });
 
     return {
-        accounts: AccountApiFactory(undefined, config.webApi, axios),
-        stylePreferences: StylePreferencesApiFactory(undefined, config.webApi, axios),
-        addresses: AddressApiFactory(undefined, config.webApi, axios),
-        sizeInfos: SizeInfoApiFactory(undefined, config.webApi, axios),
-        preferedFabricProperties: PreferedFabricPropertiesApiFactory(undefined, config.webApi, axios),
-        fitPreferences: FitPreferencesApiFactory(undefined, config.webApi, axios),
-        subscriptions: SubscriptionApiFactory(undefined, config.webApi, axios),
-        paymentMethods: PaymentMethodApiFactory(undefined, config.webApi, axios),
+        accounts: new AccountApi(undefined, config.webApi, axios),
+        addresses: new AddressApi(undefined, config.webApi, axios),
+        stylePreferences: new StylePreferencesApi(undefined, config.webApi, axios),
+        sizeInfos: new SizeInfoApi(undefined, config.webApi, axios),
+        preferedFabricProperties: new PreferedFabricPropertiesApi(undefined, config.webApi, axios),
+        fitPreferences: new FitPreferencesApi(undefined, config.webApi, axios),
+        subscriptions: new SubscriptionApi(undefined, config.webApi, axios),
+        paymentMethods: new PaymentMethodApi(undefined, config.webApi, axios),
     }
 }

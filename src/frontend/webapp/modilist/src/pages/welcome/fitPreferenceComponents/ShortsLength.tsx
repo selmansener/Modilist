@@ -47,7 +47,7 @@ export function ShortsLengths(props: ShortsLengthsProps) {
         }}
         value={value ?? ""}
         label={
-            <Typography variant="h3" sx={{
+            <Typography variant="h3" align="center" sx={{
                 mb: 4
             }}>
                 {t("Pages.Welcome.FitPreferences.ShortsLengthPreference")}
@@ -62,7 +62,7 @@ export function ShortsLengths(props: ShortsLengthsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={shortsLength.img} />
-                        <Typography variant="h4">{shortsLength.name}</Typography>
+                        <Typography variant="h4" align="center">{shortsLength.name}</Typography>
                     </Box>
                 }
             })

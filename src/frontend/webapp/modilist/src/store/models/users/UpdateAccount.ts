@@ -1,6 +1,6 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
-import { api } from "../../..";
+import { api } from "../../../App";
 import { AccountDTO, AccountState, Gender, UpdateAccount } from "../../../services/swagger/api";
 import { Dictonary, ErrorResponse, ResponseModel } from "../../response-model";
 

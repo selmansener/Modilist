@@ -40,7 +40,7 @@ export function UpperFits(props: UpperFitsProps) {
         }}
         value={value ?? ""}
         label={
-            <Typography variant="h3" sx={{
+            <Typography variant="h3" align="center" sx={{
                 mb: 4
             }}>
                 {t("Pages.Welcome.FitPreferences.UpperFitPreference")}
@@ -55,7 +55,7 @@ export function UpperFits(props: UpperFitsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={upperFit.img} />
-                        <Typography variant="h4">{upperFit.name}</Typography>
+                        <Typography variant="h4" align="center">{upperFit.name}</Typography>
                     </Box>
                 }
             })

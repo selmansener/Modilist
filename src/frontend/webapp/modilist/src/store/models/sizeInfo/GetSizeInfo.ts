@@ -1,6 +1,6 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
-import { api } from "../../..";
+import { api } from "../../../App";
 import { BodyType, SizeInfoDTO } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 

@@ -557,14 +557,14 @@ export default function StylePreferences() {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
                 </Box>
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
-                justifyContent: 'center'
+                justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedUpperCategories ?? ""}
             label={<Typography variant="h4">{t("MainCategories.Upper")}</Typography>}
@@ -585,14 +585,14 @@ export default function StylePreferences() {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
                 </Box>
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
-                justifyContent: 'center'
+                justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedLowerCategories ?? ""}
             label={<Typography variant="h4">{t("MainCategories.Lower")}</Typography>}
@@ -613,14 +613,14 @@ export default function StylePreferences() {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
                 </Box>
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
-                justifyContent: 'center'
+                justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedOuterCategories ?? ""}
             label={<Typography variant="h4">{t("MainCategories.Outer")}</Typography>}
@@ -640,14 +640,14 @@ export default function StylePreferences() {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
                 </Box>
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
-                justifyContent: 'center'
+                justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedUnderwearCategories ?? ""}
             label={<Typography variant="h4">{t("MainCategories.UnderwearPyjamasBeach")}</Typography>}
@@ -668,14 +668,14 @@ export default function StylePreferences() {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
                 </Box>
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
-                justifyContent: 'center'
+                justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedAccessoryCategories ?? ""}
             label={<Typography variant="h4">{t("MainCategories.Accessories")}</Typography>}
@@ -696,14 +696,14 @@ export default function StylePreferences() {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
                 </Box>
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
-                justifyContent: 'center'
+                justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedBagCategories ?? ""}
             label={<Typography variant="h4">{t("MainCategories.Bags")}</Typography>}
@@ -724,14 +724,14 @@ export default function StylePreferences() {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }}>{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
                 </Box>
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
-                justifyContent: 'center'
+                justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedFootwearCategories ?? ""}
             label={<Typography variant="h4">{t("MainCategories.Footwear")}</Typography>}
@@ -846,7 +846,7 @@ export default function StylePreferences() {
                     alignItems: 'center'
                 }}>
                     <FormControl error={touched.lovesShopping && errors.lovesShopping !== undefined}>
-                        <Typography variant="h3">
+                        <Typography variant="h3" align="center">
                             {t(`Pages.Welcome.StylePreferences.LikesShoping`)}
                         </Typography>
                         <Box sx={{
@@ -886,7 +886,7 @@ export default function StylePreferences() {
                     alignItems: 'center'
                 }}>
                     <FormControl error={touched.openToSuggestions && errors.openToSuggestions !== undefined}>
-                        <Typography variant="h3">
+                        <Typography variant="h3" align="center">
                             {t(`Pages.Welcome.StylePreferences.OpenToSuggestions`)}
                         </Typography>
                         <Box sx={{

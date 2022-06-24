@@ -36,7 +36,7 @@ export function FootTypes(props: FootTypesProps) {
     return <CustomCheckboxGroup
         value={value ?? ""}
         label={
-            <Typography variant="h3" sx={{
+            <Typography variant="h3" align="center" sx={{
                 mb: 4
             }}>
                 {t("Pages.Welcome.FitPreferences.FootTypePreference")}
@@ -51,7 +51,7 @@ export function FootTypes(props: FootTypesProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={footType.img} />
-                        <Typography variant="h4">{footType.name}</Typography>
+                        <Typography variant="h4" align="center">{footType.name}</Typography>
                     </Box>
                 }
             })

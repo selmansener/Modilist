@@ -40,7 +40,7 @@ export function LowerFits(props: LowerFitsProps) {
     return <CustomCheckboxGroup
         value={value ?? ""}
         label={
-            <Typography variant="h3" sx={{
+            <Typography variant="h3" align="center" sx={{
                 mb: 4
             }}>
                 {t("Pages.Welcome.FitPreferences.LowerFitPreference")}
@@ -55,7 +55,7 @@ export function LowerFits(props: LowerFitsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={lowerFit.img} />
-                        <Typography variant="h4">{lowerFit.name}</Typography>
+                        <Typography variant="h4" align="center">{lowerFit.name}</Typography>
                     </Box>
                 }
             })

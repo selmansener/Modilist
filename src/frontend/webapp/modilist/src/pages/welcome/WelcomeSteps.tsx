@@ -39,22 +39,14 @@ const steps = [
 export function WelcomeSteps() {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const theme = useTheme();
     const { activeStep, skipped } = useSelector((state: RootState) => state.welcomePageStepper);
-    const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: activateAccountIsBusy, data: activateAccount, status: activateAccountStatus } = useSelector((state: RootState) => state.activateAccountModel);
     const dispatch = useDispatch<Dispatch>();
 
     useEffect(() => {
-        if (!getAccountIsBusy && account?.id === "") {
-            dispatch.getAccountModel.getAccount();
-        }
-    }, []);
-
-    useEffect(() => {
         if (activateAccountStatus === 200 && activateAccount) {
             dispatch.getAccountModel.HANDLE_RESPONSE(activateAccount, activateAccountStatus);
-            navigate("/");
+            navigate("/", { replace: true });
         }
     }, [activateAccountStatus]);
 
@@ -143,7 +135,7 @@ export function WelcomeSteps() {
                 </Stepper>
             </Grid>
             <Grid item xs={12}>
-                <Typography variant="subtitle1" sx={{ mb: 4 }}>
+                <Typography variant="subtitle1" sx={{ mb: 4 }} align="center">
                     {t('Layouts.Welcome.WelcomeLayout.Description1')}
                 </Typography>
             </Grid>

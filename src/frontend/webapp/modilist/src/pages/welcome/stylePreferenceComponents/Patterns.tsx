@@ -55,7 +55,7 @@ export function Patterns(props: PatternsProps) {
         value={value ?? ""}
         label={<Box sx={{
             mb: 2
-        }}>
+        }} textAlign="center">
             <Typography variant="h4" display="inline">
                 {t("Pages.Welcome.FabricProperties.ExcludedPatterns.1")}
             </Typography>
@@ -77,7 +77,7 @@ export function Patterns(props: PatternsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={colorType.img} />
-                        <Typography variant="h4">{colorType.name}</Typography>
+                        <Typography variant="h4" align="center">{colorType.name}</Typography>
                     </Box>
                 }
             })

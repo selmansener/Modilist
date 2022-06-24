@@ -1,5 +1,5 @@
 import './App.css';
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { AuthenticatedTemplate, MsalProvider, UnauthenticatedTemplate } from "@azure/msal-react";
 import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material';
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
@@ -7,11 +7,20 @@ import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { config } from './config';
 import { Router } from './layouts/Router';
+import { Provider } from 'react-redux';
+import { PublicClientApplication } from '@azure/msal-browser';
+import { store } from './store/store';
+import { BrowserRouter } from 'react-router-dom';
+import { apiFactory } from './services/api';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const msalInstance = new PublicClientApplication(config.msalConfig);
 
 const themeOptions: ThemeOptions = {
   palette: {
     primary: {
       main: '#403E56',
+      contrastText: '#fff'
     },
     secondary: {
       main: '#F57691',
@@ -35,6 +44,9 @@ const themeOptions: ThemeOptions = {
     }
   },
   typography: {
+    allVariants: {
+      color: '#403e56',
+    },
     fontFamily: 'poppins',
     h1: {
       fontSize: 64,
@@ -90,6 +102,7 @@ const themeOptions: ThemeOptions = {
     button: {
       fontSize: 20,
       fontWeight: 600,
+      textTransform: 'initial'
     },
   },
 };
@@ -113,19 +126,27 @@ i18n
     }
   });
 
+export const api = apiFactory(msalInstance);
 
 function App() {
 
   return (
     <div className="App">
-      <ThemeProvider theme={mdTheme} >
-        <AuthenticatedTemplate>
-          <Router environment={config.environment} isPublic={false} />
-        </AuthenticatedTemplate>
-        <UnauthenticatedTemplate>
-          <Router environment={config.environment} isPublic />
-        </UnauthenticatedTemplate>
-      </ThemeProvider>
+      <CssBaseline />
+      <Provider store={store}>
+        <MsalProvider instance={msalInstance}>
+          <BrowserRouter>
+            <ThemeProvider theme={mdTheme} >
+              <AuthenticatedTemplate>
+                <Router environment={config.environment} isPublic={false} />
+              </AuthenticatedTemplate>
+              <UnauthenticatedTemplate>
+                <Router environment={config.environment} isPublic />
+              </UnauthenticatedTemplate>
+            </ThemeProvider>
+          </BrowserRouter>
+        </MsalProvider>
+      </Provider>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
-import { api } from "../../..";
+import { api } from "../../../App";
 import { AccountDTO, AccountState, CreateAccount, Gender } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 
@@ -43,6 +43,25 @@ export const createAccountModel = createModel<RootModel>()({
             return {
                 ...state,
                 status
+            }
+        },
+        RESET: (state: ResponseModel<AccountDTO>) => {
+            return {
+                ...state,
+                isBusy: false,
+                data: {
+                    birthDate: null,
+                    email: "",
+                    firstName: "",
+                    lastName: "",
+                    gender: Gender.None,
+                    id: "",
+                    instagramUserName: "",
+                    jobTitle: "",
+                    phone: "",
+                    state: AccountState.None
+                },
+                status: 0
             }
         }
     },

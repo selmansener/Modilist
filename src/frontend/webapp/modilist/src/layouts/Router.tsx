@@ -233,6 +233,7 @@ export function Router(props: RouterProps) {
           {routeOptions.component}
         </WelcomeLayout>)
       case "callback":
+        console.log("callback");
         return (<Callback />)
       case "comingsoon":
         return (<ComingSoonLayout />)

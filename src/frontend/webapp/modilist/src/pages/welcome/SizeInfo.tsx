@@ -239,7 +239,7 @@ export default function SizeInfo() {
             {account?.gender !== Gender.None &&
                 <>
                     <Grid item xs={12}>
-                        <Typography variant="h3" sx={{
+                        <Typography variant="h3" align="center" sx={{
                             mt: 2
                         }}>{t("Pages.Welcome.BodySize.BodyType")}</Typography>
                     </Grid>
@@ -337,7 +337,7 @@ export default function SizeInfo() {
             </Grid>
 
             <Grid item xs={12}>
-                <Typography variant="h3">{t("Pages.Welcome.BodySize.CategorySizes")}</Typography>
+                <Typography variant="h3" align="center">{t("Pages.Welcome.BodySize.CategorySizes")}</Typography>
             </Grid>
 
             <Section
