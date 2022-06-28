@@ -20,6 +20,8 @@ namespace Modilist.Data.EntityConfigurations.AddressDomain
 
             builder.HasIndex(x => new { x.AccountId, x.Name, x.DeletedAt })
                 .IsUnique();
+
+            builder.Property(x => x.FullAddress).HasMaxLength(2500);
         }
     }
 }

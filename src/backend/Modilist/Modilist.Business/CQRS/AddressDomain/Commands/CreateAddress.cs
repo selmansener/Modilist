@@ -72,7 +72,7 @@ namespace Modilist.Business.CQRS.AddressDomain.Commands
                 throw new Exception("Address exists with same name for account");
             }
 
-            address = new Address(request.AccountId, request.Name, request.FirstName, request.LastName, request.Phone, request.ZipCode, request.City, request.District, request.FullAddress, request.IsDefault);
+            address = new Address(request.AccountId, request.Name, request.FirstName, request.LastName, request.Phone, request.City, request.District, request.FullAddress, request.IsDefault, request.ZipCode);
 
             if (request.IsDefault)
             {

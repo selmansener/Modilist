@@ -37,6 +37,10 @@
         public const string CreateProducts = "Products.Create";
         public const string UpdateProducts = "Products.Update";
 
+        public const string GetSalesOrders = "SalesOrders.Get";
+        public const string CreateSalesOrders = "SalesOrders.Create";
+        public const string UpdateSalesOrders = "SalesOrders.Update";
+
         public const string Development = "Development";
     }
 }

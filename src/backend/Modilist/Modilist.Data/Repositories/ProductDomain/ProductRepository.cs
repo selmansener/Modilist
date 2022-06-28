@@ -15,6 +15,8 @@ namespace Modilist.Data.Repositories.ProductDomain
     public interface IProductRepository : IBaseRepository<Product>
     {
         Task<Product?> GetBySKUAsync(string sku, CancellationToken cancellationToken);
+
+        Task<bool> DoesProductExistsAsync(int productId, CancellationToken cancellationToken);
     }
 
     internal class ProductRepository : BaseRepository<Product>, IProductRepository
@@ -22,6 +24,11 @@ namespace Modilist.Data.Repositories.ProductDomain
         public ProductRepository(ModilistDbContext baseDb) 
             : base(baseDb)
         {
+        }
+
+        public async Task<bool> DoesProductExistsAsync(int productId, CancellationToken cancellationToken)
+        {
+            return await GetAll().AnyAsync(x => x.Id == productId, cancellationToken);
         }
 
         public async Task<Product?> GetBySKUAsync(string sku, CancellationToken cancellationToken)

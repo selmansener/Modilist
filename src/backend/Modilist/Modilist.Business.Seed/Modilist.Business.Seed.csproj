@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Modilist.Business.Utils\Modilist.Business.Utils.csproj" />
     <ProjectReference Include="..\Modilist.Data\Modilist.Data.csproj" />
   </ItemGroup>
 

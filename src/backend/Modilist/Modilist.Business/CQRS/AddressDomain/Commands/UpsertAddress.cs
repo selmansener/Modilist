@@ -80,7 +80,7 @@ namespace Modilist.Business.CQRS.AddressDomain.Commands
 
             if (address == null)
             {
-                address = new Address(request.AccountId, request.Name, request.FirstName, request.LastName, request.Phone, request.ZipCode, request.City, request.District, request.FullAddress, request.IsDefault);
+                address = new Address(request.AccountId, request.Name, request.FirstName, request.LastName, request.Phone, request.City, request.District, request.FullAddress, request.IsDefault, request.ZipCode);
 
                 await _addressWriteRepository.AddAsync(address, cancellationToken);
             }

@@ -50,6 +50,8 @@ namespace Modilist.Data.DataAccess
 
         public virtual DbSet<SalesOrderLineItem> SalesOrderLineItems { get; set; }
 
+        public virtual DbSet<SalesOrderAddress> SalesOrderAddresses { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var entityTypes = GetEntityTypes(builder).ToList();

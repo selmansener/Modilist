@@ -1,13 +1,17 @@
 ﻿
-using Modilist.Domains.Base;
-using Modilist.Domains.Models.AccountDomain;
+using Mapster;
 
-namespace Modilist.Domains.Models.AddressDomain
+using Modilist.Domains.Base;
+using Modilist.Domains.Models.AddressDomain;
+
+namespace Modilist.Domains.Models.SalesOrderDomain
 {
-    public class Address : BaseEntity
+    public class SalesOrderAddress : BaseEntity
     {
-        public Address(
-            Guid accountId,
+        protected SalesOrderAddress() { }
+
+        public SalesOrderAddress(
+            int salesOrderId,
             string name,
             string firstName,
             string lastName,
@@ -15,10 +19,9 @@ namespace Modilist.Domains.Models.AddressDomain
             string city,
             string district,
             string fullAddress,
-            bool isDefault,
-            string? zipCode = null)
+            string zipCode = null)
         {
-            AccountId = accountId;
+            SalesOrderId = salesOrderId;
             Name = name;
             FirstName = firstName;
             LastName = lastName;
@@ -27,12 +30,11 @@ namespace Modilist.Domains.Models.AddressDomain
             City = city;
             District = district;
             FullAddress = fullAddress;
-            IsDefault = isDefault;
         }
 
-        public Guid AccountId { get; private set; }
+        public int SalesOrderId { get; set; }
 
-        public Account Account { get; private set; }
+        public SalesOrder SalesOrder { get; set; }
 
         public string Name { get; private set; }
 
@@ -50,23 +52,17 @@ namespace Modilist.Domains.Models.AddressDomain
 
         public string FullAddress { get; private set; }
 
-        public bool IsDefault { get; private set; }
-
-        public void ChangeDefault(bool isDefault)
-        {
-            IsDefault = isDefault;
-        }
-
-        public void UpdateAddress(
+        internal void UpdateAddress(
+            string name,
             string firstName,
             string lastName,
             string phone,
-            string zipCode,
             string city,
             string district,
             string fullAddress,
-            bool isDefault)
+            string zipCode = null)
         {
+            Name = name;
             FirstName = firstName;
             LastName = lastName;
             Phone = phone;
@@ -74,7 +70,6 @@ namespace Modilist.Domains.Models.AddressDomain
             City = city;
             District = district;
             FullAddress = fullAddress;
-            IsDefault = isDefault;
         }
     }
 }
