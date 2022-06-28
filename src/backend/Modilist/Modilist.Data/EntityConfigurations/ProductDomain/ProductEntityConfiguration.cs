@@ -12,6 +12,9 @@ namespace Modilist.Data.EntityConfigurations.ProductDomain
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseHiLo(nameof(Product));
+
+            builder.HasIndex(x => new { x.SKU, x.DeletedAt })
+                .IsUnique();
         }
     }
 }

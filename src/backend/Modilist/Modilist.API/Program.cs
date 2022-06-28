@@ -22,6 +22,7 @@ using Modilist.API.Extensions;
 using FluentValidation.AspNetCore;
 using Modilist.Business.Utils.Extensions;
 using Modilist.Infrastructure.Shared.Configurations;
+using Modilist.Infrastructure.Azure.Extensions;
 
 const string CorsPolicyName = "Default";
 const string ApiTitle = "ModilistAPI";
@@ -43,10 +44,13 @@ builder.Services.Configure<ConfigurationOptions>(configuration =>
 });
 
 builder.Services.Configure<IyzicoAPIOptions>(builder.Configuration.GetSection("AppSettings:IyzicoAPIOptions"));
+builder.Services.Configure<StorageConnectionStrings>(builder.Configuration.GetSection("AppSettings:StorageConnectionStrings"));
 
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddBusinessUtils();
+
+builder.Services.AddBlobClientFactory();
 
 builder.Services.AddCors(ConfigureCors);
 

@@ -33,6 +33,10 @@
         public const string CreateSubscriptions = "Subscriptions.Create";
         public const string UpdateSubscriptions = "Subscriptions.Update";
 
+        public const string GetProducts = "Products.Get";
+        public const string CreateProducts = "Products.Create";
+        public const string UpdateProducts = "Products.Update";
+
         public const string Development = "Development";
     }
 }

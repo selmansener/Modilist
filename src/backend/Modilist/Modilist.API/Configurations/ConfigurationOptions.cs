@@ -13,5 +13,7 @@ namespace Modilist.API.Configurations
         public IEnumerable<string> AllowedOrigins { get; set; }
 
         public string DevelopmentApiKey { get; set; }
+
+        public StorageConnectionStrings StorageConnectionStrings { get; set; }
     }
 }

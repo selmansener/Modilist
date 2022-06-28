@@ -26,6 +26,7 @@
     <ProjectReference Include="..\Modilist.Business.Seed\Modilist.Business.Seed.csproj" />
     <ProjectReference Include="..\Modilist.Business.Utils\Modilist.Business.Utils.csproj" />
     <ProjectReference Include="..\Modilist.Business\Modilist.Business.csproj" />
+    <ProjectReference Include="..\Modilist.Infrastructure.Azure.Extensions\Modilist.Infrastructure.Azure.Extensions.csproj" />
     <ProjectReference Include="..\Modilist.Infrastructure.Shared\Modilist.Infrastructure.Shared.csproj" />
   </ItemGroup>
 

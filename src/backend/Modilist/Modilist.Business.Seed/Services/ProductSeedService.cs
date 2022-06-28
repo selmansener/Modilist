@@ -19,7 +19,7 @@ namespace Modilist.Business.Seed.Services
 
             for (int i = 0; i < 5; i++)
             {
-                await _dbContext.AddAsync(new Product(faker.Random.ReplaceNumbers("###-###-###"), faker.Commerce.ProductName()), cancellationToken);
+                await _dbContext.AddAsync(new Product(faker.Random.ReplaceNumbers("###-###-###"), faker.Commerce.ProductName(), faker.Commerce.Categories(1).FirstOrDefault()), cancellationToken);
             }
         }
     }

@@ -138,6 +138,8 @@ namespace Modilist.Data.Repositories.Base
             entity.Update();
             _baseDb.Entry(entity).State = EntityState.Modified;
 
+            _baseDb.ChangeTracker.DetectChanges();
+
             if (saveChanges)
             {
                 resultCount = await _baseDb.SaveChangesAsync(cancellationToken);

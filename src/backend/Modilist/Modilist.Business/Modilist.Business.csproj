@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Modilist.Data\Modilist.Data.csproj" />
+    <ProjectReference Include="..\Modilist.Infrastructure.Azure.Extensions\Modilist.Infrastructure.Azure.Extensions.csproj" />
     <ProjectReference Include="..\Modilist.Infrastructure.Shared\Modilist.Infrastructure.Shared.csproj" />
   </ItemGroup>
 
