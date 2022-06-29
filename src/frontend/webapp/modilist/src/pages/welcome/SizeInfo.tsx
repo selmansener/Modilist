@@ -1,4 +1,5 @@
-import { Box, Button, CircularProgress, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Fab, Box, Button, CircularProgress, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import NavigationIcon from '@mui/icons-material/Navigation';
 import { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -100,6 +101,12 @@ export default function SizeInfo() {
         "FootLength",
     ];
 
+    useEffect(() => { window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      }); }, [])
+
     useEffect(() => {
         if (!getAccountIsBusy && account === undefined) {
             dispatch.getAccountModel.getAccount();
@@ -125,6 +132,7 @@ export default function SizeInfo() {
         handleBlur,
         touched,
         errors,
+        isValid,
         values: sizeInfo,
         submitForm,
     } = useFormik({
@@ -493,6 +501,7 @@ export default function SizeInfo() {
                 <Button
                     disabled
                     size="large"
+                    variant="outlined"
                 >
                     {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
                 </Button>
@@ -503,6 +512,13 @@ export default function SizeInfo() {
                     disabled={isBusy}
                     onClick={() => {
                         submitForm();
+                        if(!isValid){
+                            window.scrollTo({
+                                top: 0,
+                                left: 0,
+                                behavior: 'smooth'
+                              });
+                        }
                     }}
                     variant="outlined">
                     {isBusy && <CircularProgress 

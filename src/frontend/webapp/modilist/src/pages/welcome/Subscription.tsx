@@ -19,12 +19,19 @@ export default function Subscription() {
     const { isBusy: updateSubscriptionMaxPricingLimitIsBusy, status: updateSubscriptionMaxPricingLimitStatus } = useSelector((state: RootState) => state.updateSubscriptionMaxPricingLimitModel);
     const { personal, contactInfo, paymentMethod, subscriptionDetails } = useSelector((state: RootState) => state.stepperSubscription);
     const isBusy = getAccountIsBusy || updateAccountIsBusy || getDefaultAddressIsBusy || upsertAddressIsBusy || createPaymentMethodIsBusy || updateSubscriptionMaxPricingLimitIsBusy;
-
+    
+    useEffect(() => { window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      }); }, [])
+    
     useEffect(() => {
         if (updateAccountStatus === 200 && upsertAddressStatus === 200 && createPaymentMethodStatus === 200 && updateSubscriptionMaxPricingLimitStatus === 200) {
             dispatch.welcomePageStepper.next();
         }
     }, [updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionMaxPricingLimitStatus])
+
 
     return (
         <Grid item container spacing={12}>
@@ -35,6 +42,7 @@ export default function Subscription() {
             <Grid item container xs={6} justifyContent="flex-start">
                 <Button
                     disabled={isBusy}
+                    variant="outlined"
                     onClick={() => {
                         dispatch.welcomePageStepper.back();
                     }}

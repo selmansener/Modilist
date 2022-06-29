@@ -40,6 +40,12 @@ export default function StylePreferences() {
     const { imgBaseHost } = config;
     const { gender } = account as AccountDTO;
 
+    useEffect(() => { window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      }); }, []);
+
     useEffect(() => {
         if (!getStylePreferencesIsBusy) {
             dispatch.getStylePreferencesModel.getStylePreferences();
@@ -77,6 +83,7 @@ export default function StylePreferences() {
         handleChange,
         touched,
         errors,
+        isValid,
         values: stylePreferences,
         setFieldValue,
         submitForm,
@@ -1029,6 +1036,7 @@ export default function StylePreferences() {
             <Grid item container xs={6} justifyContent="flex-start">
                 <Button
                     disabled={isBusy}
+                    variant="outlined"
                     onClick={() => {
                         dispatch.welcomePageStepper.back();
                     }}
@@ -1041,6 +1049,13 @@ export default function StylePreferences() {
                     disabled={isBusy}
                     onClick={() => {
                         submitForm();
+                        if(!isValid){
+                            window.scrollTo({
+                                top: 0,
+                                left: 0,
+                                behavior: 'smooth'
+                              });
+                        }
                     }}
                     variant="outlined">
                     {isBusy && <CircularProgress sx={{

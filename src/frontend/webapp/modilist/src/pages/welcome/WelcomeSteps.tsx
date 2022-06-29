@@ -1,5 +1,6 @@
-import { Stepper, Typography, Step, StepLabel, styled, StepIconProps, Box, CircularProgress, useTheme, Grid } from "@mui/material";
-import React, { useEffect } from "react";
+import { Stepper, Typography, Step, StepLabel, styled, StepIconProps, Box, CircularProgress, useTheme, Grid, Fab, Paper } from "@mui/material";
+import NavigationIcon from '@mui/icons-material/Navigation';
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 import { Trans, useTranslation } from "react-i18next";
@@ -34,6 +35,7 @@ const steps = [
         component: <Subscription />
     },
 ];
+
 
 
 export function WelcomeSteps() {
@@ -139,6 +141,9 @@ export function WelcomeSteps() {
                     {t('Layouts.Welcome.WelcomeLayout.Description1')}
                 </Typography>
             </Grid>
+          
+
+    
             {activeStep === steps.length
                 ? <Grid item xs={12}>
                     <CircularProgress />
@@ -147,6 +152,14 @@ export function WelcomeSteps() {
                     {steps[activeStep].component}
                 </Grid>
             }
+                        <Fab sx={{position: "fixed", bottom: 80, right: 20}}variant="extended" onClick={() => {
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'smooth'
+                  });
+            }}><NavigationIcon sx={{ mr: 1 }} />
+            {t('Layouts.Welcome.WelcomeSteps.Buttons.Navigate')}</Fab>
         </Grid>
     );
 }

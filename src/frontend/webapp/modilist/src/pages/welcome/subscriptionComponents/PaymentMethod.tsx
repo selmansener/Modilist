@@ -25,6 +25,7 @@ export default function PaymentMethod() {
         handleBlur,
         touched,
         errors,
+        isValid,
         values: creditCard,
         submitForm
     } = useFormik({
@@ -46,6 +47,9 @@ export default function PaymentMethod() {
     useEffect(() => {
         dispatch.stepperSubscription.setPaymentMethod(() => {
             submitForm();
+            if(!isValid){
+                window.scrollTo(0,0);
+            }
         })
     }, []);
 

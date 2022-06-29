@@ -32,6 +32,7 @@ export default function ContactInfo() {
         handleChange,
         handleBlur,
         touched,
+        isValid,
         values: address,
         submitForm,
         errors } = useFormik({
@@ -55,6 +56,9 @@ export default function ContactInfo() {
 
         dispatch.stepperSubscription.setContactInfo(() => {
             submitForm();
+            if(!isValid){
+                window.scrollTo(0,0);
+            }
         })
     }, []);
 

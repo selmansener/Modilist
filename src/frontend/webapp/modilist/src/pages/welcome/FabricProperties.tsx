@@ -27,6 +27,12 @@ export function FabricProperties() {
         additionalNotes: ""
     });
 
+    useEffect(() => { window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      }); }, [])
+
     useEffect(() => {
         if (upsertStatus === 200) {
             if (upsertPreferedFabricProperties) {
@@ -176,6 +182,7 @@ export function FabricProperties() {
         <Grid item container xs={6} justifyContent="flex-start">
             <Button
                 disabled={isBusy}
+                variant="outlined"
                 onClick={() => {
                     dispatch.welcomePageStepper.back();
                 }}

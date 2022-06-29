@@ -39,6 +39,7 @@ export default function Personal() {
         handleBlur,
         touched,
         errors,
+        isValid,
         values: account,
         setFieldValue,
         submitForm,
@@ -58,6 +59,9 @@ export default function Personal() {
 
         dispatch.stepperSubscription.setPersonal(() => {
             submitForm();
+            if(!isValid){
+                window.scrollTo(0,0);
+            }
         });
     }, []);
 

@@ -29,6 +29,12 @@ export function FitPreferences() {
         waistHeight: ""
     });
 
+    useEffect(() => { window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      }); }, [])
+
     useEffect(() => {
         if (upsertStatus === 200) {
             if (upsertFitPreferences) {
@@ -40,6 +46,8 @@ export function FitPreferences() {
             dispatch.welcomePageStepper.next();
         }
     }, [upsertStatus]);
+
+
 
     useEffect(() => {
         if (initialFitPreferences && getFitPreferencesStatus === 200) {
@@ -168,6 +176,7 @@ export function FitPreferences() {
         <Grid item container xs={6} justifyContent="flex-start">
             <Button
                 disabled={isBusy}
+                variant="outlined"
                 onClick={() => {
                     dispatch.welcomePageStepper.back();
                 }}
