@@ -41,7 +41,7 @@ const steps = [
 export function WelcomeSteps() {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const { activeStep, skipped } = useSelector((state: RootState) => state.welcomePageStepper);
+    const { activeStep } = useSelector((state: RootState) => state.welcomePageStepper);
     const { isBusy: activateAccountIsBusy, data: activateAccount, status: activateAccountStatus } = useSelector((state: RootState) => state.activateAccountModel);
     const dispatch = useDispatch<Dispatch>();
 
@@ -52,9 +52,6 @@ export function WelcomeSteps() {
         }
     }, [activateAccountStatus]);
 
-    const isStepSkipped = (step: number) => {
-        return skipped.has(step);
-    };
 
     const StepIconRoot = styled('div')<{
         ownerState: { completed?: boolean; active?: boolean };
@@ -107,14 +104,11 @@ export function WelcomeSteps() {
         <Grid item container>
             <Grid item xs={12}>
                 <Stepper activeStep={activeStep}>
-                    {steps.map((step, index) => {
+                    {steps.map((step) => {
                         const stepProps: { completed?: boolean } = {};
                         const labelProps: {
                             optional?: React.ReactNode;
                         } = {};
-                        if (isStepSkipped(index)) {
-                            stepProps.completed = false;
-                        }
                         return (
                             <Step key={step.title} {...stepProps} sx={{
                                 minHeight: '120px',

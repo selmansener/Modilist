@@ -42,6 +42,7 @@ export const upsertStylePreferencesModel = createModel<RootModel>()({
         RESET: (state: ResponseModel<StylePreferencesDTO>) => {
             return {
                 ...state,
+                status: 0,
                 data: {
                     bodyPartsToHide: "",
                     bodyPartsToHighlight: "",

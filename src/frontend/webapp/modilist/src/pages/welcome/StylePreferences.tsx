@@ -32,10 +32,10 @@ interface ProductCategory {
 
 export default function StylePreferences() {
     const { t } = useTranslation();
-    const { data: account } = useSelector((state: RootState) => state.getAccountModel);
+    const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: getStylePreferencesIsBusy, data: getStylePreferences, status: getStylePreferencesStatus } = useSelector((state: RootState) => state.getStylePreferencesModel);
     const { isBusy: upsertStylePreferencesIsBusy, data: upsertStylePreferences, status: upsertStylePreferencesStatus } = useSelector((state: RootState) => state.upsertStylePreferencesModel);
-    const isBusy = getStylePreferencesIsBusy || upsertStylePreferencesIsBusy;
+    const isBusy = getAccountIsBusy || getStylePreferencesIsBusy || upsertStylePreferencesIsBusy;
     const dispatch = useDispatch<Dispatch>();
     const { imgBaseHost } = config;
     const { gender } = account as AccountDTO;
@@ -293,8 +293,8 @@ export default function StylePreferences() {
         },
         {
             name: t("ProductCategories.Belt"),
-            value: "Watch",
-            img: `${imgBaseHost}/product-category-icons/Watch.svg`,
+            value: "Belt",
+            img: `${imgBaseHost}/product-category-icons/Belt.svg`,
             mainCategory: MainCategory.Accessories
         },
         {
@@ -353,7 +353,7 @@ export default function StylePreferences() {
         },
         {
             name: t("ProductCategories.Sneakers"),
-            value: "Sandals",
+            value: "Sneakers",
             img: `${imgBaseHost}/product-category-icons/Sneakers.svg`,
             mainCategory: MainCategory.Footwear
         },
@@ -559,10 +559,10 @@ export default function StylePreferences() {
         const upperCategories = productCategories.filter(x => x.mainCategory === MainCategory.Upper).map(category => {
             return {
                 value: category.value,
-                element: <Box sx={{
+                element: <Box key={category.name} sx={{
                     display: 'flex',
                     flexDirection: 'column'
-                }}>
+                }} >
                     <ImageComponent src={category.img} />
                     <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
                 </Box>
@@ -587,7 +587,7 @@ export default function StylePreferences() {
         const lowerCategories = productCategories.filter(x => x.mainCategory === MainCategory.Lower).map(category => {
             return {
                 value: category.value,
-                element: <Box sx={{
+                element: <Box key={category.name} sx={{
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
@@ -615,7 +615,7 @@ export default function StylePreferences() {
         const outerCategories = productCategories.filter(x => x.mainCategory === MainCategory.Outer).map(category => {
             return {
                 value: category.value,
-                element: <Box sx={{
+                element: <Box key={category.name} sx={{
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
@@ -642,7 +642,7 @@ export default function StylePreferences() {
         const accessoriesCategories = productCategories.filter(x => x.mainCategory === MainCategory.UnderwearPyjamasBeach).map(category => {
             return {
                 value: category.value,
-                element: <Box sx={{
+                element: <Box key={category.name} sx={{
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
@@ -670,7 +670,7 @@ export default function StylePreferences() {
         const accessoriesCategories = productCategories.filter(x => x.mainCategory === MainCategory.Accessories).map(category => {
             return {
                 value: category.value,
-                element: <Box sx={{
+                element: <Box key={category.name} sx={{
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
@@ -698,7 +698,7 @@ export default function StylePreferences() {
         const bagsCategories = productCategories.filter(x => x.mainCategory === MainCategory.Bags).map(category => {
             return {
                 value: category.value,
-                element: <Box sx={{
+                element: <Box key={category.name} sx={{
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
@@ -726,7 +726,7 @@ export default function StylePreferences() {
         const categories = productCategories.filter(x => x.mainCategory === MainCategory.Footwear).map(category => {
             return {
                 value: category.value,
-                element: <Box sx={{
+                element: <Box key={category.name} sx={{
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
@@ -831,7 +831,7 @@ export default function StylePreferences() {
     const bodyParts = _bodyParts.map(bodyPart => {
         return {
             value: bodyPart,
-            element: <Box sx={{
+            element: <Box key={bodyPart} sx={{
                 display: 'flex',
                 flexDirection: 'column'
             }}>
@@ -941,7 +941,7 @@ export default function StylePreferences() {
                     <FormControl fullWidth error={touched.choiceReasons && errors.choiceReasons !== undefined}>
                         <FormGroup>
                             {choiseReasons.map(reason => (
-                                <FormControlLabel control={
+                                <FormControlLabel key={reason} control={
                                     <Checkbox
                                         disabled={isBusy}
                                         value={reason}

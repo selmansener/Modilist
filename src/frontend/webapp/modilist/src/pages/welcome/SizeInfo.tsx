@@ -13,6 +13,7 @@ import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 import { WeigthIcon } from "../../components/customIcons/WeightIcon";
 import { MeasureIcon } from "../../components/customIcons/MeasureIcon";
+import React from "react";
 
 let footWearSizes: number[] = [];
 
@@ -210,9 +211,10 @@ export default function SizeInfo() {
                 bodySizes.map((bodySize, index) => {
                     const sizeName = camelCase(bodySize);
 
-                    return <>
-                        {index % 2 === 0 ? <Grid xs={2}></Grid> : <></>}
-                        <Grid item key={sizeName} xs={4}>
+                    return <React.Fragment key={sizeName}>
+                    
+                        {index % 2 === 0 ? <Grid item xs={2}></Grid> : <></>}
+                        <Grid item xs={4}>
                             <Box sx={{
                                 display: 'flex',
                                 justifyContent: 'space-evenly'
@@ -221,7 +223,7 @@ export default function SizeInfo() {
                                     width: '70px',
                                     mr: 2
                                 }}>
-                                    {gender && <ImageComponent src={`${imgBaseHost}/body-size/${gender}/${bodySize}.svg`} />}
+                                    {account?.gender!=Gender.None && <ImageComponent src={`${imgBaseHost}/body-size/${gender}/${bodySize}.svg`} />}
                                 </Box>
                                 <FormControl fullWidth>
                                     <TextField
@@ -235,8 +237,8 @@ export default function SizeInfo() {
                                 </FormControl>
                             </Box>
                         </Grid>
-                        {index % 2 === 0 ? <></> : <Grid xs={2}></Grid>}
-                    </>
+                        {index % 2 === 0 ? <></> : <Grid item xs={2}></Grid>}
+                        </React.Fragment>
                 })
             }
         </>
@@ -254,7 +256,7 @@ export default function SizeInfo() {
                     <Grid item xs={12}>
                         <FormControl fullWidth error={touched.bodyType && errors.bodyType !== undefined}>
                             <FormHelperText>
-                                <Typography>{touched.bodyType && errors?.bodyType}</Typography>
+                                {touched.bodyType && errors?.bodyType}
                             </FormHelperText>
                             <CustomRadioButtonGroup
                                 greyscale
