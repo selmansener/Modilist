@@ -258,6 +258,7 @@ export default function SizeInfo() {
                             <FormHelperText>
                                 {touched.bodyType && errors?.bodyType}
                             </FormHelperText>
+                            
                             <CustomRadioButtonGroup
                                 greyscale
                                 name="bodyType"
@@ -286,7 +287,6 @@ export default function SizeInfo() {
                         display: 'flex'
                     }}>
                         <Box sx={{
-                            display: 'flex',
                             width: '70px',
                             mr: 2,
                             alignItems: 'center'
@@ -316,7 +316,6 @@ export default function SizeInfo() {
                         display: 'flex'
                     }}>
                         <Box sx={{
-                            display: 'flex',
                             width: '70px',
                             mr: 2,
                             alignItems: 'center'
