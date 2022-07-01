@@ -4071,6 +4071,13 @@
   "resolved" "https://registry.npmjs.org/duplexer/-/duplexer-0.1.2.tgz"
   "version" "0.1.2"
 
+"dynamic-query-builder-client@^0.2.4":
+  "integrity" "sha512-1U/6Z2iChZJl+Hze6JGcydm0boRhbmPQRpNR66Isz+wqXU73sTGNsnwpIH+Ri+34mxrigtFYvZctM26oy/gkbw=="
+  "resolved" "https://registry.npmjs.org/dynamic-query-builder-client/-/dynamic-query-builder-client-0.2.4.tgz"
+  "version" "0.2.4"
+  dependencies:
+    "moment" "^2.22.2"
+
 "ecc-jsbn@~0.1.1":
   "integrity" "sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw=="
   "resolved" "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz"
@@ -6567,7 +6574,7 @@
   dependencies:
     "minimist" "^1.2.6"
 
-"moment@^2.24.0", "moment@^2.29.1":
+"moment@^2.22.2", "moment@^2.24.0", "moment@^2.29.1":
   "integrity" "sha512-c6YRvhEo//6T2Jz/vVtYzqBzwvPT95JBQ+smCytzf7c50oMZRsR/a4w88aD34I+/QVSfnoAnSBFPJHItlOMJVw=="
   "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.3.tgz"
   "version" "2.29.3"

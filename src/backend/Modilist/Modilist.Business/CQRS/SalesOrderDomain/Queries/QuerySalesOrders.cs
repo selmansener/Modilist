@@ -42,12 +42,6 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Queries
 
         public async Task<DQBResultDTO<SalesOrderDTO>> Handle(QuerySalesOrders request, CancellationToken cancellationToken)
         {
-            var count = await _salesOrderRepository
-                .QueryAllByAccountId(request.AccountId)
-                .ProjectToType<SalesOrderDTO>()
-                .ApplyFilters(request.Dqb)
-                .CountAsync(cancellationToken);
-
             var data = await _salesOrderRepository
                 .QueryAllByAccountId(request.AccountId)
                 .ProjectToType<SalesOrderDTO>()
@@ -57,7 +51,7 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Queries
             return new DQBResultDTO<SalesOrderDTO>
             {
                 Data = data,
-                Count = count
+                Count = request.Dqb.PaginationOption.DataSetCount
             };
         }
     }

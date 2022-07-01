@@ -1,9 +1,9 @@
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 export function SizeInfo() {
     return (
-        <>
-            <Typography variant="h1">Kıyafet Ölçülerim</Typography>
-        </>
+        <Grid item container xs={12} spacing={2}>
+
+        </Grid>
     )
 }

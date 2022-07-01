@@ -29,6 +29,8 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public string? CargoTrackingCode { get; private set; }
 
+        public DateTime? PreparedAt { get; private set; }
+
         public DateTime? ShippedAt { get; private set; }
 
         public DateTime? DeliveredAt { get; private set; }
@@ -87,6 +89,92 @@ namespace Modilist.Domains.Models.SalesOrderDomain
                     address.FullAddress,
                     address.ZipCode);
             }
+        }
+
+        public void Prepared()
+        {
+            if (State >= SalesOrderState.Prepared)
+            {
+                throw new SalesOrderAlreadyPreparedException(AccountId, Id);
+            }
+
+            State = SalesOrderState.Prepared;
+            PreparedAt = DateTime.UtcNow;
+        }
+
+        public void Shipped(string? cargoState, string cargoTrackingCode)
+        {
+            if (string.IsNullOrWhiteSpace(cargoTrackingCode))
+            {
+                throw new ArgumentNullException(nameof(cargoTrackingCode));
+            }
+
+            if (State >= SalesOrderState.Shipped)
+            {
+                throw new SalesOrderAlreadyShippedException(Id, AccountId, CargoTrackingCode);
+            }
+
+            CargoState = cargoState;
+            CargoTrackingCode = cargoTrackingCode;
+            State = SalesOrderState.Shipped;
+            ShippedAt = DateTime.UtcNow;
+        }
+
+        public void Delivered()
+        {
+            if (State >= SalesOrderState.Delivered)
+            {
+                throw new SalesOrderAlreadyDeliveredException(AccountId, Id);
+            }
+
+            State = SalesOrderState.Delivered;
+            PreparedAt = DateTime.UtcNow;
+        }
+
+        public void Completed()
+        {
+            if (State == SalesOrderState.Completed)
+            {
+                throw new SalesOrderAlreadyCompletedException(AccountId, Id);
+            }
+
+            State = SalesOrderState.Completed;
+            PreparedAt = DateTime.UtcNow;
+        }
+
+        public void AddFeedback(
+            int salesOrderLineItemId,
+            float price,
+            LineItemSizeFeedback size,
+            float style,
+            float fit,
+            float color,
+            float quality,
+            float fabric,
+            float pattern,
+            float perfectMatch,
+            bool sendSimilarProducts = false,
+            bool blockBrand = false,
+            string? additionalNotes = null)
+        {
+            if (State != SalesOrderState.Delivered)
+            {
+                throw new InvalidOrderStateFeedbackException(Id, salesOrderLineItemId, State);
+            }
+
+            if (LineItems.Count == 0)
+            {
+                throw new InvalidOperationException($"LineItems has to be included to perform AddFeedback action. Additional Info: SalesOrderId: {Id}, AccountId: {AccountId}");
+            }
+
+            var salesOrderLineItem = LineItems.FirstOrDefault(x => x.Id == salesOrderLineItemId);
+
+            if (salesOrderLineItem == null)
+            {
+                throw new SalesOrderLineItemNotFoundException(AccountId, Id, salesOrderLineItemId);
+            }
+
+            salesOrderLineItem.AddFeedback(price, size, style, fit, color, quality, fabric, pattern, perfectMatch, sendSimilarProducts, blockBrand, additionalNotes);
         }
     }
 }

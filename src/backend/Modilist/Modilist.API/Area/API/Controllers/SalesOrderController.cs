@@ -62,5 +62,18 @@ namespace Modilist.API.Area.API.Controllers
 
             return Ok(response);
         }
+
+        // TODO: This endpoint shouldn't exists. A scheduled job will change sales order status.
+        [HttpPost("{salesOrderId}/Ship")]
+        [Authorize(nameof(AuthorizationPermissions.UpdateSalesOrders))]
+        [ProducesResponseType(typeof(ShipSalesOrderDTO), 200)]
+        public async Task<IActionResult> Ship(int salesOrderId, ShipSalesOrder input, CancellationToken cancellationToken)
+        {
+            input.SalesOrderId = salesOrderId;
+
+            var response = await _mediator.Send(input, cancellationToken);
+
+            return Ok(response);
+        }
     }
 }

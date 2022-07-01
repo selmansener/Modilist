@@ -14,3 +14,8 @@ export interface ErrorResponse {
     errors?: Dictonary;
     errorType?: string;
 }
+
+export interface DQBResultDTO<T> {
+    data: T[],
+    count: number,
+}

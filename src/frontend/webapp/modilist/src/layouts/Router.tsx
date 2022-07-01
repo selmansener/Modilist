@@ -1,17 +1,16 @@
 import * as React from 'react';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PaymentIcon from '@mui/icons-material/Payment';
-import SquareFootIcon from '@mui/icons-material/SquareFoot';
+import CheckroomIcon from '@mui/icons-material/Checkroom';
 import StraightenIcon from '@mui/icons-material/Straighten';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import BoyIcon from '@mui/icons-material/Boy';
+import HomeIcon from '@mui/icons-material/Home';
 import { Account } from '../pages/account/Account';
 import { Addresses } from '../pages/adresses/Addresses';
-import { BodySizeInfo } from '../pages/bodySizeInfo/BodySizeInfo';
 import { Main } from '../pages/main/Main';
-import { Orders } from '../pages/orders/Orders';
 import { PaymentMethods } from '../pages/paymentMethods/PaymentMethods';
 import { SizeInfo } from '../pages/sizeInfo/SizeInfo';
 import { StylePreferences } from '../pages/stylePreferences/StylePreferences';
@@ -26,6 +25,10 @@ import NotFound from './notFound/NotFound';
 import Unauthenticated from './unauthenticated/UnauthenticatedLayout';
 import { GenderSelection } from '../pages/welcome/GenderSelection';
 import { WelcomeSteps } from '../pages/welcome/WelcomeSteps';
+import { SalesOrders } from '../pages/salesOrders/SalesOrders';
+import { FitPreferences } from '../pages/fitPreferences/FitPreferences';
+import { FabricProperties } from '../pages/fabricProperties/FabricProperties';
+import { SalesOrderDetails } from '../pages/salesOrders/SalesOrderDetails';
 
 interface RouterOptions {
   title: string,
@@ -67,11 +70,11 @@ const routes: RouterOptions[] = [
     environments: ["production", "development", "int", "staging"]
   },
   {
-    title: "Dashboard",
+    title: "Pages.Titles.Main",
     route: "/",
     menuItem: {
-      icon: <DashboardIcon />,
-      name: "Dashboard"
+      icon: <HomeIcon />,
+      name: "Pages.Titles.Main"
     },
     component: <Main />,
     layout: "dashboard",
@@ -79,47 +82,31 @@ const routes: RouterOptions[] = [
     environments: ["development", "int", "staging"]
   },
   {
-    title: "Hesap Bilgilerim",
-    route: "/account",
+    title: "Pages.Titles.SalesOrders",
+    route: "/sales-orders",
     menuItem: {
-      icon: <ManageAccountsIcon />,
-      name: "Hesap Bilgilerim"
+      icon: <ShoppingBasketIcon />,
+      name: "Pages.Titles.SalesOrders"
     },
+    component: <SalesOrders />,
     layout: "dashboard",
-    component: <Account />,
     isPublic: false,
     environments: ["development", "int", "staging"]
   },
   {
-    title: "Stil Tercihlerim",
-    route: "/style-preferences",
-    menuItem: {
-      icon: <BarChartIcon />,
-      name: "Stil Tercihlerim"
-    },
+    title: "Pages.Titles.SalesOrders",
+    route: "/sales-orders/:salesOrderId",
+    component: <SalesOrderDetails />,
     layout: "dashboard",
-    component: <StylePreferences />,
     isPublic: false,
     environments: ["development", "int", "staging"]
   },
   {
-    title: "Siparişlerim",
-    route: "/orders",
-    menuItem: {
-      icon: <ShoppingCartIcon />,
-      name: "Siparişlerim"
-    },
-    layout: "dashboard",
-    component: <Orders />,
-    isPublic: false,
-    environments: ["development", "int", "staging"]
-  },
-  {
-    title: "Kıyafet Ölçülerim",
+    title: "Pages.Titles.SizeInfo",
     route: "/size-info",
     menuItem: {
-      icon: <SquareFootIcon />,
-      name: "Kıyafet Ölçülerim"
+      icon: <BoyIcon />,
+      name: "Pages.Titles.SizeInfo"
     },
     layout: "dashboard",
     component: <SizeInfo />,
@@ -127,26 +114,38 @@ const routes: RouterOptions[] = [
     environments: ["development", "int", "staging"]
   },
   {
-    title: "Beden Ölçülerim",
-    route: "/body-size-info",
+    title: "Pages.Titles.StylePreferences",
+    route: "/style-preferences",
     menuItem: {
-      icon: <StraightenIcon />,
-      name: "Beden Ölçülerim"
+      icon: <BoyIcon />,
+      name: "Pages.Titles.StylePreferences"
     },
     layout: "dashboard",
-    component: <BodySizeInfo />,
+    component: <StylePreferences />,
     isPublic: false,
     environments: ["development", "int", "staging"]
   },
   {
-    title: "Adreslerim",
-    route: "/addresses",
+    title: "Pages.Titles.FitPreferences",
+    route: "/fit-preferences",
     menuItem: {
-      icon: <LocationOnIcon />,
-      name: "Adreslerim"
+      icon: <BoyIcon />,
+      name: "Pages.Titles.FitPreferences"
     },
     layout: "dashboard",
-    component: <Addresses />,
+    component: <FitPreferences />,
+    isPublic: false,
+    environments: ["development", "int", "staging"]
+  },
+  {
+    title: "Pages.Titles.FabricProperties",
+    route: "/fit-preferences",
+    menuItem: {
+      icon: <BoyIcon />,
+      name: "Pages.Titles.FabricProperties"
+    },
+    layout: "dashboard",
+    component: <FabricProperties />,
     isPublic: false,
     environments: ["development", "int", "staging"]
   },
@@ -159,6 +158,18 @@ const routes: RouterOptions[] = [
     },
     layout: "dashboard",
     component: <PaymentMethods />,
+    isPublic: false,
+    environments: ["development", "int", "staging"]
+  },
+  {
+    title: "Adreslerim",
+    route: "/addresses",
+    menuItem: {
+      icon: <LocationOnIcon />,
+      name: "Adreslerim"
+    },
+    layout: "dashboard",
+    component: <Addresses />,
     isPublic: false,
     environments: ["development", "int", "staging"]
   },
@@ -215,7 +226,10 @@ export function Router(props: RouterProps) {
     // TODO: replace switch with router Outlet or Layout
     switch (routeOptions.layout) {
       case "dashboard":
-        return (<Dashboard menuItems={filteredRoutes.filter(x => x.menuItem !== undefined).map(x => {
+        return (<Dashboard 
+          title={routeOptions.title}
+          icon={routeOptions.menuItem?.icon}
+          menuItems={filteredRoutes.filter(x => x.menuItem !== undefined).map(x => {
           if (x.menuItem) {
             return {
               ...x.menuItem,

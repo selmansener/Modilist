@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Modilist.Domains.Base;
 using Modilist.Domains.Models.AccountDomain;
 using Modilist.Domains.Models.AddressDomain;
-using Modilist.Domains.Models.CommonEntities;
 using Modilist.Domains.Models.PaymentDomain;
 using Modilist.Domains.Models.ProductDomain;
 using Modilist.Domains.Models.SalesOrderDomain;
@@ -51,6 +50,8 @@ namespace Modilist.Data.DataAccess
         public virtual DbSet<SalesOrderLineItem> SalesOrderLineItems { get; set; }
 
         public virtual DbSet<SalesOrderAddress> SalesOrderAddresses { get; set; }
+
+        public virtual DbSet<LineItemFeedback> LineItemFeedbacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

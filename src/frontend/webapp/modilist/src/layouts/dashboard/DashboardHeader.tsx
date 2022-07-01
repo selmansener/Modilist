@@ -1,5 +1,5 @@
 import AccountCircle from "@mui/icons-material/AccountCircle"
-import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent } from "@mui/material"
+import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent, Avatar, Grid, Box } from "@mui/material"
 import React from "react";
 import { styled } from '@mui/material/styles';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useTranslation } from 'react-i18next'
+import { AccountDTO } from "../../services/swagger/api";
 
 const drawerWidth: number = 240;
 
@@ -89,6 +90,7 @@ export interface MenuItem {
 
 interface DashboardHeaderProps {
   menuItems: MenuItem[];
+  account?: AccountDTO;
 }
 
 export function DashboardHeader(props: DashboardHeaderProps) {
@@ -98,7 +100,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const { menuItems } = props;
+  const { menuItems, account } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -210,6 +212,24 @@ export function DashboardHeader(props: DashboardHeaderProps) {
           </IconButton>
         </Toolbar>
         <Divider />
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          p: 4
+        }}>
+          <Avatar alt={`${account?.firstName} ${account?.lastName}`} src="/static/images/avatar/3.jpg" sx={{
+            width: '48px',
+            height: '48px'
+          }} />
+          {open && <Box>
+            <Typography variant="h5" align="center" sx={{
+              mt: 2
+            }}>{`${account?.firstName} ${account?.lastName}`}</Typography>
+            {account?.jobTitle && account?.jobTitle !== "" && <Typography variant="body1" align="center">{account?.jobTitle}</Typography>}
+          </Box>}
+        </Box>
+        <Divider />
         <List component="nav">
           {menuItems.map((item: MenuItem) => {
             return (
@@ -218,7 +238,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
                   <ListItemIcon>
                     {item.icon}
                   </ListItemIcon>
-                  <ListItemText primary={item.name} />
+                  <ListItemText primary={t(item.name)} />
                 </ListItemButton>
               </Link>
             )

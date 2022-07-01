@@ -12,12 +12,12 @@ namespace Modilist.Business.Seed.Services
 {
     internal class StylePreferencesSeedService : BaseSeedService
     {
-        protected override ImmutableList<SeedServiceType> Dependencies => ImmutableList.Create(SeedServiceType.Users);
-
         public StylePreferencesSeedService(ModilistDbContext dbContext)
             : base(dbContext)
         {
         }
+
+        protected override ImmutableList<SeedServiceType> Dependencies => ImmutableList.Create(SeedServiceType.Users);
 
         public override async Task Execute(CancellationToken cancellationToken)
         {
@@ -34,8 +34,6 @@ namespace Modilist.Business.Seed.Services
                 "Süprizlerle Kendimi Şımartmak",
                 "Kendime Yeni Bir Stil Oluşturmak"
             };
-
-            
 
             foreach (var account in accounts)
             {

@@ -12,7 +12,9 @@ import Loading from '../callback/Loading';
 import { useMsal } from '@azure/msal-react';
 
 interface DashboardProps {
-  menuItems: MenuItem[]
+  menuItems: MenuItem[],
+  title: string,
+  icon: React.ReactNode,
 }
 
 export default function Dashboard(props: React.PropsWithChildren<DashboardProps>) {
@@ -21,7 +23,7 @@ export default function Dashboard(props: React.PropsWithChildren<DashboardProps>
   const { isBusy: getAccountIsBusy, data: currentAccount, status: getAccountStatus } = useSelector((state: RootState) => state.getAccountModel);
   const { isBusy: createAccountIsBusy, data: createAccountResponse, status: createAccountStatus } = useSelector((state: RootState) => state.createAccountModel);
   const dispatch = useDispatch<Dispatch>();
-  const { menuItems } = props;
+  const { menuItems, title, icon } = props;
 
   useEffect(() => {
     let activeAccount = msal.getActiveAccount();
@@ -78,9 +80,12 @@ export default function Dashboard(props: React.PropsWithChildren<DashboardProps>
       getAccountIsBusy || currentAccount?.state === AccountState.Created ? <Loading /> :
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
-          <DashboardHeader menuItems={menuItems} />
+          <DashboardHeader menuItems={menuItems} account={currentAccount} />
           <Box sx={{ display: 'flex', flexDirection: 'column', flex: 'auto' }}>
-            <DashboardMain >
+            <DashboardMain 
+              title={title}
+              icon={icon}
+            >
               {props.children}
             </DashboardMain>
             <DashboardFooter />

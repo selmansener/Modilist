@@ -11,6 +11,7 @@ import { upsertPreferedFabricPropertiesModel } from "./fabricProperties/UpsertFa
 import { getFitPreferencesModel } from "./fitPreferences/GetFitPreferences"
 import { upsertFitPreferencesModel } from "./fitPreferences/UpsertFitPreferences"
 import { createPaymentMethodModel } from "./paymentMethods/CreatePaymentMethod"
+import { salesOrdersQueryModel } from "./salesOrders/SalesOrdersQuery"
 import { getSizeInfoModel } from "./sizeInfo/GetSizeInfo"
 import { upsertSizeInfoModel } from "./sizeInfo/UpsertSizeInfo"
 import { getStylePreferencesModel } from "./stylePreferences/GetStylePreferences"
@@ -50,6 +51,7 @@ export interface RootModel extends Models<RootModel> {
   updateSubscriptionMaxPricingLimitModel: typeof updateSubscriptionMaxPricingLimitModel,
   createPaymentMethodModel: typeof createPaymentMethodModel,
   stepperSubscription: typeof stepperSubscription,
+  salesOrdersQueryModel: typeof salesOrdersQueryModel
 }
 
 export const models: RootModel = {
@@ -77,4 +79,5 @@ export const models: RootModel = {
   updateSubscriptionMaxPricingLimitModel,
   createPaymentMethodModel,
   stepperSubscription,
+  salesOrdersQueryModel,
 }

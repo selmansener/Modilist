@@ -26,6 +26,27 @@
     }
   },
   "Pages": {
+    "Titles": {
+      "Main": "Anasayfa",
+      "SalesOrders": "Siparişlerim",
+      "SizeInfo": "Beden Ölçülerim",
+      "StylePreferences": "Stil Tercihlerim",
+      "FitPreferences": "Kalıp Tercihlerim",
+      "FabricProperties": "Renk & Kumaş",
+      "Addresses": "Kayıtlı Adreslerim",
+      "PaymentMethods": "Kayıtlı Kartlarım"
+    },
+    "Main": {
+      "ActiveSalesOrders": "Aktif Siparişlerim",
+      "SalesOrderReferenceNumber": "Sipariş Ref. No: ",
+      "SalesOrderCreatedAt": "Sipariş Tarihi: ",
+      "SalesOrderState": "Sipariş Durumu: ",
+      "SalesOrderAddress": "Teslimat Adresi: ",
+      "Details": "Devamı >",
+      "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
+      "FirstOrderPromotion": "İlk Siparişinde 20 TL indirim",
+      "FriendshipPromotion": "Arkadaşını davet et 20 TL kazan!"
+    },
     "Account": {
       "PersonalInfo": "Kişisel Bilgiler",
       "Job": "Mesleğin nedir? (Opsiyonel)",
@@ -377,6 +398,13 @@
     "RequiredField": "* Gerekli Alan"
   },
   "Generic": {
+    "SalesOrderState": {
+      "Created": "Siparişiniz Hazırlanıyor",
+      "Prepared": "Siparişiniz Hazırlanıyor",
+      "Shipped": "Siparişin Yolda",
+      "Delivered": "Siparişin Teslim Edildi",
+      "Completed": "Siparişin Tamamlandı"
+    },
     "Forms": {
       "Select": "Seçiniz"
     },

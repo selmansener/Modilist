@@ -12,6 +12,8 @@ namespace Modilist.Data.EntityConfigurations.SalesOrderDomain
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseHiLo(nameof(SalesOrder));
+
+            builder.Property(x => x.State).IsRequired().HasConversion<string>();
         }
     }
 }

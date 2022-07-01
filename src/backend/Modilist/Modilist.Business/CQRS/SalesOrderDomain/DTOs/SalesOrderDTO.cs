@@ -10,6 +10,8 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.DTOs
 {
     public class SalesOrderDTO
     {
+        public int Id { get; set; }
+
         public Guid AccountId { get; private set; }
 
         public SalesOrderState State { get; private set; }

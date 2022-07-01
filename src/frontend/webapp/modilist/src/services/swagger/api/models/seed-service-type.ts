@@ -20,6 +20,8 @@ export enum SeedServiceType {
     UsersCreatedEmpty = 'UsersCreatedEmpty',
     UsersCreated = 'UsersCreated',
     Users = 'Users',
-    StylePreferences = 'StylePreferences'
+    StylePreferences = 'StylePreferences',
+    Product = 'Product',
+    SalesOrders = 'SalesOrders'
 }
 
