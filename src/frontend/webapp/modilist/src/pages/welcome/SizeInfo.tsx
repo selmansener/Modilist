@@ -35,6 +35,9 @@ export default function SizeInfo() {
     const { isBusy: upsertSizeInfoIsBusy, data: upsertSizeInfo, status: upsertStatus } = useSelector((state: RootState) => state.upsertSizeInfoModel);
     const isBusy = getAccountIsBusy || getSizeInfoIsBusy || upsertSizeInfoIsBusy;
     const requiredField = t("FormValidation.RequiredField");
+    const mustBeInteger = t("FormValidation.MustBeInteger");
+    const mustBeGreaterThanZero = t("FormValidation.MustBeGreaterThanZero");
+    const mustBeNumber = t("FormValidation.MustBeNumber");
 
     const schema = Yup.object({
         upperBody: Yup.string().required(requiredField),
@@ -42,11 +45,21 @@ export default function SizeInfo() {
         outWear: Yup.string().required(requiredField),
         footWear: Yup.string().required(requiredField),
         bodyType: Yup.string().notOneOf(["None"], requiredField).required(requiredField),
-        weight: Yup.number().integer().moreThan(0, requiredField).required(requiredField),
-        height: Yup.number().integer().moreThan(0, requiredField).required(requiredField),
+        weight: Yup.number().typeError(mustBeInteger).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).required(requiredField),
+        height: Yup.number().typeError(mustBeInteger).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).required(requiredField),
         womenUnderWearCup: account?.gender === Gender.Female ? Yup.string().required(requiredField) : Yup.string().optional(),
         womenUnderWearSize: account?.gender === Gender.Female ? Yup.string().required(requiredField) : Yup.string().optional(),
-        menUnderWear: account?.gender === Gender.Male ? Yup.string().required(requiredField) : Yup.string().optional()
+        menUnderWear: account?.gender === Gender.Male ? Yup.string().required(requiredField) : Yup.string().optional(),
+        shoulderWidth: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
+        headRadius: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
+        armLength: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
+        bodyLength: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
+        neckRadius: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
+        breastRadius: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
+        waistRadius: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
+        hipRadius: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
+        legLength: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
+        footLength: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
     });
 
     const sizeSymbols = ["XXS", "XS", "S", "M", "L", "XL", "XXL"];
@@ -102,11 +115,13 @@ export default function SizeInfo() {
         "FootLength",
     ];
 
-    useEffect(() => { window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      }); }, [])
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        })
+    }, [])
 
     useEffect(() => {
         if (!getAccountIsBusy && account === undefined) {
@@ -148,6 +163,7 @@ export default function SizeInfo() {
                 });
             }
         },
+        validateOnMount: true
     });
 
     type SectionProps = {
@@ -202,17 +218,13 @@ export default function SizeInfo() {
             })}
         </>
     }
-
     const BodySizes = () => {
         const gender = account?.gender ? camelCase(account?.gender.toString()) : undefined;
-
         return <>
             {
                 bodySizes.map((bodySize, index) => {
                     const sizeName = camelCase(bodySize);
-
                     return <React.Fragment key={sizeName}>
-                    
                         {index % 2 === 0 ? <Grid item xs={2}></Grid> : <></>}
                         <Grid item xs={4}>
                             <Box sx={{
@@ -223,22 +235,24 @@ export default function SizeInfo() {
                                     width: '70px',
                                     mr: 2
                                 }}>
-                                    {account?.gender!=Gender.None && <ImageComponent src={`${imgBaseHost}/body-size/${gender}/${bodySize}.svg`} />}
+                                    {account?.gender != Gender.None && <ImageComponent src={`${imgBaseHost}/body-size/${gender}/${bodySize}.svg`} />}
                                 </Box>
                                 <FormControl fullWidth>
                                     <TextField
+                                        name={sizeName}
                                         disabled={isBusy}
+                                        error={touched[sizeName as keyof typeof sizeInfo] && errors[sizeName as keyof typeof sizeInfo] !== undefined}
+                                        helperText={touched[sizeName as keyof typeof sizeInfo] && errors[sizeName as keyof typeof sizeInfo]}
                                         value={sizeInfo[sizeName as keyof typeof sizeInfo]}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        label={t(`Pages.Welcome.BodySize.${bodySize}`)} type="number"
-                                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                                        label={t(`Pages.Welcome.BodySize.${bodySize}`)}
                                         variant="outlined" />
                                 </FormControl>
                             </Box>
                         </Grid>
                         {index % 2 === 0 ? <></> : <Grid item xs={2}></Grid>}
-                        </React.Fragment>
+                    </React.Fragment>
                 })
             }
         </>
@@ -258,7 +272,7 @@ export default function SizeInfo() {
                             <FormHelperText>
                                 {touched.bodyType && errors?.bodyType}
                             </FormHelperText>
-                            
+
                             <CustomRadioButtonGroup
                                 greyscale
                                 name="bodyType"
@@ -298,9 +312,7 @@ export default function SizeInfo() {
                                 disabled={isBusy}
                                 name="weight"
                                 label={t('Pages.Welcome.BodySize.Weight')}
-                                type="number"
                                 value={sizeInfo.weight}
-                                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                 variant="outlined"
                                 error={touched.weight && errors.weight !== undefined}
                                 helperText={touched.weight && errors.weight}
@@ -327,11 +339,9 @@ export default function SizeInfo() {
                                 disabled={isBusy}
                                 name="height"
                                 label={t('Pages.Welcome.BodySize.Height')}
-                                type="number"
                                 value={sizeInfo.height}
                                 error={touched.height && errors.height !== undefined}
                                 helperText={touched.height && errors.height}
-                                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                 variant="outlined"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -488,13 +498,14 @@ export default function SizeInfo() {
             <Grid item xs={12}>
                 <FormControl fullWidth>
                     <TextField
+                        name="additionalNotes"
                         disabled={isBusy}
                         value={sizeInfo?.additionalNotes}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         variant="outlined"
                         multiline
-                        rows={5}
+                        minRows={5}
                         maxRows={8} />
                 </FormControl>
             </Grid>
@@ -513,21 +524,21 @@ export default function SizeInfo() {
                     disabled={isBusy}
                     onClick={() => {
                         submitForm();
-                        if(!isValid){
+                        if (!isValid) {
                             window.scrollTo({
                                 top: 0,
                                 left: 0,
                                 behavior: 'smooth'
-                              });
+                            });
                         }
                     }}
                     variant="outlined">
-                    {isBusy && <CircularProgress 
-                    sx={{
-                        width: "18px !important",
-                        height: "18px !important",
-                        mr: 2
-                    }} 
+                    {isBusy && <CircularProgress
+                        sx={{
+                            width: "18px !important",
+                            height: "18px !important",
+                            mr: 2
+                        }}
                     />}
                     {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
                 </Button>

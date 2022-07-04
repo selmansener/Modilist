@@ -18,17 +18,7 @@ export const getSizeInfoModel = createModel<RootModel>()({
             menUnderWear: "",
             womenUnderWearCup: "",
             womenUnderWearSize: "",
-            additionalNotes: "",
-            armLength: 0,
-            bodyLength: 0,
-            breastRadius: 0,
-            footLength: 0,
-            headRadius: 0,
-            hipRadius: 0,
-            legLength: 0,
-            neckRadius: 0,
-            shoulderWidth: 0,
-            waistRadius: 0
+            additionalNotes: ""
         },
         status: 0
     } as ResponseModel<SizeInfoDTO>,
