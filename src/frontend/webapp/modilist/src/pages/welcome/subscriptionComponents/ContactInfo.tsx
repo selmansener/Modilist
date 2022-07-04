@@ -7,6 +7,30 @@ import { useEffect, useState } from "react";
 import { Cities } from "../address/Cities";
 import { Districts } from "../address/Districts";
 import { FormControl, Grid, TextField, Typography } from "@mui/material";
+import { IMaskInput } from "react-imask";
+import React from "react";
+
+interface PhoneInputMaskProps {
+    onChange: (event: { target: { name: string; value: string } }) => void;
+    name: string;
+    value?: string;
+}
+const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
+    function PhoneInputMask(props, ref) {
+        const { onChange, ...other } = props;
+        return (
+            <IMaskInput
+                {...other}
+                mask="000 000 0000"
+                definitions={{
+                    '#': /[1-9]/,
+                }}
+                onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+                overwrite
+            />
+        );
+    },
+);
 
 export default function ContactInfo() {
     const { t } = useTranslation();
@@ -106,13 +130,15 @@ export default function ContactInfo() {
                         <TextField
                             name={"phone"}
                             label={t("Generic.Address.Phone")}
-                            type="number"
                             variant="outlined"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             error={touched.phone && errors.phone !== undefined}
                             value={address?.phone}
                             helperText={touched.phone && errors?.phone}
+                            InputProps={{
+                                inputComponent: PhoneInputMask as any,
+                            }}
                         />
                     </FormControl>
                 </Grid>

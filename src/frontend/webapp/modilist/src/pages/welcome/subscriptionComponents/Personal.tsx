@@ -11,6 +11,29 @@ import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import add from 'date-fns/add'
 import { AccountDTO } from '../../../services/swagger/api';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import { IMaskInput } from 'react-imask';
+interface PhoneInputMaskProps {
+    onChange: (event: { target: { name: string; value: string } }) => void;
+    name: string;
+    value?: string;
+}
+const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
+    function PhoneInputMask(props, ref) {
+        const { onChange, ...other } = props;
+        return (
+            <IMaskInput
+                {...other}
+                mask="000 000 0000"
+                definitions={{
+                    '#': /[1-9]/,
+                }}
+                onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+                overwrite
+            />
+        );
+    },
+);
 
 export default function Personal() {
     const maxDate = add(new Date(), {
@@ -23,7 +46,7 @@ export default function Personal() {
     const dispatch = useDispatch<Dispatch>();
     const [isBusy] = useState<boolean>(getAccountIsBusy || updateAccountIsBusy);
     const requiredField = t("FormValidation.RequiredField");
-
+    const [isDatePickerOpen, setIsDatePickerOpen] = React.useState(false);
     const schema = Yup.object({
         firstName: Yup.string().required(requiredField),
         lastName: Yup.string().required(requiredField),
@@ -33,6 +56,7 @@ export default function Personal() {
         instagramUserName: Yup.string().optional(),
         jobTitle: Yup.string().optional()
     });
+
 
     const {
         handleChange,
@@ -59,8 +83,8 @@ export default function Personal() {
 
         dispatch.stepperSubscription.setPersonal(() => {
             submitForm();
-            if(!isValid){
-                window.scrollTo(0,0);
+            if (!isValid) {
+                window.scrollTo(0, 0);
             }
         });
     }, []);
@@ -112,30 +136,38 @@ export default function Personal() {
         <Grid item xs={6}>
             <FormControl fullWidth>
                 <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={locale}>
-                    <DatePicker
-                        label={<Typography>{t('Generic.PersonalInfo.BirthDate')}</Typography>}
-                        disabled={isBusy}
-                        value={account?.birthDate ?? null}
-                        views={["year", "month", "day"]}
-                        maxDate={maxDate}
-                        inputFormat={"dd/MM/yyyy"}
-                        onChange={(newValue) => {
-                            setFieldValue("birthDate", newValue);
-                        }}
-                        renderInput={(params) =>
-                            <TextField {...params}
-                                ref={params.ref}
-                                disabled={isBusy}
-                                name="birthDate"
-                                helperText={(
-                                    touched.birthDate && errors.birthDate
-                                )}
-                                error={touched.birthDate && errors.birthDate !== undefined}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                        }
-                    />
+                    <ClickAwayListener onClickAway={() => {
+                        setIsDatePickerOpen(false);
+                    }}>
+                        <DatePicker
+                            open={isDatePickerOpen}
+                            label={<Typography>{t('Generic.PersonalInfo.BirthDate')}</Typography>}
+                            disabled={isBusy}
+                            value={account?.birthDate ?? null}
+                            views={["year", "month", "day"]}
+                            maxDate={maxDate}
+                            inputFormat={"dd/MM/yyyy"}
+                            onChange={(newValue) => {
+                                setFieldValue("birthDate", newValue);
+                            }}
+                            renderInput={(params) =>
+                                <TextField {...params}
+                                    ref={params.ref}
+                                    disabled={isBusy}
+                                    name="birthDate"
+                                    helperText={(
+                                        touched.birthDate && errors.birthDate
+                                    )}
+                                    error={touched.birthDate && errors.birthDate !== undefined}
+                                    onChange={handleChange}
+                                    onClick={() => {
+                                        setIsDatePickerOpen(true);
+                                    }}
+                                    onBlur={handleBlur}
+                                />
+                            }
+                        />
+                    </ClickAwayListener>
                 </LocalizationProvider>
             </FormControl>
         </Grid>
@@ -150,7 +182,10 @@ export default function Personal() {
                     disabled={isBusy}
                     variant="outlined"
                     onChange={handleChange}
-                    onBlur={handleBlur} />
+                    onBlur={handleBlur}
+                    InputProps={{
+                        inputComponent: PhoneInputMask as any,
+                    }} />
             </FormControl>
         </Grid>
 
