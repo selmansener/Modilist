@@ -10,6 +10,8 @@
 
         public string? ExcludedFabrics { get; set; }
 
+        public string? ExcludedAccessoryColors { get; set; }
+
         public string? Allergens { get; set; }
 
         public string? AdditionalNotes { get; set; }

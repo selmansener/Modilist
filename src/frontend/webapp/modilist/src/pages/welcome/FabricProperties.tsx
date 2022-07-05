@@ -5,6 +5,7 @@ import { Colors } from "./stylePreferenceComponents/Colors";
 import { ColorTypes } from "./stylePreferenceComponents/ColorTypes";
 import { Fabrics } from "./stylePreferenceComponents/Fabrics";
 import { Patterns } from "./stylePreferenceComponents/Patterns";
+import { AccessoryColors } from "./stylePreferenceComponents/AccessoryColors";
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import { Dispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,15 +24,18 @@ export function FabricProperties() {
         excludedColorCategories: "",
         excludedPatterns: "",
         excludedFabrics: "",
+        excludedAccessoryColors: "",
         allergens: "",
         additionalNotes: ""
     });
 
-    useEffect(() => { window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      }); }, [])
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }, [])
 
     useEffect(() => {
         if (upsertStatus === 200) {
@@ -111,6 +115,18 @@ export function FabricProperties() {
         />
     }
 
+    const AccessoryColor = () => {
+        return <AccessoryColors
+            value={fabricProps?.excludedAccessoryColors}
+            onChange={(value) => {
+                setFabricProps({
+                    ...fabricProps,
+                    excludedAccessoryColors: value
+                });
+            }}
+        />
+    }
+
     return <Grid item container spacing={12}>
         <Grid item xs={12}>
             <Color />
@@ -123,6 +139,9 @@ export function FabricProperties() {
         </Grid>
         <Grid item xs={12}>
             <Fabric />
+        </Grid>
+        <Grid item xs={12}>
+            <AccessoryColor />
         </Grid>
         <Grid item xs={12}>
             <Trans>
@@ -141,6 +160,9 @@ export function FabricProperties() {
                     <Typography display="inline" align="left" variant={"h4"}>
                         {t("Pages.Welcome.FabricProperties.Allergens.2")}
                     </Typography>
+                    <Typography variant="h4" color="secondary" component={"span"}>
+                        {t('Pages.Welcome.BodySize.Optional')}
+                    </Typography>
                 </Box>
             </Trans>
             <FormControl fullWidth>
@@ -154,16 +176,18 @@ export function FabricProperties() {
                     }}
                     variant="outlined"
                     multiline
-                    rows={5}
-                    maxRows={8} />
+                    rows={5} />
             </FormControl>
         </Grid>
         <Grid item xs={12}>
-            <Typography align="left" variant={"h4"} sx={{
-                mb: 2
-            }}>
-                {t("Pages.Welcome.FabricProperties.AdditionalNotes")}
-            </Typography>
+            <Box sx={{ mb: 2 }} textAlign={"left"}>
+                <Typography variant={"h4"} component={"span"}>
+                    {t("Pages.Welcome.FabricProperties.AdditionalNotes")}
+                </Typography>
+                <Typography variant="h4" color="secondary" component={"span"}>
+                    {t('Pages.Welcome.BodySize.Optional')}
+                </Typography>
+            </Box>
             <FormControl fullWidth>
                 <TextField
                     value={fabricProps.additionalNotes}
@@ -175,8 +199,7 @@ export function FabricProperties() {
                     }}
                     variant="outlined"
                     multiline
-                    rows={5}
-                    maxRows={8} />
+                    rows={5} />
             </FormControl>
         </Grid>
         <Grid item container xs={6} justifyContent="flex-start">

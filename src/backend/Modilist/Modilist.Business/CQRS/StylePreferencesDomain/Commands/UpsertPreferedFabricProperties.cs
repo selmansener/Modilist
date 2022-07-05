@@ -25,12 +25,15 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
         public string? ExcludedColorCategories { get; set; }
 
         public string? ExcludedPatterns { get; set; }
-
+        
         public string? ExcludedFabrics { get; set; }
+        
+        public string? ExcludedAccessoryColors{ get; set; }
 
         public string? Allergens { get; set; }
 
         public string? AdditionalNotes { get; set; }
+
     }
 
     internal class UpsertPreferedFabricPropertiesValidator : AbstractValidator<UpsertPreferedFabricProperties>
@@ -64,6 +67,7 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
                     request.ExcludedColorCategories,
                     request.ExcludedPatterns,
                     request.ExcludedFabrics,
+                    request.ExcludedAccessoryColors,
                     request.Allergens,
                     request.AdditionalNotes);
 
@@ -87,6 +91,7 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
                     request.ExcludedColorCategories,
                     request.ExcludedPatterns,
                     request.ExcludedFabrics,
+                    request.ExcludedAccessoryColors,
                     request.Allergens,
                     request.AdditionalNotes);
 

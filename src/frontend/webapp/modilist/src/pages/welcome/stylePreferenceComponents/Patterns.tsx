@@ -65,6 +65,9 @@ export function Patterns(props: PatternsProps) {
             <Typography variant="h4" display="inline">
                 {t("Pages.Welcome.FabricProperties.ExcludedPatterns.3")}
             </Typography>
+            <Typography variant="h4" color="secondary" component={"span"}>
+                {t('Pages.Welcome.BodySize.Optional')}
+            </Typography>
         </Box>
         }
         isNegative

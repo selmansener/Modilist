@@ -10,7 +10,7 @@
                     "TitleBodySize": "Beden Ölçüleri",
                     "TitleStylePreferences": "Stil Tercihleri",
                     "TitleFitPreferences": "Kalıp ve Boy<br/>Tercihleri",
-                    "TitleFabricProperties": "Kumaş ve Doku<br/>Tercihleri",
+                    "TitleFabricProperties": "Renk ve Kumaş<br/>Tercihleri",
                     "TitleContactInfo": "İletişim Bilgileri",
                     "TitleSubscription": "Abonelik",
                     "TitlePaymentMethod": "Ödeme Yöntemi"
@@ -176,29 +176,35 @@
             "FabricProperties": {
                 "ExcludedColors": {
                     "1": "Kombinlerinizde ",
-                    "2": "kesinlikle olmasını istemediğiniz ",
-                    "3": "renkleri seçiniz."
+                    "2": "kesinlikle tercih etmediğiniz ",
+                    "3": "renkleri seçiniz; "
+                },
+                "ExcludedAccessoryColors": {
+                    "1": "Kombinlerinizde ",
+                    "2": "kesinlikle tercih etmediğiniz ",
+                    "3": "aksesuar renklerini seçiniz; "
                 },
                 "ExcludedColorTypes": {
                     "1": "Kombinlerinizde ",
-                    "2": "kesinlikle olmasını istemediğiniz ",
-                    "3": "renk tonlarını seçiniz."
+                    "2": "kesinlikle tercih etmediğiniz ",
+                    "3": "renk tonlarını seçiniz; "
                 },
                 "ExcludedPatterns": {
                     "1": "Kombinlerinizde ",
-                    "2": "kesinlikle olmasını istemediğiniz ",
-                    "3": "desenleri seçiniz."
+                    "2": "kesinlikle tercih etmediğiniz ",
+                    "3": "desenleri seçiniz; "
                 },
                 "ExcludedFabrics": {
                     "1": "Kombinlerinizde ",
-                    "2": "kesinlikle olmasını istemediğiniz ",
-                    "3": "dokuları seçiniz."
+                    "2": "kesinlikle tercih etmediğiniz ",
+                    "3": "dokuları seçiniz; "
                 },
                 "Allergens": {
                     "1": " Alerjiniz ",
-                    "2": "olan herhangi bir madde ya da kumaş türü varsa belirtiniz."
+                    "2": "olan herhangi bir madde ya da kumaş türü varsa belirtiniz; "
                 },
-                "AdditionalNotes": "Eklemek istediğiniz notunuz varsa belirtiniz."
+                "AdditionalNotes": "Eklemek istediğiniz notunuz varsa belirtiniz; ",
+                "Optional": "(Opsiyonel)"
             },
             "ContactInfo": {
                 "Title": "Teslimat Adresi"
@@ -391,7 +397,10 @@
         "Grey": "Gri",
         "White": "Beyaz",
         "Black": "Siyah",
-        "NavyBlue": "Lacivert"
+        "NavyBlue": "Lacivert",
+        "Gold": "Altın",
+        "Silver": "Gümüş",
+        "Copper": "Bakır"
     },
     "Pattern": {
         "Plaid": "Ekose",

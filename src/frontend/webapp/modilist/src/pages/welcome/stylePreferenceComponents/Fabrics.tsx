@@ -60,6 +60,9 @@ export function Fabrics(props: FabricsProps) {
                 <Typography variant="h4" display="inline">
                     {t("Pages.Welcome.FabricProperties.ExcludedFabrics.3")}
                 </Typography>
+                <Typography variant="h4" color="secondary" component={"span"}>
+                    {t('Pages.Welcome.BodySize.Optional')}
+                </Typography>
             </Trans>
         </Box>
         }
@@ -70,7 +73,7 @@ export function Fabrics(props: FabricsProps) {
                     value: fabric.value,
                     element: <Box>
                         <ImageComponent src={fabric.img} />
-                        <Typography  variant="h4" align="center">{fabric.name}</Typography>
+                        <Typography variant="h4" align="center">{fabric.name}</Typography>
                     </Box>
                 }
             })

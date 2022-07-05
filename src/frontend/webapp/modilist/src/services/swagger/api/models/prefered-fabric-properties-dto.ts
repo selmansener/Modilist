@@ -46,6 +46,12 @@ export interface PreferedFabricPropertiesDTO {
      * @type {string}
      * @memberof PreferedFabricPropertiesDTO
      */
+    excludedAccessoryColors?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PreferedFabricPropertiesDTO
+     */
     allergens?: string | null;
     /**
      * 

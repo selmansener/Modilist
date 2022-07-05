@@ -52,6 +52,12 @@ export interface UpsertPreferedFabricProperties {
      * @type {string}
      * @memberof UpsertPreferedFabricProperties
      */
+    excludedAccessoryColors?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertPreferedFabricProperties
+     */
     allergens?: string | null;
     /**
      * 

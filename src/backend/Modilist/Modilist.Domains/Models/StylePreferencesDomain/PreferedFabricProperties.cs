@@ -17,6 +17,7 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
             string? excludedColorCategories,
             string? excludedPatterns,
             string? excludedFabrics,
+            string? excludedAccessoryColors,
             string? allergens,
             string? additionalNotes)
         {
@@ -25,6 +26,7 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
             ExcludedColorCategories = excludedColorCategories;
             ExcludedPatterns = excludedPatterns;
             ExcludedFabrics = excludedFabrics;
+            ExcludedAccessoryColors = excludedAccessoryColors;
             Allergens = allergens;
             AdditionalNotes = additionalNotes;
         }
@@ -41,6 +43,8 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
 
         public string? ExcludedFabrics { get; private set; }
 
+        public string? ExcludedAccessoryColors { get; private set; }
+
         public string? Allergens { get; private set; }
 
         public string? AdditionalNotes { get; private set; }
@@ -50,6 +54,7 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
             string? excludedColorCategories,
             string? excludedPatterns,
             string? excludedFabrics,
+            string? excludedAccessoryColors,
             string? allergens,
             string? additionalNotes)
         {
@@ -57,6 +62,7 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
             ExcludedColorCategories = excludedColorCategories;
             ExcludedPatterns = excludedPatterns;
             ExcludedFabrics = excludedFabrics;
+            ExcludedAccessoryColors = excludedAccessoryColors;
             Allergens = allergens;
             AdditionalNotes = additionalNotes;
         }
