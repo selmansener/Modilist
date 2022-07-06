@@ -41,11 +41,18 @@ export function WaistHeights(props: WaistHeightsProps) {
     return <CustomCheckboxGroup
         value={value ?? ""}
         label={
-            <Typography variant="h3" align="center" sx={{
+            <Box textAlign="center" sx={{
                 mb: 4
             }}>
-                {t("Pages.Welcome.FitPreferences.WaistHeightPreference")}
-            </Typography>
+                <Typography variant="h3" align="center" component={"span"} sx={{
+                    mb: 4
+                }}>
+                    {t("Pages.Welcome.FitPreferences.WaistHeightPreference")}
+                </Typography>
+                <Typography variant="h3" align="center" color="secondary" component={"span"}>
+                    {t('Pages.Welcome.FitPreferences.Optional')}
+                </Typography>
+            </Box>
         }
         contents={
             waistHeights.map(waistHeight => {

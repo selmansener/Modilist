@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Grid } from "@mui/material";
+import { Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,11 +29,13 @@ export function FitPreferences() {
         waistHeight: ""
     });
 
-    useEffect(() => { window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      }); }, [])
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }, [])
 
     useEffect(() => {
         if (upsertStatus === 200) {
@@ -151,6 +153,11 @@ export function FitPreferences() {
     }
 
     return <Grid item container xs={12} spacing={12}>
+        <Grid item xs={12}>
+            <Typography variant="h5" color="secondary" sx={{ fontWeight:800 }} align="center">
+                {t('Pages.Welcome.FitPreferences.Warning')}
+            </Typography>
+        </Grid>
         <Grid item xs={12}>
             <Waist />
         </Grid>
