@@ -41,4 +41,22 @@ export interface CreateProduct {
      * @memberof CreateProduct
      */
     brand?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateProduct
+     */
+    size?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateProduct
+     */
+    price?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateProduct
+     */
+    vat?: number;
 }

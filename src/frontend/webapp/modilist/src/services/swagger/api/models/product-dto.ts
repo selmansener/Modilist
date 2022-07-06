@@ -11,6 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ProductImageDTO } from './product-image-dto';
 /**
  * 
  * @export
@@ -47,4 +48,34 @@ export interface ProductDTO {
      * @memberof ProductDTO
      */
     brand?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductDTO
+     */
+    price?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductDTO
+     */
+    priceWithoutVAT?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductDTO
+     */
+    vat?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductDTO
+     */
+    size?: string;
+    /**
+     * 
+     * @type {Array<ProductImageDTO>}
+     * @memberof ProductDTO
+     */
+    images?: Array<ProductImageDTO>;
 }

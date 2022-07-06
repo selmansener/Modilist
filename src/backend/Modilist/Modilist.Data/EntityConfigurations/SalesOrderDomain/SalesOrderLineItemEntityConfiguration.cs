@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Modilist.Domains.Models.SalesOrderDomain;
+using Modilist.Infrastructure.Shared.Enums;
 
 namespace Modilist.Data.EntityConfigurations.SalesOrderDomain
 {
@@ -18,6 +19,8 @@ namespace Modilist.Data.EntityConfigurations.SalesOrderDomain
                 .HasForeignKey(x => x.SalesOrderId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Property(x => x.State).HasDefaultValue(SalesOrderLineItemState.None).IsRequired().HasConversion<string>();
         }
     }
 }

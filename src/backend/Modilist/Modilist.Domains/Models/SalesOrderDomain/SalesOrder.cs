@@ -142,8 +142,9 @@ namespace Modilist.Domains.Models.SalesOrderDomain
             PreparedAt = DateTime.UtcNow;
         }
 
-        public void AddFeedback(
+        public void AddOrUpdateFeedback(
             int salesOrderLineItemId,
+            SalesOrderLineItemState lineItemState,
             float price,
             LineItemSizeFeedback size,
             float style,
@@ -153,8 +154,8 @@ namespace Modilist.Domains.Models.SalesOrderDomain
             float fabric,
             float pattern,
             float perfectMatch,
+            float brand,
             bool sendSimilarProducts = false,
-            bool blockBrand = false,
             string? additionalNotes = null)
         {
             if (State != SalesOrderState.Delivered)
@@ -174,7 +175,7 @@ namespace Modilist.Domains.Models.SalesOrderDomain
                 throw new SalesOrderLineItemNotFoundException(AccountId, Id, salesOrderLineItemId);
             }
 
-            salesOrderLineItem.AddFeedback(price, size, style, fit, color, quality, fabric, pattern, perfectMatch, sendSimilarProducts, blockBrand, additionalNotes);
+            salesOrderLineItem.AddOrUpdateFeedback(lineItemState, price, size, style, fit, color, quality, fabric, pattern, perfectMatch, brand, sendSimilarProducts, additionalNotes);
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using FluentValidation;
 
 using Mapster;
@@ -26,6 +21,12 @@ namespace Modilist.Business.CQRS.ProductDomain.Commands
         public string Category { get; set; }
 
         public string Brand { get; set; }
+
+        public string Size { get; set; }
+
+        public decimal Price { get; set; }
+
+        public int VAT { get; set; } = 18;
     }
 
     internal class CreateProductValidator : AbstractValidator<CreateProduct>
@@ -35,6 +36,9 @@ namespace Modilist.Business.CQRS.ProductDomain.Commands
             RuleFor(c => c.SKU).NotEmpty();
             RuleFor(c => c.Name).NotEmpty();
             RuleFor(c => c.Category).NotEmpty();
+            RuleFor(c => c.Size).NotEmpty();
+            RuleFor(c => c.Price).NotEmpty();
+            RuleFor(c => c.VAT).NotEmpty();
         }
     }
 
@@ -56,7 +60,7 @@ namespace Modilist.Business.CQRS.ProductDomain.Commands
                 throw new ProductAlreadyExistsException(request.SKU);
             }
 
-            product = new Product(request.SKU, request.Name, request.Category, request.Brand);
+            product = new Product(request.SKU, request.Name, request.Category, request.Price, request.VAT, request.Size, request.Brand);
 
             await _productRepository.AddAsync(product, cancellationToken);
 

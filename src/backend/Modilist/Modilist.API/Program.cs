@@ -23,6 +23,8 @@ using FluentValidation.AspNetCore;
 using Modilist.Business.Utils.Extensions;
 using Modilist.Infrastructure.Shared.Configurations;
 using Modilist.Infrastructure.Azure.Extensions;
+using Mapster;
+using Modilist.Business.CQRS.SalesOrderDomain.DTOs;
 
 const string CorsPolicyName = "Default";
 const string ApiTitle = "ModilistAPI";
@@ -51,6 +53,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddBusinessUtils();
 
 builder.Services.AddBlobClientFactory();
+
+TypeAdapterConfig.GlobalSettings.Scan(typeof(Program).Assembly, typeof(BusinessExtensions).Assembly, typeof(AccountExtensions).Assembly);
+TypeAdapterConfig.GlobalSettings.Default.IgnoreNullValues(true);
 
 builder.Services.AddCors(ConfigureCors);
 

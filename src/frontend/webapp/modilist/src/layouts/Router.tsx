@@ -29,6 +29,7 @@ import { SalesOrders } from '../pages/salesOrders/SalesOrders';
 import { FitPreferences } from '../pages/fitPreferences/FitPreferences';
 import { FabricProperties } from '../pages/fabricProperties/FabricProperties';
 import { SalesOrderDetails } from '../pages/salesOrders/SalesOrderDetails';
+import { Checkout } from '../pages/checkout/Checkout';
 
 interface RouterOptions {
   title: string,
@@ -97,6 +98,14 @@ const routes: RouterOptions[] = [
     title: "Pages.Titles.SalesOrders",
     route: "/sales-orders/:salesOrderId",
     component: <SalesOrderDetails />,
+    layout: "dashboard",
+    isPublic: false,
+    environments: ["development", "int", "staging"]
+  },
+  {
+    title: "Pages.Titles.SalesOrders",
+    route: "/sales-orders/:salesOrderId/checkout",
+    component: <Checkout />,
     layout: "dashboard",
     isPublic: false,
     environments: ["development", "int", "staging"]
@@ -247,7 +256,6 @@ export function Router(props: RouterProps) {
           {routeOptions.component}
         </WelcomeLayout>)
       case "callback":
-        console.log("callback");
         return (<Callback />)
       case "comingsoon":
         return (<ComingSoonLayout />)

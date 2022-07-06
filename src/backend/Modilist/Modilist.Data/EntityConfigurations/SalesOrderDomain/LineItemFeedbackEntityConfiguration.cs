@@ -14,7 +14,7 @@ namespace Modilist.Data.EntityConfigurations.SalesOrderDomain
             builder.Property(x => x.Id).UseHiLo(nameof(LineItemFeedback));
 
             builder.HasOne(x => x.SalesOrderLineItem)
-                .WithOne(x => x.LineItemFeedback)
+                .WithOne(x => x.Feedback)
                 .HasForeignKey<LineItemFeedback>(x => x.SalesOrderLineItemId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);

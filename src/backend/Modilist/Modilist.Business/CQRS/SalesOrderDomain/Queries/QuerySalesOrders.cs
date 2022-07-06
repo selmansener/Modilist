@@ -16,7 +16,7 @@ using Modilist.Data.Repositories.SalesOrderDomain;
 
 namespace Modilist.Business.CQRS.SalesOrderDomain.Queries
 {
-    public class QuerySalesOrders : IRequest<DQBResultDTO<SalesOrderDTO>>
+    public class QuerySalesOrders : IRequest<DQBResultDTO<SalesOrderDetailsDTO>>
     {
         public Guid AccountId { get; set; }
 
@@ -31,7 +31,7 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Queries
         }
     }
 
-    internal class QuerySalesOrdersHandler : IRequestHandler<QuerySalesOrders, DQBResultDTO<SalesOrderDTO>>
+    internal class QuerySalesOrdersHandler : IRequestHandler<QuerySalesOrders, DQBResultDTO<SalesOrderDetailsDTO>>
     {
         private readonly ISalesOrderRepository _salesOrderRepository;
 
@@ -40,15 +40,15 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Queries
             _salesOrderRepository = salesOrderRepository;
         }
 
-        public async Task<DQBResultDTO<SalesOrderDTO>> Handle(QuerySalesOrders request, CancellationToken cancellationToken)
+        public async Task<DQBResultDTO<SalesOrderDetailsDTO>> Handle(QuerySalesOrders request, CancellationToken cancellationToken)
         {
             var data = await _salesOrderRepository
                 .QueryAllByAccountId(request.AccountId)
-                .ProjectToType<SalesOrderDTO>()
+                .ProjectToType<SalesOrderDetailsDTO>()
                 .ApplyFilters(request.Dqb)
                 .ToListAsync(cancellationToken);
 
-            return new DQBResultDTO<SalesOrderDTO>
+            return new DQBResultDTO<SalesOrderDetailsDTO>
             {
                 Data = data,
                 Count = request.Dqb.PaginationOption.DataSetCount

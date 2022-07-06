@@ -51,8 +51,6 @@ export function apiFactory(msal: IPublicClientApplication) {
         async error => {
             if (error instanceof InteractionRequiredAuthError) {
                 const account = msal.getActiveAccount();
-                console.log("response auth failed");
-                console.log("actAcc", account);
                 await msal.logoutRedirect({
                     account
                 });

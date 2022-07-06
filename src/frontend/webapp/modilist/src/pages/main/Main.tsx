@@ -3,10 +3,24 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../store/store";
+import { useEffect } from "react";
+import { tr } from "date-fns/locale";
+import format from "date-fns/format";
+import addDays from "date-fns/addDays";
 
 export function Main() {
     const theme = useTheme();
     const { t } = useTranslation();
+    const dispatch = useDispatch<Dispatch>();
+    const { isBusy, data: salesOrder, status } = useSelector((state: RootState) => state.activeSalesOrderModel);
+
+    useEffect(() => {
+        if (!isBusy && status === 0) {
+            dispatch.activeSalesOrderModel.activeSalesOrder();
+        }
+    }, []);
 
     return (
         <Grid item container xs={12} spacing={2}>
@@ -24,38 +38,46 @@ export function Main() {
                             </Grid>
                             <Grid item xs={6}>
                                 <Typography variant="body1" align="right">
-                                    {t("Pages.Main.SalesOrderReferenceNumber")} #24124
+                                    {t("Pages.Main.SalesOrderReferenceNumber")}
+                                    <Link to={`/sales-orders/${salesOrder?.id}`}>
+                                        #{salesOrder?.id}
+                                    </Link>
                                 </Typography>
-
                             </Grid>
                             <Grid item xs={12}>
                                 <Trans>
                                     <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.SalesOrderCreatedAt")}</Typography>
-                                    <Typography display={"inline"} variant="body1">15.06.2022</Typography>
+                                    <Typography display={"inline"} variant="body1">
+                                        {salesOrder?.createdAt && format(new Date(salesOrder?.createdAt), 'MMMM yyyy', { locale: tr })}
+                                    </Typography>
                                 </Trans>
                             </Grid>
                             <Grid item xs={12}>
                                 <Trans>
                                     <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.SalesOrderState")}</Typography>
-                                    <Typography display={"inline"} variant="body1" color="secondary">{t("Generic.SalesOrderState.Created")}</Typography>
+                                    <Typography display={"inline"} variant="body1" color="secondary">{t(`Generic.SalesOrderState.${salesOrder?.state}`)}</Typography>
                                 </Trans>
                             </Grid>
                             <Grid item xs={12}>
                                 <Trans>
                                     <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.SalesOrderAddress")}</Typography>
-                                    <Typography display={"inline"} variant="body1">Evim</Typography>
+                                    <Typography display={"inline"} variant="body1">{salesOrder?.salesOrderAddress?.name}</Typography>
                                 </Trans>
                             </Grid>
                             <Grid item xs={10}>
                                 <Trans>
                                     <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.EstimatedDeliveryDate")}</Typography>
-                                    <Typography display={"inline"} variant="body1">15.06.2022</Typography>
+                                    <Typography display={"inline"} variant="body1">
+                                        {salesOrder?.createdAt && format(addDays(new Date(salesOrder.createdAt), 7), 'dd.MM.yyyy', { locale: tr })}
+                                    </Typography>
                                 </Trans>
                             </Grid>
                             <Grid item xs={2} textAlign="right">
-                                <Link to={"/main"}>
-                                    {t("Pages.Main.Details")}
-                                </Link>
+                                <Typography variant="body1">
+                                    <Link to={`/sales-orders/${salesOrder?.id}`}>
+                                        {t("Pages.Main.Details")}
+                                    </Link>
+                                </Typography>
                             </Grid>
                         </Grid>
                     </Paper>

@@ -23,13 +23,14 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public int? LineItemFeedbackId { get; private set; }
 
-        public LineItemFeedback? LineItemFeedback { get; private set; }
+        public LineItemFeedback? Feedback { get; private set; }
 
         public int ProductId { get; private set; }
 
         public Product Product { get; private set; }
 
-        public void AddFeedback(
+        public void AddOrUpdateFeedback(
+            SalesOrderLineItemState state,
             float price,
             LineItemSizeFeedback size,
             float style,
@@ -39,16 +40,26 @@ namespace Modilist.Domains.Models.SalesOrderDomain
             float fabric,
             float pattern,
             float perfectMatch,
+            float brand,
             bool sendSimilarProducts = false,
-            bool blockBrand = false,
             string? additionalNotes = null)
         {
-            if (LineItemFeedbackId.HasValue)
+
+            if (state == SalesOrderLineItemState.None)
             {
-                throw new LineItemAlreadyHasFeedbackException(LineItemFeedbackId.Value);
+                throw new InvalidOperationException("Invalid SalesOrderLineItemState: None");
             }
 
-            LineItemFeedback = new LineItemFeedback(Id, price, size, style, fit, color, quality, fabric, pattern, perfectMatch, sendSimilarProducts, blockBrand, additionalNotes);
+            State = state;
+
+            if (LineItemFeedbackId.HasValue)
+            {
+                Feedback.UpdateFeedback(price, size, style, fit, color, quality, fabric, pattern, perfectMatch, brand, sendSimilarProducts,  additionalNotes);
+            }
+            else
+            {
+                Feedback = new LineItemFeedback(Id, price, size, style, fit, color, quality, fabric, pattern, perfectMatch, brand, sendSimilarProducts, additionalNotes);
+            }
         }
     }
 }

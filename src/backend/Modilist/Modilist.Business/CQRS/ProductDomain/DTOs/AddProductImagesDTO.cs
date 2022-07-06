@@ -12,19 +12,6 @@ namespace Modilist.Business.CQRS.ProductDomain.DTOs
         public IEnumerable<ProductImageDTO> ProductImages { get; set; }
     }
 
-    public class ProductImageDTO
-    {
-        public string Name { get; set; }
-
-        public string ContentType { get; set; }
-
-        public string Extension { get; set; }
-
-        public string Url { get; set; }
-
-        public ImageVariantDTO Variants { get; set; }
-    }
-
     public class ImageVariantDTO
     {
         public string? Thumbnail { get; set; }

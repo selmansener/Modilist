@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Modilist.Data.DataAccess;
 using Modilist.Data.Repositories.Base;
 using Modilist.Domains.Models.SalesOrderDomain;
+using Modilist.Infrastructure.Shared.Enums;
 
 namespace Modilist.Data.Repositories.SalesOrderDomain
 {
@@ -19,6 +20,8 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
         Task<SalesOrder?> GetSalesOrderAsync(Guid accountId, int id, CancellationToken cancellationToken, bool includeLineItems = false);
 
         IQueryable<SalesOrder> QueryAllByAccountId(Guid accountId);
+
+        Task<SalesOrder?> GetLatestActiveOrderAsync(Guid accountId, CancellationToken cancellationToken);
     }
 
     internal class SalesOrderRepository : BaseRepository<SalesOrder>, ISalesOrderRepository
@@ -33,6 +36,14 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
             return GetAll().AnyAsync(x => x.AccountId == accountId 
                 && x.CreatedAt.DayOfYear >= startDate.DayOfYear 
                 && x.CreatedAt.DayOfYear <= endDate.DayOfYear);
+        }
+
+        public Task<SalesOrder?> GetLatestActiveOrderAsync(Guid accountId, CancellationToken cancellationToken)
+        {
+            return GetAll()
+                .Include(x => x.SalesOrderAddress)
+                .OrderByDescending(x => x.CreatedAt)
+                .FirstOrDefaultAsync(x => x.AccountId == accountId && x.State == SalesOrderState.Created || x.State == SalesOrderState.Prepared || x.State == SalesOrderState.Shipped, cancellationToken);
         }
 
         public Task<SalesOrder?> GetSalesOrderAsync(Guid accountId, int id, CancellationToken cancellationToken, bool includeLineItems = false)

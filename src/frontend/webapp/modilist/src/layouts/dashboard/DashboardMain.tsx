@@ -18,21 +18,21 @@ export function DashboardMain(props: React.PropsWithChildren<DashboardMainProps>
                 minHeight: '100vh',
                 overflow: 'auto',
                 p: 2,
-                mt: 10, 
+                mt: 10,
                 mb: 4
             }}
         >
             <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Typography variant="h4">
-                            {icon}
-                            {t(title)}
-                        </Typography>
-                    </Grid>
-                    <Grid item container xs={12} spacing={2}>
-                        {props.children}
-                    </Grid>
+                {title !== "" && <Grid item xs={12}>
+                    <Typography variant="h4">
+                        {icon}
+                        {t(title)}
+                    </Typography>
+                </Grid>}
+                <Grid item container xs={12} spacing={2}>
+                    {props.children}
                 </Grid>
+            </Grid>
         </Box>
     )
 }

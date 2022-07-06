@@ -17,8 +17,8 @@ namespace Modilist.Domains.Models.SalesOrderDomain
             float fabric,
             float pattern,
             float perfectMatch,
+            float brand,
             bool sendSimilarProducts = false,
-            bool blockBrand = false,
             string? additionalNotes = null)
         {
             SalesOrderLineItemId = salesOrderLineItemId;
@@ -32,7 +32,7 @@ namespace Modilist.Domains.Models.SalesOrderDomain
             Pattern = pattern;
             PerfectMatch = perfectMatch;
             SendSimilarProducts = sendSimilarProducts;
-            BlockBrand = blockBrand;
+            Brand = brand;
             AdditionalNotes = additionalNotes;
         }
 
@@ -60,8 +60,36 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public bool SendSimilarProducts { get; private set; }
 
-        public bool BlockBrand { get; private set; }
+        public float Brand { get; private set; }
 
         public string? AdditionalNotes { get; private set; }
+
+        public void UpdateFeedback(
+            float price,
+            LineItemSizeFeedback size,
+            float style,
+            float fit,
+            float color,
+            float quality,
+            float fabric,
+            float pattern,
+            float perfectMatch,
+            float brand,
+            bool sendSimilarProducts = false,
+            string? additionalNotes = null)
+        {
+            Price = price;
+            Size = size;
+            Style = style;
+            Fit = fit;
+            Color = color;
+            Quality = quality;
+            Fabric = fabric;
+            Pattern = pattern;
+            PerfectMatch = perfectMatch;
+            SendSimilarProducts = sendSimilarProducts;
+            Brand = brand;
+            AdditionalNotes = additionalNotes;
+        }
     }
 }

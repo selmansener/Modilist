@@ -26,7 +26,7 @@ namespace Modilist.API.Area.API.Controllers
 
         [HttpGet("Query")]
         [Authorize(nameof(AuthorizationPermissions.GetSalesOrders))]
-        [ProducesResponseType(typeof(DQBResultDTO<SalesOrderDTO>), 200)]
+        [ProducesResponseType(typeof(DQBResultDTO<SalesOrderDetailsDTO>), 200)]
         [DynamicQuery]
         public async Task<IActionResult> QuerySalesOrders([FromQuery] DynamicQueryOptions dqb, CancellationToken cancellationToken)
         {
@@ -34,6 +34,33 @@ namespace Modilist.API.Area.API.Controllers
             {
                 AccountId = User.GetUserId(),
                 Dqb = dqb
+            }, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [HttpGet("{salesOrderId}")]
+        [Authorize(nameof(AuthorizationPermissions.GetSalesOrders))]
+        [ProducesResponseType(typeof(SalesOrderDetailsDTO), 200)]
+        public async Task<IActionResult> Get(int salesOrderId, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetSalesOrderDetails
+            {
+                AccountId = User.GetUserId(),
+                SalesOrderId = salesOrderId
+            }, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [HttpGet("Active")]
+        [Authorize(nameof(AuthorizationPermissions.GetSalesOrders))]
+        [ProducesResponseType(typeof(ActiveSalesOrderDTO), 200)]
+        public async Task<IActionResult> GetActiveOrder(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetActiveSalesOrder
+            {
+                AccountId = User.GetUserId()
             }, cancellationToken);
 
             return Ok(response);
@@ -70,6 +97,20 @@ namespace Modilist.API.Area.API.Controllers
         public async Task<IActionResult> Ship(int salesOrderId, ShipSalesOrder input, CancellationToken cancellationToken)
         {
             input.SalesOrderId = salesOrderId;
+
+            var response = await _mediator.Send(input, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [HttpPost("{salesOrderId}/Feedback/{salesOrderLineItemId}")]
+        [Authorize(nameof(AuthorizationPermissions.UpdateSalesOrders))]
+        [ProducesResponseType(typeof(AddOrUpdateFeedbackDTO), 200)]
+        public async Task<IActionResult> Feedback(int salesOrderId, int salesOrderLineItemId, AddOrUpdateFeedback input, CancellationToken cancellationToken)
+        {
+            input.AccountId = User.GetUserId();
+            input.SalesOrderId = salesOrderId;
+            input.SalesOrderLineItemId = salesOrderLineItemId;
 
             var response = await _mediator.Send(input, cancellationToken);
 

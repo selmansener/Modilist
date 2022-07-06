@@ -16,7 +16,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 const msalInstance = new PublicClientApplication(config.msalConfig);
 
-const themeOptions: ThemeOptions = {
+const mdTheme = createTheme({
   palette: {
     primary: {
       main: '#403E56',
@@ -105,9 +105,7 @@ const themeOptions: ThemeOptions = {
       textTransform: 'initial'
     },
   },
-};
-
-const mdTheme = createTheme(themeOptions);
+});
 
 i18n
   .use(LanguageDetector)

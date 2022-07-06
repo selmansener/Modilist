@@ -11,5 +11,15 @@
         public string Category { get; set; }
 
         public string? Brand { get; set; }
+
+        public decimal Price { get; set; }
+
+        public decimal PriceWithoutVAT { get; set; }
+
+        public int VAT { get; set; }
+
+        public string Size { get; set; }
+
+        public IEnumerable<ProductImageDTO> Images { get; set; }
     }
 }

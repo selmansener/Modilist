@@ -16,11 +16,15 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { ActiveSalesOrderDTO } from '../models';
+import { AddOrUpdateFeedback } from '../models';
+import { AddOrUpdateFeedbackDTO } from '../models';
 import { AddSalesOrderLineItem } from '../models';
 import { AddSalesOrderLineItemDTO } from '../models';
 import { CreateSalesOrder } from '../models';
 import { SalesOrderDTO } from '../models';
-import { SalesOrderDTODQBResultDTO } from '../models';
+import { SalesOrderDetailsDTO } from '../models';
+import { SalesOrderDetailsDTODQBResultDTO } from '../models';
 import { ShipSalesOrder } from '../models';
 import { ShipSalesOrderDTO } from '../models';
 /**
@@ -29,6 +33,53 @@ import { ShipSalesOrderDTO } from '../models';
  */
 export const SalesOrderApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1SalesOrderActiveGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/SalesOrder/Active`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (apiVersion !== undefined) {
+                localVarQueryParameter['api-version'] = apiVersion;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @param {CreateSalesOrder} [body] 
@@ -189,6 +240,123 @@ export const SalesOrderApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 
          * @param {number} salesOrderId 
+         * @param {number} salesOrderLineItemId 
+         * @param {AddOrUpdateFeedback} [body] 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1SalesOrderSalesOrderIdFeedbackSalesOrderLineItemIdPost: async (salesOrderId: number, salesOrderLineItemId: number, body?: AddOrUpdateFeedback, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'salesOrderId' is not null or undefined
+            if (salesOrderId === null || salesOrderId === undefined) {
+                throw new RequiredError('salesOrderId','Required parameter salesOrderId was null or undefined when calling apiV1SalesOrderSalesOrderIdFeedbackSalesOrderLineItemIdPost.');
+            }
+            // verify required parameter 'salesOrderLineItemId' is not null or undefined
+            if (salesOrderLineItemId === null || salesOrderLineItemId === undefined) {
+                throw new RequiredError('salesOrderLineItemId','Required parameter salesOrderLineItemId was null or undefined when calling apiV1SalesOrderSalesOrderIdFeedbackSalesOrderLineItemIdPost.');
+            }
+            const localVarPath = `/api/v1/SalesOrder/{salesOrderId}/Feedback/{salesOrderLineItemId}`
+                .replace(`{${"salesOrderId"}}`, encodeURIComponent(String(salesOrderId)))
+                .replace(`{${"salesOrderLineItemId"}}`, encodeURIComponent(String(salesOrderLineItemId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (apiVersion !== undefined) {
+                localVarQueryParameter['api-version'] = apiVersion;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || (localVarRequestOptions.headers && localVarRequestOptions.headers['Content-Type'] === 'application/json');
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} salesOrderId 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1SalesOrderSalesOrderIdGet: async (salesOrderId: number, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'salesOrderId' is not null or undefined
+            if (salesOrderId === null || salesOrderId === undefined) {
+                throw new RequiredError('salesOrderId','Required parameter salesOrderId was null or undefined when calling apiV1SalesOrderSalesOrderIdGet.');
+            }
+            const localVarPath = `/api/v1/SalesOrder/{salesOrderId}`
+                .replace(`{${"salesOrderId"}}`, encodeURIComponent(String(salesOrderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Address.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SizeInfo.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PreferedFabricProperties.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/FitPreferences.Upsert", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders.Get", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders.Create", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders.Update", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (apiVersion !== undefined) {
+                localVarQueryParameter['api-version'] = apiVersion;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} salesOrderId 
          * @param {ShipSalesOrder} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
@@ -255,6 +423,19 @@ export const SalesOrderApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1SalesOrderActiveGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<ActiveSalesOrderDTO>>> {
+            const localVarAxiosArgs = await SalesOrderApiAxiosParamCreator(configuration).apiV1SalesOrderActiveGet(apiVersion, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {CreateSalesOrder} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
@@ -273,7 +454,7 @@ export const SalesOrderApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1SalesOrderQueryGet(dqb?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<SalesOrderDTODQBResultDTO>>> {
+        async apiV1SalesOrderQueryGet(dqb?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<SalesOrderDetailsDTODQBResultDTO>>> {
             const localVarAxiosArgs = await SalesOrderApiAxiosParamCreator(configuration).apiV1SalesOrderQueryGet(dqb, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -290,6 +471,36 @@ export const SalesOrderApiFp = function(configuration?: Configuration) {
          */
         async apiV1SalesOrderSalesOrderIdAddLineItemPost(salesOrderId: number, body?: AddSalesOrderLineItem, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AddSalesOrderLineItemDTO>>> {
             const localVarAxiosArgs = await SalesOrderApiAxiosParamCreator(configuration).apiV1SalesOrderSalesOrderIdAddLineItemPost(salesOrderId, body, apiVersion, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {number} salesOrderId 
+         * @param {number} salesOrderLineItemId 
+         * @param {AddOrUpdateFeedback} [body] 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1SalesOrderSalesOrderIdFeedbackSalesOrderLineItemIdPost(salesOrderId: number, salesOrderLineItemId: number, body?: AddOrUpdateFeedback, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AddOrUpdateFeedbackDTO>>> {
+            const localVarAxiosArgs = await SalesOrderApiAxiosParamCreator(configuration).apiV1SalesOrderSalesOrderIdFeedbackSalesOrderLineItemIdPost(salesOrderId, salesOrderLineItemId, body, apiVersion, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {number} salesOrderId 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1SalesOrderSalesOrderIdGet(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<SalesOrderDetailsDTO>>> {
+            const localVarAxiosArgs = await SalesOrderApiAxiosParamCreator(configuration).apiV1SalesOrderSalesOrderIdGet(salesOrderId, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -321,6 +532,15 @@ export const SalesOrderApiFactory = function (configuration?: Configuration, bas
     return {
         /**
          * 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1SalesOrderActiveGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<ActiveSalesOrderDTO>> {
+            return SalesOrderApiFp(configuration).apiV1SalesOrderActiveGet(apiVersion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {CreateSalesOrder} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
@@ -335,7 +555,7 @@ export const SalesOrderApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1SalesOrderQueryGet(dqb?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<SalesOrderDTODQBResultDTO>> {
+        async apiV1SalesOrderQueryGet(dqb?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<SalesOrderDetailsDTODQBResultDTO>> {
             return SalesOrderApiFp(configuration).apiV1SalesOrderQueryGet(dqb, options).then((request) => request(axios, basePath));
         },
         /**
@@ -348,6 +568,28 @@ export const SalesOrderApiFactory = function (configuration?: Configuration, bas
          */
         async apiV1SalesOrderSalesOrderIdAddLineItemPost(salesOrderId: number, body?: AddSalesOrderLineItem, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<AddSalesOrderLineItemDTO>> {
             return SalesOrderApiFp(configuration).apiV1SalesOrderSalesOrderIdAddLineItemPost(salesOrderId, body, apiVersion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} salesOrderId 
+         * @param {number} salesOrderLineItemId 
+         * @param {AddOrUpdateFeedback} [body] 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1SalesOrderSalesOrderIdFeedbackSalesOrderLineItemIdPost(salesOrderId: number, salesOrderLineItemId: number, body?: AddOrUpdateFeedback, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<AddOrUpdateFeedbackDTO>> {
+            return SalesOrderApiFp(configuration).apiV1SalesOrderSalesOrderIdFeedbackSalesOrderLineItemIdPost(salesOrderId, salesOrderLineItemId, body, apiVersion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} salesOrderId 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1SalesOrderSalesOrderIdGet(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<SalesOrderDetailsDTO>> {
+            return SalesOrderApiFp(configuration).apiV1SalesOrderSalesOrderIdGet(salesOrderId, apiVersion, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -372,6 +614,16 @@ export const SalesOrderApiFactory = function (configuration?: Configuration, bas
 export class SalesOrderApi extends BaseAPI {
     /**
      * 
+     * @param {string} [apiVersion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SalesOrderApi
+     */
+    public async apiV1SalesOrderActiveGet(apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<ActiveSalesOrderDTO>> {
+        return SalesOrderApiFp(this.configuration).apiV1SalesOrderActiveGet(apiVersion, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
      * @param {CreateSalesOrder} [body] 
      * @param {string} [apiVersion] 
      * @param {*} [options] Override http request option.
@@ -388,7 +640,7 @@ export class SalesOrderApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SalesOrderApi
      */
-    public async apiV1SalesOrderQueryGet(dqb?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<SalesOrderDTODQBResultDTO>> {
+    public async apiV1SalesOrderQueryGet(dqb?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<SalesOrderDetailsDTODQBResultDTO>> {
         return SalesOrderApiFp(this.configuration).apiV1SalesOrderQueryGet(dqb, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -402,6 +654,30 @@ export class SalesOrderApi extends BaseAPI {
      */
     public async apiV1SalesOrderSalesOrderIdAddLineItemPost(salesOrderId: number, body?: AddSalesOrderLineItem, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<AddSalesOrderLineItemDTO>> {
         return SalesOrderApiFp(this.configuration).apiV1SalesOrderSalesOrderIdAddLineItemPost(salesOrderId, body, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {number} salesOrderId 
+     * @param {number} salesOrderLineItemId 
+     * @param {AddOrUpdateFeedback} [body] 
+     * @param {string} [apiVersion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SalesOrderApi
+     */
+    public async apiV1SalesOrderSalesOrderIdFeedbackSalesOrderLineItemIdPost(salesOrderId: number, salesOrderLineItemId: number, body?: AddOrUpdateFeedback, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<AddOrUpdateFeedbackDTO>> {
+        return SalesOrderApiFp(this.configuration).apiV1SalesOrderSalesOrderIdFeedbackSalesOrderLineItemIdPost(salesOrderId, salesOrderLineItemId, body, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {number} salesOrderId 
+     * @param {string} [apiVersion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SalesOrderApi
+     */
+    public async apiV1SalesOrderSalesOrderIdGet(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<SalesOrderDetailsDTO>> {
+        return SalesOrderApiFp(this.configuration).apiV1SalesOrderSalesOrderIdGet(salesOrderId, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

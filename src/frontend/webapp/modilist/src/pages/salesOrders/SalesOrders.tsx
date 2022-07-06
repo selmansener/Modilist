@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../layouts/callback/Loading";
 import { Dispatch, RootState } from "../../store/store";
-import { SalesOrderListItem } from "./SalesOrderListItem";
+import { SalesOrderListItem } from "./components/SalesOrderListItem";
 import { Pagination, QueryBuilder, SortDirection, SortField, StringFilter, StringFilterOperation } from "dynamic-query-builder-client";
 
 enum SalesOrderStateMap {
@@ -131,7 +131,7 @@ export function SalesOrders() {
                     mb: 2
                 }}/>}
                 <Button
-                    disabled={salesOrdersIsBusy}
+                    disabled={salesOrdersIsBusy || (salesOrders?.data.length ?? 0) >= (salesOrders?.count ?? 0)}
                     variant="contained"
                     onClick={() => {
                         queryBuilder.pagination = new Pagination({

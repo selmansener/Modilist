@@ -1,23 +1,71 @@
-import { Button, Divider, Grid, Paper, Rating, Typography } from "@mui/material";
+import { Button, Divider, Grid, Paper, Rating, Typography, useTheme } from "@mui/material";
 import format from "date-fns/format";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import { ImageComponent } from "../../components/image/ImageComponent";
-import { config } from "../../config";
-import { SalesOrderDTO } from "../../services/swagger/api";
+import { ImageComponent } from "../../../components/image/ImageComponent";
+import { config } from "../../../config";
+import { SalesOrderDetailsDTO, SalesOrderState } from "../../../services/swagger/api";
 import { tr } from "date-fns/locale";
+import { LovelyRating } from "../../../components/lovelyRating/LovelyRating";
+import { calculateAvgSalesOrderRating } from "../utils/calculateAvgRating";
+import { addDays } from "date-fns";
 
 export interface SalesOrderListItemProps {
-    salesOrder: SalesOrderDTO;
+    salesOrder: SalesOrderDetailsDTO;
 }
 
 export function SalesOrderListItem(props: SalesOrderListItemProps) {
     const { t } = useTranslation();
+    const theme = useTheme();
     const navigate = useNavigate();
     const { imgBaseHost } = config;
-    const [value] = useState<number>(2);
     const { salesOrder } = props;
+
+    const doesOrderDelivered = salesOrder.state === SalesOrderState.Delivered || salesOrder.state === SalesOrderState.Completed;
+
+    const RenderPackageContent = () => {
+        if (!doesOrderDelivered) {
+            return (
+                <React.Fragment>
+                    <Grid item xs={2}>
+                        <ImageComponent src={`${imgBaseHost}/common/QuestionMark.jpg`} />
+                    </Grid>
+                    <Grid item xs={2}>
+                        <ImageComponent src={`${imgBaseHost}/common/QuestionMark.jpg`} />
+                    </Grid>
+                    <Grid item xs={2}>
+                        <ImageComponent src={`${imgBaseHost}/common/QuestionMark.jpg`} />
+                    </Grid>
+                    <Grid item xs={2}>
+                        <ImageComponent src={`${imgBaseHost}/common/QuestionMark.jpg`} />
+                    </Grid>
+                    <Grid item xs={2}>
+                        <ImageComponent src={`${imgBaseHost}/common/QuestionMark.jpg`} />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="body1">
+                            {t("Pages.SalesOrders.PackageContentsDescription")}
+                        </Typography>
+                    </Grid>
+                </React.Fragment>
+            )
+        }
+
+        return (
+            <React.Fragment>
+                {salesOrder.lineItems?.map(lineItem => {
+                    return (
+                        <Grid key={lineItem.id} item xs={2}>
+                            <ImageComponent sx={{
+                                height: '86px'
+                            }} src={lineItem?.product?.images ? (lineItem?.product?.images[0].url ?? "") : ""} asBackground />
+                        </Grid>
+                    )
+                })}
+            </React.Fragment>
+        )
+    }
 
     return (
         <Grid item container xs={12} spacing={2}>
@@ -75,29 +123,33 @@ export function SalesOrderListItem(props: SalesOrderListItemProps) {
                             </Grid>
                             <Grid item xs={12}>
                                 <Trans>
-                                    <Typography variant="body1" fontWeight={800}>
-                                        {t("Pages.SalesOrders.EstimatedDeliveryDate")}
+                                    <Typography variant="body1" color={doesOrderDelivered ? theme.palette.text.primary : theme.palette.text.disabled} fontWeight={800}>
+                                        {t("Pages.SalesOrders.DeliveryDate")}
                                     </Typography>
-                                    <Typography>
+                                    {doesOrderDelivered && <Typography>
                                         {salesOrder.createdAt && format(new Date(salesOrder.createdAt), 'dd.MM.yyyy', { locale: tr })}
-                                    </Typography>
+                                    </Typography>}
                                 </Trans>
                             </Grid>
                             <Grid item xs={12}>
                                 <Trans>
-                                    <Typography variant="body1" fontWeight={800}>
+                                    <Typography variant="body1" color={doesOrderDelivered ? theme.palette.text.primary : theme.palette.text.disabled} fontWeight={800}>
                                         {t("Pages.SalesOrders.Recipient")}
                                     </Typography>
-                                    <Typography>
+                                    {doesOrderDelivered && <Typography>
                                         Selman Şener
-                                    </Typography>
+                                    </Typography>}
                                 </Trans>
                             </Grid>
                             <Grid item xs={12}>
-                                <Typography variant="body1" fontWeight={800}>
+                                <Typography variant="body1" color={doesOrderDelivered ? theme.palette.text.primary : theme.palette.text.disabled} fontWeight={800}>
                                     {t("Pages.SalesOrders.SalesOrderFeedback")}
                                 </Typography>
-                                <Rating value={value} readOnly />
+                                <LovelyRating
+                                    readOnly
+                                    disabled={!doesOrderDelivered}
+                                    value={calculateAvgSalesOrderRating(salesOrder)}
+                                    precision={0.5} />
                             </Grid>
                         </Grid>
                         <Grid item container xs={4}>
@@ -106,26 +158,7 @@ export function SalesOrderListItem(props: SalesOrderListItemProps) {
                                     {t("Pages.SalesOrders.PackageContents")}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={2}>
-                                <ImageComponent src={`${imgBaseHost}/common/QuestionMark.jpg`} />
-                            </Grid>
-                            <Grid item xs={2}>
-                                <ImageComponent src={`${imgBaseHost}/common/QuestionMark.jpg`} />
-                            </Grid>
-                            <Grid item xs={2}>
-                                <ImageComponent src={`${imgBaseHost}/common/QuestionMark.jpg`} />
-                            </Grid>
-                            <Grid item xs={2}>
-                                <ImageComponent src={`${imgBaseHost}/common/QuestionMark.jpg`} />
-                            </Grid>
-                            <Grid item xs={2}>
-                                <ImageComponent src={`${imgBaseHost}/common/QuestionMark.jpg`} />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Typography variant="body1">
-                                    {t("Pages.SalesOrders.PackageContentsDescription")}
-                                </Typography>
-                            </Grid>
+                            {RenderPackageContent()}
                         </Grid>
                         <Grid item container xs={4}>
                             <Grid item xs={12}>
@@ -139,19 +172,21 @@ export function SalesOrderListItem(props: SalesOrderListItemProps) {
                                 </Trans>
                             </Grid>
                             <Grid item xs={12}>
-                                <Trans>
-                                    <Typography display="inline">
-                                        {t("Pages.SalesOrders.EstimatedDeliveryDate")}
-                                    </Typography>
-                                    <Typography display="inline">
-                                        {salesOrder.createdAt && format(new Date(salesOrder.createdAt), 'dd.MM.yyyy', { locale: tr })}
-                                    </Typography>
-                                </Trans>
+                                {!doesOrderDelivered &&
+                                    <Trans>
+                                        <Typography display="inline">
+                                            {t("Pages.SalesOrders.EstimatedDeliveryDate")}
+                                        </Typography>
+                                        <Typography display="inline">
+                                            {salesOrder.createdAt && format(addDays(new Date(salesOrder.createdAt), 7), 'dd.MM.yyyy', { locale: tr })}
+                                        </Typography>
+                                    </Trans>
+                                }
                             </Grid>
                             <Grid item xs={12}>
                                 <Button variant="contained"
                                     onClick={() => {
-                                        navigate(`/sales-order/${salesOrder.id}`);
+                                        navigate(`/sales-orders/${salesOrder.id}`);
                                     }}>
                                     {t("Pages.SalesOrders.Details")}
                                 </Button>
