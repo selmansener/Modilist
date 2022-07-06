@@ -974,6 +974,7 @@ export default function StylePreferences() {
                         <FormControlLabel
                             control={
                                 <Checkbox
+                                    name="prefersHijabClothing"
                                     onChange={handleChange}
                                     checked={stylePreferences.prefersHijabClothing}
                                 />
