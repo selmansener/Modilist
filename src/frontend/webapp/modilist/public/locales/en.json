@@ -396,9 +396,9 @@
     },
     "FormValidation": {
         "RequiredField": "* Gerekli Alan",
-        "MustBeInteger": "Please enter an integer",
-        "MustBeGreaterThanZero": "Please enter a positive integer",
-        "MustBeNumber": "You can only enter a number"
+        "MustBeInteger": "Lütfen bir tamsayı giriniz",
+        "MustBeGreaterThanZero": "Lütfen sıfırdan büyük bir tamsayı giriniz",
+        "MustBeNumber": "Yalnızca rakam girebilirsiniz"
     },
     "Generic": {
         "SalesOrderState": {

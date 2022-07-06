@@ -12,16 +12,16 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
             BodyType bodyType,
             int weight = 0,
             int height = 0,
-            int shoulderWidth = 0,
-            int headRadius = 0,
-            int armLength = 0,
-            int bodyLength = 0,
-            int neckRadius = 0,
-            int breastRadius = 0,
-            int waistRadius = 0,
-            int hipRadius = 0,
-            int legLength = 0,
-            int footLength = 0,
+            int? shoulderWidth = 0,
+            int? headRadius = 0,
+            int? armLength = 0,
+            int? bodyLength = 0,
+            int? neckRadius = 0,
+            int? breastRadius = 0,
+            int? waistRadius = 0,
+            int? hipRadius = 0,
+            int? legLength = 0,
+            int? footLength = 0,
             string? upperBody = null,
             string? lowerBody = null,
             string? womenUnderWearCup = null,
@@ -79,25 +79,25 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
 
         public int Height { get; private set; }
 
-        public int ShoulderWidth { get; private set; }
+        public int? ShoulderWidth { get; private set; }
 
-        public int HeadRadius { get; private set; }
+        public int? HeadRadius { get; private set; }
 
-        public int ArmLength { get; private set; }
+        public int? ArmLength { get; private set; }
 
-        public int BodyLength { get; private set; }
+        public int? BodyLength { get; private set; }
 
-        public int NeckRadius { get; private set; }
+        public int? NeckRadius { get; private set; }
 
-        public int BreastRadius { get; private set; }
+        public int? BreastRadius { get; private set; }
 
-        public int WaistRadius { get; private set; }
+        public int? WaistRadius { get; private set; }
 
-        public int HipRadius { get; private set; }
+        public int? HipRadius { get; private set; }
 
-        public int LegLength { get; private set; }
+        public int? LegLength { get; private set; }
 
-        public int FootLength { get; private set; }
+        public int? FootLength { get; private set; }
 
         public string? AdditionalNotes { get; private set; }
 
@@ -105,16 +105,16 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
             BodyType bodyType,
             int weight,
             int height,
-            int shoulderWidth,
-            int headRadius,
-            int armLength,
-            int bodyLength,
-            int neckRadius,
-            int breastRadius,
-            int waistRadius,
-            int hipRadius,
-            int legLength,
-            int footLength,
+            int? shoulderWidth,
+            int? headRadius,
+            int? armLength,
+            int? bodyLength,
+            int? neckRadius,
+            int? breastRadius,
+            int? waistRadius,
+            int? hipRadius,
+            int? legLength,
+            int? footLength,
             string? upperBody = null,
             string? lowerBody = null,
             string? womenUnderWearCup = null,

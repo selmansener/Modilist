@@ -35,24 +35,24 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.DTOs
 
         public int Height { get; set; }
 
-        public int ShoulderWidth { get; set; }
-
-        public int HeadRadius { get; set; }
-
-        public int ArmLength { get; set; }
-
-        public int BodyLength { get; set; }
-
-        public int NeckRadius { get; set; }
-
-        public int BreastRadius { get; set; }
-
-        public int WaistRadius { get; set; }
-
-        public int HipRadius { get; set; }
-
-        public int LegLength { get; set; }
-
-        public int FootLength { get; set; }
+        public int? ShoulderWidth { get; set; }
+        
+        public int? HeadRadius { get; set; }
+        
+        public int? ArmLength { get; set; }
+        
+        public int? BodyLength { get; set; }
+        
+        public int? NeckRadius { get; set; }
+        
+        public int? BreastRadius { get; set; }
+        
+        public int? WaistRadius { get; set; }
+        
+        public int? HipRadius { get; set; }
+        
+        public int? LegLength { get; set; }
+        
+        public int? FootLength { get; set; }
     }
 }
