@@ -13,6 +13,7 @@ import add from 'date-fns/add'
 import { AccountDTO } from '../../../services/swagger/api';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { IMaskInput } from 'react-imask';
+import trLocale from 'date-fns/locale/tr';
 interface PhoneInputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
     name: string;
@@ -35,6 +36,10 @@ const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
     },
 );
 
+const localeMap = {
+    tr: trLocale
+};
+
 export default function Personal() {
     const maxDate = add(new Date(), {
         years: -18
@@ -42,21 +47,25 @@ export default function Personal() {
     const { t } = useTranslation();
     const { isBusy: getAccountIsBusy, data: initialAccount, status: getAccountStatus } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: updateAccountIsBusy, data: updateAccount, status: updateAccountStatus } = useSelector((state: RootState) => state.updateAccountModel);
-    const [locale] = React.useState<string>('tr');
+    const [locale] = React.useState<keyof typeof localeMap>('tr');
     const dispatch = useDispatch<Dispatch>();
     const [isBusy] = useState<boolean>(getAccountIsBusy || updateAccountIsBusy);
     const requiredField = t("FormValidation.RequiredField");
+    const minCharacters = t("FormValidation.MinCharacters").toString();
     const [isDatePickerOpen, setIsDatePickerOpen] = React.useState(false);
     const schema = Yup.object({
         firstName: Yup.string().required(requiredField),
         lastName: Yup.string().required(requiredField),
         birthDate: Yup.date().max(maxDate, requiredField).required(requiredField).typeError(requiredField),
         gender: Yup.string().oneOf(["Male", "Female"], requiredField).required(requiredField),
-        phone: Yup.string().required(requiredField),
+        phone: Yup.string().test({
+            name: 'minCharacters',
+            message: `${minCharacters}`,
+            test: (value) => value?.length == 12
+        }).required(requiredField),
         instagramUserName: Yup.string().optional(),
         jobTitle: Yup.string().optional()
     });
-
 
     const {
         handleChange,
@@ -134,11 +143,11 @@ export default function Personal() {
         </Grid>
 
         <Grid item xs={6}>
-            <FormControl fullWidth>
-                <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={locale}>
-                    <ClickAwayListener onClickAway={() => {
-                        setIsDatePickerOpen(false);
-                    }}>
+            <ClickAwayListener onClickAway={() => {
+                setIsDatePickerOpen(false);
+            }}>
+                <FormControl fullWidth>
+                    <LocalizationProvider dateAdapter={AdapterDateFns} locale={localeMap[locale]}>
                         <DatePicker
                             open={isDatePickerOpen}
                             label={<Typography>{t('Generic.PersonalInfo.BirthDate')}</Typography>}
@@ -159,6 +168,10 @@ export default function Personal() {
                                         touched.birthDate && errors.birthDate
                                     )}
                                     error={touched.birthDate && errors.birthDate !== undefined}
+                                    inputProps={{
+                                        ...params.inputProps,
+                                        placeholder: "gg.aa.yyyy"
+                                    }}
                                     onChange={handleChange}
                                     onClick={() => {
                                         setIsDatePickerOpen(true);
@@ -167,9 +180,9 @@ export default function Personal() {
                                 />
                             }
                         />
-                    </ClickAwayListener>
-                </LocalizationProvider>
-            </FormControl>
+                    </LocalizationProvider>
+                </FormControl>
+            </ClickAwayListener>
         </Grid>
 
         <Grid item xs={6}>
@@ -192,6 +205,7 @@ export default function Personal() {
         <Grid item xs={6}>
             <FormControl fullWidth>
                 <TextField label={<Typography>{t('Pages.Welcome.Personal.Job')}</Typography>} variant="outlined"
+                    name="jobTitle"
                     disabled={isBusy}
                     onChange={handleChange}
                     value={account?.jobTitle} />
@@ -201,6 +215,7 @@ export default function Personal() {
         <Grid item xs={6}>
             <FormControl fullWidth>
                 <TextField label={<Typography>{t('Pages.Welcome.Personal.Instagram')}</Typography>} variant="outlined"
+                    name="instagramUserName"
                     disabled={isBusy}
                     onChange={handleChange}
                     value={account?.instagramUserName} />

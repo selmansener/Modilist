@@ -1,11 +1,36 @@
 
 import { FormControl, Grid, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
+import React from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { IMaskInput } from "react-imask";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { Dispatch } from "../../../store/store";
+
+interface CreditCardInputMaskProps {
+    onChange: (event: { target: { name: string; value: string } }) => void;
+    name: string;
+    value?: string;
+}
+
+const CreditCardInputMask = React.forwardRef<HTMLElement, CreditCardInputMaskProps>(
+    function PhoneInputMask(props, ref) {
+        const { onChange, ...other } = props;
+        return (
+            <IMaskInput
+                {...other}
+                mask="0000 0000 0000 0000"
+                definitions={{
+                    '#': /[1-9]/,
+                }}
+                onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+                overwrite
+            />
+        );
+    },
+);
 
 export default function PaymentMethod() {
     const dispatch = useDispatch<Dispatch>();
@@ -16,8 +41,8 @@ export default function PaymentMethod() {
     const schema = Yup.object({
         cardHolderName: Yup.string().required(requiredField),
         cardNumber: Yup.string().required(requiredField),
-        expireMonth: Yup.string().required(requiredField),
-        expireYear: Yup.string().required(requiredField),
+        expireMonth: Yup.string().length(2, "Ayı lütfen 2 haneli olarak giriniz").required(requiredField),
+        expireYear: Yup.string().length(4, "Yılı lütfen 4 haneli olarak giriniz").required(requiredField),
     });
 
     const {
@@ -71,11 +96,13 @@ export default function PaymentMethod() {
                             error={touched.cardNumber && errors.cardNumber !== undefined}
                             helperText={touched.cardNumber && errors.cardNumber}
                             label={t("Pages.Welcome.PaymentMethod.CardNumber")}
-                            type="number"
                             value={creditCard.cardNumber}
                             variant="outlined"
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            InputProps={{
+                                inputComponent: CreditCardInputMask as any,
+                            }}
                         />
                     </FormControl>
                 </Grid>
