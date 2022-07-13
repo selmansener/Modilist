@@ -159,6 +159,9 @@ export default function Personal() {
                             onChange={(newValue) => {
                                 setFieldValue("birthDate", newValue);
                             }}
+                            onAccept={() => {
+                                setIsDatePickerOpen(false)
+                            }}
                             renderInput={(params) =>
                                 <TextField {...params}
                                     ref={params.ref}

@@ -165,6 +165,7 @@ export default function SizeInfo() {
         },
         validateOnMount: true
     });
+    const gender = account?.gender ? camelCase(account?.gender.toString()) : undefined;
 
     type SectionProps = {
         sectionData: string[],
@@ -216,45 +217,6 @@ export default function SizeInfo() {
                     </Grid>
                 )
             })}
-        </>
-    }
-    const BodySizes = () => {
-        const gender = account?.gender ? camelCase(account?.gender.toString()) : undefined;
-        return <>
-            {
-                bodySizes.map((bodySize, index) => {
-                    const sizeName = camelCase(bodySize);
-                    return <React.Fragment key={sizeName}>
-                        {index % 2 === 0 ? <Grid item xs={2}></Grid> : <></>}
-                        <Grid item xs={4}>
-                            <Box sx={{
-                                display: 'flex',
-                                justifyContent: 'space-evenly'
-                            }}>
-                                <Box sx={{
-                                    width: '70px',
-                                    mr: 2
-                                }}>
-                                    {account?.gender != Gender.None && <ImageComponent src={`${imgBaseHost}/body-size/${gender}/${bodySize}.svg`} />}
-                                </Box>
-                                <FormControl fullWidth>
-                                    <TextField
-                                        name={sizeName}
-                                        disabled={isBusy}
-                                        error={touched[sizeName as keyof typeof sizeInfo] && errors[sizeName as keyof typeof sizeInfo] !== undefined}
-                                        helperText={touched[sizeName as keyof typeof sizeInfo] && errors[sizeName as keyof typeof sizeInfo]}
-                                        value={sizeInfo[sizeName as keyof typeof sizeInfo]}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        label={t(`Pages.Welcome.BodySize.${bodySize}`)}
-                                        variant="outlined" />
-                                </FormControl>
-                            </Box>
-                        </Grid>
-                        {index % 2 === 0 ? <></> : <Grid item xs={2}></Grid>}
-                    </React.Fragment>
-                })
-            }
         </>
     }
 
@@ -482,7 +444,42 @@ export default function SizeInfo() {
                 </Typography>
             </Grid>
 
-            <BodySizes />
+            <React.Fragment>
+                {
+                    bodySizes.map((bodySize, index) => {
+                        const sizeName = camelCase(bodySize);
+                        return <React.Fragment key={sizeName}>
+                            {index % 2 === 0 ? <Grid item xs={2}></Grid> : <></>}
+                            <Grid item xs={4}>
+                                <Box sx={{
+                                    display: 'flex',
+                                    justifyContent: 'space-evenly'
+                                }}>
+                                    <Box sx={{
+                                        width: '70px',
+                                        mr: 2
+                                    }}>
+                                        {account?.gender != Gender.None && <ImageComponent src={`${imgBaseHost}/body-size/${gender}/${bodySize}.svg`} />}
+                                    </Box>
+                                    <FormControl fullWidth>
+                                        <TextField
+                                            name={sizeName}
+                                            disabled={isBusy}
+                                            error={touched[sizeName as keyof typeof sizeInfo] && errors[sizeName as keyof typeof sizeInfo] !== undefined}
+                                            helperText={touched[sizeName as keyof typeof sizeInfo] && errors[sizeName as keyof typeof sizeInfo]}
+                                            value={sizeInfo[sizeName as keyof typeof sizeInfo]}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            label={t(`Pages.Welcome.BodySize.${bodySize}`)}
+                                            variant="outlined" />
+                                    </FormControl>
+                                </Box>
+                            </Grid>
+                            {index % 2 === 0 ? <></> : <Grid item xs={2}></Grid>}
+                        </React.Fragment>
+                    })
+                }
+            </React.Fragment>
 
             <Grid item xs={12}>
                 <Trans>

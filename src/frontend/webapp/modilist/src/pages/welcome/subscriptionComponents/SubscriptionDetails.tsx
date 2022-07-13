@@ -75,7 +75,7 @@ export function SubscriptionDetails() {
                     } />
             </FormControl>
         </Grid>
-        <Grid xs={2} sx={{
+        <Grid item xs={2} sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
