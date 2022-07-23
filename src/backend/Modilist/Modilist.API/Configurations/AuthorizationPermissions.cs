@@ -27,6 +27,7 @@
         public const string GetFitPreferences = "FitPreferences.Get";
         public const string UpsertFitPreferences = "FitPreferences.Upsert";
 
+        public const string GetPaymentMethod = "PaymentMethods.Get";
         public const string CreatePaymentMethod = "PaymentMethods.Create";
 
         public const string GetSubscriptions = "Subscriptions.Get";
@@ -40,6 +41,10 @@
         public const string GetSalesOrders = "SalesOrders.Get";
         public const string CreateSalesOrders = "SalesOrders.Create";
         public const string UpdateSalesOrders = "SalesOrders.Update";
+
+        public const string GetReturns = "Returns.Get";
+        public const string CreateReturns = "Returns.Create";
+        public const string UpdateReturns = "Returns.Update";
 
         public const string Development = "Development";
     }

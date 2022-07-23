@@ -37,6 +37,8 @@ namespace Modilist.Domains.Models.ProductDomain
 
         public string Size { get; private set; }
 
+        public bool NonReturnable { get; private set; } = false;
+
         public IReadOnlyList<ProductImage> Images => _images;
 
         public void AddImage(

@@ -17,6 +17,7 @@ export * from './apis/fit-preferences-api';
 export * from './apis/payment-method-api';
 export * from './apis/prefered-fabric-properties-api';
 export * from './apis/product-api';
+export * from './apis/return-api';
 export * from './apis/sales-order-api';
 export * from './apis/size-info-api';
 export * from './apis/style-preferences-api';

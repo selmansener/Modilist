@@ -4,6 +4,9 @@ const fs = require('fs');
 
 const searchLine = 'const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers[\'Content-Type\'] === \'application/json\';';
 const replaceLine = 'const needsSerialization = (typeof body !== "string") || (localVarRequestOptions.headers && localVarRequestOptions.headers[\'Content-Type\'] === \'application/json\');';
+const lineToRemove = "import { ModelObject } from './model-object';";
+const valueLine = "value?: ModelObject | null;";
+const replaceValueLine = "value?: any | null;";
 
 const fixStrictCheckIssue = (fileName, content) => {
     console.log(`Fixing file: ${fileName}`);
@@ -12,7 +15,7 @@ const fixStrictCheckIssue = (fileName, content) => {
         return content;
     }
 
-    return content.replaceAll(searchLine, replaceLine);
+    return content.replaceAll(searchLine, replaceLine).replaceAll(lineToRemove, "").replaceAll(valueLine, replaceValueLine);
 }
 
 const child = spawn("java", ["-jar",
@@ -51,4 +54,22 @@ const child = spawn("java", ["-jar",
         console.log("\x1b[32m", `${file} fixed.`);
         console.log("\x1b[0m");
     });
+    
+    console.log("Fixing filter file.");
+    console.log("\x1b[0m");
+
+    const filterFilePath = path.resolve(__dirname, "../src/services/swagger/api/models/filter.ts");
+
+    const filterFileContent = fs.readFileSync(filterFilePath, {
+        encoding: 'utf-8'
+    });
+
+    const fixedFilterFileContent = filterFileContent.replaceAll(lineToRemove, "").replaceAll(valueLine, replaceValueLine);
+
+    fs.writeFileSync(filterFilePath, fixedFilterFileContent, {
+        encoding: 'utf-8'
+    });
+
+    console.log("\x1b[32m", `Filter file fixed.`);
+    console.log("\x1b[0m");
 });

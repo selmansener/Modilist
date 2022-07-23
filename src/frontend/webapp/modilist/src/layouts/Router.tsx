@@ -30,6 +30,7 @@ import { FitPreferences } from '../pages/fitPreferences/FitPreferences';
 import { FabricProperties } from '../pages/fabricProperties/FabricProperties';
 import { SalesOrderDetails } from '../pages/salesOrders/SalesOrderDetails';
 import { Checkout } from '../pages/checkout/Checkout';
+import { AccountSettings } from '../pages/accountSettings/AccountSettings';
 
 interface RouterOptions {
   title: string,
@@ -159,6 +160,14 @@ const routes: RouterOptions[] = [
     environments: ["development", "int", "staging"]
   },
   {
+    title: "Pages.Titles.Settings",
+    route: "/settings",
+    layout: "dashboard",
+    component: <AccountSettings />,
+    isPublic: false,
+    environments: ["development", "int", "staging"]
+  },
+  {
     title: "Kayıtlı Kartlarım",
     route: "/payment-methods",
     menuItem: {
@@ -222,6 +231,10 @@ export interface RouterProps {
   role?: string;
 }
 
+// export function RouterLink(params:type) {
+
+// }
+
 export function Router(props: RouterProps) {
   const { environment, isPublic, role } = props;
 
@@ -235,20 +248,20 @@ export function Router(props: RouterProps) {
     // TODO: replace switch with router Outlet or Layout
     switch (routeOptions.layout) {
       case "dashboard":
-        return (<Dashboard 
+        return (<Dashboard
           title={routeOptions.title}
           icon={routeOptions.menuItem?.icon}
           menuItems={filteredRoutes.filter(x => x.menuItem !== undefined).map(x => {
-          if (x.menuItem) {
-            return {
-              ...x.menuItem,
-              route: x.route
+            if (x.menuItem) {
+              return {
+                ...x.menuItem,
+                route: x.route
+              }
             }
-          }
-          else {
-            throw new Error("missing menuItem")
-          }
-        })}>
+            else {
+              throw new Error("missing menuItem")
+            }
+          })}>
           {routeOptions.component}
         </Dashboard>);
       case "welcome":

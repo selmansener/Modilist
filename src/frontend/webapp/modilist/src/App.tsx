@@ -19,33 +19,33 @@ const msalInstance = new PublicClientApplication(config.msalConfig);
 const mdTheme = createTheme({
   palette: {
     primary: {
-      main: '#403E56',
+      main: '#2F2244',
       contrastText: '#fff'
     },
     secondary: {
-      main: '#F57691',
+      main: '#968DB3',
     },
     error: {
-      main: '#EE7266',
+      main: '#F08279',
     },
     warning: {
-      main: '#EF9C4F',
+      main: '#FAD27F',
     },
     info: {
-      main: '#98D1D0',
+      main: '#BEE1E2',
     },
     success: {
-      main: '#A5F0CE',
+      main: '#A6D3B2',
     },
     text: {
-      primary: '#403e56',
+      primary: '#2F2244',
       secondary: 'rgba(64,62,86,0.7)',
       disabled: 'rgba(64,62,86,0.38)',
     }
   },
   typography: {
     allVariants: {
-      color: '#403e56',
+      color: '#2F2244',
     },
     fontFamily: 'poppins',
     h1: {
@@ -105,6 +105,23 @@ const mdTheme = createTheme({
       textTransform: 'initial'
     },
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 5px #968DB3;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: #2F2244;
+        }
+      `,
+    }
+  }
 });
 
 i18n
@@ -130,7 +147,7 @@ function App() {
 
   return (
     <div className="App">
-      <CssBaseline />
+      <CssBaseline enableColorScheme />
       <Provider store={store}>
         <MsalProvider instance={msalInstance}>
           <BrowserRouter>

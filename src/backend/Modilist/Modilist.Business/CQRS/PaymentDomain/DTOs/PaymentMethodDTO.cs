@@ -8,12 +8,16 @@ namespace Modilist.Business.CQRS.PaymentDomain.DTOs
 {
     public class PaymentMethodDTO
     {
-        public string CardNumber { get; set; }
+        public string? CardAssociation { get; set; }
 
-        public string CardHolderName { get; set; }
+        public string? CardFamily { get; set; }
 
-        public string ExpireMonth { get; set; }
+        public string? CardBankName { get; set; }
 
-        public string ExpireYear { get; set; }
+        public long? CardBankCode { get; set; }
+
+        public string? LastFourDigit { get; set; }
+
+        public bool IsDefault { get; set; }
     }
 }

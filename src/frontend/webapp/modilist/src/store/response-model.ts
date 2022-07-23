@@ -1,6 +1,6 @@
 export type Dictonary = { [key: string]: string[] }[]
 
-export interface ResponseModel<T> {
+export interface ResponseModel<T = void> {
     isBusy: boolean;
     data?: T;
     message?: string;

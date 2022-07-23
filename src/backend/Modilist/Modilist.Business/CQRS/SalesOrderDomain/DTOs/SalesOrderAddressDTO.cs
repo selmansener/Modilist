@@ -2,20 +2,20 @@
 {
     public class SalesOrderAddressDTO
     {
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
-        public string FirstName { get; private set; }
+        public string FirstName { get; set; }
 
-        public string LastName { get; private set; }
+        public string LastName { get; set; }
 
-        public string Phone { get; private set; }
+        public string Phone { get; set; }
 
-        public string? ZipCode { get; private set; }
+        public string? ZipCode { get; set; }
 
-        public string City { get; private set; }
+        public string City { get; set; }
 
-        public string District { get; private set; }
+        public string District { get; set; }
 
-        public string FullAddress { get; private set; }
+        public string FullAddress { get; set; }
     }
 }

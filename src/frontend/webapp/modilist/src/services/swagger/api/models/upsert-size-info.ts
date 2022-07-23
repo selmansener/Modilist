@@ -96,65 +96,59 @@ export interface UpsertSizeInfo {
      * @type {number}
      * @memberof UpsertSizeInfo
      */
-    shoulderWidth?: number;
+    shoulderWidth?: number | null;
     /**
      * 
      * @type {number}
      * @memberof UpsertSizeInfo
      */
-    headRadius?: number;
+    headRadius?: number | null;
     /**
      * 
      * @type {number}
      * @memberof UpsertSizeInfo
      */
-    armLength?: number;
+    armLength?: number | null;
     /**
      * 
      * @type {number}
      * @memberof UpsertSizeInfo
      */
-    bodyLength?: number;
+    bodyLength?: number | null;
     /**
      * 
      * @type {number}
      * @memberof UpsertSizeInfo
      */
-    neckRadius?: number;
+    neckRadius?: number | null;
     /**
      * 
      * @type {number}
      * @memberof UpsertSizeInfo
      */
-    breastRadius?: number;
+    breastRadius?: number | null;
     /**
      * 
      * @type {number}
      * @memberof UpsertSizeInfo
      */
-    waistRadius?: number;
+    waistRadius?: number | null;
     /**
      * 
      * @type {number}
      * @memberof UpsertSizeInfo
      */
-    hipRadius?: number;
+    hipRadius?: number | null;
     /**
      * 
      * @type {number}
      * @memberof UpsertSizeInfo
      */
-    legLength?: number;
+    legLength?: number | null;
     /**
      * 
      * @type {number}
      * @memberof UpsertSizeInfo
      */
-    footLength?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpsertSizeInfo
-     */
-    footWidth?: number;
+    footLength?: number | null;
 }

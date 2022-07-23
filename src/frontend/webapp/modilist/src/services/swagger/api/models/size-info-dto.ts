@@ -89,59 +89,59 @@ export interface SizeInfoDTO {
      * @type {number}
      * @memberof SizeInfoDTO
      */
-    shoulderWidth?: number;
+    shoulderWidth?: number | null;
     /**
      * 
      * @type {number}
      * @memberof SizeInfoDTO
      */
-    headRadius?: number;
+    headRadius?: number | null;
     /**
      * 
      * @type {number}
      * @memberof SizeInfoDTO
      */
-    armLength?: number;
+    armLength?: number | null;
     /**
      * 
      * @type {number}
      * @memberof SizeInfoDTO
      */
-    bodyLength?: number;
+    bodyLength?: number | null;
     /**
      * 
      * @type {number}
      * @memberof SizeInfoDTO
      */
-    neckRadius?: number;
+    neckRadius?: number | null;
     /**
      * 
      * @type {number}
      * @memberof SizeInfoDTO
      */
-    breastRadius?: number;
+    breastRadius?: number | null;
     /**
      * 
      * @type {number}
      * @memberof SizeInfoDTO
      */
-    waistRadius?: number;
+    waistRadius?: number | null;
     /**
      * 
      * @type {number}
      * @memberof SizeInfoDTO
      */
-    hipRadius?: number;
+    hipRadius?: number | null;
     /**
      * 
      * @type {number}
      * @memberof SizeInfoDTO
      */
-    legLength?: number;
+    legLength?: number | null;
     /**
      * 
      * @type {number}
      * @memberof SizeInfoDTO
      */
-    footLength?: number;
+    footLength?: number | null;
 }

@@ -10,6 +10,7 @@ using Modilist.Domains.Models.AccountDomain;
 using Modilist.Domains.Models.AddressDomain;
 using Modilist.Domains.Models.PaymentDomain;
 using Modilist.Domains.Models.ProductDomain;
+using Modilist.Domains.Models.ReturnDomain;
 using Modilist.Domains.Models.SalesOrderDomain;
 using Modilist.Domains.Models.StylePreferencesDomain;
 using Modilist.Domains.Models.SubscriptionDomain;
@@ -52,6 +53,12 @@ namespace Modilist.Data.DataAccess
         public virtual DbSet<SalesOrderAddress> SalesOrderAddresses { get; set; }
 
         public virtual DbSet<LineItemFeedback> LineItemFeedbacks { get; set; }
+
+        public virtual DbSet<Return> Returns { get; set; }
+
+        public virtual DbSet<ReturnLineItem> ReturnLineItems { get; set; }
+
+        public virtual DbSet<ReturnAddress> ReturnAddresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

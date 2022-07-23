@@ -29,7 +29,7 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public Product Product { get; private set; }
 
-        public void AddOrUpdateFeedback(
+        internal void AddOrUpdateFeedback(
             SalesOrderLineItemState state,
             float price,
             LineItemSizeFeedback size,
@@ -60,6 +60,11 @@ namespace Modilist.Domains.Models.SalesOrderDomain
             {
                 Feedback = new LineItemFeedback(Id, price, size, style, fit, color, quality, fabric, pattern, perfectMatch, brand, sendSimilarProducts, additionalNotes);
             }
+        }
+
+        internal void Sold()
+        {
+            State = SalesOrderLineItemState.Sold;
         }
     }
 }

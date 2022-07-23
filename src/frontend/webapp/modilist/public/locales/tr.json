@@ -24,6 +24,22 @@
                     "Navigate": "Yukarı"
                 }
             }
+        },
+        "Dashboard": {
+            "Footer": {
+                "FollowUs": "Bizi takip edin.",
+                "Links": {
+                    "AboutUs": "Hakkımızda",
+                    "FAQ": "Sıkça Sorulan Sorular",
+                    "Partnership": "İş Ortaklığı Formu",
+                    "OpenPositions": "Kariyer",
+                    "DeveloperAPI": "Developer API",
+                    "KVKK": "Kişisel Verilerin Korunması",
+                    "OnlineSalesAgreement": "Mesafeli Satış Sözleşmesi",
+                    "PrivacyAndCookiePolicies": "Gizlilik ve Çerez Politikası",
+                    "UsageAgreement": "Kullanım Koşulları"
+                }
+            }
         }
     },
     "Pages": {
@@ -35,7 +51,8 @@
             "FitPreferences": "Kalıp Tercihlerim",
             "FabricProperties": "Renk & Kumaş",
             "Addresses": "Kayıtlı Adreslerim",
-            "PaymentMethods": "Kayıtlı Kartlarım"
+            "PaymentMethods": "Kayıtlı Kartlarım",
+            "Settings": "Hesap Ayarlarım"
         },
         "Main": {
             "ActiveSalesOrders": "Aktif Siparişlerim",
@@ -308,6 +325,31 @@
                 "ExpireMonth": "Son Kullanma Tarihi (Ay)",
                 "ExpireYear": "Son Kullanma Tarihi (Yıl)"
             }
+        },
+        "Checkout": {
+            "Title": "Sipariş Ref. No:",
+            "ReturnDate": "İade ürünleri içeren paketini ne zaman teslim almamızı istersin.",
+            "ReturnAddress": "İadenin teslim alınacağı adres",
+            "ChangeReturnAddress": "Kayıtlı Adreslerim >",
+            "PaymentMethod": "Ödeme Yöntemi",
+            "IyzicoInfo": "Kredi kartı bilgilerin iyzico güvencesiyle korunmaktadır.",
+            "DiscountTitle": "Promosyonlar",
+            "DiscountCode": "İndirim Kodu",
+            "ApplyDiscount": "Uygula",
+            "Wallet": "Modilist Cüzdanım",
+            "Balance": "Kalan Bakiye",
+            "UseBalance": "Kullan",
+            "SoldProductPrice": "Satın Alınacak Ürünler Ara Toplam: ",
+            "VATPrice": "KDV %18: ",
+            "TotalProductPrice": "Toplam Tutar: ",
+            "PackageTotalPrice": "Kombinin Toplam Tutarı: ",
+            "Checkout": "Ödemeyi tamamla",
+            "ReturnWarning": "Ödemeyi yapabilmek için önce iade işlemini tamamlamalısın.",
+            "CargoTrackingCode": "Kargo Takip Numarası",
+            "CargoTrackingCodeInfo": "İade işlemini tamamladığında kargo takip numarası oluşur.",
+            "CreateReturn": "İade talebi oluştur",
+            "ReturnedLineItems": "İade edilecek ürünler",
+            "SoldLineItems": "Satın alınacak ürünler"
         }
     },
     "WelcomeSteps": {

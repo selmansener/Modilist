@@ -177,5 +177,23 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
             salesOrderLineItem.AddOrUpdateFeedback(lineItemState, price, size, style, fit, color, quality, fabric, pattern, perfectMatch, brand, sendSimilarProducts, additionalNotes);
         }
+
+        public void BuyAllLineItems()
+        {
+            if(State != SalesOrderState.Delivered)
+            {
+                throw new InvalidOrderStateException(AccountId, Id, State, SalesOrderState.Delivered, nameof(BuyAllLineItems));
+            }
+
+            if (LineItems.Count == 0)
+            {
+                throw new InvalidOperationException("SalesOrder don't have any LineItems.");
+            }
+
+            foreach (var lineItem in LineItems)
+            {
+                lineItem.Sold();
+            }
+        }
     }
 }

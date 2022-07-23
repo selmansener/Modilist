@@ -13,7 +13,7 @@ export function LovelyRating(props: LovelyRatingProps) {
         <Rating
             {...props}
             icon={<FavoriteIcon
-                color="secondary"
+                color="error"
                 fontSize="inherit"
                 sx={{
                     ...filledIconSx

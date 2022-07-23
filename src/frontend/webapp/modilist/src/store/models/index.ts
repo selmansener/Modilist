@@ -11,7 +11,11 @@ import { upsertPreferedFabricPropertiesModel } from "./fabricProperties/UpsertFa
 import { getFitPreferencesModel } from "./fitPreferences/GetFitPreferences"
 import { upsertFitPreferencesModel } from "./fitPreferences/UpsertFitPreferences"
 import { createPaymentMethodModel } from "./paymentMethods/CreatePaymentMethod"
+import { getDefaultPaymentMethodModel } from "./paymentMethods/GetDefaultPaymentMethod"
+import { createReturnModel } from "./returns/CreateReturn"
+import { getReturnModel } from "./returns/GetReturn"
 import { activeSalesOrderModel } from "./salesOrders/ActiveSalesOrder"
+import { buyAllLineItemsModel } from "./salesOrders/BuyAllLineItems"
 import { addOrUpdateFeedbackModel } from "./salesOrders/Feedback"
 import { salesOrderDetailsModel } from "./salesOrders/SalesOrderDetails"
 import { salesOrdersQueryModel } from "./salesOrders/SalesOrdersQuery"
@@ -58,6 +62,10 @@ export interface RootModel extends Models<RootModel> {
   salesOrderDetailsModel: typeof salesOrderDetailsModel,
   addOrUpdateFeedbackModel: typeof addOrUpdateFeedbackModel,
   activeSalesOrderModel: typeof activeSalesOrderModel,
+  buyAllLineItemsModel: typeof buyAllLineItemsModel,
+  getDefaultPaymentMethodModel: typeof getDefaultPaymentMethodModel,
+  getReturnModel: typeof getReturnModel,
+  createReturnModel: typeof createReturnModel,
 }
 
 export const models: RootModel = {
@@ -89,4 +97,8 @@ export const models: RootModel = {
   salesOrderDetailsModel,
   addOrUpdateFeedbackModel,
   activeSalesOrderModel,
+  buyAllLineItemsModel,
+  getDefaultPaymentMethodModel,
+  getReturnModel,
+  createReturnModel,
 }

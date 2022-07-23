@@ -115,7 +115,9 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
                     throw new InvalidOperationException("create card request failed");
                 }
 
-                paymentMethod.UpdateCardUserKey(card.CardUserKey);
+                var lastFourDigit = request.CardNumber.Substring(request.CardNumber.Length - 4, 4);
+
+                paymentMethod.UpdateCardInfo(card.CardUserKey, card.CardAssociation, card.CardFamily, card.CardBankName, card.CardBankCode, lastFourDigit);
 
                 await _paymentMethodRepository.UpdateAsync(paymentMethod, cancellationToken);
             }

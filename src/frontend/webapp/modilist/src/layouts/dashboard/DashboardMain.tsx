@@ -18,7 +18,7 @@ export function DashboardMain(props: React.PropsWithChildren<DashboardMainProps>
                 minHeight: '100vh',
                 overflow: 'auto',
                 p: 2,
-                mt: 10,
+                mt: 14,
                 mb: 4
             }}
         >

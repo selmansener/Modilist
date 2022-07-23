@@ -64,7 +64,7 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public string? AdditionalNotes { get; private set; }
 
-        public void UpdateFeedback(
+        internal void UpdateFeedback(
             float price,
             LineItemSizeFeedback size,
             float style,

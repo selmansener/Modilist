@@ -1,8 +1,10 @@
 import { Button, Divider, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SalesOrderDetailsDTO, SalesOrderLineItemState, SalesOrderState } from "../../../services/swagger/api";
+import { Dispatch, RootState } from "../../../store/store";
 import { LineItemFeedback } from "./LineItemFeedback";
 
 export interface SalesOrderFeedbackProps {
@@ -12,7 +14,16 @@ export interface SalesOrderFeedbackProps {
 export function SalesOrderFeedback(props: SalesOrderFeedbackProps) {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const dispatch = useDispatch<Dispatch>();
+    const { isBusy, status } = useSelector((state: RootState) => state.buyAllLineItemsModel);
     const { salesOrder } = props;
+
+    useEffect(() => {
+        if (status === 200) {
+            dispatch.buyAllLineItemsModel.RESET();
+            navigate(`/sales-orders/${salesOrder.id}/checkout`);
+        }
+    }, [status]);
 
     const RenderLineItemFeedbacks = () => {
         if (!salesOrder.lineItems) {
@@ -20,7 +31,7 @@ export function SalesOrderFeedback(props: SalesOrderFeedbackProps) {
         }
 
         return salesOrder.lineItems.map(lineItem => {
-            return <Grid key={lineItem.id} item xs={2.4}>
+            return <Grid key={lineItem.id} item xs={2.4} >
                 {lineItem?.id && <LineItemFeedback
                     salesOrderId={salesOrder?.id ?? 0}
                     lineItemId={lineItem?.id}
@@ -95,6 +106,12 @@ export function SalesOrderFeedback(props: SalesOrderFeedbackProps) {
         return Math.round(((totalPrice() - soldProductPrice()) + Number.EPSILON) * 100) / 100;
     }
 
+    const buyAllClickHandler = () => {
+        if (!isBusy && status === 0 && salesOrder?.id) {
+            dispatch.buyAllLineItemsModel.buyAllLineItems(salesOrder?.id);
+        }
+    }
+
     const RenderBuyAllSection = () => {
         if (salesOrder.state !== SalesOrderState.Delivered) {
             return <></>
@@ -113,7 +130,11 @@ export function SalesOrderFeedback(props: SalesOrderFeedbackProps) {
                     </Typography>
                 </Grid>
                 <Grid item xs={12} display="flex" justifyContent="flex-end">
-                    <Button size="large" variant="contained">
+                    <Button
+                        disabled={isBusy}
+                        size="large"
+                        variant="contained"
+                        onClick={buyAllClickHandler}>
                         {t("Pages.SalesOrderFeedback.BuyAll")}
                     </Button>
                 </Grid>
@@ -137,11 +158,11 @@ export function SalesOrderFeedback(props: SalesOrderFeedbackProps) {
                     <Button
                         fullWidth
                         disabled={salesOrder.lineItems?.some(x => x.state === SalesOrderLineItemState.None)}
-                        variant="contained" 
+                        variant="contained"
                         onClick={() => {
                             navigate(`/sales-orders/${salesOrder.id}/checkout`);
                         }}
-                        >
+                    >
                         {t("Pages.SalesOrderFeedback.Checkout")}
                     </Button>
                 </Grid>

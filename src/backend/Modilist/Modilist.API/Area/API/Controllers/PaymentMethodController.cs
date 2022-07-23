@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Modilist.API.Configurations;
 using Modilist.Business.CQRS.PaymentDomain.Commands;
 using Modilist.Business.CQRS.PaymentDomain.DTOs;
+using Modilist.Business.CQRS.PaymentDomain.Queries;
 using Modilist.Infrastructure.Shared.Extensions;
 
 namespace Modilist.API.Area.API.Controllers
@@ -17,6 +18,19 @@ namespace Modilist.API.Area.API.Controllers
         public PaymentMethodController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [Authorize(nameof(AuthorizationPermissions.GetPaymentMethod))]
+        [HttpPost("GetDefault")]
+        [ProducesResponseType(typeof(PaymentMethodDTO), 200)]
+        public async Task<IActionResult> GetDefault(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetDefaultPaymentMethod
+            {
+                AccountId = User.GetUserId()
+            }, cancellationToken);
+
+            return Ok(response);
         }
 
         [Authorize(nameof(AuthorizationPermissions.CreatePaymentMethod))]

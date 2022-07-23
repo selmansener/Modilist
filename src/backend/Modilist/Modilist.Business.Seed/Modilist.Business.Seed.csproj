@@ -25,6 +25,7 @@
   <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="EFCoreAutoMigrator" Version="1.0.5" />
+    <PackageReference Include="Iyzipay" Version="2.1.39" />
     <PackageReference Include="JsonNet.ContractResolvers" Version="2.0.0" />
   </ItemGroup>
 

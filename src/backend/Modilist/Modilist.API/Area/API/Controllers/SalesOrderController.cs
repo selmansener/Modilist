@@ -116,5 +116,19 @@ namespace Modilist.API.Area.API.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost("{salesOrderId}/BuyAll")]
+        [Authorize(nameof(AuthorizationPermissions.UpdateSalesOrders))]
+        [ProducesResponseType(typeof(AddOrUpdateFeedbackDTO), 200)]
+        public async Task<IActionResult> BuyAll(int salesOrderId, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new BuyAllLineItems
+            {
+                AccountId = User.GetUserId(),
+                SalesOrderId = salesOrderId,
+            }, cancellationToken);
+
+            return Ok(response);
+        }
     }
 }

@@ -8,6 +8,7 @@ using Modilist.Data.DataAccess;
 using Modilist.Data.Repositories.AddressDomain;
 using Modilist.Data.Repositories.PaymentDomain;
 using Modilist.Data.Repositories.ProductDomain;
+using Modilist.Data.Repositories.ReturnDomain;
 using Modilist.Data.Repositories.SalesOrderDomain;
 using Modilist.Data.Repositories.StylePreferencesDomain;
 using Modilist.Data.Repositories.SubscriptionDomain;
@@ -66,6 +67,8 @@ namespace Modilist.Data.Extensions
             services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddScoped<ISalesOrderRepository, SalesOrderRepository>();
+
+            services.AddScoped<IReturnRepository, ReturnRepository>();
 
             return services;
         }

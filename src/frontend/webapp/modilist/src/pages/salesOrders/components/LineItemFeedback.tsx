@@ -92,7 +92,11 @@ export function LineItemFeedback(props: LineItemFeedbackProps) {
     }
 
     return (
-        <Grid item container xs={12} spacing={2}>
+        <Grid item container xs={12} spacing={2} sx={{
+            border: 1,
+            pr: 2,
+            pb: 2,
+        }}>
             <Grid item xs={12}>
                 {product.images && product.images.length > 0 && <ImageComponent src={product.images[0].url ?? ""} asBackground sx={{
                     height: '260px'

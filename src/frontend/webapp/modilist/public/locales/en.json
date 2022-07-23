@@ -10,7 +10,7 @@
                     "TitleBodySize": "Beden Ölçüleri",
                     "TitleStylePreferences": "Stil Tercihleri",
                     "TitleFitPreferences": "Kalıp ve Boy<br/>Tercihleri",
-                    "TitleFabricProperties": "Kumaş ve Doku<br/>Tercihleri",
+                    "TitleFabricProperties": "Renk ve Kumaş<br/>Tercihleri",
                     "TitleContactInfo": "İletişim Bilgileri",
                     "TitleSubscription": "Abonelik",
                     "TitlePaymentMethod": "Ödeme Yöntemi"
@@ -20,7 +20,8 @@
                 "Buttons": {
                     "Back": "Geri",
                     "Finish": "Tamamla",
-                    "Next": "İleri"
+                    "Next": "İleri",
+                    "Navigate": "Yukarı"
                 }
             }
         }
@@ -45,7 +46,84 @@
             "Details": "Devamı >",
             "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
             "FirstOrderPromotion": "İlk Siparişinde 20 TL indirim",
-            "FriendshipPromotion": "Arkadaşını davet et 20 TL kazan!"
+            "FriendshipPromotion": "Arkadaşını davet et 20 TL kazan!",
+            "SendInvitation": "Davetiye Gönder"
+        },
+        "SalesOrders": {
+            "SalesOrderReferenceNumber": "Sipariş Ref. No: ",
+            "SalesOrderCreatedAt": "Sipariş Tarihi: ",
+            "SalesOrderState": "Sipariş Durumu: ",
+            "SalesOrderAddress": "Teslimat Adresi: ",
+            "Recipient": "Teslim Alan Kişi: ",
+            "Details": "Detay Görüntüle",
+            "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
+            "PackageContents": "Kombin İçeriği: ",
+            "PackageContentsDescription": "Kombin içeriğini paketin eline ulaştığı zaman görüntüleyebilirsin.",
+            "SalesOrderFeedback": "Kombine Puanın",
+            "LoadMore": "Devamı",
+            "DeliveryDate": "Teslimat Tarihi: ",
+            "Filters": {
+                "SalesOrderStateTitle": "Sipariş Durumu",
+                "SalesOrderState": {
+                    "All": "Tümü",
+                    "Active": "Aktif",
+                    "Completed": "Tamamlanan",
+                    "Returned": "İadeler"
+                }
+            }
+        },
+        "SalesOrderDetails": {
+            "Title": "Sipariş Ref. No: ",
+            "DeliveryAddress": "Sipariş Teslimat Adresi: ",
+            "RegisteredAddresses": "Kayıtlı Adreslerim",
+            "CreatedAt": "Sipariş Oluşturulma Tarihi: ",
+            "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
+            "SalesOrderState": "Sipariş Durumu: ",
+            "PackageContents": "Kombin İçeriği: ",
+            "PackageContentsDescription": " Kombin içeriğini paketin eline ulaştığı zaman görüntüleyebilirsin.",
+            "AdditionalNotes": "Ekstra Notlar: ",
+            "CargoTrackingCode": "Kargo Takip Numarası: ",
+            "Change": "Değiştir "
+        },
+        "SalesOrderFeedback": {
+            "AutoPaymentWarning": "5 iş günü içerisinde değerlendirme yapmaz iseniz kombin toplam bedeli kayıtlı kartınızdan tahsil edilecektir.",
+            "PackageContents": "Kombin İçeriği",
+            "Evaluate": "Değerlendir >",
+            "EvaluateButton": "Değerlendir",
+            "BuyAll": "Tümünü Satın Al",
+            "SKU": "Ürün Kodu: ",
+            "Size": " Beden",
+            "Previous": "< Önceki Ürün",
+            "Next": "Sonraki Ürün >",
+            "Feedback": {
+                "Title": "Bu ürün hakkında ne düşünüyorsun?",
+                "HighScore": "Çok Sevdim: ",
+                "LowScore": "Hiç Sevmedim: ",
+                "Price": "Fiyatı",
+                "Size": {
+                    "Question": "Beden Ölçüsü",
+                    "Small": "Küçük",
+                    "Fit": "Uygun",
+                    "Large": "Büyük"
+                },
+                "Style": "Tarzımla Uyumu",
+                "Color": "Rengi",
+                "Fit": "Kalıbı",
+                "Quality": "Kalitesi",
+                "Fabric": "Kumaşı/Dokusu",
+                "Pattern": "Deseni",
+                "PerfectMatch": "Kombinle Uyumu",
+                "SendSimilarProducts": "Bu tarz daha çok ürüne ihtiyacım var.",
+                "Brand": "Marka",
+                "AdditionalNotes": "Belirtmek istediğin diğer konular:",
+                "Buy": "Satın al",
+                "Return": "İade et"
+            },
+            "SoldProductPrice": "Satın Alınacak Ürünler Ara Toplam: ",
+            "VATPrice": "KDV %18: ",
+            "TotalProductPrice": "Toplam Tutar: ",
+            "PackageTotalPrice": "Kombinin Toplam Tutarı: ",
+            "Checkout": "Ödeme sayfasına git"
         },
         "Account": {
             "PersonalInfo": "Kişisel Bilgiler",
@@ -96,6 +174,7 @@
                 "Optional": "(Opsiyonel)"
             },
             "FitPreferences": {
+                "Warning": "Seçim yapmadığın kategorilerdeki her tarzı benimsediğini varsayacağız.",
                 "WaistHeightPreference": "Alt giyimde tercih ettiğin bel çeşitleri",
                 "WaistHeights": {
                     "UltraHighWaist": "UltraHighWaist",
@@ -147,7 +226,8 @@
                 "FootTypes": {
                     "Narrow": "İnce",
                     "Wide": "Taraklı"
-                }
+                },
+                "Optional": "(Opsiyonel)"
             },
             "FabricProperties": {
                 "ExcludedColors": {
@@ -172,9 +252,10 @@
                 },
                 "Allergens": {
                     "1": " Alerjiniz ",
-                    "2": "olan herhangi bir madde ya da kumaş türü varsa belirtiniz."
+                    "2": "olan herhangi bir madde ya da kumaş türü varsa belirtiniz; "
                 },
-                "AdditionalNotes": "Eklemek istediğiniz notunuz varsa belirtiniz."
+                "AdditionalNotes": "Eklemek istediğiniz notunuz varsa belirtiniz; ",
+                "Optional": "(Opsiyonel)"
             },
             "ContactInfo": {
                 "Title": "Teslimat Adresi"
@@ -227,6 +308,26 @@
                 "ExpireMonth": "Son Kullanma Tarihi (Ay)",
                 "ExpireYear": "Son Kullanma Tarihi (Yıl)"
             }
+        },
+        "Checkout": {
+            "Title": "Sipariş Ref. No:",
+            "ReturnDate": "İade ürünleri içeren paketini ne zaman teslim almamızı istersin.",
+            "ReturnAddress": "İadenin teslim alınacağı adres",
+            "ChangeReturnAddress": "Kayıtlı Adreslerim >",
+            "PaymentMethod": "Ödeme Yöntemi",
+            "IyzicoInfo": "Kredi kartı bilgilerin iyzico güvencesiyle korunmaktadır.",
+            "DiscountTitle": "Promosyonlar",
+            "DiscountCode": "İndirim Kodu",
+            "ApplyDiscount": "Uygula",
+            "Wallet": "Modilist Cüzdanım",
+            "Balance": "Kalan Bakiye",
+            "UseBalance": "Kullan",
+            "SoldProductPrice": "Satın Alınacak Ürünler Ara Toplam: ",
+            "VATPrice": "KDV %18: ",
+            "TotalProductPrice": "Toplam Tutar: ",
+            "PackageTotalPrice": "Kombinin Toplam Tutarı: ",
+            "Checkout": "Ödemeyi tamamla",
+            "ReturnWarning": "Ödemeyi yapabilmek için önce iade işlemini tamamlamalısın."
         }
     },
     "WelcomeSteps": {
@@ -367,14 +468,17 @@
         "Grey": "Gri",
         "White": "Beyaz",
         "Black": "Siyah",
-        "NavyBlue": "Lacivert"
+        "NavyBlue": "Lacivert",
+        "Gold": "Altın",
+        "Silver": "Gümüş",
+        "Copper": "Bakır"
     },
     "Pattern": {
         "Plaid": "Ekose",
         "Striped": "Çizgili",
         "PolkaDot": "Puantiye",
         "Shawl": "Şal",
-        "Camouflage": "Kamufulaj",
+        "Camouflage": "Kamuflaj",
         "AnimalPattern": "Hayvan Deseni",
         "Squared": "Kareli",
         "AnimalFigured": "Hayvan Figürlü",
@@ -396,9 +500,10 @@
     },
     "FormValidation": {
         "RequiredField": "* Gerekli Alan",
+        "MinCharacters": "Lütfen başında 0 olmadan 10 haneli bir telefon numarası giriniz",
         "MustBeInteger": "Lütfen bir tamsayı giriniz",
         "MustBeGreaterThanZero": "Lütfen sıfırdan büyük bir tamsayı giriniz",
-        "MustBeNumber": "Yalnızca rakam girebilirsiniz"
+        "MustBeNumber": "Lütfen bir sayı giriniz"
     },
     "Generic": {
         "SalesOrderState": {

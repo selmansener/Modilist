@@ -1,15 +1,17 @@
-import AccountCircle from "@mui/icons-material/AccountCircle"
 import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent, Avatar, Grid, Box } from "@mui/material"
 import React from "react";
 import { styled } from '@mui/material/styles';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useTranslation } from 'react-i18next'
 import { AccountDTO } from "../../services/swagger/api";
+import { ImageComponent } from "../../components/image/ImageComponent";
+import SettingsIcon from '@mui/icons-material/Settings';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 const drawerWidth: number = 240;
 
@@ -142,13 +144,17 @@ export function DashboardHeader(props: DashboardHeaderProps) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Modilist
-          </Typography>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexGrow: 1
+          }}>
+            <ImageComponent width={100} src="/modilist-logo.png" />
+          </Box>
           <Select
             value={i18n.language}
             onChange={handleLanguageChange}
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, backgroundColor: "#fff" }}
           >
             {supportedLanguages.map(supportedLang => (
               <MenuItem value={supportedLang.lang} key={supportedLang.lang}>
@@ -174,7 +180,9 @@ export function DashboardHeader(props: DashboardHeaderProps) {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -196,6 +204,17 @@ export function DashboardHeader(props: DashboardHeaderProps) {
               <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
           </div>
+          <NavLink to={"/settings"} style={{ color: "#fff" }}>
+            <IconButton
+              size="large"
+              aria-label="settings"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <SettingsIcon />
+            </IconButton>
+          </NavLink>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -203,8 +222,8 @@ export function DashboardHeader(props: DashboardHeaderProps) {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-end',
-            px: [1],
+            justifyContent: 'center',
+            p: 4,
           }}
         >
           <IconButton onClick={toggleDrawer}>

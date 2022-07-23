@@ -22,23 +22,35 @@ export interface PaymentMethodDTO {
      * @type {string}
      * @memberof PaymentMethodDTO
      */
-    cardNumber?: string;
+    cardAssociation?: string | null;
     /**
      * 
      * @type {string}
      * @memberof PaymentMethodDTO
      */
-    cardHolderName?: string;
+    cardFamily?: string | null;
     /**
      * 
      * @type {string}
      * @memberof PaymentMethodDTO
      */
-    expireMonth?: string;
+    cardBankName?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaymentMethodDTO
+     */
+    cardBankCode?: number | null;
     /**
      * 
      * @type {string}
      * @memberof PaymentMethodDTO
      */
-    expireYear?: string;
+    lastFourDigit?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PaymentMethodDTO
+     */
+    isDefault?: boolean;
 }

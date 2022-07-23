@@ -13,6 +13,7 @@
  */
 import { FilterOperation } from './filter-operation';
 import { LogicalOperator } from './logical-operator';
+
 /**
  * 
  * @export

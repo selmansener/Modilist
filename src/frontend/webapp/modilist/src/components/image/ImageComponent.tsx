@@ -8,6 +8,8 @@ export interface ImageProps {
     alt?: string;
     asBackground?: boolean;
     sx?: SxProps<Theme>;
+    width?: number;
+    height?: number;
     onClick?: React.MouseEventHandler<HTMLImageElement>;
 }
 
@@ -52,14 +54,17 @@ export function ImageComponent(props: ImageProps) {
             })
 
             const Img = () => {
-                return <Box sx={{
-                    ...sx,
-                    backgroundImage: `url(${src})`,
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'contain'
-                }}>
-    
+                return <Box
+                    width={props.width}
+                    height={props.height}
+                    sx={{
+                        ...sx,
+                        backgroundImage: `url(${src})`,
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'contain'
+                    }}>
+
                 </Box>
             }
 
