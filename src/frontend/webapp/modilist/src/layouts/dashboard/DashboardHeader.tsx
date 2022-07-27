@@ -12,6 +12,7 @@ import { AccountDTO } from "../../services/swagger/api";
 import { ImageComponent } from "../../components/image/ImageComponent";
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth: number = 240;
 
@@ -215,6 +216,14 @@ export function DashboardHeader(props: DashboardHeaderProps) {
               <SettingsIcon />
             </IconButton>
           </NavLink>
+          <IconButton
+            size="large"
+            aria-label="logout"
+            color="inherit"
+            onClick={logout}
+          >
+            <LogoutIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

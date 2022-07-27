@@ -7,7 +7,7 @@ import { ResponseModel } from "../../response-model";
 export const getReturnModel = createModel<RootModel>()({
     state: {
         isBusy: false,
-        data: {},
+        data: undefined,
         status: 0
     } as ResponseModel<ReturnDTO>,
     reducers: {
@@ -37,7 +37,7 @@ export const getReturnModel = createModel<RootModel>()({
             return {
                 isBusy: false,
                 status: 0,
-                data: {}
+                data: undefined
             }
         }
     },

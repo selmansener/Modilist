@@ -19,7 +19,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [HttpPost("Create")]
-        [Authorize(nameof(AuthorizationPermissions.CreateProducts))]
+        [Authorize(nameof(AuthorizationPermissions.Products))]
         [ProducesResponseType(typeof(ProductDTO), 200)]
         public async Task<IActionResult> Create(CreateProduct input, CancellationToken cancellationToken)
         {
@@ -29,7 +29,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [HttpPost("AddImages/{productId}")]
-        [Authorize(nameof(AuthorizationPermissions.UpdateProducts))]
+        [Authorize(nameof(AuthorizationPermissions.Products))]
         [ProducesResponseType(typeof(AddProductImagesDTO), 200)]
         public async Task<IActionResult> AddImages(int productId, [FromForm] IEnumerable<IFormFile> files, CancellationToken cancellationToken)
         {

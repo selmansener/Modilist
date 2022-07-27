@@ -869,7 +869,7 @@ export default function StylePreferences() {
                                 precision={0.5}
                                 size="large"
                                 icon={<FavoriteIcon
-                                    color="secondary"
+                                    color="error"
                                     fontSize="inherit"
                                     sx={{
                                         width: '48px',
@@ -909,7 +909,7 @@ export default function StylePreferences() {
                                 precision={0.5}
                                 size="large"
                                 icon={<FavoriteIcon
-                                    color="secondary"
+                                    color="error"
                                     fontSize="inherit"
                                     sx={{
                                         width: '48px',

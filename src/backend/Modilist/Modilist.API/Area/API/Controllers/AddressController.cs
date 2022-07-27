@@ -24,7 +24,7 @@ namespace Modilist.API.Area.API.Controllers
             _addressService = addressService;
         }
 
-        [Authorize(nameof(AuthorizationPermissions.GetAddress))]
+        [Authorize(nameof(AuthorizationPermissions.Addresses))]
         [HttpGet("GetCities")]
         [ProducesResponseType(typeof(IEnumerable<City>), 200)]
         public IActionResult GetCities()
@@ -32,7 +32,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(_addressService.GetCities());
         }
 
-        [Authorize(nameof(AuthorizationPermissions.GetAddress))]
+        [Authorize(nameof(AuthorizationPermissions.Addresses))]
         [HttpGet("GetDistricts/{cityCode}")]
         [ProducesResponseType(typeof(IEnumerable<District>), 200)]
         public IActionResult GetDistricts(string cityCode)
@@ -40,34 +40,47 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(_addressService.GetDistricts(cityCode));
         }
 
-        [Authorize(nameof(AuthorizationPermissions.GetAddress))]
-        [HttpGet("GetDefault")]
-        [ProducesResponseType(typeof(AddressDTO), 200)]
-        public async Task<IActionResult> GetDefault()
+        [Authorize(nameof(AuthorizationPermissions.Addresses))]
+        [HttpGet("GetAll")]
+        [ProducesResponseType(typeof(IEnumerable<AddressDTO>), 200)]
+        public async Task<IActionResult> GetAll()
         {
-            var account = await _mediator.Send(new GetDefaultAddress
+            var response = await _mediator.Send(new GetAllAddresses
             {
                 AccountId = User.GetUserId()
             });
 
-            return Ok(account);
+            return Ok(response);
         }
 
-        [Authorize(nameof(AuthorizationPermissions.GetAddress))]
+        [Authorize(nameof(AuthorizationPermissions.Addresses))]
+        [HttpGet("GetDefault")]
+        [ProducesResponseType(typeof(AddressDTO), 200)]
+        public async Task<IActionResult> GetDefault()
+        {
+            var defaultAddress = await _mediator.Send(new GetDefaultAddress
+            {
+                AccountId = User.GetUserId()
+            });
+
+            return Ok(defaultAddress);
+        }
+
+        [Authorize(nameof(AuthorizationPermissions.Addresses))]
         [HttpGet("Get/{id}")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
         public async Task<IActionResult> Get(int id, CancellationToken cancellationToken)
         {
-            var account = await _mediator.Send(new GetAddress
+            var address = await _mediator.Send(new GetAddress
             {
                 Id = id,
                 AccountId = User.GetUserId()
             }, cancellationToken);
 
-            return Ok(account);
+            return Ok(address);
         }
 
-        [Authorize(nameof(AuthorizationPermissions.CreateAddress))]
+        [Authorize(nameof(AuthorizationPermissions.Addresses))]
         [HttpPost("Create")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
         public async Task<IActionResult> Create(CreateAddress input, CancellationToken cancellationToken)
@@ -79,7 +92,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [Authorize(nameof(AuthorizationPermissions.UpdateAddress))]
+        [Authorize(nameof(AuthorizationPermissions.Addresses))]
         [HttpPost("Update/{name}")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
         public async Task<IActionResult> Update(string name, UpdateAddress input, CancellationToken cancellationToken)
@@ -92,7 +105,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [Authorize(nameof(AuthorizationPermissions.UpdateAddress))]
+        [Authorize(nameof(AuthorizationPermissions.Addresses))]
         [HttpPost("Upsert/{name}")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
         public async Task<IActionResult> Upsert(string name, UpsertAddress input, CancellationToken cancellationToken)

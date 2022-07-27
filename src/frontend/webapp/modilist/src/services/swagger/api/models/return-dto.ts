@@ -42,4 +42,10 @@ export interface ReturnDTO {
      * @memberof ReturnDTO
      */
     cargoTrackingCode?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof ReturnDTO
+     */
+    requestedPickupDate?: Date;
 }

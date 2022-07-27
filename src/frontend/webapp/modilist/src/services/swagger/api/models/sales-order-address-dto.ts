@@ -19,6 +19,12 @@
 export interface SalesOrderAddressDTO {
     /**
      * 
+     * @type {number}
+     * @memberof SalesOrderAddressDTO
+     */
+    id?: number;
+    /**
+     * 
      * @type {string}
      * @memberof SalesOrderAddressDTO
      */
@@ -46,7 +52,7 @@ export interface SalesOrderAddressDTO {
      * @type {string}
      * @memberof SalesOrderAddressDTO
      */
-    zipCode?: string | null;
+    zipCode?: string;
     /**
      * 
      * @type {string}

@@ -20,7 +20,7 @@ namespace Modilist.API.Area.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(nameof(AuthorizationPermissions.GetSizeInfo))]
+        [Authorize(nameof(AuthorizationPermissions.StylePreferences))]
         [HttpGet("Get")]
         [ProducesResponseType(typeof(SizeInfoDTO), 200)]
         public async Task<IActionResult> Get()
@@ -30,7 +30,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [Authorize(nameof(AuthorizationPermissions.UpsertSizeInfo))]
+        [Authorize(nameof(AuthorizationPermissions.StylePreferences))]
         [HttpPost("Upsert")]
         [ProducesResponseType(typeof(SizeInfoDTO), 200)]
         public async Task<IActionResult> Upsert(UpsertSizeInfo input, CancellationToken cancellationToken)

@@ -20,7 +20,7 @@ namespace Modilist.API.Area.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(nameof(AuthorizationPermissions.GetPaymentMethod))]
+        [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
         [HttpPost("GetDefault")]
         [ProducesResponseType(typeof(PaymentMethodDTO), 200)]
         public async Task<IActionResult> GetDefault(CancellationToken cancellationToken)
@@ -33,7 +33,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [Authorize(nameof(AuthorizationPermissions.CreatePaymentMethod))]
+        [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
         [HttpPost("Create")]
         [ProducesResponseType(typeof(PaymentMethodDTO), 200)]
         public async Task<IActionResult> Create(CreatePaymentMethod input, CancellationToken cancellationToken)

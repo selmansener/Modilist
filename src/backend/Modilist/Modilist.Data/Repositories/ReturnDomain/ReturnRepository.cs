@@ -21,7 +21,9 @@ namespace Modilist.Data.Repositories.ReturnDomain
 
         public async Task<Return?> GetBySalesOrderAsync(Guid accountId, int salesOrderId, CancellationToken cancellationToken)
         {
-            return await GetAll().FirstOrDefaultAsync(x => x.AccountId == accountId && x.SalesOrderId == salesOrderId, cancellationToken);
+            return await GetAll()
+                .Include(x => x.ReturnAddress)
+                .FirstOrDefaultAsync(x => x.AccountId == accountId && x.SalesOrderId == salesOrderId, cancellationToken);
         }
     }
 }

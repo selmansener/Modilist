@@ -82,6 +82,8 @@ namespace Modilist.Business.Seed
                 await _dbContext.SaveChangesAsync(cancellationToken);
 
                 await _dbContext.Database.CommitTransactionAsync(cancellationToken);
+
+                _seedCache.UpdateSeedCacheData();
             }
             catch (Exception ex)
             {

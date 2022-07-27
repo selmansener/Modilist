@@ -8,5 +8,6 @@
         StylePreferences = 3,
         Product = 4,
         SalesOrders = 5,
+        Addresses = 6,
     }
 }

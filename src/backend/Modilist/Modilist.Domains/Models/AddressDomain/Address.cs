@@ -6,6 +6,8 @@ namespace Modilist.Domains.Models.AddressDomain
 {
     public class Address : BaseEntity
     {
+        protected Address() { }
+
         public Address(
             Guid accountId,
             string name,

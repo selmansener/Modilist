@@ -53,7 +53,7 @@ namespace Modilist.Business.CQRS.ReturnDomain.Commands
         {
             Return? @return = await _returnRepository.GetBySalesOrderAsync(request.AccountId, request.SalesOrderId, cancellationToken);
 
-            if (@return == null)
+            if (@return != null)
             {
                 throw new ReturnAlreadyExistsException(request.AccountId, request.SalesOrderId);
             }

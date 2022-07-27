@@ -1,4 +1,11 @@
 {
+    "Components": {
+        "AddressSelection": {
+            "Title": "Adresi Değiştir",
+            "CloseButton": "Kapat",
+            "Select": "Seç >"
+        }
+    },
     "Layouts": {
         "Welcome": {
             "WelcomeLayout": {
@@ -328,9 +335,12 @@
         },
         "Checkout": {
             "Title": "Sipariş Ref. No:",
+            "SelectReturnDate": "İade Tarihi",
+            "EstimatedPickupDate": "İade edilen ürünleri {{date}} tarihinde alacağız.",
             "ReturnDate": "İade ürünleri içeren paketini ne zaman teslim almamızı istersin.",
             "ReturnAddress": "İadenin teslim alınacağı adres",
             "ChangeReturnAddress": "Kayıtlı Adreslerim >",
+            "ChangeReturnAddressModal": "İadenizin teslim alınacağı adresi seçiniz.",
             "PaymentMethod": "Ödeme Yöntemi",
             "IyzicoInfo": "Kredi kartı bilgilerin iyzico güvencesiyle korunmaktadır.",
             "DiscountTitle": "Promosyonlar",

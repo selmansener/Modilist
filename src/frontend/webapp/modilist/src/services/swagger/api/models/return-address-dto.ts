@@ -19,6 +19,12 @@
 export interface ReturnAddressDTO {
     /**
      * 
+     * @type {number}
+     * @memberof ReturnAddressDTO
+     */
+    id?: number;
+    /**
+     * 
      * @type {string}
      * @memberof ReturnAddressDTO
      */
@@ -46,7 +52,7 @@ export interface ReturnAddressDTO {
      * @type {string}
      * @memberof ReturnAddressDTO
      */
-    zipCode?: string | null;
+    zipCode?: string;
     /**
      * 
      * @type {string}

@@ -15,10 +15,11 @@ export interface LineItemFeedbackProps {
     lineItemFeedback: LineItemFeedbackDTO;
     salesOrderId: number;
     lineItemId: number;
+    disabled?: boolean;
 }
 
 export function LineItemFeedback(props: LineItemFeedbackProps) {
-    const { product, state, lineItemFeedback, lineItemId, salesOrderId } = props;
+    const { product, state, lineItemFeedback, lineItemId, salesOrderId, disabled } = props;
     const { t } = useTranslation();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -78,14 +79,14 @@ export function LineItemFeedback(props: LineItemFeedbackProps) {
                         precision={0.5} />
                 </Grid>
                 <Grid item xs={6}>
-                    <Link sx={{
+                    {!disabled && <Link sx={{
                         textDecorationLine: 'none',
                         cursor: 'pointer'
                     }} onClick={handleClickOpen}>
                         <Typography variant="body1" color="secondary" align="right">
                             {t("Pages.SalesOrderFeedback.Evaluate")}
                         </Typography>
-                    </Link>
+                    </Link>}
                 </Grid>
             </React.Fragment>
         )

@@ -20,7 +20,7 @@ namespace Modilist.API.Area.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(nameof(AuthorizationPermissions.GetSubscriptions))]
+        [Authorize(nameof(AuthorizationPermissions.Subscriptions))]
         [HttpGet("Get")]
         [ProducesResponseType(typeof(SubscriptionDTO), 200)]
         public async Task<IActionResult> Get(CancellationToken cancellationToken)
@@ -34,7 +34,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
 
-        [Authorize(nameof(AuthorizationPermissions.CreateSubscriptions))]
+        [Authorize(nameof(AuthorizationPermissions.Subscriptions))]
         [HttpPost("Create")]
         [ProducesResponseType(typeof(SubscriptionDTO), 200)]
         public async Task<IActionResult> Create(CancellationToken cancellationToken)
@@ -48,7 +48,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
 
-        [Authorize(nameof(AuthorizationPermissions.UpdateSubscriptions))]
+        [Authorize(nameof(AuthorizationPermissions.Subscriptions))]
         [HttpPost("UpdateMaxPricingLimit")]
         [ProducesResponseType(typeof(SubscriptionDTO), 200)]
         public async Task<IActionResult> UpdateMaxPricingLimit(UpdateSubscriptionMaxPricingLimit input, CancellationToken cancellationToken)

@@ -20,7 +20,7 @@ namespace Modilist.API.Area.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(nameof(AuthorizationPermissions.GetFitPreferences))]
+        [Authorize(nameof(AuthorizationPermissions.StylePreferences))]
         [HttpGet("Get")]
         [ProducesResponseType(typeof(FitPreferencesDTO), 200)]
         public async Task<IActionResult> Get()
@@ -30,7 +30,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [Authorize(nameof(AuthorizationPermissions.UpsertFitPreferences))]
+        [Authorize(nameof(AuthorizationPermissions.StylePreferences))]
         [HttpPost("Upsert")]
         [ProducesResponseType(typeof(FitPreferencesDTO), 200)]
         public async Task<IActionResult> Upsert(UpsertFitPreferences input, CancellationToken cancellationToken)

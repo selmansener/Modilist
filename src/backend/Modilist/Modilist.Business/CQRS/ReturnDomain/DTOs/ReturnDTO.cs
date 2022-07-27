@@ -15,5 +15,7 @@ namespace Modilist.Business.CQRS.ReturnDomain.DTOs
         public ReturnAddressDTO ReturnAddress { get; set; }
 
         public string CargoTrackingCode { get; set; }
+
+        public DateTime RequestedPickupDate { get; set; }
     }
 }

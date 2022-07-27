@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.13.0" />
     <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="EFCoreAutoMigrator" Version="1.0.5" />
     <PackageReference Include="Iyzipay" Version="2.1.39" />
@@ -32,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Modilist.Business.Utils\Modilist.Business.Utils.csproj" />
     <ProjectReference Include="..\Modilist.Data\Modilist.Data.csproj" />
+    <ProjectReference Include="..\Modilist.Infrastructure.Azure.Extensions\Modilist.Infrastructure.Azure.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

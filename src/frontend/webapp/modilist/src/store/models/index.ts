@@ -3,6 +3,7 @@ import { Models } from "@rematch/core"
 import { citiesModel } from "./addresses/Cities"
 import { createAddressModel } from "./addresses/CreateAddress"
 import { districtsModel } from "./addresses/Districts"
+import { getAllAddressesModel } from "./addresses/GetAllAddresses"
 import { getDefaultAddressModel } from "./addresses/GetDefaultAddress"
 import { updateAddressModel } from "./addresses/UpdateAddress"
 import { upsertAddressModel } from "./addresses/UpsertAddress"
@@ -45,6 +46,7 @@ export interface RootModel extends Models<RootModel> {
   createAddressModel: typeof createAddressModel,
   updateAddressModel: typeof updateAddressModel,
   upsertAddressModel: typeof upsertAddressModel,
+  getAllAddressesModel: typeof getAllAddressesModel,
   citiesModel: typeof citiesModel,
   districtsModel: typeof districtsModel,
   getSizeInfoModel: typeof getSizeInfoModel,
@@ -80,6 +82,7 @@ export const models: RootModel = {
   createAddressModel,
   updateAddressModel,
   upsertAddressModel,
+  getAllAddressesModel,
   citiesModel,
   districtsModel,
   getSizeInfoModel,

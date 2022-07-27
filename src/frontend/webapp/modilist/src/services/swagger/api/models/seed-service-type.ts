@@ -22,6 +22,7 @@ export enum SeedServiceType {
     Users = 'Users',
     StylePreferences = 'StylePreferences',
     Product = 'Product',
-    SalesOrders = 'SalesOrders'
+    SalesOrders = 'SalesOrders',
+    Addresses = 'Addresses'
 }
 
