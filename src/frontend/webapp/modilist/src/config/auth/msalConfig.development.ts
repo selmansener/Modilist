@@ -19,7 +19,7 @@ export const apiConfig: ApiConfig = {
         "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders",
         "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Returns",
     ],
-    webApi: "http://localhost:5088"
+    webApi: "https://localhost:5088"
 };
 
 export const b2cPolicies = {

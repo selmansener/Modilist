@@ -7,6 +7,7 @@ import { getAllAddressesModel } from "./addresses/GetAllAddresses"
 import { getDefaultAddressModel } from "./addresses/GetDefaultAddress"
 import { updateAddressModel } from "./addresses/UpdateAddress"
 import { upsertAddressModel } from "./addresses/UpsertAddress"
+import { getBlogMetaDataModel } from "./blog/GetBlogMetaData"
 import { getPreferedFabricPropertiesModel } from "./fabricProperties/GetFabricProperties"
 import { upsertPreferedFabricPropertiesModel } from "./fabricProperties/UpsertFabricProperties"
 import { getFitPreferencesModel } from "./fitPreferences/GetFitPreferences"
@@ -68,6 +69,7 @@ export interface RootModel extends Models<RootModel> {
   getDefaultPaymentMethodModel: typeof getDefaultPaymentMethodModel,
   getReturnModel: typeof getReturnModel,
   createReturnModel: typeof createReturnModel,
+  getBlogMetaDataModel: typeof getBlogMetaDataModel,
 }
 
 export const models: RootModel = {
@@ -104,4 +106,5 @@ export const models: RootModel = {
   getDefaultPaymentMethodModel,
   getReturnModel,
   createReturnModel,
+  getBlogMetaDataModel,
 }

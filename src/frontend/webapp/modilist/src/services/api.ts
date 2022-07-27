@@ -1,4 +1,4 @@
-import { AccountApi, StylePreferencesApi, AddressApi, SizeInfoApi, PreferedFabricPropertiesApi, FitPreferencesApi, SubscriptionApi, PaymentMethodApi, SalesOrderApi, ReturnApi } from "./swagger/api";
+import { AccountApi, StylePreferencesApi, AddressApi, SizeInfoApi, PreferedFabricPropertiesApi, FitPreferencesApi, SubscriptionApi, PaymentMethodApi, SalesOrderApi, ReturnApi, BlogApi } from "./swagger/api";
 import axios from 'axios';
 import { InteractionRequiredAuthError, IPublicClientApplication } from "@azure/msal-browser";
 import { config } from "../config";
@@ -69,6 +69,7 @@ export function apiFactory(msal: IPublicClientApplication) {
         subscriptions: new SubscriptionApi(undefined, config.webApi, axios),
         paymentMethods: new PaymentMethodApi(undefined, config.webApi, axios),
         salesOrders: new SalesOrderApi(undefined, config.webApi, axios),
-        returns: new ReturnApi(undefined, config.webApi, axios)
+        returns: new ReturnApi(undefined, config.webApi, axios),
+        blog: new BlogApi(undefined, config.webApi, axios)
     }
 }

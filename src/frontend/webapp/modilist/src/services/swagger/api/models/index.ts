@@ -8,6 +8,7 @@ export * from './add-product-images-dto';
 export * from './add-sales-order-line-item';
 export * from './add-sales-order-line-item-dto';
 export * from './address-dto';
+export * from './blog-meta-data';
 export * from './body-type';
 export * from './city';
 export * from './create-account';

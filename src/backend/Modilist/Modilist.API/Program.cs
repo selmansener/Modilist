@@ -122,6 +122,8 @@ app.UseCors(CorsPolicyName);
 //    app.UseSwaggerUI(ConfigureSwaggerUI);
 //    app.UseStaticFiles();
 //}
+
+app.UseHttpsRedirection();
 app.UseSwagger();
 app.UseSwaggerUI(ConfigureSwaggerUI);
 app.UseStaticFiles();

@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { tr } from "date-fns/locale";
 import format from "date-fns/format";
 import addDays from "date-fns/addDays";
+import { BlogSection } from "./components/BlogSection";
 
 export function Main() {
     const theme = useTheme();
@@ -120,14 +121,15 @@ export function Main() {
                 </Grid>
             </Grid>
             <Grid item xs={6}>
-                <Paper sx={{
+                <BlogSection />
+                {/* <Paper sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: '480px'
                 }}>
                     <Typography variant="h1">BLOG</Typography>
-                </Paper>
+                </Paper> */}
             </Grid>
         </Grid>
     )
