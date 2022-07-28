@@ -126,7 +126,8 @@ namespace Modilist.Business.Seed.Services
                     card.CardFamily,
                     card.CardBankName,
                     card.CardBankCode,
-                    lastFourDigit);
+                    lastFourDigit,
+                    faker.Random.Int(min: 100, max: 999).ToString());
 
                 await _dbContext.PaymentMethods.AddAsync(paymentMethod, cancellationToken);
             }
