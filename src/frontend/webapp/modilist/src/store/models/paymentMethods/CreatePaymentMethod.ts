@@ -12,6 +12,7 @@ export const createPaymentMethodModel = createModel<RootModel>()({
             cardNumber: "",
             expireMonth: "",
             expireYear: "",
+            cvc: ""
         },
         status: 0
     } as ResponseModel<PaymentMethodDTO>,

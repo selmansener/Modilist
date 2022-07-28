@@ -35,6 +35,8 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
         public string ExpireYear { get; set; }
 
+        public string CVC { get; set; }
+
         public bool IsDefault { get; set; }
     }
 
@@ -47,6 +49,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
             RuleFor(x => x.CardHolderName).NotEmpty();
             RuleFor(x => x.ExpireMonth).NotEmpty();
             RuleFor(x => x.ExpireYear).NotEmpty();
+            RuleFor(x => x.CVC).NotEmpty();
         }
     }
 
@@ -95,7 +98,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
                 CardHolderName = request.CardHolderName,
                 CardNumber = request.CardNumber,
                 ExpireMonth = request.ExpireMonth,
-                ExpireYear = request.ExpireYear
+                ExpireYear = request.ExpireYear,
             };
 
             cardRequest.Card = cardInformation;
@@ -117,7 +120,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
                 var lastFourDigit = request.CardNumber.Substring(request.CardNumber.Length - 4, 4);
 
-                paymentMethod.UpdateCardInfo(card.CardUserKey, card.CardAssociation, card.CardFamily, card.CardBankName, card.CardBankCode, lastFourDigit);
+                paymentMethod.UpdateCardInfo(card.CardUserKey, card.CardAssociation, card.CardFamily, card.CardBankName, card.CardBankCode, lastFourDigit, request.CVC);
 
                 await _paymentMethodRepository.UpdateAsync(paymentMethod, cancellationToken);
             }

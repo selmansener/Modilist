@@ -264,6 +264,11 @@
                     "2": "kesinlikle olmasını istemediğiniz ",
                     "3": "renk tonlarını seçiniz."
                 },
+                "ExcludedAccessoryColors": {
+                    "1": "Kombinlerinizde ",
+                    "2": "kesinlikle olmasını istemediğiniz ",
+                    "3": "aksesuar rengi"
+                },
                 "ExcludedPatterns": {
                     "1": "Kombinlerinizde ",
                     "2": "kesinlikle olmasını istemediğiniz ",
@@ -330,7 +335,13 @@
                 "CardHolderName": "Kart Üzerindeki İsim",
                 "CardNumber": "Kart Numarası",
                 "ExpireMonth": "Son Kullanma Tarihi (Ay)",
-                "ExpireYear": "Son Kullanma Tarihi (Yıl)"
+                "ExpireYear": "Son Kullanma Tarihi (Yıl)",
+                "MonthTwoDigits": "Lütfen iki haneli olarak giriniz",
+                "MonthValidation": "Lütfen geçerli bir ay giriniz",
+                "YearTwoDigits": "Lütfen yılı iki haneli olarak giriniz",
+                "YearValidation": "Lütfen geçerli bir yıl giriniz",
+                "CvcValidation": "Lütfen geçerli bir CVC giriniz",
+                "CardHolderNameValidation": "Lütfen sayı kullanmadan geçerli bir isim giriniz"
             }
         },
         "Checkout": {

@@ -30,6 +30,8 @@ namespace Modilist.Domains.Models.PaymentDomain
 
         public string? LastFourDigit { get; private set; }
 
+        public string? CVC { get; private set; }
+
         public bool IsDefault { get; private set; }
 
         public void ChangeDefault(bool isDefault)
@@ -37,7 +39,7 @@ namespace Modilist.Domains.Models.PaymentDomain
             IsDefault = isDefault;
         }
 
-        public void UpdateCardInfo(string cardUserKey, string cardAssociation, string cardFamily, string cardBankName, long? cardBankCode, string lastFourDigit)
+        public void UpdateCardInfo(string cardUserKey, string cardAssociation, string cardFamily, string cardBankName, long? cardBankCode, string lastFourDigit, string? cvc)
         {
             CardUserKey = cardUserKey;
             CardAssociation = cardAssociation;
@@ -45,7 +47,7 @@ namespace Modilist.Domains.Models.PaymentDomain
             CardBankName = cardBankName;
             CardBankCode = cardBankCode;
             LastFourDigit = lastFourDigit;
-
+            CVC = cvc;
 
             var validator = new PaymentMethodCardInfoValidator();
 
@@ -62,6 +64,7 @@ namespace Modilist.Domains.Models.PaymentDomain
             RuleFor(x => x.CardFamily).NotEmpty();
             RuleFor(x => x.CardBankName).NotEmpty();
             RuleFor(x => x.LastFourDigit).NotEmpty();
+            RuleFor(x => x.CVC).NotEmpty();
         }
     }
 }
