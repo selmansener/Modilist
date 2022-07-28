@@ -10,6 +10,10 @@
 
         public string BlogUrl { get; set; }
 
+        public int ViewCount { get; set; }
+
+        public int LikeCount { get; set; }
+
         public DateTime PublishedDate { get; set; }
     }
 }

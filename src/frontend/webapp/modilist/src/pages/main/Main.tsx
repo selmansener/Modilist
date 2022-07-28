@@ -121,15 +121,11 @@ export function Main() {
                 </Grid>
             </Grid>
             <Grid item xs={6}>
-                <BlogSection />
-                {/* <Paper sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '480px'
+                <Paper sx={{
+                    p: 2
                 }}>
-                    <Typography variant="h1">BLOG</Typography>
-                </Paper> */}
+                    <BlogSection />
+                </Paper>
             </Grid>
         </Grid>
     )

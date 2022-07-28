@@ -26,9 +26,9 @@ namespace Modilist.API.Area.API.Controllers
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(":method:", "GET");
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(":path:", "/_functions/blogContent");
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(":schema:", "https");
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("user-agent", "Dotnet");
 
                 var resp = await httpClient.GetAsync("https://www.modilist.com/_functions/blogContent", cancellationToken);
-                var test = resp.Content.ReadAsStreamAsync(cancellationToken);
                 var content = await resp.Content.ReadAsStringAsync(cancellationToken);
 
                 return Ok(content);

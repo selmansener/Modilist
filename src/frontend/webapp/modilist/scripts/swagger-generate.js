@@ -20,7 +20,7 @@ const fixStrictCheckIssue = (fileName, content) => {
 
 const child = spawn("java", ["-jar",
     "src/services/swagger/swagger-codegen-cli.jar",
-    "generate", "-i", "http://localhost:5088/swagger/v1/swagger.json", "-l", "typescript-axios", "-o", path.resolve(__dirname, "../src/services/swagger/api")], {
+    "generate", "-i", "https://localhost:5088/swagger/v1/swagger.json", "-l", "typescript-axios", "-o", path.resolve(__dirname, "../src/services/swagger/api"), "-Dio.swagger.parser.util.RemoteUrl.trustAll=true", "-Dio.swagger.v3.parser.util.RemoteUrl.trustAll=true"], {
     env: process.env,
     shell: false,
     stdio: 'inherit'

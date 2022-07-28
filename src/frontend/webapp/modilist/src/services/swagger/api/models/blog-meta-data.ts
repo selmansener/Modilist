@@ -43,6 +43,18 @@ export interface BlogMetaData {
     blogUrl?: string;
     /**
      * 
+     * @type {number}
+     * @memberof BlogMetaData
+     */
+    viewCount?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BlogMetaData
+     */
+    likeCount?: number;
+    /**
+     * 
      * @type {Date}
      * @memberof BlogMetaData
      */
