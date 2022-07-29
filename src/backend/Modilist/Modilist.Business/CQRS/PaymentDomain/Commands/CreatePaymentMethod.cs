@@ -96,7 +96,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
             {
                 CardAlias = account.Email,
                 CardHolderName = request.CardHolderName,
-                CardNumber = request.CardNumber,
+                CardNumber = request.CardNumber.Replace(" ", string.Empty),
                 ExpireMonth = request.ExpireMonth,
                 ExpireYear = request.ExpireYear,
             };
