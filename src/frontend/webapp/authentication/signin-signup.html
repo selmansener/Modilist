@@ -7,16 +7,34 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="https://stmodilistsharedwesteu.blob.core.windows.net/img/common/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
     html {
       height: 100%;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
+      background-color: rgba(150, 141, 179, 0.2);
       display: flex;
       flex-direction: column;
       margin: 0;
       height: 100%;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px #968DB3;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2F2244;
     }
 
     .root {
@@ -32,72 +50,92 @@
       align-items: center;
       justify-content: center;
       align-self: stretch;
-      height: 1020px;
+      background-image: linear-gradient(rgba(150, 141, 179, 0.8), rgba(150, 141, 179, 0.8)), url("https://stmodilistsharedwesteu.blob.core.windows.net/img/common/auth-form-background.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      overflow: auto;
     }
 
     .panel {
       width: 490px;
       padding: 50px;
-      background-color: #06273a;
       color: #fffef8;
       align-self: stretch;
     }
 
     .companyLogo {
-      width: 100%;
+      width: 50%;
     }
 
     .heading h1 {
       text-align: center;
     }
 
-    .divider {
+    .divider h2 {
       display: none;
     }
 
-    .social button {
-      width: 100%;
+    .divider {
+      border-top: 1px solid #2F2244;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .social .options {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+    .social .accountButton.claims-provider-selection {
+      width: 48px;
+      height: 48px;
       margin-top: 10px;
-      padding: 15px;
       margin-left: auto;
       margin-right: auto;
       display: block;
-      background-color: #fffef8;
-      border: 2px solid #5c5c5c;
-      border-radius: 5px;
+      background-color: #2F2244;
+      border: none;
+      border-radius: 50%;
+      color: #fff;
 
-      background-position: left;
+      background-position: center;
       background-repeat: no-repeat;
-      background-position-x: 3%;
-      background-position-y: 50%;
-      transition: background 250ms ease-in-out, transform 150ms;
+      background-size: 50%;
+      transition: 'background-color' 250ms ease-in-out, transform 150ms;
       outline: none;
 
       cursor: pointer;
+
+      text-indent: 1000%;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     #FacebookExchange {
-      background-image: url(https://stazureb2c.blob.core.windows.net/authentacation-pages/images/facebook.svg);
-      background-size: 20% 90%;
+      background-image: url(https://stmodilistsharedwesteu.blob.core.windows.net/img/common/facebook-white.png);
     }
 
     #FacebookExchange:hover {
-      background-color: #3b5595;
-      color: #ffffff;
+      background-color: #2f2244d2;
     }
 
     #GoogleExchange {
-      background-image: url(https://stazureb2c.blob.core.windows.net/authentacation-pages/images/google.svg);
-      background-size: 20% 60%;
+      background-image: url(https://stmodilistsharedwesteu.blob.core.windows.net/img/common/google-white.png);
     }
 
     #GoogleExchange:hover {
-      background-color: #c64a29;
-      color: #ffffff;
+      background-color: #2f2244d2;
     }
 
     button:active {
       transform: scale(0.99);
+    }
+
+    #localAccountForm .entry {
+      display: flex;
+      flex-direction: column;
     }
 
     .entry-item {
@@ -107,21 +145,21 @@
 
     .entry-item input {
       outline: none;
-      border: 2px solid #5c5c5c;
+      border: 2px solid #968DB3;
       border-radius: 5px;
       font-size: 1em;
       height: 50px;
       line-height: 1.42857143;
-      padding: 6px 20px;
+      padding: 6px 12px;
       margin-top: 10px;
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: calc(100% - 40px);
+      width: calc(100% - 28px);
     }
 
     .entry-item input:focus {
-      border: 2px solid #000;
+      border: 2px solid #968db3d3;
     }
 
     .entry-item label {
@@ -130,21 +168,34 @@
 
     .password-label,
     .rememberMe {
-      text-align: right;
       margin-top: 10px;
     }
 
+    .rememberMe {
+      text-align: center;
+    }
+
+    .password-label {
+      text-align: left;
+    }
+
     .password-label a {
-      color: #ffffff;
+      color: #2F2244;
+      text-decoration: none;
+    }
+
+    .entry .rememberMe {
+      order: 3;
     }
 
     .buttons {
-      text-align: right;
+      text-align: center;
     }
 
     .buttons #next {
-      width: 200px;
-      background-color: #ffffff;
+      color: #fff;
+      width: 100%;
+      background-color: #2F2244;
       border: none;
       border-radius: 0.5rem;
       cursor: pointer;
@@ -159,34 +210,77 @@
       margin-left: 0;
       padding: 10px 16px;
       text-align: center;
+      font-weight: 800;
     }
 
     .create,
     .create a {
-      color: #ffffff;
-      text-align: right;
+      text-align: center;
     }
 
     .create a {
+      color: #2F2244;
+      font-weight: 800;
+      text-decoration: none;
       padding-left: 5px;
     }
 
     .left {
       flex-grow: 1;
       align-self: stretch;
-      background-image: url(https://stazureb2c.blob.core.windows.net/authentacation-pages/images/left.jpg);
-      background-size: cover;
-      background-position-x: 30%;
-      height: 1020px;
+      /* height: 1020px; */
+      background-color: rgba(150, 141, 179, 0.2);
+      justify-content: flex-start;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
     }
 
-    .right {
-      flex-grow: 1;
-      align-self: stretch;
-      background-image: url(https://stazureb2c.blob.core.windows.net/authentacation-pages/images/right.jpg);
-      background-size: cover;
-      background-position-x: 30%;
-      height: 1020px;
+    .top {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .bottom {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    #api {
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 24px;
+      border-radius: 8px;
+      color: #2F2244;
+    }
+
+    .intro {
+      display: none;
+    }
+
+    .claims-provider-list-buttons.social {
+      order: 3;
+    }
+
+    @media only screen and (max-width : 1364px) {
+      .left {
+        display: none;
+      }
+
+      .container {
+        width: 100%;
+      }
+
+      .root {
+        width: 100%;
+      }
+    }
+
+    .error {
+      color: #F08279;
     }
   </style>
 </head>
@@ -194,16 +288,23 @@
 <body>
   <div class="root">
     <div class="left">
+      <div class="top">
+        <img class="companyLogo" data-tenant-branding-logo="true"
+          src="https://stmodilistsharedwesteu.blob.core.windows.net/img/logo/svg/originalhorizontallogoslogan.svg"
+          alt="Company Logo">
+      </div>
+      <div class="bottom">
+        <img src="https://stmodilistsharedwesteu.blob.core.windows.net/img/gender/female.svg" alt="Female">
+        <img src="https://stmodilistsharedwesteu.blob.core.windows.net/img/gender/male.svg" alt="Male">
+      </div>
     </div>
     <div class="container">
       <div class="panel">
-        <img class="companyLogo" data-tenant-branding-logo="true"
-          src="https://stazureb2c.blob.core.windows.net/authentacation-pages/images/logo.svg" alt="Company Logo">
+        <h1 style="text-align: center;">Merhaba</h1>
+        <p style="text-align: center;">Stilini keşfedip modaya uygun giyinmek istiyorsan;</p>
         <div id="api" role="main">
         </div>
       </div>
-    </div>
-    <div class="right">
     </div>
   </div>
 </body>
