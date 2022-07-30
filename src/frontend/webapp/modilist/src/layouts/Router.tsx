@@ -75,7 +75,9 @@ const routes: RouterOptions[] = [
     title: "Pages.Titles.Main",
     route: "/",
     menuItem: {
-      icon: <HomeIcon />,
+      icon: <HomeIcon sx={{
+        verticalAlign: "sub"
+      }} />,
       name: "Pages.Titles.Main"
     },
     component: <Main />,
@@ -87,7 +89,9 @@ const routes: RouterOptions[] = [
     title: "Pages.Titles.SalesOrders",
     route: "/sales-orders",
     menuItem: {
-      icon: <ShoppingBasketIcon />,
+      icon: <ShoppingBasketIcon sx={{
+        verticalAlign: "sub"
+      }} />,
       name: "Pages.Titles.SalesOrders"
     },
     component: <SalesOrders />,
@@ -115,7 +119,9 @@ const routes: RouterOptions[] = [
     title: "Pages.Titles.SizeInfo",
     route: "/size-info",
     menuItem: {
-      icon: <BoyIcon />,
+      icon: <BoyIcon sx={{
+        verticalAlign: "sub"
+      }}/>,
       name: "Pages.Titles.SizeInfo"
     },
     layout: "dashboard",
@@ -127,7 +133,9 @@ const routes: RouterOptions[] = [
     title: "Pages.Titles.StylePreferences",
     route: "/style-preferences",
     menuItem: {
-      icon: <BoyIcon />,
+      icon: <BoyIcon sx={{
+        verticalAlign: "sub"
+      }}/>,
       name: "Pages.Titles.StylePreferences"
     },
     layout: "dashboard",
@@ -139,7 +147,9 @@ const routes: RouterOptions[] = [
     title: "Pages.Titles.FitPreferences",
     route: "/fit-preferences",
     menuItem: {
-      icon: <BoyIcon />,
+      icon: <BoyIcon sx={{
+        verticalAlign: "sub"
+      }}/>,
       name: "Pages.Titles.FitPreferences"
     },
     layout: "dashboard",
@@ -149,9 +159,11 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.FabricProperties",
-    route: "/fit-preferences",
+    route: "/fabric-properties",
     menuItem: {
-      icon: <BoyIcon />,
+      icon: <BoyIcon sx={{
+        verticalAlign: "sub"
+      }}/>,
       name: "Pages.Titles.FabricProperties"
     },
     layout: "dashboard",
@@ -171,7 +183,9 @@ const routes: RouterOptions[] = [
     title: "Kayıtlı Kartlarım",
     route: "/payment-methods",
     menuItem: {
-      icon: <PaymentIcon />,
+      icon: <PaymentIcon sx={{
+        verticalAlign: "sub"
+      }}/>,
       name: "Kayıtlı Kartlarım"
     },
     layout: "dashboard",
@@ -183,7 +197,9 @@ const routes: RouterOptions[] = [
     title: "Adreslerim",
     route: "/addresses",
     menuItem: {
-      icon: <LocationOnIcon />,
+      icon: <LocationOnIcon sx={{
+        verticalAlign: "sub"
+      }}/>,
       name: "Adreslerim"
     },
     layout: "dashboard",
@@ -230,10 +246,6 @@ export interface RouterProps {
   isPublic: boolean;
   role?: string;
 }
-
-// export function RouterLink(params:type) {
-
-// }
 
 export function Router(props: RouterProps) {
   const { environment, isPublic, role } = props;

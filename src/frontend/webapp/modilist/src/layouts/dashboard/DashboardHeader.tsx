@@ -133,46 +133,49 @@ export function DashboardHeader(props: DashboardHeaderProps) {
             pr: '24px', // keep right padding when drawer closed
           }}
         >
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
-            sx={{
-              marginRight: '18px',
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
+          <Box>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
+              sx={{
+                marginRight: '18px',
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
           <Box sx={{
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             flexGrow: 1
           }}>
-            <ImageComponent width={100} src="/modilist-logo.png" />
+            <ImageComponent width={200} src="/whitehorizontallogo.svg" />
           </Box>
-          <Select
-            value={i18n.language}
-            onChange={handleLanguageChange}
-            sx={{ mr: 2, backgroundColor: "#fff" }}
-          >
-            {supportedLanguages.map(supportedLang => (
-              <MenuItem value={supportedLang.lang} key={supportedLang.lang}>
-                <img
-                  loading="lazy"
-                  width="20"
-                  src={`https://flagcdn.com/w20/${supportedLang.code}.png`}
-                  srcSet={`https://flagcdn.com/w40/${supportedLang.code}.png 2x`}
-                  alt={supportedLang.code}
-                />
-                <Typography variant="caption" sx={{ pl: 1 }}>
-                  {supportedLang.lang.toLocaleUpperCase()}
-                </Typography>
-              </MenuItem>
-            ))}
-          </Select>
-          <div>
+          <Box>
+
+            <Select
+              value={i18n.language}
+              onChange={handleLanguageChange}
+              sx={{ mr: 2, backgroundColor: "#fff" }}
+            >
+              {supportedLanguages.map(supportedLang => (
+                <MenuItem value={supportedLang.lang} key={supportedLang.lang}>
+                  <img
+                    loading="lazy"
+                    width="20"
+                    src={`https://flagcdn.com/w20/${supportedLang.code}.png`}
+                    srcSet={`https://flagcdn.com/w40/${supportedLang.code}.png 2x`}
+                    alt={supportedLang.code}
+                  />
+                  <Typography variant="caption" sx={{ pl: 1 }}>
+                    {supportedLang.lang.toLocaleUpperCase()}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Select>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -204,26 +207,26 @@ export function DashboardHeader(props: DashboardHeaderProps) {
               <MenuItem onClick={handleClose}>My account</MenuItem>
               <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
-          </div>
-          <NavLink to={"/settings"} style={{ color: "#fff" }}>
+            <NavLink to={"/settings"} style={{ color: "#fff" }}>
+              <IconButton
+                size="large"
+                aria-label="settings"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <SettingsIcon />
+              </IconButton>
+            </NavLink>
             <IconButton
               size="large"
-              aria-label="settings"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              aria-label="logout"
               color="inherit"
+              onClick={logout}
             >
-              <SettingsIcon />
+              <LogoutIcon />
             </IconButton>
-          </NavLink>
-          <IconButton
-            size="large"
-            aria-label="logout"
-            color="inherit"
-            onClick={logout}
-          >
-            <LogoutIcon />
-          </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

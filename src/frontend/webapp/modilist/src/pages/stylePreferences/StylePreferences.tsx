@@ -1,10 +1,11 @@
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+import { StylePreferences as WStylePreferences } from "../welcome/StylePreferences";
 
 export function StylePreferences() {
 
     return (
-        <>
-            <Typography variant="h1">Stil Tercihlerim</Typography>
-        </>
+        <Grid item container xs={12} spacing={2}>
+            <WStylePreferences />
+        </Grid>
     )
 }

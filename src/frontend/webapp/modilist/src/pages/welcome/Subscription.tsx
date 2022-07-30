@@ -8,7 +8,7 @@ import PaymentMethod from './subscriptionComponents/PaymentMethod';
 import Personal from './subscriptionComponents/Personal';
 import { SubscriptionDetails } from './subscriptionComponents/SubscriptionDetails';
 
-export default function Subscription() {
+export function Subscription() {
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
     const { isBusy: getAccountIsBusy } = useSelector((state: RootState) => state.getAccountModel);

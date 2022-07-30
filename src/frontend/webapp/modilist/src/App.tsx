@@ -118,6 +118,10 @@ const mdTheme = createTheme({
 
         ::-webkit-scrollbar-thumb {
           background: #2F2244;
+        },
+
+        a {
+          text-decoration: none;
         }
       `,
     }

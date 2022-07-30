@@ -1,4 +1,5 @@
-import { Box, Container, Grid, Typography } from "@mui/material"
+import { Box, Grid, Typography } from "@mui/material"
+import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 
 interface DashboardMainProps {
@@ -22,11 +23,14 @@ export function DashboardMain(props: React.PropsWithChildren<DashboardMainProps>
                 mb: 4
             }}
         >
+            <Helmet>
+                <title>{`${t(title)} | Modilist`}</title>
+            </Helmet>
             <Grid container spacing={2}>
                 {title !== "" && <Grid item xs={12}>
-                    <Typography variant="h4">
-                        {icon}
-                        {t(title)}
+                    {icon}
+                    <Typography variant="h4" component="span">
+                        &nbsp;{t(title)}
                     </Typography>
                 </Grid>}
                 <Grid item container xs={12} spacing={2}>

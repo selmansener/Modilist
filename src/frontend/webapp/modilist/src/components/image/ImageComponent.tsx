@@ -8,8 +8,8 @@ export interface ImageProps {
     alt?: string;
     asBackground?: boolean;
     sx?: SxProps<Theme>;
-    width?: number;
-    height?: number;
+    width?: string | number;
+    height?: string | number;
     onClick?: React.MouseEventHandler<HTMLImageElement>;
 }
 

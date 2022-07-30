@@ -67,6 +67,7 @@
     "react-credit-cards": "^0.8.3",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.0.0",
+    "react-helmet": "^6.1.0",
     "react-i18next": "^11.16.7",
     "react-imask": "^6.4.2",
     "react-redux": "^8.0.1",
@@ -171,5 +172,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@types/react-helmet": "^6.1.5"
   }
 }

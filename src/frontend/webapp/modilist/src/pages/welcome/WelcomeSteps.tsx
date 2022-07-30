@@ -4,14 +4,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 import { Trans, useTranslation } from "react-i18next";
-import SizeInfo from "./SizeInfo";
-import StylePreferences from "./StylePreferences";
-import Subscription from "./Subscription";
 import { FabricProperties } from "./FabricProperties";
 import { FitPreferences } from "./FitPreferences";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import Loading from "../../layouts/callback/Loading";
 import { useNavigate } from "react-router-dom";
+import { SizeInfo } from "./SizeInfo";
+import { StylePreferences } from "./StylePreferences";
+import { Subscription } from "./Subscription";
 
 const steps = [
     {

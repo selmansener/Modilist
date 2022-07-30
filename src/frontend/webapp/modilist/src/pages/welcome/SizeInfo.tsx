@@ -26,7 +26,7 @@ if (footWearSizes.length === 0) {
     footWearSizes = sizes;
 }
 
-export default function SizeInfo() {
+export function SizeInfo() {
     const { imgBaseHost } = config;
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();

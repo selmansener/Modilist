@@ -69,8 +69,14 @@
             "SalesOrderAddress": "Teslimat Adresi: ",
             "Details": "Devamı >",
             "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
-            "FirstOrderPromotion": "İlk Siparişinde 20 TL indirim",
-            "FriendshipPromotion": "Arkadaşını davet et 20 TL kazan!",
+            "FirstOrderPromotion": {
+                "1": "İlk Siparişinde",
+                "2": "20 TL indirim!"
+            },
+            "FriendshipPromotion": {
+                "1": "Arkadaşını davet et",
+                "2": "20 TL kazan!"
+            },
             "SendInvitation": "Davetiye Gönder"
         },
         "SalesOrders": {

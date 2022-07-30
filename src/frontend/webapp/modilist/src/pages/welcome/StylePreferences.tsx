@@ -30,7 +30,7 @@ interface ProductCategory {
     mainCategory: MainCategory
 }
 
-export default function StylePreferences() {
+export function StylePreferences() {
     const { t } = useTranslation();
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: getStylePreferencesIsBusy, data: getStylePreferences, status: getStylePreferencesStatus } = useSelector((state: RootState) => state.getStylePreferencesModel);

@@ -95,6 +95,7 @@ export function LineItemFeedback(props: LineItemFeedbackProps) {
     return (
         <Grid item container xs={12} spacing={2} sx={{
             border: 1,
+            borderRadius: 1,
             pr: 2,
             pb: 2,
         }}>
