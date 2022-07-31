@@ -20,8 +20,9 @@ jobs:
   - task: Npm@1
     displayName: 'Install Packages'
     inputs:
-      command: 'install'
+      command: 'custom'
       workingDir: 'src/frontend/webapp/modilist'
+      customCommand: 'install --force'
   - script: REACT_APP_ENV=staging node scripts/build.js
     displayName: Build
     name: build

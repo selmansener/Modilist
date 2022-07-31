@@ -2,12 +2,14 @@ import { LogLevel } from "@azure/msal-browser";
 
 export const apiConfig = {
     b2cScopes: [
-        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Accounts.Create",
-        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Accounts.Update",
-        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Accounts.Get",
-        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/StylePreferences.Create",
-        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/StylePreferences.Update",
-        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/StylePreferences.Get",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Accounts",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/StylePreferences",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Addresses",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/PaymentMethods",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Subscriptions",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Products",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/SalesOrders",
+        "https://modilistauth.onmicrosoft.com/ecf4b6c9-62d3-4f93-abc3-640ff5d0f6e8/Returns",
     ],
     webApi: "https://app-modilist-staging-westeu.azurewebsites.net"
 };
