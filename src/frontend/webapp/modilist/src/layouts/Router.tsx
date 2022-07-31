@@ -11,7 +11,6 @@ import { SizeInfo } from '../pages/sizeInfo/SizeInfo';
 import { StylePreferences } from '../pages/stylePreferences/StylePreferences';
 import { Environment } from '../config';
 import { Route, Routes } from 'react-router-dom';
-import Page from '../pages/Page';
 import Dashboard from './dashboard/DashboardLayout';
 import WelcomeLayout from './welcome/WelcomeLayout';
 import NotFound from './notFound/NotFound';
@@ -28,9 +27,14 @@ import { CheckoutCompleted } from '../pages/checkout/CheckoutCompleted';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { Grid, Typography } from '@mui/material';
+import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
+import CheckroomIcon from '@mui/icons-material/Checkroom';
+import StraightenIcon from '@mui/icons-material/Straighten';
+import GradientIcon from '@mui/icons-material/Gradient';
 
 interface RouterOptions {
-  title: string,
+  title?: string,
+  helmet: string,
   route: string,
   menuItem?: {
     icon: React.ReactNode;
@@ -48,7 +52,7 @@ interface RouterOptions {
 
 const routes: RouterOptions[] = [
   {
-    title: "Login",
+    helmet: "Login",
     route: "",
     component: <></>,
     layout: {
@@ -60,6 +64,7 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.Main",
+    helmet: "Pages.Titles.Main",
     route: "",
     menuItem: {
       icon: <HomeIcon sx={{
@@ -79,6 +84,7 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.SalesOrders",
+    helmet: "Pages.Titles.SalesOrders",
     route: "sales-orders",
     menuItem: {
       icon: <ShoppingBasketIcon sx={{
@@ -98,6 +104,7 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.SalesOrders",
+    helmet: "Pages.Titles.SalesOrders",
     route: "sales-orders/:salesOrderId",
     component: <SalesOrderDetails />,
     layout: {
@@ -111,6 +118,7 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.SalesOrders",
+    helmet: "Pages.Titles.SalesOrders",
     route: "sales-orders/:salesOrderId/checkout",
     component: <Checkout />,
     layout: {
@@ -124,6 +132,7 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.SalesOrders",
+    helmet: "Pages.Titles.SalesOrders",
     route: "sales-orders/:salesOrderId/checkout-completed",
     component: <CheckoutCompleted />,
     layout: {
@@ -137,9 +146,10 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.SizeInfo",
+    helmet: "Pages.Titles.SizeInfo",
     route: "size-info",
     menuItem: {
-      icon: <BoyIcon sx={{
+      icon: <SensorOccupiedIcon sx={{
         verticalAlign: "sub"
       }} />,
       name: "Pages.Titles.SizeInfo"
@@ -156,9 +166,10 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.StylePreferences",
+    helmet: "Pages.Titles.StylePreferences",
     route: "style-preferences",
     menuItem: {
-      icon: <BoyIcon sx={{
+      icon: <CheckroomIcon sx={{
         verticalAlign: "sub"
       }} />,
       name: "Pages.Titles.StylePreferences"
@@ -175,9 +186,10 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.FitPreferences",
+    helmet: "Pages.Titles.FitPreferences",
     route: "fit-preferences",
     menuItem: {
-      icon: <BoyIcon sx={{
+      icon: <StraightenIcon sx={{
         verticalAlign: "sub"
       }} />,
       name: "Pages.Titles.FitPreferences"
@@ -194,9 +206,10 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.FabricProperties",
+    helmet: "Pages.Titles.FabricProperties",
     route: "fabric-properties",
     menuItem: {
-      icon: <BoyIcon sx={{
+      icon: <GradientIcon sx={{
         verticalAlign: "sub"
       }} />,
       name: "Pages.Titles.FabricProperties"
@@ -213,6 +226,7 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.Settings",
+    helmet: "Pages.Titles.Settings",
     route: "settings",
     layout: {
       path: "/",
@@ -226,6 +240,7 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.PaymentMethods",
+    helmet: "Pages.Titles.PaymentMethods",
     route: "payment-methods",
     menuItem: {
       icon: <PaymentIcon sx={{
@@ -245,6 +260,7 @@ const routes: RouterOptions[] = [
   },
   {
     title: "Pages.Titles.Addresses",
+    helmet: "Pages.Titles.Addresses",
     route: "addresses",
     menuItem: {
       icon: <LocationOnIcon sx={{
@@ -263,7 +279,7 @@ const routes: RouterOptions[] = [
     disabledEnvironments: []
   },
   {
-    title: "Pages.Titles.Welcome",
+    helmet: "Pages.Titles.Welcome",
     route: "gender",
     layout: {
       path: "/welcome",
@@ -274,7 +290,7 @@ const routes: RouterOptions[] = [
     disabledEnvironments: []
   },
   {
-    title: "Pages.Titles.Welcome",
+    helmet: "Pages.Titles.Welcome",
     route: "",
     layout: {
       path: "/welcome",
@@ -327,9 +343,9 @@ export function Router(props: RouterProps) {
           return <Route key={route.route} path={route.route} element={
             <React.Fragment>
               <Helmet>
-                {t(route.title)}
+                {t(route.helmet)}
               </Helmet>
-              {route.title !== "" && <Grid item xs={12}>
+              {route.title && route.title !== "" && <Grid item xs={12}>
                 {route.menuItem?.icon}
                 <Typography variant="h4" component="span">
                   &nbsp;{t(route.title)}

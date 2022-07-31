@@ -47,15 +47,24 @@ export function WelcomeSteps() {
     const navigate = useNavigate();
     const { activeStep } = useSelector((state: RootState) => state.welcomePageStepper);
     const { isBusy: activateAccountIsBusy, data: activateAccount, status: activateAccountStatus } = useSelector((state: RootState) => state.activateAccountModel);
+
+    const { isBusy: createFirstOrderIsBusy, data: createFirstOrderData, status: createFirstOrderStatus } = useSelector((state: RootState) => state.createFirstOrderModel);
     const dispatch = useDispatch<Dispatch>();
 
     useEffect(() => {
         if (activateAccountStatus === 200 && activateAccount) {
             dispatch.getAccountModel.HANDLE_RESPONSE(activateAccount, activateAccountStatus);
-            navigate("/", { replace: true });
+            if (!createFirstOrderIsBusy && createFirstOrderStatus === 0) {
+                dispatch.createFirstOrderModel.createFirstOrder();
+            }
         }
     }, [activateAccountStatus]);
 
+    useEffect(() => {
+        if (!createFirstOrderIsBusy && createFirstOrderStatus === 200) {
+            navigate("/", { replace: true });
+        }
+    }, [createFirstOrderStatus]);
 
     const StepIconRoot = styled('div')<{
         ownerState: { completed?: boolean; active?: boolean };

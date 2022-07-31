@@ -22,6 +22,8 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
         IQueryable<SalesOrder> QueryAllByAccountId(Guid accountId);
 
         Task<SalesOrder?> GetLatestActiveOrderAsync(Guid accountId, CancellationToken cancellationToken);
+
+        Task<bool> DoesAccountHasAnyOrder(Guid accountId, CancellationToken cancellationToken);
     }
 
     internal class SalesOrderRepository : BaseRepository<SalesOrder>, ISalesOrderRepository
@@ -31,22 +33,27 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
         {
         }
 
-        public Task<bool> DoesSalesOrderInDateTimeRangeAsync(Guid accountId, DateTime startDate, DateTime endDate, CancellationToken cancellationToken)
+        public async Task<bool> DoesAccountHasAnyOrder(Guid accountId, CancellationToken cancellationToken)
         {
-            return GetAll().AnyAsync(x => x.AccountId == accountId 
+            return await GetAll().AnyAsync(x => x.AccountId == accountId, cancellationToken);
+        }
+
+        public async Task<bool> DoesSalesOrderInDateTimeRangeAsync(Guid accountId, DateTime startDate, DateTime endDate, CancellationToken cancellationToken)
+        {
+            return await GetAll().AnyAsync(x => x.AccountId == accountId 
                 && x.CreatedAt.DayOfYear >= startDate.DayOfYear 
                 && x.CreatedAt.DayOfYear <= endDate.DayOfYear);
         }
 
-        public Task<SalesOrder?> GetLatestActiveOrderAsync(Guid accountId, CancellationToken cancellationToken)
+        public async Task<SalesOrder?> GetLatestActiveOrderAsync(Guid accountId, CancellationToken cancellationToken)
         {
-            return GetAll()
+            return await GetAll()
                 .Include(x => x.SalesOrderAddress)
                 .OrderByDescending(x => x.CreatedAt)
                 .FirstOrDefaultAsync(x => x.AccountId == accountId && x.State == SalesOrderState.Created || x.State == SalesOrderState.Prepared || x.State == SalesOrderState.Shipped, cancellationToken);
         }
 
-        public Task<SalesOrder?> GetSalesOrderAsync(Guid accountId, int id, CancellationToken cancellationToken, bool includeLineItems = false)
+        public async Task<SalesOrder?> GetSalesOrderAsync(Guid accountId, int id, CancellationToken cancellationToken, bool includeLineItems = false)
         {
             var salesOrders = GetAll();
 
@@ -55,7 +62,7 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
                 salesOrders = salesOrders.Include(x => x.LineItems);
             }
 
-            return salesOrders.FirstOrDefaultAsync(x => x.AccountId == accountId && x.Id == id, cancellationToken);
+            return await salesOrders.FirstOrDefaultAsync(x => x.AccountId == accountId && x.Id == id, cancellationToken);
         }
 
         public IQueryable<SalesOrder> QueryAllByAccountId(Guid accountId)

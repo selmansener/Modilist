@@ -12,6 +12,7 @@ import Cards from 'react-credit-cards';
 import { Focused } from 'react-credit-cards'
 import 'react-credit-cards/es/styles-compiled.css';
 import IMask, { MaskedRange } from "imask";
+import { config } from "../../../config";
 
 interface InputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -64,6 +65,7 @@ const ExpireYearInputMask = React.forwardRef<HTMLElement, InputMaskProps>(
 export default function PaymentMethod() {
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
+    const { isProduction } = config;
 
     const requiredField = t("FormValidation.RequiredField");
     const [cardFocused, setCardFocused] = useState<Focused>();
@@ -126,9 +128,10 @@ export default function PaymentMethod() {
         setFieldValue,
         submitForm
     } = useFormik({
+        enableReinitialize: true,
         initialValues: {
             cardHolderName: "",
-            cardNumber: "",
+            cardNumber: !isProduction ? "5526080000000006" : "",
             expireMonth: "",
             expireYear: "",
             cvc: ""
@@ -251,7 +254,7 @@ export default function PaymentMethod() {
                                 name="cvc"
                                 error={touched.cvc && errors.cvc !== undefined}
                                 helperText={touched.cvc && errors.cvc}
-                                label="cvc"
+                                label="CVC"
                                 value={creditCard.cvc}
                                 variant="outlined"
                                 onChange={handleChange}

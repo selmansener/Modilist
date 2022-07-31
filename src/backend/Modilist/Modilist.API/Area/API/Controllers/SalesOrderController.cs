@@ -66,6 +66,19 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
+        [HttpPost("[controller].CreateFirstOrder")]
+        [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
+        [ProducesResponseType(typeof(SalesOrderDTO), 200)]
+        public async Task<IActionResult> CreateFirstOrder(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new CreateFirstSalesOrder
+            {
+                AccountId = User.GetUserId()
+            }, cancellationToken);
+
+            return Ok(response);
+        }
+
         // TODO: This endpoint should be explicit for Style Advisors only. Change permission after RBAC implementation.
         [HttpPost("[controller].Create")]
         [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
