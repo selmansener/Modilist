@@ -31,7 +31,7 @@ export const FitPreferencesApiAxiosParamCreator = function (configuration?: Conf
          * @throws {RequiredError}
          */
         apiV1FitPreferencesGetGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/FitPreferences/Get`;
+            const localVarPath = `/api/v1/FitPreferences.Get`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -79,7 +79,7 @@ export const FitPreferencesApiAxiosParamCreator = function (configuration?: Conf
          * @throws {RequiredError}
          */
         apiV1FitPreferencesUpsertPost: async (body?: UpsertFitPreferences, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/FitPreferences/Upsert`;
+            const localVarPath = `/api/v1/FitPreferences.Upsert`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;

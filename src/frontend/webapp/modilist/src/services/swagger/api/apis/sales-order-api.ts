@@ -40,7 +40,7 @@ export const SalesOrderApiAxiosParamCreator = function (configuration?: Configur
          * @throws {RequiredError}
          */
         apiV1SalesOrderActiveGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/SalesOrder/Active`;
+            const localVarPath = `/api/v1/SalesOrder.Active`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -88,7 +88,7 @@ export const SalesOrderApiAxiosParamCreator = function (configuration?: Configur
          * @throws {RequiredError}
          */
         apiV1SalesOrderCreatePost: async (body?: CreateSalesOrder, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/SalesOrder/Create`;
+            const localVarPath = `/api/v1/SalesOrder.Create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -139,7 +139,7 @@ export const SalesOrderApiAxiosParamCreator = function (configuration?: Configur
          * @throws {RequiredError}
          */
         apiV1SalesOrderQueryGet: async (dqb?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/SalesOrder/Query`;
+            const localVarPath = `/api/v1/SalesOrder.Query`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -192,7 +192,7 @@ export const SalesOrderApiAxiosParamCreator = function (configuration?: Configur
             if (salesOrderId === null || salesOrderId === undefined) {
                 throw new RequiredError('salesOrderId','Required parameter salesOrderId was null or undefined when calling apiV1SalesOrderSalesOrderIdAddLineItemPost.');
             }
-            const localVarPath = `/api/v1/SalesOrder/{salesOrderId}/AddLineItem`
+            const localVarPath = `/api/v1/SalesOrder.{salesOrderId}/AddLineItem`
                 .replace(`{${"salesOrderId"}}`, encodeURIComponent(String(salesOrderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -249,7 +249,7 @@ export const SalesOrderApiAxiosParamCreator = function (configuration?: Configur
             if (salesOrderId === null || salesOrderId === undefined) {
                 throw new RequiredError('salesOrderId','Required parameter salesOrderId was null or undefined when calling apiV1SalesOrderSalesOrderIdBuyAllPost.');
             }
-            const localVarPath = `/api/v1/SalesOrder/{salesOrderId}/BuyAll`
+            const localVarPath = `/api/v1/SalesOrder.{salesOrderId}/BuyAll`
                 .replace(`{${"salesOrderId"}}`, encodeURIComponent(String(salesOrderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -308,7 +308,7 @@ export const SalesOrderApiAxiosParamCreator = function (configuration?: Configur
             if (salesOrderLineItemId === null || salesOrderLineItemId === undefined) {
                 throw new RequiredError('salesOrderLineItemId','Required parameter salesOrderLineItemId was null or undefined when calling apiV1SalesOrderSalesOrderIdFeedbackSalesOrderLineItemIdPost.');
             }
-            const localVarPath = `/api/v1/SalesOrder/{salesOrderId}/Feedback/{salesOrderLineItemId}`
+            const localVarPath = `/api/v1/SalesOrder.{salesOrderId}/Feedback/{salesOrderLineItemId}`
                 .replace(`{${"salesOrderId"}}`, encodeURIComponent(String(salesOrderId)))
                 .replace(`{${"salesOrderLineItemId"}}`, encodeURIComponent(String(salesOrderLineItemId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -366,7 +366,7 @@ export const SalesOrderApiAxiosParamCreator = function (configuration?: Configur
             if (salesOrderId === null || salesOrderId === undefined) {
                 throw new RequiredError('salesOrderId','Required parameter salesOrderId was null or undefined when calling apiV1SalesOrderSalesOrderIdGet.');
             }
-            const localVarPath = `/api/v1/SalesOrder/{salesOrderId}`
+            const localVarPath = `/api/v1/SalesOrder.{salesOrderId}`
                 .replace(`{${"salesOrderId"}}`, encodeURIComponent(String(salesOrderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -420,7 +420,7 @@ export const SalesOrderApiAxiosParamCreator = function (configuration?: Configur
             if (salesOrderId === null || salesOrderId === undefined) {
                 throw new RequiredError('salesOrderId','Required parameter salesOrderId was null or undefined when calling apiV1SalesOrderSalesOrderIdShipPost.');
             }
-            const localVarPath = `/api/v1/SalesOrder/{salesOrderId}/Ship`
+            const localVarPath = `/api/v1/SalesOrder.{salesOrderId}/Ship`
                 .replace(`{${"salesOrderId"}}`, encodeURIComponent(String(salesOrderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');

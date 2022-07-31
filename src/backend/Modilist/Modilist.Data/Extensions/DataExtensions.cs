@@ -70,6 +70,8 @@ namespace Modilist.Data.Extensions
 
             services.AddScoped<IReturnRepository, ReturnRepository>();
 
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+
             return services;
         }
 

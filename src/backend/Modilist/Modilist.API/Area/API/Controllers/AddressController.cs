@@ -25,7 +25,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Addresses))]
-        [HttpGet("GetCities")]
+        [HttpGet("[controller].GetCities")]
         [ProducesResponseType(typeof(IEnumerable<City>), 200)]
         public IActionResult GetCities()
         {
@@ -33,7 +33,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Addresses))]
-        [HttpGet("GetDistricts/{cityCode}")]
+        [HttpGet("[controller].GetDistricts/{cityCode}")]
         [ProducesResponseType(typeof(IEnumerable<District>), 200)]
         public IActionResult GetDistricts(string cityCode)
         {
@@ -41,7 +41,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Addresses))]
-        [HttpGet("GetAll")]
+        [HttpGet("[controller].GetAll")]
         [ProducesResponseType(typeof(IEnumerable<AddressDTO>), 200)]
         public async Task<IActionResult> GetAll()
         {
@@ -54,7 +54,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Addresses))]
-        [HttpGet("GetDefault")]
+        [HttpGet("[controller].GetDefault")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
         public async Task<IActionResult> GetDefault()
         {
@@ -67,7 +67,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Addresses))]
-        [HttpGet("Get/{id}")]
+        [HttpGet("[controller].Get/{id}")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
         public async Task<IActionResult> Get(int id, CancellationToken cancellationToken)
         {
@@ -81,7 +81,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Addresses))]
-        [HttpPost("Create")]
+        [HttpPost("[controller].Create")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
         public async Task<IActionResult> Create(CreateAddress input, CancellationToken cancellationToken)
         {
@@ -93,7 +93,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Addresses))]
-        [HttpPost("Update/{name}")]
+        [HttpPost("[controller].Update/{name}")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
         public async Task<IActionResult> Update(string name, UpdateAddress input, CancellationToken cancellationToken)
         {
@@ -106,7 +106,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Addresses))]
-        [HttpPost("Upsert/{name}")]
+        [HttpPost("[controller].Upsert/{name}")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
         public async Task<IActionResult> Upsert(string name, UpsertAddress input, CancellationToken cancellationToken)
         {

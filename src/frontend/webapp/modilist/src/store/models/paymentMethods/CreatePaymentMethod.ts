@@ -46,7 +46,7 @@ export const createPaymentMethodModel = createModel<RootModel>()({
             async createPaymentMethod(input: CreatePaymentMethod): Promise<any> {
                 createPaymentMethodModel.BUSY();
 
-                const response = await api.paymentMethods.apiV1PaymentMethodCreatePost(input);
+                const response = await api.payments.apiV1PaymentCreatePaymentMethodPost(input);
 
                 if (response.status === 200) {
                     createPaymentMethodModel.HANDLE_RESPONSE(response.data, response.status);

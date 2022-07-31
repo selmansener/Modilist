@@ -11,6 +11,7 @@ namespace Modilist.Domains.Models.ReturnDomain
         {
             ReturnId = returnId;
             ProductId = productId;
+            State = ReturnLineItemState.None;
         }
 
         public int ReturnId { get; private set; }

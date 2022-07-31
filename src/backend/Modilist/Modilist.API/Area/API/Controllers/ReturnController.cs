@@ -21,7 +21,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
 
-        [HttpPost("Get/{salesOrderId}")]
+        [HttpPost("[controller].Get/{salesOrderId}")]
         [Authorize(nameof(AuthorizationPermissions.Returns))]
         [ProducesResponseType(typeof(ReturnDTO), 200)]
         public async Task<IActionResult> Get(int salesOrderId, CancellationToken cancellationToken)
@@ -35,7 +35,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [HttpPost("Create")]
+        [HttpPost("[controller].Create")]
         [Authorize(nameof(AuthorizationPermissions.Returns))]
         [ProducesResponseType(typeof(ReturnDTO), 200)]
         public async Task<IActionResult> Create(CreateReturn input, CancellationToken cancellationToken)

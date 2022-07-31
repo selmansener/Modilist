@@ -22,7 +22,7 @@ namespace Modilist.API.Area.API.Controllers
 
 
         [Authorize(nameof(AuthorizationPermissions.Accounts))]
-        [HttpGet("Get")]
+        [HttpGet("[controller].Get")]
         [ProducesResponseType(typeof(AccountDTO), 200)]
         public async Task<IActionResult> Get(CancellationToken cancellationToken)
         {
@@ -32,7 +32,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Accounts))]
-        [HttpPost("Create")]
+        [HttpPost("[controller].Create")]
         [ProducesResponseType(typeof(AccountDTO), 200)]
         public async Task<IActionResult> Create(CreateAccount input, CancellationToken cancellationToken)
         {
@@ -42,7 +42,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Accounts))]
-        [HttpPost("Update")]
+        [HttpPost("[controller].Update")]
         [ProducesResponseType(typeof(AccountDTO), 200)]
         public async Task<IActionResult> Update(UpdateAccount input, CancellationToken cancellationToken)
         {
@@ -54,7 +54,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Accounts))]
-        [HttpPost("Activate")]
+        [HttpPost("[controller].Activate")]
         [ProducesResponseType(typeof(AccountDTO), 200)]
         public async Task<IActionResult> Activate(CancellationToken cancellationToken)
         {

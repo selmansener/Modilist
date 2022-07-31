@@ -15,6 +15,8 @@ using Modilist.Business.Exceptions;
 using Modilist.Data.Repositories.SalesOrderDomain;
 using Modilist.Domains.Models.SalesOrderDomain;
 
+using Newtonsoft.Json;
+
 namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
 {
     public class ShipSalesOrder : IRequest<ShipSalesOrderDTO>

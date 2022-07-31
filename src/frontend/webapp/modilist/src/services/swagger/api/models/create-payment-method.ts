@@ -43,6 +43,12 @@ export interface CreatePaymentMethod {
     expireYear?: string;
     /**
      * 
+     * @type {string}
+     * @memberof CreatePaymentMethod
+     */
+    cvc?: string;
+    /**
+     * 
      * @type {boolean}
      * @memberof CreatePaymentMethod
      */

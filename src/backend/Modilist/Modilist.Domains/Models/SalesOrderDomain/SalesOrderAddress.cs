@@ -1,8 +1,5 @@
 ﻿
-using Mapster;
-
 using Modilist.Domains.Base;
-using Modilist.Domains.Models.AddressDomain;
 
 namespace Modilist.Domains.Models.SalesOrderDomain
 {
@@ -30,6 +27,7 @@ namespace Modilist.Domains.Models.SalesOrderDomain
             City = city;
             District = district;
             FullAddress = fullAddress;
+            Country = "Turkey";
         }
 
         public int SalesOrderId { get; set; }
@@ -45,6 +43,8 @@ namespace Modilist.Domains.Models.SalesOrderDomain
         public string Phone { get; private set; }
 
         public string? ZipCode { get; private set; }
+
+        public string Country { get; private set; }
 
         public string City { get; private set; }
 

@@ -31,7 +31,7 @@ export const PreferedFabricPropertiesApiAxiosParamCreator = function (configurat
          * @throws {RequiredError}
          */
         apiV1PreferedFabricPropertiesGetGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/PreferedFabricProperties/Get`;
+            const localVarPath = `/api/v1/PreferedFabricProperties.Get`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -79,7 +79,7 @@ export const PreferedFabricPropertiesApiAxiosParamCreator = function (configurat
          * @throws {RequiredError}
          */
         apiV1PreferedFabricPropertiesUpsertPost: async (body?: UpsertPreferedFabricProperties, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/PreferedFabricProperties/Upsert`;
+            const localVarPath = `/api/v1/PreferedFabricProperties.Upsert`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;

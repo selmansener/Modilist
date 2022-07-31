@@ -21,7 +21,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Subscriptions))]
-        [HttpGet("Get")]
+        [HttpGet("[controller].Get")]
         [ProducesResponseType(typeof(SubscriptionDTO), 200)]
         public async Task<IActionResult> Get(CancellationToken cancellationToken)
         {
@@ -35,7 +35,7 @@ namespace Modilist.API.Area.API.Controllers
 
 
         [Authorize(nameof(AuthorizationPermissions.Subscriptions))]
-        [HttpPost("Create")]
+        [HttpPost("[controller].Create")]
         [ProducesResponseType(typeof(SubscriptionDTO), 200)]
         public async Task<IActionResult> Create(CancellationToken cancellationToken)
         {
@@ -49,7 +49,7 @@ namespace Modilist.API.Area.API.Controllers
 
 
         [Authorize(nameof(AuthorizationPermissions.Subscriptions))]
-        [HttpPost("UpdateMaxPricingLimit")]
+        [HttpPost("[controller].UpdateMaxPricingLimit")]
         [ProducesResponseType(typeof(SubscriptionDTO), 200)]
         public async Task<IActionResult> UpdateMaxPricingLimit(UpdateSubscriptionMaxPricingLimit input, CancellationToken cancellationToken)
         {

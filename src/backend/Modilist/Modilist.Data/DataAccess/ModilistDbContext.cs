@@ -60,6 +60,10 @@ namespace Modilist.Data.DataAccess
 
         public virtual DbSet<ReturnAddress> ReturnAddresses { get; set; }
 
+        public virtual DbSet<Payment> Payments { get; set; }
+
+        public virtual DbSet<PaymentLineItem> PaymentLineItems { get; private set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var entityTypes = GetEntityTypes(builder).ToList();

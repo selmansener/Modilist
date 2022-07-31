@@ -120,7 +120,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
                 var lastFourDigit = request.CardNumber.Substring(request.CardNumber.Length - 4, 4);
 
-                paymentMethod.UpdateCardInfo(card.CardUserKey, card.CardAssociation, card.CardFamily, card.CardBankName, card.CardBankCode, lastFourDigit, request.CVC);
+                paymentMethod.UpdateCardInfo(card.CardUserKey, card.CardToken, card.CardAssociation, card.CardFamily, card.CardBankName, card.CardBankCode, lastFourDigit, request.CVC);
 
                 await _paymentMethodRepository.UpdateAsync(paymentMethod, cancellationToken);
             }

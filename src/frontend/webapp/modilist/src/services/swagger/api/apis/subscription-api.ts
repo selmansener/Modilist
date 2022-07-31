@@ -31,7 +31,7 @@ export const SubscriptionApiAxiosParamCreator = function (configuration?: Config
          * @throws {RequiredError}
          */
         apiV1SubscriptionCreatePost: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Subscription/Create`;
+            const localVarPath = `/api/v1/Subscription.Create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -78,7 +78,7 @@ export const SubscriptionApiAxiosParamCreator = function (configuration?: Config
          * @throws {RequiredError}
          */
         apiV1SubscriptionGetGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Subscription/Get`;
+            const localVarPath = `/api/v1/Subscription.Get`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -126,7 +126,7 @@ export const SubscriptionApiAxiosParamCreator = function (configuration?: Config
          * @throws {RequiredError}
          */
         apiV1SubscriptionUpdateMaxPricingLimitPost: async (body?: UpdateSubscriptionMaxPricingLimit, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Subscription/UpdateMaxPricingLimit`;
+            const localVarPath = `/api/v1/Subscription.UpdateMaxPricingLimit`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;

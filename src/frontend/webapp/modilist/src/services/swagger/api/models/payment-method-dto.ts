@@ -37,6 +37,18 @@ export interface PaymentMethodDTO {
     cardBankName?: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof PaymentMethodDTO
+     */
+    expireYear?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodDTO
+     */
+    cvc?: string;
+    /**
+     * 
      * @type {number}
      * @memberof PaymentMethodDTO
      */

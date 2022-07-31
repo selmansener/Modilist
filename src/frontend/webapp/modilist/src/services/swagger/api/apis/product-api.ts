@@ -38,7 +38,7 @@ export const ProductApiAxiosParamCreator = function (configuration?: Configurati
             if (productId === null || productId === undefined) {
                 throw new RequiredError('productId','Required parameter productId was null or undefined when calling apiV1ProductAddImagesProductIdPostForm.');
             }
-            const localVarPath = `/api/v1/Product/AddImages/{productId}`
+            const localVarPath = `/api/v1/Product.AddImages/{productId}`
                 .replace(`{${"productId"}}`, encodeURIComponent(String(productId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -96,7 +96,7 @@ export const ProductApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         apiV1ProductCreatePost: async (body?: CreateProduct, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Product/Create`;
+            const localVarPath = `/api/v1/Product.Create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;

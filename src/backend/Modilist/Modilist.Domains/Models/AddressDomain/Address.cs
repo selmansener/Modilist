@@ -30,6 +30,7 @@ namespace Modilist.Domains.Models.AddressDomain
             District = district;
             FullAddress = fullAddress;
             IsDefault = isDefault;
+            Country = "Turkey";
         }
 
         public Guid AccountId { get; private set; }
@@ -45,6 +46,8 @@ namespace Modilist.Domains.Models.AddressDomain
         public string Phone { get; private set; }
 
         public string? ZipCode { get; private set; }
+
+        public string Country { get; private set; }
 
         public string City { get; private set; }
 

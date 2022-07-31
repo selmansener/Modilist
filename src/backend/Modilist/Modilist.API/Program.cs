@@ -25,6 +25,7 @@ using Modilist.Infrastructure.Shared.Configurations;
 using Modilist.Infrastructure.Azure.Extensions;
 using Mapster;
 using Modilist.Business.CQRS.SalesOrderDomain.DTOs;
+using System.Net;
 
 const string CorsPolicyName = "Default";
 const string ApiTitle = "ModilistAPI";
@@ -70,6 +71,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddControllers();
 
+builder.Services.AddHttpsRedirection(options =>
+{
+    options.RedirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
+    options.HttpsPort = 443;
+});
 
 Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
 

@@ -377,7 +377,19 @@
             "CargoTrackingCodeInfo": "İade işlemini tamamladığında kargo takip numarası oluşur.",
             "CreateReturn": "İade talebi oluştur",
             "ReturnedLineItems": "İade edilecek ürünler",
-            "SoldLineItems": "Satın alınacak ürünler"
+            "SoldLineItems": "Satın alınacak ürünler",
+            "TermsInfo": {
+                "1": "Ön bilgilendirme formunu ",
+                "2": "ve ",
+                "3": "mesafeli satış sözleşmesini ",
+                "4": "onaylıyorum."
+            },
+            "TermsInfoError": "Devam edebilmek için lütfen formu onaylayın."
+        },
+        "CheckoutCompleted": {
+            "SalesOrderCompleted": "#{{salesOrderId}} numaralı siparişin tamamlandı.",
+            "Thanks": "Bizi tercih ettiğin için teşekkür ederiz.",
+            "ReturnToHome": "Anasayfa'ya dön"
         }
     },
     "WelcomeSteps": {
@@ -564,7 +576,8 @@
             "Completed": "Siparişin Tamamlandı"
         },
         "Forms": {
-            "Select": "Seçiniz"
+            "Select": "Seçiniz",
+            "Close": "Kapat"
         },
         "PersonalInfo": {
             "FirstName": "Ad",

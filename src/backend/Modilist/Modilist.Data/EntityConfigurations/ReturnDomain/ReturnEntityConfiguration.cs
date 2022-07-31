@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,6 +14,12 @@ namespace Modilist.Data.EntityConfigurations.ReturnDomain
             builder.Property(x => x.Id).UseHiLo(nameof(Return));
 
             builder.Property(x => x.State).IsRequired().HasConversion<string>();
+
+            builder.HasOne(x => x.SalesOrder)
+                .WithOne(x => x.Return)
+                .HasForeignKey<Return>(x => x.SalesOrderId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

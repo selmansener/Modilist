@@ -24,6 +24,10 @@ import { FabricProperties } from '../pages/fabricProperties/FabricProperties';
 import { SalesOrderDetails } from '../pages/salesOrders/SalesOrderDetails';
 import { Checkout } from '../pages/checkout/Checkout';
 import { AccountSettings } from '../pages/accountSettings/AccountSettings';
+import { CheckoutCompleted } from '../pages/checkout/CheckoutCompleted';
+import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
+import { Grid, Typography } from '@mui/material';
 
 interface RouterOptions {
   title: string,
@@ -109,6 +113,19 @@ const routes: RouterOptions[] = [
     title: "Pages.Titles.SalesOrders",
     route: "sales-orders/:salesOrderId/checkout",
     component: <Checkout />,
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.SalesOrders"} icon={<ShoppingBasketIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
+    isPublic: false,
+    disabledEnvironments: []
+  },
+  {
+    title: "Pages.Titles.SalesOrders",
+    route: "sales-orders/:salesOrderId/checkout-completed",
+    component: <CheckoutCompleted />,
     layout: {
       path: "/",
       component: <Dashboard title={"Pages.Titles.SalesOrders"} icon={<ShoppingBasketIcon sx={{
@@ -288,6 +305,7 @@ export interface RouterProps {
 }
 
 export function Router(props: RouterProps) {
+  const { t } = useTranslation();
   const { environment, isPublic, role } = props;
 
   const filteredRoutes = routes.filter(route =>
@@ -296,20 +314,32 @@ export function Router(props: RouterProps) {
     && (route.roles === undefined || route.roles?.length === 0 || (route.roles && route.roles.some(r => r === role)))
   );
 
-  const groupedRoutes = filteredRoutes.reduce((a: any,b: any) => {
+  const groupedRoutes = filteredRoutes.reduce((a: any, b: any) => {
     ((a[b["layout"]["path"]] as any) = a[b["layout"]["path"]] || []).push(b);
     return a;
   }, {});
 
   const RenderRoutes = () => {
-    const routes = [];
     return Object.keys(groupedRoutes).map((key: string) => {
-      console.log("key", key);
       var group: RouterOptions[] = groupedRoutes[key as keyof typeof groupedRoutes];
       return <Route key={key} path={key} element={group[0].layout.component as React.ReactNode}>
         {group.map(route => {
-          console.log("route", route.route)
-          return <Route key={route.route} path={route.route} element={route.component} />
+          return <Route key={route.route} path={route.route} element={
+            <React.Fragment>
+              <Helmet>
+                {t(route.title)}
+              </Helmet>
+              {route.title !== "" && <Grid item xs={12}>
+                {route.menuItem?.icon}
+                <Typography variant="h4" component="span">
+                  &nbsp;{t(route.title)}
+                </Typography>
+              </Grid>}
+              <Grid item container xs={12} spacing={2}>
+                {route.component}
+              </Grid>
+            </React.Fragment>
+          } />
         })}
       </Route>
     })

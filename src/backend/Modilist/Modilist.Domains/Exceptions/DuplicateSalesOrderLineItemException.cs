@@ -13,11 +13,11 @@ namespace Modilist.Domains.Exceptions
             ProductId = productId;
         }
 
-        public Guid AccountId { get; set; }
+        public Guid AccountId { get; private set; }
 
-        public int SalesOrderId { get; set; }
+        public int SalesOrderId { get; private set; }
 
-        public int ProductId { get; set; }
+        public int ProductId { get; private set; }
 
         public int StatusCode => 409;
     }

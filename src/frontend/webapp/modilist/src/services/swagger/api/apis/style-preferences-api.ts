@@ -31,7 +31,7 @@ export const StylePreferencesApiAxiosParamCreator = function (configuration?: Co
          * @throws {RequiredError}
          */
         apiV1StylePreferencesGetGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/StylePreferences/Get`;
+            const localVarPath = `/api/v1/StylePreferences.Get`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -79,7 +79,7 @@ export const StylePreferencesApiAxiosParamCreator = function (configuration?: Co
          * @throws {RequiredError}
          */
         apiV1StylePreferencesUpsertPost: async (body?: UpsertStylePreferences, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/StylePreferences/Upsert`;
+            const localVarPath = `/api/v1/StylePreferences.Upsert`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;

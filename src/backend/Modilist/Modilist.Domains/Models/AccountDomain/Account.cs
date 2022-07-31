@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using Modilist.Domains.Base;
 using Modilist.Domains.Models.AddressDomain;
 using Modilist.Domains.Models.PaymentDomain;
+using Modilist.Domains.Models.ReturnDomain;
 using Modilist.Domains.Models.SalesOrderDomain;
 using Modilist.Domains.Models.StylePreferencesDomain;
 using Modilist.Domains.Models.SubscriptionDomain;
@@ -17,6 +18,8 @@ namespace Modilist.Domains.Models.AccountDomain
         private readonly List<Address> _addresses = new List<Address>();
         private readonly List<PaymentMethod> _paymentMethods = new List<PaymentMethod>();
         private readonly List<SalesOrder> _salesOrders = new List<SalesOrder>();
+        private readonly List<Return> _returns = new List<Return>();
+        private readonly List<Payment> _payments = new List<Payment>();
 
         public Account(Guid id,
             string email,
@@ -67,6 +70,10 @@ namespace Modilist.Domains.Models.AccountDomain
         public IReadOnlyList<PaymentMethod> PaymentMethods => _paymentMethods;
 
         public IReadOnlyList<SalesOrder> SalesOrders => _salesOrders;
+
+        public IReadOnlyList<Return> Returns => _returns;
+
+        public IReadOnlyList<Payment> Payments => _payments;
 
         public string? FirstName { get; private set; }
 

@@ -6,6 +6,7 @@
         public const string Accounts = "Accounts";
         public const string StylePreferences = "StylePreferences";
         public const string Addresses = "Addresses";
+        // TODO: Rename as Payments
         public const string PaymentMethods = "PaymentMethods";
         public const string Subscriptions = "Subscriptions";
         public const string Products = "Products";

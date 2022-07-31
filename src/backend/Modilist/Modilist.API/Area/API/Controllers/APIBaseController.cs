@@ -4,7 +4,7 @@ namespace Modilist.API.Area.API.Controllers
 {
     [ApiController]
     [Area("api")]
-    [Route("[area]/v1/[controller]")]
+    [Route("[area]/v1/")]
     public abstract class APIBaseController : Controller
     {
     }

@@ -11,19 +11,19 @@ using Modilist.Infrastructure.Shared.Extensions;
 
 namespace Modilist.API.Area.API.Controllers
 {
-    public class PaymentMethodController : APIBaseController
+    public class PaymentController : APIBaseController
     {
         private readonly IMediator _mediator;
 
-        public PaymentMethodController(IMediator mediator)
+        public PaymentController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
-        [HttpPost("GetDefault")]
+        [HttpPost("[controller].GetDefaultPaymentMethod")]
         [ProducesResponseType(typeof(PaymentMethodDTO), 200)]
-        public async Task<IActionResult> GetDefault(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetDefaultPaymentMethod(CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new GetDefaultPaymentMethod
             {
@@ -34,13 +34,27 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
-        [HttpPost("Create")]
+        [HttpPost("[controller].CreatePaymentMethod")]
         [ProducesResponseType(typeof(PaymentMethodDTO), 200)]
-        public async Task<IActionResult> Create(CreatePaymentMethod input, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreatePaymentMethod(CreatePaymentMethod input, CancellationToken cancellationToken)
         {
             input.AccountId = User.GetUserId();
 
             var response = await _mediator.Send(input, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
+        [HttpPost("[controller].Create/{salesOrderId}")]
+        [ProducesResponseType(typeof(PaymentDTO), 200)]
+        public async Task<IActionResult> CreatePayment(int salesOrderId, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new CreatePayment
+            {
+                AccountId = User.GetUserId(),
+                SalesOrderId = salesOrderId,
+            }, cancellationToken);
 
             return Ok(response);
         }

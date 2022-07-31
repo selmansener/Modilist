@@ -1,12 +1,12 @@
-import { Box, Button, Divider, FormControl, Grid, Link, Paper, TextField, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Checkbox, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, FormControl, FormControlLabel, FormHelperText, Grid, Link, Paper, TextField, Tooltip, Typography } from "@mui/material";
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import format from "date-fns/format";
 import tr from "date-fns/locale/tr";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 import { AddressDTO, SalesOrderLineItemState } from "../../services/swagger/api";
@@ -19,6 +19,7 @@ import { AddressSelection } from "../../components/addressSelection/AddressSelec
 import trLocale from 'date-fns/locale/tr';
 
 export function Checkout() {
+    const navigate = useNavigate();
     const { t } = useTranslation();
     const { salesOrderId } = useParams();
     const dispatch = useDispatch<Dispatch>();
@@ -26,6 +27,7 @@ export function Checkout() {
     const { isBusy: isBusyPaymentMethod, data: paymentMethod, status: paymentMethodStatus } = useSelector((state: RootState) => state.getDefaultPaymentMethodModel);
     const { isBusy: isBusyGetReturn, data: getReturnData, status: getReturnStatus } = useSelector((state: RootState) => state.getReturnModel);
     const { isBusy: isBusyCreateReturn, data: createReturnData, status: createReturnStatus } = useSelector((state: RootState) => state.createReturnModel);
+    const { isBusy: isBusyCreatePayment, data: createPaymentData, status: createPaymentStatus } = useSelector((state: RootState) => state.createPaymentModel);
     const { imgBaseHost } = config;
     const now = new Date();
     const minDate = addDays(now, 2);
@@ -33,6 +35,10 @@ export function Checkout() {
     const [addressSelectionOpen, setAddressSelectionOpen] = useState<boolean>(false);
     const [pickupDate, setPickupDate] = useState<Date | null>(addDays(now, 3));
     const [selectedAddress, setSelectedAddress] = useState<AddressDTO>();
+    const [isFormChecked, setIsFormChecked] = useState<boolean>(false);
+    const [isTermsDialogOpen, setIsTermsDialogOpen] = useState<boolean>(false);
+    const [isSalesDialogOpen, setIsSalesDialogOpen] = useState<boolean>(false);
+    const [isCheckoutTouched, setIsCheckoutTouched] = useState<boolean>(false);
 
     useEffect(() => {
         if (salesOrderId && !isBusySalesOrder && salesOrderStatus === 0) {
@@ -43,6 +49,12 @@ export function Checkout() {
             dispatch.getReturnModel.getReturn(parseInt(salesOrderId));
         }
     }, [salesOrderId]);
+
+    useEffect(() => {
+        if (createPaymentStatus === 200) {
+            navigate(`/sales-orders/${salesOrderId}/checkout-completed`);
+        }
+    }, [createPaymentStatus])
 
     useEffect(() => {
         if (!isBusyPaymentMethod && paymentMethodStatus === 0) {
@@ -66,7 +78,7 @@ export function Checkout() {
     useEffect(() => {
         if (createReturnData && createReturnStatus === 200) {
             dispatch.getReturnModel.HANDLE_RESPONSE(createReturnData, createReturnStatus);
-            
+
             dispatch.createReturnModel.RESET();
         }
     }, [createReturnStatus]);
@@ -78,6 +90,17 @@ export function Checkout() {
     const handleAddressSelection = (selectedAddress: AddressDTO) => {
         setAddressSelectionOpen(false);
         setSelectedAddress(selectedAddress);
+    }
+
+    const handleCheckout = () => {
+        if (!isFormChecked) {
+            setIsCheckoutTouched(true);
+            return;
+        }
+
+        if (salesOrderId && !isBusyCreatePayment && createPaymentStatus === 0) {
+            dispatch.createPaymentModel.createPayment(parseInt(salesOrderId));
+        }
     }
 
     const getMaskedPhone = () => {
@@ -332,6 +355,60 @@ export function Checkout() {
         </React.Fragment>
     }
 
+    const RenderTermsDialog = () => {
+        return (
+            <React.Fragment>
+                <Dialog
+                    open={isTermsDialogOpen}
+                    onClose={() => {
+                        setIsTermsDialogOpen(false);
+                    }}
+                >
+                    <DialogTitle>
+                        {"Use Google's location service?"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Let Google help apps determine location. This means sending anonymous
+                            location data to Google, even when no apps are running.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => {
+                            setIsTermsDialogOpen(false);
+                        }} autoFocus>
+                            {t("Generic.Forms.Close")}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={isSalesDialogOpen}
+                    onClose={() => {
+                        setIsSalesDialogOpen(false);
+                    }}
+                >
+                    <DialogTitle>
+                        {"Use Google's location service?"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Let Google help apps determine location. This means sending anonymous
+                            location data to Google, even when no apps are running.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => {
+                            setIsSalesDialogOpen(false);
+                        }} autoFocus>
+                            {t("Generic.Forms.Close")}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </React.Fragment >
+        )
+    }
+
     return (
         <Grid item container xs={12} spacing={2}>
             <Grid item xs={6}>
@@ -484,8 +561,40 @@ export function Checkout() {
             </Grid>
             <Grid item xs={12} sx={{
                 display: 'flex',
-                justifyContent: 'flex-end'
+                justifyContent: 'space-between'
             }}>
+                {RenderTermsDialog()}
+                <FormControl error={isCheckoutTouched && !isFormChecked}>
+                    <FormControlLabel
+                        onClick={(e) => {
+                            if (e.target instanceof HTMLAnchorElement) {
+                                e.preventDefault();
+                            }
+                        }} control={<Checkbox checked={isFormChecked} onClick={(e) => {
+                            setIsFormChecked(!isFormChecked);
+                            setIsCheckoutTouched(false);
+                        }} />} label={
+                            <Trans>
+                                <Link onClick={() => {
+                                    setIsTermsDialogOpen(true);
+                                }}>
+                                    {t("Pages.Checkout.TermsInfo.1")}
+                                </Link>
+                                <Typography variant="body1" component="span">
+                                    {t("Pages.Checkout.TermsInfo.2")}
+                                </Typography>
+                                <Link onClick={() => {
+                                    setIsSalesDialogOpen(true);
+                                }}>
+                                    {t("Pages.Checkout.TermsInfo.3")}
+                                </Link>
+                                <Typography variant="body1" component="span">
+                                    {t("Pages.Checkout.TermsInfo.4")}
+                                </Typography>
+                            </Trans>
+                        } />
+                    {isCheckoutTouched && !isFormChecked && <FormHelperText color="error">{t("Pages.Checkout.TermsInfoError")}</FormHelperText>}
+                </FormControl>
                 {isCheckoutDisabled() ?
                     <Tooltip
                         title={t("Pages.Checkout.ReturnWarning")}
@@ -501,16 +610,20 @@ export function Checkout() {
                         </span>
                     </Tooltip>
                     : <Button
+                        disabled={isBusyCreatePayment}
                         variant="contained"
-                        onClick={() => {
-
-                        }}
+                        onClick={handleCheckout}
                     >
+                        {isBusyCreatePayment && <CircularProgress
+                            sx={{
+                                width: "18px !important",
+                                height: "18px !important",
+                                mr: 2
+                            }}
+                        />}
                         {t("Pages.Checkout.Checkout")}
                     </Button>
                 }
-
-
             </Grid>
         </Grid>
     )

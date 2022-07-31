@@ -15,7 +15,7 @@ export * from './apis/address-api';
 export * from './apis/blog-api';
 export * from './apis/development-api';
 export * from './apis/fit-preferences-api';
-export * from './apis/payment-method-api';
+export * from './apis/payment-api';
 export * from './apis/prefered-fabric-properties-api';
 export * from './apis/product-api';
 export * from './apis/return-api';

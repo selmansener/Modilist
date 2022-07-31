@@ -122,6 +122,7 @@ namespace Modilist.Business.Seed.Services
 
                 paymentMethod.UpdateCardInfo(
                     card.CardUserKey,
+                    card.CardToken,
                     card.CardAssociation,
                     card.CardFamily,
                     card.CardBankName,

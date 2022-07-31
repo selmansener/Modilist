@@ -24,7 +24,7 @@ namespace Modilist.API.Area.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("Query")]
+        [HttpGet("[controller].Query")]
         [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
         [ProducesResponseType(typeof(DQBResultDTO<SalesOrderDetailsDTO>), 200)]
         [DynamicQuery]
@@ -39,7 +39,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{salesOrderId}")]
+        [HttpGet("[controller].{salesOrderId}")]
         [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
         [ProducesResponseType(typeof(SalesOrderDetailsDTO), 200)]
         public async Task<IActionResult> Get(int salesOrderId, CancellationToken cancellationToken)
@@ -53,7 +53,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("Active")]
+        [HttpGet("[controller].Active")]
         [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
         [ProducesResponseType(typeof(ActiveSalesOrderDTO), 200)]
         public async Task<IActionResult> GetActiveOrder(CancellationToken cancellationToken)
@@ -67,7 +67,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         // TODO: This endpoint should be explicit for Style Advisors only. Change permission after RBAC implementation.
-        [HttpPost("Create")]
+        [HttpPost("[controller].Create")]
         [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
         [ProducesResponseType(typeof(SalesOrderDTO), 200)]
         public async Task<IActionResult> Create(CreateSalesOrder input, CancellationToken cancellationToken)
@@ -78,7 +78,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         // TODO: This endpoint should be explicit for Style Advisors only. Change permission after RBAC implementation.
-        [HttpPost("{salesOrderId}/AddLineItem")]
+        [HttpPost("[controller].{salesOrderId}/AddLineItem")]
         [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
         [ProducesResponseType(typeof(AddSalesOrderLineItemDTO), 200)]
         public async Task<IActionResult> AddLineItem(int salesOrderId, AddSalesOrderLineItem input, CancellationToken cancellationToken)
@@ -91,7 +91,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         // TODO: This endpoint shouldn't exists. A scheduled job will change sales order status.
-        [HttpPost("{salesOrderId}/Ship")]
+        [HttpPost("[controller].{salesOrderId}/Ship")]
         [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
         [ProducesResponseType(typeof(ShipSalesOrderDTO), 200)]
         public async Task<IActionResult> Ship(int salesOrderId, ShipSalesOrder input, CancellationToken cancellationToken)
@@ -103,7 +103,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [HttpPost("{salesOrderId}/Feedback/{salesOrderLineItemId}")]
+        [HttpPost("[controller].{salesOrderId}/Feedback/{salesOrderLineItemId}")]
         [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
         [ProducesResponseType(typeof(AddOrUpdateFeedbackDTO), 200)]
         public async Task<IActionResult> Feedback(int salesOrderId, int salesOrderLineItemId, AddOrUpdateFeedback input, CancellationToken cancellationToken)
@@ -117,7 +117,7 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
-        [HttpPost("{salesOrderId}/BuyAll")]
+        [HttpPost("[controller].{salesOrderId}/BuyAll")]
         [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
         [ProducesResponseType(typeof(AddOrUpdateFeedbackDTO), 200)]
         public async Task<IActionResult> BuyAll(int salesOrderId, CancellationToken cancellationToken)

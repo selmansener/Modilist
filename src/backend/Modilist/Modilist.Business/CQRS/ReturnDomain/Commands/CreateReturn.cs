@@ -9,8 +9,10 @@ using Modilist.Business.CQRS.ReturnDomain.DTOs;
 using Modilist.Business.Exceptions;
 using Modilist.Data.Repositories.AddressDomain;
 using Modilist.Data.Repositories.ReturnDomain;
+using Modilist.Data.Repositories.SalesOrderDomain;
 using Modilist.Domains.Models.AddressDomain;
 using Modilist.Domains.Models.ReturnDomain;
+using Modilist.Domains.Models.SalesOrderDomain;
 
 using Newtonsoft.Json;
 
@@ -42,11 +44,13 @@ namespace Modilist.Business.CQRS.ReturnDomain.Commands
     {
         private readonly IReturnRepository _returnRepository;
         private readonly IAddressRepository _addressRepository;
+        private readonly ISalesOrderRepository _salesOrderRepository;
 
-        public CreateReturnHandler(IReturnRepository returnRepository, IAddressRepository addressRepository)
+        public CreateReturnHandler(IReturnRepository returnRepository, IAddressRepository addressRepository, ISalesOrderRepository salesOrderRepository)
         {
             _returnRepository = returnRepository;
             _addressRepository = addressRepository;
+            _salesOrderRepository = salesOrderRepository;
         }
 
         public async Task<ReturnDTO> Handle(CreateReturn request, CancellationToken cancellationToken)
@@ -67,9 +71,23 @@ namespace Modilist.Business.CQRS.ReturnDomain.Commands
                 throw new AddressNotFoundException(request.AccountId, request.AddressId);
             }
 
+            SalesOrder? salesOrder = await _salesOrderRepository.GetSalesOrderAsync(request.AccountId, request.SalesOrderId, cancellationToken, includeLineItems: true);
+
+            if (salesOrder == null)
+            {
+                throw new SalesOrderNotFoundException(request.AccountId, request.SalesOrderId);
+            }
+
             @return = new Return(request.AccountId, request.SalesOrderId, request.RequestedPickupDate);
 
             @return.AssignAddress(address);
+
+            var returnedLineItems = salesOrder.LineItems.Where(x => x.State == Infrastructure.Shared.Enums.SalesOrderLineItemState.Returned);
+
+            foreach (var lineItem in returnedLineItems)
+            {
+                @return.AddReturnLineItem(lineItem.ProductId);
+            }
 
             await _returnRepository.AddAsync(@return, cancellationToken);
 

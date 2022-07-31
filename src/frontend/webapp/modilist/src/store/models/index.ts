@@ -12,6 +12,7 @@ import { getPreferedFabricPropertiesModel } from "./fabricProperties/GetFabricPr
 import { upsertPreferedFabricPropertiesModel } from "./fabricProperties/UpsertFabricProperties"
 import { getFitPreferencesModel } from "./fitPreferences/GetFitPreferences"
 import { upsertFitPreferencesModel } from "./fitPreferences/UpsertFitPreferences"
+import { createPaymentModel } from "./paymentMethods/CreatePayment"
 import { createPaymentMethodModel } from "./paymentMethods/CreatePaymentMethod"
 import { getDefaultPaymentMethodModel } from "./paymentMethods/GetDefaultPaymentMethod"
 import { createReturnModel } from "./returns/CreateReturn"
@@ -70,6 +71,7 @@ export interface RootModel extends Models<RootModel> {
   getReturnModel: typeof getReturnModel,
   createReturnModel: typeof createReturnModel,
   getBlogMetaDataModel: typeof getBlogMetaDataModel,
+  createPaymentModel: typeof createPaymentModel,
 }
 
 export const models: RootModel = {
@@ -107,4 +109,5 @@ export const models: RootModel = {
   getReturnModel,
   createReturnModel,
   getBlogMetaDataModel,
+  createPaymentModel,
 }

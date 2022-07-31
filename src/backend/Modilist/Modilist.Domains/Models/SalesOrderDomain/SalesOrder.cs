@@ -1,10 +1,10 @@
 ﻿
-using Mapster;
-
 using Modilist.Domains.Base;
 using Modilist.Domains.Exceptions;
 using Modilist.Domains.Models.AccountDomain;
 using Modilist.Domains.Models.AddressDomain;
+using Modilist.Domains.Models.PaymentDomain;
+using Modilist.Domains.Models.ReturnDomain;
 using Modilist.Infrastructure.Shared.Enums;
 
 namespace Modilist.Domains.Models.SalesOrderDomain
@@ -22,6 +22,14 @@ namespace Modilist.Domains.Models.SalesOrderDomain
         public Guid AccountId { get; private set; }
 
         public Account Account { get; private set; }
+
+        public int? ReturnId { get; private set; }
+
+        public Return? Return { get; private set; }
+
+        public int? PaymentId { get; private set; }
+
+        public Payment? Payment { get; private set; }
 
         public SalesOrderState State { get; private set; }
 
@@ -180,7 +188,7 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public void BuyAllLineItems()
         {
-            if(State != SalesOrderState.Delivered)
+            if (State != SalesOrderState.Delivered)
             {
                 throw new InvalidOrderStateException(AccountId, Id, State, SalesOrderState.Delivered, nameof(BuyAllLineItems));
             }

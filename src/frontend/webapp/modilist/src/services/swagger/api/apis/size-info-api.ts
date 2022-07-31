@@ -31,7 +31,7 @@ export const SizeInfoApiAxiosParamCreator = function (configuration?: Configurat
          * @throws {RequiredError}
          */
         apiV1SizeInfoGetGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/SizeInfo/Get`;
+            const localVarPath = `/api/v1/SizeInfo.Get`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -79,7 +79,7 @@ export const SizeInfoApiAxiosParamCreator = function (configuration?: Configurat
          * @throws {RequiredError}
          */
         apiV1SizeInfoUpsertPost: async (body?: UpsertSizeInfo, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/SizeInfo/Upsert`;
+            const localVarPath = `/api/v1/SizeInfo.Upsert`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;

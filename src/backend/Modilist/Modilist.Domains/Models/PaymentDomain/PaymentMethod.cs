@@ -20,6 +20,8 @@ namespace Modilist.Domains.Models.PaymentDomain
 
         public string? CardUserKey { get; private set; }
 
+        public string? CardToken { get; private set; }
+
         public string? CardAssociation { get; private set; }
 
         public string? CardFamily { get; private set; }
@@ -39,9 +41,10 @@ namespace Modilist.Domains.Models.PaymentDomain
             IsDefault = isDefault;
         }
 
-        public void UpdateCardInfo(string cardUserKey, string cardAssociation, string cardFamily, string cardBankName, long? cardBankCode, string lastFourDigit, string? cvc)
+        public void UpdateCardInfo(string cardUserKey, string cardToken, string cardAssociation, string cardFamily, string cardBankName, long? cardBankCode, string lastFourDigit, string? cvc)
         {
             CardUserKey = cardUserKey;
+            CardToken = cardToken;
             CardAssociation = cardAssociation;
             CardFamily = cardFamily;
             CardBankName = cardBankName;
@@ -60,6 +63,7 @@ namespace Modilist.Domains.Models.PaymentDomain
         public PaymentMethodCardInfoValidator()
         {
             RuleFor(x => x.CardUserKey).NotEmpty();
+            RuleFor(x => x.CardToken).NotEmpty();
             RuleFor(x => x.CardAssociation).NotEmpty();
             RuleFor(x => x.CardFamily).NotEmpty();
             RuleFor(x => x.CardBankName).NotEmpty();

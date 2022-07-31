@@ -36,7 +36,7 @@ export const AddressApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         apiV1AddressCreatePost: async (body?: CreateAddress, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Address/Create`;
+            const localVarPath = `/api/v1/Address.Create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -87,7 +87,7 @@ export const AddressApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         apiV1AddressGetAllGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Address/GetAll`;
+            const localVarPath = `/api/v1/Address.GetAll`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -134,7 +134,7 @@ export const AddressApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         apiV1AddressGetCitiesGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Address/GetCities`;
+            const localVarPath = `/api/v1/Address.GetCities`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -181,7 +181,7 @@ export const AddressApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         apiV1AddressGetDefaultGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Address/GetDefault`;
+            const localVarPath = `/api/v1/Address.GetDefault`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -233,7 +233,7 @@ export const AddressApiAxiosParamCreator = function (configuration?: Configurati
             if (cityCode === null || cityCode === undefined) {
                 throw new RequiredError('cityCode','Required parameter cityCode was null or undefined when calling apiV1AddressGetDistrictsCityCodeGet.');
             }
-            const localVarPath = `/api/v1/Address/GetDistricts/{cityCode}`
+            const localVarPath = `/api/v1/Address.GetDistricts/{cityCode}`
                 .replace(`{${"cityCode"}}`, encodeURIComponent(String(cityCode)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -286,7 +286,7 @@ export const AddressApiAxiosParamCreator = function (configuration?: Configurati
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling apiV1AddressGetIdGet.');
             }
-            const localVarPath = `/api/v1/Address/Get/{id}`
+            const localVarPath = `/api/v1/Address.Get/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -340,7 +340,7 @@ export const AddressApiAxiosParamCreator = function (configuration?: Configurati
             if (name === null || name === undefined) {
                 throw new RequiredError('name','Required parameter name was null or undefined when calling apiV1AddressUpdateNamePost.');
             }
-            const localVarPath = `/api/v1/Address/Update/{name}`
+            const localVarPath = `/api/v1/Address.Update/{name}`
                 .replace(`{${"name"}}`, encodeURIComponent(String(name)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -398,7 +398,7 @@ export const AddressApiAxiosParamCreator = function (configuration?: Configurati
             if (name === null || name === undefined) {
                 throw new RequiredError('name','Required parameter name was null or undefined when calling apiV1AddressUpsertNamePost.');
             }
-            const localVarPath = `/api/v1/Address/Upsert/{name}`
+            const localVarPath = `/api/v1/Address.Upsert/{name}`
                 .replace(`{${"name"}}`, encodeURIComponent(String(name)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');

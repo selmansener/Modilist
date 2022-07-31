@@ -1,7 +1,9 @@
 ﻿
 using Modilist.Domains.Base;
+using Modilist.Domains.Exceptions;
 using Modilist.Domains.Models.AccountDomain;
 using Modilist.Domains.Models.AddressDomain;
+using Modilist.Domains.Models.SalesOrderDomain;
 using Modilist.Infrastructure.Shared.Enums;
 
 namespace Modilist.Domains.Models.ReturnDomain
@@ -22,6 +24,8 @@ namespace Modilist.Domains.Models.ReturnDomain
         public Account Account { get; private set; }
 
         public int SalesOrderId { get; private set; }
+
+        public SalesOrder SalesOrder { get; private set; }
 
         public int? ReturnAddressId { get; private set; }
 
@@ -62,6 +66,16 @@ namespace Modilist.Domains.Models.ReturnDomain
                 address.District,
                 address.FullAddress,
                 address.ZipCode);
+        }
+
+        public void AddReturnLineItem(int productId)
+        {
+            if (LineItems.Any(x => x.ProductId == productId))
+            {
+                throw new DuplicateReturnLineItemException(AccountId, Id, productId);
+            }
+
+            _lineItems.Add(new ReturnLineItem(Id, productId));
         }
     }
 }

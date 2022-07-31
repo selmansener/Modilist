@@ -21,7 +21,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.StylePreferences))]
-        [HttpGet("Get")]
+        [HttpGet("[controller].Get")]
         [ProducesResponseType(typeof(PreferedFabricPropertiesDTO), 200)]
         public async Task<IActionResult> Get()
         {
@@ -31,7 +31,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.StylePreferences))]
-        [HttpPost("Upsert")]
+        [HttpPost("[controller].Upsert")]
         [ProducesResponseType(typeof(PreferedFabricPropertiesDTO), 200)]
         public async Task<IActionResult> Upsert(UpsertPreferedFabricProperties input, CancellationToken cancellationToken)
         {

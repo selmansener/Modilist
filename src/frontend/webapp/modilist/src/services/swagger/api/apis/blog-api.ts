@@ -30,7 +30,7 @@ export const BlogApiAxiosParamCreator = function (configuration?: Configuration)
          * @throws {RequiredError}
          */
         apiV1BlogGetGet: async (apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Blog/Get`;
+            const localVarPath = `/api/v1/Blog.Get`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;

@@ -32,7 +32,7 @@ export const ReturnApiAxiosParamCreator = function (configuration?: Configuratio
          * @throws {RequiredError}
          */
         apiV1ReturnCreatePost: async (body?: CreateReturn, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Return/Create`;
+            const localVarPath = `/api/v1/Return.Create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -88,7 +88,7 @@ export const ReturnApiAxiosParamCreator = function (configuration?: Configuratio
             if (salesOrderId === null || salesOrderId === undefined) {
                 throw new RequiredError('salesOrderId','Required parameter salesOrderId was null or undefined when calling apiV1ReturnGetSalesOrderIdPost.');
             }
-            const localVarPath = `/api/v1/Return/Get/{salesOrderId}`
+            const localVarPath = `/api/v1/Return.Get/{salesOrderId}`
                 .replace(`{${"salesOrderId"}}`, encodeURIComponent(String(salesOrderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');

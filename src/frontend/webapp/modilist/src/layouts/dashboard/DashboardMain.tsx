@@ -24,20 +24,11 @@ export function DashboardMain(props: React.PropsWithChildren<DashboardMainProps>
                 mb: 4
             }}
         >
-            <Helmet>
+            {/* <Helmet>
                 <title>{`${t(title)} | Modilist`}</title>
-            </Helmet>
+            </Helmet> */}
             <Grid container spacing={2}>
-                {title !== "" && <Grid item xs={12}>
-                    {icon}
-                    <Typography variant="h4" component="span">
-                        &nbsp;{t(title)}
-                    </Typography>
-                </Grid>}
-                <Grid item container xs={12} spacing={2}>
-                    {props.children}
-                    <Outlet />
-                </Grid>
+                <Outlet />
             </Grid>
         </Box>
     )
