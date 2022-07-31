@@ -7,11 +7,15 @@ import { Trans, useTranslation } from "react-i18next";
 import { FabricProperties } from "./FabricProperties";
 import { FitPreferences } from "./FitPreferences";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import Loading from "../../layouts/callback/Loading";
 import { useNavigate } from "react-router-dom";
 import { SizeInfo } from "./SizeInfo";
 import { StylePreferences } from "./StylePreferences";
 import { Subscription } from "./Subscription";
+import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
+import CheckroomIcon from '@mui/icons-material/Checkroom';
+import StraightenIcon from '@mui/icons-material/Straighten';
+import GradientIcon from '@mui/icons-material/Gradient';
+import CardMembershipIcon from '@mui/icons-material/CardMembership';
 
 const steps = [
     {
@@ -67,12 +71,12 @@ export function WelcomeSteps() {
         alignItems: 'center',
         ...(ownerState.active && {
             backgroundImage:
-                'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
-            boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+                'linear-gradient( 136deg, rgb(47,34,68) 0%, rgb(150, 141, 179) 100%)',
+            boxShadow: '0 4px 6px 0 rgba(150, 141, 179,.45)',
         }),
         ...(ownerState.completed && {
             backgroundImage:
-                'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+                'linear-gradient( 136deg, rgb(47,34,68) 0%, rgb(150, 141, 179) 100%)',
         }),
     }));
 
@@ -80,11 +84,11 @@ export function WelcomeSteps() {
         const { active, completed, className } = props;
 
         const icons: { [index: string]: React.ReactElement } = {
-            1: <AccountBoxIcon />,
-            2: <AccountBoxIcon />,
-            3: <AccountBoxIcon />,
-            4: <AccountBoxIcon />,
-            5: <AccountBoxIcon />,
+            1: <SensorOccupiedIcon />,
+            2: <CheckroomIcon />,
+            3: <StraightenIcon />,
+            4: <GradientIcon />,
+            5: <CardMembershipIcon />,
         };
 
         return (
@@ -122,7 +126,7 @@ export function WelcomeSteps() {
                                     <Trans>
                                         <Typography sx={{
                                             mt: 1
-                                        }}>{t(step.title)}</Typography>
+                                        }} align="center">{t(step.title)}</Typography>
                                     </Trans>
                                 </StepLabel>
                             </Step>
@@ -135,9 +139,9 @@ export function WelcomeSteps() {
                     {t('Layouts.Welcome.WelcomeLayout.Description1')}
                 </Typography>
             </Grid>
-          
 
-    
+
+
             {activeStep === steps.length
                 ? <Grid item xs={12}>
                     <CircularProgress />
@@ -146,14 +150,14 @@ export function WelcomeSteps() {
                     {steps[activeStep].component}
                 </Grid>
             }
-                        <Fab sx={{position: "fixed", bottom: 80, right: 20}}variant="extended" onClick={() => {
+            <Fab sx={{ position: "fixed", bottom: 80, right: 20 }} variant="extended" onClick={() => {
                 window.scrollTo({
                     top: 0,
                     left: 0,
                     behavior: 'smooth'
-                  });
+                });
             }}><NavigationIcon sx={{ mr: 1 }} />
-            {t('Layouts.Welcome.WelcomeSteps.Buttons.Navigate')}</Fab>
+                {t('Layouts.Welcome.WelcomeSteps.Buttons.Navigate')}</Fab>
         </Grid>
     );
 }

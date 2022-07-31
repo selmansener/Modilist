@@ -59,7 +59,8 @@
             "FabricProperties": "Renk & Kumaş",
             "Addresses": "Kayıtlı Adreslerim",
             "PaymentMethods": "Kayıtlı Kartlarım",
-            "Settings": "Hesap Ayarlarım"
+            "Settings": "Hesap Ayarlarım",
+            "Welcome": "Hoşgeldin"
         },
         "Main": {
             "ActiveSalesOrders": "Aktif Siparişlerim",

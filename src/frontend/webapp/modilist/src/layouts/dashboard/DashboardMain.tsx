@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material"
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import { Outlet } from "react-router-dom";
 
 interface DashboardMainProps {
     title: string,
@@ -35,6 +36,7 @@ export function DashboardMain(props: React.PropsWithChildren<DashboardMainProps>
                 </Grid>}
                 <Grid item container xs={12} spacing={2}>
                     {props.children}
+                    <Outlet />
                 </Grid>
             </Grid>
         </Box>

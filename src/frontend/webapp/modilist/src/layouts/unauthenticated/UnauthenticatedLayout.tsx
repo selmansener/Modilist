@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { useMsal } from "@azure/msal-react";
 import { config } from '../../config';
-import { useEffect, useState } from 'react';
-import { AccountDTO } from '../../services/swagger/api/models';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch, RootState } from '../../store/store';
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 
 export default function Unauthenticated() {
     const { instance } = useMsal();
@@ -17,6 +15,8 @@ export default function Unauthenticated() {
     })
 
     return (
-        <></>
+        <React.Fragment>
+            <Outlet />
+        </React.Fragment>
     );
 }

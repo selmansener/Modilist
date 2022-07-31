@@ -1,14 +1,9 @@
 import * as React from 'react';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PaymentIcon from '@mui/icons-material/Payment';
-import CheckroomIcon from '@mui/icons-material/Checkroom';
-import StraightenIcon from '@mui/icons-material/Straighten';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import BoyIcon from '@mui/icons-material/Boy';
 import HomeIcon from '@mui/icons-material/Home';
-import { Account } from '../pages/account/Account';
 import { Addresses } from '../pages/adresses/Addresses';
 import { Main } from '../pages/main/Main';
 import { PaymentMethods } from '../pages/paymentMethods/PaymentMethods';
@@ -19,8 +14,6 @@ import { Route, Routes } from 'react-router-dom';
 import Page from '../pages/Page';
 import Dashboard from './dashboard/DashboardLayout';
 import WelcomeLayout from './welcome/WelcomeLayout';
-import Callback from './callback/CallbackLayout';
-import ComingSoonLayout from './comingSoon/ComingSoonLayout';
 import NotFound from './notFound/NotFound';
 import Unauthenticated from './unauthenticated/UnauthenticatedLayout';
 import { GenderSelection } from '../pages/welcome/GenderSelection';
@@ -40,40 +33,30 @@ interface RouterOptions {
     name: string;
   };
   component: React.ReactNode;
-  layout: string;
+  layout: {
+    path: string;
+    component: React.ReactNode;
+  };
   roles?: string[];
   isPublic: boolean;
-  environments: Environment[];
+  disabledEnvironments: Environment[];
 }
 
 const routes: RouterOptions[] = [
   {
     title: "Login",
-    route: "/",
+    route: "",
     component: <></>,
-    layout: "unauthenticated",
+    layout: {
+      path: "/unauthenticated",
+      component: <Unauthenticated />
+    },
     isPublic: true,
-    environments: ["production", "development", "int", "staging"]
-  },
-  {
-    title: "Coming Soon",
-    route: "/",
-    component: <></>,
-    layout: "comingsoon",
-    isPublic: false,
-    environments: ["production"]
-  },
-  {
-    title: "Loading",
-    route: "/callback",
-    component: <></>,
-    layout: "callback",
-    isPublic: false,
-    environments: ["production", "development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.Main",
-    route: "/",
+    route: "",
     menuItem: {
       icon: <HomeIcon sx={{
         verticalAlign: "sub"
@@ -81,13 +64,18 @@ const routes: RouterOptions[] = [
       name: "Pages.Titles.Main"
     },
     component: <Main />,
-    layout: "dashboard",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.Main"} icon={<HomeIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SalesOrders",
-    route: "/sales-orders",
+    route: "sales-orders",
     menuItem: {
       icon: <ShoppingBasketIcon sx={{
         verticalAlign: "sub"
@@ -95,151 +83,203 @@ const routes: RouterOptions[] = [
       name: "Pages.Titles.SalesOrders"
     },
     component: <SalesOrders />,
-    layout: "dashboard",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.SalesOrders"} icon={<ShoppingBasketIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SalesOrders",
-    route: "/sales-orders/:salesOrderId",
+    route: "sales-orders/:salesOrderId",
     component: <SalesOrderDetails />,
-    layout: "dashboard",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.SalesOrders"} icon={<ShoppingBasketIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SalesOrders",
-    route: "/sales-orders/:salesOrderId/checkout",
+    route: "sales-orders/:salesOrderId/checkout",
     component: <Checkout />,
-    layout: "dashboard",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.SalesOrders"} icon={<ShoppingBasketIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SizeInfo",
-    route: "/size-info",
+    route: "size-info",
     menuItem: {
       icon: <BoyIcon sx={{
         verticalAlign: "sub"
-      }}/>,
+      }} />,
       name: "Pages.Titles.SizeInfo"
     },
-    layout: "dashboard",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.SizeInfo"} icon={<BoyIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     component: <SizeInfo />,
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.StylePreferences",
-    route: "/style-preferences",
+    route: "style-preferences",
     menuItem: {
       icon: <BoyIcon sx={{
         verticalAlign: "sub"
-      }}/>,
+      }} />,
       name: "Pages.Titles.StylePreferences"
     },
-    layout: "dashboard",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.StylePreferences"} icon={<BoyIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     component: <StylePreferences />,
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.FitPreferences",
-    route: "/fit-preferences",
+    route: "fit-preferences",
     menuItem: {
       icon: <BoyIcon sx={{
         verticalAlign: "sub"
-      }}/>,
+      }} />,
       name: "Pages.Titles.FitPreferences"
     },
-    layout: "dashboard",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.FitPreferences"} icon={<BoyIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     component: <FitPreferences />,
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.FabricProperties",
-    route: "/fabric-properties",
+    route: "fabric-properties",
     menuItem: {
       icon: <BoyIcon sx={{
         verticalAlign: "sub"
-      }}/>,
+      }} />,
       name: "Pages.Titles.FabricProperties"
     },
-    layout: "dashboard",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.FabricProperties"} icon={<BoyIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     component: <FabricProperties />,
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.Settings",
-    route: "/settings",
-    layout: "dashboard",
+    route: "settings",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.Settings"} icon={<ShoppingBasketIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     component: <AccountSettings />,
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
-    title: "Kayıtlı Kartlarım",
-    route: "/payment-methods",
+    title: "Pages.Titles.PaymentMethods",
+    route: "payment-methods",
     menuItem: {
       icon: <PaymentIcon sx={{
         verticalAlign: "sub"
-      }}/>,
-      name: "Kayıtlı Kartlarım"
+      }} />,
+      name: "Pages.Titles.PaymentMethods"
     },
-    layout: "dashboard",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.PaymentMethods"} icon={<PaymentIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     component: <PaymentMethods />,
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
-    title: "Adreslerim",
-    route: "/addresses",
+    title: "Pages.Titles.Addresses",
+    route: "addresses",
     menuItem: {
       icon: <LocationOnIcon sx={{
         verticalAlign: "sub"
-      }}/>,
-      name: "Adreslerim"
+      }} />,
+      name: "Pages.Titles.Addresses"
     },
-    layout: "dashboard",
+    layout: {
+      path: "/",
+      component: <Dashboard title={"Pages.Titles.Addresses"} icon={<LocationOnIcon sx={{
+        verticalAlign: "sub"
+      }} />} />
+    },
     component: <Addresses />,
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
-    title: "Hoşgeldiniz",
-    route: "/welcome/gender",
-    layout: "welcome",
+    title: "Pages.Titles.Welcome",
+    route: "gender",
+    layout: {
+      path: "/welcome",
+      component: <WelcomeLayout title="Pages.Titles.Welcome" />
+    },
     component: <GenderSelection />,
     isPublic: false,
-    environments: ["development", "int", "staging"]
+    disabledEnvironments: []
   },
   {
-    title: "Hoşgeldiniz",
-    route: "/welcome",
-    layout: "welcome",
+    title: "Pages.Titles.Welcome",
+    route: "",
+    layout: {
+      path: "/welcome",
+      component: <WelcomeLayout title="Pages.Titles.Welcome" />
+    },
     component: <WelcomeSteps />,
     isPublic: false,
-    environments: ["development", "int", "staging"]
-  },
-  {
-    title: "NotFound",
-    route: "*",
-    layout: "",
-    component: <></>,
-    isPublic: false,
-    environments: ["production", "development", "int", "staging"]
-  },
-  {
-    title: "NotFound",
-    route: "*",
-    layout: "",
-    component: <></>,
-    isPublic: true,
-    environments: ["production", "development", "int", "staging"]
+    disabledEnvironments: []
   },
 ]
+
+export const menuItems = routes.filter(x => x.menuItem !== undefined).map(x => {
+  if (x.menuItem) {
+    return {
+      ...x.menuItem,
+      route: x.route
+    }
+  }
+  else {
+    throw new Error("missing menuItem")
+  }
+});
 
 export interface RouterProps {
   environment: Environment;
@@ -251,55 +291,34 @@ export function Router(props: RouterProps) {
   const { environment, isPublic, role } = props;
 
   const filteredRoutes = routes.filter(route =>
-    route.environments.some(env => env === environment)
+    route.disabledEnvironments.every(env => env !== environment)
     && route.isPublic === isPublic
     && (route.roles === undefined || route.roles?.length === 0 || (route.roles && route.roles.some(r => r === role)))
   );
 
-  const RenderRoute = (routeOptions: RouterOptions) => {
-    // TODO: replace switch with router Outlet or Layout
-    switch (routeOptions.layout) {
-      case "dashboard":
-        return (<Dashboard
-          title={routeOptions.title}
-          icon={routeOptions.menuItem?.icon}
-          menuItems={filteredRoutes.filter(x => x.menuItem !== undefined).map(x => {
-            if (x.menuItem) {
-              return {
-                ...x.menuItem,
-                route: x.route
-              }
-            }
-            else {
-              throw new Error("missing menuItem")
-            }
-          })}>
-          {routeOptions.component}
-        </Dashboard>);
-      case "welcome":
-        return (<WelcomeLayout>
-          {routeOptions.component}
-        </WelcomeLayout>)
-      case "callback":
-        return (<Callback />)
-      case "comingsoon":
-        return (<ComingSoonLayout />)
-      case "unauthenticated":
-        return (<Unauthenticated />)
-      default:
-        return <NotFound />
-    }
+  const groupedRoutes = filteredRoutes.reduce((a: any,b: any) => {
+    ((a[b["layout"]["path"]] as any) = a[b["layout"]["path"]] || []).push(b);
+    return a;
+  }, {});
+
+  const RenderRoutes = () => {
+    const routes = [];
+    return Object.keys(groupedRoutes).map((key: string) => {
+      console.log("key", key);
+      var group: RouterOptions[] = groupedRoutes[key as keyof typeof groupedRoutes];
+      return <Route key={key} path={key} element={group[0].layout.component as React.ReactNode}>
+        {group.map(route => {
+          console.log("route", route.route)
+          return <Route key={route.route} path={route.route} element={route.component} />
+        })}
+      </Route>
+    })
   }
 
   return (
     <Routes>
-      {filteredRoutes.map((route: RouterOptions) => {
-        return <Route key={route.route} path={route.route} element={(
-          <Page title={route.title}>
-            {RenderRoute(route)}
-          </Page>
-        )} />
-      })}
+      {RenderRoutes()}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

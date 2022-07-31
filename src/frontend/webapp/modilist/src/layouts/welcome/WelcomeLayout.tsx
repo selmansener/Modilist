@@ -3,20 +3,23 @@ import { useEffect } from "react";
 import { RootState, Dispatch } from "../../store/store";
 import { useDispatch, useSelector } from 'react-redux';
 import { useMsal } from "@azure/msal-react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { AccountState } from "../../services/swagger/api";
+import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
+import { ImageComponent } from "../../components/image/ImageComponent";
 
-export interface WelcomeLayoutProps { }
+export interface WelcomeLayoutProps {
+    title: string;
+}
 
 export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayoutProps>) {
     const { instance: msal } = useMsal();
+    const { title } = props;
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const { isBusy: getAccountIsBusy, data: account, status: getAccountStatus } = useSelector((state: RootState) => state.getAccountModel);
     const dispatch = useDispatch<Dispatch>();
-
-    useEffect(() => {
-        document.title = "Hoşgeldiniz | Modilist";
-    }, []);
 
     useEffect(() => {
         if (!getAccountIsBusy && account?.id === "") {
@@ -48,11 +51,18 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
 
     return (
         <Box component="main">
+            <Helmet>
+                {`${t(title)} | Modilist`}
+            </Helmet>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography sx={{ flexGrow: 1 }} align="center" color="#fff">
-                        Modilist
-                    </Typography>
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        flexGrow: 1
+                    }}>
+                        <ImageComponent width={200} src="/whitehorizontallogo.svg" />
+                    </Box>
                 </Toolbar>
             </AppBar>
             <Container maxWidth="xl" sx={{
@@ -60,7 +70,7 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
                 mb: 2
             }}>
                 <Grid container>
-                    {props.children}
+                    <Outlet />
                 </Grid>
             </Container>
         </Box>

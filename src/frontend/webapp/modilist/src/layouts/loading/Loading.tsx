@@ -1,4 +1,5 @@
 import { Box, CircularProgress } from "@mui/material";
+import { Helmet } from "react-helmet";
 import useWindowDimensions from "../../utils/windowDimensions";
 
 export default function Loading() {
@@ -11,6 +12,9 @@ export default function Loading() {
         alignItems: 'center',
         justifyContent: 'center'
     }}>
+        <Helmet>
+            Loading | Modilist
+        </Helmet>
         <CircularProgress />
     </Box>
 }

@@ -8,13 +8,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch, RootState } from '../../store/store';
 import { AccountState } from '../../services/swagger/api';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../callback/Loading';
 import { useMsal } from '@azure/msal-react';
+import useWindowDimensions from '../../utils/windowDimensions';
+import { CircularProgress } from '@mui/material';
+import { menuItems } from '../Router';
 
 interface DashboardProps {
-  menuItems: MenuItem[],
+  // menuItems: MenuItem[],
   title: string,
   icon: React.ReactNode,
+}
+
+function Loading() {
+  const { height, width } = useWindowDimensions();
+
+  return <Box sx={{
+      display: 'flex',
+      width: width,
+      height: height,
+      alignItems: 'center',
+      justifyContent: 'center'
+  }}>
+      <CircularProgress />
+  </Box>
 }
 
 export default function Dashboard(props: React.PropsWithChildren<DashboardProps>) {
@@ -23,7 +39,7 @@ export default function Dashboard(props: React.PropsWithChildren<DashboardProps>
   const { isBusy: getAccountIsBusy, data: currentAccount, status: getAccountStatus } = useSelector((state: RootState) => state.getAccountModel);
   const { isBusy: createAccountIsBusy, data: createAccountResponse, status: createAccountStatus } = useSelector((state: RootState) => state.createAccountModel);
   const dispatch = useDispatch<Dispatch>();
-  const { menuItems, title, icon } = props;
+  const { title, icon } = props;
 
   useEffect(() => {
     let activeAccount = msal.getActiveAccount();
