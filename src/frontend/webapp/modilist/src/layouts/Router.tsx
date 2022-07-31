@@ -48,7 +48,7 @@ const routes: RouterOptions[] = [
     route: "",
     component: <></>,
     layout: {
-      path: "/unauthenticated",
+      path: "/",
       component: <Unauthenticated />
     },
     isPublic: true,
