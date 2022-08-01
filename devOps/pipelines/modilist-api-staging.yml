@@ -29,6 +29,7 @@ steps:
     inputs:
       command: 'publish'
       publishWebProjects: true
+      arguments: '-o $(System.DefaultWorkingDirectory)\Modilist.Functions.ScheduledJobs\'
       workingDirectory: '$(System.DefaultWorkingDirectory)\src\backend\Modilist\Modilist.Functions.ScheduledJobs'
   - task: AzureFunctionApp@1
     displayName: Deploy Functions
@@ -36,5 +37,5 @@ steps:
       azureSubscription: 'Microsoft Azure Sponsorship(cd6bc22e-8b3a-4c6e-9c03-03152a8567ea)'
       appType: 'functionApp'
       appName: 'func-scheduled-modilist-staging-westeu'
-      package: '$(System.DefaultWorkingDirectory)/**/Modilist.Functions.ScheduledJobs/*.zip'
+      package: '$(System.DefaultWorkingDirectory)/Modilist.Functions.ScheduledJobs/**/*.zip'
       deploymentMethod: 'auto'
