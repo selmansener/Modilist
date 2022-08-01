@@ -10,11 +10,13 @@ pool:
 
 steps:
   - task: DotNetCoreCLI@2
+    displayName: Publish WebAPI
     inputs:
       command: 'publish'
       publishWebProjects: true
       workingDirectory: '$(System.DefaultWorkingDirectory)\src\backend\Modilist\Modilist.API'
   - task: AzureRmWebAppDeployment@4
+    displayName: Deploy WebAPI
     inputs:
       ConnectionType: 'AzureRM'
       azureSubscription: 'Microsoft Azure Sponsorship(cd6bc22e-8b3a-4c6e-9c03-03152a8567ea)'
@@ -22,3 +24,17 @@ steps:
       WebAppName: 'app-modilist-prod-westeu'
       packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
       RuntimeStack: 'DOTNETCORE|6.0'
+  - task: DotNetCoreCLI@2
+    displayName: Publish Functions
+    inputs:
+      command: 'publish'
+      publishWebProjects: true
+      workingDirectory: '$(System.DefaultWorkingDirectory)\src\backend\Modilist\Modilist.Functions.ScheduledJobs'
+  - task: AzureFunctionApp@1
+    displayName: Deploy Functions
+    inputs:
+      azureSubscription: 'Microsoft Azure Sponsorship(cd6bc22e-8b3a-4c6e-9c03-03152a8567ea)'
+      appType: 'functionApp'
+      appName: 'func-scheduled-modilist-prod-westeu'
+      package: '$(System.DefaultWorkingDirectory)/**/Modilist.Functions.ScheduledJobs/*.zip'
+      deploymentMethod: 'auto'
