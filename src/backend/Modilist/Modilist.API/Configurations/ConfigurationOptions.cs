@@ -2,7 +2,7 @@
 
 namespace Modilist.API.Configurations
 {
-    public class ConfigurationOptions
+    internal class ConfigurationOptions
     {
         public AzureAdB2COptions AzureAdB2COptions { get; set; }
 

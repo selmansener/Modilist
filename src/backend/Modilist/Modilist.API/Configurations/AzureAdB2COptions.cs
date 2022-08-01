@@ -1,6 +1,6 @@
 ﻿namespace Modilist.API.Configurations
 {
-    public class AzureAdB2COptions
+    internal class AzureAdB2COptions
     {
         public string Domain { get; set; }
 

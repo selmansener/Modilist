@@ -18,10 +18,12 @@ namespace Modilist.Data.Transactions
     {
         private readonly ModilistDbContext _dbContext;
         private IDbContextTransaction _dbTransaction;
+        private readonly bool _shouldDisposeDbContext;
 
-        public TransactionManager(ModilistDbContext dbContext)
+        public TransactionManager(ModilistDbContext dbContext, bool shouldDisposeDbContext = true)
         {
             _dbContext = dbContext;
+            _shouldDisposeDbContext = shouldDisposeDbContext;
         }
 
         public async Task BeginTransactionAsync(CancellationToken cancellationToken)
@@ -68,7 +70,10 @@ namespace Modilist.Data.Transactions
                     _dbTransaction.Dispose();
                 }
 
-                _dbContext.Dispose();
+                if (_shouldDisposeDbContext)
+                {
+                    _dbContext.Dispose();
+                }
             }
         }
     }

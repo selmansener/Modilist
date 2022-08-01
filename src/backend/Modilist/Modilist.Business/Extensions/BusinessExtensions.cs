@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using MediatR;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using Modilist.Business.CQRS.UserDomain.Commands;
 using Modilist.Business.PipelineBehaviors;
@@ -49,7 +50,7 @@ namespace Modilist.Business.Extensions
 
         public static IServiceCollection AddTransactionBehavior(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
 
             return services;
         }

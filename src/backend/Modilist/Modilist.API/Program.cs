@@ -1,31 +1,32 @@
+using System.Net;
+
+using Mapster;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Identity.Web;
+using Microsoft.OpenApi.Models;
 
 using Modilist.API.AuthorizationPolicies;
 using Modilist.API.Configurations;
-using Modilist.Business.Seed;
-using Modilist.Business.Extensions;
-using Modilist.Data.Extensions;
-using Swashbuckle.AspNetCore.SwaggerUI;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Modilist.API.SwaggerConfiguration.Filters;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Modilist.API.Middlewares;
-using Newtonsoft.Json.Converters;
-using Modilist.API.Extensions;
-using FluentValidation.AspNetCore;
+using Modilist.API.SwaggerConfiguration.Filters;
+using Modilist.Business.Extensions;
+using Modilist.Business.Seed;
 using Modilist.Business.Utils.Extensions;
-using Modilist.Infrastructure.Shared.Configurations;
+using Modilist.Data.Extensions;
 using Modilist.Infrastructure.Azure.Extensions;
-using Mapster;
-using Modilist.Business.CQRS.SalesOrderDomain.DTOs;
-using System.Net;
+using Modilist.Infrastructure.Shared.Configurations;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
+
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 const string CorsPolicyName = "Default";
 const string ApiTitle = "ModilistAPI";
@@ -42,7 +43,7 @@ builder.Services.Configure<ConfigurationOptions>(configuration =>
 {
     configuration.DevelopmentApiKey = config.DevelopmentApiKey;
     configuration.AllowedOrigins = config.AllowedOrigins;
-    configuration.AzureAdB2COptions= config.AzureAdB2COptions;
+    configuration.AzureAdB2COptions = config.AzureAdB2COptions;
     configuration.ModilistDbConnectionOptions = config.ModilistDbConnectionOptions;
 });
 
@@ -179,7 +180,7 @@ void ConfigureSwaggerGenerator(SwaggerGenOptions options)
     options.SwaggerDoc("v1", new OpenApiInfo { Title = ApiTitle, Version = "v1" });
     options.CustomSchemaIds(DefaultSchemaIdSelector);
     var permissions = GetPermissions().ToDictionary(
-        x => $"https://{config.AzureAdB2COptions.Domain}/{config.AzureAdB2COptions.ClientId}/{x.Value}", 
+        x => $"https://{config.AzureAdB2COptions.Domain}/{config.AzureAdB2COptions.ClientId}/{x.Value}",
         x => x.Key);
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

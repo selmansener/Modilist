@@ -14,6 +14,7 @@ namespace Modilist.Data.Repositories.Base
         void BeginTransactionAsync(CancellationToken cancellationToken);
         void Detach(TEntity entity);
         void DetachAll(IEnumerable<TEntity> entities);
+        Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken);
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> GetAllAsNoTracking();
         Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken);
@@ -30,6 +31,11 @@ namespace Modilist.Data.Repositories.Base
         public BaseRepository(ModilistDbContext baseDb)
         {
             _baseDb = baseDb;
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
+        {
+            return await _baseDb.Set<TEntity>().ToListAsync(cancellationToken);
         }
 
         public virtual IQueryable<TEntity> GetAll()

@@ -4,8 +4,24 @@
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Settings\appsettings.Development.json" />
+    <None Remove="Settings\appsettings.Int.json" />
+    <None Remove="Settings\appsettings.Production.json" />
+    <None Remove="Settings\appsettings.Staging.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Settings\appsettings.Development.json" />
+    <EmbeddedResource Include="Settings\appsettings.Int.json" />
+    <EmbeddedResource Include="Settings\appsettings.Production.json" />
+    <EmbeddedResource Include="Settings\appsettings.Staging.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modilist.Business\Modilist.Business.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

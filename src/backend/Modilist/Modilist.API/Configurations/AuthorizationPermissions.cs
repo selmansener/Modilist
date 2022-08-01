@@ -1,6 +1,6 @@
 ﻿namespace Modilist.API.Configurations
 {
-    public struct AuthorizationPermissions
+    internal struct AuthorizationPermissions
 #pragma warning restore CA1815 // Override equals and operator equals on value types
     {
         public const string Accounts = "Accounts";
