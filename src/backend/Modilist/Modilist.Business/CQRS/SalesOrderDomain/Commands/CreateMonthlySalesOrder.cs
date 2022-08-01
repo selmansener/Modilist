@@ -5,6 +5,8 @@ using MediatR;
 
 using Microsoft.Extensions.Logging;
 
+using Modilist.Business.Exceptions;
+using Modilist.Data.Repositories.AddressDomain;
 using Modilist.Data.Repositories.SalesOrderDomain;
 using Modilist.Domains.Models.SalesOrderDomain;
 
@@ -31,12 +33,14 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
     internal class CreateMonthlySalesOrderHandler : IRequestHandler<CreateMonthlySalesOrder>
     {
         private readonly ISalesOrderRepository _salesOrderRepository;
+        private readonly IAddressRepository _addressRepository;
         private readonly ILogger<CreateMonthlySalesOrderHandler> _logger;
 
-        public CreateMonthlySalesOrderHandler(ISalesOrderRepository salesOrderRepository, ILogger<CreateMonthlySalesOrderHandler> logger)
+        public CreateMonthlySalesOrderHandler(ISalesOrderRepository salesOrderRepository, ILogger<CreateMonthlySalesOrderHandler> logger, IAddressRepository addressRepository)
         {
             _salesOrderRepository = salesOrderRepository;
             _logger = logger;
+            _addressRepository = addressRepository;
         }
 
         public async Task<Unit> Handle(CreateMonthlySalesOrder request, CancellationToken cancellationToken)
@@ -60,7 +64,16 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
                 return Unit.Value;
             }
 
+            var defaultAddress = await _addressRepository.GetDefaultByAccountIdAsync(request.AccountId, cancellationToken);
+
+            if (defaultAddress == null)
+            {
+                throw new DefaultAddressNotFoundException(request.AccountId);
+            }
+
             var salesOrder = new SalesOrder(request.AccountId);
+
+            salesOrder.AssignAddress(defaultAddress);
 
             await _salesOrderRepository.AddAsync(salesOrder, cancellationToken);
 

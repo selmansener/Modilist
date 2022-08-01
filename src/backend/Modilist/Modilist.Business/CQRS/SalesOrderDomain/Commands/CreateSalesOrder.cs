@@ -30,12 +30,12 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
     internal class CreateSalesOrderHandler : IRequestHandler<CreateSalesOrder, SalesOrderDTO>
     {
         private readonly ISalesOrderRepository _salesOrderRepository;
-        private readonly IAddressRepository _addressRespository;
+        private readonly IAddressRepository _addressRepository;
 
         public CreateSalesOrderHandler(ISalesOrderRepository salesOrderRepository, IAddressRepository addressRespository)
         {
             _salesOrderRepository = salesOrderRepository;
-            _addressRespository = addressRespository;
+            _addressRepository = addressRespository;
         }
 
         public async Task<SalesOrderDTO> Handle(CreateSalesOrder request, CancellationToken cancellationToken)
@@ -51,7 +51,12 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
                 throw new AccountHasActiveSalesOrderException(request.AccountId, startDate, endDate);
             }
 
-            Address? address = await _addressRespository.GetDefaultByAccountIdAsync(request.AccountId, cancellationToken);
+            Address? address = await _addressRepository.GetDefaultByAccountIdAsync(request.AccountId, cancellationToken);
+
+            if (address == null)
+            {
+                throw new DefaultAddressNotFoundException(request.AccountId);
+            }
 
             var salesOrder = new SalesOrder(request.AccountId);
 
