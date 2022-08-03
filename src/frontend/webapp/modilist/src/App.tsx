@@ -125,6 +125,10 @@ const mdTheme = createTheme({
           color: #BCBC86;
         }
 
+        a {
+          text-decoration: none;
+        }
+
         a.active[aria-current='page'] {
           & .MuiListItemButton-root {
             background-color: #2F2244
@@ -136,6 +140,10 @@ const mdTheme = createTheme({
 
           & .MuiTypography-root, & .MuiSvgIcon-root {
             color: #fff
+          }
+
+          & .MuiButton-text {
+            text-decoration: underline;
           }
         }
       `

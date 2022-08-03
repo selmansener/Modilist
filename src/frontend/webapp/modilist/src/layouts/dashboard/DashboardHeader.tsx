@@ -1,10 +1,8 @@
-import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent, Avatar, Grid, Box, Container } from "@mui/material"
-import React from "react";
-import { styled, useTheme } from '@mui/material/styles';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import MuiDrawer from '@mui/material/Drawer';
+import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent, Avatar, Box, Portal, AppBar, Drawer, Button } from "@mui/material"
+import React, { useRef } from "react";
+import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useTranslation } from 'react-i18next'
@@ -15,30 +13,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth: number = 240;
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  //height: '180px',
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    //height: '180px',
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
 
 const supportedLanguages = [
   {
@@ -58,32 +32,6 @@ const supportedLanguages = [
     lang: "en-GB"
   }
 ]
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    '& .MuiDrawer-paper': {
-      position: 'relative',
-      whiteSpace: 'nowrap',
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      boxSizing: 'border-box',
-      ...(!open && {
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing(7),
-        [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9),
-        },
-      }),
-    },
-  }),
-);
 
 export interface MenuItem {
   name: string;
@@ -106,14 +54,14 @@ export function DashboardHeader(props: DashboardHeaderProps) {
   const { menuItems, account } = props;
   const theme = useTheme();
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [notificationsIcon, setNotificationsIcon] = React.useState<null | HTMLElement>(null);
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleNotificationMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setNotificationsIcon(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleNotificationClose = () => {
+    setNotificationsIcon(null);
   };
 
   const logout = () => {
@@ -126,11 +74,11 @@ export function DashboardHeader(props: DashboardHeaderProps) {
     i18n.changeLanguage(event.target.value);
   }
 
+  const container = window !== undefined ? () => window.document.body : undefined;
+
   return (
-    <>
-      <AppBar position="absolute"
-        open={open}
-      >
+    <Box display="flex">
+      <AppBar position="absolute">
         <Toolbar
           sx={{
             pr: '24px', // keep right padding when drawer closed
@@ -142,10 +90,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
               color="inherit"
               aria-label="open drawer"
               onClick={toggleDrawer}
-              sx={{
-                marginRight: '18px',
-                ...(open && { display: 'none' }),
-              }}
+              sx={{ display: { sm: 'none' } }}
             >
               <MenuIcon />
             </IconButton>
@@ -157,8 +102,19 @@ export function DashboardHeader(props: DashboardHeaderProps) {
           }}>
             <ImageComponent width={200} src="/whitehorizontallogo.svg" />
           </Box>
+          <Box sx={{
+            display: { xs: 'none', sm: 'block' },
+            mr: 2
+          }}>
+            {menuItems.map((item) => (
+              <NavLink key={item.route} to={item.route}>
+                <Button sx={{ color: '#fff' }} startIcon={item.icon}>
+                  {t(item.name)}
+                </Button>
+              </NavLink>
+            ))}
+          </Box>
           <Box>
-
             <Select
               value={i18n.language}
               onChange={handleLanguageChange}
@@ -184,7 +140,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleMenu}
+              onClick={handleNotificationMenu}
               color="inherit"
             >
               <Badge badgeContent={4} color="secondary">
@@ -193,21 +149,13 @@ export function DashboardHeader(props: DashboardHeaderProps) {
             </IconButton>
             <Menu
               id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              anchorEl={notificationsIcon}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
+              open={notificationsIcon !== null}
+              onClose={handleNotificationClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleNotificationClose}>Profile</MenuItem>
+              <MenuItem onClick={handleNotificationClose}>My account</MenuItem>
               <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
             <NavLink to={"/settings"} style={{ color: "#fff" }}>
@@ -232,66 +180,79 @@ export function DashboardHeader(props: DashboardHeaderProps) {
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent"
-        open={open}
-        sx={{
-          [`& .MuiDrawer-paper`]: {
-            backgroundColor: 'rgba(150, 141, 179, 0.3);',
-            border: 'none'
-          },
-        }}>
-        <Toolbar
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            p: 4,
-            backgroundColor: theme.palette.primary.main,
-            boxShadow: '0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);'
-
-          }}
-        >
-          <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon sx={{
-              color: '#fff'
+      <Box component="nav">
+        <Portal container={container}>
+          <Drawer variant="temporary"
+            open={open}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
             }}
-            />
-          </IconButton>
-        </Toolbar>
-        <Divider />
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          p: 4
-        }}>
-          <Avatar alt={`${account?.firstName} ${account?.lastName}`} src="/static/images/avatar/3.jpg" sx={{
-            width: '48px',
-            height: '48px'
-          }} />
-          {open && <Box>
-            <Typography variant="h5" align="center" sx={{
-              mt: 2
-            }}>{`${account?.firstName} ${account?.lastName}`}</Typography>
-            {account?.jobTitle && account?.jobTitle !== "" && <Typography variant="body1" align="center">{account?.jobTitle}</Typography>}
-          </Box>}
-        </Box>
-        <Divider />
-        <List component="nav">
-          {menuItems.map((item: MenuItem) => {
-            return (
-              <NavLink key={item.route} to={item.route}>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={t(item.name)}  />
-                </ListItemButton>
-              </NavLink>
-            )
-          })}
-        </List>
-      </Drawer>
-    </>
+            sx={{
+              display: { xs: 'block', sm: 'none' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+          // sx={{
+          //   [`& .MuiDrawer-paper`]: {
+          //     backgroundColor: 'rgba(150, 141, 179, 0.3);',
+          //     border: 'none'
+          //   },
+          // }}
+          >
+            <Toolbar
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                p: 4,
+                backgroundColor: theme.palette.primary.main,
+                boxShadow: '0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);'
+
+              }}
+            >
+              <IconButton onClick={toggleDrawer}>
+                <ChevronLeftIcon sx={{
+                  color: '#fff'
+                }}
+                />
+              </IconButton>
+            </Toolbar>
+            <Divider />
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              p: 4
+            }}>
+              <Avatar alt={`${account?.firstName} ${account?.lastName}`} src="/static/images/avatar/3.jpg" sx={{
+                width: '48px',
+                height: '48px'
+              }} />
+              {open && <Box>
+                <Typography variant="h5" align="center" sx={{
+                  mt: 2
+                }}>{`${account?.firstName} ${account?.lastName}`}</Typography>
+                {account?.jobTitle && account?.jobTitle !== "" && <Typography variant="body1" align="center">{account?.jobTitle}</Typography>}
+              </Box>}
+            </Box>
+            <Divider />
+            <List component="nav">
+              {menuItems.map((item: MenuItem) => {
+                return (
+                  <NavLink key={item.route} to={item.route}>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        {item.icon}
+                      </ListItemIcon>
+                      <ListItemText primary={t(item.name)} />
+                    </ListItemButton>
+                  </NavLink>
+                )
+              })}
+            </List>
+          </Drawer>
+
+        </Portal>
+      </Box>
+    </Box>
   )
 }

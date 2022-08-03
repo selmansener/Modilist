@@ -49,7 +49,9 @@ export function BlogSection() {
                     </Link>
                 </Grid>
                 <Grid item xs={12}>
-                    <Link href={`https://modilist.com${blogMetaData.blogUrl}`} target="_blank" underline="none">
+                    <Link href={`https://modilist.com${blogMetaData.blogUrl}`} target="_blank" sx={{
+                        textDecoration: 'none'
+                    }}>
                         <Typography variant="body1">
                             {getDescription()}
                         </Typography>
