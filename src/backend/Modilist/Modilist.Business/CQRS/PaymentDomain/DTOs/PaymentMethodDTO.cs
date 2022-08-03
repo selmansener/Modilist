@@ -14,6 +14,10 @@ namespace Modilist.Business.CQRS.PaymentDomain.DTOs
 
         public string? CardBankName { get; set; }
 
+        public string CardHolderName { get; set; }
+
+        public string ExpireMonth { get; set; }
+
         public string ExpireYear { get; set; }
 
         public string CVC { get; set; }

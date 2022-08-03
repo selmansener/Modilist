@@ -28,6 +28,6 @@ export function calculateAvgSalesOrderRating(salesOrder: SalesOrderDetailsDTO) {
             }
         });
     }
-    console.log(total);
+    
     return Math.round(total / count * 2) / 2;
 }

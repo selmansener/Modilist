@@ -6,16 +6,15 @@ import { Dispatch, RootState } from "../../store/store";
 import { Trans, useTranslation } from "react-i18next";
 import { FabricProperties } from "./FabricProperties";
 import { FitPreferences } from "./FitPreferences";
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useNavigate } from "react-router-dom";
 import { SizeInfo } from "./SizeInfo";
 import { StylePreferences } from "./StylePreferences";
 import { Subscription } from "./Subscription";
-import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
 import StraightenIcon from '@mui/icons-material/Straighten';
 import GradientIcon from '@mui/icons-material/Gradient';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
+import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 
 const steps = [
     {
@@ -93,7 +92,7 @@ export function WelcomeSteps() {
         const { active, completed, className } = props;
 
         const icons: { [index: string]: React.ReactElement } = {
-            1: <SensorOccupiedIcon />,
+            1: <AccessibilityNewIcon />,
             2: <CheckroomIcon />,
             3: <StraightenIcon />,
             4: <GradientIcon />,

@@ -96,7 +96,7 @@ export function Account() {
     }, []);
 
     return (
-        <Paper>
+        <Paper elevation={6}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Typography variant='h6' align='left' sx={{ m: 1 }}>

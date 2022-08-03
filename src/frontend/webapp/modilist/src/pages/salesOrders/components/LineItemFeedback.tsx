@@ -1,4 +1,4 @@
-import { Button, Grid, Link, Typography } from "@mui/material";
+import { Button, Grid, Link, Typography, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { LineItemFeedbackDTO, ProductDTO, SalesOrderLineItemState } from "../../../services/swagger/api";
@@ -22,6 +22,7 @@ export function LineItemFeedback(props: LineItemFeedbackProps) {
     const { product, state, lineItemFeedback, lineItemId, salesOrderId, disabled } = props;
     const { t } = useTranslation();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const theme = useTheme();
 
     const handleClickOpen = () => {
         setIsModalOpen(true);
@@ -78,14 +79,11 @@ export function LineItemFeedback(props: LineItemFeedbackProps) {
                         value={calculateAvgLineItemRating(lineItemFeedback)}
                         precision={0.5} />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} textAlign="right">
                     {!disabled && <Link sx={{
-                        textDecorationLine: 'none',
                         cursor: 'pointer'
-                    }} onClick={handleClickOpen}>
-                        <Typography variant="body1" color="secondary" align="right">
-                            {t("Pages.SalesOrderFeedback.Evaluate")}
-                        </Typography>
+                    }} onClick={handleClickOpen} fontWeight={800}>
+                    {t("Pages.SalesOrderFeedback.Evaluate")}
                     </Link>}
                 </Grid>
             </React.Fragment>
@@ -94,8 +92,9 @@ export function LineItemFeedback(props: LineItemFeedbackProps) {
 
     return (
         <Grid item container xs={12} spacing={2} sx={{
-            border: 1,
+            display: 'flex',
             borderRadius: 1,
+            boxShadow: theme.shadows[6],
             pr: 2,
             pb: 2,
         }}>

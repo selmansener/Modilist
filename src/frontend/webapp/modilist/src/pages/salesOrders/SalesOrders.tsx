@@ -94,7 +94,9 @@ export function SalesOrders() {
     }
 
     return (
-        <Grid item container xs={12} spacing={2}>
+        <Grid item container xs={12} spacing={4} sx={{
+            mt: -8
+        }}>
             <Grid item container xs={12} sx={{
                 display: 'flex',
                 justifyContent: 'flex-end'
@@ -117,9 +119,11 @@ export function SalesOrders() {
                     </FormControl>
                 </Grid>
             </Grid>
-            {salesOrders?.data.map(salesOrder => {
-                return <SalesOrderListItem salesOrder={salesOrder} />
-            })}
+            <Grid item container xs={12} spacing={4}>
+                {salesOrders?.data.map(salesOrder => {
+                    return <SalesOrderListItem salesOrder={salesOrder} />
+                })}
+            </Grid>
             <Grid item xs={12} sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -128,10 +132,10 @@ export function SalesOrders() {
             }}>
                 {salesOrdersIsBusy && <CircularProgress sx={{
                     mb: 2
-                }}/>}
+                }} />}
                 <Button
                     disabled={salesOrdersIsBusy || (salesOrders?.data.length ?? 0) >= (salesOrders?.count ?? 0)}
-                    variant="contained"
+                    variant="outlined"
                     onClick={() => {
                         queryBuilder.pagination = new Pagination({
                             offset: salesOrders?.data.length,

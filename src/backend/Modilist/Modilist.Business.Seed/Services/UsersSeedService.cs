@@ -98,7 +98,7 @@ namespace Modilist.Business.Seed.Services
                 };
 
                 var expireMonth = faker.Random.Int(min: 1, max: 12).ToString();
-                expireMonth = expireMonth.Length == 1 ? expireMonth.PadLeft(0) : expireMonth;
+                expireMonth = expireMonth.Length == 1 ? expireMonth.PadLeft(1, '0') : expireMonth;
 
                 CardInformation cardInformation = new CardInformation
                 {
@@ -108,6 +108,8 @@ namespace Modilist.Business.Seed.Services
                     ExpireMonth = expireMonth,
                     ExpireYear = faker.Random.Int(min: DateTime.UtcNow.AddYears(1).Year, max: DateTime.UtcNow.AddYears(5).Year).ToString()
                 };
+
+                var cardHolderName = $"{account.FirstName.Substring(0, 2).PadRight(account.FirstName.Length - 2, '*')} {account.LastName.Substring(0, 2).PadRight(account.LastName.Length - 2, '*')}";
 
                 cardRequest.Card = cardInformation;
 
@@ -122,13 +124,16 @@ namespace Modilist.Business.Seed.Services
 
                 paymentMethod.UpdateCardInfo(
                     card.CardUserKey,
+                    cardHolderName,
                     card.CardToken,
                     card.CardAssociation,
                     card.CardFamily,
                     card.CardBankName,
                     card.CardBankCode,
                     lastFourDigit,
-                    faker.Random.Int(min: 100, max: 999).ToString());
+                    faker.Random.Int(min: 100, max: 999).ToString(),
+                    expireMonth,
+                    cardInformation.ExpireYear);
 
                 await _dbContext.PaymentMethods.AddAsync(paymentMethod, cancellationToken);
             }

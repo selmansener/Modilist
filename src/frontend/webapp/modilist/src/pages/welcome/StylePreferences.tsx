@@ -1,4 +1,4 @@
-import { Box, Stack, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Typography, Button, CircularProgress, FormHelperText } from "@mui/material";
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography, Button, CircularProgress, FormHelperText } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import { useEffect, useState } from "react";
 import { CustomCheckboxGroup } from "../../components/customCheckbox/CustomCheckbox";
@@ -40,11 +40,13 @@ export function StylePreferences() {
     const { imgBaseHost } = config;
     const { gender } = account as AccountDTO;
 
-    useEffect(() => { window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      }); }, []);
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }, []);
 
     useEffect(() => {
         if (!getStylePreferencesIsBusy) {
@@ -759,17 +761,6 @@ export function StylePreferences() {
         "MakingNewStyle",
     ];
 
-    const ITEM_HEIGHT = 48;
-    const ITEM_PADDING_TOP = 8;
-    const MenuProps = {
-        PaperProps: {
-            style: {
-                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-                width: 250,
-            },
-        },
-    };
-
     const handleChoiseReasonChange = (e: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
         if (checked) {
             if (stylePreferences?.choiceReasons !== undefined) {
@@ -968,7 +959,7 @@ export function StylePreferences() {
                 <BodyPartsToHide />
                 {account?.gender === Gender.Female &&
                     <FormControl fullWidth sx={{
-                        mt:4
+                        mt: 4
                     }}>
                         <FormControlLabel
                             control={
@@ -1049,12 +1040,12 @@ export function StylePreferences() {
                     disabled={isBusy}
                     onClick={() => {
                         submitForm();
-                        if(!isValid){
+                        if (!isValid) {
                             window.scrollTo({
                                 top: 0,
                                 left: 0,
                                 behavior: 'smooth'
-                              });
+                            });
                         }
                     }}
                     variant="outlined">

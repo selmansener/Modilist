@@ -27,13 +27,14 @@ import { CheckoutCompleted } from '../pages/checkout/CheckoutCompleted';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { Grid, Typography } from '@mui/material';
-import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
 import StraightenIcon from '@mui/icons-material/Straighten';
 import GradientIcon from '@mui/icons-material/Gradient';
+import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 
 interface RouterOptions {
   title?: string,
+  icon?: React.ReactNode,
   helmet: string,
   route: string,
   menuItem?: {
@@ -75,9 +76,7 @@ const routes: RouterOptions[] = [
     component: <Main />,
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.Main"} icon={<HomeIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     isPublic: false,
     disabledEnvironments: []
@@ -95,37 +94,37 @@ const routes: RouterOptions[] = [
     component: <SalesOrders />,
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.SalesOrders"} icon={<ShoppingBasketIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     isPublic: false,
     disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SalesOrders",
+    icon: <ShoppingBasketIcon sx={{
+      verticalAlign: "sub"
+    }} />,
     helmet: "Pages.Titles.SalesOrders",
     route: "sales-orders/:salesOrderId",
     component: <SalesOrderDetails />,
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.SalesOrders"} icon={<ShoppingBasketIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     isPublic: false,
     disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SalesOrders",
+    icon: <ShoppingBasketIcon sx={{
+      verticalAlign: "sub"
+    }} />,
     helmet: "Pages.Titles.SalesOrders",
     route: "sales-orders/:salesOrderId/checkout",
     component: <Checkout />,
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.SalesOrders"} icon={<ShoppingBasketIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     isPublic: false,
     disabledEnvironments: []
@@ -137,9 +136,7 @@ const routes: RouterOptions[] = [
     component: <CheckoutCompleted />,
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.SalesOrders"} icon={<ShoppingBasketIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     isPublic: false,
     disabledEnvironments: []
@@ -149,16 +146,14 @@ const routes: RouterOptions[] = [
     helmet: "Pages.Titles.SizeInfo",
     route: "size-info",
     menuItem: {
-      icon: <SensorOccupiedIcon sx={{
+      icon: <AccessibilityNewIcon sx={{
         verticalAlign: "sub"
       }} />,
       name: "Pages.Titles.SizeInfo"
     },
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.SizeInfo"} icon={<BoyIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     component: <SizeInfo />,
     isPublic: false,
@@ -176,9 +171,7 @@ const routes: RouterOptions[] = [
     },
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.StylePreferences"} icon={<BoyIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     component: <StylePreferences />,
     isPublic: false,
@@ -196,9 +189,7 @@ const routes: RouterOptions[] = [
     },
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.FitPreferences"} icon={<BoyIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     component: <FitPreferences />,
     isPublic: false,
@@ -216,9 +207,7 @@ const routes: RouterOptions[] = [
     },
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.FabricProperties"} icon={<BoyIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     component: <FabricProperties />,
     isPublic: false,
@@ -230,9 +219,7 @@ const routes: RouterOptions[] = [
     route: "settings",
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.Settings"} icon={<ShoppingBasketIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     component: <AccountSettings />,
     isPublic: false,
@@ -250,9 +237,7 @@ const routes: RouterOptions[] = [
     },
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.PaymentMethods"} icon={<PaymentIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     component: <PaymentMethods />,
     isPublic: false,
@@ -270,9 +255,7 @@ const routes: RouterOptions[] = [
     },
     layout: {
       path: "/",
-      component: <Dashboard title={"Pages.Titles.Addresses"} icon={<LocationOnIcon sx={{
-        verticalAlign: "sub"
-      }} />} />
+      component: <Dashboard />
     },
     component: <Addresses />,
     isPublic: false,
@@ -346,7 +329,7 @@ export function Router(props: RouterProps) {
                 {t(route.helmet)}
               </Helmet>
               {route.title && route.title !== "" && <Grid item xs={12}>
-                {route.menuItem?.icon}
+                {route.menuItem?.icon ?? route?.icon}
                 <Typography variant="h4" component="span">
                   &nbsp;{t(route.title)}
                 </Typography>

@@ -1,4 +1,11 @@
 {
+    "Components": {
+        "AddressSelection": {
+            "Title": "Adresi Değiştir",
+            "CloseButton": "Kapat",
+            "Select": "Seç >"
+        }
+    },
     "Layouts": {
         "Welcome": {
             "WelcomeLayout": {
@@ -24,6 +31,22 @@
                     "Navigate": "Yukarı"
                 }
             }
+        },
+        "Dashboard": {
+            "Footer": {
+                "FollowUs": "Bizi takip edin.",
+                "Links": {
+                    "AboutUs": "Hakkımızda",
+                    "FAQ": "Sıkça Sorulan Sorular",
+                    "Partnership": "İş Ortaklığı Formu",
+                    "OpenPositions": "Kariyer",
+                    "DeveloperAPI": "Developer API",
+                    "KVKK": "Kişisel Verilerin Korunması",
+                    "OnlineSalesAgreement": "Mesafeli Satış Sözleşmesi",
+                    "PrivacyAndCookiePolicies": "Gizlilik ve Çerez Politikası",
+                    "UsageAgreement": "Kullanım Koşulları"
+                }
+            }
         }
     },
     "Pages": {
@@ -35,7 +58,9 @@
             "FitPreferences": "Kalıp Tercihlerim",
             "FabricProperties": "Renk & Kumaş",
             "Addresses": "Kayıtlı Adreslerim",
-            "PaymentMethods": "Kayıtlı Kartlarım"
+            "PaymentMethods": "Kayıtlı Kartlarım",
+            "Settings": "Hesap Ayarlarım",
+            "Welcome": "Hoşgeldin"
         },
         "Main": {
             "ActiveSalesOrders": "Aktif Siparişlerim",
@@ -45,8 +70,14 @@
             "SalesOrderAddress": "Teslimat Adresi: ",
             "Details": "Devamı >",
             "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
-            "FirstOrderPromotion": "İlk Siparişinde 20 TL indirim",
-            "FriendshipPromotion": "Arkadaşını davet et 20 TL kazan!",
+            "FirstOrderPromotion": {
+                "1": "İlk Siparişinde",
+                "2": "20 TL indirim!"
+            },
+            "FriendshipPromotion": {
+                "1": "Arkadaşını davet et",
+                "2": "20 TL kazan!"
+            },
             "SendInvitation": "Davetiye Gönder"
         },
         "SalesOrders": {
@@ -59,9 +90,12 @@
             "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
             "PackageContents": "Kombin İçeriği: ",
             "PackageContentsDescription": "Kombin içeriğini paketin eline ulaştığı zaman görüntüleyebilirsin.",
-            "SalesOrderFeedback": "Kombine Puanın",
+            "SalesOrderFeedback": "Kombine Puanın:",
             "LoadMore": "Devamı",
             "DeliveryDate": "Teslimat Tarihi: ",
+            "TotalPrice": "Satın Alınan Ürün Tutarı: ",
+            "SoldItems": "Satın Alınan Ürünler: ",
+            "ReturnedItems": "İade Edilen Ürünler: ",
             "Filters": {
                 "SalesOrderStateTitle": "Sipariş Durumu",
                 "SalesOrderState": {
@@ -75,7 +109,7 @@
         "SalesOrderDetails": {
             "Title": "Sipariş Ref. No: ",
             "DeliveryAddress": "Sipariş Teslimat Adresi: ",
-            "RegisteredAddresses": "Kayıtlı Adreslerim",
+            "RegisteredAddresses": "Kayıtlı Adreslerim >",
             "CreatedAt": "Sipariş Oluşturulma Tarihi: ",
             "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
             "SalesOrderState": "Sipariş Durumu: ",
@@ -240,6 +274,11 @@
                     "2": "kesinlikle olmasını istemediğiniz ",
                     "3": "renk tonlarını seçiniz."
                 },
+                "ExcludedAccessoryColors": {
+                    "1": "Kombinlerinizde ",
+                    "2": "kesinlikle olmasını istemediğiniz ",
+                    "3": "aksesuar rengi"
+                },
                 "ExcludedPatterns": {
                     "1": "Kombinlerinizde ",
                     "2": "kesinlikle olmasını istemediğiniz ",
@@ -306,14 +345,23 @@
                 "CardHolderName": "Kart Üzerindeki İsim",
                 "CardNumber": "Kart Numarası",
                 "ExpireMonth": "Son Kullanma Tarihi (Ay)",
-                "ExpireYear": "Son Kullanma Tarihi (Yıl)"
+                "ExpireYear": "Son Kullanma Tarihi (Yıl)",
+                "MonthTwoDigits": "Lütfen iki haneli olarak giriniz",
+                "MonthValidation": "Lütfen geçerli bir ay giriniz",
+                "YearTwoDigits": "Lütfen yılı iki haneli olarak giriniz",
+                "YearValidation": "Lütfen geçerli bir yıl giriniz",
+                "CvcValidation": "Lütfen geçerli bir CVC giriniz",
+                "CardHolderNameValidation": "Lütfen sayı kullanmadan geçerli bir isim giriniz"
             }
         },
         "Checkout": {
             "Title": "Sipariş Ref. No:",
+            "SelectReturnDate": "İade Tarihi",
+            "EstimatedPickupDate": "İade edilen ürünleri {{date}} tarihinde alacağız.",
             "ReturnDate": "İade ürünleri içeren paketini ne zaman teslim almamızı istersin.",
             "ReturnAddress": "İadenin teslim alınacağı adres",
             "ChangeReturnAddress": "Kayıtlı Adreslerim >",
+            "ChangeReturnAddressModal": "İadenizin teslim alınacağı adresi seçiniz.",
             "PaymentMethod": "Ödeme Yöntemi",
             "IyzicoInfo": "Kredi kartı bilgilerin iyzico güvencesiyle korunmaktadır.",
             "DiscountTitle": "Promosyonlar",
@@ -327,7 +375,24 @@
             "TotalProductPrice": "Toplam Tutar: ",
             "PackageTotalPrice": "Kombinin Toplam Tutarı: ",
             "Checkout": "Ödemeyi tamamla",
-            "ReturnWarning": "Ödemeyi yapabilmek için önce iade işlemini tamamlamalısın."
+            "ReturnWarning": "Ödemeyi yapabilmek için önce iade işlemini tamamlamalısın.",
+            "CargoTrackingCode": "Kargo Takip Numarası",
+            "CargoTrackingCodeInfo": "İade işlemini tamamladığında kargo takip numarası oluşur.",
+            "CreateReturn": "İade talebi oluştur",
+            "ReturnedLineItems": "İade edilecek ürünler",
+            "SoldLineItems": "Satın alınacak ürünler",
+            "TermsInfo": {
+                "1": "Ön bilgilendirme formunu ",
+                "2": "ve ",
+                "3": "mesafeli satış sözleşmesini ",
+                "4": "onaylıyorum."
+            },
+            "TermsInfoError": "Devam edebilmek için lütfen formu onaylayın."
+        },
+        "CheckoutCompleted": {
+            "SalesOrderCompleted": "#{{salesOrderId}} numaralı siparişin tamamlandı.",
+            "Thanks": "Bizi tercih ettiğin için teşekkür ederiz.",
+            "ReturnToHome": "Anasayfa'ya dön"
         }
     },
     "WelcomeSteps": {
@@ -514,7 +579,8 @@
             "Completed": "Siparişin Tamamlandı"
         },
         "Forms": {
-            "Select": "Seçiniz"
+            "Select": "Seçiniz",
+            "Close": "Kapat"
         },
         "PersonalInfo": {
             "FirstName": "Ad",

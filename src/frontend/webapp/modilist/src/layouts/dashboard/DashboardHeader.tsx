@@ -1,6 +1,6 @@
-import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent, Avatar, Grid, Box } from "@mui/material"
+import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent, Avatar, Grid, Box, Container } from "@mui/material"
 import React from "react";
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -104,6 +104,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
     setOpen(!open);
   };
   const { menuItems, account } = props;
+  const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -127,7 +128,9 @@ export function DashboardHeader(props: DashboardHeaderProps) {
 
   return (
     <>
-      <AppBar position="absolute" open={open}>
+      <AppBar position="absolute"
+        open={open}
+      >
         <Toolbar
           sx={{
             pr: '24px', // keep right padding when drawer closed
@@ -150,7 +153,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
           <Box sx={{
             display: 'flex',
             justifyContent: 'flex-start',
-            flexGrow: 1
+            flexGrow: 1,
           }}>
             <ImageComponent width={200} src="/whitehorizontallogo.svg" />
           </Box>
@@ -229,17 +232,30 @@ export function DashboardHeader(props: DashboardHeaderProps) {
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent"
+        open={open}
+        sx={{
+          [`& .MuiDrawer-paper`]: {
+            backgroundColor: 'rgba(150, 141, 179, 0.3);',
+            border: 'none'
+          },
+        }}>
         <Toolbar
           sx={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             p: 4,
+            backgroundColor: theme.palette.primary.main,
+            boxShadow: '0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);'
+
           }}
         >
           <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
+            <ChevronLeftIcon sx={{
+              color: '#fff'
+            }}
+            />
           </IconButton>
         </Toolbar>
         <Divider />
@@ -264,14 +280,14 @@ export function DashboardHeader(props: DashboardHeaderProps) {
         <List component="nav">
           {menuItems.map((item: MenuItem) => {
             return (
-              <Link key={item.route} to={item.route}>
+              <NavLink key={item.route} to={item.route}>
                 <ListItemButton>
                   <ListItemIcon>
                     {item.icon}
                   </ListItemIcon>
-                  <ListItemText primary={t(item.name)} />
+                  <ListItemText primary={t(item.name)}  />
                 </ListItemButton>
-              </Link>
+              </NavLink>
             )
           })}
         </List>

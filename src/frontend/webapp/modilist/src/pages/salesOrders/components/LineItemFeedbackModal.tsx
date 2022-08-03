@@ -47,7 +47,9 @@ export function LineItemFeedbackModal(props: LineItemFeedbackModalProps) {
 
     return (
         <Dialog onClose={onClose} open={open} fullWidth maxWidth="xl">
-            <DialogTitle>
+            <DialogTitle sx={{
+                mb: 4
+            }}>
                 <Grid item container xs={12} spacing={2}>
                     <Grid item xs={1}>
                     </Grid>
@@ -55,17 +57,21 @@ export function LineItemFeedbackModal(props: LineItemFeedbackModalProps) {
                         <Grid item xs={12}>
                             <Typography variant="h4" align="center">{t("Pages.SalesOrderFeedback.Feedback.Title")}</Typography>
                         </Grid>
-                        <Grid item container xs={12} spacing={2}>
-                            <Grid item xs={3}></Grid>
-                            <Grid item xs={3} display="flex" justifyContent="center">
-                                <Typography display="inline" variant="body1">{t("Pages.SalesOrderFeedback.Feedback.LowScore")}</Typography>
-                                <LovelyRating defaultValue={1} readOnly />
-                            </Grid>
-                            <Grid item xs={3} display="flex" justifyContent="center">
-                                <Typography display="inline" variant="body1">{t("Pages.SalesOrderFeedback.Feedback.HighScore")}</Typography>
-                                <LovelyRating defaultValue={5} readOnly />
-                            </Grid>
-                            <Grid item xs={3}></Grid>
+                        <Grid item xs={6} sx={{ display: "flex", justifyContent: "flex-end" }}>
+                            <Typography display="inline" variant="body2">{t("Pages.SalesOrderFeedback.Feedback.LowScore")}</Typography>
+                            &nbsp;
+                            <LovelyRating defaultValue={0.5} precision={0.5} readOnly emptyIconProps={{
+                                fontSize: "small"
+                            }} filledIconProps={{
+                                fontSize: "small"
+                            }} />
+                        </Grid>
+                        <Grid item xs={6} sx={{ display: "flex" }}>
+                            <Typography display="inline" variant="body2">{t("Pages.SalesOrderFeedback.Feedback.HighScore")}</Typography>
+                            &nbsp;
+                            <LovelyRating defaultValue={5} readOnly filledIconProps={{
+                                fontSize: "small"
+                            }} />
                         </Grid>
                     </Grid>
                     <Grid item xs={1}>
@@ -74,9 +80,25 @@ export function LineItemFeedbackModal(props: LineItemFeedbackModalProps) {
             </DialogTitle>
             <DialogContent>
                 <Grid item container xs={12} spacing={2}>
-                    <Grid item container xs={8} spacing={2}>
+                    <Grid item container xs={10} spacing={2}>
                         <Grid item xs={2}>
-                            <Typography>
+                            <Typography variant="h6" align="right">
+                                {t("Pages.SalesOrderFeedback.Feedback.Fit")}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <LovelyRating
+                                value={feedback?.fit ?? 0}
+                                onChange={(e, value) => {
+                                    setFeedback({
+                                        ...feedback,
+                                        fit: value ?? 0
+                                    });
+                                }}
+                                precision={0.5} />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant="h6" align="right">
                                 {t("Pages.SalesOrderFeedback.Feedback.PerfectMatch")}
                             </Typography>
                         </Grid>
@@ -93,7 +115,7 @@ export function LineItemFeedbackModal(props: LineItemFeedbackModalProps) {
                             />
                         </Grid>
                         <Grid item xs={2}>
-                            <Typography>
+                            <Typography variant="h6" align="right">
                                 {t("Pages.SalesOrderFeedback.Feedback.Brand")}
                             </Typography>
                         </Grid>
@@ -109,55 +131,7 @@ export function LineItemFeedbackModal(props: LineItemFeedbackModalProps) {
                                 precision={0.5} />
                         </Grid>
                         <Grid item xs={2}>
-                            <Typography>
-                                {t("Pages.SalesOrderFeedback.Feedback.Fabric")}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <LovelyRating
-                                value={feedback?.fabric ?? 0}
-                                onChange={(e, value) => {
-                                    setFeedback({
-                                        ...feedback,
-                                        fabric: value ?? 0
-                                    });
-                                }}
-                                precision={0.5} />
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Typography>
-                                {t("Pages.SalesOrderFeedback.Feedback.Style")}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <LovelyRating
-                                value={feedback?.style ?? 0}
-                                onChange={(e, value) => {
-                                    setFeedback({
-                                        ...feedback,
-                                        style: value ?? 0
-                                    });
-                                }}
-                                precision={0.5} />
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Typography>
-                                {t("Pages.SalesOrderFeedback.Feedback.Quality")}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <LovelyRating
-                                value={feedback?.quality ?? 0}
-                                onChange={(e, value) => {
-                                    setFeedback({
-                                        ...feedback,
-                                        quality: value ?? 0
-                                    });
-                                }}
-                                precision={0.5} />
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Typography>
+                            <Typography variant="h6" align="right">
                                 {t("Pages.SalesOrderFeedback.Feedback.Color")}
                             </Typography>
                         </Grid>
@@ -173,39 +147,39 @@ export function LineItemFeedbackModal(props: LineItemFeedbackModalProps) {
                                 precision={0.5} />
                         </Grid>
                         <Grid item xs={2}>
-                            <Typography>
-                                {t("Pages.SalesOrderFeedback.Feedback.Fit")}
+                            <Typography variant="h6" align="right">
+                                {t("Pages.SalesOrderFeedback.Feedback.Style")}
                             </Typography>
                         </Grid>
                         <Grid item xs={2}>
                             <LovelyRating
-                                value={feedback?.fit ?? 0}
+                                value={feedback?.style ?? 0}
                                 onChange={(e, value) => {
                                     setFeedback({
                                         ...feedback,
-                                        fit: value ?? 0
+                                        style: value ?? 0
                                     });
                                 }}
                                 precision={0.5} />
                         </Grid>
                         <Grid item xs={2}>
-                            <Typography>
-                                {t("Pages.SalesOrderFeedback.Feedback.Pattern")}
+                            <Typography variant="h6" align="right">
+                                {t("Pages.SalesOrderFeedback.Feedback.Quality")}
                             </Typography>
                         </Grid>
                         <Grid item xs={2}>
                             <LovelyRating
-                                value={feedback?.pattern ?? 0}
+                                value={feedback?.quality ?? 0}
                                 onChange={(e, value) => {
                                     setFeedback({
                                         ...feedback,
-                                        pattern: value ?? 0
+                                        quality: value ?? 0
                                     });
                                 }}
                                 precision={0.5} />
                         </Grid>
                         <Grid item xs={2}>
-                            <Typography>
+                            <Typography variant="h6" align="right">
                                 {t("Pages.SalesOrderFeedback.Feedback.Price")}
                             </Typography>
                         </Grid>
@@ -221,7 +195,39 @@ export function LineItemFeedbackModal(props: LineItemFeedbackModalProps) {
                                 precision={0.5} />
                         </Grid>
                         <Grid item xs={2}>
-                            <Typography>
+                            <Typography variant="h6" align="right">
+                                {t("Pages.SalesOrderFeedback.Feedback.Fabric")}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <LovelyRating
+                                value={feedback?.fabric ?? 0}
+                                onChange={(e, value) => {
+                                    setFeedback({
+                                        ...feedback,
+                                        fabric: value ?? 0
+                                    });
+                                }}
+                                precision={0.5} />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant="h6" align="right">
+                                {t("Pages.SalesOrderFeedback.Feedback.Pattern")}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <LovelyRating
+                                value={feedback?.pattern ?? 0}
+                                onChange={(e, value) => {
+                                    setFeedback({
+                                        ...feedback,
+                                        pattern: value ?? 0
+                                    });
+                                }}
+                                precision={0.5} />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant="h6" align="right">
                                 {t("Pages.SalesOrderFeedback.Feedback.Size.Question")}
                             </Typography>
                         </Grid>
@@ -296,23 +302,21 @@ export function LineItemFeedbackModal(props: LineItemFeedbackModalProps) {
                                 />
                             </FormControl>
                         </Grid>
-                        <Grid item xs={12} display="flex" justifyContent={'flex-end'}>
-                            <Button
-                                disabled={isBusy}
-                                variant="outlined"
-                                size="medium"
-                                sx={{
-                                    width: '200px',
-                                    height: '50px'
-                                }}
-                                onClick={() => {
-                                    submit(SalesOrderLineItemState.Returned);
-                                }}>
-                                {t("Pages.SalesOrderFeedback.Feedback.Return")}
-                            </Button>
+                        <Grid item container xs={12} display="flex" justifyContent="flex-end">
+                            <Grid item xs={2}>
+                                <Button
+                                    disabled={isBusy}
+                                    variant="outlined"
+                                    fullWidth
+                                    onClick={() => {
+                                        submit(SalesOrderLineItemState.Returned);
+                                    }}>
+                                    {t("Pages.SalesOrderFeedback.Feedback.Return")}
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item container xs={4} spacing={2}>
+                    <Grid item container xs={2} spacing={2}>
                         <Grid item xs={12}>
                             {product.images && product.images.length > 0 && <ImageComponent src={product.images[0].url ?? ""} asBackground sx={{
                                 height: '260px'
@@ -362,13 +366,11 @@ export function LineItemFeedbackModal(props: LineItemFeedbackModalProps) {
                             <Button
                                 disabled={isBusy}
                                 variant="contained"
-                                size="medium"
-                                sx={{
-                                    width: '200px',
-                                    height: '50px'
-                                }}
+                                fullWidth
                                 onClick={() => {
                                     submit(SalesOrderLineItemState.Sold);
+                                }} sx={{
+                                    boxShadow: "none"
                                 }}>
                                 {t("Pages.SalesOrderFeedback.Feedback.Buy")}
                             </Button>

@@ -34,10 +34,10 @@ export function Main() {
             <Helmet>
                 <title>{"Bak bu sana yakışır | Modilist "}</title>
             </Helmet>
-            <Grid item container xs={12} spacing={2}>
-                <Grid item container xs={6} spacing={2}>
+            <Grid item container xs={12} spacing={4}>
+                <Grid item container xs={6} spacing={4}>
                     <Grid item container xs={12}>
-                        <Paper sx={{
+                        <Paper elevation={6} sx={{
                             p: 2
                         }}>
                             <Grid item container xs={12} spacing={2}>
@@ -94,7 +94,7 @@ export function Main() {
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>
-                        <Paper sx={{
+                        <Paper elevation={6} sx={{
                             display: 'flex',
                             p: 5,
                             minHeight: '340px'
@@ -112,7 +112,7 @@ export function Main() {
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>
-                        <Paper sx={{
+                        <Paper elevation={6} sx={{
                             display: 'flex',
                             p: 5,
                             minHeight: '340px'
@@ -145,7 +145,7 @@ export function Main() {
                     </Grid>
                 </Grid>
                 <Grid item xs={6}>
-                    <Paper sx={{
+                    <Paper elevation={6} sx={{
                         p: 2
                     }}>
                         <BlogSection />

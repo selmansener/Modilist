@@ -1,4 +1,4 @@
-import { Divider, FormControl, Grid, Link, Paper, TextField, Typography } from "@mui/material";
+import { Button, Divider, FormControl, Grid, Link, Paper, TextField, Typography, useTheme } from "@mui/material";
 import format from "date-fns/format";
 import { tr } from "date-fns/locale";
 import React, { useEffect } from "react";
@@ -12,6 +12,9 @@ import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 import InfoIcon from '@mui/icons-material/Info';
 import { SalesOrderFeedback } from "./components/SalesOrderFeedback";
+import { addDays } from "date-fns";
+import { LovelyRating } from "../../components/lovelyRating/LovelyRating";
+import { calculateAvgSalesOrderRating } from "./utils/calculateAvgRating";
 
 export function SalesOrderDetails() {
     const { t } = useTranslation();
@@ -19,12 +22,30 @@ export function SalesOrderDetails() {
     const dispatch = useDispatch<Dispatch>();
     const { isBusy, data: salesOrder } = useSelector((state: RootState) => state.salesOrderDetailsModel);
     const { imgBaseHost } = config;
+    const theme = useTheme();
 
     useEffect(() => {
         if (salesOrderId && !isBusy) {
             dispatch.salesOrderDetailsModel.salesOrderDetails(parseInt(salesOrderId));
         }
     }, [salesOrderId]);
+
+    const getOrderImage = () => {
+        switch (salesOrder?.state) {
+            case SalesOrderState.Created:
+            case SalesOrderState.Prepared:
+            case SalesOrderState.Shipped:
+                return `${imgBaseHost}/common/active-order-image.png`;
+            case SalesOrderState.Delivered:
+                return `${imgBaseHost}/common/delivered-order-image.png`;
+            case SalesOrderState.Completed:
+                return `${imgBaseHost}/common/completed-order-image.png`;
+            default:
+                return undefined;
+        }
+    }
+
+    const doesOrderDelivered = salesOrder?.state === SalesOrderState.Delivered || salesOrder?.state === SalesOrderState.Completed;
 
     const getMaskedPhone = () => {
         const phone = salesOrder?.salesOrderAddress?.phone;
@@ -39,15 +60,16 @@ export function SalesOrderDetails() {
 
         return (
             <React.Fragment>
-                {"("}
                 <Link sx={{
-                    cursor: 'pointer'
-                }} onClick={() => {
 
-                }}>
+                    cursor: 'pointer'
+                }}
+                    fontWeight={800}
+                    onClick={() => {
+
+                    }}>
                     {t("Pages.SalesOrderDetails.RegisteredAddresses")}
                 </Link>
-                {")"}
             </React.Fragment>
         )
     }
@@ -59,18 +81,17 @@ export function SalesOrderDetails() {
 
         return (
             <React.Fragment>
-                {"("}
                 <Link sx={{
+                    fontWeight: 800,
                     cursor: 'pointer'
                 }} onClick={() => {
 
                 }}>
-                    {t("Pages.SalesOrderDetails.Change")}
+                    {t("Pages.SalesOrderDetails.ChangeDeliveryDate")}
                     <CalendarMonthIcon sx={{
                         verticalAlign: 'text-top'
                     }} fontSize="small" />
                 </Link>
-                {")"}
             </React.Fragment>
         )
     }
@@ -85,7 +106,7 @@ export function SalesOrderDetails() {
         return (
             <React.Fragment>
                 <Grid item xs={4}>
-                    <Typography variant="body1" align="right" fontWeight={800}>
+                    <Typography variant="body1" align="right" fontWeight={800} color={theme.palette.secondary.main}>
                         {t("Pages.SalesOrderDetails.PackageContents")}
                     </Typography>
                 </Grid>
@@ -152,107 +173,134 @@ export function SalesOrderDetails() {
     return (
         <Grid item container xs={12} spacing={2}>
             <Grid item xs={12}>
-                <Paper sx={{
-                    p: 2
-                }}>
-                    <Grid item container xs={12} spacing={2}>
-                        <Grid item xs={6}>
-                            <Typography variant="h4">{t("Pages.SalesOrderDetails.Title")}#{salesOrderId}</Typography>
+                <Grid item container xs={12} spacing={2}>
+                    <Grid item xs={6}>
+                        <Typography variant="h4">{t("Pages.SalesOrderDetails.Title")}#{salesOrderId}</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Typography variant="h4" align="right">
+                            {salesOrder?.createdAt && format(new Date(salesOrder.createdAt), 'MMMM yyyy', { locale: tr })}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Divider />
+                    </Grid>
+                    <Grid item container xs={8} spacing={2} alignContent="flex-start">
+                        <Grid item xs={4}>
+                            <Typography variant="body1" align="right" fontWeight={800} color={theme.palette.secondary.main}>
+                                {t("Pages.SalesOrderDetails.DeliveryAddress")}
+                            </Typography>
                         </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="h4" align="right">
-                                {salesOrder?.createdAt && format(new Date(salesOrder.createdAt), 'MMMM yyyy', { locale: tr })}
+                        <Grid item xs={8} sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                        }}>
+                            <Typography variant="body1" component="span" fontWeight={800} color={theme.palette.primary.main}>
+                                {salesOrder?.salesOrderAddress?.name}
+                            </Typography>
+                            <Typography align="right" component="span">
+                                {RenderChangeAddressLink()}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4}>
+                            {/* WARN: This line should be empty */}
+                        </Grid>
+                        <Grid item xs={8}>
+                            <Typography variant="body1">
+                                {salesOrder?.salesOrderAddress?.fullAddress}
+                            </Typography>
+                            <Typography variant="body1">
+                                {salesOrder?.salesOrderAddress?.district} / {salesOrder?.salesOrderAddress?.city}
+                            </Typography>
+                            <Typography variant="body1">
+                                {getMaskedPhone()}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Typography variant="body1" align="right" fontWeight={800} color={theme.palette.secondary.main}>
+                                {t("Pages.SalesOrderDetails.CreatedAt")}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={8}>
+                            <Typography variant="body1" fontWeight={800} color={theme.palette.primary.main}>
+                                {salesOrder?.createdAt && format(new Date(salesOrder?.createdAt), 'dd.MM.yyyy', { locale: tr })}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Divider />
                         </Grid>
-                        <Grid item container xs={8} spacing={2}>
-                            <Grid item xs={4}>
-                                <Typography variant="body1" align="right" fontWeight={800}>
-                                    {t("Pages.SalesOrderDetails.DeliveryAddress")}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Typography variant="body1">
-                                    {salesOrder?.salesOrderAddress?.name} {RenderChangeAddressLink()}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={4}>
-                                {/* WARN: This line should be empty */}
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Typography variant="body1">
-                                    {salesOrder?.salesOrderAddress?.fullAddress}
-                                </Typography>
-                                <Typography variant="body1">
-                                    {salesOrder?.salesOrderAddress?.district} / {salesOrder?.salesOrderAddress?.city}
-                                </Typography>
-                                <Typography variant="body1">
-                                    {getMaskedPhone()}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Typography variant="body1" align="right" fontWeight={800}>
-                                    {t("Pages.SalesOrderDetails.CreatedAt")}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Typography variant="body1">
-                                    {salesOrder?.createdAt && format(new Date(salesOrder?.createdAt), 'dd.MM.yyyy', { locale: tr })}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Divider />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Typography variant="body1" align="right" fontWeight={800}>
-                                    {t("Pages.SalesOrderDetails.EstimatedDeliveryDate")}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Typography variant="body1">
-                                    {salesOrder?.createdAt && format(new Date(salesOrder?.createdAt), 'dd.MM.yyyy', { locale: tr })} {RenderChangeEstimatedDeliveryDateLink()}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Typography variant="body1" align="right" fontWeight={800}>
-                                    {t("Pages.SalesOrderDetails.SalesOrderState")}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Typography variant="body1">
-                                    {t(`Generic.SalesOrderState.${salesOrder?.state}`)}
-                                </Typography>
-                            </Grid>
-                            {RenderPackageContents()}
-                            <Grid item xs={4}>
-                                <Typography variant="body1" align="right" fontWeight={800}>
-                                    {t("Pages.SalesOrderDetails.CargoTrackingCode")}
-                                </Typography>
-                            </Grid>
-                            <Grid item container xs={8}>
-                                <Grid item xs={6}>
-                                    <Typography variant="body1">
-                                        {salesOrder?.cargoTrackingCode}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Typography variant="body1" align="right">
-                                        CARGO COMPANY IMAGE
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                            {RenderAdditionalNotes()}
-                        </Grid>
                         <Grid item xs={4}>
-                            <Typography variant="h3">
-                                CONTEXT IMAGE
+                            <Typography variant="body1" align="right" fontWeight={800} color={theme.palette.secondary.main}>
+                                {t("Pages.SalesOrderDetails.EstimatedDeliveryDate")}
                             </Typography>
                         </Grid>
-                        <SalesOrderFeedback salesOrder={salesOrder ?? {}} />
+                        <Grid item xs={8} sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                        }}>
+                            <Typography variant="body1" fontWeight={800} color={theme.palette.primary.main}>
+                                {salesOrder?.createdAt && format(addDays(new Date(salesOrder?.createdAt), 7), 'dd.MM.yyyy', { locale: tr })}
+                            </Typography>
+                            <Typography variant="body1">
+                                {RenderChangeEstimatedDeliveryDateLink()}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Typography variant="body1" align="right" fontWeight={800} color={theme.palette.secondary.main}>
+                                {t("Pages.SalesOrderDetails.SalesOrderState")}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={8}>
+                            <Typography variant="body1" color={theme.palette.primary.main} fontWeight={800}>
+                                {t(`Generic.SalesOrderState.${salesOrder?.state}`)}
+                            </Typography>
+                        </Grid>
+                        {RenderPackageContents()}
+                        <Grid item xs={4}>
+                            <Typography variant="body1" align="right" fontWeight={800} color={theme.palette.secondary.main}>
+                                {t("Pages.SalesOrderDetails.CargoTrackingCode")}
+                            </Typography>
+                        </Grid>
+                        <Grid item container xs={8}>
+                            <Grid item xs={6}>
+                                <Typography variant="body1" fontWeight={800} color={theme.palette.primary.main}>
+                                    {salesOrder?.cargoTrackingCode}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography variant="body1" align="right">
+                                    CARGO COMPANY IMAGE
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Typography variant="body1" align="right" fontWeight={800} color={theme.palette.secondary.main}>
+                                {t("Pages.SalesOrderDetails.SalesOrderFeedback")}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4}>
+                            {salesOrder && <LovelyRating
+                                readOnly
+                                disabled={!doesOrderDelivered}
+                                value={calculateAvgSalesOrderRating(salesOrder)}
+                                precision={0.5} />}
+                        </Grid>
+                        <Grid item xs={4} sx={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            alignItems: 'flex-start'
+                        }}>
+                            {salesOrder?.state === SalesOrderState.Completed && <Button variant="contained" color="secondary">
+                                {t("Pages.SalesOrderDetails.DisplayInvoice")}
+                            </Button>}
+                        </Grid>
+                        {RenderAdditionalNotes()}
                     </Grid>
-                </Paper>
+                    {getOrderImage() && <Grid item xs={4}>
+                        <ImageComponent src={getOrderImage() ?? ''} asBackground height={350} />
+                    </Grid>}
+                    {doesOrderDelivered && <SalesOrderFeedback salesOrder={salesOrder ?? {}} />}
+                </Grid>
             </Grid>
         </Grid>
     )

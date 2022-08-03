@@ -32,6 +32,13 @@ export const createPaymentModel = createModel<RootModel>()({
                 ...state,
                 status
             }
+        },
+        RESET: (state: ResponseModel<PaymentDTO>) => {
+            return {
+                isBusy: false,
+                data: undefined,
+                status: 0
+            }
         }
     },
     effects: (dispatch) => {

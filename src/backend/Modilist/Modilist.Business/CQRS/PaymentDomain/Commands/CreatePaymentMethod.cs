@@ -120,7 +120,23 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
                 var lastFourDigit = request.CardNumber.Substring(request.CardNumber.Length - 4, 4);
 
-                paymentMethod.UpdateCardInfo(card.CardUserKey, card.CardToken, card.CardAssociation, card.CardFamily, card.CardBankName, card.CardBankCode, lastFourDigit, request.CVC);
+                var holderLastName = request.CardHolderName.Split(" ").Last();
+                var holderFirstName = request.CardHolderName.Replace(" " + holderLastName, string.Empty);
+
+                var cardHolderName = $"{holderFirstName.Substring(0, 2).PadRight(holderFirstName.Length - 2, '*')} {holderLastName.Substring(0, 2).PadRight(holderLastName.Length - 2, '*')}";
+
+                paymentMethod.UpdateCardInfo(
+                    card.CardUserKey,
+                    cardHolderName,
+                    card.CardToken,
+                    card.CardAssociation,
+                    card.CardFamily,
+                    card.CardBankName,
+                    card.CardBankCode,
+                    lastFourDigit,
+                    request.CVC,
+                    request.ExpireMonth,
+                    request.ExpireYear);
 
                 await _paymentMethodRepository.UpdateAsync(paymentMethod, cancellationToken);
             }

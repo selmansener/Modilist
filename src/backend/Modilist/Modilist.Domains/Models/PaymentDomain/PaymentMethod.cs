@@ -20,6 +20,8 @@ namespace Modilist.Domains.Models.PaymentDomain
 
         public string? CardUserKey { get; private set; }
 
+        public string? CardHolderName { get; private set; }
+
         public string? CardToken { get; private set; }
 
         public string? CardAssociation { get; private set; }
@@ -29,6 +31,10 @@ namespace Modilist.Domains.Models.PaymentDomain
         public string? CardBankName { get; private set; }
 
         public long? CardBankCode { get; private set; }
+
+        public string? ExpireMonth { get; private set; }
+
+        public string? ExpireYear { get; private set; }
 
         public string? LastFourDigit { get; private set; }
 
@@ -41,15 +47,29 @@ namespace Modilist.Domains.Models.PaymentDomain
             IsDefault = isDefault;
         }
 
-        public void UpdateCardInfo(string cardUserKey, string cardToken, string cardAssociation, string cardFamily, string cardBankName, long? cardBankCode, string lastFourDigit, string? cvc)
+        public void UpdateCardInfo(
+            string cardUserKey,
+            string cardHolderName,
+            string cardToken,
+            string cardAssociation,
+            string cardFamily,
+            string cardBankName,
+            long? cardBankCode,
+            string lastFourDigit,
+            string cvc,
+            string expireMonth,
+            string expireYear)
         {
             CardUserKey = cardUserKey;
+            CardHolderName = cardHolderName;
             CardToken = cardToken;
             CardAssociation = cardAssociation;
             CardFamily = cardFamily;
             CardBankName = cardBankName;
             CardBankCode = cardBankCode;
             LastFourDigit = lastFourDigit;
+            ExpireMonth = expireMonth;
+            ExpireYear = expireYear;
             CVC = cvc;
 
             var validator = new PaymentMethodCardInfoValidator();
@@ -63,12 +83,15 @@ namespace Modilist.Domains.Models.PaymentDomain
         public PaymentMethodCardInfoValidator()
         {
             RuleFor(x => x.CardUserKey).NotEmpty();
+            RuleFor(x => x.CardHolderName).NotEmpty();
             RuleFor(x => x.CardToken).NotEmpty();
             RuleFor(x => x.CardAssociation).NotEmpty();
             RuleFor(x => x.CardFamily).NotEmpty();
             RuleFor(x => x.CardBankName).NotEmpty();
             RuleFor(x => x.LastFourDigit).NotEmpty();
             RuleFor(x => x.CVC).NotEmpty();
+            RuleFor(x => x.ExpireMonth).NotEmpty();
+            RuleFor(x => x.ExpireYear).NotEmpty();
         }
     }
 }

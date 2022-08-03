@@ -4,6 +4,10 @@
             "Title": "Adresi Değiştir",
             "CloseButton": "Kapat",
             "Select": "Seç >"
+        },
+        "ServicePrice": {
+            "Title": "Title",
+            "Content": "Content"
         }
     },
     "Layouts": {
@@ -90,9 +94,12 @@
             "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
             "PackageContents": "Kombin İçeriği: ",
             "PackageContentsDescription": "Kombin içeriğini paketin eline ulaştığı zaman görüntüleyebilirsin.",
-            "SalesOrderFeedback": "Kombine Puanın",
+            "SalesOrderFeedback": "Kombine Puanın:",
             "LoadMore": "Devamı",
             "DeliveryDate": "Teslimat Tarihi: ",
+            "TotalPrice": "Satın Alınan Ürün Tutarı: ",
+            "SoldItems": "Satın Alınan Ürünler: ",
+            "ReturnedItems": "İade Edilen Ürünler: ",
             "Filters": {
                 "SalesOrderStateTitle": "Sipariş Durumu",
                 "SalesOrderState": {
@@ -106,7 +113,7 @@
         "SalesOrderDetails": {
             "Title": "Sipariş Ref. No: ",
             "DeliveryAddress": "Sipariş Teslimat Adresi: ",
-            "RegisteredAddresses": "Kayıtlı Adreslerim",
+            "RegisteredAddresses": "Teslimat Adresini Değiştir >",
             "CreatedAt": "Sipariş Oluşturulma Tarihi: ",
             "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
             "SalesOrderState": "Sipariş Durumu: ",
@@ -114,7 +121,9 @@
             "PackageContentsDescription": " Kombin içeriğini paketin eline ulaştığı zaman görüntüleyebilirsin.",
             "AdditionalNotes": "Ekstra Notlar: ",
             "CargoTrackingCode": "Kargo Takip Numarası: ",
-            "Change": "Değiştir "
+            "ChangeDeliveryDate": "Teslimat Tarihini Değiştir ",
+            "SalesOrderFeedback": "Kombine Puanın: ",
+            "DisplayInvoice": "Faturayı Görüntüle"
         },
         "SalesOrderFeedback": {
             "AutoPaymentWarning": "5 iş günü içerisinde değerlendirme yapmaz iseniz kombin toplam bedeli kayıtlı kartınızdan tahsil edilecektir.",
@@ -150,11 +159,15 @@
                 "Buy": "Satın al",
                 "Return": "İade et"
             },
-            "SoldProductPrice": "Satın Alınacak Ürünler Ara Toplam: ",
+            "SoldProductPrice": "Ürünler Toplam: ",
             "VATPrice": "KDV %18: ",
+            "SubTotal": "Ara Toplam: ",
             "TotalProductPrice": "Toplam Tutar: ",
             "PackageTotalPrice": "Kombinin Toplam Tutarı: ",
-            "Checkout": "Ödeme sayfasına git"
+            "Checkout": "Ödeme sayfasına git",
+            "DisplayPriceInfo": "Ödemen gereken toplam ücreti görebilmek için kombininde yer alan ürünleri ayrı ayrı değerlendirmelisin.",
+            "ServicePrice": "Hizmet Bedeli: ",
+            "ServicePriceWarning": "En az bir ürün satın alırsan hizmet bedeli ödemezsin."
         },
         "Account": {
             "PersonalInfo": "Kişisel Bilgiler",
@@ -356,7 +369,7 @@
             "SelectReturnDate": "İade Tarihi",
             "EstimatedPickupDate": "İade edilen ürünleri {{date}} tarihinde alacağız.",
             "ReturnDate": "İade ürünleri içeren paketini ne zaman teslim almamızı istersin.",
-            "ReturnAddress": "İadenin teslim alınacağı adres",
+            "ReturnAddress": "İadenin teslim alınacağı adres: ",
             "ChangeReturnAddress": "Kayıtlı Adreslerim >",
             "ChangeReturnAddressModal": "İadenizin teslim alınacağı adresi seçiniz.",
             "PaymentMethod": "Ödeme Yöntemi",
@@ -367,7 +380,7 @@
             "Wallet": "Modilist Cüzdanım",
             "Balance": "Kalan Bakiye",
             "UseBalance": "Kullan",
-            "SoldProductPrice": "Satın Alınacak Ürünler Ara Toplam: ",
+            "SoldProductPrice": "Ürünler Toplam: ",
             "VATPrice": "KDV %18: ",
             "TotalProductPrice": "Toplam Tutar: ",
             "PackageTotalPrice": "Kombinin Toplam Tutarı: ",

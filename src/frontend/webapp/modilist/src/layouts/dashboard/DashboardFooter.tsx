@@ -27,7 +27,9 @@ export function DashboardFooter() {
     const { instagram, facebook, twitter, linkedIn } = config.socialMediaLinks;
 
     return (
-        <Box component="footer">
+        <Box component="footer" sx={{
+            ml: 2,
+        }}>
             <Grid container spacing={2} sx={{
                 backgroundColor: theme.palette.primary.main
             }}>

@@ -1,16 +1,10 @@
-import { Box, Grid, Typography } from "@mui/material"
-import { Helmet } from "react-helmet";
-import { useTranslation } from "react-i18next";
+import { Box, Grid } from "@mui/material"
 import { Outlet } from "react-router-dom";
 
 interface DashboardMainProps {
-    title: string,
-    icon: React.ReactNode,
 }
 
 export function DashboardMain(props: React.PropsWithChildren<DashboardMainProps>) {
-    const { t } = useTranslation();
-    const { title, icon } = props;
 
     return (
 
@@ -21,13 +15,11 @@ export function DashboardMain(props: React.PropsWithChildren<DashboardMainProps>
                 overflow: 'auto',
                 p: 2,
                 mt: 14,
-                mb: 4
+                mb: 4,
+                mx: [4],
             }}
         >
-            {/* <Helmet>
-                <title>{`${t(title)} | Modilist`}</title>
-            </Helmet> */}
-            <Grid container spacing={2}>
+            <Grid container spacing={4}>
                 <Outlet />
             </Grid>
         </Box>

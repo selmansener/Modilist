@@ -41,57 +41,57 @@ const mdTheme = createTheme({
       primary: '#2F2244',
       secondary: 'rgba(64,62,86,0.7)',
       disabled: 'rgba(64,62,86,0.38)',
-    }
+    },
   },
   typography: {
     allVariants: {
       color: '#2F2244',
     },
-    fontFamily: 'poppins',
+    fontFamily: 'Poppins, sans-serif',
     h1: {
       fontSize: 64,
-      fontFamily: 'poppins',
+      fontFamily: 'Poppins, sans-serif',
       fontWeight: 800,
     },
     h2: {
       fontSize: 40,
-      fontFamily: 'poppins',
+      fontFamily: 'Poppins, sans-serif',
       fontWeight: 800,
     },
     h3: {
       fontSize: 32,
-      fontFamily: 'poppins',
+      fontFamily: 'Poppins, sans-serif',
       fontWeight: 800,
     },
     h4: {
       fontSize: 24,
-      fontFamily: 'poppins',
+      fontFamily: 'Poppins, sans-serif',
       fontWeight: 800,
     },
     h5: {
       fontSize: 20,
-      fontFamily: 'poppins',
+      fontFamily: 'Poppins, sans-serif',
       fontWeight: 800,
     },
     h6: {
-      fontSize: 14,
-      fontFamily: 'poppins',
+      fontSize: 16,
+      fontFamily: 'Poppins, sans-serif',
       fontWeight: 800,
     },
     subtitle1: {
-      fontFamily: 'poppins',
+      fontFamily: 'Poppins, sans-serif',
       fontSize: 20,
     },
     subtitle2: {
-      fontFamily: 'poppins',
+      fontFamily: 'Poppins, sans-serif',
       fontSize: 14,
     },
     body1: {
-      fontFamily: 'poppins',
+      fontFamily: 'Poppins, sans-serif',
       fontSize: 16,
     },
     body2: {
-      fontFamily: 'poppins',
+      fontFamily: 'Poppins, sans-serif',
       fontSize: 14,
       fontWeight: 300,
       lineHeight: 1.27,
@@ -100,9 +100,9 @@ const mdTheme = createTheme({
     htmlFontSize: 16,
     fontWeightBold: 800,
     button: {
-      fontSize: 20,
-      fontWeight: 600,
-      textTransform: 'initial'
+      fontSize: 16,
+      fontWeight: 800,
+      textTransform: 'initial',
     },
   },
   components: {
@@ -120,10 +120,47 @@ const mdTheme = createTheme({
           background: #2F2244;
         },
 
-        a {
+        & .MuiLink-root {
           text-decoration: none;
+          color: #BCBC86;
         }
-      `,
+
+        a.active[aria-current='page'] {
+          & .MuiListItemButton-root {
+            background-color: #2F2244
+          }
+
+          & .MuiListItemButton-root:active {
+            background-color: #2F2244
+          }
+
+          & .MuiTypography-root, & .MuiSvgIcon-root {
+            color: #fff
+          }
+        }
+      `
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'underline',
+          color: '#2F2244'
+        }
+      }
+    },
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          border: 1,
+          borderColor: '#2F2244',
+          borderStyle: 'solid'
+        },
+        root: {
+          "&.Mui-disabled": {
+            border: 0
+          }
+        }
+      }
     }
   }
 });

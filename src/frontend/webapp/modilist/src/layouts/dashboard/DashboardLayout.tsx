@@ -7,39 +7,32 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch, RootState } from '../../store/store';
 import { AccountState } from '../../services/swagger/api';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import useWindowDimensions from '../../utils/windowDimensions';
 import { CircularProgress } from '@mui/material';
 import { menuItems } from '../Router';
 
-interface DashboardProps {
-  // menuItems: MenuItem[],
-  title: string,
-  icon: React.ReactNode,
-}
-
 function Loading() {
   const { height, width } = useWindowDimensions();
 
   return <Box sx={{
-      display: 'flex',
-      width: width,
-      height: height,
-      alignItems: 'center',
-      justifyContent: 'center'
+    display: 'flex',
+    width: width,
+    height: height,
+    alignItems: 'center',
+    justifyContent: 'center'
   }}>
-      <CircularProgress />
+    <CircularProgress />
   </Box>
 }
 
-export default function Dashboard(props: React.PropsWithChildren<DashboardProps>) {
+export default function Dashboard() {
   const { instance: msal } = useMsal();
   const navigate = useNavigate();
   const { isBusy: getAccountIsBusy, data: currentAccount, status: getAccountStatus } = useSelector((state: RootState) => state.getAccountModel);
   const { isBusy: createAccountIsBusy, data: createAccountResponse, status: createAccountStatus } = useSelector((state: RootState) => state.createAccountModel);
   const dispatch = useDispatch<Dispatch>();
-  const { title, icon } = props;
 
   useEffect(() => {
     let activeAccount = msal.getActiveAccount();
@@ -98,11 +91,8 @@ export default function Dashboard(props: React.PropsWithChildren<DashboardProps>
           <CssBaseline />
           <DashboardHeader menuItems={menuItems} account={currentAccount} />
           <Box sx={{ display: 'flex', flexDirection: 'column', flex: 'auto' }}>
-            <DashboardMain 
-              title={title}
-              icon={icon}
-            >
-              {props.children}
+            <DashboardMain>
+              <Outlet />
             </DashboardMain>
             <DashboardFooter />
           </Box>

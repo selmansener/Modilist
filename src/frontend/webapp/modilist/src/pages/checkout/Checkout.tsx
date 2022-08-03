@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, FormControl, FormControlLabel, FormHelperText, Grid, Link, Paper, TextField, Tooltip, Typography } from "@mui/material";
+import { Alert, Box, Button, Checkbox, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, FormControl, FormControlLabel, FormHelperText, Grid, Link, Paper, TextField, Tooltip, Typography, useTheme } from "@mui/material";
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import format from "date-fns/format";
@@ -17,6 +17,8 @@ import addDays from "date-fns/addDays";
 import { LineItemFeedback } from "../salesOrders/components/LineItemFeedback";
 import { AddressSelection } from "../../components/addressSelection/AddressSelection";
 import trLocale from 'date-fns/locale/tr';
+import WarningAmberOutlinedIcon from '@mui/icons-material/WarningAmberOutlined';
+import Cards from 'react-credit-cards';
 
 export function Checkout() {
     const navigate = useNavigate();
@@ -39,6 +41,11 @@ export function Checkout() {
     const [isTermsDialogOpen, setIsTermsDialogOpen] = useState<boolean>(false);
     const [isSalesDialogOpen, setIsSalesDialogOpen] = useState<boolean>(false);
     const [isCheckoutTouched, setIsCheckoutTouched] = useState<boolean>(false);
+    const theme = useTheme();
+
+    const everyItemReturned = salesOrder?.lineItems?.every(x => x.state === SalesOrderLineItemState.Returned);
+    const anyItemReturned = salesOrder?.lineItems?.some(x => x.state === SalesOrderLineItemState.Returned);
+    const servicePrice = everyItemReturned ? 45 : 0;
 
     useEffect(() => {
         if (salesOrderId && !isBusySalesOrder && salesOrderStatus === 0) {
@@ -52,6 +59,7 @@ export function Checkout() {
 
     useEffect(() => {
         if (createPaymentStatus === 200) {
+            dispatch.createPaymentModel.RESET();
             navigate(`/sales-orders/${salesOrderId}/checkout-completed`);
         }
     }, [createPaymentStatus])
@@ -151,6 +159,10 @@ export function Checkout() {
             return 0;
         }
 
+        if (everyItemReturned) {
+            return servicePrice;
+        }
+
         const total = salesOrder.lineItems?.filter(x => x.state === SalesOrderLineItemState.Sold)
             .map(x => {
                 if (x.product?.price === undefined) {
@@ -167,6 +179,10 @@ export function Checkout() {
     }
 
     const vatPrice = () => {
+        if (everyItemReturned) {
+            return 0;
+        }
+
         return Math.round(((totalPrice() - soldProductPrice()) + Number.EPSILON) * 100) / 100;
     }
 
@@ -240,115 +256,125 @@ export function Checkout() {
                         {RenderReturnedLineItems()}
                     </Box>
                 </Grid>
-                <Grid item container xs={6} spacing={2}>
-                    <Grid item xs={12}>
-                        <Typography variant="body1" fontWeight={800}>
-                            {t(getReturnData === undefined ? "Pages.Checkout.ReturnDate" : "Pages.Checkout.EstimatedPickupDate", {
-                                date: getReturnData?.requestedPickupDate && format(new Date(getReturnData?.requestedPickupDate), "dd.MM.yyyy", {
-                                    locale: trLocale
-                                })
-                            })}
-                        </Typography>
-                    </Grid>
-                    {getReturnData === undefined && <Grid item xs={12}>
-                        <FormControl>
-                            <Paper>
-                                <LocalizationProvider dateAdapter={AdapterDateFns} locale={trLocale}>
-                                    <StaticDatePicker
-                                        showToolbar
-                                        toolbarTitle={t("Pages.Checkout.SelectReturnDate")}
-                                        orientation="landscape"
-                                        minDate={minDate}
-                                        maxDate={maxDate}
-                                        onError={(reason) => {
-                                            // TODO: formik set error
-                                            console.log(reason);
-                                        }}
-                                        views={["month", "day"]}
-                                        displayStaticWrapperAs="desktop"
-                                        value={pickupDate}
-                                        disablePast
-                                        onChange={(newValue) => {
-                                            setPickupDate(newValue);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} />}
-                                    />
-                                </LocalizationProvider>
-
-                            </Paper>
-                        </FormControl>
-                    </Grid>}
-                    {getReturnData &&
-                        <Grid item xs={12}>
-                            <Typography variant="h1">PICKUP IMAGE</Typography>
-                        </Grid>}
-                </Grid>
-                <Grid item container xs={6} spacing={2} alignContent="space-between">
-                    <Grid item container xs={12} spacing={2} alignContent="flex-start">
-                        <Grid item xs={12}>
-                            <Typography variant="body1" fontWeight={800}>
-                                {t("Pages.Checkout.ReturnAddress")}
-                            </Typography>
-                        </Grid>
-                        {/* TODO: this section should be rendered with selected address */}
-                        <Grid item xs={6}>
-                            {selectedAddress?.name}
-                        </Grid>
-                        {getReturnData === undefined && <Grid item xs={6}>
-                            <Typography variant="body1" fontWeight={800} align="right">
-                                <Link
-                                    onClick={() => {
-                                        setAddressSelectionOpen(true);
-                                    }}
-                                    sx={{
-                                        cursor: 'pointer'
-                                    }}>
-                                    {t("Pages.Checkout.ChangeReturnAddress")}
-                                </Link>
-                            </Typography>
-                        </Grid>}
-                        <Grid item xs={12}>
-                            <Typography variant="body1">
-                                {selectedAddress?.fullAddress}
-                            </Typography>
-                            <Typography variant="body1">
-                                {selectedAddress?.district} / {selectedAddress?.city}
-                            </Typography>
-                            <Typography variant="body1">
-                                {getMaskedPhone()}
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={12} spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography>
-                                {t("Pages.Checkout.CargoTrackingCode")}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={8}>
-                            <Typography variant="h5">
-                                {getReturnData ? getReturnData.cargoTrackingCode : t("Pages.Checkout.CargoTrackingCodeInfo")}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <FormControl fullWidth>
-                                <Button
-                                    disabled={getReturnData !== undefined}
-                                    variant="contained"
-                                    onClick={() => {
-                                        if (!isBusyCreateReturn && createReturnStatus === 0 && salesOrderId && pickupDate) {
-                                            dispatch.createReturnModel.createReturn({
-                                                salesOrderId: parseInt(salesOrderId),
-                                                addressId: selectedAddress?.id,
-                                                requestedPickupDate: pickupDate
+                <Grid item xs={12}>
+                    <Paper elevation={6} sx={{
+                        p: 4
+                    }}>
+                        <Grid item container xs={12} spacing={2}>
+                            <Grid item container xs={12} xl={6} spacing={2}>
+                                <Grid item xs={12}>
+                                    <Typography variant="body1" fontWeight={800}>
+                                        {t(getReturnData === undefined ? "Pages.Checkout.ReturnDate" : "Pages.Checkout.EstimatedPickupDate", {
+                                            date: getReturnData?.requestedPickupDate && format(new Date(getReturnData?.requestedPickupDate), "dd.MM.yyyy", {
+                                                locale: trLocale
                                             })
-                                        }
-                                    }}>
-                                    {t("Pages.Checkout.CreateReturn")}
-                                </Button>
-                            </FormControl>
+                                        })}
+                                    </Typography>
+                                </Grid>
+                                {getReturnData === undefined && <Grid item xs={12}>
+                                    <FormControl>
+                                        <Paper>
+                                            <LocalizationProvider dateAdapter={AdapterDateFns} locale={trLocale}>
+                                                <StaticDatePicker
+                                                    showToolbar
+                                                    toolbarTitle={t("Pages.Checkout.SelectReturnDate")}
+                                                    orientation="landscape"
+                                                    minDate={minDate}
+                                                    maxDate={maxDate}
+                                                    onError={(reason) => {
+                                                        // TODO: formik set error
+                                                        console.log(reason);
+                                                    }}
+                                                    views={["month", "day"]}
+                                                    displayStaticWrapperAs="desktop"
+                                                    value={pickupDate}
+                                                    disablePast
+                                                    onChange={(newValue) => {
+                                                        setPickupDate(newValue);
+                                                    }}
+                                                    renderInput={(params) => <TextField {...params} />}
+                                                />
+                                            </LocalizationProvider>
+
+                                        </Paper>
+                                    </FormControl>
+                                </Grid>}
+                                {getReturnData &&
+                                    <Grid item xs={12}>
+                                        <Typography variant="h1">PICKUP IMAGE</Typography>
+                                    </Grid>}
+                            </Grid>
+                            <Grid item container xs={12} xl={6} spacing={2} alignContent="space-between">
+                                <Grid item container xs={12} spacing={2} alignContent="flex-start">
+                                    <Grid item xs={6}>
+                                        <Trans>
+                                            <Typography variant="body1" fontWeight={800} component="span">
+                                                {t("Pages.Checkout.ReturnAddress")}
+                                            </Typography>
+                                            <Typography variant="body1" fontWeight={800} component="span">
+                                                {selectedAddress?.name}
+                                            </Typography>
+                                        </Trans>
+                                    </Grid>
+                                    {getReturnData === undefined && <Grid item xs={6}>
+                                        <Typography variant="body1" fontWeight={800} align="right">
+                                            <Link
+                                                onClick={() => {
+                                                    setAddressSelectionOpen(true);
+                                                }}
+                                                sx={{
+                                                    cursor: 'pointer'
+                                                }}>
+                                                {t("Pages.Checkout.ChangeReturnAddress")}
+                                            </Link>
+                                        </Typography>
+                                    </Grid>}
+                                    <Grid item xs={12}>
+                                        <Typography variant="body1">
+                                            {selectedAddress?.fullAddress}
+                                        </Typography>
+                                        <Typography variant="body1">
+                                            {selectedAddress?.district} / {selectedAddress?.city}
+                                        </Typography>
+                                        <Typography variant="body1">
+                                            {getMaskedPhone()}
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                                <Grid item container xs={12} spacing={2}>
+                                    <Grid item xs={12}>
+                                        <Typography variant="body1" fontWeight={800}>
+                                            {t("Pages.Checkout.CargoTrackingCode")}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={8}>
+                                        <Typography variant="body1">
+                                            {getReturnData ? getReturnData.cargoTrackingCode : t("Pages.Checkout.CargoTrackingCodeInfo")}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <FormControl fullWidth>
+                                            <Button
+                                                disabled={getReturnData !== undefined}
+                                                variant="contained"
+                                                color="secondary"
+                                                onClick={() => {
+                                                    if (!isBusyCreateReturn && createReturnStatus === 0 && salesOrderId && pickupDate) {
+                                                        dispatch.createReturnModel.createReturn({
+                                                            salesOrderId: parseInt(salesOrderId),
+                                                            addressId: selectedAddress?.id,
+                                                            requestedPickupDate: pickupDate
+                                                        })
+                                                    }
+                                                }}>
+                                                {t("Pages.Checkout.CreateReturn")}
+                                            </Button>
+                                        </FormControl>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </Paper>
                 </Grid>
             </Grid>
             <AddressSelection open={addressSelectionOpen} handleClose={handleAddressSelectionClose} onSelect={handleAddressSelection} contentText="Pages.Checkout.ChangeReturnAddressModal" />
@@ -419,35 +445,41 @@ export function Checkout() {
                     {salesOrder?.createdAt && format(new Date(salesOrder.createdAt), 'MMMM yyyy', { locale: tr })}
                 </Typography>
             </Grid>
-            <Grid item xs={12}>
-                <Divider />
-            </Grid>
+            {anyItemReturned && <Grid item xs={12}>
+                <Divider sx={{
+                    mb: 4
+                }} />
+            </Grid>}
             {RenderReturnsSection()}
-            <Grid item xs={12}>
-                <Divider />
-            </Grid>
-            <Grid item xs={12}>
-                <Typography variant="body1" fontWeight={800}>
-                    {t("Pages.Checkout.SoldLineItems")}
-                </Typography>
-            </Grid>
-            <Grid item xs={12}>
-                <Box sx={{
-                    display: 'flex',
-                    p: 2,
-                    flexDirection: 'row',
-                }}>
-                    {RenderSoldLineItems()}
-                </Box>
-            </Grid>
-            <Grid item container xs={6} spacing={2}>
+            {!everyItemReturned &&
+                <React.Fragment>
+                    <Grid item xs={12} sx={{
+                        mt: 4
+                    }}>
+                        <Typography variant="body1" fontWeight={800}>
+                            {t("Pages.Checkout.SoldLineItems")}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Box sx={{
+                            display: 'flex',
+                            p: 2,
+                            flexDirection: 'row',
+                        }}>
+                            {RenderSoldLineItems()}
+                        </Box>
+                    </Grid>
+                </React.Fragment>}
+            <Grid item container xs={6} spacing={2} sx={{
+                mt: 2
+            }}>
                 <Grid item xs={12}>
                     <Typography variant="body1" fontWeight={800}>
                         {t("Pages.Checkout.PaymentMethod")}
                     </Typography>
                 </Grid>
                 <Grid item container xs={12} spacing={2}>
-                    <Grid item container xs={8} alignContent="flex-start" spacing={2}>
+                    <Grid item container xs={7} alignContent="flex-start" spacing={2}>
                         <Grid item xs={12}>
                             <Typography variant="body1" fontWeight={800}>
                                 {paymentMethod?.cardBankName}
@@ -467,12 +499,24 @@ export function Checkout() {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Grid item xs={4}>
-                        <ImageComponent src={`${imgBaseHost}/card-logo/${paymentMethod?.cardAssociation}.svg`} />
+                    <Grid item xs={5} sx={{
+                        display:"flex",
+                        justifyContent: "center"
+                    }}>
+                        <Cards
+                            cvc={paymentMethod?.cvc ?? "000"}
+                            expiry={`${paymentMethod?.expireMonth}/${paymentMethod?.expireYear}`}
+                            name={paymentMethod?.cardHolderName ?? ""}
+                            preview
+                            issuer={paymentMethod?.cardAssociation?.replace("_", "").toLowerCase() ?? undefined}
+                            number={getMaskedCardNumber()}
+                        />
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item container xs={6} spacing={2} alignContent="flex-start" >
+            <Grid item container xs={6} spacing={2} alignContent="flex-start" sx={{
+                mt: 2
+            }} >
                 <Grid item container xs={12} alignItems="center" spacing={2}>
                     <Grid item xs={12}>
                         <Typography variant="body1" fontWeight={800} >
@@ -528,6 +572,17 @@ export function Checkout() {
                 </Grid>
             </Grid>
             <Grid item container xs={12} spacing={2}>
+                {everyItemReturned && <Grid item xs={12} sx={{
+                    display: 'flex',
+                    flexBasis: 'max-content',
+                    justifyContent: 'flex-end'
+                }}>
+                    <Alert variant="filled" severity="warning" icon={<WarningAmberOutlinedIcon color="primary" />}>
+                        <Typography variant="body1" align="right" fontWeight={800}>
+                            {t("Pages.SalesOrderFeedback.ServicePriceWarning")}
+                        </Typography>
+                    </Alert>
+                </Grid>}
                 <Grid item xs={11}>
                     <Typography variant="body1" align="right" fontWeight={800}>
                         {t("Pages.Checkout.SoldProductPrice")}
@@ -546,6 +601,16 @@ export function Checkout() {
                 <Grid item xs={1}>
                     <Typography variant="body1" align="right">
                         {vatPrice()} TL
+                    </Typography>
+                </Grid>
+                <Grid item xs={11}>
+                    <Typography variant="body1" align="right" fontWeight={800} color={everyItemReturned ? theme.palette.error.main : theme.palette.primary.main}>
+                        {t("Pages.SalesOrderFeedback.ServicePrice")}
+                    </Typography>
+                </Grid>
+                <Grid item xs={1}>
+                    <Typography variant="body1" align="right" color={everyItemReturned ? theme.palette.error.main : theme.palette.primary.main}>
+                        {servicePrice} TL
                     </Typography>
                 </Grid>
                 <Grid item xs={11}>
