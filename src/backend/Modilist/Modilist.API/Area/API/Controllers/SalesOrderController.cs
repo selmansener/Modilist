@@ -143,5 +143,44 @@ namespace Modilist.API.Area.API.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost("[controller].{salesOrderId}/UpdateAddress")]
+        [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> UpdateAddress(int salesOrderId, [FromBody] UpdateSalesOrderAddress request, CancellationToken cancellationToken)
+        {
+            request.AccountId = User.GetUserId();
+            request.SalesOrderId = salesOrderId;
+
+            var response = await _mediator.Send(request, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [HttpPost("[controller].{salesOrderId}/UpdateEstimatedDeliveryDate")]
+        [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> UpdateEstimatedDeliveryDate(int salesOrderId, [FromBody] UpdateEstimatedDeliveryDate request, CancellationToken cancellationToken)
+        {
+            request.AccountId = User.GetUserId();
+            request.SalesOrderId = salesOrderId;
+
+            var response = await _mediator.Send(request, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [HttpPost("[controller].{salesOrderId}/UpdateAdditionalRequests")]
+        [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> UpdateAdditionalRequests(int salesOrderId, [FromBody] UpdateAdditionalRequests request, CancellationToken cancellationToken)
+        {
+            request.AccountId = User.GetUserId();
+            request.SalesOrderId = salesOrderId;
+
+            var response = await _mediator.Send(request, cancellationToken);
+
+            return Ok(response);
+        }
     }
 }

@@ -19,6 +19,8 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
 
         Task<SalesOrder?> GetSalesOrderAsync(Guid accountId, int id, CancellationToken cancellationToken, bool includeLineItems = false);
 
+        Task<SalesOrder?> GetWithAddressAsync(Guid accountId, int id, CancellationToken cancellationToken);
+
         IQueryable<SalesOrder> QueryAllByAccountId(Guid accountId);
 
         Task<SalesOrder?> GetLatestActiveOrderAsync(Guid accountId, CancellationToken cancellationToken);
@@ -63,6 +65,11 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
             }
 
             return await salesOrders.FirstOrDefaultAsync(x => x.AccountId == accountId && x.Id == id, cancellationToken);
+        }
+
+        public async Task<SalesOrder?> GetWithAddressAsync(Guid accountId, int id, CancellationToken cancellationToken)
+        {
+            return await GetAll().Include(x => x.SalesOrderAddress).FirstOrDefaultAsync(x => x.AccountId == accountId && x.Id == id, cancellationToken);
         }
 
         public IQueryable<SalesOrder> QueryAllByAccountId(Guid accountId)

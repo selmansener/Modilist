@@ -82,6 +82,7 @@ namespace Modilist.Business.Seed.Services
                 }
             }
 
+
             await _dbContext.AddRangeAsync(addresses, cancellationToken);
         }
     }

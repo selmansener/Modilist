@@ -76,6 +76,12 @@ export interface SalesOrderDetailsDTO {
     createdAt?: Date;
     /**
      * 
+     * @type {Date}
+     * @memberof SalesOrderDetailsDTO
+     */
+    estimatedDeliveryDate?: Date;
+    /**
+     * 
      * @type {Array<SalesOrderLineItemDTO>}
      * @memberof SalesOrderDetailsDTO
      */
@@ -86,4 +92,10 @@ export interface SalesOrderDetailsDTO {
      * @memberof SalesOrderDetailsDTO
      */
     salesOrderAddress?: SalesOrderAddressDTO;
+    /**
+     * 
+     * @type {string}
+     * @memberof SalesOrderDetailsDTO
+     */
+    additionalRequests?: string;
 }

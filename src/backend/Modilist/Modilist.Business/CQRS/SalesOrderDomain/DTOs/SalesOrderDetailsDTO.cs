@@ -22,8 +22,12 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.DTOs
 
         public DateTime CreatedAt { get; set; }
 
+        public DateTime EstimatedDeliveryDate { get; set; }
+
         public IEnumerable<SalesOrderLineItemDTO> LineItems { get; set; }
 
         public SalesOrderAddressDTO SalesOrderAddress { get; set; }
+
+        public string AdditionalRequests { get; set; }
     }
 }

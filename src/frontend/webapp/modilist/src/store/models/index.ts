@@ -23,6 +23,9 @@ import { createFirstOrderModel } from "./salesOrders/CreateFirstOrder"
 import { addOrUpdateFeedbackModel } from "./salesOrders/Feedback"
 import { salesOrderDetailsModel } from "./salesOrders/SalesOrderDetails"
 import { salesOrdersQueryModel } from "./salesOrders/SalesOrdersQuery"
+import { updateAdditionalRequestsModel } from "./salesOrders/UpdateAdditionalRequests"
+import { updateEstimatedDeliveryDateModel } from "./salesOrders/UpdateEstimatedDeliveryDate"
+import { updateSalesOrderAddressModel } from "./salesOrders/UpdateSalesOrderAddress"
 import { getSizeInfoModel } from "./sizeInfo/GetSizeInfo"
 import { upsertSizeInfoModel } from "./sizeInfo/UpsertSizeInfo"
 import { getStylePreferencesModel } from "./stylePreferences/GetStylePreferences"
@@ -74,6 +77,9 @@ export interface RootModel extends Models<RootModel> {
   getBlogMetaDataModel: typeof getBlogMetaDataModel,
   createPaymentModel: typeof createPaymentModel,
   createFirstOrderModel: typeof createFirstOrderModel,
+  updateSalesOrderAddressModel: typeof updateSalesOrderAddressModel,
+  updateEstimatedDeliveryDateModel: typeof updateEstimatedDeliveryDateModel,
+  updateAdditionalRequestsModel: typeof updateAdditionalRequestsModel,
 }
 
 export const models: RootModel = {
@@ -113,4 +119,7 @@ export const models: RootModel = {
   getBlogMetaDataModel,
   createPaymentModel,
   createFirstOrderModel,
+  updateSalesOrderAddressModel,
+  updateEstimatedDeliveryDateModel,
+  updateAdditionalRequestsModel,
 }

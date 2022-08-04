@@ -31,6 +31,7 @@ import CheckroomIcon from '@mui/icons-material/Checkroom';
 import StraightenIcon from '@mui/icons-material/Straighten';
 import GradientIcon from '@mui/icons-material/Gradient';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
+import { CheckoutFailed } from '../pages/checkout/CheckoutFailed';
 
 interface RouterOptions {
   title?: string,
@@ -134,6 +135,18 @@ const routes: RouterOptions[] = [
     helmet: "Pages.Titles.SalesOrders",
     route: "sales-orders/:salesOrderId/checkout-completed",
     component: <CheckoutCompleted />,
+    layout: {
+      path: "/",
+      component: <Dashboard />
+    },
+    isPublic: false,
+    disabledEnvironments: []
+  },
+  {
+    title: "Pages.Titles.SalesOrders",
+    helmet: "Pages.Titles.SalesOrders",
+    route: "sales-orders/:salesOrderId/checkout-failed",
+    component: <CheckoutFailed />,
     layout: {
       path: "/",
       component: <Dashboard />

@@ -105,9 +105,8 @@ export function AddressSelection(props: AddressSelectionProps) {
             open={open}
             onClose={handleClose}
         >
-            <DialogTitle></DialogTitle>
             <DialogContent>
-                <Grid container xs={12} spacing={2}>
+                <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography variant="h5">
                             {t("Components.AddressSelection.Title")}
@@ -120,10 +119,10 @@ export function AddressSelection(props: AddressSelectionProps) {
                     </Grid>
                     {addresses && addresses.map((address, index) => {
                         if (index === addresses.length - 1) {
-                            return <AddressItem {...address} onSelect={handleAddressSelection} />
+                            return <AddressItem key={address.name} {...address} onSelect={handleAddressSelection} />
                         }
 
-                        return <React.Fragment>
+                        return <React.Fragment key={address.name}>
                             <AddressItem {...address} onSelect={handleAddressSelection} />
                             <Grid item xs={12}>
                                 <Divider />

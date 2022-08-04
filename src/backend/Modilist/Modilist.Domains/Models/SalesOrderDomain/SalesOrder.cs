@@ -17,6 +17,7 @@ namespace Modilist.Domains.Models.SalesOrderDomain
         {
             AccountId = accountId;
             State = SalesOrderState.Created;
+            EstimatedDeliveryDate = CreatedAt.AddDays(7);
         }
 
         public Guid AccountId { get; private set; }
@@ -45,6 +46,10 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public DateTime? CompletedAt { get; private set; }
 
+        public DateTime EstimatedDeliveryDate { get; private set; }
+
+        public string? AdditionalRequests { get; private set; }
+
         public IReadOnlyList<SalesOrderLineItem> LineItems => _lineItems;
 
         public int? SalesOrderAddressId { get; set; }
@@ -70,6 +75,11 @@ namespace Modilist.Domains.Models.SalesOrderDomain
             if (address == null)
             {
                 throw new ArgumentNullException(nameof(address));
+            }
+
+            if (State > SalesOrderState.Prepared)
+            {
+                throw new UpdateSalesOrderAddressFailureException(AccountId, Id, address.Id, State, "SalesOrderAddress can not be updated after Shipped.");
             }
 
             if (SalesOrderAddress == null)
@@ -202,6 +212,26 @@ namespace Modilist.Domains.Models.SalesOrderDomain
             {
                 lineItem.Sold();
             }
+        }
+
+        public void UpdateEstimatedDeliveryDate(DateTime estimatedDeliveryDate)
+        {
+            if (estimatedDeliveryDate == default)
+            {
+                throw new ArgumentNullException(nameof(estimatedDeliveryDate));
+            }
+
+            if (State > SalesOrderState.Prepared)
+            {
+                throw new UpdateSalesOrderFailureException(AccountId, Id, "EstimatedDeliveryDate can not be updated for Shipped orders.");
+            }
+
+            EstimatedDeliveryDate = estimatedDeliveryDate;
+        }
+
+        public void UpdateAdditionalRequests(string? additionalRequests)
+        {
+            AdditionalRequests = additionalRequests;
         }
     }
 }

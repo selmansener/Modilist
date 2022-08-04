@@ -5,9 +5,9 @@
             "CloseButton": "Kapat",
             "Select": "Seç >"
         },
-        "ServicePrice": {
-            "Title": "Title",
-            "Content": "Content"
+        "DeliveryDateDialog": {
+            "Title": "Tahmini Teslimat Tarihi",
+            "Content": "Teslimat tarihini değiştir."
         }
     },
     "Layouts": {
@@ -123,7 +123,8 @@
             "CargoTrackingCode": "Kargo Takip Numarası: ",
             "ChangeDeliveryDate": "Teslimat Tarihini Değiştir ",
             "SalesOrderFeedback": "Kombine Puanın: ",
-            "DisplayInvoice": "Faturayı Görüntüle"
+            "DisplayInvoice": "Faturayı Görüntüle",
+            "ChangeDeliveryAddress": "Teslimat adresini değiştirin."
         },
         "SalesOrderFeedback": {
             "AutoPaymentWarning": "5 iş günü içerisinde değerlendirme yapmaz iseniz kombin toplam bedeli kayıtlı kartınızdan tahsil edilecektir.",
@@ -400,8 +401,18 @@
             "TermsInfoError": "Devam edebilmek için lütfen formu onaylayın."
         },
         "CheckoutCompleted": {
-            "SalesOrderCompleted": "#{{salesOrderId}} numaralı siparişin tamamlandı.",
-            "Thanks": "Bizi tercih ettiğin için teşekkür ederiz.",
+            "SalesOrderReferenceNumber": "Sipariş Ref. No: #{{salesOrderId}}",
+            "SuccessMessage": "Ödeme işlemin başarı ile gerçekleşti.",
+            "BestWishes": "İyi günlerde kullanmanı diliyoruz.",
+            "ReturnToHome": "Anasayfa'ya dön"
+        },
+        "CheckoutFailed": {
+            "SalesOrderReferenceNumber": "Sipariş Ref. No: #{{salesOrderId}}",
+            "FailureMessage": "Ödeme işlemini tamamlamaya çalışırken bir hata ile karşılaştık.",
+            "Apologize": "Ödeme esnasında problem yaşadığın için üzgünüz.",
+            "Investigate": "Hatayı inceleyip en kısa sürede çözmeye çalşacağız.",
+            "Suggest": "Dilersen bir süre sonra ödeme sayfasına dönüp tekrar deneyebilirsin.",
+            "ReturnToCheckout": "Ödeme sayfasına dön",
             "ReturnToHome": "Anasayfa'ya dön"
         }
     },
@@ -590,7 +601,8 @@
         },
         "Forms": {
             "Select": "Seçiniz",
-            "Close": "Kapat"
+            "Close": "Kapat",
+            "Submit": "Kaydet"
         },
         "PersonalInfo": {
             "FirstName": "Ad",

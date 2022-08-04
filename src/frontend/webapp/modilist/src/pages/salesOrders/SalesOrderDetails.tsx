@@ -1,11 +1,11 @@
 import { Button, Divider, FormControl, Grid, Link, Paper, TextField, Typography, useTheme } from "@mui/material";
 import format from "date-fns/format";
 import { tr } from "date-fns/locale";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { SalesOrderState } from "../../services/swagger/api";
+import { AddressDTO, SalesOrderState } from "../../services/swagger/api";
 import { Dispatch, RootState } from "../../store/store";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { ImageComponent } from "../../components/image/ImageComponent";
@@ -15,20 +15,62 @@ import { SalesOrderFeedback } from "./components/SalesOrderFeedback";
 import { addDays } from "date-fns";
 import { LovelyRating } from "../../components/lovelyRating/LovelyRating";
 import { calculateAvgSalesOrderRating } from "./utils/calculateAvgRating";
+import { AddressSelection } from "../../components/addressSelection/AddressSelection";
+import { DeliveryDateDialog } from "./components/DeliveryDateDialog";
 
 export function SalesOrderDetails() {
     const { t } = useTranslation();
     const { salesOrderId } = useParams();
     const dispatch = useDispatch<Dispatch>();
-    const { isBusy, data: salesOrder } = useSelector((state: RootState) => state.salesOrderDetailsModel);
+    const { isBusy: isBusySalesOrder, data: salesOrder, status: salesOrderStatus } = useSelector((state: RootState) => state.salesOrderDetailsModel);
+    const { isBusy: isBusyUpdateAddress, status: updateAddressStatus } = useSelector((state: RootState) => state.updateSalesOrderAddressModel);
+    const { isBusy: isBusyUpdateAdditionalRequests, status: updateAdditionalRequestsStatus } = useSelector((state: RootState) => state.updateAdditionalRequestsModel);
     const { imgBaseHost } = config;
+    const [isAddressSelectionOpen, setIsAddressSelectionOpen] = useState(false);
+    const [isDeliveryDateDialogOpen, setIsDeliveryDateDialogOpen] = useState(false);
+    const [additionalRequests, setAdditionalRequests] = useState<string>(salesOrder?.additionalRequests ?? "");
     const theme = useTheme();
 
     useEffect(() => {
-        if (salesOrderId && !isBusy) {
+        if (updateAdditionalRequestsStatus === 200) {
+            if (salesOrderId) {
+                dispatch.salesOrderDetailsModel.salesOrderDetails(parseInt(salesOrderId));
+            }
+
+            dispatch.updateAdditionalRequestsModel.RESET();
+        }
+    }, [updateAdditionalRequestsStatus]);
+
+    useEffect(() => {
+        if (salesOrderStatus === 200) {
+            setAdditionalRequests(salesOrder?.additionalRequests ?? "");
+        }
+    }, [salesOrderStatus]);
+
+    useEffect(() => {
+        if (salesOrderId && !isBusySalesOrder) {
             dispatch.salesOrderDetailsModel.salesOrderDetails(parseInt(salesOrderId));
         }
     }, [salesOrderId]);
+
+    useEffect(() => {
+        if (salesOrderId && !isBusyUpdateAddress && updateAddressStatus === 200) {
+            dispatch.salesOrderDetailsModel.salesOrderDetails(parseInt(salesOrderId));
+        }
+    }, [updateAddressStatus]);
+
+    const handleAddressChange = (selectedAddress: AddressDTO) => {
+        if (salesOrderId) {
+            dispatch.updateSalesOrderAddressModel.updateSalesOrderAddress({
+                salesOrderId: parseInt(salesOrderId),
+                data: {
+                    addressId: selectedAddress.id
+                }
+            });
+        }
+
+        setIsAddressSelectionOpen(false);
+    }
 
     const getOrderImage = () => {
         switch (salesOrder?.state) {
@@ -61,12 +103,11 @@ export function SalesOrderDetails() {
         return (
             <React.Fragment>
                 <Link sx={{
-
                     cursor: 'pointer'
                 }}
                     fontWeight={800}
                     onClick={() => {
-
+                        setIsAddressSelectionOpen(true);
                     }}>
                     {t("Pages.SalesOrderDetails.RegisteredAddresses")}
                 </Link>
@@ -85,7 +126,7 @@ export function SalesOrderDetails() {
                     fontWeight: 800,
                     cursor: 'pointer'
                 }} onClick={() => {
-
+                    setIsDeliveryDateDialogOpen(true);
                 }}>
                     {t("Pages.SalesOrderDetails.ChangeDeliveryDate")}
                     <CalendarMonthIcon sx={{
@@ -161,9 +202,34 @@ export function SalesOrderDetails() {
                             label={t("Pages.SalesOrderDetails.AdditionalNotes")}
                             multiline
                             rows={4}
-                            defaultValue=""
+                            value={additionalRequests}
+                            onChange={(e) => {
+                                setAdditionalRequests(e.target.value);
+                            }}
                             variant="outlined"
                         />
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end'
+                }}>
+                    <FormControl>
+                        <Button
+                            variant="contained"
+                            onClick={() => {
+                                if (salesOrderId && !isBusyUpdateAdditionalRequests) {
+                                    dispatch.updateAdditionalRequestsModel.updateAdditionalRequests({
+                                        salesOrderId: parseInt(salesOrderId),
+                                        data: {
+                                            additionalRequests: additionalRequests
+                                        }
+                                    })
+                                }
+                            }}
+                            color="secondary">
+                            {t("Generic.Forms.Submit")}
+                        </Button>
                     </FormControl>
                 </Grid>
             </React.Fragment>
@@ -238,9 +304,9 @@ export function SalesOrderDetails() {
                             display: 'flex',
                             justifyContent: 'space-between'
                         }}>
-                            <Typography variant="body1" fontWeight={800} color={theme.palette.primary.main}>
-                                {salesOrder?.createdAt && format(addDays(new Date(salesOrder?.createdAt), 7), 'dd.MM.yyyy', { locale: tr })}
-                            </Typography>
+                            {salesOrder?.estimatedDeliveryDate && <Typography variant="body1" fontWeight={800} color={theme.palette.primary.main}>
+                                {salesOrder?.createdAt && format(new Date(salesOrder?.estimatedDeliveryDate), 'dd.MM.yyyy', { locale: tr })}
+                            </Typography>}
                             <Typography variant="body1">
                                 {RenderChangeEstimatedDeliveryDateLink()}
                             </Typography>
@@ -302,6 +368,28 @@ export function SalesOrderDetails() {
                     {doesOrderDelivered && <SalesOrderFeedback salesOrder={salesOrder ?? {}} />}
                 </Grid>
             </Grid>
+            <AddressSelection
+                open={isAddressSelectionOpen}
+                handleClose={() => {
+                    setIsAddressSelectionOpen(false);
+                }}
+                onSelect={handleAddressChange}
+                contentText={"Pages.SalesOrderDetails.ChangeDeliveryAddress"}
+            />
+            {salesOrder?.estimatedDeliveryDate && <DeliveryDateDialog
+                open={isDeliveryDateDialogOpen}
+                salesOrderId={salesOrderId ? parseInt(salesOrderId) : 0}
+                currentDate={new Date(salesOrder?.estimatedDeliveryDate)}
+                handleClose={(isDateChanged: boolean) => {
+                    console.log("isDateChanged", isDateChanged);
+                    console.log("salesOrderId", salesOrderId);
+                    if (isDateChanged && salesOrderId) {
+                        dispatch.salesOrderDetailsModel.salesOrderDetails(parseInt(salesOrderId));
+                    }
+
+                    setIsDeliveryDateDialogOpen(false);
+                }}
+            />}
         </Grid>
     )
 }
