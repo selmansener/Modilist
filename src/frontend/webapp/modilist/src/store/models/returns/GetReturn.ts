@@ -47,7 +47,7 @@ export const getReturnModel = createModel<RootModel>()({
             async getReturn(salesOrderId: number): Promise<any> {
                 getReturnModel.BUSY();
 
-                const response = await api.returns.apiV1ReturnGetSalesOrderIdPost(salesOrderId);
+                const response = await api.returns.apiV1ReturnGetSalesOrderIdGet(salesOrderId);
 
                 if (response.status === 200) {
                     getReturnModel.HANDLE_RESPONSE(response.data, response.status);

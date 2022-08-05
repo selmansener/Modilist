@@ -1,5 +1,6 @@
 // @filename: models.ts
 import { Models } from "@rematch/core"
+import { changeDefaultAddressModel } from "./addresses/ChangeDefaultAddress"
 import { citiesModel } from "./addresses/Cities"
 import { createAddressModel } from "./addresses/CreateAddress"
 import { districtsModel } from "./addresses/Districts"
@@ -14,6 +15,7 @@ import { getFitPreferencesModel } from "./fitPreferences/GetFitPreferences"
 import { upsertFitPreferencesModel } from "./fitPreferences/UpsertFitPreferences"
 import { createPaymentModel } from "./paymentMethods/CreatePayment"
 import { createPaymentMethodModel } from "./paymentMethods/CreatePaymentMethod"
+import { getAllPaymentMethodsModel } from "./paymentMethods/GetAllPaymentMethods"
 import { getDefaultPaymentMethodModel } from "./paymentMethods/GetDefaultPaymentMethod"
 import { createReturnModel } from "./returns/CreateReturn"
 import { getReturnModel } from "./returns/GetReturn"
@@ -80,6 +82,8 @@ export interface RootModel extends Models<RootModel> {
   updateSalesOrderAddressModel: typeof updateSalesOrderAddressModel,
   updateEstimatedDeliveryDateModel: typeof updateEstimatedDeliveryDateModel,
   updateAdditionalRequestsModel: typeof updateAdditionalRequestsModel,
+  getAllPaymentMethodsModel: typeof getAllPaymentMethodsModel,
+  changeDefaultAddressModel: typeof changeDefaultAddressModel,
 }
 
 export const models: RootModel = {
@@ -122,4 +126,6 @@ export const models: RootModel = {
   updateSalesOrderAddressModel,
   updateEstimatedDeliveryDateModel,
   updateAdditionalRequestsModel,
+  getAllPaymentMethodsModel,
+  changeDefaultAddressModel,
 }

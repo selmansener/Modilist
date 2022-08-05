@@ -20,7 +20,7 @@ export function Subscription() {
     const { personal, contactInfo, paymentMethod, subscriptionDetails } = useSelector((state: RootState) => state.stepperSubscription);
     const isBusy = getAccountIsBusy || updateAccountIsBusy || getDefaultAddressIsBusy || upsertAddressIsBusy || createPaymentMethodIsBusy || updateSubscriptionMaxPricingLimitIsBusy;
     
-    useEffect(() => { window.scrollTo({
+    useEffect(() => { window.scrollTo({ 
         top: 0,
         left: 0,
         behavior: 'smooth'

@@ -2,7 +2,6 @@ import * as React from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PaymentIcon from '@mui/icons-material/Payment';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import BoyIcon from '@mui/icons-material/Boy';
 import HomeIcon from '@mui/icons-material/Home';
 import { Addresses } from '../pages/adresses/Addresses';
 import { Main } from '../pages/main/Main';
@@ -32,6 +31,10 @@ import StraightenIcon from '@mui/icons-material/Straighten';
 import GradientIcon from '@mui/icons-material/Gradient';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import { CheckoutFailed } from '../pages/checkout/CheckoutFailed';
+import { NewPaymentMethod } from '../pages/paymentMethods/NewPaymentMethod';
+import AddCardIcon from '@mui/icons-material/AddCard';
+import { NewAddress } from '../pages/adresses/NewAddress';
+import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
 
 interface RouterOptions {
   title?: string,
@@ -257,6 +260,21 @@ const routes: RouterOptions[] = [
     disabledEnvironments: []
   },
   {
+    title: "Pages.Titles.NewPaymentMethod",
+    helmet: "Pages.Titles.NewPaymentMethod",
+    icon: <AddCardIcon sx={{
+      verticalAlign: "sub"
+    }} />,
+    route: "add-payment-method",
+    layout: {
+      path: "/",
+      component: <Dashboard />
+    },
+    component: <NewPaymentMethod />,
+    isPublic: false,
+    disabledEnvironments: []
+  },
+  {
     title: "Pages.Titles.Addresses",
     helmet: "Pages.Titles.Addresses",
     route: "addresses",
@@ -271,6 +289,21 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <Addresses />,
+    isPublic: false,
+    disabledEnvironments: []
+  },
+  {
+    title: "Pages.Titles.NewAddress",
+    helmet: "Pages.Titles.NewAddress",
+    icon: <AddLocationAltOutlinedIcon sx={{
+      verticalAlign: "sub"
+    }} />,
+    route: "add-address",
+    layout: {
+      path: "/",
+      component: <Dashboard />
+    },
+    component: <NewAddress />,
     isPublic: false,
     disabledEnvironments: []
   },

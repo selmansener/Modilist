@@ -21,7 +21,20 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
-        [HttpPost("[controller].GetDefaultPaymentMethod")]
+        [HttpGet("[controller].GetAll")]
+        [ProducesResponseType(typeof(IEnumerable<PaymentMethodDTO>), 200)]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetAllPaymentMethods
+            {
+                AccountId = User.GetUserId()
+            }, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
+        [HttpGet("[controller].GetDefaultPaymentMethod")]
         [ProducesResponseType(typeof(PaymentMethodDTO), 200)]
         public async Task<IActionResult> GetDefaultPaymentMethod(CancellationToken cancellationToken)
         {

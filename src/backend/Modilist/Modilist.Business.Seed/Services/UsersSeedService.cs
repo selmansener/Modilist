@@ -109,7 +109,7 @@ namespace Modilist.Business.Seed.Services
                     ExpireYear = faker.Random.Int(min: DateTime.UtcNow.AddYears(1).Year, max: DateTime.UtcNow.AddYears(5).Year).ToString()
                 };
 
-                var cardHolderName = $"{account.FirstName.Substring(0, 2).PadRight(account.FirstName.Length - 2, '*')} {account.LastName.Substring(0, 2).PadRight(account.LastName.Length - 2, '*')}";
+                var cardHolderName = $"{account.FirstName.Substring(0, 2).PadRight(account.FirstName.Length, '*')} {account.LastName.Substring(0, 2).PadRight(account.LastName.Length, '*')}";
 
                 cardRequest.Card = cardInformation;
 

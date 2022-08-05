@@ -14,25 +14,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth: number = 240;
 
-const supportedLanguages = [
-  {
-    code: "tr",
-    lang: "tr"
-  },
-  {
-    code: "us",
-    lang: "en"
-  },
-  {
-    code: "us",
-    lang: "en-US"
-  },
-  {
-    code: "us",
-    lang: "en-GB"
-  }
-]
-
 export interface MenuItem {
   name: string;
   icon: React.ReactNode;
@@ -45,7 +26,7 @@ interface DashboardHeaderProps {
 }
 
 export function DashboardHeader(props: DashboardHeaderProps) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { instance, accounts } = useMsal();
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
@@ -70,9 +51,6 @@ export function DashboardHeader(props: DashboardHeaderProps) {
     });
   }
 
-  const handleLanguageChange = (event: SelectChangeEvent) => {
-    i18n.changeLanguage(event.target.value);
-  }
 
   const container = window !== undefined ? () => window.document.body : undefined;
 
@@ -100,41 +78,24 @@ export function DashboardHeader(props: DashboardHeaderProps) {
             justifyContent: 'flex-start',
             flexGrow: 1,
           }}>
-            <ImageComponent width={200} src="/whitehorizontallogo.svg" />
+            <NavLink to="/">
+              <ImageComponent width={200} src="/whitehorizontallogo.svg" />
+            </NavLink>
           </Box>
           <Box sx={{
-            display: { xs: 'none', sm: 'block' },
-            mr: 2
+            display: { xs: 'none', sm: 'flex' },
+            justifyContent: 'flex-start',
+            alignContent: 'flex-start'
           }}>
             {menuItems.map((item) => (
-              <NavLink key={item.route} to={item.route}>
-                <Button sx={{ color: '#fff' }} startIcon={item.icon}>
+              <NavLink key={item.route} to={item.route} style={{ display: "flex" }}>
+                <Button sx={{ color: '#fff' }} size="small" startIcon={item.icon}>
                   {t(item.name)}
                 </Button>
               </NavLink>
             ))}
           </Box>
           <Box>
-            <Select
-              value={i18n.language}
-              onChange={handleLanguageChange}
-              sx={{ mr: 2, backgroundColor: "#fff" }}
-            >
-              {supportedLanguages.map(supportedLang => (
-                <MenuItem value={supportedLang.lang} key={supportedLang.lang}>
-                  <img
-                    loading="lazy"
-                    width="20"
-                    src={`https://flagcdn.com/w20/${supportedLang.code}.png`}
-                    srcSet={`https://flagcdn.com/w40/${supportedLang.code}.png 2x`}
-                    alt={supportedLang.code}
-                  />
-                  <Typography variant="caption" sx={{ pl: 1 }}>
-                    {supportedLang.lang.toLocaleUpperCase()}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Select>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -253,6 +214,6 @@ export function DashboardHeader(props: DashboardHeaderProps) {
 
         </Portal>
       </Box>
-    </Box>
+    </Box >
   )
 }

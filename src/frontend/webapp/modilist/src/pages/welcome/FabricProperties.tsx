@@ -1,5 +1,5 @@
 import { Box, Button, CircularProgress, FormControl, Grid, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Colors } from "./stylePreferenceComponents/Colors";
 import { ColorTypes } from "./stylePreferenceComponents/ColorTypes";
@@ -11,8 +11,12 @@ import { Dispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { Gender, PreferedFabricPropertiesDTO } from "../../services/swagger/api";
 
+export interface FabricPropertiesProps {
+    layout?: string;
+}
 
-export function FabricProperties() {
+export function FabricProperties(props: FabricPropertiesProps) {
+    const { layout } = props;
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
@@ -45,7 +49,9 @@ export function FabricProperties() {
 
             dispatch.upsertPreferedFabricPropertiesModel.RESET();
 
-            dispatch.welcomePageStepper.next();
+            if (layout !== "dashboard") {
+                dispatch.welcomePageStepper.next();
+            }
         }
     }, [upsertStatus]);
 
@@ -202,18 +208,7 @@ export function FabricProperties() {
                     rows={5} />
             </FormControl>
         </Grid>
-        <Grid item container xs={6} justifyContent="flex-start">
-            <Button
-                disabled={isBusy}
-                variant="outlined"
-                onClick={() => {
-                    dispatch.welcomePageStepper.back();
-                }}
-            >
-                {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
-            </Button>
-        </Grid>
-        <Grid item container xs={6} justifyContent="flex-end">
+        {layout && layout === "dashboard" ? <Grid item xs={12} display="flex" justifyContent="flex-end">
             <Button
                 disabled={isBusy}
                 onClick={() => {
@@ -221,14 +216,44 @@ export function FabricProperties() {
                         dispatch.upsertPreferedFabricPropertiesModel.upsertPreferedFabricProperties(fabricProps);
                     }
                 }}
-                variant="outlined">
+                color="secondary"
+                variant="contained">
                 {isBusy && <CircularProgress sx={{
                     width: "18px !important",
                     height: "18px !important",
                     mr: 2
                 }} />}
-                {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
+                {t('Generic.Forms.Submit')}
             </Button>
-        </Grid>
+        </Grid> : <React.Fragment>
+            <Grid item container xs={6} justifyContent="flex-start">
+                <Button
+                    disabled={isBusy}
+                    variant="outlined"
+                    onClick={() => {
+                        dispatch.welcomePageStepper.back();
+                    }}
+                >
+                    {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
+                </Button>
+            </Grid>
+            <Grid item container xs={6} justifyContent="flex-end">
+                <Button
+                    disabled={isBusy}
+                    onClick={() => {
+                        if (!upsertPreferedFabricPropertiesIsBusy) {
+                            dispatch.upsertPreferedFabricPropertiesModel.upsertPreferedFabricProperties(fabricProps);
+                        }
+                    }}
+                    variant="outlined">
+                    {isBusy && <CircularProgress sx={{
+                        width: "18px !important",
+                        height: "18px !important",
+                        mr: 2
+                    }} />}
+                    {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
+                </Button>
+            </Grid>
+        </React.Fragment>}
     </Grid>
 }

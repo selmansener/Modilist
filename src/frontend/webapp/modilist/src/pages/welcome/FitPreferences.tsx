@@ -1,5 +1,5 @@
 import { Button, CircularProgress, Grid, Typography } from "@mui/material";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { FitPreferencesDTO, Gender } from "../../services/swagger/api";
@@ -12,7 +12,12 @@ import { SkirtDressLengths } from "./fitPreferenceComponents/SkirtDressLength";
 import { UpperFits } from "./fitPreferenceComponents/UpperFit";
 import { WaistHeights } from "./fitPreferenceComponents/WaistHeight";
 
-export function FitPreferences() {
+export interface FitPreferencesProps {
+    layout?: string;
+}
+
+export function FitPreferences(props: FitPreferencesProps) {
+    const { layout } = props;
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
@@ -45,7 +50,9 @@ export function FitPreferences() {
 
             dispatch.upsertFitPreferencesModel.RESET();
 
-            dispatch.welcomePageStepper.next();
+            if (layout !== "dashboard") {
+                dispatch.welcomePageStepper.next();
+            }
         }
     }, [upsertStatus]);
 
@@ -154,7 +161,7 @@ export function FitPreferences() {
 
     return <Grid item container xs={12} spacing={12}>
         <Grid item xs={12}>
-            <Typography variant="h5" color="secondary" sx={{ fontWeight:800 }} align="center">
+            <Typography variant="h5" color="secondary" sx={{ fontWeight: 800 }} align="center">
                 {t('Pages.Welcome.FitPreferences.Warning')}
             </Typography>
         </Grid>
@@ -180,33 +187,54 @@ export function FitPreferences() {
         {/* <Grid item xs={12}>
             <Foot />
         </Grid> */}
-        <Grid item container xs={6} justifyContent="flex-start">
-            <Button
-                disabled={isBusy}
-                variant="outlined"
-                onClick={() => {
-                    dispatch.welcomePageStepper.back();
-                }}
-            >
-                {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
-            </Button>
-        </Grid>
-        <Grid item container xs={6} justifyContent="flex-end">
-            <Button
-                disabled={isBusy}
-                onClick={() => {
-                    if (!upsertFitPreferencesIsBusy) {
-                        dispatch.upsertFitPreferencesModel.upsertFitPreferences(fitPreferences);
-                    }
-                }}
-                variant="outlined">
-                {isBusy && <CircularProgress sx={{
-                    width: "18px !important",
-                    height: "18px !important",
-                    mr: 2
-                }} />}
-                {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
-            </Button>
-        </Grid>
+        {layout && layout === "dashboard" ?
+            <Grid item xs={12} display="flex" justifyContent="flex-end">
+                <Button
+                    disabled={isBusy}
+                    onClick={() => {
+                        if (!upsertFitPreferencesIsBusy) {
+                            dispatch.upsertFitPreferencesModel.upsertFitPreferences(fitPreferences);
+                        }
+                    }}
+                    variant="contained"
+                    color="secondary">
+                    {isBusy && <CircularProgress sx={{
+                        width: "18px !important",
+                        height: "18px !important",
+                        mr: 2
+                    }} />}
+                    {t('Generic.Forms.Submit')}
+                </Button>
+            </Grid> : <React.Fragment>
+                <Grid item container xs={6} justifyContent="flex-start">
+                    <Button
+                        disabled={isBusy}
+                        variant="outlined"
+                        onClick={() => {
+                            dispatch.welcomePageStepper.back();
+                        }}
+                    >
+                        {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
+                    </Button>
+                </Grid>
+                <Grid item container xs={6} justifyContent="flex-end">
+                    <Button
+                        disabled={isBusy}
+                        onClick={() => {
+                            if (!upsertFitPreferencesIsBusy) {
+                                dispatch.upsertFitPreferencesModel.upsertFitPreferences(fitPreferences);
+                            }
+                        }}
+                        variant="outlined">
+                        {isBusy && <CircularProgress sx={{
+                            width: "18px !important",
+                            height: "18px !important",
+                            mr: 2
+                        }} />}
+                        {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
+                    </Button>
+                </Grid>
+            </React.Fragment>
+        }
     </Grid>
 }

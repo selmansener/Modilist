@@ -330,6 +330,59 @@ export const AddressApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {string} name 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1AddressSetAsDefaultNamePost: async (name: string, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            if (name === null || name === undefined) {
+                throw new RequiredError('name','Required parameter name was null or undefined when calling apiV1AddressSetAsDefaultNamePost.');
+            }
+            const localVarPath = `/api/v1/Address.SetAsDefault/{name}`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Addresses", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Returns", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (apiVersion !== undefined) {
+                localVarQueryParameter['api-version'] = apiVersion;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} name 
          * @param {UpdateAddress} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
@@ -536,6 +589,20 @@ export const AddressApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} name 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1AddressSetAsDefaultNamePost(name: string, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AddressDTO>>> {
+            const localVarAxiosArgs = await AddressApiAxiosParamCreator(configuration).apiV1AddressSetAsDefaultNamePost(name, apiVersion, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {string} name 
          * @param {UpdateAddress} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
@@ -632,6 +699,16 @@ export const AddressApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @param {string} name 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1AddressSetAsDefaultNamePost(name: string, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<AddressDTO>> {
+            return AddressApiFp(configuration).apiV1AddressSetAsDefaultNamePost(name, apiVersion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} name 
          * @param {UpdateAddress} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
@@ -723,6 +800,17 @@ export class AddressApi extends BaseAPI {
      */
     public async apiV1AddressGetIdGet(id: number, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<AddressDTO>> {
         return AddressApiFp(this.configuration).apiV1AddressGetIdGet(id, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} name 
+     * @param {string} [apiVersion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AddressApi
+     */
+    public async apiV1AddressSetAsDefaultNamePost(name: string, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<AddressDTO>> {
+        return AddressApiFp(this.configuration).apiV1AddressSetAsDefaultNamePost(name, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

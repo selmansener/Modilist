@@ -1,4 +1,4 @@
-import { Fab, Box, Button, CircularProgress, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Fab, Box, Button, CircularProgress, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography, useTheme } from "@mui/material";
 import NavigationIcon from '@mui/icons-material/Navigation';
 import { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -11,8 +11,6 @@ import { camelCase } from "change-case";
 import { CustomRadioButtonGroup } from "../../components/customRadioButton/CustomRadioButton";
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
-import { WeigthIcon } from "../../components/customIcons/WeightIcon";
-import { MeasureIcon } from "../../components/customIcons/MeasureIcon";
 import React from "react";
 
 let footWearSizes: number[] = [];
@@ -26,7 +24,12 @@ if (footWearSizes.length === 0) {
     footWearSizes = sizes;
 }
 
-export function SizeInfo() {
+export interface SizeInfoProps {
+    layout?: string;
+}
+
+export function SizeInfo(props: SizeInfoProps) {
+    const { layout } = props;
     const { imgBaseHost } = config;
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
@@ -38,6 +41,7 @@ export function SizeInfo() {
     const mustBeInteger = t("FormValidation.MustBeInteger");
     const mustBeGreaterThanZero = t("FormValidation.MustBeGreaterThanZero");
     const mustBeNumber = t("FormValidation.MustBeNumber");
+    const theme = useTheme();
 
     const schema = Yup.object({
         upperBody: Yup.string().required(requiredField),
@@ -139,7 +143,9 @@ export function SizeInfo() {
 
             dispatch.upsertSizeInfoModel.RESET();
 
-            dispatch.welcomePageStepper.next();
+            if (layout !== "dashboard") {
+                dispatch.welcomePageStepper.next();
+            }
         }
     }, [upsertSizeInfo]);
 
@@ -231,10 +237,6 @@ export function SizeInfo() {
                     </Grid>
                     <Grid item xs={12}>
                         <FormControl fullWidth error={touched.bodyType && errors.bodyType !== undefined}>
-                            <FormHelperText>
-                                {touched.bodyType && errors?.bodyType}
-                            </FormHelperText>
-
                             <CustomRadioButtonGroup
                                 greyscale
                                 name="bodyType"
@@ -250,6 +252,11 @@ export function SizeInfo() {
                                         }
                                     })}
                             />
+                            <FormHelperText>
+                                <Typography variant="body1" fontWeight={800} align="center" color={theme.palette.error.main}>
+                                    {touched.bodyType && errors?.bodyType}
+                                </Typography>
+                            </FormHelperText>
                         </FormControl>
                     </Grid>
                 </>
@@ -506,40 +513,73 @@ export function SizeInfo() {
                         maxRows={8} />
                 </FormControl>
             </Grid>
-            <Grid item container xs={6} justifyContent="flex-start">
-                <Button
-                    disabled
-                    size="large"
-                    variant="outlined"
-                >
-                    {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
-                </Button>
-            </Grid>
-            <Grid item container xs={6} justifyContent="flex-end">
-                <Button
-                    size="large"
-                    disabled={isBusy}
-                    onClick={() => {
-                        submitForm();
-                        if (!isValid) {
-                            window.scrollTo({
-                                top: 0,
-                                left: 0,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }}
-                    variant="outlined">
-                    {isBusy && <CircularProgress
-                        sx={{
-                            width: "18px !important",
-                            height: "18px !important",
-                            mr: 2
+            {layout && layout === "dashboard" ?
+                <Grid item xs={12} sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end'
+                }}>
+                    <Button
+                        size="large"
+                        disabled={isBusy}
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => {
+                            submitForm();
+                            if (!isValid) {
+                                window.scrollTo({
+                                    top: 0,
+                                    left: 0,
+                                    behavior: 'smooth'
+                                });
+                            }
                         }}
-                    />}
-                    {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
-                </Button>
-            </Grid>
+                    >
+                        {isBusy && <CircularProgress
+                            sx={{
+                                width: "18px !important",
+                                height: "18px !important",
+                                mr: 2
+                            }}
+                        />}
+                        {t('Generic.Forms.Submit')}
+                    </Button>
+                </Grid> : <React.Fragment>
+                    <Grid item container xs={6} justifyContent="flex-start">
+                        <Button
+                            disabled
+                            size="large"
+                            variant="outlined"
+                        >
+                            {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
+                        </Button>
+                    </Grid>
+                    <Grid item container xs={6} justifyContent="flex-end">
+                        <Button
+                            size="large"
+                            disabled={isBusy}
+                            onClick={() => {
+                                submitForm();
+                                if (!isValid) {
+                                    window.scrollTo({
+                                        top: 0,
+                                        left: 0,
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            }}
+                            variant="outlined">
+                            {isBusy && <CircularProgress
+                                sx={{
+                                    width: "18px !important",
+                                    height: "18px !important",
+                                    mr: 2
+                                }}
+                            />}
+                            {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
+                        </Button>
+                    </Grid>
+                </React.Fragment>
+            }
         </Grid>
     )
 }

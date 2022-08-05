@@ -17,7 +17,7 @@ function CustomRadioButton(props: CustomRadioButtonProps) {
         cursor: 'pointer',
         border: checked ? 1 : 0,
         borderColor: theme.palette.primary.main,
-        borderRadius: checked ? ((theme.shape.borderRadius as number)) : 0,
+        borderRadius: checked ? 1 : 0,
         p: 1,
         m: 1,
         '&:hover': {

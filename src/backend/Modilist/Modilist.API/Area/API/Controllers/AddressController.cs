@@ -117,5 +117,19 @@ namespace Modilist.API.Area.API.Controllers
 
             return Ok(response);
         }
+
+        [Authorize(nameof(AuthorizationPermissions.Addresses))]
+        [HttpPost("[controller].SetAsDefault/{name}")]
+        [ProducesResponseType(typeof(AddressDTO), 200)]
+        public async Task<IActionResult> SetAsDefault(string name, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new SetAsDefaultAddress
+            {
+                AccountId = User.GetUserId(),
+                Name = name
+            }, cancellationToken);
+
+            return Ok(response);
+        }
     }
 }

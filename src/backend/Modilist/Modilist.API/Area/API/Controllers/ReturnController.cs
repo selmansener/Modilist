@@ -21,7 +21,7 @@ namespace Modilist.API.Area.API.Controllers
         }
 
 
-        [HttpPost("[controller].Get/{salesOrderId}")]
+        [HttpGet("[controller].Get/{salesOrderId}")]
         [Authorize(nameof(AuthorizationPermissions.Returns))]
         [ProducesResponseType(typeof(ReturnDTO), 200)]
         public async Task<IActionResult> Get(int salesOrderId, CancellationToken cancellationToken)

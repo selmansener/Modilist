@@ -62,7 +62,9 @@
             "FitPreferences": "Kalıp Tercihlerim",
             "FabricProperties": "Renk & Kumaş",
             "Addresses": "Kayıtlı Adreslerim",
+            "NewAddress": "Yeni Adres Ekle",
             "PaymentMethods": "Kayıtlı Kartlarım",
+            "NewPaymentMethod": "Yeni Kart Ekle",
             "Settings": "Hesap Ayarlarım",
             "Welcome": "Hoşgeldin"
         },
@@ -414,6 +416,41 @@
             "Suggest": "Dilersen bir süre sonra ödeme sayfasına dönüp tekrar deneyebilirsin.",
             "ReturnToCheckout": "Ödeme sayfasına dön",
             "ReturnToHome": "Anasayfa'ya dön"
+        },
+        "PaymentMethods": {
+            "PaymentMethodListItem": {
+                "AddNew": "Yeni Kart Ekle",
+                "BankName": "Banka: ",
+                "CardNumber": "Kart Numarası: ",
+                "SetAsDefault": "Varsayılan Olarak Ata",
+                "Default": "Varsayılan Kart"
+            }
+        },
+        "NewPaymentMethod": {
+            "CardHolderName": "Kart Üzerindeki İsim",
+            "CardNumber": "Kart Numarası",
+            "ExpireMonth": "Son Kullanma Tarihi (Ay)",
+            "ExpireYear": "Son Kullanma Tarihi (Yıl)",
+            "MonthTwoDigits": "Lütfen iki haneli olarak giriniz",
+            "MonthValidation": "Lütfen geçerli bir ay giriniz",
+            "YearTwoDigits": "Lütfen yılı iki haneli olarak giriniz",
+            "YearValidation": "Lütfen geçerli bir yıl giriniz",
+            "CvcValidation": "Lütfen geçerli bir CVC giriniz",
+            "CardHolderNameValidation": "Lütfen sayı kullanmadan geçerli bir isim giriniz",
+            "SetAsDefault": "Varsayılan Olarak Ata"
+        },
+        "Addresses": {
+            "AddressLineItem": {
+                "AddNew": "Yeni Address Ekle",
+                "AddressName": "Adres Adı: ",
+                "FullAddress": "Adres: ",
+                "Default": "Varsayılan Adres",
+                "SetAsDefault":"Varsayılan Olarak Ata"
+            }
+        },
+        "NewAddress": {
+            "AddressName": "Adres Adı",
+            "SetAsDefault": "Varsayılan Olarak Ata"
         }
     },
     "WelcomeSteps": {
@@ -602,7 +639,8 @@
         "Forms": {
             "Select": "Seçiniz",
             "Close": "Kapat",
-            "Submit": "Kaydet"
+            "Submit": "Kaydet",
+            "Edit": "Düzenle"
         },
         "PersonalInfo": {
             "FirstName": "Ad",

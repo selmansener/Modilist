@@ -83,10 +83,10 @@ export const ReturnApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1ReturnGetSalesOrderIdPost: async (salesOrderId: number, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiV1ReturnGetSalesOrderIdGet: async (salesOrderId: number, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'salesOrderId' is not null or undefined
             if (salesOrderId === null || salesOrderId === undefined) {
-                throw new RequiredError('salesOrderId','Required parameter salesOrderId was null or undefined when calling apiV1ReturnGetSalesOrderIdPost.');
+                throw new RequiredError('salesOrderId','Required parameter salesOrderId was null or undefined when calling apiV1ReturnGetSalesOrderIdGet.');
             }
             const localVarPath = `/api/v1/Return.Get/{salesOrderId}`
                 .replace(`{${"salesOrderId"}}`, encodeURIComponent(String(salesOrderId)));
@@ -96,7 +96,7 @@ export const ReturnApiAxiosParamCreator = function (configuration?: Configuratio
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -159,8 +159,8 @@ export const ReturnApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1ReturnGetSalesOrderIdPost(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<ReturnDTO>>> {
-            const localVarAxiosArgs = await ReturnApiAxiosParamCreator(configuration).apiV1ReturnGetSalesOrderIdPost(salesOrderId, apiVersion, options);
+        async apiV1ReturnGetSalesOrderIdGet(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<ReturnDTO>>> {
+            const localVarAxiosArgs = await ReturnApiAxiosParamCreator(configuration).apiV1ReturnGetSalesOrderIdGet(salesOrderId, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -192,8 +192,8 @@ export const ReturnApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1ReturnGetSalesOrderIdPost(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<ReturnDTO>> {
-            return ReturnApiFp(configuration).apiV1ReturnGetSalesOrderIdPost(salesOrderId, apiVersion, options).then((request) => request(axios, basePath));
+        async apiV1ReturnGetSalesOrderIdGet(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<ReturnDTO>> {
+            return ReturnApiFp(configuration).apiV1ReturnGetSalesOrderIdGet(salesOrderId, apiVersion, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -224,7 +224,7 @@ export class ReturnApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReturnApi
      */
-    public async apiV1ReturnGetSalesOrderIdPost(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<ReturnDTO>> {
-        return ReturnApiFp(this.configuration).apiV1ReturnGetSalesOrderIdPost(salesOrderId, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    public async apiV1ReturnGetSalesOrderIdGet(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<ReturnDTO>> {
+        return ReturnApiFp(this.configuration).apiV1ReturnGetSalesOrderIdGet(salesOrderId, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
 }

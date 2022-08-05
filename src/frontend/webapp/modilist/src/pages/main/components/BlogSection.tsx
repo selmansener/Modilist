@@ -7,6 +7,7 @@ import { ImageComponent } from "../../../components/image/ImageComponent";
 import { RootState, Dispatch } from "../../../store/store";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 
 export function BlogSection() {
     const dispatch = useDispatch<Dispatch>();
@@ -45,6 +46,10 @@ export function BlogSection() {
                     <Link href={`https://modilist.com${blogMetaData.blogUrl}`} target="_blank" underline="none">
                         <Typography variant="h5" align="left">
                             {blogMetaData.title}
+                            <OpenInNewOutlinedIcon sx={{
+                                verticalAlign: 'text-bottom',
+                                ml: 1
+                            }}/>
                         </Typography>
                     </Link>
                 </Grid>

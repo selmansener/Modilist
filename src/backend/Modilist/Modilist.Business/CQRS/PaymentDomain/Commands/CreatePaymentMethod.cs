@@ -123,7 +123,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
                 var holderLastName = request.CardHolderName.Split(" ").Last();
                 var holderFirstName = request.CardHolderName.Replace(" " + holderLastName, string.Empty);
 
-                var cardHolderName = $"{holderFirstName.Substring(0, 2).PadRight(holderFirstName.Length - 2, '*')} {holderLastName.Substring(0, 2).PadRight(holderLastName.Length - 2, '*')}";
+                var cardHolderName = $"{holderFirstName.Substring(0, 2).PadRight(holderFirstName.Length, '*')} {holderLastName.Substring(0, 2).PadRight(holderLastName.Length, '*')}";
 
                 paymentMethod.UpdateCardInfo(
                     card.CardUserKey,

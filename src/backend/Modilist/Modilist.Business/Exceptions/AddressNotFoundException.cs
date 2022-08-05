@@ -12,9 +12,18 @@ namespace Modilist.Business.Exceptions
             AddressId = addressId;
         }
 
-        public Guid AccountId { get; set; }
+        public AddressNotFoundException(Guid accountId, string name)
+            : base($"Address not found with Name: {name}. AdditionalInfo: AccountId: {accountId}")
+        {
+            AccountId = accountId;
+            Name = name;
+        }
 
-        public int AddressId { get; set; }
+        public Guid AccountId { get; private set; }
+
+        public int? AddressId { get; private set; }
+
+        public string? Name { get; private set; }
 
         public int StatusCode => 404;
     }

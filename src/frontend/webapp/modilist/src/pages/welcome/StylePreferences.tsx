@@ -1,6 +1,6 @@
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography, Button, CircularProgress, FormHelperText } from "@mui/material";
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography, Button, CircularProgress, FormHelperText, useTheme } from "@mui/material";
 import Rating from '@mui/material/Rating';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CustomCheckboxGroup } from "../../components/customCheckbox/CustomCheckbox";
 import { Trans, useTranslation } from "react-i18next";
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -30,7 +30,12 @@ interface ProductCategory {
     mainCategory: MainCategory
 }
 
-export function StylePreferences() {
+export interface StylePreferencesProps {
+    layout?: string;
+}
+
+export function StylePreferences(props: StylePreferencesProps) {
+    const { layout } = props;
     const { t } = useTranslation();
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: getStylePreferencesIsBusy, data: getStylePreferences, status: getStylePreferencesStatus } = useSelector((state: RootState) => state.getStylePreferencesModel);
@@ -39,6 +44,7 @@ export function StylePreferences() {
     const dispatch = useDispatch<Dispatch>();
     const { imgBaseHost } = config;
     const { gender } = account as AccountDTO;
+    const theme = useTheme();
 
     useEffect(() => {
         window.scrollTo({
@@ -60,7 +66,9 @@ export function StylePreferences() {
 
             dispatch.upsertStylePreferencesModel.RESET();
 
-            dispatch.welcomePageStepper.next();
+            if (layout !== "dashboard") {
+                dispatch.welcomePageStepper.next();
+            }
         }
     }, [upsertStylePreferencesStatus]);
 
@@ -98,6 +106,7 @@ export function StylePreferences() {
                 dispatch.upsertStylePreferencesModel.upsertStylePreferences(values);
             }
         },
+        validateOnMount: true
     });
 
     const commonProductCategories: ProductCategory[] = [
@@ -874,7 +883,11 @@ export function StylePreferences() {
                                 />}
                             />
                         </Box>
-                        <FormHelperText>{touched.lovesShopping && errors.lovesShopping}</FormHelperText>
+                        <FormHelperText>
+                            <Typography variant="body1" fontWeight={800} color={theme.palette.error.main}>
+                                {touched.lovesShopping && errors.lovesShopping}
+                            </Typography>
+                        </FormHelperText>
                     </FormControl>
                 </Grid>
                 <Grid item xs={12} sx={{
@@ -914,7 +927,11 @@ export function StylePreferences() {
                                     }} />}
                             />
                         </Box>
-                        <FormHelperText>{touched.openToSuggestions && errors.openToSuggestions}</FormHelperText>
+                        <FormHelperText>
+                            <Typography variant="body1" fontWeight={800} color={theme.palette.error.main}>
+                                {touched.openToSuggestions && errors.openToSuggestions}
+                            </Typography>
+                        </FormHelperText>
                     </FormControl>
                 </Grid>
             </Grid>
@@ -945,7 +962,11 @@ export function StylePreferences() {
                                     } />
                             ))}
                         </FormGroup>
-                        <FormHelperText>{touched.choiceReasons && errors.choiceReasons}</FormHelperText>
+                        <FormHelperText>
+                            <Typography variant="body1" fontWeight={800} color={theme.palette.error.main}>
+                                {touched.choiceReasons && errors.choiceReasons}
+                            </Typography>
+                        </FormHelperText>
                     </FormControl>
                 </Grid>
             </Grid>
@@ -1024,39 +1045,66 @@ export function StylePreferences() {
                     <BagsGroup />
                 </FormControl>
             </Grid>
-            <Grid item container xs={6} justifyContent="flex-start">
-                <Button
-                    disabled={isBusy}
-                    variant="outlined"
-                    onClick={() => {
-                        dispatch.welcomePageStepper.back();
-                    }}
-                >
-                    {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
-                </Button>
-            </Grid>
-            <Grid item container xs={6} justifyContent="flex-end">
-                <Button
-                    disabled={isBusy}
-                    onClick={() => {
-                        submitForm();
-                        if (!isValid) {
-                            window.scrollTo({
-                                top: 0,
-                                left: 0,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }}
-                    variant="outlined">
-                    {isBusy && <CircularProgress sx={{
-                        width: "18px !important",
-                        height: "18px !important",
-                        mr: 2
-                    }} />}
-                    {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
-                </Button>
-            </Grid>
-        </Grid>
+            {
+                layout && layout === "dashboard" ? <Grid item xs={12} display="flex" justifyContent="flex-end">
+                    <Button
+                        disabled={isBusy}
+                        onClick={() => {
+                            submitForm();
+                            if (!isValid) {
+                                window.scrollTo({
+                                    top: 0,
+                                    left: 0,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }}
+                        color="secondary"
+                        variant="contained">
+                        {isBusy && <CircularProgress sx={{
+                            width: "18px !important",
+                            height: "18px !important",
+                            mr: 2
+                        }} />}
+                        {t('Generic.Forms.Submit')}
+                    </Button>
+                </Grid>
+                    : <React.Fragment>
+                        <Grid item container xs={6} justifyContent="flex-start">
+                            <Button
+                                disabled={isBusy}
+                                variant="outlined"
+                                onClick={() => {
+                                    dispatch.welcomePageStepper.back();
+                                }}
+                            >
+                                {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}
+                            </Button>
+                        </Grid>
+                        <Grid item container xs={6} justifyContent="flex-end">
+                            <Button
+                                disabled={isBusy}
+                                onClick={() => {
+                                    submitForm();
+                                    if (!isValid) {
+                                        window.scrollTo({
+                                            top: 0,
+                                            left: 0,
+                                            behavior: 'smooth'
+                                        });
+                                    }
+                                }}
+                                variant="outlined">
+                                {isBusy && <CircularProgress sx={{
+                                    width: "18px !important",
+                                    height: "18px !important",
+                                    mr: 2
+                                }} />}
+                                {t('Layouts.Welcome.WelcomeSteps.Buttons.Next')}
+                            </Button>
+                        </Grid>
+                    </React.Fragment>
+            }
+        </Grid >
     )
 }

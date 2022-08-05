@@ -4,7 +4,7 @@ import { FabricProperties as WFabricProperties } from "../welcome/FabricProperti
 export function FabricProperties() {
     return (
         <Grid item container xs={12} spacing={12}>
-            <WFabricProperties />
+            <WFabricProperties layout="dashboard" />
         </Grid>
     )
 }
