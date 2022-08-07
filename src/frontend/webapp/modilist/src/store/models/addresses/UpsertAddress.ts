@@ -18,7 +18,8 @@ export const upsertAddressModel = createModel<RootModel>()({
             name: "",
             phone: "",
             zipCode: ""
-        }
+        },
+        status: 0
     } as ResponseModel<AddressDTO>,
     reducers: {
         BUSY: (state: ResponseModel<AddressDTO>) => {
@@ -38,6 +39,24 @@ export const upsertAddressModel = createModel<RootModel>()({
                 isBusy: false
             }
         },
+        RESET: (state: ResponseModel<AddressDTO>) => {
+            return {
+                isBusy: false,
+                data: {
+                    accountId: "",
+                    city: "",
+                    district: "",
+                    firstName: "",
+                    fullAddress: "",
+                    isDefault: true,
+                    lastName: "",
+                    name: "",
+                    phone: "",
+                    zipCode: ""
+                },
+                status: 0
+            }
+        }
     },
     effects: (dispatch) => {
         const { upsertAddressModel } = dispatch

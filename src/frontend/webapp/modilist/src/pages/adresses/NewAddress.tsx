@@ -1,14 +1,15 @@
 import { Button, Checkbox, FormControl, FormControlLabel, Grid, TextField } from "@mui/material";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../store/store";
 import { Cities } from "../welcome/address/Cities";
 import { Districts } from "../welcome/address/Districts";
 import * as Yup from "yup";
 import React from "react";
 import { IMaskInput } from "react-imask";
+import { useNavigate } from "react-router-dom";
 
 interface PhoneInputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -36,7 +37,9 @@ const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
 export function NewAddress() {
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
+    const { isBusy, status } = useSelector((state: RootState) => state.upsertAddressModel);
     const [selectedCity, setSelectedCity] = useState<string | undefined>();
+    const navigate = useNavigate();
 
     const requiredField = t("FormValidation.RequiredField");
 
@@ -74,7 +77,7 @@ export function NewAddress() {
             },
             validationSchema: schema,
             onSubmit: (values) => {
-                if (values && values?.name) {
+                if (!isBusy && values && values?.name) {
                     dispatch.upsertAddressModel.upsertAddress({
                         name: values.name,
                         body: values
@@ -83,6 +86,12 @@ export function NewAddress() {
             },
         });
 
+    useEffect(() => {
+        if (!isBusy && status === 200) {
+            dispatch.upsertAddressModel.RESET();
+            navigate("/addresses");
+        }
+    }, [status]);
 
     return (
         <Grid item container xs={12} spacing={2}>
