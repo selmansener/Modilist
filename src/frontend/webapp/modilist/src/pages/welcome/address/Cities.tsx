@@ -1,7 +1,8 @@
 import { Autocomplete, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { City } from "../../../services/swagger/api";
 import { Dispatch, RootState } from "../../../store/store";
 
 export interface CitiesProps {
@@ -23,10 +24,27 @@ export function Cities(props: CitiesProps) {
         dispatch.citiesModel.getCities();
     }, []);
 
+    const getCity = () => {
+        const city = cities?.find(x => x.name === value);
+        if (city) {
+            return {
+                ...city,
+                label: city.name
+            }
+        }
+        else {
+            return {
+                name: "",
+                code: "",
+                label: ""
+            }
+        }
+    }
+
     return (
         <Autocomplete
             id="city"
-            value={cities?.find(x => x.name === value)}
+            value={getCity()}
             onChange={(e, value) => {
                 onChange({
                     code: value?.code,

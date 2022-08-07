@@ -4,6 +4,7 @@ import { changeDefaultAddressModel } from "./addresses/ChangeDefaultAddress"
 import { citiesModel } from "./addresses/Cities"
 import { createAddressModel } from "./addresses/CreateAddress"
 import { districtsModel } from "./addresses/Districts"
+import { getAddressModel } from "./addresses/GetAddress"
 import { getAllAddressesModel } from "./addresses/GetAllAddresses"
 import { getDefaultAddressModel } from "./addresses/GetDefaultAddress"
 import { updateAddressModel } from "./addresses/UpdateAddress"
@@ -84,6 +85,7 @@ export interface RootModel extends Models<RootModel> {
   updateAdditionalRequestsModel: typeof updateAdditionalRequestsModel,
   getAllPaymentMethodsModel: typeof getAllPaymentMethodsModel,
   changeDefaultAddressModel: typeof changeDefaultAddressModel,
+  getAddressModel: typeof getAddressModel,
 }
 
 export const models: RootModel = {
@@ -128,4 +130,5 @@ export const models: RootModel = {
   updateAdditionalRequestsModel,
   getAllPaymentMethodsModel,
   changeDefaultAddressModel,
+  getAddressModel,
 }

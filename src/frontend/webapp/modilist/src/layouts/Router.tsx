@@ -33,8 +33,9 @@ import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import { CheckoutFailed } from '../pages/checkout/CheckoutFailed';
 import { NewPaymentMethod } from '../pages/paymentMethods/NewPaymentMethod';
 import AddCardIcon from '@mui/icons-material/AddCard';
-import { NewAddress } from '../pages/adresses/NewAddress';
+import { UpsertAddress } from '../pages/adresses/UpsertAddress';
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
+import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
 
 interface RouterOptions {
   title?: string,
@@ -303,7 +304,22 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    component: <NewAddress />,
+    component: <UpsertAddress />,
+    isPublic: false,
+    disabledEnvironments: []
+  },
+  {
+    title: "Pages.Titles.UpdateAddress",
+    helmet: "Pages.Titles.UpdateAddress",
+    icon: <EditLocationAltIcon sx={{
+      verticalAlign: "sub"
+    }} />,
+    route: "update-address/:addressId",
+    layout: {
+      path: "/",
+      component: <Dashboard />
+    },
+    component: <UpsertAddress />,
     isPublic: false,
     disabledEnvironments: []
   },

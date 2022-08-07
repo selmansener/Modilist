@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import UpdateIcon from '@mui/icons-material/Update';
 import { AddressDTO } from "../../../services/swagger/api";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { useNavigate } from "react-router-dom";
 
 export interface AddressListItemProps {
     address: AddressDTO;
@@ -12,6 +13,7 @@ export interface AddressListItemProps {
 export function AddressListItem(props: AddressListItemProps) {
     const { t } = useTranslation();
     const { address, setAsDefaultHandler } = props;
+    const navigate = useNavigate();
 
     return (
         <Paper elevation={6} sx={{
@@ -33,6 +35,9 @@ export function AddressListItem(props: AddressListItemProps) {
                 </Grid>
                 <Grid item xs={6} display="flex" justifyContent="flex-end">
                     <Button
+                        onClick={() => {
+                            navigate(`/update-address/${address.id}`);
+                        }}
                         variant="outlined"
                         startIcon={<UpdateIcon />}
                     >

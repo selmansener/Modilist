@@ -1,5 +1,5 @@
 import { Autocomplete, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { Dispatch, RootState } from "../../../store/store";
@@ -19,6 +19,11 @@ export function Districts(props: DistrictsProps) {
     const dispatch = useDispatch<Dispatch>();
     const { value, error, helperText, onChange, onBlur, selectedCity } = props;
     const ref = useRef<HTMLInputElement>();
+    // const [district, setDistrict] = useState<{
+    //     name?: string,
+    //     code?: string,
+    //     label?: string
+    // }>();
 
     useEffect(() => {
         if (selectedCity) {
@@ -26,11 +31,41 @@ export function Districts(props: DistrictsProps) {
         }
     }, [selectedCity]);
 
+    // useEffect(() => {
+    //     if (districts) {
+    //         var foundDistrict = districts?.find(x => x.name == value);
+    //         if (foundDistrict) {
+    //             setDistrict({
+    //                 ...foundDistrict,
+    //                 label: foundDistrict.name
+    //             });
+    //         }
+    //     }
+    // }, [districts, value]);
+
+    const getDistrict = () => {
+        const district = districts?.find(x => x.name == value);
+
+        if (district) {
+            return {
+                ...district,
+                label: district.name
+            }
+        }
+        else {
+            return {
+                code: "",
+                name: "",
+                label: ""
+            }
+        }
+    }
+
     return (
-    
+
         <Autocomplete
             id="district"
-            value={districts?.find(x => x.name === value)}
+            value={getDistrict()}
             onChange={(e, value) => {
                 onChange({
                     code: value?.code,

@@ -9,7 +9,8 @@ import { Districts } from "../welcome/address/Districts";
 import * as Yup from "yup";
 import React from "react";
 import { IMaskInput } from "react-imask";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { AddressDTO } from "../../services/swagger/api";
 
 interface PhoneInputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -34,12 +35,37 @@ const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
     },
 );
 
-export function NewAddress() {
+type FieldStates = {
+    name: boolean;
+    firstName: boolean;
+    lastName: boolean;
+    phone: boolean;
+    city: boolean;
+    district: boolean;
+    fullAddress: boolean;
+    zipCode: boolean;
+}
+
+export function UpsertAddress() {
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
-    const { isBusy, status } = useSelector((state: RootState) => state.upsertAddressModel);
+    const { addressId } = useParams();
+    const { isBusy: isBusyGetAddress, data: initialAddress, status: statusGetAddress } = useSelector((state: RootState) => state.getAddressModel);
+    const { isBusy: isBusyUpsertAddress, status } = useSelector((state: RootState) => state.upsertAddressModel);
+    const { data: cities } = useSelector((state: RootState) => state.citiesModel);
+    const isBusy = isBusyGetAddress || isBusyUpsertAddress;
     const [selectedCity, setSelectedCity] = useState<string | undefined>();
     const navigate = useNavigate();
+    const [fieldStates, setFieldStates] = useState<FieldStates>({
+        name: false,
+        firstName: false,
+        lastName: false,
+        phone: false,
+        city: false,
+        district: false,
+        fullAddress: false,
+        zipCode: false,
+    });
 
     const requiredField = t("FormValidation.RequiredField");
 
@@ -53,6 +79,34 @@ export function NewAddress() {
         fullAddress: Yup.string().required(requiredField)
     });
 
+    useEffect(() => {
+        if (addressId && !isBusyGetAddress) {
+            dispatch.getAddressModel.getAddress(parseInt(addressId));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!isBusyGetAddress && statusGetAddress === 200 && initialAddress) {
+            setFieldStates({
+                name: initialAddress.name !== undefined && initialAddress.name !== "",
+                firstName: initialAddress.firstName !== undefined && initialAddress.firstName !== "",
+                lastName: initialAddress.lastName !== undefined && initialAddress.lastName !== "",
+                phone: initialAddress.phone !== undefined && initialAddress.phone !== "",
+                city: initialAddress.city !== undefined && initialAddress.city !== "",
+                district: initialAddress.district !== undefined && initialAddress.district !== "",
+                fullAddress: initialAddress.fullAddress !== undefined && initialAddress.fullAddress !== "",
+                zipCode: initialAddress.zipCode !== undefined && initialAddress.zipCode !== "",
+            });
+        }
+    }, [statusGetAddress]);
+
+    useEffect(() => {
+        if (statusGetAddress === 200 && cities && initialAddress) {
+            const city = cities.find(x => x.name === initialAddress.city);
+            setSelectedCity(city?.code);
+        }
+    }, [cities, initialAddress, statusGetAddress]);
+
     const {
         setFieldValue,
         setFieldTouched,
@@ -64,7 +118,7 @@ export function NewAddress() {
         submitForm,
         errors } = useFormik({
             enableReinitialize: true,
-            initialValues: {
+            initialValues: initialAddress ?? {
                 city: "",
                 district: "",
                 firstName: "",
@@ -106,6 +160,9 @@ export function NewAddress() {
                         error={touched.firstName && errors.firstName !== undefined}
                         value={address?.firstName}
                         helperText={touched.firstName && errors?.firstName}
+                        InputLabelProps={{
+                            shrink: fieldStates.firstName
+                        }}
                     />
                 </FormControl>
             </Grid>
@@ -121,6 +178,9 @@ export function NewAddress() {
                         error={touched.lastName && errors.lastName !== undefined}
                         value={address?.lastName}
                         helperText={touched.lastName && errors?.lastName}
+                        InputLabelProps={{
+                            shrink: fieldStates.lastName
+                        }}
                     />
                 </FormControl>
             </Grid>
@@ -138,6 +198,9 @@ export function NewAddress() {
                         helperText={touched.phone && errors?.phone}
                         InputProps={{
                             inputComponent: PhoneInputMask as any,
+                        }}
+                        InputLabelProps={{
+                            shrink: fieldStates.phone
                         }}
                     />
                 </FormControl>
@@ -185,7 +248,15 @@ export function NewAddress() {
 
             <Grid item xs={4}>
                 <FormControl fullWidth>
-                    <TextField label={t("Generic.Address.ZipCode")} type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                    <TextField
+                        label={t("Generic.Address.ZipCode")}
+                        type="number"
+                        value={address?.zipCode}
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                        variant="outlined"
+                        InputLabelProps={{
+                            shrink: fieldStates.zipCode
+                        }} />
                 </FormControl>
             </Grid>
 
@@ -203,6 +274,9 @@ export function NewAddress() {
                         value={address?.fullAddress}
                         error={touched.fullAddress && errors.fullAddress !== undefined}
                         helperText={touched.fullAddress && errors.fullAddress}
+                        InputLabelProps={{
+                            shrink: fieldStates.fullAddress
+                        }}
                     />
                 </FormControl>
             </Grid>
@@ -218,6 +292,9 @@ export function NewAddress() {
                         onBlur={handleBlur}
                         error={touched.name && errors.name !== undefined}
                         helperText={touched.name && errors?.name}
+                        InputLabelProps={{
+                            shrink: fieldStates.name
+                        }}
                     />
                 </FormControl>
             </Grid>
@@ -230,6 +307,7 @@ export function NewAddress() {
                     } />
                 </FormControl>
                 <Button
+                    disabled={isBusy}
                     variant="contained"
                     color="secondary"
                     onClick={() => {

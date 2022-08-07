@@ -76,7 +76,7 @@ namespace Modilist.Business.CQRS.AddressDomain.Commands
                 }
             }
 
-            Address address = await _addressWriteRepository.GetByNameAsync(request.Name, request.AccountId, cancellationToken);
+            Address? address = await _addressWriteRepository.GetByNameAsync(request.Name, request.AccountId, cancellationToken);
 
             if (address == null)
             {
