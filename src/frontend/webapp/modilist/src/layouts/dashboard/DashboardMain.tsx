@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material"
+import { Box, Container, Grid } from "@mui/material"
 import { Outlet } from "react-router-dom";
 
 interface DashboardMainProps {
@@ -19,9 +19,11 @@ export function DashboardMain(props: React.PropsWithChildren<DashboardMainProps>
                 mx: [4],
             }}
         >
-            <Grid container spacing={4}>
-                <Outlet />
-            </Grid>
+            <Container maxWidth="xl">
+                <Grid container spacing={4}>
+                    <Outlet />
+                </Grid>
+            </Container>
         </Box>
     )
 }

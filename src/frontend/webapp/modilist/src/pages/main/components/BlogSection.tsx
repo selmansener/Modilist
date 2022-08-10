@@ -33,7 +33,6 @@ export function BlogSection() {
 
     return (
         <Grid item container xs={12} spacing={2}>
-            <Grid item xs={12}></Grid>
             <Grid item xs={6}>
                 {blogMetaData?.imageUrl &&
                     <Link href={`https://modilist.com${blogMetaData.blogUrl}`} target="_blank">
@@ -49,7 +48,7 @@ export function BlogSection() {
                             <OpenInNewOutlinedIcon sx={{
                                 verticalAlign: 'text-bottom',
                                 ml: 1
-                            }}/>
+                            }} />
                         </Typography>
                     </Link>
                 </Grid>
@@ -67,30 +66,29 @@ export function BlogSection() {
                 <Divider />
             </Grid>
             <Grid item container xs={12} spacing={2}>
-                <Grid item xs={1}>
+                <Grid item xs={4}>
                     <VisibilityIcon sx={{
                         verticalAlign: "text-bottom"
                     }} />
-                    <Typography variant="body1" component="span">
-                        &nbsp;{blogMetaData.viewCount}
+                    <Typography variant="body1" component="span" ml={1}>
+                        {blogMetaData.viewCount}
                     </Typography>
-                </Grid>
-                <Grid item xs={1}>
                     <FavoriteBorderIcon color="error" sx={{
-                        verticalAlign: "text-bottom"
+                        verticalAlign: "text-bottom",
+                        ml: 1
                     }} />
-                    <Typography variant="body1" component="span">
-                        &nbsp;{blogMetaData.likeCount}
+                    <Typography variant="body1" component="span" ml={1}>
+                        {blogMetaData.likeCount}
                     </Typography>
                 </Grid>
-                <Grid item xs={10}>
-                {blogMetaData.publishedDate &&
-                    <Typography variant="body1" align="right">
+                <Grid item xs={8}>
+                    {blogMetaData.publishedDate &&
+                        <Typography variant="body1" align="right">
                             {format(new Date(blogMetaData.publishedDate), "dd MMM", { locale: tr })}
-                    </Typography>
-                }
+                        </Typography>
+                    }
+                </Grid>
             </Grid>
-        </Grid>
         </Grid>
     )
 }

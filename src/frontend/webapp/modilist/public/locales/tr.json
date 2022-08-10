@@ -641,7 +641,8 @@
             "Select": "Seçiniz",
             "Close": "Kapat",
             "Submit": "Kaydet",
-            "Edit": "Düzenle"
+            "Edit": "Düzenle",
+            "Success": "İşlem başarılı!"
         },
         "PersonalInfo": {
             "FirstName": "Ad",

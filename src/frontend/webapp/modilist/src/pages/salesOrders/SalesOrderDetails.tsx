@@ -1,4 +1,4 @@
-import { Button, Divider, FormControl, Grid, Link, Paper, TextField, Typography, useTheme } from "@mui/material";
+import { Alert, Button, Divider, FormControl, Grid, Link, Paper, Snackbar, TextField, Typography, useTheme } from "@mui/material";
 import format from "date-fns/format";
 import { tr } from "date-fns/locale";
 import React, { useEffect, useState } from "react";
@@ -12,7 +12,6 @@ import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 import InfoIcon from '@mui/icons-material/Info';
 import { SalesOrderFeedback } from "./components/SalesOrderFeedback";
-import { addDays } from "date-fns";
 import { LovelyRating } from "../../components/lovelyRating/LovelyRating";
 import { calculateAvgSalesOrderRating } from "./utils/calculateAvgRating";
 import { AddressSelection } from "../../components/addressSelection/AddressSelection";
@@ -29,6 +28,7 @@ export function SalesOrderDetails() {
     const [isAddressSelectionOpen, setIsAddressSelectionOpen] = useState(false);
     const [isDeliveryDateDialogOpen, setIsDeliveryDateDialogOpen] = useState(false);
     const [additionalRequests, setAdditionalRequests] = useState<string>(salesOrder?.additionalRequests ?? "");
+    const [snackbarStatus, setSnackbarStatus] = useState<boolean>(false);
     const theme = useTheme();
 
     useEffect(() => {
@@ -37,6 +37,7 @@ export function SalesOrderDetails() {
                 dispatch.salesOrderDetailsModel.salesOrderDetails(parseInt(salesOrderId));
             }
 
+            setSnackbarStatus(true);
             dispatch.updateAdditionalRequestsModel.RESET();
         }
     }, [updateAdditionalRequestsStatus]);
@@ -390,6 +391,21 @@ export function SalesOrderDetails() {
                     setIsDeliveryDateDialogOpen(false);
                 }}
             />}
+            <Snackbar
+                open={snackbarStatus}
+                autoHideDuration={6000}
+                onClose={() => {
+                    setSnackbarStatus(false);
+                }}>
+                <Alert onClose={() => {
+                    setSnackbarStatus(false);
+                }}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}>
+                    {t("Generic.Forms.Success")}
+                </Alert>
+            </Snackbar>
         </Grid>
     )
 }

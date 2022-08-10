@@ -59,6 +59,8 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
 
             var salesOrder = new SalesOrder(request.AccountId);
 
+            salesOrder.AssignAddress(address);
+
             await _salesOrderRepository.AddAsync(salesOrder, cancellationToken);
 
             return salesOrder.Adapt<SalesOrderDTO>();

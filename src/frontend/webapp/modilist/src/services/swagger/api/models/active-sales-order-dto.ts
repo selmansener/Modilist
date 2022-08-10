@@ -79,4 +79,10 @@ export interface ActiveSalesOrderDTO {
      * @memberof ActiveSalesOrderDTO
      */
     salesOrderAddress?: SalesOrderAddressDTO;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActiveSalesOrderDTO
+     */
+    additionalRequests?: string;
 }
