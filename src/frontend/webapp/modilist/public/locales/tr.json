@@ -458,12 +458,16 @@
             "SuccessMessage": "Hesabınız başarı ile doğrulandı.",
             "Thanks": "Hesabınızı doğruladığınız ve hesap güvenliğinizi sağlamamıza katkıda bulunduğunuz için teşekkürler.",
             "NavigationMessage": "İlk kombininizi hazırlayabilmemiz için stil formunu doldurmanız gerekiyor.",
-            "NavigateToForm": "Stil formunu doldur."
+            "NavigateToForm": "Stil formunu doldur"
         },
         "AccountVerificationFailed": {
             "FailedMessage": "Hesabınızı doğrularken bir hata ile karşılaştık.",
             "WeAreOnIt": "Oluşan hata ile ilgili logları en kısa sürede inceleyip problemi gidereceğiz.",
             "SuggestionMessage": "Bir süre sonra tekrar deneyebilir ya da müşteri hizmetlerimiz ile iletişime geçebilirsin."
+        },
+        "AccountCreated": {
+            "WelcomeMessage": "Modilist'e Hoşgeldin!",
+            "CheckMailMessage": "Kombinlerini hazırlamaya başlamadan önce e-posta adresine gelen mesaj üzerinden hesabını doğrulaman gerekiyor."
         }
     },
     "WelcomeSteps": {

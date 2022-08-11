@@ -28,6 +28,8 @@ namespace Modilist.Business.CQRS.UserDomain.DTOs
         public string? JobTitle { get; private set; }
 
         public AccountState State { get; private set; }
+
+        public bool IsVerified { get; private set; }
     }
 
     public class AccountDTOMapper : IRegister

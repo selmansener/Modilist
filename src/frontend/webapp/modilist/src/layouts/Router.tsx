@@ -39,6 +39,7 @@ import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
 import { VerificationLayout } from './verification/Verification';
 import { AccountVerified } from '../pages/verification/AccountVerified';
 import { AccountVerificationFailed } from '../pages/verification/AccountVerificationFailed';
+import { AccountCreated } from '../pages/verification/AccountCreated';
 
 interface RouterOptions {
   title?: string,
@@ -345,6 +346,17 @@ const routes: RouterOptions[] = [
       component: <WelcomeLayout title="Pages.Titles.Welcome" />
     },
     component: <WelcomeSteps />,
+    isPublic: false,
+    disabledEnvironments: []
+  },
+  {
+    helmet: "Pages.Titles.AccountVerification",
+    route: "account-created",
+    layout: {
+      path: "/verification",
+      component: <VerificationLayout />
+    },
+    component: <AccountCreated />,
     isPublic: false,
     disabledEnvironments: []
   },

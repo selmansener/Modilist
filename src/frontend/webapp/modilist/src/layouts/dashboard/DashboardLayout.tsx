@@ -78,6 +78,10 @@ export default function Dashboard() {
       return;
     }
 
+    if (!currentAccount?.isVerified) {
+      navigate("/verification/account-created", { replace: true });
+    }
+
     if (currentAccount?.state === AccountState.Created) {
       navigate("/welcome/gender", { replace: true });
     }

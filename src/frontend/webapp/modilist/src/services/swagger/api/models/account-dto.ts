@@ -79,4 +79,10 @@ export interface AccountDTO {
      * @memberof AccountDTO
      */
     state?: AccountState;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountDTO
+     */
+    isVerified?: boolean;
 }
