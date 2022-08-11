@@ -1,11 +1,27 @@
 import { Button, Grid, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 
 export function AccountVerified() {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const [counter, setCounter] = useState(5);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            navigate("/welcome/gender", {
+                replace: true
+            });
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+    }, [counter]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -31,6 +47,16 @@ export function AccountVerified() {
             <Grid item xs={12}>
                 <Typography>
                     {t("Pages.AccountVerified.NavigationMessage")}
+                </Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <MarkEmailReadIcon color="success" sx={{
+                    fontSize: 72
+                }} />
+            </Grid>
+            <Grid item xs={12}>
+                <Typography>
+                    {t("Pages.AccountVerified.Timer", { counter: counter })}
                 </Typography>
             </Grid>
             <Grid item xs={12}>

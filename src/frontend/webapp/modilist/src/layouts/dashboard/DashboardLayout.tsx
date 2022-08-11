@@ -80,6 +80,7 @@ export default function Dashboard() {
 
     if (!currentAccount?.isVerified) {
       navigate("/verification/account-created", { replace: true });
+      return;
     }
 
     if (currentAccount?.state === AccountState.Created) {
