@@ -10,6 +10,8 @@ namespace Modilist.Data.Repositories.UserDomain
     public interface IAccountRepository : IBaseRepository<Account>
     {
         Task<Account?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+
+        Task<Account?> GetByMail(string mail, CancellationToken cancellationToken);
     }
 
     internal class AccountRepository : BaseRepository<Account>, IAccountRepository
@@ -22,6 +24,11 @@ namespace Modilist.Data.Repositories.UserDomain
         public async Task<Account?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await _baseDb.Accounts.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
+        public async Task<Account?> GetByMail(string mail, CancellationToken cancellationToken)
+        {
+            return await GetAll().FirstOrDefaultAsync(account => account.Email == mail, cancellationToken);
         }
     }
 }

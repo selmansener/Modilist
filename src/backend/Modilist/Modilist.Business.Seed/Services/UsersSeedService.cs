@@ -66,6 +66,7 @@ namespace Modilist.Business.Seed.Services
                     user.JobTitle);
 
                 account.Activate();
+                account.Verify();
 
                 await _dbContext.AddAsync(account, cancellationToken);
 

@@ -36,6 +36,9 @@ import AddCardIcon from '@mui/icons-material/AddCard';
 import { UpsertAddress } from '../pages/adresses/UpsertAddress';
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
 import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
+import { VerificationLayout } from './verification/Verification';
+import { AccountVerified } from '../pages/verification/AccountVerified';
+import { AccountVerificationFailed } from '../pages/verification/AccountVerificationFailed';
 
 interface RouterOptions {
   title?: string,
@@ -345,6 +348,28 @@ const routes: RouterOptions[] = [
     isPublic: false,
     disabledEnvironments: []
   },
+  {
+    helmet: "Pages.Titles.AccountVerification",
+    route: "account-verified",
+    layout: {
+      path: "/verification",
+      component: <VerificationLayout />
+    },
+    component: <AccountVerified />,
+    isPublic: false,
+    disabledEnvironments: []
+  },
+  {
+    helmet: "Pages.Titles.AccountVerification",
+    route: "account-verification-failed",
+    layout: {
+      path: "/verification",
+      component: <VerificationLayout />
+    },
+    component: <AccountVerificationFailed />,
+    isPublic: false,
+    disabledEnvironments: []
+  }
 ]
 
 export const menuItems = routes.filter(x => x.menuItem !== undefined).map(x => {

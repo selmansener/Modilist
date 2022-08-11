@@ -8,6 +8,7 @@ import { AccountState } from "../../services/swagger/api";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { ImageComponent } from "../../components/image/ImageComponent";
+import { DashboardFooter } from "../dashboard/DashboardFooter";
 
 export interface WelcomeLayoutProps {
     title: string;
@@ -50,29 +51,32 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
     }, [getAccountStatus]);
 
     return (
-        <Box component="main">
-            <Helmet>
-                {`${t(title)} | Modilist`}
-            </Helmet>
-            <AppBar position="static">
-                <Toolbar>
-                    <Box sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        flexGrow: 1
-                    }}>
-                        <ImageComponent width={200} src="/whitehorizontallogo.svg" />
-                    </Box>
-                </Toolbar>
-            </AppBar>
-            <Container maxWidth="xl" sx={{
-                mt: 2,
-                mb: 2
-            }}>
-                <Grid container>
-                    <Outlet />
-                </Grid>
-            </Container>
+        <Box>
+            <Box component="main" mb={8}>
+                <Helmet>
+                    {`${t(title)} | Modilist`}
+                </Helmet>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Box sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            flexGrow: 1
+                        }}>
+                            <ImageComponent width={200} src="/whitehorizontallogo.svg" />
+                        </Box>
+                    </Toolbar>
+                </AppBar>
+                <Container maxWidth="xl" sx={{
+                    mt: 4,
+                    mb: 2
+                }}>
+                    <Grid container>
+                        <Outlet />
+                    </Grid>
+                </Container>
+            </Box>
+            <DashboardFooter />
         </Box>
     )
 }

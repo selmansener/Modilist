@@ -13,6 +13,9 @@ namespace Modilist.Data.EntityConfigurations.UserDomain
         {
             builder.HasKey(x => x.Id);
 
+            builder.HasIndex(x => new {  x.Email, x.DeletedAt })
+                .IsUnique();
+
             builder.Property(x => x.State).HasConversion<string>().IsRequired();
             builder.Property(x => x.Gender).HasConversion<string>().IsRequired();
         }

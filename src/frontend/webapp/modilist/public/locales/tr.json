@@ -67,7 +67,8 @@
             "PaymentMethods": "Kayıtlı Kartlarım",
             "NewPaymentMethod": "Yeni Kart Ekle",
             "Settings": "Hesap Ayarlarım",
-            "Welcome": "Hoşgeldin"
+            "Welcome": "Hoşgeldin",
+            "AccountVerification": "Hesap Doğrulama"
         },
         "Main": {
             "ActiveSalesOrders": "Aktif Siparişlerim",
@@ -452,6 +453,17 @@
         "NewAddress": {
             "AddressName": "Adres Adı",
             "SetAsDefault": "Varsayılan Olarak Ata"
+        },
+        "AccountVerified": {
+            "SuccessMessage": "Hesabınız başarı ile doğrulandı.",
+            "Thanks": "Hesabınızı doğruladığınız ve hesap güvenliğinizi sağlamamıza katkıda bulunduğunuz için teşekkürler.",
+            "NavigationMessage": "İlk kombininizi hazırlayabilmemiz için stil formunu doldurmanız gerekiyor.",
+            "NavigateToForm": "Stil formunu doldur."
+        },
+        "AccountVerificationFailed": {
+            "FailedMessage": "Hesabınızı doğrularken bir hata ile karşılaştık.",
+            "WeAreOnIt": "Oluşan hata ile ilgili logları en kısa sürede inceleyip problemi gidereceğiz.",
+            "SuggestionMessage": "Bir süre sonra tekrar deneyebilir ya da müşteri hizmetlerimiz ile iletişime geçebilirsin."
         }
     },
     "WelcomeSteps": {

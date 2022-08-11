@@ -31,6 +31,8 @@ namespace Modilist.Business.Seed.Services
                     user.Phone,
                     user.JobTitle);
 
+                account.Verify();
+
                 await _dbContext.AddAsync(account, cancellationToken);
             }
         }

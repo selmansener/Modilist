@@ -23,6 +23,8 @@ namespace Modilist.Business.Seed.Services
                     user.Id,
                     user.Email);
 
+                account.Verify();
+
                 await _dbContext.AddAsync(account, cancellationToken);
             }
         }

@@ -21,6 +21,8 @@ namespace Modilist.API.Area.API.Controllers
         }
 
 
+
+
         [Authorize(nameof(AuthorizationPermissions.Accounts))]
         [HttpGet("[controller].Get")]
         [ProducesResponseType(typeof(AccountDTO), 200)]
@@ -29,6 +31,18 @@ namespace Modilist.API.Area.API.Controllers
             var account = await _mediator.Send(new GetAccount { Id = User.GetUserId() }, cancellationToken);
 
             return Ok(account);
+        }
+
+        [HttpGet("[controller].Verify/{email}")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> Create(string email, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new VerifyAccount
+            {
+                Email = email,
+            });
+
+            return Redirect(response.RedirectUrl);
         }
 
         [Authorize(nameof(AuthorizationPermissions.Accounts))]

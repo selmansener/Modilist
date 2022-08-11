@@ -99,6 +99,10 @@ namespace Modilist.Domains.Models.AccountDomain
 
         public DateTime? BlockedAt { get; private set; }
 
+        public DateTime? VerifiedAt { get; private set; }
+
+        public bool IsVerified { get; private set; }
+
         public void Update(string firstName,
                        string lastName,
                        DateTime? birthDate,
@@ -200,6 +204,12 @@ namespace Modilist.Domains.Models.AccountDomain
 
             State = AccountState.Active;
             ActivatedAt = DateTime.UtcNow;
+        }
+
+        public void Verify()
+        {
+            IsVerified = true;
+            VerifiedAt = DateTime.UtcNow;
         }
     }
 }
