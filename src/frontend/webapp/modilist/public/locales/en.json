@@ -4,6 +4,10 @@
             "Title": "Adresi Değiştir",
             "CloseButton": "Kapat",
             "Select": "Seç >"
+        },
+        "DeliveryDateDialog": {
+            "Title": "Tahmini Teslimat Tarihi",
+            "Content": "Teslimat tarihini değiştir."
         }
     },
     "Layouts": {
@@ -33,6 +37,10 @@
             }
         },
         "Dashboard": {
+            "Header": {
+                "Profile": "Kişisel Bilgilerim",
+                "Logout": "Çıkış Yap"
+            },
             "Footer": {
                 "FollowUs": "Bizi takip edin.",
                 "Links": {
@@ -58,9 +66,13 @@
             "FitPreferences": "Kalıp Tercihlerim",
             "FabricProperties": "Renk & Kumaş",
             "Addresses": "Kayıtlı Adreslerim",
+            "NewAddress": "Yeni Adres Ekle",
+            "UpdateAddress": "Adresi Güncelle",
             "PaymentMethods": "Kayıtlı Kartlarım",
+            "NewPaymentMethod": "Yeni Kart Ekle",
             "Settings": "Hesap Ayarlarım",
-            "Welcome": "Hoşgeldin"
+            "Welcome": "Hoşgeldin",
+            "AccountVerification": "Hesap Doğrulama"
         },
         "Main": {
             "ActiveSalesOrders": "Aktif Siparişlerim",
@@ -109,7 +121,7 @@
         "SalesOrderDetails": {
             "Title": "Sipariş Ref. No: ",
             "DeliveryAddress": "Sipariş Teslimat Adresi: ",
-            "RegisteredAddresses": "Kayıtlı Adreslerim >",
+            "RegisteredAddresses": "Teslimat Adresini Değiştir >",
             "CreatedAt": "Sipariş Oluşturulma Tarihi: ",
             "EstimatedDeliveryDate": "Tahmini Teslimat Tarihi: ",
             "SalesOrderState": "Sipariş Durumu: ",
@@ -117,7 +129,10 @@
             "PackageContentsDescription": " Kombin içeriğini paketin eline ulaştığı zaman görüntüleyebilirsin.",
             "AdditionalNotes": "Ekstra Notlar: ",
             "CargoTrackingCode": "Kargo Takip Numarası: ",
-            "Change": "Değiştir "
+            "ChangeDeliveryDate": "Teslimat Tarihini Değiştir ",
+            "SalesOrderFeedback": "Kombine Puanın: ",
+            "DisplayInvoice": "Faturayı Görüntüle",
+            "ChangeDeliveryAddress": "Teslimat adresini değiştirin."
         },
         "SalesOrderFeedback": {
             "AutoPaymentWarning": "5 iş günü içerisinde değerlendirme yapmaz iseniz kombin toplam bedeli kayıtlı kartınızdan tahsil edilecektir.",
@@ -153,11 +168,15 @@
                 "Buy": "Satın al",
                 "Return": "İade et"
             },
-            "SoldProductPrice": "Satın Alınacak Ürünler Ara Toplam: ",
+            "SoldProductPrice": "Ürünler Toplam: ",
             "VATPrice": "KDV %18: ",
+            "SubTotal": "Ara Toplam: ",
             "TotalProductPrice": "Toplam Tutar: ",
             "PackageTotalPrice": "Kombinin Toplam Tutarı: ",
-            "Checkout": "Ödeme sayfasına git"
+            "Checkout": "Ödeme sayfasına git",
+            "DisplayPriceInfo": "Ödemen gereken toplam ücreti görebilmek için kombininde yer alan ürünleri ayrı ayrı değerlendirmelisin.",
+            "ServicePrice": "Hizmet Bedeli: ",
+            "ServicePriceWarning": "En az bir ürün satın alırsan hizmet bedeli ödemezsin."
         },
         "Account": {
             "PersonalInfo": "Kişisel Bilgiler",
@@ -359,7 +378,7 @@
             "SelectReturnDate": "İade Tarihi",
             "EstimatedPickupDate": "İade edilen ürünleri {{date}} tarihinde alacağız.",
             "ReturnDate": "İade ürünleri içeren paketini ne zaman teslim almamızı istersin.",
-            "ReturnAddress": "İadenin teslim alınacağı adres",
+            "ReturnAddress": "İadenin teslim alınacağı adres: ",
             "ChangeReturnAddress": "Kayıtlı Adreslerim >",
             "ChangeReturnAddressModal": "İadenizin teslim alınacağı adresi seçiniz.",
             "PaymentMethod": "Ödeme Yöntemi",
@@ -370,7 +389,7 @@
             "Wallet": "Modilist Cüzdanım",
             "Balance": "Kalan Bakiye",
             "UseBalance": "Kullan",
-            "SoldProductPrice": "Satın Alınacak Ürünler Ara Toplam: ",
+            "SoldProductPrice": "Ürünler Toplam: ",
             "VATPrice": "KDV %18: ",
             "TotalProductPrice": "Toplam Tutar: ",
             "PackageTotalPrice": "Kombinin Toplam Tutarı: ",
@@ -390,9 +409,70 @@
             "TermsInfoError": "Devam edebilmek için lütfen formu onaylayın."
         },
         "CheckoutCompleted": {
-            "SalesOrderCompleted": "#{{salesOrderId}} numaralı siparişin tamamlandı.",
-            "Thanks": "Bizi tercih ettiğin için teşekkür ederiz.",
+            "SalesOrderReferenceNumber": "Sipariş Ref. No: #{{salesOrderId}}",
+            "SuccessMessage": "Ödeme işlemin başarı ile gerçekleşti.",
+            "BestWishes": "İyi günlerde kullanmanı diliyoruz.",
             "ReturnToHome": "Anasayfa'ya dön"
+        },
+        "CheckoutFailed": {
+            "SalesOrderReferenceNumber": "Sipariş Ref. No: #{{salesOrderId}}",
+            "FailureMessage": "Ödeme işlemini tamamlamaya çalışırken bir hata ile karşılaştık.",
+            "Apologize": "Ödeme esnasında problem yaşadığın için üzgünüz.",
+            "Investigate": "Hatayı inceleyip en kısa sürede çözmeye çalşacağız.",
+            "Suggest": "Dilersen bir süre sonra ödeme sayfasına dönüp tekrar deneyebilirsin.",
+            "ReturnToCheckout": "Ödeme sayfasına dön",
+            "ReturnToHome": "Anasayfa'ya dön"
+        },
+        "PaymentMethods": {
+            "PaymentMethodListItem": {
+                "AddNew": "Yeni Kart Ekle",
+                "BankName": "Banka: ",
+                "CardNumber": "Kart Numarası: ",
+                "SetAsDefault": "Varsayılan Olarak Ata",
+                "Default": "Varsayılan Kart"
+            }
+        },
+        "NewPaymentMethod": {
+            "CardHolderName": "Kart Üzerindeki İsim",
+            "CardNumber": "Kart Numarası",
+            "ExpireMonth": "Son Kullanma Tarihi (Ay)",
+            "ExpireYear": "Son Kullanma Tarihi (Yıl)",
+            "MonthTwoDigits": "Lütfen iki haneli olarak giriniz",
+            "MonthValidation": "Lütfen geçerli bir ay giriniz",
+            "YearTwoDigits": "Lütfen yılı iki haneli olarak giriniz",
+            "YearValidation": "Lütfen geçerli bir yıl giriniz",
+            "CvcValidation": "Lütfen geçerli bir CVC giriniz",
+            "CardHolderNameValidation": "Lütfen sayı kullanmadan geçerli bir isim giriniz",
+            "SetAsDefault": "Varsayılan Olarak Ata"
+        },
+        "Addresses": {
+            "AddressLineItem": {
+                "AddNew": "Yeni Address Ekle",
+                "AddressName": "Adres Adı: ",
+                "FullAddress": "Adres: ",
+                "Default": "Varsayılan Adres",
+                "SetAsDefault":"Varsayılan Olarak Ata"
+            }
+        },
+        "NewAddress": {
+            "AddressName": "Adres Adı",
+            "SetAsDefault": "Varsayılan Olarak Ata"
+        },
+        "AccountVerified": {
+            "SuccessMessage": "Hesabınız başarı ile doğrulandı.",
+            "Thanks": "Hesabınızı doğruladığınız ve hesap güvenliğinizi sağlamamıza katkıda bulunduğunuz için teşekkürler.",
+            "NavigationMessage": "İlk kombininizi hazırlayabilmemiz için stil formunu doldurmanız gerekiyor.",
+            "NavigateToForm": "Stil formunu doldur",
+            "Timer": "{{counter}} saniye içinde stil formuna yönlendiriliyorsun..."
+        },
+        "AccountVerificationFailed": {
+            "FailedMessage": "Hesabınızı doğrularken bir hata ile karşılaştık.",
+            "WeAreOnIt": "Oluşan hata ile ilgili logları en kısa sürede inceleyip problemi gidereceğiz.",
+            "SuggestionMessage": "Bir süre sonra tekrar deneyebilir ya da müşteri hizmetlerimiz ile iletişime geçebilirsin."
+        },
+        "AccountCreated": {
+            "WelcomeMessage": "Modilist'e Hoşgeldin!",
+            "CheckMailMessage": "Kombinlerini hazırlamaya başlamadan önce e-posta adresine gelen mesaj üzerinden hesabını doğrulaman gerekiyor."
         }
     },
     "WelcomeSteps": {
@@ -580,7 +660,10 @@
         },
         "Forms": {
             "Select": "Seçiniz",
-            "Close": "Kapat"
+            "Close": "Kapat",
+            "Submit": "Kaydet",
+            "Edit": "Düzenle",
+            "Success": "İşlem başarılı!"
         },
         "PersonalInfo": {
             "FirstName": "Ad",

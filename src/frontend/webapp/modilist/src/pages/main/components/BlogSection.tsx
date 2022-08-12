@@ -32,7 +32,7 @@ export function BlogSection() {
     }
 
     return (
-        <Grid item container xs={12} spacing={2}>
+        <Grid item container xs={12} spacing={2} >
             <Grid item xs={6}>
                 {blogMetaData?.imageUrl &&
                     <Link href={`https://modilist.com${blogMetaData.blogUrl}`} target="_blank">

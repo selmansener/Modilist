@@ -37,6 +37,10 @@
             }
         },
         "Dashboard": {
+            "Header": {
+                "Profile": "Kişisel Bilgilerim",
+                "Logout": "Çıkış Yap"
+            },
             "Footer": {
                 "FollowUs": "Bizi takip edin.",
                 "Links": {
@@ -68,7 +72,9 @@
             "NewPaymentMethod": "Yeni Kart Ekle",
             "Settings": "Hesap Ayarlarım",
             "Welcome": "Hoşgeldin",
-            "AccountVerification": "Hesap Doğrulama"
+            "AccountVerification": "Hesap Doğrulama",
+            "Account": "Kişisel Bilgilerim",
+            "NotFound": "Sayfa Bulunamadı | Modilist"
         },
         "Main": {
             "ActiveSalesOrders": "Aktif Siparişlerim",
@@ -469,6 +475,18 @@
         "AccountCreated": {
             "WelcomeMessage": "Modilist'e Hoşgeldin!",
             "CheckMailMessage": "Kombinlerini hazırlamaya başlamadan önce e-posta adresine gelen mesaj üzerinden hesabını doğrulaman gerekiyor."
+        },
+        "NotFound": {
+            "Message": "Aradığınız sayfayı bulamadık ya da kaybettik.",
+            "ReturnToHome": "Anasayfa'ya dön",
+            "ReturnToPreviousPage": "Geri dön"
+        },
+        "About": {
+            "Title": "Hakkımızda",
+            "Description": {
+                "1": "Modilist, giyim ve aksesuar alışverişlerinde kişiselleştirilmiş",
+                "2": "bir deneyim sunmayı amaçlayan, yapay zeka destekli bir platformdur."
+            }
         }
     },
     "WelcomeSteps": {

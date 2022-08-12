@@ -104,7 +104,7 @@ export function DashboardFooter() {
                             justifyContent: 'space-evenly',
                             alignItems: 'flex-start'
                         }}>
-                            <NavLink to={"#"}>
+                            <NavLink to={"/about"}>
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.AboutUs")}
                                 </Typography>

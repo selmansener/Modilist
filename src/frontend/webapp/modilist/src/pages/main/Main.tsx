@@ -40,10 +40,11 @@ export function Main() {
                         </Paper>
                     </Grid>
                 </Grid>
-                <Grid item container xs={6} spacing={2} display="flex" alignContent="flex-start">
+                <Grid item container xs={6} spacing={4} display="flex" alignContent="flex-start">
                     <Grid item xs={12}>
-                        <Paper elevation={6} sx={{
-                            p: 2
+                        <Paper elevation={6}  sx={{
+                            p: 2,
+                            minHeight: 428
                         }}>
                             <BlogSection />
                         </Paper>

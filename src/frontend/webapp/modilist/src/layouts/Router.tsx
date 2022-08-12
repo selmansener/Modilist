@@ -40,6 +40,9 @@ import { VerificationLayout } from './verification/Verification';
 import { AccountVerified } from '../pages/verification/AccountVerified';
 import { AccountVerificationFailed } from '../pages/verification/AccountVerificationFailed';
 import { AccountCreated } from '../pages/verification/AccountCreated';
+import { Account } from '../pages/account/Account';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import { About } from '../pages/about/About';
 
 interface RouterOptions {
   title?: string,
@@ -70,6 +73,17 @@ const routes: RouterOptions[] = [
       component: <Unauthenticated />
     },
     isPublic: true,
+    disabledEnvironments: []
+  },
+  {
+    helmet: "Pages.Titles.About",
+    route: "about",
+    component: <About />,
+    layout: {
+      path: "/",
+      component: <Dashboard />
+    },
+    isPublic: false,
     disabledEnvironments: []
   },
   {
@@ -231,6 +245,21 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <FabricProperties />,
+    isPublic: false,
+    disabledEnvironments: []
+  },
+  {
+    title: "Pages.Titles.Account",
+    helmet: "Pages.Titles.Account",
+    route: "account",
+    icon: <ManageAccountsIcon sx={{
+      verticalAlign: "sub"
+    }}/>,
+    layout: {
+      path: "/",
+      component: <Dashboard />
+    },
+    component: <Account />,
     isPublic: false,
     disabledEnvironments: []
   },

@@ -1,8 +1,8 @@
-import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent, Avatar, Box, Portal, AppBar, Drawer, Button } from "@mui/material"
+import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent, Avatar, Box, Portal, AppBar, Drawer, Button, Grid } from "@mui/material"
 import React, { useRef } from "react";
 import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useTranslation } from 'react-i18next'
@@ -11,6 +11,7 @@ import { ImageComponent } from "../../components/image/ImageComponent";
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 const drawerWidth: number = 240;
 
@@ -27,6 +28,7 @@ interface DashboardHeaderProps {
 
 export function DashboardHeader(props: DashboardHeaderProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { instance, accounts } = useMsal();
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
@@ -36,6 +38,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
   const theme = useTheme();
 
   const [notificationsIcon, setNotificationsIcon] = React.useState<null | HTMLElement>(null);
+  const [accountIcon, setAccountIcon] = React.useState<null | HTMLElement>(null);
 
   const handleNotificationMenu = (event: React.MouseEvent<HTMLElement>) => {
     setNotificationsIcon(event.currentTarget);
@@ -44,6 +47,14 @@ export function DashboardHeader(props: DashboardHeaderProps) {
   const handleNotificationClose = () => {
     setNotificationsIcon(null);
   };
+
+  const handleAccountIconMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAccountIcon(event.currentTarget);
+  };
+
+  const handleAccountMenuClose = () => {
+    setAccountIcon(null);
+  }
 
   const logout = () => {
     instance.logoutRedirect({
@@ -89,7 +100,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
           }}>
             {menuItems.map((item) => (
               <NavLink key={item.route} to={item.route} style={{ display: "flex" }}>
-                <Button sx={{ color: '#fff' }} size="small" startIcon={item.icon}>
+                <Button sx={{ color: '#fff', mr: 2 }} size="small" startIcon={item.icon}>
                   {t(item.name)}
                 </Button>
               </NavLink>
@@ -115,9 +126,40 @@ export function DashboardHeader(props: DashboardHeaderProps) {
               open={notificationsIcon !== null}
               onClose={handleNotificationClose}
             >
-              <MenuItem onClick={handleNotificationClose}>Profile</MenuItem>
-              <MenuItem onClick={handleNotificationClose}>My account</MenuItem>
-              <MenuItem onClick={logout}>Logout</MenuItem>
+              <MenuItem onClick={handleNotificationClose}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="h6">
+                      Başka bir notification
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>
+                      Siparişin teslim edildi.
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>
+                      Buraya tıklayarak siparişini değerlendirebilirsin.
+                    </Typography>
+                  </Grid>
+
+                </Grid>
+              </MenuItem>
+              <MenuItem onClick={handleNotificationClose}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="h6">
+                      Örnek notification
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>
+                      Siparişin hazırlandı. Yakında kargoya verilecek.
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </MenuItem>
             </Menu>
             <NavLink to={"/settings"} style={{ color: "#fff" }}>
               <IconButton
@@ -132,12 +174,27 @@ export function DashboardHeader(props: DashboardHeaderProps) {
             </NavLink>
             <IconButton
               size="large"
-              aria-label="logout"
+              onClick={handleAccountIconMenu}
               color="inherit"
-              onClick={logout}
+              sx={{
+                display: { xs: 'none', sm: 'inline' },
+              }}
             >
-              <LogoutIcon />
+              <ManageAccountsIcon />
             </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={accountIcon}
+              keepMounted
+              open={accountIcon !== null}
+              onClose={handleAccountMenuClose}
+            >
+              <MenuItem onClick={() => {
+                navigate("/account");
+                handleAccountMenuClose();
+              }}>{t("Layouts.Dashboard.Header.Profile")}</MenuItem>
+              <MenuItem onClick={logout}>{t("Layouts.Dashboard.Header.Logout")}</MenuItem>
+            </Menu>
           </Box>
         </Toolbar>
       </AppBar>
@@ -152,12 +209,6 @@ export function DashboardHeader(props: DashboardHeaderProps) {
               display: { xs: 'block', sm: 'none' },
               '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
             }}
-          // sx={{
-          //   [`& .MuiDrawer-paper`]: {
-          //     backgroundColor: 'rgba(150, 141, 179, 0.3);',
-          //     border: 'none'
-          //   },
-          // }}
           >
             <Toolbar
               sx={{
