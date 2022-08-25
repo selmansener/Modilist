@@ -74,7 +74,7 @@ const routes: RouterOptions[] = [
       component: <Unauthenticated />
     },
     isPublic: true,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     helmet: "Pages.Titles.About",
