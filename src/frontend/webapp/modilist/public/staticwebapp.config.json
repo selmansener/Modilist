@@ -4,7 +4,8 @@
         "exclude": [
             "/static/*",
             "/images/*",
-            "/locales/*"
+            "/locales/*",
+            "/.well-known/*"
         ]
     }
 }

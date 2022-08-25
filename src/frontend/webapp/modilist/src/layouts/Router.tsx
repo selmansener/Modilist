@@ -43,6 +43,7 @@ import { AccountCreated } from '../pages/verification/AccountCreated';
 import { Account } from '../pages/account/Account';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { About } from '../pages/about/About';
+import { ComingSoon } from './comingSoon/ComingSoon';
 
 interface RouterOptions {
   title?: string,
@@ -73,7 +74,7 @@ const routes: RouterOptions[] = [
       component: <Unauthenticated />
     },
     isPublic: true,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     helmet: "Pages.Titles.About",
@@ -84,7 +85,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.Main",
@@ -102,7 +103,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.SalesOrders",
@@ -120,7 +121,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.SalesOrders",
@@ -135,7 +136,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.SalesOrders",
@@ -150,7 +151,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.SalesOrders",
@@ -162,7 +163,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.SalesOrders",
@@ -174,7 +175,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.SizeInfo",
@@ -192,7 +193,7 @@ const routes: RouterOptions[] = [
     },
     component: <SizeInfo />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.StylePreferences",
@@ -210,7 +211,7 @@ const routes: RouterOptions[] = [
     },
     component: <StylePreferences />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.FitPreferences",
@@ -228,7 +229,7 @@ const routes: RouterOptions[] = [
     },
     component: <FitPreferences />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.FabricProperties",
@@ -246,7 +247,7 @@ const routes: RouterOptions[] = [
     },
     component: <FabricProperties />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.Account",
@@ -254,14 +255,14 @@ const routes: RouterOptions[] = [
     route: "account",
     icon: <ManageAccountsIcon sx={{
       verticalAlign: "sub"
-    }}/>,
+    }} />,
     layout: {
       path: "/",
       component: <Dashboard />
     },
     component: <Account />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.Settings",
@@ -273,7 +274,7 @@ const routes: RouterOptions[] = [
     },
     component: <AccountSettings />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.PaymentMethods",
@@ -291,7 +292,7 @@ const routes: RouterOptions[] = [
     },
     component: <PaymentMethods />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.NewPaymentMethod",
@@ -306,7 +307,7 @@ const routes: RouterOptions[] = [
     },
     component: <NewPaymentMethod />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.Addresses",
@@ -324,7 +325,7 @@ const routes: RouterOptions[] = [
     },
     component: <Addresses />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.NewAddress",
@@ -339,7 +340,7 @@ const routes: RouterOptions[] = [
     },
     component: <UpsertAddress />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     title: "Pages.Titles.UpdateAddress",
@@ -354,7 +355,7 @@ const routes: RouterOptions[] = [
     },
     component: <UpsertAddress />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     helmet: "Pages.Titles.Welcome",
@@ -365,7 +366,7 @@ const routes: RouterOptions[] = [
     },
     component: <GenderSelection />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     helmet: "Pages.Titles.Welcome",
@@ -376,7 +377,7 @@ const routes: RouterOptions[] = [
     },
     component: <WelcomeSteps />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     helmet: "Pages.Titles.AccountVerification",
@@ -387,7 +388,7 @@ const routes: RouterOptions[] = [
     },
     component: <AccountCreated />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     helmet: "Pages.Titles.AccountVerification",
@@ -398,7 +399,7 @@ const routes: RouterOptions[] = [
     },
     component: <AccountVerified />,
     isPublic: false,
-    disabledEnvironments: []
+    disabledEnvironments: ["production"]
   },
   {
     helmet: "Pages.Titles.AccountVerification",
@@ -409,8 +410,19 @@ const routes: RouterOptions[] = [
     },
     component: <AccountVerificationFailed />,
     isPublic: false,
-    disabledEnvironments: []
-  }
+    disabledEnvironments: ["production"]
+  },
+  {
+    helmet: "Pages.Titles.Main",
+    route: "coming-soon",
+    layout: {
+      path: "/",
+      component: <ComingSoon />
+    },
+    component: <></>,
+    isPublic: false,
+    disabledEnvironments: ["development", "int", "staging"]
+  },
 ]
 
 export const menuItems = routes.filter(x => x.menuItem !== undefined).map(x => {
