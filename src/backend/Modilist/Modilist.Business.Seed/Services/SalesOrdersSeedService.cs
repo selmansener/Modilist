@@ -64,6 +64,10 @@ namespace Modilist.Business.Seed.Services
 
             await _dbContext.AddRangeAsync(salesOrders, cancellationToken);
 
+            _dbContext.ChangeTracker.DetectChanges();
+
+            await _dbContext.SaveChangesAsync();
+
             foreach (var account in accounts)
             {
                 var orders = salesOrders.Where(x => x.State == SalesOrderState.Delivered && x.AccountId == account.Id);

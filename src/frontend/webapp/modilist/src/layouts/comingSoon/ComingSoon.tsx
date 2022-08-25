@@ -8,18 +8,21 @@ export function ComingSoon() {
     const [muted, setMuted] = useState(true);
     const [position, setPosition] = useState({
         top: 0,
-        right: 0
+        left: 0
     });
-    const videoContainer = useRef<HTMLDivElement | null>(null);
+
+    const videoRef = useRef<HTMLVideoElement | null>(null);
 
     const updateSize = () => {
-        const rect = videoContainer?.current?.getBoundingClientRect();
-        console.log(rect);
-        if (rect) {
+        const videoRect = videoRef?.current?.getBoundingClientRect();
+        if (videoRect) {
+            const x = videoRect.x + 15;
+            const y = videoRect.y + 15;
+
             setPosition({
-                top: rect.top,
-                right: (rect.width * 12 / 100) + rect.left
-            })
+                top: y,
+                left: x
+            });
         }
     }
 
@@ -48,7 +51,6 @@ export function ComingSoon() {
                 </Grid>
                 <Grid item xs={12}
                     textAlign="center"
-                    ref={videoContainer}
                     onClick={() => {
                         setMuted(!muted);
                     }}
@@ -58,9 +60,8 @@ export function ComingSoon() {
                     <Box sx={{
                         position: "absolute",
                         color: "#fff",
-                        // right: `${position.right + 180}px`,
-                        right: `${position.right}px`,
-                        top: `${position.top + 30}px`,
+                        left: position.left,
+                        top: position.top,
                         backgroundColor: "rgba(0, 0, 0, 0.3)",
                         p: 2,
                         width: 58,
@@ -69,7 +70,7 @@ export function ComingSoon() {
                     }}>
                         {muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
                     </Box>
-                    <video autoPlay loop muted={muted} width="80%" src="https://stmodilistsharedwesteu.blob.core.windows.net/videos/opener.webm" />
+                    <video ref={videoRef} autoPlay loop muted={muted} width="80%" src="https://stmodilistsharedwesteu.blob.core.windows.net/videos/opener.webm" />
                 </Grid>
             </Grid>
         </Container >
