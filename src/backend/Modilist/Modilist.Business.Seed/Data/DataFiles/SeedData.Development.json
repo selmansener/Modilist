@@ -60,6 +60,28 @@
       "Email": "demet.cetinkaya@modilist.com",
       "Phone": "5542503058",
       "JobTitle": "UI/UX Designer"
+    },
+    {
+      "Id": "3237005b-64a1-4c3d-a98d-a78ae74ac8b8",
+      "FirstName": "Meltem",
+      "LastName": "Bedir",
+      "BirthDate": "1989-07-16",
+      "Gender": "Female",
+      "InstagramUserName": "@aselmansener",
+      "Email": "meltembe8686@gmail.com",
+      "Phone": "5542503058",
+      "JobTitle": "UI/UX Designer"
+    },
+    {
+      "Id": "8b732d56-c939-4398-bbc7-404c4b4b85a4",
+      "FirstName": "Gülce",
+      "LastName": "Yazıcı",
+      "BirthDate": "1989-07-16",
+      "Gender": "Female",
+      "InstagramUserName": "@aselmansener",
+      "Email": "gulceyazici285@gmail.com",
+      "Phone": "5542503058",
+      "JobTitle": "Software Developer"
     }
   ]
 }
