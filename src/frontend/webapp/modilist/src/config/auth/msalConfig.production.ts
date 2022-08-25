@@ -21,13 +21,13 @@ export const b2cPolicies = {
     },
     authorities: {
         signUpSignIn: {
-            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_signIn_signUp",
+            authority: "https://login.modilist.com/7a597f5e-68aa-4c7e-a553-6591835b7217/B2C_1_signIn_signUp",
         },
         forgotPassword: {
-            authority: "https://modilistauth.b2clogin.com/modilistauth.onmicrosoft.com/B2C_1_reset",
+            authority: "https://login.modilist.com/7a597f5e-68aa-4c7e-a553-6591835b7217/B2C_1_reset",
         }
     },
-    authorityDomain: "modilistauth.b2clogin.com"
+    authorityDomain: "login.modilist.com"
 }
 
 /**
