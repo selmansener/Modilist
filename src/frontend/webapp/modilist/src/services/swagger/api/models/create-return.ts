@@ -25,10 +25,10 @@ export interface CreateReturn {
     salesOrderId?: number;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof CreateReturn
      */
-    addressId?: number;
+    addressName?: string;
     /**
      * 
      * @type {Date}

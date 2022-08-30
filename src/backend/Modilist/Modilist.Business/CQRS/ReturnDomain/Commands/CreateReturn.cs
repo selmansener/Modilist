@@ -25,7 +25,7 @@ namespace Modilist.Business.CQRS.ReturnDomain.Commands
 
         public int SalesOrderId { get; set; }
 
-        public int AddressId { get; set; }
+        public string AddressName { get; set; }
 
         public DateTime RequestedPickupDate { get; set; }
     }
@@ -36,6 +36,7 @@ namespace Modilist.Business.CQRS.ReturnDomain.Commands
         {
             RuleFor(x => x.AccountId).NotEmpty();
             RuleFor(x => x.SalesOrderId).NotEmpty();
+            RuleFor(x => x.AddressName).NotEmpty();
             RuleFor(x => x.RequestedPickupDate).NotEmpty();
         }
     }
@@ -64,11 +65,11 @@ namespace Modilist.Business.CQRS.ReturnDomain.Commands
 
             // TODO: Create shipment
 
-            Address? address = await _addressRepository.GetByAccountIdAsync(request.AddressId, request.AccountId, cancellationToken);
+            Address? address = await _addressRepository.GetByNameAsync(request.AddressName, request.AccountId, cancellationToken);
 
             if (address == null)
             {
-                throw new AddressNotFoundException(request.AccountId, request.AddressId);
+                throw new AddressNotFoundException(request.AccountId, request.AddressName);
             }
 
             SalesOrder? salesOrder = await _salesOrderRepository.GetSalesOrderAsync(request.AccountId, request.SalesOrderId, cancellationToken, includeLineItems: true);

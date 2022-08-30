@@ -30,9 +30,6 @@ export function CheckoutCompleted() {
                 <Typography variant="body1" align="center">
                     {t("Pages.CheckoutCompleted.SuccessMessage")}
                 </Typography>
-                <Typography variant="body1" align="center">
-                    {t("Pages.CheckoutCompleted.Apologize")}
-                </Typography>
             </Grid>
             <Grid item xs={12} sx={{
                 display: "flex",

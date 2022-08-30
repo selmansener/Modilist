@@ -362,7 +362,7 @@ export function Checkout() {
                                                     if (!isBusyCreateReturn && createReturnStatus === 0 && salesOrderId && pickupDate) {
                                                         dispatch.createReturnModel.createReturn({
                                                             salesOrderId: parseInt(salesOrderId),
-                                                            addressId: selectedAddress?.id,
+                                                            addressName: selectedAddress?.name,
                                                             requestedPickupDate: pickupDate
                                                         })
                                                     }
