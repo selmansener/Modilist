@@ -16,7 +16,7 @@ export const getDefaultAddressModel = createModel<RootModel>()({
             isDefault: true,
             lastName: "",
             name: "",
-            phone: "",
+            phone: "5",
             zipCode: ""
         }
     } as ResponseModel<AddressDTO>,

@@ -25,10 +25,7 @@ const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
         return (
             <IMaskInput
                 {...other}
-                mask="000 000 0000"
-                definitions={{
-                    '#': /[1-9]/,
-                }}
+                mask="500 000 0000"
                 onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
                 overwrite
             />
@@ -61,8 +58,9 @@ export default function Personal() {
         phone: Yup.string().test({
             name: 'minCharacters',
             message: `${minCharacters}`,
-            test: (value) => value?.length == 12
-        }).required(requiredField),
+            test: (value) =>              
+                    value?.length == 12 
+            }).required(requiredField),
         instagramUserName: Yup.string().optional(),
         jobTitle: Yup.string().optional()
     });

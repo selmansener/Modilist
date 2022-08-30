@@ -21,10 +21,7 @@ const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
         return (
             <IMaskInput
                 {...other}
-                mask="000 000 0000"
-                definitions={{
-                    '#': /[1-9]/,
-                }}
+                mask="500 000 0000"
                 onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
                 overwrite
             />
@@ -39,12 +36,18 @@ export default function ContactInfo() {
     const [selectedCity, setSelectedCity] = useState<string | undefined>();
 
     const requiredField = t("FormValidation.RequiredField");
+    const minCharacters = t("FormValidation.MinCharacters").toString();
 
     const schema = Yup.object({
         name: Yup.string().required(requiredField),
         firstName: Yup.string().required(requiredField),
         lastName: Yup.string().required(requiredField),
-        phone: Yup.string().required(requiredField),
+        phone: Yup.string().test({
+            name: 'minCharacters',
+            message: `${minCharacters}`,
+            test: (value) => 
+                    value?.length == 12            
+        }).required(requiredField),
         city: Yup.string().required(requiredField),
         district: Yup.string().required(requiredField),
         fullAddress: Yup.string().required(requiredField)

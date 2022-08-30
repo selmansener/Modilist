@@ -16,7 +16,7 @@ export const getAccountModel = createModel<RootModel>()({
             id: "",
             instagramUserName: "",
             jobTitle: "",
-            phone: "",
+            phone: "5",
             state: AccountState.None
         },
         status: 0
