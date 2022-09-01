@@ -236,6 +236,11 @@ export function SizeInfo(props: SizeInfoProps) {
                         }}>{t("Pages.Welcome.BodySize.BodyType")}</Typography>
                     </Grid>
                     <Grid item xs={12}>
+                    <FormHelperText>
+                                <Typography variant="h3" fontWeight={800} align="center" color={theme.palette.error.main}>
+                                    {touched.bodyType && errors?.bodyType}
+                                </Typography>
+                            </FormHelperText>
                         <FormControl fullWidth error={touched.bodyType && errors.bodyType !== undefined}>
                             <CustomRadioButtonGroup
                                 greyscale
@@ -252,11 +257,6 @@ export function SizeInfo(props: SizeInfoProps) {
                                         }
                                     })}
                             />
-                            <FormHelperText>
-                                <Typography variant="body1" fontWeight={800} align="center" color={theme.palette.error.main}>
-                                    {touched.bodyType && errors?.bodyType}
-                                </Typography>
-                            </FormHelperText>
                         </FormControl>
                     </Grid>
                 </>
