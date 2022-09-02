@@ -11,6 +11,7 @@ using Modilist.Business.Utils.AddressDomain;
 using Modilist.Data.DataAccess;
 using Modilist.Domains.Models.AccountDomain;
 using Modilist.Domains.Models.PaymentDomain;
+using Modilist.Domains.Models.SubscriptionDomain;
 using Modilist.Infrastructure.Shared.Configurations;
 
 namespace Modilist.Business.Seed.Services
@@ -137,6 +138,10 @@ namespace Modilist.Business.Seed.Services
                     cardInformation.ExpireYear);
 
                 await _dbContext.PaymentMethods.AddAsync(paymentMethod, cancellationToken);
+
+                var subscription = new Subscription(account.Id);
+
+                await _dbContext.AddAsync(subscription);
             }
         }
     }

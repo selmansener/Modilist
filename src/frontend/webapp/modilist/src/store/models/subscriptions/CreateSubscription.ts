@@ -1,7 +1,7 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../../App";
-import { SubscriptionDTO, SubscriptionState, SubscriptionSuspentionReason, SubscriptionBlockingReason } from "../../../services/swagger/api";
+import { SubscriptionDTO, SubscriptionState } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 
 export const createSubscriptionModel = createModel<RootModel>()({
@@ -14,8 +14,6 @@ export const createSubscriptionModel = createModel<RootModel>()({
             blockedAt: undefined,
             closedAt: undefined,
             state : SubscriptionState.None,
-            suspentionReason : SubscriptionSuspentionReason.None,
-            blockingReason : SubscriptionBlockingReason.None,
             maxPricingLimit: 0,
         },
         status: 0

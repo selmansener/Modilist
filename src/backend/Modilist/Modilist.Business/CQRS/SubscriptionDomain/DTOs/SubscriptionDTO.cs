@@ -17,10 +17,6 @@ namespace Modilist.Business.CQRS.SubscriptionDomain.DTOs
 
         public SubscriptionState State { get; set; }
 
-        public SubscriptionSuspentionReason SuspentionReason { get; set; }
-
-        public SubscriptionBlockingReason BlockingReason { get; set; }
-
         public int MaxPricingLimit { get; set; }
     }
 }

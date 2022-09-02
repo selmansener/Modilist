@@ -33,8 +33,10 @@ import { getSizeInfoModel } from "./sizeInfo/GetSizeInfo"
 import { upsertSizeInfoModel } from "./sizeInfo/UpsertSizeInfo"
 import { getStylePreferencesModel } from "./stylePreferences/GetStylePreferences"
 import { upsertStylePreferencesModel } from "./stylePreferences/UpsertStylePreferences"
+import { activateSubscriptionModel } from "./subscriptions/ActivateSubscription"
 import { createSubscriptionModel } from "./subscriptions/CreateSubscription"
 import { getSubscriptionModel } from "./subscriptions/GetSubscription"
+import { suspendSubscriptionModel } from "./subscriptions/SuspendSubscription"
 import { updateSubscriptionMaxPricingLimitModel } from "./subscriptions/UpdateSubscriptionMaxPricingLimit"
 import { activateAccountModel } from "./users/ActivateAccount"
 import { createAccountModel } from "./users/CreateAccount"
@@ -67,6 +69,8 @@ export interface RootModel extends Models<RootModel> {
   getSubscriptionModel: typeof getSubscriptionModel,
   createSubscriptionModel: typeof createSubscriptionModel,
   updateSubscriptionMaxPricingLimitModel: typeof updateSubscriptionMaxPricingLimitModel,
+  suspendSubscriptionModel: typeof suspendSubscriptionModel,
+  activateSubscriptionModel: typeof activateSubscriptionModel,
   createPaymentMethodModel: typeof createPaymentMethodModel,
   stepperSubscription: typeof stepperSubscription,
   salesOrdersQueryModel: typeof salesOrdersQueryModel,
@@ -112,6 +116,8 @@ export const models: RootModel = {
   getSubscriptionModel,
   createSubscriptionModel,
   updateSubscriptionMaxPricingLimitModel,
+  suspendSubscriptionModel,
+  activateSubscriptionModel,
   createPaymentMethodModel,
   stepperSubscription,
   salesOrdersQueryModel,

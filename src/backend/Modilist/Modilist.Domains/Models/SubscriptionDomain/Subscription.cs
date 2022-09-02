@@ -7,6 +7,8 @@ namespace Modilist.Domains.Models.SubscriptionDomain
 {
     public class Subscription : BaseEntity
     {
+        private readonly List<SubscriptionStateLog> _stateLogs = new List<SubscriptionStateLog>();
+
         public Subscription(Guid accountId)
         {
             AccountId = accountId;
@@ -20,7 +22,7 @@ namespace Modilist.Domains.Models.SubscriptionDomain
 
         public DateTime StartedAt { get; private set; }
 
-        public DateTime? ReactivatedAt { get; private set; }
+        public DateTime? ActivatedAt { get; private set; }
 
         public DateTime? SuspendedAt { get; private set; }
 
@@ -30,11 +32,9 @@ namespace Modilist.Domains.Models.SubscriptionDomain
 
         public SubscriptionState State { get; private set; }
 
-        public SubscriptionSuspentionReason SuspentionReason { get; private set; }
-
-        public SubscriptionBlockingReason BlockingReason { get; private set; }
-
         public int MaxPricingLimit { get; private set; }
+
+        public IReadOnlyList<SubscriptionStateLog> StateLogs => _stateLogs;
 
         public void SetMaxPricingLimit(int maxPricingLimit)
         {
@@ -44,6 +44,38 @@ namespace Modilist.Domains.Models.SubscriptionDomain
             }
 
             MaxPricingLimit = maxPricingLimit;
+        }
+
+        public void Suspend(IEnumerable<SubscriptionSuspentionReason> suspentionReasons)
+        {
+            if (State == SubscriptionState.Suspended)
+            {
+                throw new InvalidOperationException("Subscription already suspended.");
+            }
+
+            var stateLog = new SubscriptionStateLog(Id, State, SubscriptionState.Suspended);
+            foreach (var suspentionReason in suspentionReasons)
+            {
+                stateLog.AddSuspentionReason(suspentionReason);
+            }
+
+            _stateLogs.Add(stateLog);
+
+            State = SubscriptionState.Suspended;
+            SuspendedAt = DateTime.UtcNow;
+        }
+
+        public void Activate()
+        {
+            if (State == SubscriptionState.Active)
+            {
+                throw new InvalidOperationException("Subscription already active.");
+            }
+
+            _stateLogs.Add(new SubscriptionStateLog(Id, State, SubscriptionState.Active));
+
+            State = SubscriptionState.Active;
+            ActivatedAt = DateTime.UtcNow;
         }
     }
 }

@@ -104,7 +104,6 @@ export function Account() {
 
     return (
         <Grid container spacing={2}>
-
             <Grid item xs={6}>
                 <FormControl fullWidth>
                     <TextField label={<Typography>{t('Generic.PersonalInfo.FirstName')}</Typography>}

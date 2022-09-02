@@ -11,18 +11,17 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SubscriptionSuspentionReason } from './subscription-suspention-reason';
 /**
  * 
  * @export
- * @enum {string}
+ * @interface SuspendSubscription
  */
-export enum SubscriptionSuspentionReason {
-    Pricing = 'Pricing',
-    TrustIssues = 'TrustIssues',
-    TooMuchNotifications = 'TooMuchNotifications',
-    UXIssues = 'UXIssues',
-    StyleIssues = 'StyleIssues',
-    LogisticIssues = 'LogisticIssues',
-    Other = 'Other'
+export interface SuspendSubscription {
+    /**
+     * 
+     * @type {Array<SubscriptionSuspentionReason>}
+     * @memberof SuspendSubscription
+     */
+    suspentionReasons?: Array<SubscriptionSuspentionReason>;
 }
-

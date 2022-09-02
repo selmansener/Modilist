@@ -55,6 +55,19 @@ export function DashboardFooter() {
         i18n.changeLanguage(lang);
     }
 
+    const getLanguage = () => {
+        switch (i18n.language) {
+            case "en-GB":
+            case "en-US":
+            case "en":
+                return "en";
+            case "tr-TR":
+            case "tr":
+            default:
+                return "tr";
+        }
+    }
+
     return (
         <Box component="footer" sx={{
             ml: 2,
@@ -165,7 +178,7 @@ export function DashboardFooter() {
                             alignItems: 'flex-end'
                         }}>
                             <Select
-                                value={i18n.language}
+                                value={getLanguage()}
                                 onChange={handleLanguageChange}
                                 sx={{ mr: 2, backgroundColor: "#fff" }}
                             >

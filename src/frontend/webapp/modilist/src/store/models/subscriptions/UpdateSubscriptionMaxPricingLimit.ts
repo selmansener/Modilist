@@ -1,21 +1,19 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../../App";
-import { SubscriptionDTO, SubscriptionState, SubscriptionSuspentionReason, SubscriptionBlockingReason, UpdateSubscriptionMaxPricingLimit } from "../../../services/swagger/api";
+import { SubscriptionDTO, SubscriptionState, UpdateSubscriptionMaxPricingLimit } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 
 export const updateSubscriptionMaxPricingLimitModel = createModel<RootModel>()({
     state: {
         isBusy: false,
         data: {
-            startedAt : undefined,
+            startedAt: undefined,
             reactivatedAt: undefined,
             suspendedAt: undefined,
             blockedAt: undefined,
             closedAt: undefined,
-            state : SubscriptionState.None,
-            suspentionReason : SubscriptionSuspentionReason.None,
-            blockingReason : SubscriptionBlockingReason.None,
+            state: SubscriptionState.None,
             maxPricingLimit: 0,
         },
         status: 0

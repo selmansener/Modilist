@@ -44,6 +44,7 @@ import { Account } from '../pages/account/Account';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { About } from '../pages/about/About';
 import { ComingSoon } from './comingSoon/ComingSoon';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 interface RouterOptions {
   title?: string,
@@ -268,6 +269,9 @@ const routes: RouterOptions[] = [
     title: "Pages.Titles.Settings",
     helmet: "Pages.Titles.Settings",
     route: "settings",
+    icon: <SettingsIcon sx={{
+      verticalAlign: "sub"
+    }} />,
     layout: {
       path: "/",
       component: <Dashboard />

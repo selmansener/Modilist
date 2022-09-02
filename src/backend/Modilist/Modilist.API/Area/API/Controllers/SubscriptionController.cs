@@ -59,5 +59,32 @@ namespace Modilist.API.Area.API.Controllers
 
             return Ok(subscription);
         }
+
+
+        [Authorize(nameof(AuthorizationPermissions.Subscriptions))]
+        [HttpPost("[controller].Suspend")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> Suspend(SuspendSubscription input, CancellationToken cancellationToken)
+        {
+            input.AccountId = User.GetUserId();
+
+            await _mediator.Send(input, cancellationToken);
+
+            return Ok();
+        }
+
+
+        [Authorize(nameof(AuthorizationPermissions.Subscriptions))]
+        [HttpPost("[controller].Activate")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> Activate(CancellationToken cancellationToken)
+        {
+            await _mediator.Send(new ActivateSubscription
+            {
+                AccountId = User.GetUserId()
+            }, cancellationToken);
+
+            return Ok();
+        }
     }
 }

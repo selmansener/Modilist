@@ -487,6 +487,27 @@
                 "1": "Modilist, giyim ve aksesuar alışverişlerinde kişiselleştirilmiş",
                 "2": "bir deneyim sunmayı amaçlayan, yapay zeka destekli bir platformdur."
             }
+        },
+        "AccountSettings": {
+            "SubscriptionInfo": "Aboneliğini dondurmadan önce iade ettiğin ürünlerin elimize ulaşmış olduğundan ve değerlendirme bekleyen siparişin olmadığından emin olmamız gerekiyor. Eğer bu süreci beklemeden aboneliğini dondurmak istersen müşteri hizmetlerimize her zaman ulaşabilirsin.",
+            "FeedbackInfo": " Modilist aboneliğin ücretsizdir ve bu sayede sana özel indirim fırsatlarından haberdar olursun! Ancak yine de aboneliğini dondurmak istiyorsan, bize nedenlerinden bahsetmek ister misin?",
+            "FeedbackTitle": "Aboneliğini dondurma sebeplerin",
+            "SubsFreezeReasons": {
+                "Pricing": "Kombin fiyatları bütçeme uygun değil",
+                "TrustIssues": "Ödeme sistemine güvenmiyorum",
+                "TooMuchNotifications": "Çok fazla bildirim geliyor",
+                "UXIssues": "Kullanışlı ve anlaşılır bir sistem değil",
+                "StyleIssues": "Gelen kombinler stilime uygun değil",
+                "LogisticIssues": "Kargo ile ilgili problemler",
+                "Other": "Diğer sebepler"
+            },
+            "FreezeSubs": "Aboneliğimi dondur",
+            "ActivateSubs": "Aboneliğimi aktifleştir",
+            "EncourageToActivate": {
+                "1": "Geribildirimlerini aldık. Daha iyi bir hizmet verebilmek adına kendimizi daima geliştirmeye devam edeceğimizden emin olabilirsin.",
+                "2": "Umarız ki seni tekrar aramızda görebiliriz."
+            },
+            "ActivationInfo": "Aboneliğini tekrar aktifleştirmek için aşağıdaki butona basman yeterli."
         }
     },
     "WelcomeSteps": {

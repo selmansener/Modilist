@@ -64,6 +64,8 @@ namespace Modilist.Data.DataAccess
 
         public virtual DbSet<PaymentLineItem> PaymentLineItems { get; private set; }
 
+        public virtual DbSet<SubscriptionStateLog> SubscriptionStateLogs { get; private set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var entityTypes = GetEntityTypes(builder).ToList();

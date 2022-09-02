@@ -473,6 +473,34 @@
         "AccountCreated": {
             "WelcomeMessage": "Welcome to Modilist!",
             "CheckMailMessage": "Before we start preparing your outfit, you need to verify your account via the message sent to your e-mail address."
+        },
+        "NotFound": {
+            "Message": "We couldn't find what you were looking for or we lost it.",
+            "ReturnToHome": "Return To Home Page",
+            "ReturnToPreviousPage": "Return Back"
+        },
+        "About": {
+            "Title": "About",
+            "Description": {
+                "1": "Modilist provides a personalized shoping experience ",
+                "2": "for consumers."
+            }
+        },
+        "AccountSettings": {
+            "SubscriptionInfo": "Before you unsubscribe, we need to make sure that we have received your returned items and that there are no orders pending evaluation. If you want to freeze your subscription without waiting for this process, you can always reach our customer service.",
+            "FeedbackInfo": "Your Modilist subscription is free, so you will be informed about special discount opportunities! But if you still want to freeze your subscription, would you like to tell us why?",
+            "FeedbackTitle": "Reasons for freezing your subscription",
+            "SubsFreezeReasons": {
+                "Pricing": "Product prices are not suitable for my budget",
+                "TrustIssues": "I don't trust the payment system",
+                "TooMuchNotifications": "Too many notifications coming",
+                "UXIssues": "Not a useful and understandable system",
+                "StyleIssues": "The combinations I received are not suitable for my style",
+                "LogisticIssues": "Problems with shipping",
+                "Other": "Other reasons"
+            },
+            "FreezeSubs": "Suspend Subscription",
+            "ActivateSubs": "Activate Subscription"
         }
     },
     "WelcomeSteps": {
