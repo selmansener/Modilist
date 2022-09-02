@@ -136,21 +136,21 @@ export function DashboardFooter() {
                             justifyContent: 'space-evenly',
                             alignItems: 'flex-start'
                         }}>
-                            <NavLink to={"#"}>
+                            <Link href={"https://stmodilistsharedwesteu.blob.core.windows.net/contracts/gdpr.pdf"} target="_blank">
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.KVKK")}
                                 </Typography>
-                            </NavLink>
-                            <NavLink to={"#"}>
+                            </Link>
+                            <Link href={"https://stmodilistsharedwesteu.blob.core.windows.net/contracts/distant-sales-contract.pdf"} target="_blank">
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.OnlineSalesAgreement")}
                                 </Typography>
-                            </NavLink>
-                            <NavLink to={"#"}>
+                            </Link>
+                            <Link href={"https://stmodilistsharedwesteu.blob.core.windows.net/contracts/privacy-policy.pdf"} target="_blank">
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.PrivacyAndCookiePolicies")}
                                 </Typography>
-                            </NavLink>
+                            </Link>
                             <NavLink to={"#"}>
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.UsageAgreement")}
