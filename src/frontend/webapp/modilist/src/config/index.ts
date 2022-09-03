@@ -17,6 +17,7 @@ export interface AppConfig extends ApiConfig, EnvConfig {
     msalConfig: MsalConfig;
     loginRequest: RedirectRequest;
     imgBaseHost: string;
+    cdn: string;
 }
 
 const envConfig = require(`./config.${env}`).config as EnvConfig;
@@ -34,5 +35,6 @@ export const config: AppConfig = {
     ...webApiConfig,
     loginRequest,
     msalConfig,
-    imgBaseHost: "https://stmodilistsharedwesteu.blob.core.windows.net/img"
+    imgBaseHost: "https://cdn.modilist.com/img",
+    cdn: "https://cdn.modilist.com"
 };

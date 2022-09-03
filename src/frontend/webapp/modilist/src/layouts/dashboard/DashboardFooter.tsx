@@ -38,7 +38,7 @@ export function DashboardFooter() {
     const theme = useTheme();
     const { t, i18n } = useTranslation();
     const { instagram, facebook, twitter, linkedIn } = config.socialMediaLinks;
-    const { imgBaseHost } = config;
+    const { cdn, imgBaseHost } = config;
 
     const handleLanguageChange = (event: SelectChangeEvent) => {
         let lang;
@@ -149,17 +149,17 @@ export function DashboardFooter() {
                             justifyContent: 'space-evenly',
                             alignItems: 'flex-start'
                         }}>
-                            <Link href={"https://stmodilistsharedwesteu.blob.core.windows.net/contracts/gdpr.pdf"} target="_blank">
+                            <Link href={`${cdn}/contracts/gdpr.pdf`} target="_blank">
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.KVKK")}
                                 </Typography>
                             </Link>
-                            <Link href={"https://stmodilistsharedwesteu.blob.core.windows.net/contracts/distant-sales-contract.pdf"} target="_blank">
+                            <Link href={`${cdn}/contracts/distant-sales-contract.pdf`} target="_blank">
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.OnlineSalesAgreement")}
                                 </Typography>
                             </Link>
-                            <Link href={"https://stmodilistsharedwesteu.blob.core.windows.net/contracts/privacy-policy.pdf"} target="_blank">
+                            <Link href={`${cdn}/contracts/privacy-policy.pdf`} target="_blank">
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.PrivacyAndCookiePolicies")}
                                 </Typography>
