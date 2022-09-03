@@ -42,7 +42,7 @@ export function StylePreferences(props: StylePreferencesProps) {
     const { isBusy: upsertStylePreferencesIsBusy, data: upsertStylePreferences, status: upsertStylePreferencesStatus } = useSelector((state: RootState) => state.upsertStylePreferencesModel);
     const isBusy = getAccountIsBusy || getStylePreferencesIsBusy || upsertStylePreferencesIsBusy;
     const dispatch = useDispatch<Dispatch>();
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { gender } = account as AccountDTO;
     const theme = useTheme();
 

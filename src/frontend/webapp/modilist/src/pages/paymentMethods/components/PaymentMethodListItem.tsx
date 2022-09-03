@@ -13,7 +13,7 @@ export interface PaymentMethodListItemProps {
 export function PaymentMethodListItem(props: PaymentMethodListItemProps) {
     const { t } = useTranslation();
     const { paymentMethod } = props;
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
 
     return <Paper elevation={6} sx={{
         p: 2

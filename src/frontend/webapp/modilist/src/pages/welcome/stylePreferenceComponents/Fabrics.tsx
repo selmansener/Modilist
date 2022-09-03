@@ -31,7 +31,7 @@ export interface FabricsProps {
 
 export function Fabrics(props: FabricsProps) {
     const { t } = useTranslation();
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { gender, value, onChange } = props;
 
     const fabrics: FabricElement[] = (gender === Gender.Female

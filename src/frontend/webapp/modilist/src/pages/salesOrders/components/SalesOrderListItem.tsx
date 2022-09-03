@@ -19,7 +19,7 @@ export function SalesOrderListItem(props: SalesOrderListItemProps) {
     const { t } = useTranslation();
     const theme = useTheme();
     const navigate = useNavigate();
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { salesOrder } = props;
 
     const doesOrderDelivered = salesOrder.state === SalesOrderState.Delivered || salesOrder.state === SalesOrderState.Completed;

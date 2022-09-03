@@ -23,7 +23,7 @@ export interface AccessoryColorsProps {
 
 export function AccessoryColors(props: AccessoryColorsProps) {
     const { t } = useTranslation();
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { value, onChange } = props;
 
     const colors: AccessoryColorElement[] = Object.keys(Color).map(color => {

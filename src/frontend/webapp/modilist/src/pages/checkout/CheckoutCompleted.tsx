@@ -8,7 +8,7 @@ import { ImageComponent } from "../../components/image/ImageComponent";
 export function CheckoutCompleted() {
     const { t } = useTranslation();
     const { salesOrderId } = useParams();
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const theme = useTheme();
     const navigate = useNavigate();
 

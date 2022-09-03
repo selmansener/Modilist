@@ -21,7 +21,7 @@ interface FootTypesProps {
 }
 
 export function FootTypes(props: FootTypesProps) {
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
     const { value, onChange } = props;
 

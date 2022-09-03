@@ -67,7 +67,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
 
   return (
     <Box display="flex">
-      <AppBar position="absolute">
+      <AppBar position="fixed">
         <Toolbar
           sx={{
             pr: '24px', // keep right padding when drawer closed

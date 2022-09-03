@@ -22,7 +22,7 @@ export interface UpperFitsProps {
 }
 
 export function UpperFits(props: UpperFitsProps) {
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
     const { value, onChange } = props;
 

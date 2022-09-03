@@ -32,7 +32,7 @@ export interface ColorsProps {
 
 export function Colors(props: ColorsProps) {
     const { t } = useTranslation();
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { value, onChange } = props;
 
     const colors: ColorElement[] = Object.keys(Color).map(color => {

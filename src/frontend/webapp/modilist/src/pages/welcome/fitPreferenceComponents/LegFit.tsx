@@ -24,7 +24,7 @@ interface LegFitsProps {
 }
 
 export function LegFits(props: LegFitsProps) {
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
     const { value, onChange } = props;
 

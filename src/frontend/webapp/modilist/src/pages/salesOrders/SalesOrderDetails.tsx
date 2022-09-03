@@ -24,7 +24,7 @@ export function SalesOrderDetails() {
     const { isBusy: isBusySalesOrder, data: salesOrder, status: salesOrderStatus } = useSelector((state: RootState) => state.salesOrderDetailsModel);
     const { isBusy: isBusyUpdateAddress, status: updateAddressStatus } = useSelector((state: RootState) => state.updateSalesOrderAddressModel);
     const { isBusy: isBusyUpdateAdditionalRequests, status: updateAdditionalRequestsStatus } = useSelector((state: RootState) => state.updateAdditionalRequestsModel);
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const [isAddressSelectionOpen, setIsAddressSelectionOpen] = useState(false);
     const [isDeliveryDateDialogOpen, setIsDeliveryDateDialogOpen] = useState(false);
     const [additionalRequests, setAdditionalRequests] = useState<string>(salesOrder?.additionalRequests ?? "");

@@ -11,7 +11,7 @@ import { ActiveOrder } from "./components/ActiveOrder";
 export function Main() {
     const theme = useTheme();
     const { t } = useTranslation();
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
 
     return (
         <React.Fragment>

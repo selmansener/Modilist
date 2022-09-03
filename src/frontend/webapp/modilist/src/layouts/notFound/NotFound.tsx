@@ -9,7 +9,7 @@ import { DashboardFooter } from "../dashboard/DashboardFooter";
 export default function NotFound() {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
 
     return (
         <Box display="flex" flexDirection="column">

@@ -22,7 +22,7 @@ interface SkirtDressLengthsProps {
 }
 
 export function SkirtDressLengths(props: SkirtDressLengthsProps) {
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
     const { value, onChange } = props;
 

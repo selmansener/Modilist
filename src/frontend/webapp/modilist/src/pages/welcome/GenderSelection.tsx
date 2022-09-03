@@ -17,7 +17,7 @@ interface GenderProps {
 
 function GenderImage(props: GenderProps) {
     const { isSelected, gender, onClick } = props;
-    const src = gender === Gender.Female ? `${config.imgBaseHost}/gender/female.svg` : `${config.imgBaseHost}/gender/male.svg`;
+    const src = gender === Gender.Female ? `${config.cdnImg}/gender/female.svg` : `${config.cdnImg}/gender/male.svg`;
     const StyledImage = styled(ImageComponent)<ImageProps>(({ theme }) => ({
         '&:hover': {
             transition: theme.transitions.create('opacity', {

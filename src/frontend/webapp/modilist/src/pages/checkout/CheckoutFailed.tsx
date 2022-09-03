@@ -8,7 +8,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 export function CheckoutFailed() {
     const { t } = useTranslation();
     const { salesOrderId } = useParams();
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const theme = useTheme();
     const navigate = useNavigate();
 

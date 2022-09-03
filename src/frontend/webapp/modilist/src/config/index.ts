@@ -16,7 +16,7 @@ export interface AppConfig extends ApiConfig, EnvConfig {
     iyzicoSecretKey: string;
     msalConfig: MsalConfig;
     loginRequest: RedirectRequest;
-    imgBaseHost: string;
+    cdnImg: string;
     cdn: string;
 }
 
@@ -35,6 +35,6 @@ export const config: AppConfig = {
     ...webApiConfig,
     loginRequest,
     msalConfig,
-    imgBaseHost: "https://cdn.modilist.com/img",
+    cdnImg: "https://cdn.modilist.com/img",
     cdn: "https://cdn.modilist.com"
 };

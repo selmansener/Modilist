@@ -482,9 +482,15 @@
         "About": {
             "Title": "About",
             "Description": {
-                "1": "Modilist provides a personalized shoping experience ",
-                "2": "for consumers."
-            }
+                "1": "Modilist is an artificial intelligence supported platform ",
+                "2": "that aims to provide a personalized experience in clothing and accessories shopping."
+            },
+            "IndividualTitle": "Individuality",
+            "Individual": "By accepting that each individual is unique, Modilist adopts a service approach that prioritizes consumer needs.",
+            "TechnologicalTitle": "Technological",
+            "Technological": "Modilist believes that technology is a power that makes a difference. By following new developments closely, it supports its service with new technologies.",
+            "SustainableTitle": "Sustainability",
+            "Sustainable": "Modilist aims to contribute to sustainability in terms of economy and nature by optimizing consumption with the personalized shopping experience it offers."
         },
         "AccountSettings": {
             "SubscriptionInfo": "Before you unsubscribe, we need to make sure that we have received your returned items and that there are no orders pending evaluation. If you want to freeze your subscription without waiting for this process, you can always reach our customer service.",

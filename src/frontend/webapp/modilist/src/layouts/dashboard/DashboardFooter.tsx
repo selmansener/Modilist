@@ -38,7 +38,7 @@ export function DashboardFooter() {
     const theme = useTheme();
     const { t, i18n } = useTranslation();
     const { instagram, facebook, twitter, linkedIn } = config.socialMediaLinks;
-    const { cdn, imgBaseHost } = config;
+    const { cdn, cdnImg: imgBaseHost } = config;
 
     const handleLanguageChange = (event: SelectChangeEvent) => {
         let lang;

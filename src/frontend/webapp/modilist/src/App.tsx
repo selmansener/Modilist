@@ -183,7 +183,7 @@ i18n
       loadPath: '/locales/{{lng}}.json'
     },
     detection: {
-      order: ['navigator', 'querystring', 'cookie', 'localStorage', 'sessionStorage', 'htmlTag', 'path', 'subdomain']
+      order: ['cookie', 'localStorage', 'sessionStorage', 'navigator', 'querystring', 'htmlTag', 'path', 'subdomain']
     },
     fallbackLng: "tr",
     interpolation: {

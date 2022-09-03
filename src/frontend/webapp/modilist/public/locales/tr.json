@@ -486,7 +486,13 @@
             "Description": {
                 "1": "Modilist, giyim ve aksesuar alışverişlerinde kişiselleştirilmiş",
                 "2": "bir deneyim sunmayı amaçlayan, yapay zeka destekli bir platformdur."
-            }
+            },
+            "IndividualTitle": "Bireysellik",
+            "Individual": "Modilist her bireyin özgün olduğunu kabul ederek, tüketici ihtiyaçlarını ön plana alan bir hizmet anlayışını benimser.",
+            "TechnologicalTitle": "Teknolojik",
+            "Technological": "Modilist teknolojinin fark yaratan bir güç olduğuna inanır. Yeni gelişmeleri yakından takip ederek sunduğu hizmeti yeni teknolojiler ile destekler.",
+            "SustainableTitle": "Sürdürülebilirlik",
+            "Sustainable": "Modilist sunduğu kişiselleştirilmiş alışveriş deneyimiyle tüketimi optimize ederek, ekonomi ve doğa açısından sürdürülebilirliğe katkı sağlamayı amaçlar."
         },
         "AccountSettings": {
             "SubscriptionInfo": "Aboneliğini dondurmadan önce iade ettiğin ürünlerin elimize ulaşmış olduğundan ve değerlendirme bekleyen siparişin olmadığından emin olmamız gerekiyor. Eğer bu süreci beklemeden aboneliğini dondurmak istersen müşteri hizmetlerimize her zaman ulaşabilirsin.",

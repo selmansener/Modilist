@@ -26,7 +26,7 @@ export interface WaistHeightsProps {
 }
 
 export function WaistHeights(props: WaistHeightsProps) {
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
     const { value, onChange } = props;
 

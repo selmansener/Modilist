@@ -35,7 +35,7 @@ export interface PatternsProps {
 
 export function Patterns(props: PatternsProps) {
     const { t } = useTranslation();
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { gender, value, onChange } = props;
 
     const patterns: PatternElement[] = (gender === Gender.Female

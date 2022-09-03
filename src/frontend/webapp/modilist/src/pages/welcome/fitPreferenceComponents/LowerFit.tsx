@@ -25,7 +25,7 @@ export interface LowerFitsProps {
 }
 
 export function LowerFits(props: LowerFitsProps) {
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
     const { value, onChange } = props;
 

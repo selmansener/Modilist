@@ -30,7 +30,7 @@ export interface SizeInfoProps {
 
 export function SizeInfo(props: SizeInfoProps) {
     const { layout } = props;
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);

@@ -26,7 +26,7 @@ interface ShortsLengthsProps {
 }
 
 export function ShortsLengths(props: ShortsLengthsProps) {
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
     const { gender, value, onChange } = props;
 

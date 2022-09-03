@@ -30,7 +30,7 @@ export function Checkout() {
     const { isBusy: isBusyGetReturn, data: getReturnData, status: getReturnStatus } = useSelector((state: RootState) => state.getReturnModel);
     const { isBusy: isBusyCreateReturn, data: createReturnData, status: createReturnStatus } = useSelector((state: RootState) => state.createReturnModel);
     const { isBusy: isBusyCreatePayment, data: createPaymentData, status: createPaymentStatus } = useSelector((state: RootState) => state.createPaymentModel);
-    const { imgBaseHost } = config;
+    const { cdnImg: imgBaseHost } = config;
     const now = new Date();
     const minDate = addDays(now, 2);
     const maxDate = addDays(now, 14);
