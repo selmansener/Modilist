@@ -514,6 +514,15 @@
                 "2": "Umarız ki seni tekrar aramızda görebiliriz."
             },
             "ActivationInfo": "Aboneliğini tekrar aktifleştirmek için aşağıdaki butona basman yeterli."
+        },
+        "Partnership": {
+            "Title": "İş Ortaklıkları",
+            "Description": {
+                "1": "Modilist ile ürünlerinizin en doğru kitleye kolaylıkla ulaştırın.",
+                "2": "İş ortaklıkları için aşağıdaki formu doldurun, en kısa sürede size ulaşalım."
+            },
+            "CompanyName":"Marka/Şirket Adı",
+            "JobTitle":"Pozisyon/Görev"
         }
     },
     "WelcomeSteps": {
@@ -700,11 +709,15 @@
             "Completed": "Siparişin Tamamlandı"
         },
         "Forms": {
+            "Message": "Mesajınız",
             "Select": "Seçiniz",
             "Close": "Kapat",
             "Submit": "Kaydet",
             "Edit": "Düzenle",
-            "Success": "İşlem başarılı!"
+            "Success": "İşlem başarılı!",
+            "Send": "Gönder",
+            "SentMessageSuccess": "Mesajınız başarıyla gönderildi!",
+            "SentMessageFailed": "Mesajınız gönderilirken bir hata oluştu."
         },
         "PersonalInfo": {
             "FirstName": "Ad",
@@ -716,7 +729,8 @@
                 "Gender": "Cinsiyet",
                 "Male": "Erkek",
                 "Female": "Kadın"
-            }
+            },
+            "Email": "E-Posta"
         },
         "Size": {
             "XXS": "XXS - 32",
@@ -746,5 +760,11 @@
             "Address": "Adres",
             "ZipCode": "Posta Kodu (Opsiyonel)"
         }
+    },
+    "CompanyAddress": {
+        "FullAddress":"Kızılırmak Mah. Dumlupınar Blv. No:3C-1-160 Çankaya/Ankara 06510",
+        "FirstLine": "Kızılırmak Mah. Dumlupınar Blv. No:3C-1-160",
+        "SecondLine": "Çankaya/Ankara 06510",
+        "ZipCode": "06510"
     }
 }

@@ -14,6 +14,7 @@ import { getPreferedFabricPropertiesModel } from "./fabricProperties/GetFabricPr
 import { upsertPreferedFabricPropertiesModel } from "./fabricProperties/UpsertFabricProperties"
 import { getFitPreferencesModel } from "./fitPreferences/GetFitPreferences"
 import { upsertFitPreferencesModel } from "./fitPreferences/UpsertFitPreferences"
+import { sendPartnershipMailModel } from "./partnership/SendPartnershipMail"
 import { createPaymentModel } from "./paymentMethods/CreatePayment"
 import { createPaymentMethodModel } from "./paymentMethods/CreatePaymentMethod"
 import { getAllPaymentMethodsModel } from "./paymentMethods/GetAllPaymentMethods"
@@ -90,6 +91,7 @@ export interface RootModel extends Models<RootModel> {
   getAllPaymentMethodsModel: typeof getAllPaymentMethodsModel,
   changeDefaultAddressModel: typeof changeDefaultAddressModel,
   getAddressModel: typeof getAddressModel,
+  sendPartnershipMailModel: typeof sendPartnershipMailModel,
 }
 
 export const models: RootModel = {
@@ -137,4 +139,5 @@ export const models: RootModel = {
   getAllPaymentMethodsModel,
   changeDefaultAddressModel,
   getAddressModel,
+  sendPartnershipMailModel,
 }

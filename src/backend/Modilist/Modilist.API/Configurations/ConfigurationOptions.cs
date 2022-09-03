@@ -15,5 +15,7 @@ namespace Modilist.API.Configurations
         public string DevelopmentApiKey { get; set; }
 
         public StorageConnectionStrings StorageConnectionStrings { get; set; }
+
+        public SendGridOptions SendGridOptions { get; set; }
     }
 }

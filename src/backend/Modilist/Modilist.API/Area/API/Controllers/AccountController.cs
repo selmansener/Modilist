@@ -20,9 +20,6 @@ namespace Modilist.API.Area.API.Controllers
             _mediator = mediator;
         }
 
-
-
-
         [Authorize(nameof(AuthorizationPermissions.Accounts))]
         [HttpGet("[controller].Get")]
         [ProducesResponseType(typeof(AccountDTO), 200)]

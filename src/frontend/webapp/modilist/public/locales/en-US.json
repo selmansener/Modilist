@@ -463,7 +463,7 @@
             "Thanks": "Thank you for verifying your account and helping us to ensure your account's security.",
             "NavigationMessage": "You need to fill out the style form so that we can prepare your first outfit.",
             "NavigateToForm": "Fill in the style form",
-            "Timer": "You're being redirected to the style form in a second."
+            "Timer": "You're being redirected to the style form in {{counter}} seconds."
         },
         "AccountVerificationFailed": {
             "FailedMessage": "We encountered an error while verifying your account.",
@@ -507,6 +507,15 @@
             },
             "FreezeSubs": "Suspend Subscription",
             "ActivateSubs": "Activate Subscription"
+        },
+        "Partnership": {
+            "Title": "Partnership",
+            "Description": {
+                "1": "Easily deliver your products to the right audience with Modilist.",
+                "2": "Fill in the form below for business partnerships and we will contact you as soon as possible."
+            },
+            "CompanyName":"Brand/Company Adı",
+            "JobTitle":"Position/JobTitle"
         }
     },
     "WelcomeSteps": {
@@ -696,23 +705,28 @@
             "Completed": "The order is completed"
         },
         "Forms": {
+            "Message": "Message",
             "Select": "Choose",
             "Close": "Close",
             "Submit": "Save",
             "Edit": "Edit",
-            "Success": "The operation is successful!"
+            "Success": "The operation is successful!",
+            "Send": "Send",
+            "SentMessageSuccess": "Your message has been sent successfully!",
+            "SentMessageFailed": "An error occurred while sending your message."
         },
         "PersonalInfo": {
             "FirstName": "Name",
             "LastName": "Surname",
             "BirthDate": "Birth Date",
-            "PhoneNumber": "Telefon",
+            "PhoneNumber": "Phone Number",
             "Job": "What is your profession? (Optional)",
             "Gender": {
                 "Gender": "Gender",
                 "Male": "Mr.",
                 "Female": "Ms.\/Mrs."
-            }
+            },
+            "Email": "Email"
         },
         "Size": {
             "XXS": "XXS - 32",

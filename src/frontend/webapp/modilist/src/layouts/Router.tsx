@@ -45,6 +45,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { About } from '../pages/about/About';
 import { ComingSoon } from './comingSoon/ComingSoon';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Partnership } from '../pages/partnership/Partnership';
 
 interface RouterOptions {
   title?: string,
@@ -81,6 +82,17 @@ const routes: RouterOptions[] = [
     helmet: "Pages.Titles.About",
     route: "about",
     component: <About />,
+    layout: {
+      path: "/",
+      component: <Dashboard />
+    },
+    isPublic: false,
+    disabledEnvironments: ["production"]
+  },
+  {
+    helmet: "Pages.Titles.Partnership",
+    route: "partnership",
+    component: <Partnership />,
     layout: {
       path: "/",
       component: <Dashboard />

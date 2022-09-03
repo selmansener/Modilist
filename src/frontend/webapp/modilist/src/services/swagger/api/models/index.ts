@@ -41,6 +41,7 @@ export * from './sales-order-line-item-dto';
 export * from './sales-order-line-item-state';
 export * from './sales-order-state';
 export * from './seed-service-type';
+export * from './send-mail';
 export * from './ship-sales-order';
 export * from './ship-sales-order-dto';
 export * from './size-info-dto';

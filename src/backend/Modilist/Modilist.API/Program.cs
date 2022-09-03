@@ -49,6 +49,7 @@ builder.Services.Configure<ConfigurationOptions>(configuration =>
 
 builder.Services.Configure<IyzicoAPIOptions>(builder.Configuration.GetSection("AppSettings:IyzicoAPIOptions"));
 builder.Services.Configure<StorageConnectionStrings>(builder.Configuration.GetSection("AppSettings:StorageConnectionStrings"));
+builder.Services.Configure<SendGridOptions>(builder.Configuration.GetSection("AppSettings:SendGridOptions"));
 
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpContextAccessor();
