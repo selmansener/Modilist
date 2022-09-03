@@ -13,6 +13,7 @@ import { store } from './store/store';
 import { BrowserRouter } from 'react-router-dom';
 import { apiFactory } from './services/api';
 import CssBaseline from '@mui/material/CssBaseline';
+import ScrollToTop from './utils/scrollToTop';
 
 const msalInstance = new PublicClientApplication(config.msalConfig);
 
@@ -200,6 +201,7 @@ function App() {
       <Provider store={store}>
         <MsalProvider instance={msalInstance}>
           <BrowserRouter>
+            <ScrollToTop />
             <ThemeProvider theme={mdTheme} >
               <AuthenticatedTemplate>
                 <Router environment={config.environment} isPublic={false} />
