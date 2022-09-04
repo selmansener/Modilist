@@ -46,6 +46,7 @@ import { About } from '../pages/about/About';
 import { ComingSoon } from './comingSoon/ComingSoon';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Partnership } from '../pages/partnership/Partnership';
+import { Careers } from '../pages/careers/Careers';
 
 interface RouterOptions {
   title?: string,
@@ -93,6 +94,17 @@ const routes: RouterOptions[] = [
     helmet: "Pages.Titles.Partnership",
     route: "partnership",
     component: <Partnership />,
+    layout: {
+      path: "/",
+      component: <Dashboard />
+    },
+    isPublic: false,
+    disabledEnvironments: ["production"]
+  },
+  {
+    helmet: "Pages.Titles.Careers",
+    route: "careers",
+    component: <Careers />,
     layout: {
       path: "/",
       component: <Dashboard />

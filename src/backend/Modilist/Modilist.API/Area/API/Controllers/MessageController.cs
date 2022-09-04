@@ -16,9 +16,19 @@ namespace Modilist.API.Area.API.Controllers
 
         [HttpPost("[controller].SendEmail")]
         [ProducesResponseType(200)]
-        public async Task<IActionResult> Create(SendMail input, CancellationToken cancellationToken)
+        public async Task<IActionResult> SendEmail(SendMail input, CancellationToken cancellationToken)
         {
-            await _mailProvider.SendMail(input, cancellationToken);
+            await _mailProvider.SendMailAsync(input, cancellationToken);
+
+            return Ok();
+        }
+
+        [HttpPost("[controller].SendEmailWithAttachments")]
+        [ProducesResponseType(200)]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> SendEmailWithAttachments([FromForm] SendMailWithAttachments input, CancellationToken cancellationToken)
+        {
+            await _mailProvider.SendMailWithAttachmentsAsync(input, cancellationToken);
 
             return Ok();
         }

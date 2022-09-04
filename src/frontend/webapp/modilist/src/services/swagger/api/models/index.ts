@@ -63,3 +63,4 @@ export * from './upsert-fit-preferences';
 export * from './upsert-prefered-fabric-properties';
 export * from './upsert-size-info';
 export * from './upsert-style-preferences';
+export * from './v1-message-send-email-with-attachments-body';

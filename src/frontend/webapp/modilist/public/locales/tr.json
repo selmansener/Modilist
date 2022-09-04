@@ -523,6 +523,40 @@
             },
             "CompanyName":"Marka/Şirket Adı",
             "JobTitle":"Pozisyon/Görev"
+        },
+        "Careers": {
+            "Title": "Takımın bir parçası ol!",
+            "Description": {
+                "1": "Modilist her zaman insan odaklı çalışma modelini benimser.",
+                "2": "İnsani değerleri önemseyen, bireysel gelişimi destekleyen, teknolojiyi",
+                "3": "seven ve takip eden bu özgür ve büyüyen takımın bir parçası ol!"
+            },
+            "Departments": {
+                "HumanResources": "İnsan Kaynakları",
+                "CustomerExcellence": "Müşteri İlişkileri",
+                "Engineering": "Mühendislik",
+                "Other": "Diğerleri"
+            },
+            "JobTitles": {
+                "JuniorTalentAcquisitionSpecialist": "Junior Talent Acquisition Specialist",
+                "SeniorTalentAcquisitionSpecialist": "Senior Talent Acquisition Specialist",
+                "CustomerOperationSpecialist": "Customer Operation Specialist",
+                "CustomerSuccessManager": "Customer Success Manager",
+                "JuniorSoftwareTestEngineer": "Junior Software Test Engineer",
+                "SeniorSoftwareTestEngineer": "Senior Software Test Engineer",
+                "JuniorSoftwareEngineer": "Junior Software Engineer",
+                "SeniorSoftwareEngineer": "Senior Software Engineer",
+                "JuniorDatabaseAdministrator": "Junior Database Administrator",
+                "SeniorDatabaseAdministrator": "Senior Database Administrator",
+                "DevOpsEngineer": "DevOps Engineer",
+                "JuniorFrontendDeveloper": "Junior Frontend Developer",
+                "SeniorFrontendDeveloper": "Senior Frontend Developer",
+                "JuniorBackendDeveloper": "Junior Backend Developer",
+                "SeniorBackendDeveloper": "Senior Backend Developer",
+                "JuniorMobileDeveloper": "Junior Mobile Developer",
+                "SeniorMobileDeveloper": "Senior Mobile Developer",
+                "GeneralApplication": "Genel Başvuru"
+            }
         }
     },
     "WelcomeSteps": {
@@ -717,13 +751,19 @@
             "Success": "İşlem başarılı!",
             "Send": "Gönder",
             "SentMessageSuccess": "Mesajınız başarıyla gönderildi!",
-            "SentMessageFailed": "Mesajınız gönderilirken bir hata oluştu."
+            "SentMessageFailed": "Mesajınız gönderilirken bir hata oluştu.",
+            "CareersApply": "Başvur",
+            "SelectFile": "Dosya Seç",
+            "FilesSelected": "{{count}} dosya seçildi."
         },
         "PersonalInfo": {
+            "FullName": "Ad Soyad",
             "FirstName": "Ad",
             "LastName": "Soyad",
             "BirthDate": "Doğum Tarihi",
             "PhoneNumber": "Telefon",
+            "Department": "Departman",
+            "JobTitle": "Pozisyon/Görev",
             "Job": "Mesleğin Nedir? (Opsiyonel)",
             "Gender": {
                 "Gender": "Cinsiyet",

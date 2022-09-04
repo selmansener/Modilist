@@ -132,7 +132,7 @@ export function DashboardFooter() {
                                     {t("Layouts.Dashboard.Footer.Links.Partnership")}
                                 </Typography>
                             </NavLink>
-                            <NavLink to={"#"}>
+                            <NavLink to={"/careers"}>
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.OpenPositions")}
                                 </Typography>
