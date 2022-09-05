@@ -852,8 +852,11 @@ export function StylePreferences(props: StylePreferencesProps) {
                     alignItems: 'center'
                 }}>
                     <FormControl error={touched.lovesShopping && errors.lovesShopping !== undefined}>
-                        <Typography variant="h3" align="center">
+                        <Typography variant="h3" align="center" >
                             {t(`Pages.Welcome.StylePreferences.LikesShoping`)}
+                        </Typography>
+                        <Typography variant="body1" mt={2} align="center" fontWeight={800} color={theme.palette.error.main}>
+                            {touched.lovesShopping && errors.lovesShopping}
                         </Typography>
                         <Box sx={{
                             display: 'flex',
@@ -884,9 +887,6 @@ export function StylePreferences(props: StylePreferencesProps) {
                             />
                         </Box>
                         <FormHelperText>
-                            <Typography variant="body1" fontWeight={800} color={theme.palette.error.main}>
-                                {touched.lovesShopping && errors.lovesShopping}
-                            </Typography>
                         </FormHelperText>
                     </FormControl>
                 </Grid>
@@ -896,8 +896,11 @@ export function StylePreferences(props: StylePreferencesProps) {
                     alignItems: 'center'
                 }}>
                     <FormControl error={touched.openToSuggestions && errors.openToSuggestions !== undefined}>
-                        <Typography variant="h3" align="center">
+                        <Typography variant="h3" mt={2} align="center">
                             {t(`Pages.Welcome.StylePreferences.OpenToSuggestions`)}
+                        </Typography>
+                        <Typography variant="body1" mt={2} align="center" fontWeight={800} color={theme.palette.error.main}>
+                            {touched.openToSuggestions && errors.openToSuggestions}
                         </Typography>
                         <Box sx={{
                             display: 'flex',
@@ -928,9 +931,6 @@ export function StylePreferences(props: StylePreferencesProps) {
                             />
                         </Box>
                         <FormHelperText>
-                            <Typography variant="body1" fontWeight={800} color={theme.palette.error.main}>
-                                {touched.openToSuggestions && errors.openToSuggestions}
-                            </Typography>
                         </FormHelperText>
                     </FormControl>
                 </Grid>
@@ -941,6 +941,9 @@ export function StylePreferences(props: StylePreferencesProps) {
                 <Grid item xs={8}>
                     <Typography variant="h3" align="left">
                         {t(`Pages.Welcome.StylePreferences.ChoiceReasonsQuestion`)}
+                    </Typography>
+                    <Typography variant="body1" mt={2} align="left" fontWeight={800} color={theme.palette.error.main}>
+                        {touched.choiceReasons && errors.choiceReasons}
                     </Typography>
                 </Grid>
                 <Grid item xs={4}></Grid>
@@ -963,9 +966,6 @@ export function StylePreferences(props: StylePreferencesProps) {
                             ))}
                         </FormGroup>
                         <FormHelperText>
-                            <Typography variant="body1" fontWeight={800} color={theme.palette.error.main}>
-                                {touched.choiceReasons && errors.choiceReasons}
-                            </Typography>
                         </FormHelperText>
                     </FormControl>
                 </Grid>

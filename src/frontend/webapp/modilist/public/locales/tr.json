@@ -732,7 +732,7 @@
         "Jute": "Jüt"
     },
     "FormValidation": {
-        "RequiredField": "* Gerekli Alan",
+        "RequiredField": "*Gerekli Alan",
         "MinCharacters": "Lütfen başında 0 olmadan 10 haneli bir telefon numarası giriniz",
         "MustBeInteger": "Lütfen bir tamsayı giriniz",
         "MustBeGreaterThanZero": "Lütfen sıfırdan büyük bir tamsayı giriniz",
