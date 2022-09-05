@@ -372,6 +372,7 @@
                 "YearTwoDigits": "Lütfen yılı iki haneli olarak giriniz",
                 "YearValidation": "Lütfen geçerli bir yıl giriniz",
                 "CvcValidation": "Lütfen geçerli bir CVC giriniz",
+                "CvcThreeDigit" : "Lütfen 3 haneli olarak giriniz",
                 "CardHolderNameValidation": "Lütfen sayı kullanmadan geçerli bir isim giriniz"
             }
         },

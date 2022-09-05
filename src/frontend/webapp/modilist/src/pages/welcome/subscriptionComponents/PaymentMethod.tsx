@@ -62,6 +62,20 @@ const ExpireYearInputMask = React.forwardRef<HTMLElement, InputMaskProps>(
     },
 );
 
+const CvcInputMask = React.forwardRef<HTMLElement, InputMaskProps>(
+    function CvcInputMask(props,ref) {
+        const { onChange, ...other} =props;
+        return (
+            <IMaskInput 
+            {...other}
+            mask="000"
+            onAccept={(value: any) => onChange({ target: {name: props.name, value}})}
+            />
+        );
+    },
+
+);
+
 export default function PaymentMethod() {
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
@@ -73,8 +87,10 @@ export default function PaymentMethod() {
     const monthValidation = t("Pages.Welcome.PaymentMethod.MonthValidation");
     const yearTwoDigits = t("Pages.Welcome.PaymentMethod.YearTwoDigits");
     const yearValidation = t("Pages.Welcome.PaymentMethod.YearValidation");
+    const cvcThreeDigit = t("Pages.Welcome.PaymentMethod.CvcThreeDigit");
     const cvcValidation = t("Pages.Welcome.PaymentMethod.CvcValidation");
     const cardHolderNameValidation = t("Pages.Welcome.PaymentMethod.CardHolderNameValidation");
+    const mustBeNumber = t("FormValidation.MustBeNumber");
     const schema = Yup.object({
         cardHolderName: Yup.string().test({
             name: "cardHolderNameValidation",
@@ -115,7 +131,21 @@ export default function PaymentMethod() {
                 )
             }
         }).length(2, yearTwoDigits).required(requiredField),
-        cvc: Yup.string().length(3, cvcValidation).required(requiredField)
+        cvc: Yup.string().test({
+            name: "cvcValidation",
+            message: cvcValidation,
+            test: (value) => {
+                if (value == undefined) {
+                    return false
+                }
+                const valueAsNumber = parseInt(value);
+                return (
+                    valueAsNumber >= 1 && valueAsNumber <= 999
+                )
+            }
+        })
+        .length(3, cvcThreeDigit)
+        .required(requiredField)
     });
 
     const {
@@ -262,6 +292,9 @@ export default function PaymentMethod() {
                                     setCardFocused("cvc")
                                 }}
                                 onBlur={handleBlur}
+                                InputProps ={{
+                                    inputComponent: CvcInputMask as any,
+                                }}
                             />
                         </FormControl>
                     </Grid>
