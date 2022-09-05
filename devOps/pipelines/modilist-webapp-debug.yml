@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+- job:
+  displayName: WebApp Debug Build
+  steps:
+  - task: NodeTool@0
+    displayName: 'Nodejs Installation'
+    inputs:
+      versionSpec: '16.x'
+      checkLatest: true
+  - task: Npm@1
+    displayName: 'Install Packages'
+    inputs:
+      command: 'custom'
+      workingDir: 'src/frontend/webapp/modilist'
+      customCommand: 'install --force'
+  - script: REACT_APP_ENV=int node scripts/build.js
+    displayName: Build
+    name: build
+    workingDirectory: 'src/frontend/webapp/modilist'
