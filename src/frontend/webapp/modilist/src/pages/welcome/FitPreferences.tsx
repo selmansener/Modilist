@@ -225,7 +225,8 @@ export function FitPreferences(props: FitPreferencesProps) {
                                 dispatch.upsertFitPreferencesModel.upsertFitPreferences(fitPreferences);
                             }
                         }}
-                        variant="outlined">
+                        color="secondary"
+                        variant="contained">
                         {isBusy && <CircularProgress sx={{
                             width: "18px !important",
                             height: "18px !important",

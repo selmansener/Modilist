@@ -245,7 +245,8 @@ export function FabricProperties(props: FabricPropertiesProps) {
                             dispatch.upsertPreferedFabricPropertiesModel.upsertPreferedFabricProperties(fabricProps);
                         }
                     }}
-                    variant="outlined">
+                    color="secondary"
+                    variant="contained">
                     {isBusy && <CircularProgress sx={{
                         width: "18px !important",
                         height: "18px !important",

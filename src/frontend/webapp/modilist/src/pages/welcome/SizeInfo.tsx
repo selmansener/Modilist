@@ -567,7 +567,8 @@ export function SizeInfo(props: SizeInfoProps) {
                                     });
                                 }
                             }}
-                            variant="outlined">
+                            color="secondary"
+                            variant="contained">
                             {isBusy && <CircularProgress
                                 sx={{
                                     width: "18px !important",

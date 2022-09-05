@@ -1084,6 +1084,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                         <Grid item container xs={6} justifyContent="flex-end">
                             <Button
                                 disabled={isBusy}
+                                color="secondary"
                                 onClick={() => {
                                     submitForm();
                                     if (!isValid) {
@@ -1094,7 +1095,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                                         });
                                     }
                                 }}
-                                variant="outlined">
+                                variant="contained">
                                 {isBusy && <CircularProgress sx={{
                                     width: "18px !important",
                                     height: "18px !important",
