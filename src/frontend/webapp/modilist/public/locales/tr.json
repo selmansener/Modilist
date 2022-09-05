@@ -408,6 +408,10 @@
                 "3": "mesafeli satış sözleşmesini ",
                 "4": "onaylıyorum."
             },
+            "ReturnPolicy": {
+                "1": "İade sözleşmesini",
+                "2": " okudum ve onaylıyorum."
+            },
             "TermsInfoError": "Devam edebilmek için lütfen formu onaylayın."
         },
         "CheckoutCompleted": {

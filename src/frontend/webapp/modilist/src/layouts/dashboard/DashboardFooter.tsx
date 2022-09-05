@@ -164,7 +164,7 @@ export function DashboardFooter() {
                                     {t("Layouts.Dashboard.Footer.Links.PrivacyAndCookiePolicies")}
                                 </Typography>
                             </Link>
-                            <NavLink to={"#"}>
+                            <NavLink to={`${cdn}/contracts/terms-of-use`}>
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.UsageAgreement")}
                                 </Typography>

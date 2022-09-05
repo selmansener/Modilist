@@ -30,7 +30,7 @@ export function Checkout() {
     const { isBusy: isBusyGetReturn, data: getReturnData, status: getReturnStatus } = useSelector((state: RootState) => state.getReturnModel);
     const { isBusy: isBusyCreateReturn, data: createReturnData, status: createReturnStatus } = useSelector((state: RootState) => state.createReturnModel);
     const { isBusy: isBusyCreatePayment, data: createPaymentData, status: createPaymentStatus } = useSelector((state: RootState) => state.createPaymentModel);
-    const { cdnImg: imgBaseHost } = config;
+    const { cdn, cdnImg: imgBaseHost } = config;
     const now = new Date();
     const minDate = addDays(now, 2);
     const maxDate = addDays(now, 14);
@@ -38,9 +38,9 @@ export function Checkout() {
     const [pickupDate, setPickupDate] = useState<Date | null>(addDays(now, 3));
     const [selectedAddress, setSelectedAddress] = useState<AddressDTO>();
     const [isFormChecked, setIsFormChecked] = useState<boolean>(false);
-    const [isTermsDialogOpen, setIsTermsDialogOpen] = useState<boolean>(false);
-    const [isSalesDialogOpen, setIsSalesDialogOpen] = useState<boolean>(false);
     const [isCheckoutTouched, setIsCheckoutTouched] = useState<boolean>(false);
+    const [isReturnPolicyChecked, setIsReturnPolicyChecked] = useState<boolean>(false);
+    const [isReturnTouched, setIsReturnTouched] = useState<boolean>(false);
     const theme = useTheme();
 
     const everyItemReturned = salesOrder?.lineItems?.every(x => x.state === SalesOrderLineItemState.Returned);
@@ -342,6 +342,25 @@ export function Checkout() {
                                     </Grid>
                                 </Grid>
                                 <Grid item container xs={12} spacing={2}>
+                                    {getReturnData === undefined && <Grid item xs={12}>
+                                        <FormControl error={isReturnTouched && !isReturnPolicyChecked}>
+                                            <FormControlLabel control={<Checkbox checked={isReturnPolicyChecked} onClick={(e) => {
+                                                setIsReturnPolicyChecked(!isReturnPolicyChecked);
+                                                setIsReturnTouched(false);
+                                            }} />} label={
+                                                <Trans>
+                                                    <Link href={`${cdn}/contracts/return-policy.pdf`} target="_blank">
+                                                        {t("Pages.Checkout.ReturnPolicy.1")}
+                                                    </Link>
+                                                    <Typography variant="body1" component="span">
+                                                        {t("Pages.Checkout.ReturnPolicy.2")}
+                                                    </Typography>
+                                                </Trans>
+                                            } />
+                                            {isReturnTouched && !isReturnPolicyChecked && <FormHelperText color="error">{t("Pages.Checkout.TermsInfoError")}</FormHelperText>}
+                                        </FormControl>
+                                    </Grid>}
+
                                     <Grid item xs={12}>
                                         <Typography variant="body1" fontWeight={800}>
                                             {t("Pages.Checkout.CargoTrackingCode")}
@@ -359,6 +378,11 @@ export function Checkout() {
                                                 variant="contained"
                                                 color="secondary"
                                                 onClick={() => {
+                                                    if (!isReturnPolicyChecked) {
+                                                        setIsReturnTouched(true);
+                                                        return;
+                                                    }
+
                                                     if (!isBusyCreateReturn && createReturnStatus === 0 && salesOrderId && pickupDate) {
                                                         dispatch.createReturnModel.createReturn({
                                                             salesOrderId: parseInt(salesOrderId),
@@ -379,60 +403,6 @@ export function Checkout() {
             </Grid>
             <AddressSelection open={addressSelectionOpen} handleClose={handleAddressSelectionClose} onSelect={handleAddressSelection} contentText="Pages.Checkout.ChangeReturnAddressModal" />
         </React.Fragment>
-    }
-
-    const RenderTermsDialog = () => {
-        return (
-            <React.Fragment>
-                <Dialog
-                    open={isTermsDialogOpen}
-                    onClose={() => {
-                        setIsTermsDialogOpen(false);
-                    }}
-                >
-                    <DialogTitle>
-                        {"Use Google's location service?"}
-                    </DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            Let Google help apps determine location. This means sending anonymous
-                            location data to Google, even when no apps are running.
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={() => {
-                            setIsTermsDialogOpen(false);
-                        }} autoFocus>
-                            {t("Generic.Forms.Close")}
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-
-                <Dialog
-                    open={isSalesDialogOpen}
-                    onClose={() => {
-                        setIsSalesDialogOpen(false);
-                    }}
-                >
-                    <DialogTitle>
-                        {"Use Google's location service?"}
-                    </DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            Let Google help apps determine location. This means sending anonymous
-                            location data to Google, even when no apps are running.
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={() => {
-                            setIsSalesDialogOpen(false);
-                        }} autoFocus>
-                            {t("Generic.Forms.Close")}
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </React.Fragment >
-        )
     }
 
     return (
@@ -500,7 +470,7 @@ export function Checkout() {
                         </Grid>
                     </Grid>
                     <Grid item xs={5} sx={{
-                        display:"flex",
+                        display: "flex",
                         justifyContent: "center"
                     }}>
                         <Cards
@@ -628,36 +598,26 @@ export function Checkout() {
                 display: 'flex',
                 justifyContent: 'space-between'
             }}>
-                {RenderTermsDialog()}
                 <FormControl error={isCheckoutTouched && !isFormChecked}>
-                    <FormControlLabel
-                        onClick={(e) => {
-                            if (e.target instanceof HTMLAnchorElement) {
-                                e.preventDefault();
-                            }
-                        }} control={<Checkbox checked={isFormChecked} onClick={(e) => {
-                            setIsFormChecked(!isFormChecked);
-                            setIsCheckoutTouched(false);
-                        }} />} label={
-                            <Trans>
-                                <Link onClick={() => {
-                                    setIsTermsDialogOpen(true);
-                                }}>
-                                    {t("Pages.Checkout.TermsInfo.1")}
-                                </Link>
-                                <Typography variant="body1" component="span">
-                                    {t("Pages.Checkout.TermsInfo.2")}
-                                </Typography>
-                                <Link onClick={() => {
-                                    setIsSalesDialogOpen(true);
-                                }}>
-                                    {t("Pages.Checkout.TermsInfo.3")}
-                                </Link>
-                                <Typography variant="body1" component="span">
-                                    {t("Pages.Checkout.TermsInfo.4")}
-                                </Typography>
-                            </Trans>
-                        } />
+                    <FormControlLabel control={<Checkbox checked={isFormChecked} onClick={(e) => {
+                        setIsFormChecked(!isFormChecked);
+                        setIsCheckoutTouched(false);
+                    }} />} label={
+                        <Trans>
+                            <Link href={`${cdn}/contracts/pre-information-form.pdf`} target="_blank">
+                                {t("Pages.Checkout.TermsInfo.1")}
+                            </Link>
+                            <Typography variant="body1" component="span">
+                                {t("Pages.Checkout.TermsInfo.2")}
+                            </Typography>
+                            <Link href={`${cdn}/contracts/distant-sales-contract.pdf`} target="_blank">
+                                {t("Pages.Checkout.TermsInfo.3")}
+                            </Link>
+                            <Typography variant="body1" component="span">
+                                {t("Pages.Checkout.TermsInfo.4")}
+                            </Typography>
+                        </Trans>
+                    } />
                     {isCheckoutTouched && !isFormChecked && <FormHelperText color="error">{t("Pages.Checkout.TermsInfoError")}</FormHelperText>}
                 </FormControl>
                 {isCheckoutDisabled() ?
