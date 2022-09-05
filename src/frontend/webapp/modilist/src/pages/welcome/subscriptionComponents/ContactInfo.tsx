@@ -188,7 +188,14 @@ export default function ContactInfo() {
 
                 <Grid item xs={4}>
                     <FormControl fullWidth>
-                        <TextField label={t("Generic.Address.ZipCode")} value={address?.zipCode} type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} variant="outlined" />
+                        <TextField 
+                        label={t("Generic.Address.ZipCode")} 
+                        value={address?.zipCode} 
+                        type="number"
+                        name="zipCode"
+                        onChange={handleChange}
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} 
+                        variant="outlined" />
                     </FormControl>
                 </Grid>
 
