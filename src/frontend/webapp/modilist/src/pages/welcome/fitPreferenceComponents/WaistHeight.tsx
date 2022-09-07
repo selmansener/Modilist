@@ -4,6 +4,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { CustomCheckboxGroup } from "../../../components/customCheckbox/CustomCheckbox";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
+import { Gender } from "../../../services/swagger/api";
 
 enum WaistHeight {
     UltraHighWaist = "UltraHighWaist",
@@ -21,6 +22,7 @@ interface WaistHeightElement {
 }
 
 export interface WaistHeightsProps {
+    gender: Gender;
     value?: string | null;
     onChange: (value: string) => void;
 }
@@ -28,13 +30,13 @@ export interface WaistHeightsProps {
 export function WaistHeights(props: WaistHeightsProps) {
     const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
-    const { value, onChange } = props;
+    const { gender, value, onChange } = props;
 
     const waistHeights: WaistHeightElement[] = Object.keys(WaistHeight).map(waistHeight => {
         return {
             name: t(`Pages.Welcome.FitPreferences.WaistHeights.${waistHeight}`),
             value: waistHeight,
-            img: `${imgBaseHost}/waist-heights/${waistHeight}.svg`
+            img: `${imgBaseHost}/waist-heights/${waistHeight}${gender}.svg`
         }
     });
 

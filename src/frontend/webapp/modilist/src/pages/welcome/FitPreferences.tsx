@@ -76,6 +76,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     const Waist = () => {
         return <WaistHeights
+        gender={account?.gender ?? Gender.None}
             value={fitPreferences.waistHeight}
             onChange={(value) => {
                 setFitPreferences({
@@ -88,6 +89,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     const Upper = () => {
         return <UpperFits
+        gender={account?.gender ?? Gender.None}
             value={fitPreferences.upperFit}
             onChange={(value) => {
                 setFitPreferences({
@@ -100,6 +102,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     const Lower = () => {
         return <LowerFits
+        gender={account?.gender ?? Gender.None}
             value={fitPreferences.lowerFit}
             onChange={(value) => {
                 setFitPreferences({
@@ -125,6 +128,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     const Legs = () => {
         return <LegFits
+        gender={account?.gender ?? Gender.None}
             value={fitPreferences.legFit}
             onChange={(value) => {
                 setFitPreferences({
@@ -137,6 +141,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     const Foot = () => {
         return <FootTypes
+        gender={account?.gender ?? Gender.None}
             value={fitPreferences.footType}
             onChange={(value) => {
                 setFitPreferences({
@@ -177,9 +182,9 @@ export function FitPreferences(props: FitPreferencesProps) {
         {account?.gender === Gender.Female && <Grid item xs={12}>
             <Skirt />
         </Grid>}
-        <Grid item xs={12}>
+        {account?.gender === Gender.Female && <Grid item xs={12}>
             <Shorts />
-        </Grid>
+        </Grid>}
         <Grid item xs={12}>
             <Upper />
         </Grid>

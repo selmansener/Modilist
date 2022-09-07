@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { CustomCheckboxGroup } from "../../../components/customCheckbox/CustomCheckbox";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
+import { Gender } from "../../../services/swagger/api";
 
 enum FootType {
     Narrow = "Narrow",
@@ -16,6 +17,7 @@ interface FootTypeElement {
 }
 
 interface FootTypesProps {
+    gender: Gender;
     value?: string | null;
     onChange: (value: string) => void;
 }
@@ -23,13 +25,13 @@ interface FootTypesProps {
 export function FootTypes(props: FootTypesProps) {
     const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
-    const { value, onChange } = props;
+    const { gender, value, onChange } = props;
 
     const footTypes: FootTypeElement[] = Object.keys(FootType).map(footType => {
         return {
             name: t(`Pages.Welcome.FitPreferences.FootTypes.${footType}`),
             value: footType,
-            img: `${imgBaseHost}/foot-types/${footType}.svg`
+            img: `${imgBaseHost}/foot-types/${footType}${gender}.svg`
         }
     });
 

@@ -3,11 +3,19 @@ import { useTranslation } from "react-i18next";
 import { CustomCheckboxGroup } from "../../../components/customCheckbox/CustomCheckbox";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
+import { Gender } from "../../../services/swagger/api";
 
-enum LegFit {
+
+enum LegFitFemale {
     Spanish = "Spanish",
     Straight = "Straight",
     Wide = "Wide",
+    Loose = "Loose",
+    Slim = "Slim"
+}
+enum LegFitMale {
+    Spanish = "Spanish",
+    Straight = "Straight",
     Loose = "Loose",
     Slim = "Slim"
 }
@@ -19,6 +27,7 @@ interface LegFitElement {
 }
 
 interface LegFitsProps {
+    gender: Gender;
     value?: string | null;
     onChange: (value: string) => void;
 }
@@ -26,15 +35,23 @@ interface LegFitsProps {
 export function LegFits(props: LegFitsProps) {
     const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
-    const { value, onChange } = props;
+    const { gender, value, onChange } = props;
 
-    const legFits: LegFitElement[] = Object.keys(LegFit).map(legFit => {
-        return {
-            name: t(`Pages.Welcome.FitPreferences.LegFits.${legFit}`),
-            value: legFit,
-            img: `${imgBaseHost}/leg-fits/${legFit}.svg`
-        }
-    });
+    const legFits: LegFitElement[] = gender === Gender.Female ?
+        Object.keys(LegFitFemale).map(legFit => {
+            return {
+                name: t(`Pages.Welcome.FitPreferences.LegFits.${legFit}`),
+                value: legFit,
+                img: `${imgBaseHost}/leg-fits/${legFit}${gender}.svg`
+            }
+        }) :
+        Object.keys(LegFitMale).map(legFit => {
+            return {
+                name: t(`Pages.Welcome.FitPreferences.LegFits.${legFit}`),
+                value: legFit,
+                img: `${imgBaseHost}/leg-fits/${legFit}${gender}.svg`
+            }
+        });
 
     return <CustomCheckboxGroup
         value={value ?? ""}

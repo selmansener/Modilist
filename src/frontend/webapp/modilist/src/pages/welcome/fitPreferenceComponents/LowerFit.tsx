@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { CustomCheckboxGroup } from "../../../components/customCheckbox/CustomCheckbox";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
+import { Gender } from "../../../services/swagger/api";
 
 enum LowerFit {
     Straight = "Straight",
@@ -20,6 +21,7 @@ interface LowerFitElement {
 }
 
 export interface LowerFitsProps {
+    gender: Gender;
     value?: string | null;
     onChange: (value: string) => void;
 }
@@ -27,13 +29,13 @@ export interface LowerFitsProps {
 export function LowerFits(props: LowerFitsProps) {
     const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
-    const { value, onChange } = props;
+    const { gender, value, onChange } = props;
 
     const lowerFits: LowerFitElement[] = Object.keys(LowerFit).map(lowerFit => {
         return {
             name: t(`Pages.Welcome.FitPreferences.LowerFits.${lowerFit}`),
             value: lowerFit,
-            img: `${imgBaseHost}/lower-fits/${lowerFit}.svg`
+            img: `${imgBaseHost}/lower-fits/${lowerFit}${gender}.svg`
         }
     });
 

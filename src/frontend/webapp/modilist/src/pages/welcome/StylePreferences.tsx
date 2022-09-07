@@ -141,6 +141,12 @@ export function StylePreferences(props: StylePreferencesProps) {
             mainCategory: MainCategory.Lower
         },
         {
+            name: t("ProductCategories.Cargo"),
+            value: "Cargo",
+            img: `${imgBaseHost}/product-category-icons/CargoTrousers.svg`,
+            mainCategory: MainCategory.Lower
+        },
+        {
             name: t("ProductCategories.Tshirt"),
             value: "Tshirt",
             img: `${imgBaseHost}/product-category-icons/Tshirt.svg`,
@@ -177,10 +183,16 @@ export function StylePreferences(props: StylePreferencesProps) {
             mainCategory: MainCategory.Upper
         },
         {
+            name: t("ProductCategories.Overalls"),
+            value: "Overalls",
+            img: `${imgBaseHost}/product-category-icons/Overalls${gender}.svg`,
+            mainCategory: MainCategory.Upper
+        },
+        {
             name: t("ProductCategories.Blazer"),
             value: "Blazer",
             img: `${imgBaseHost}/product-category-icons/Blazer.svg`,
-            mainCategory: MainCategory.Upper
+            mainCategory: MainCategory.Outer
         },
         {
             name: t("ProductCategories.Jacket"),
@@ -231,12 +243,6 @@ export function StylePreferences(props: StylePreferencesProps) {
             mainCategory: MainCategory.UnderwearPyjamasBeach
         },
         {
-            name: t("ProductCategories.Underwear"),
-            value: "Underwear",
-            img: `${imgBaseHost}/product-category-icons/Underwear.svg`,
-            mainCategory: MainCategory.UnderwearPyjamasBeach
-        },
-        {
             name: t("ProductCategories.SleevelessUndershirt"),
             value: "SleevelessUndershirt",
             img: `${imgBaseHost}/product-category-icons/SleevelessUndershirt.svg`,
@@ -249,22 +255,10 @@ export function StylePreferences(props: StylePreferencesProps) {
             mainCategory: MainCategory.UnderwearPyjamasBeach
         },
         {
-            name: t("ProductCategories.Clasp"),
-            value: "Clasp",
-            img: `${imgBaseHost}/product-category-icons/Clasp.svg`,
-            mainCategory: MainCategory.Accessories
-        },
-        {
-            name: t("ProductCategories.HairBand"),
-            value: "HairBand",
-            img: `${imgBaseHost}/product-category-icons/HairBand.svg`,
-            mainCategory: MainCategory.Accessories
-        },
-        {
-            name: t("ProductCategories.Headband"),
-            value: "Headband",
-            img: `${imgBaseHost}/product-category-icons/Headband.svg`,
-            mainCategory: MainCategory.Accessories
+            name: t("ProductCategories.Swimsuit"),
+            value: "Swimsuit",
+            img: `${imgBaseHost}/product-category-icons/Swimsuit${gender}.svg`,
+            mainCategory: MainCategory.UnderwearPyjamasBeach
         },
         {
             name: t("ProductCategories.Cap"),
@@ -333,21 +327,27 @@ export function StylePreferences(props: StylePreferencesProps) {
             mainCategory: MainCategory.Accessories
         },
         {
-            name: t("ProductCategories.Earring"),
-            value: "Earring",
-            img: `${imgBaseHost}/product-category-icons/Earring.svg`,
+            name: t("ProductCategories.Bracelet"),
+            value: "Bracelet",
+            img: `${imgBaseHost}/product-category-icons/Bracelet.svg`,
             mainCategory: MainCategory.Accessories
         },
         {
-            name: t("ProductCategories.Necklace"),
-            value: "Necklace",
-            img: `${imgBaseHost}/product-category-icons/Necklace.svg`,
+            name: t("ProductCategories.Earring"),
+            value: "Earring",
+            img: `${imgBaseHost}/product-category-icons/Earring${gender}.svg`,
             mainCategory: MainCategory.Accessories
         },
         {
             name: t("ProductCategories.Ring"),
             value: "Ring",
-            img: `${imgBaseHost}/product-category-icons/Ring.svg`,
+            img: `${imgBaseHost}/product-category-icons/Ring${gender}.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Necklace"),
+            value: "Necklace",
+            img: `${imgBaseHost}/product-category-icons/Necklace${gender}.svg`,
             mainCategory: MainCategory.Accessories
         },
         {
@@ -393,15 +393,21 @@ export function StylePreferences(props: StylePreferencesProps) {
             mainCategory: MainCategory.Footwear
         },
         {
-            name: t("ProductCategories.FlatShoes"),
-            value: "FlatShoes",
-            img: `${imgBaseHost}/product-category-icons/FlatShoes.svg`,
+            name: t("ProductCategories.Classic"),
+            value: "Classic",
+            img: `${imgBaseHost}/product-category-icons/Classic${gender}.svg`,
             mainCategory: MainCategory.Footwear
         },
         {
             name: t("ProductCategories.Boots"),
             value: "Boots",
             img: `${imgBaseHost}/product-category-icons/Boots.svg`,
+            mainCategory: MainCategory.Footwear
+        },
+        {
+            name: t("ProductCategories.TopBoots"),
+            value: "TopBoots",
+            img: `${imgBaseHost}/product-category-icons/TopBoots${gender}.svg`,
             mainCategory: MainCategory.Footwear
         },
         {
@@ -423,15 +429,21 @@ export function StylePreferences(props: StylePreferencesProps) {
             mainCategory: MainCategory.Bags
         },
         {
-            name: t("ProductCategories.Portfolio"),
-            value: "Portfolio",
-            img: `${imgBaseHost}/product-category-icons/Portfolio.svg`,
-            mainCategory: MainCategory.Bags
-        },
-        {
             name: t("ProductCategories.SportBag"),
             value: "SportBag",
             img: `${imgBaseHost}/product-category-icons/SportBag.svg`,
+            mainCategory: MainCategory.Bags
+        },
+        {
+            name: t("ProductCategories.Portfolio"),
+            value: "Portfolio",
+            img: `${imgBaseHost}/product-category-icons/Portfolio${gender}.svg`,
+            mainCategory: MainCategory.Bags
+        },
+        {
+            name: t("ProductCategories.Satchel"),
+            value: "Satchel",
+            img: `${imgBaseHost}/product-category-icons/Satchel${gender}.svg`,
             mainCategory: MainCategory.Bags
         },
     ]
@@ -481,10 +493,10 @@ export function StylePreferences(props: StylePreferencesProps) {
             mainCategory: MainCategory.Upper
         },
         {
-            name: t("ProductCategories.Overalls"),
-            value: "Overalls",
-            img: `${imgBaseHost}/product-category-icons/Overalls.svg`,
-            mainCategory: MainCategory.Upper
+            name: t("ProductCategories.Underwear"),
+            value: "Underwear",
+            img: `${imgBaseHost}/product-category-icons/Underwear.svg`,
+            mainCategory: MainCategory.UnderwearPyjamasBeach
         },
         {
             name: t("ProductCategories.Nightwear"),
@@ -499,15 +511,33 @@ export function StylePreferences(props: StylePreferencesProps) {
             mainCategory: MainCategory.UnderwearPyjamasBeach
         },
         {
+            name: t("ProductCategories.Clasp"),
+            value: "Clasp",
+            img: `${imgBaseHost}/product-category-icons/Clasp.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.HairBand"),
+            value: "HairBand",
+            img: `${imgBaseHost}/product-category-icons/HairBand.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
+            name: t("ProductCategories.Headband"),
+            value: "Headband",
+            img: `${imgBaseHost}/product-category-icons/Headband.svg`,
+            mainCategory: MainCategory.Accessories
+        },
+        {
             name: t("ProductCategories.ShawlScarf"),
             value: "ShawlScarf",
             img: `${imgBaseHost}/product-category-icons/ShawlScarf.svg`,
             mainCategory: MainCategory.Accessories
         },
         {
-            name: t("ProductCategories.ShortHeels"),
-            value: "ShortHeels",
-            img: `${imgBaseHost}/product-category-icons/ShortHeels.svg`,
+            name: t("ProductCategories.FlatShoes"),
+            value: "FlatShoes",
+            img: `${imgBaseHost}/product-category-icons/FlatShoes.svg`,
             mainCategory: MainCategory.Footwear
         },
         {
@@ -515,18 +545,6 @@ export function StylePreferences(props: StylePreferencesProps) {
             value: "HighHeels",
             img: `${imgBaseHost}/product-category-icons/HighHeels.svg`,
             mainCategory: MainCategory.Footwear
-        },
-        {
-            name: t("ProductCategories.TopBoots"),
-            value: "TopBoots",
-            img: `${imgBaseHost}/product-category-icons/TopBoots.svg`,
-            mainCategory: MainCategory.Footwear
-        },
-        {
-            name: t("ProductCategories.Satchel"),
-            value: "Satchel",
-            img: `${imgBaseHost}/product-category-icons/Satchel.svg`,
-            mainCategory: MainCategory.Bags
         },
         {
             name: t("ProductCategories.HandBags"),
@@ -789,33 +807,33 @@ export function StylePreferences(props: StylePreferencesProps) {
 
     const BodyPartsToHighlight = () => {
         return <FormControl fullWidth>
-            <CustomCheckboxGroup
-                value={stylePreferences?.bodyPartsToHighlight ?? ""}
-                label={<Typography variant="h3" sx={{
-                    mb: 4
-                }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>}
-                contents={bodyParts}
-                onChange={(values: string[]) => {
-                    setFieldValue("bodyPartsToHighlight", values.length > 0 ? values.join(',') : "");
-                }}
-            />
-        </FormControl>
+                <CustomCheckboxGroup
+                    value={stylePreferences?.bodyPartsToHighlight ?? ""}
+                    label={<Typography variant="h3" sx={{
+                        mb: 4
+                    }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>}
+                    contents={bodyParts}
+                    onChange={(values: string[]) => {
+                        setFieldValue("bodyPartsToHighlight", values.length > 0 ? values.join(',') : "");
+                    }}
+                />
+            </FormControl> 
     }
 
     const BodyPartsToHide = () => {
         return <FormControl fullWidth>
-            <CustomCheckboxGroup
-                value={stylePreferences?.bodyPartsToHide ?? ""}
-                label={<Typography variant="h3" sx={{
-                    mb: 4
-                }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>}
-                isNegative
-                contents={bodyParts}
-                onChange={(values: string[]) => {
-                    setFieldValue("bodyPartsToHide", values.length > 0 ? values.join(',') : "");
-                }}
-            />
-        </FormControl>
+                <CustomCheckboxGroup
+                    value={stylePreferences?.bodyPartsToHide ?? ""}
+                    label={<Typography variant="h3" sx={{
+                        mb: 4
+                    }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>}
+                    isNegative
+                    contents={bodyParts}
+                    onChange={(values: string[]) => {
+                        setFieldValue("bodyPartsToHide", values.length > 0 ? values.join(',') : "");
+                    }}
+                />
+            </FormControl>
     }
 
     const _bodyParts = [
@@ -973,26 +991,31 @@ export function StylePreferences(props: StylePreferencesProps) {
             <Grid item xs={6}>
                 <ImageComponent src={`${imgBaseHost}/style-preferences-general/WhyModilist1.svg`}></ImageComponent>
             </Grid>
-            <Grid item xs={12}>
-                <BodyPartsToHighlight />
-            </Grid>
-            <Grid item xs={12}>
+            {account?.gender === Gender.Female && 
+            <>
+             <Grid item xs={12}>
+             <BodyPartsToHighlight />
+              </Grid>
+              <Grid item xs={12}>
                 <BodyPartsToHide />
-                {account?.gender === Gender.Female &&
-                    <FormControl fullWidth sx={{
-                        mt: 4
-                    }}>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    name="prefersHijabClothing"
-                                    onChange={handleChange}
-                                    checked={stylePreferences.prefersHijabClothing}
-                                />
-                            }
-                            label={<Typography variant="subtitle1">{t("Pages.Welcome.StylePreferences.Hijab")}</Typography>} />
-                    </FormControl>}
-            </Grid>
+             
+                 <FormControl fullWidth sx={{
+                     mt: 4
+                 }}>
+                     <FormControlLabel
+                         control={
+                             <Checkbox
+                                 name="prefersHijabClothing"
+                                 onChange={handleChange}
+                                 checked={stylePreferences.prefersHijabClothing}
+                             />
+                         }
+                         label={<Typography variant="subtitle1">{t("Pages.Welcome.StylePreferences.Hijab")}</Typography>} />
+                         </FormControl>
+         </Grid>
+         </>
+            }
+               
             <Grid item xs={12}>
                 <Typography variant="h3" sx={{
                     mb: 4

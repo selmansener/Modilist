@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { CustomCheckboxGroup } from "../../../components/customCheckbox/CustomCheckbox";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
+import { Gender } from "../../../services/swagger/api";
 
 enum UpperFit {
     Skinny = "Skinny",
@@ -17,6 +18,7 @@ interface UpperFitElement {
 }
 
 export interface UpperFitsProps {
+    gender: Gender;
     value?: string | null;
     onChange: (value: string) => void;
 }
@@ -24,13 +26,13 @@ export interface UpperFitsProps {
 export function UpperFits(props: UpperFitsProps) {
     const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
-    const { value, onChange } = props;
+    const { gender,value, onChange } = props;
 
     const upperFits: UpperFitElement[] = Object.keys(UpperFit).map(upperFit => {
         return {
             name: t(`Pages.Welcome.FitPreferences.UpperFits.${upperFit}`),
             value: upperFit,
-            img: `${imgBaseHost}/upper-fits/${upperFit}.svg`
+            img: `${imgBaseHost}/upper-fits/${upperFit}${gender}.svg`
         }
     });
 
