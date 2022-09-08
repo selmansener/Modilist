@@ -24,6 +24,7 @@ export function SalesOrderFeedback(props: SalesOrderFeedbackProps) {
     useEffect(() => {
         if (status === 200) {
             dispatch.buyAllLineItemsModel.RESET();
+            dispatch.salesOrderDetailsModel.RESET();
             navigate(`/sales-orders/${salesOrder.id}/checkout`);
         }
     }, [status]);

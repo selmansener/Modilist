@@ -52,6 +52,10 @@ export function SalesOrderDetails() {
         if (salesOrderId && !isBusySalesOrder) {
             dispatch.salesOrderDetailsModel.salesOrderDetails(parseInt(salesOrderId));
         }
+
+        return () => {
+            dispatch.salesOrderDetailsModel.RESET();
+        }
     }, [salesOrderId]);
 
     useEffect(() => {
