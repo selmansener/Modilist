@@ -6,8 +6,5 @@ export const config: EnvConfig = {
         facebook: "https://www.facebook.com/modilistcom",
         twitter: "https://twitter.com/modilistcom",
         linkedIn: "https://www.linkedin.com/company/modilist/"
-    },
-    // TODO: replace config
-    iyzicoApiKey: "REPLACE_APIKEY",
-    iyzicoSecretKey: "REPLACE_SECRETKEY"
+    }
 };

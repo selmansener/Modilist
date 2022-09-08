@@ -12,8 +12,6 @@ export interface AppConfig extends ApiConfig, EnvConfig {
     isInt: boolean;
     isStaging: boolean;
     isProduction: boolean;
-    iyzicoApiKey: string;
-    iyzicoSecretKey: string;
     msalConfig: MsalConfig;
     loginRequest: RedirectRequest;
     cdnImg: string;
