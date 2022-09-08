@@ -181,6 +181,7 @@ export function SalesOrderFeedback(props: SalesOrderFeedbackProps) {
                         variant="contained"
                         color="secondary"
                         onClick={() => {
+                            dispatch.salesOrderDetailsModel.RESET();
                             navigate(`/sales-orders/${salesOrder.id}/checkout`);
                         }}
                     >
