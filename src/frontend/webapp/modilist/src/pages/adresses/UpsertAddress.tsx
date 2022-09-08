@@ -51,7 +51,7 @@ export function UpsertAddress() {
     const dispatch = useDispatch<Dispatch>();
     const { addressId } = useParams();
     const { isBusy: isBusyGetAddress, data: initialAddress, status: statusGetAddress } = useSelector((state: RootState) => state.getAddressModel);
-    const { isBusy: isBusyUpsertAddress, status } = useSelector((state: RootState) => state.upsertAddressModel);
+    const { isBusy: isBusyUpsertAddress, status: statusUpsertAddress } = useSelector((state: RootState) => state.upsertAddressModel);
     const { data: cities } = useSelector((state: RootState) => state.citiesModel);
     const isBusy = isBusyGetAddress || isBusyUpsertAddress;
     const [selectedCity, setSelectedCity] = useState<string | undefined>();
@@ -82,6 +82,10 @@ export function UpsertAddress() {
     useEffect(() => {
         if (addressId && !isBusyGetAddress) {
             dispatch.getAddressModel.getAddress(parseInt(addressId));
+        }
+
+        return () => {
+            dispatch.getAddressModel.RESET();
         }
     }, []);
 
@@ -141,11 +145,11 @@ export function UpsertAddress() {
         });
 
     useEffect(() => {
-        if (!isBusy && status === 200) {
+        if (!isBusy && statusUpsertAddress === 200) {
             dispatch.upsertAddressModel.RESET();
             navigate("/addresses");
         }
-    }, [status]);
+    }, [statusUpsertAddress]);
 
     return (
         <Grid item container xs={12} spacing={2}>

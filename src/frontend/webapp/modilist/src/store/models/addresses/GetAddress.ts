@@ -28,6 +28,14 @@ export const getAddressModel = createModel<RootModel>()({
                 status: status
             }
         },
+        RESET: (state: ResponseModel<AddressDTO>) => {
+            return {
+                ...state,
+                data: undefined,
+                isBusy: false,
+                status: 0
+            }
+        }
     },
     effects: (dispatch) => {
         const { getAddressModel } = dispatch
