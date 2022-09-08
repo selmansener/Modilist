@@ -10,18 +10,35 @@ import { FormControl, Grid, TextField, Typography } from "@mui/material";
 import { IMaskInput } from "react-imask";
 import React from "react";
 
-interface PhoneInputMaskProps {
+interface NumberInputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
     name: string;
     value?: string;
 }
-const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
+const PhoneInputMask = React.forwardRef<HTMLElement, NumberInputMaskProps>(
     function PhoneInputMask(props, ref) {
         const { onChange, ...other } = props;
         return (
             <IMaskInput
                 {...other}
                 mask="500 000 0000"
+                onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+                overwrite
+            />
+        );
+    },
+);
+
+const ZipCodeInputMask = React.forwardRef<HTMLElement, NumberInputMaskProps>(
+    function ZipCodeInputMask(props, ref) {
+        const { onChange, ...other } = props;
+        return (
+            <IMaskInput
+                {...other}
+                mask="00000"
+                definitions={{
+                    '#': /[1-9]/,
+                }}
                 onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
                 overwrite
             />
@@ -50,7 +67,8 @@ export default function ContactInfo() {
         }).required(requiredField),
         city: Yup.string().required(requiredField),
         district: Yup.string().required(requiredField),
-        fullAddress: Yup.string().required(requiredField)
+        fullAddress: Yup.string().required(requiredField),
+        zipCode: Yup.string().optional()
     });
 
     const {
@@ -191,10 +209,11 @@ export default function ContactInfo() {
                         <TextField 
                         label={t("Generic.Address.ZipCode")} 
                         value={address?.zipCode} 
-                        type="number"
                         name="zipCode"
                         onChange={handleChange}
-                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} 
+                        InputProps={{
+                            inputComponent: ZipCodeInputMask as any,
+                        }}
                         variant="outlined" />
                     </FormControl>
                 </Grid>

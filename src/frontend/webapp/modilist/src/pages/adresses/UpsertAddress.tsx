@@ -12,19 +12,36 @@ import { IMaskInput } from "react-imask";
 import { useNavigate, useParams } from "react-router-dom";
 import { AddressDTO } from "../../services/swagger/api";
 
-interface PhoneInputMaskProps {
+interface NumberInputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
     name: string;
     value?: string;
 }
 
-const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
+const PhoneInputMask = React.forwardRef<HTMLElement, NumberInputMaskProps>(
     function PhoneInputMask(props, ref) {
         const { onChange, ...other } = props;
         return (
             <IMaskInput
                 {...other}
                 mask="000 000 0000"
+                definitions={{
+                    '#': /[1-9]/,
+                }}
+                onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+                overwrite
+            />
+        );
+    },
+);
+
+const ZipCodeInputMask = React.forwardRef<HTMLElement, NumberInputMaskProps>(
+    function ZipCodeInputMask(props, ref) {
+        const { onChange, ...other } = props;
+        return (
+            <IMaskInput
+                {...other}
+                mask="00000"
                 definitions={{
                     '#': /[1-9]/,
                 }}
@@ -76,7 +93,8 @@ export function UpsertAddress() {
         phone: Yup.string().required(requiredField),
         city: Yup.string().required(requiredField),
         district: Yup.string().required(requiredField),
-        fullAddress: Yup.string().required(requiredField)
+        fullAddress: Yup.string().required(requiredField),
+        zipCode: Yup.string().optional()
     });
 
     useEffect(() => {
@@ -150,6 +168,19 @@ export function UpsertAddress() {
             navigate("/addresses");
         }
     }, [statusUpsertAddress]);
+
+    useEffect(() => {
+        setFieldStates({
+            name: address.name !== undefined && address.name !== "",
+            firstName: address.firstName !== undefined && address.firstName !== "",
+            lastName: address.lastName !== undefined && address.lastName !== "",
+            phone: address.phone !== undefined && address.phone !== "",
+            city: address.city !== undefined && address.city !== "",
+            district: address.district !== undefined && address.district !== "",
+            fullAddress: address.fullAddress !== undefined && address.fullAddress !== "",
+            zipCode: address.zipCode !== undefined && address.zipCode !== "",
+        });
+    }, [address]);
 
     return (
         <Grid item container xs={12} spacing={2}>
@@ -253,10 +284,13 @@ export function UpsertAddress() {
             <Grid item xs={4}>
                 <FormControl fullWidth>
                     <TextField
+                        name="zipCode"
                         label={t("Generic.Address.ZipCode")}
-                        type="number"
                         value={address?.zipCode}
-                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                        onChange={handleChange}
+                        InputProps={{
+                            inputComponent: ZipCodeInputMask as any,
+                        }}
                         variant="outlined"
                         InputLabelProps={{
                             shrink: fieldStates.zipCode
