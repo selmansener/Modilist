@@ -56,6 +56,7 @@ export * from './update-account';
 export * from './update-additional-requests';
 export * from './update-address';
 export * from './update-estimated-delivery-date';
+export * from './update-requested-style';
 export * from './update-sales-order-address';
 export * from './update-subscription-max-pricing-limit';
 export * from './upsert-address';

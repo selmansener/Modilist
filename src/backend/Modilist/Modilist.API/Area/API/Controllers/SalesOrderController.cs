@@ -182,5 +182,18 @@ namespace Modilist.API.Area.API.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost("[controller].{salesOrderId}/UpdateRequestedStyle")]
+        [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> UpdateRequestedStyle(int salesOrderId, [FromBody] UpdateRequestedStyle request, CancellationToken cancellationToken)
+        {
+            request.AccountId = User.GetUserId();
+            request.SalesOrderId = salesOrderId;
+
+            var response = await _mediator.Send(request, cancellationToken);
+
+            return Ok(response);
+        }
     }
 }

@@ -134,7 +134,27 @@
             "ChangeDeliveryDate": "Teslimat Tarihini Değiştir ",
             "SalesOrderFeedback": "Kombine Puanın: ",
             "DisplayInvoice": "Faturayı Görüntüle",
-            "ChangeDeliveryAddress": "Teslimat adresini değiştirin."
+            "ChangeDeliveryAddress": "Teslimat adresini değiştirin.",
+            "SelectRequestedStyle": "Tarzını seç",
+            "OutfitStyles": {
+                "Casual": "Gündelik",
+                "Grunge": "Salaş",
+                "Bohem": "Bohem",
+                "Trendy": "Trendy",
+                "Elegant": "Zarif",
+                "Sportswear": "Sportif",
+                "Minimalist": "Minimalist",
+                "Artsy": "İddalı",
+                "Vintage": "Vintage",
+                "Modest": "Sade",
+                "Loungewear": "Rahat",
+                "BusinessCasual": "Ofis"
+            },            
+            "OutfitQuestion": "Hangisi senin tarzın? *",
+            "OutfitInfo": {
+                "1": "*Ürünler temsilidir, senin kendine en uygun tarzı",
+                "2": "daha rahat seçebilmen için bu görselleri ekledik."
+            }
         },
         "SalesOrderFeedback": {
             "AutoPaymentWarning": "5 iş günü içerisinde değerlendirme yapmaz iseniz kombin toplam bedeli kayıtlı kartınızdan tahsil edilecektir.",
@@ -756,6 +776,7 @@
             "Submit": "Kaydet",
             "Edit": "Düzenle",
             "Success": "İşlem başarılı!",
+            "Error": "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
             "Send": "Gönder",
             "SentMessageSuccess": "Mesajınız başarıyla gönderildi!",
             "SentMessageFailed": "Mesajınız gönderilirken bir hata oluştu.",

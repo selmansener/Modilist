@@ -85,4 +85,10 @@ export interface ActiveSalesOrderDTO {
      * @memberof ActiveSalesOrderDTO
      */
     additionalRequests?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActiveSalesOrderDTO
+     */
+    requestedStyle?: string;
 }

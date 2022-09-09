@@ -1,4 +1,4 @@
-import { Alert, Button, CircularProgress, FormControl, Grid, Paper, Snackbar, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, CircularProgress, Dialog, DialogContent, DialogTitle, FormControl, Grid, Paper, Snackbar, TextField, Typography } from "@mui/material";
 import { format, addDays } from "date-fns";
 import { tr } from "date-fns/locale";
 import { Trans, useTranslation } from "react-i18next";
@@ -6,29 +6,182 @@ import { Link } from "react-router-dom";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../../store/store";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Gender } from "../../../services/swagger/api";
+import { CustomRadioButtonGroup } from "../../../components/customRadioButton/CustomRadioButton";
+import { ImageComponent } from "../../../components/image/ImageComponent";
+import { config } from "../../../config";
+
+const requestedStyleMale = [
+    "Casual",
+    "Grunge",
+    "Bohem",
+    "Trendy",
+    "Elegant",
+    "Sportswear",
+    "Minimalist",
+    "Artsy",
+    "Vintage",
+    "Modest",
+    "Loungewear",
+    "BusinessCasual"
+];
+
+const requestedStyleFemale = [
+    "Casual",
+    "Grunge",
+    "Bohem",
+    "Trendy",
+    "Elegant",
+    "Sportswear",
+    "Minimalist",
+    "Artsy",
+    "Vintage",
+    "Modest",
+    "Loungewear",
+    "BusinessCasual"
+];
 
 export function ActiveOrder() {
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
-    const { isBusy, data: salesOrder, status } = useSelector((state: RootState) => state.activeSalesOrderModel);
+    const { isBusy: getAccountIsBusy, data: getAccountResponse } = useSelector((state: RootState) => state.getAccountModel);
+    const { isBusy: isSalesOrderBusy, data: salesOrder, status } = useSelector((state: RootState) => state.activeSalesOrderModel);
     const { isBusy: isBusyUpdateAdditionalRequests, status: updateAdditionalRequestsStatus } = useSelector((state: RootState) => state.updateAdditionalRequestsModel);
+    const { isBusy: isBusyUpdateRequestedStyle, status: updateRequestedStyleStatus } = useSelector((state: RootState) => state.updateRequestedStyleModel);
     const [additionalRequests, setAdditionalRequests] = useState<string>(salesOrder?.additionalRequests ?? "");
+    const [requestedStyle, setRequestedStyle] = useState<string>(salesOrder?.requestedStyle ?? "");
     const [snackbarStatus, setSnackbarStatus] = useState<boolean>(false);
+    const [isRequestedStyleOpen, setIsRequestedStyleOpen] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+    const { cdnImg } = config;
+    const isBusy = getAccountIsBusy || isSalesOrderBusy || isBusyUpdateAdditionalRequests || isBusyUpdateRequestedStyle;
 
     useEffect(() => {
-        if (!isBusy && status === 0) {
+        if (!isSalesOrderBusy && status === 0) {
             dispatch.activeSalesOrderModel.activeSalesOrder();
         }
     }, []);
 
     useEffect(() => {
+        if (updateAdditionalRequestsStatus === 0) {
+            return;
+        }
+
         if (!isBusyUpdateAdditionalRequests && updateAdditionalRequestsStatus === 200) {
-            setSnackbarStatus(true);
+            setIsSuccess(true);
             dispatch.activeSalesOrderModel.activeSalesOrder();
             dispatch.updateAdditionalRequestsModel.RESET();
         }
+        else {
+            setIsSuccess(false);
+        }
+
+        setSnackbarStatus(true);
     }, [updateAdditionalRequestsStatus]);
+
+    useEffect(() => {
+        if (updateRequestedStyleStatus === 0) {
+            return;
+        }
+
+        if (!isBusyUpdateRequestedStyle && updateRequestedStyleStatus === 200) {
+            setIsSuccess(true);
+            dispatch.activeSalesOrderModel.activeSalesOrder();
+            dispatch.updateRequestedStyleModel.RESET();
+            setIsRequestedStyleOpen(false);
+        }
+        else {
+            setIsSuccess(false);
+        }
+
+        setSnackbarStatus(true);
+    }, [updateRequestedStyleStatus]);
+
+    const handleRequestedStyleClose = () => {
+        setIsRequestedStyleOpen(false);
+    }
+
+    const requestedStyleData = getAccountResponse && (getAccountResponse?.gender === Gender.Female ? requestedStyleFemale : requestedStyleMale);
+
+    const content = requestedStyleData?.map(style => {
+        return {
+            value: style,
+            element: <Box textAlign="center">
+                <ImageComponent src={`${cdnImg}/outfit-styles/${getAccountResponse?.gender?.toString().toLowerCase()}/${style}.png`} width={155} />
+                <Typography variant="h6">
+                    {t(`Pages.SalesOrderDetails.OutfitStyles.${style}`)}
+                </Typography>
+            </Box>
+        }
+    }) ?? [];
+
+    const RenderRequestedStyleDialog = (content: {
+        value: string;
+        element: JSX.Element;
+    }[]) => {
+        if (!requestedStyleData || requestedStyleData.length === 0) {
+            return <></>
+        }
+
+        return (
+            <Dialog onClose={handleRequestedStyleClose} open={isRequestedStyleOpen} maxWidth="lg" fullWidth>
+                <DialogTitle sx={{
+                    mb:2
+                }}>
+                    <Typography variant="h3" align="center">
+                        {t("Pages.SalesOrderDetails.OutfitQuestion")}
+                    </Typography>
+                </DialogTitle>
+                <CustomRadioButtonGroup
+                    containerSx={{
+                        justifyContent: 'space-evenly'
+                    }}
+                    radioButtonSx={{
+                        flexBasis: '20%'
+                    }}
+                    name="requestedStyle"
+                    value={requestedStyle}
+                    contents={content}
+                    onChange={(value) => {
+                        setRequestedStyle(value);
+                    }}
+                />
+                <Box sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    px:[6],
+                    py:[2]
+                }}>
+                    <Box>
+                        <Typography>
+                            {t("Pages.SalesOrderDetails.OutfitInfo.1")}
+                        </Typography>
+                        <Typography>
+                            {t("Pages.SalesOrderDetails.OutfitInfo.2")}
+                        </Typography>
+                    </Box>
+                    <Button
+                        disabled={isBusy || requestedStyle === ""}
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            if (salesOrder?.id && !isBusyUpdateRequestedStyle && updateRequestedStyleStatus === 0) {
+                                dispatch.updateRequestedStyleModel.updateRequestedStyle({
+                                    salesOrderId: salesOrder.id,
+                                    data: {
+                                        requestedStyle: requestedStyle
+                                    }
+                                })
+                            }
+                        }}>
+                        {t("Generic.Forms.Submit")}
+                    </Button>
+                </Box>
+            </Dialog>
+        )
+    }
 
     return (
         <Grid item container xs={12}>
@@ -104,8 +257,20 @@ export function ActiveOrder() {
                     </Grid>
                     <Grid item xs={12} sx={{
                         display: 'flex',
-                        justifyContent: 'flex-end'
+                        justifyContent: 'space-between'
                     }}>
+                        <FormControl>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={(() => {
+                                    if (salesOrder?.id && !isBusyUpdateAdditionalRequests) {
+                                        setIsRequestedStyleOpen(true);
+                                    }
+                                })}>
+                                {t("Pages.SalesOrderDetails.SelectRequestedStyle")}
+                            </Button>
+                        </FormControl>
                         <FormControl>
                             <Button
                                 disabled={isBusyUpdateAdditionalRequests}
@@ -131,6 +296,7 @@ export function ActiveOrder() {
                         </FormControl>
                     </Grid>
                 </Grid>
+                {RenderRequestedStyleDialog(content)}
                 <Snackbar
                     open={snackbarStatus}
                     autoHideDuration={6000}
@@ -140,10 +306,10 @@ export function ActiveOrder() {
                     <Alert onClose={() => {
                         setSnackbarStatus(false);
                     }}
-                        severity="success"
+                        severity={isSuccess ? "success" : "error"}
                         variant="filled"
                         sx={{ width: '100%' }}>
-                        {t("Generic.Forms.Success")}
+                        {t(`Generic.Forms.${isSuccess ? "Success" : "Error"}`)}
                     </Alert>
                 </Snackbar>
             </Paper>

@@ -50,6 +50,8 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public string? AdditionalRequests { get; private set; }
 
+        public string? RequestedStyle { get; private set; }
+
         public IReadOnlyList<SalesOrderLineItem> LineItems => _lineItems;
 
         public int? SalesOrderAddressId { get; set; }
@@ -231,7 +233,27 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public void UpdateAdditionalRequests(string? additionalRequests)
         {
+            if (State > SalesOrderState.Created)
+            {
+                throw new UpdateSalesOrderFailureException(AccountId, Id, "AdditionalRequests can only be updated for Created orders.");
+            }
+
             AdditionalRequests = additionalRequests;
+        }
+
+        public void UpdateRequestedStyle(string? requestedStyle)
+        {
+            if (string.IsNullOrWhiteSpace(requestedStyle))
+            {
+                throw new ArgumentNullException(nameof(requestedStyle));
+            }
+
+            if (State > SalesOrderState.Created)
+            {
+                throw new UpdateSalesOrderFailureException(AccountId, Id, "RequestedStyle can only be updated for Created orders.");
+            }
+
+            RequestedStyle = requestedStyle;
         }
     }
 }

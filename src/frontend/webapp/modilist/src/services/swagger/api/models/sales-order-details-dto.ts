@@ -98,4 +98,10 @@ export interface SalesOrderDetailsDTO {
      * @memberof SalesOrderDetailsDTO
      */
     additionalRequests?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SalesOrderDetailsDTO
+     */
+    requestedStyle?: string;
 }

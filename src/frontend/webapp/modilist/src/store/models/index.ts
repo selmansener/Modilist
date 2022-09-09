@@ -30,6 +30,7 @@ import { salesOrderDetailsModel } from "./salesOrders/SalesOrderDetails"
 import { salesOrdersQueryModel } from "./salesOrders/SalesOrdersQuery"
 import { updateAdditionalRequestsModel } from "./salesOrders/UpdateAdditionalRequests"
 import { updateEstimatedDeliveryDateModel } from "./salesOrders/UpdateEstimatedDeliveryDate"
+import { updateRequestedStyleModel } from "./salesOrders/UpdateRequestedStyle"
 import { updateSalesOrderAddressModel } from "./salesOrders/UpdateSalesOrderAddress"
 import { getSizeInfoModel } from "./sizeInfo/GetSizeInfo"
 import { upsertSizeInfoModel } from "./sizeInfo/UpsertSizeInfo"
@@ -94,6 +95,7 @@ export interface RootModel extends Models<RootModel> {
   getAddressModel: typeof getAddressModel,
   sendPartnershipMailModel: typeof sendPartnershipMailModel,
   sendJobApplicationMailModel: typeof sendJobApplicationMailModel,
+  updateRequestedStyleModel: typeof updateRequestedStyleModel,
 }
 
 export const models: RootModel = {
@@ -143,4 +145,5 @@ export const models: RootModel = {
   getAddressModel,
   sendPartnershipMailModel,
   sendJobApplicationMailModel,
+  updateRequestedStyleModel,
 }

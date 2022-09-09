@@ -26,5 +26,7 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.DTOs
         public SalesOrderAddressDTO SalesOrderAddress { get; set; }
 
         public string AdditionalRequests { get; set; }
+
+        public string RequestedStyle { get; set; }
     }
 }

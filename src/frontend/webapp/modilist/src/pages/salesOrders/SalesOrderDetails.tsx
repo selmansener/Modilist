@@ -1,11 +1,11 @@
-import { Alert, Button, Divider, FormControl, Grid, Link, Paper, Snackbar, TextField, Typography, useTheme } from "@mui/material";
+import { Alert, Box, Button, Dialog, DialogTitle, Divider, FormControl, Grid, Link, Paper, Snackbar, TextField, Typography, useTheme } from "@mui/material";
 import format from "date-fns/format";
 import { tr } from "date-fns/locale";
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { AddressDTO, SalesOrderState } from "../../services/swagger/api";
+import { AddressDTO, Gender, SalesOrderState } from "../../services/swagger/api";
 import { Dispatch, RootState } from "../../store/store";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { ImageComponent } from "../../components/image/ImageComponent";
@@ -16,19 +16,56 @@ import { LovelyRating } from "../../components/lovelyRating/LovelyRating";
 import { calculateAvgSalesOrderRating } from "./utils/calculateAvgRating";
 import { AddressSelection } from "../../components/addressSelection/AddressSelection";
 import { DeliveryDateDialog } from "./components/DeliveryDateDialog";
+import { CustomRadioButtonGroup } from "../../components/customRadioButton/CustomRadioButton";
+
+const requestedStyleMale = [
+    "Casual",
+    "Grunge",
+    "Bohem",
+    "Trendy",
+    "Elegant",
+    "Sportswear",
+    "Minimalist",
+    "Artsy",
+    "Vintage",
+    "Modest",
+    "Loungewear",
+    "BusinessCasual"
+];
+
+const requestedStyleFemale = [
+    "Casual",
+    "Grunge",
+    "Bohem",
+    "Trendy",
+    "Elegant",
+    "Sportswear",
+    "Minimalist",
+    "Artsy",
+    "Vintage",
+    "Modest",
+    "Loungewear",
+    "BusinessCasual"
+];
 
 export function SalesOrderDetails() {
     const { t } = useTranslation();
     const { salesOrderId } = useParams();
     const dispatch = useDispatch<Dispatch>();
+    const { isBusy: getAccountIsBusy, data: getAccountResponse } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: isBusySalesOrder, data: salesOrder, status: salesOrderStatus } = useSelector((state: RootState) => state.salesOrderDetailsModel);
     const { isBusy: isBusyUpdateAddress, status: updateAddressStatus } = useSelector((state: RootState) => state.updateSalesOrderAddressModel);
     const { isBusy: isBusyUpdateAdditionalRequests, status: updateAdditionalRequestsStatus } = useSelector((state: RootState) => state.updateAdditionalRequestsModel);
+    const { isBusy: isBusyUpdateRequestedStyle, status: updateRequestedStyleStatus } = useSelector((state: RootState) => state.updateRequestedStyleModel);
+    const isBusy = getAccountIsBusy || isBusySalesOrder || isBusyUpdateAddress || isBusyUpdateAdditionalRequests || isBusyUpdateRequestedStyle;
     const { cdnImg: imgBaseHost } = config;
     const [isAddressSelectionOpen, setIsAddressSelectionOpen] = useState(false);
     const [isDeliveryDateDialogOpen, setIsDeliveryDateDialogOpen] = useState(false);
     const [additionalRequests, setAdditionalRequests] = useState<string>(salesOrder?.additionalRequests ?? "");
     const [snackbarStatus, setSnackbarStatus] = useState<boolean>(false);
+    const [requestedStyle, setRequestedStyle] = useState<string>(salesOrder?.requestedStyle ?? "");
+    const [isRequestedStyleOpen, setIsRequestedStyleOpen] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
     const theme = useTheme();
 
     useEffect(() => {
@@ -217,8 +254,20 @@ export function SalesOrderDetails() {
                 </Grid>
                 <Grid item xs={12} sx={{
                     display: 'flex',
-                    justifyContent: 'flex-end'
+                    justifyContent: 'space-between'
                 }}>
+                    <FormControl>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={(() => {
+                                    if (salesOrder?.id && !isBusyUpdateAdditionalRequests) {
+                                        setIsRequestedStyleOpen(true);
+                                    }
+                                })}>
+                                {t("Pages.SalesOrderDetails.SelectRequestedStyle")}
+                            </Button>
+                        </FormControl>
                     <FormControl>
                         <Button
                             variant="contained"
@@ -238,6 +287,91 @@ export function SalesOrderDetails() {
                     </FormControl>
                 </Grid>
             </React.Fragment>
+        )
+    }
+    
+    const handleRequestedStyleClose = () => {
+        setIsRequestedStyleOpen(false);
+    }
+    
+    const requestedStyleData = getAccountResponse && (getAccountResponse?.gender === Gender.Female ? requestedStyleFemale : requestedStyleMale);
+
+    const content = requestedStyleData?.map(style => {
+        return {
+            value: style,
+            element: <Box textAlign="center">
+                <ImageComponent src={`${imgBaseHost}/outfit-styles/${getAccountResponse?.gender?.toString().toLowerCase()}/${style}.png`} width={155} />
+                <Typography variant="h6">
+                    {t(`Pages.SalesOrderDetails.OutfitStyles.${style}`)}
+                </Typography>
+            </Box>
+        }
+    }) ?? [];
+
+    const RenderRequestedStyleDialog = (content: {
+        value: string;
+        element: JSX.Element;
+    }[]) => {
+        if (!requestedStyleData || requestedStyleData.length === 0) {
+            return <></>
+        }
+
+        return (
+            <Dialog onClose={handleRequestedStyleClose} open={isRequestedStyleOpen} maxWidth="lg" fullWidth>
+                <DialogTitle sx={{
+                    mb:2
+                }}>
+                    <Typography variant="h3" align="center">
+                        {t("Pages.SalesOrderDetails.OutfitQuestion")}
+                    </Typography>
+                </DialogTitle>
+                <CustomRadioButtonGroup
+                    containerSx={{
+                        justifyContent: 'space-evenly'
+                    }}
+                    radioButtonSx={{
+                        flexBasis: '20%'
+                    }}
+                    name="requestedStyle"
+                    value={requestedStyle}
+                    contents={content}
+                    onChange={(value) => {
+                        setRequestedStyle(value);
+                    }}
+                />
+                <Box sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    px:[6],
+                    py:[2]
+                }}>
+                    <Box>
+                        <Typography>
+                            {t("Pages.SalesOrderDetails.OutfitInfo.1")}
+                        </Typography>
+                        <Typography>
+                            {t("Pages.SalesOrderDetails.OutfitInfo.2")}
+                        </Typography>
+                    </Box>
+                    <Button
+                        disabled={isBusy || requestedStyle === ""}
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            if (salesOrder?.id && !isBusyUpdateRequestedStyle && updateRequestedStyleStatus === 0) {
+                                dispatch.updateRequestedStyleModel.updateRequestedStyle({
+                                    salesOrderId: salesOrder.id,
+                                    data: {
+                                        requestedStyle: requestedStyle
+                                    }
+                                })
+                            }
+                        }}>
+                        {t("Generic.Forms.Submit")}
+                    </Button>
+                </Box>
+            </Dialog>
         )
     }
 
@@ -392,6 +526,7 @@ export function SalesOrderDetails() {
                     setIsDeliveryDateDialogOpen(false);
                 }}
             />}
+            {salesOrder?.state === SalesOrderState.Created && RenderRequestedStyleDialog(content)}
             <Snackbar
                 open={snackbarStatus}
                 autoHideDuration={6000}
