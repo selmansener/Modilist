@@ -51,6 +51,7 @@ export default function ContactInfo() {
     const { isBusy: getDefaultAddressIsBusy, data: getDefaultAddressResponse } = useSelector((state: RootState) => state.getDefaultAddressModel);
     const dispatch = useDispatch<Dispatch>();
     const [selectedCity, setSelectedCity] = useState<string | undefined>();
+    const [addressNumberShrink, setAddressNumberShrink] = useState(false);
 
     const requiredField = t("FormValidation.RequiredField");
     const minCharacters = t("FormValidation.MinCharacters").toString();
@@ -107,6 +108,10 @@ export default function ContactInfo() {
         })
     }, []);
 
+    useEffect(() => {
+        setAddressNumberShrink(address.phone !== undefined && address.phone !== "");
+    }, [address]);
+
     return (
         <>
             <Grid item container spacing={4}>
@@ -159,6 +164,9 @@ export default function ContactInfo() {
                             helperText={touched.phone && errors?.phone}
                             InputProps={{
                                 inputComponent: PhoneInputMask as any,
+                            }}
+                            InputLabelProps={{
+                                shrink: addressNumberShrink
                             }}
                         />
                     </FormControl>

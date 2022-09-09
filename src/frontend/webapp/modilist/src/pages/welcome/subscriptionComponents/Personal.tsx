@@ -50,6 +50,7 @@ export default function Personal() {
     const requiredField = t("FormValidation.RequiredField");
     const minCharacters = t("FormValidation.MinCharacters").toString();
     const [isDatePickerOpen, setIsDatePickerOpen] = React.useState(false);
+    const [personalNumberShrink, setpersonalNumberShrink] = useState(false);
     const schema = Yup.object({
         firstName: Yup.string().required(requiredField),
         lastName: Yup.string().required(requiredField),
@@ -105,6 +106,10 @@ export default function Personal() {
             // dispatch.updateAccountModel.RESET();
         }
     }, [updateAccountStatus]);
+
+    useEffect(() => {
+        setpersonalNumberShrink(account.phone !== undefined && account.phone !== "");
+    }, [account]);
 
     return <Grid item container xs={12} spacing={4}>
         <Grid item xs={12}>
@@ -199,7 +204,11 @@ export default function Personal() {
                     onBlur={handleBlur}
                     InputProps={{
                         inputComponent: PhoneInputMask as any,
+                    }}
+                    InputLabelProps={{
+                        shrink: personalNumberShrink
                     }} />
+
             </FormControl>
         </Grid>
 

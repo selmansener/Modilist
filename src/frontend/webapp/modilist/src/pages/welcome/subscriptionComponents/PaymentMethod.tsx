@@ -14,6 +14,9 @@ import 'react-credit-cards/es/styles-compiled.css';
 import IMask, { MaskedRange } from "imask";
 import { config } from "../../../config";
 
+type CreditCardNumber = {
+    number: boolean;
+}
 interface InputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
     name: string;
@@ -83,6 +86,7 @@ export default function PaymentMethod() {
 
     const requiredField = t("FormValidation.RequiredField");
     const [cardFocused, setCardFocused] = useState<Focused>();
+    const [creditCardNumberShrink, setCreditCardNumberShrink] = useState(false);
     const monthTwoDigits = t("Pages.Welcome.PaymentMethod.MonthTwoDigits");
     const monthValidation = t("Pages.Welcome.PaymentMethod.MonthValidation");
     const yearTwoDigits = t("Pages.Welcome.PaymentMethod.YearTwoDigits");
@@ -184,6 +188,12 @@ export default function PaymentMethod() {
         })
     }, []);
 
+    useEffect(() => {
+
+        setCreditCardNumberShrink(creditCard.cardNumber !== undefined && creditCard.cardNumber !== '');
+
+    }, [creditCard])
+
     return (
         <>
             <Grid item container spacing={4}>
@@ -211,6 +221,9 @@ export default function PaymentMethod() {
                                 onBlur={handleBlur}
                                 InputProps={{
                                     inputComponent: CreditCardInputMask as any,
+                                }}
+                                InputLabelProps={{
+                                    shrink: creditCardNumberShrink
                                 }}
                             />
                         </FormControl>
