@@ -107,7 +107,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
             ))}
           </Box>
           <Box>
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -160,7 +160,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
                   </Grid>
                 </Grid>
               </MenuItem>
-            </Menu>
+            </Menu> */}
             <NavLink to={"/settings"} style={{ color: "#fff" }}>
               <IconButton
                 size="large"
