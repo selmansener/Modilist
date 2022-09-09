@@ -339,9 +339,6 @@ export function SalesOrderDetails() {
                                 </Typography>
                             </Grid>
                             <Grid item xs={6}>
-                                <Typography variant="body1" align="right">
-                                    CARGO COMPANY IMAGE
-                                </Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={4}>
