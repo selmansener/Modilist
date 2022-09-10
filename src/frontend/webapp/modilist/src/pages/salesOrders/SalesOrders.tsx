@@ -114,7 +114,6 @@ export function SalesOrders() {
                             <MenuItem value={SalesOrderStateMap.All}>{t("Pages.SalesOrders.Filters.SalesOrderState.All")}</MenuItem>
                             <MenuItem value={SalesOrderStateMap.Active}>{t("Pages.SalesOrders.Filters.SalesOrderState.Active")}</MenuItem>
                             <MenuItem value={SalesOrderStateMap.Completed}>{t("Pages.SalesOrders.Filters.SalesOrderState.Completed")}</MenuItem>
-                            <MenuItem value={SalesOrderStateMap.Returned}>{t("Pages.SalesOrders.Filters.SalesOrderState.Returned")}</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
