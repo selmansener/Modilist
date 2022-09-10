@@ -1,4 +1,8 @@
 ﻿
+using System.Numerics;
+
+using Microsoft.CodeAnalysis.CSharp;
+
 using Modilist.Domains.Base;
 using Modilist.Domains.Models.AccountDomain;
 using Modilist.Infrastructure.Shared.Enums;
@@ -14,6 +18,7 @@ namespace Modilist.Domains.Models.SubscriptionDomain
             AccountId = accountId;
             State = SubscriptionState.Active;
             StartedAt = DateTime.UtcNow;
+            MaxPricingLimit = "1000";
         }
 
         public Guid AccountId { get; private set; }
@@ -32,18 +37,31 @@ namespace Modilist.Domains.Models.SubscriptionDomain
 
         public SubscriptionState State { get; private set; }
 
-        public int MaxPricingLimit { get; private set; }
+        public string MaxPricingLimit { get; private set; }
+
+        public int MaxPricingLimitAsInt { get; private set; }
 
         public IReadOnlyList<SubscriptionStateLog> StateLogs => _stateLogs;
 
-        public void SetMaxPricingLimit(int maxPricingLimit)
+        public void SetMaxPricingLimit(string maxPricingLimit)
         {
-            if (maxPricingLimit < 500)
+            int result;
+
+            if (int.TryParse(maxPricingLimit, out result) && result < 500)
             {
                 throw new InvalidOperationException("MaxPricingLimit can not be less than 500");
             }
+            else if(!int.TryParse(maxPricingLimit, out result) && !maxPricingLimit.Equals("+2500"))
+            {
+                throw new InvalidOperationException("MaxPricingLimit must a valid integer");
+            }
+            else
+            {
+                result = 9999;
+            }
 
             MaxPricingLimit = maxPricingLimit;
+            MaxPricingLimitAsInt = result;
         }
 
         public void Suspend(IEnumerable<SubscriptionSuspentionReason> suspentionReasons)

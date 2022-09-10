@@ -11,7 +11,7 @@ export function SubscriptionDetails() {
     const dispatch = useDispatch<Dispatch>();
     const { isBusy: getSubscriptionIsBusy, data: getSubscription, status: getSubscriptionStatus } = useSelector((state: RootState) => state.getSubscriptionModel);
     const { isBusy: createSubscriptionIsBusy, data: createSubscription, status: createSubscriptionStatus } = useSelector((state: RootState) => state.createSubscriptionModel);
-    const [maxLimit, setMaxLimit] = useState<number>(getSubscription?.maxPricingLimit ?? 1000);
+    const [maxLimit, setMaxLimit] = useState<string>(getSubscription?.maxPricingLimit ?? "1000");
 
     useEffect(() => {
         if (createSubscription && createSubscriptionStatus === 200) {
@@ -25,7 +25,7 @@ export function SubscriptionDetails() {
         }
 
         if (getSubscriptionStatus === 200 && getSubscription?.maxPricingLimit) {
-            setMaxLimit(getSubscription?.maxPricingLimit ?? 1000);
+            setMaxLimit(getSubscription?.maxPricingLimit ?? "1000");
         }
     }, [getSubscriptionStatus]);
 
@@ -42,7 +42,7 @@ export function SubscriptionDetails() {
     }, []);
 
     return <Grid item container spacing={4}>
-        <Grid item xs={10}>
+        <Grid item xs={9}>
             <FormControl fullWidth>
                 <FormControlLabel
                     labelPlacement="bottom"
@@ -57,30 +57,47 @@ export function SubscriptionDetails() {
                         <Slider
                             color="secondary"
                             aria-label="Temperature"
-                            value={maxLimit}
+                            value={parseInt(maxLimit)}
                             getAriaValueText={(val, index) => val.toString()}
-                            valueLabelFormat={(val, index) => <Typography display="inline">{val}<CurrencyLiraIcon fontSize="small" sx={{
-                                verticalAlign: 'text-bottom',
-                                display: 'inline-flex'
-                            }} /></Typography>}
+                            valueLabelFormat={(val, index) =>
+                                val <= 2500 ?
+                                    <Typography display="inline">{val}<CurrencyLiraIcon fontSize="small" sx={{
+                                        verticalAlign: 'text-bottom',
+                                        display: 'inline-flex'
+                                    }} /></Typography> :
+                                    <Typography display="inline">+2500<CurrencyLiraIcon fontSize="small" sx={{
+                                        verticalAlign: 'text-bottom',
+                                        display: 'inline-flex'
+                                    }} /></Typography>
+                            }
                             valueLabelDisplay="auto"
                             onChange={(e, val) => {
-                                setMaxLimit(val as number);
+                                if(val > 2500){
+                                    setMaxLimit("+2500");
+                                }
+                                else{
+                                    setMaxLimit(val.toString());
+                                }
                             }}
                             step={250}
                             marks
                             min={500}
-                            max={2500}
+                            max={2750}
                         />
                     } />
             </FormControl>
         </Grid>
-        <Grid item xs={2} sx={{
+        <Grid item xs={3} sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
         }} >
-            <Typography variant="h2" color="secondary">{maxLimit}<CurrencyLiraIcon fontSize="large" /></Typography>
+            <Typography variant="h2" color="secondary">{
+                parseInt(maxLimit) <= 2500 ?
+                    maxLimit :
+                    "+2500"}
+                <CurrencyLiraIcon fontSize="large" /></Typography>
+                {parseInt(maxLimit) > 2500 && <Typography variant="h5" color="secondary">{t("Pages.Welcome.Subscription.SubscriptionDetails.Description")}</Typography>}
         </Grid>
     </Grid>
 }

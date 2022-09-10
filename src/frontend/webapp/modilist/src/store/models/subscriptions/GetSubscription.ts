@@ -14,7 +14,7 @@ export const getSubscriptionModel = createModel<RootModel>()({
             blockedAt: undefined,
             closedAt: undefined,
             state : SubscriptionState.None,
-            maxPricingLimit: 1000,
+            maxPricingLimit: "1000",
         },
         status: 0
     } as ResponseModel<SubscriptionDTO>,

@@ -48,6 +48,7 @@ export * from './size-info-dto';
 export * from './sort-option';
 export * from './sorting-direction';
 export * from './style-preferences-dto';
+export * from './subscription-blocking-reason';
 export * from './subscription-dto';
 export * from './subscription-state';
 export * from './subscription-suspention-reason';

@@ -19,8 +19,8 @@
 export interface UpdateSubscriptionMaxPricingLimit {
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof UpdateSubscriptionMaxPricingLimit
      */
-    maxPricingLimit?: number;
+    maxPricingLimit?: string;
 }

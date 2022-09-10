@@ -378,7 +378,8 @@
             },
             "Subscription": {
                 "SubscriptionDetails": {
-                    "PriceTitle": "Kombinleriniz için maksimum harcama limiti"
+                    "PriceTitle": "Kombinleriniz için maksimum harcama limiti",
+                    "Description": "ve üzeri"
                 }
             },
             "PaymentMethod": {
@@ -392,7 +393,7 @@
                 "YearTwoDigits": "Lütfen yılı iki haneli olarak giriniz",
                 "YearValidation": "Lütfen geçerli bir yıl giriniz",
                 "CvcValidation": "Lütfen geçerli bir CVC giriniz",
-                "CvcThreeDigit" : "Lütfen 3 haneli olarak giriniz",
+                "CvcThreeDigit": "Lütfen 3 haneli olarak giriniz",
                 "CardHolderNameValidation": "Lütfen sayı kullanmadan geçerli bir isim giriniz"
             }
         },
@@ -478,7 +479,7 @@
                 "AddressName": "Adres Adı: ",
                 "FullAddress": "Adres: ",
                 "Default": "Varsayılan Adres",
-                "SetAsDefault":"Varsayılan Olarak Ata"
+                "SetAsDefault": "Varsayılan Olarak Ata"
             }
         },
         "NewAddress": {
@@ -546,8 +547,8 @@
                 "1": "Modilist ile ürünlerinizin en doğru kitleye kolaylıkla ulaştırın.",
                 "2": "İş ortaklıkları için aşağıdaki formu doldurun, en kısa sürede size ulaşalım."
             },
-            "CompanyName":"Marka/Şirket Adı",
-            "JobTitle":"Pozisyon/Görev"
+            "CompanyName": "Marka/Şirket Adı",
+            "JobTitle": "Pozisyon/Görev"
         },
         "Careers": {
             "Title": "Takımın bir parçası ol!",
@@ -830,7 +831,7 @@
         }
     },
     "CompanyAddress": {
-        "FullAddress":"Kızılırmak Mah. Dumlupınar Blv. No:3C-1-160 Çankaya/Ankara 06510",
+        "FullAddress": "Kızılırmak Mah. Dumlupınar Blv. No:3C-1-160 Çankaya/Ankara 06510",
         "FirstLine": "Kızılırmak Mah. Dumlupınar Blv. No:3C-1-160",
         "SecondLine": "Çankaya/Ankara 06510",
         "ZipCode": "06510"

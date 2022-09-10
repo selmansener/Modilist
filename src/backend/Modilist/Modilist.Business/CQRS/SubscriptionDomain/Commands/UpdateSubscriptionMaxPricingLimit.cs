@@ -16,10 +16,26 @@ namespace Modilist.Business.CQRS.SubscriptionDomain.Commands
 {
     public class UpdateSubscriptionMaxPricingLimit : IRequest<SubscriptionDTO>
     {
+        private int _maxPricingLimit = 0;
+
         [JsonIgnore]
         public Guid AccountId { get; set; }
 
-        public int MaxPricingLimit { get; set; }
+        public string MaxPricingLimit { get; set; } = "1000";
+
+        [JsonIgnore]
+        public int MaxPricingLimitAsInt 
+        { 
+            get
+            {
+                if (!int.TryParse(MaxPricingLimit, out _maxPricingLimit))
+                {
+
+                    _maxPricingLimit = 2750;
+                }
+                return _maxPricingLimit; 
+            }
+        }
     }
 
     internal class UpdateSubscriptionMaxPricingLimitValidator : AbstractValidator<UpdateSubscriptionMaxPricingLimit>
@@ -27,11 +43,9 @@ namespace Modilist.Business.CQRS.SubscriptionDomain.Commands
         public UpdateSubscriptionMaxPricingLimitValidator()
         {
             RuleFor(x => x.AccountId).NotEmpty();
-            RuleFor(x => x.MaxPricingLimit)
-                .NotEmpty()
-                .GreaterThan(500)
-                .Must(x => x % 250 == 0)
-                .When(x => x.MaxPricingLimit > 500, ApplyConditionTo.CurrentValidator);
+            RuleFor(x => x.MaxPricingLimitAsInt).NotEmpty()
+                .GreaterThanOrEqualTo(500)
+                .Must(x => x % 250 == 0);
         }
     }
 
