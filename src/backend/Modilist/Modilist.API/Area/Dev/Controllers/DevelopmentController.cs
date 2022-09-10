@@ -33,5 +33,12 @@ namespace Modilist.API.Area.Dev.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("GetClientIP")]
+        public IActionResult GetClientIP()
+        {
+            var ipAddress = Request.HttpContext.Connection.RemoteIpAddress;
+            return Ok(new { IPAdress = ipAddress?.ToString() });
+        }
     }
 }
