@@ -47,6 +47,8 @@ import { ComingSoon } from './comingSoon/ComingSoon';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Partnership } from '../pages/partnership/Partnership';
 import { Careers } from '../pages/careers/Careers';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
 
 interface RouterOptions {
   title?: string,
@@ -88,7 +90,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     helmet: "Pages.Titles.Partnership",
@@ -99,7 +101,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     helmet: "Pages.Titles.Careers",
@@ -110,14 +112,13 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
-    title: "Pages.Titles.Main",
     helmet: "Pages.Titles.Main",
     route: "",
     menuItem: {
-      icon: <HomeIcon sx={{
+      icon: <HomeOutlinedIcon sx={{
         verticalAlign: "sub"
       }} />,
       name: "Pages.Titles.Main"
@@ -128,14 +129,14 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SalesOrders",
     helmet: "Pages.Titles.SalesOrders",
     route: "sales-orders",
     menuItem: {
-      icon: <ShoppingBasketIcon sx={{
+      icon: <ShoppingBasketOutlinedIcon sx={{
         verticalAlign: "sub"
       }} />,
       name: "Pages.Titles.SalesOrders"
@@ -146,7 +147,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SalesOrders",
@@ -161,7 +162,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SalesOrders",
@@ -176,7 +177,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SalesOrders",
@@ -188,7 +189,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SalesOrders",
@@ -200,7 +201,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.SizeInfo",
@@ -218,7 +219,7 @@ const routes: RouterOptions[] = [
     },
     component: <SizeInfo />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.StylePreferences",
@@ -236,7 +237,7 @@ const routes: RouterOptions[] = [
     },
     component: <StylePreferences />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.FitPreferences",
@@ -254,7 +255,7 @@ const routes: RouterOptions[] = [
     },
     component: <FitPreferences />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.FabricProperties",
@@ -272,7 +273,7 @@ const routes: RouterOptions[] = [
     },
     component: <FabricProperties />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.Account",
@@ -287,7 +288,7 @@ const routes: RouterOptions[] = [
     },
     component: <Account />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.Settings",
@@ -302,7 +303,7 @@ const routes: RouterOptions[] = [
     },
     component: <AccountSettings />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.PaymentMethods",
@@ -320,7 +321,7 @@ const routes: RouterOptions[] = [
     },
     component: <PaymentMethods />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.NewPaymentMethod",
@@ -335,7 +336,7 @@ const routes: RouterOptions[] = [
     },
     component: <NewPaymentMethod />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.Addresses",
@@ -353,7 +354,7 @@ const routes: RouterOptions[] = [
     },
     component: <Addresses />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.NewAddress",
@@ -368,7 +369,7 @@ const routes: RouterOptions[] = [
     },
     component: <UpsertAddress />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     title: "Pages.Titles.UpdateAddress",
@@ -383,7 +384,7 @@ const routes: RouterOptions[] = [
     },
     component: <UpsertAddress />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     helmet: "Pages.Titles.Welcome",
@@ -394,7 +395,7 @@ const routes: RouterOptions[] = [
     },
     component: <GenderSelection />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     helmet: "Pages.Titles.Welcome",
@@ -405,7 +406,7 @@ const routes: RouterOptions[] = [
     },
     component: <WelcomeSteps />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     helmet: "Pages.Titles.AccountVerification",
@@ -416,7 +417,7 @@ const routes: RouterOptions[] = [
     },
     component: <AccountCreated />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     helmet: "Pages.Titles.AccountVerification",
@@ -427,7 +428,7 @@ const routes: RouterOptions[] = [
     },
     component: <AccountVerified />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     helmet: "Pages.Titles.AccountVerification",
@@ -438,7 +439,7 @@ const routes: RouterOptions[] = [
     },
     component: <AccountVerificationFailed />,
     isPublic: false,
-    disabledEnvironments: ["production"]
+    disabledEnvironments: []
   },
   {
     helmet: "Pages.Titles.Main",
@@ -449,7 +450,7 @@ const routes: RouterOptions[] = [
     },
     component: <></>,
     isPublic: false,
-    disabledEnvironments: ["development", "int", "staging"]
+    disabledEnvironments: ["production", "development", "int", "staging"]
   },
 ]
 

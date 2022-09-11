@@ -7,11 +7,14 @@ import { Helmet } from "react-helmet";
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 import { ActiveOrder } from "./components/ActiveOrder";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 export function Main() {
     const theme = useTheme();
     const { t } = useTranslation();
     const { cdnImg: imgBaseHost } = config;
+    const { isBusy: getAccountIsBusy, data: getAccountResponse } = useSelector((state: RootState) => state.getAccountModel);
 
     return (
         <React.Fragment>
@@ -19,6 +22,11 @@ export function Main() {
                 <title>{"Bak bu sana yakışır | Modilist "}</title>
             </Helmet>
             <Grid item container xs={12} spacing={4}>
+                <Grid item xs={12}>
+                    <Typography variant="h4" component="span">
+                        {t("Pages.Main.Welcome", { username: getAccountResponse?.firstName })}
+                    </Typography>
+                </Grid>
                 <Grid item container xs={6} spacing={4}>
                     <ActiveOrder />
                     <Grid item xs={12}>
@@ -42,7 +50,7 @@ export function Main() {
                 </Grid>
                 <Grid item container xs={6} spacing={4} display="flex" alignContent="flex-start">
                     <Grid item xs={12}>
-                        <Paper elevation={6}  sx={{
+                        <Paper elevation={6} sx={{
                             p: 2,
                             minHeight: 428
                         }}>

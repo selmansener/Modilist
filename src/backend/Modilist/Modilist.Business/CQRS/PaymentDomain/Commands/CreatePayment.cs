@@ -9,7 +9,9 @@ using Mapster;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using Modilist.Business.CQRS.PaymentDomain.DTOs;
@@ -23,6 +25,7 @@ using Modilist.Domains.Models.SalesOrderDomain;
 using Modilist.Infrastructure.Shared.Configurations;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 using IyzicoPayment = Iyzipay.Model.Payment;
 
@@ -47,25 +50,31 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
     internal class CreatePaymentHandler : IRequestHandler<CreatePayment, PaymentDTO>
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPaymentRepository _paymentRepository;
         private readonly ISalesOrderRepository _salesOrderRepository;
         private readonly IPaymentMethodRepository _paymentMethodRepository;
         private readonly IAccountRepository _accountRepository;
         private readonly IyzicoAPIOptions _iyzicoAPIOptions;
+        private readonly ILogger<CreatePaymentHandler> _logger;
 
 
         public CreatePaymentHandler(
+            IHttpContextAccessor httpContextAccessor,
             IPaymentRepository paymentRepository,
             ISalesOrderRepository salesOrderRepository,
             IPaymentMethodRepository paymentMethodRepository,
             IAccountRepository accountRepository,
-            IOptions<IyzicoAPIOptions> options)
+            IOptions<IyzicoAPIOptions> options,
+            ILogger<CreatePaymentHandler> logger)
         {
+            _httpContextAccessor = httpContextAccessor;
             _paymentRepository = paymentRepository;
             _salesOrderRepository = salesOrderRepository;
             _paymentMethodRepository = paymentMethodRepository;
             _iyzicoAPIOptions = options.Value;
             _accountRepository = accountRepository;
+            _logger = logger;
         }
 
         public async Task<PaymentDTO> Handle(CreatePayment request, CancellationToken cancellationToken)
@@ -117,14 +126,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
             var soldLineItems = salesOrder.LineItems.Where(x => x.State == Infrastructure.Shared.Enums.SalesOrderLineItemState.Sold);
 
-            foreach (var lineItem in soldLineItems)
-            {
-                payment.AddLineItem(lineItem.Product);
-            }
-
-            var conversationId = Guid.NewGuid().ToString();
-
-            var paymentRequest = GetPaymentRequest(account, paymentMethod, salesOrder, payment, conversationId);
+            var paymentRequest = GetPaymentRequest(account, paymentMethod, salesOrder, payment);
 
             IyzicoPayment iyzicoPayment = IyzicoPayment.Create(paymentRequest, new Iyzipay.Options
             {
@@ -133,12 +135,37 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
                 SecretKey = _iyzicoAPIOptions.SecretKey
             });
 
+            var iyzicoPaymentLog = JsonConvert.SerializeObject(iyzicoPayment, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                },
+                Formatting = Formatting.Indented
+            });
+
+            _logger.LogInformation(iyzicoPaymentLog);
+
             if (iyzicoPayment.Status == "success")
             {
                 if (iyzicoPayment.ConversationId != paymentRequest.ConversationId)
                 {
                     // TODO: we might be hacked!!!
                     throw new InvalidOperationException("payment request failed");
+                }
+
+                foreach (var lineItem in soldLineItems)
+                {
+                    var paymentItemTransactionId = iyzicoPayment.PaymentItems.FirstOrDefault(x => x.ItemId == lineItem.ProductId.ToString())?.PaymentTransactionId;
+
+                    if (string.IsNullOrEmpty(paymentItemTransactionId))
+                    {
+                        _logger.LogCritical("PaymentTransactionId is null for SalesOrder: {SalesOrderId}, Account: {AccountId}, Payment: {PaymentId}", salesOrder.Id, account.Id, iyzicoPayment.PaymentId);
+                    }
+
+                    payment.AddLineItem(lineItem.Product, paymentItemTransactionId ?? string.Empty);
                 }
 
                 await _paymentRepository.AddAsync(payment, cancellationToken);
@@ -157,7 +184,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
             return payment.Adapt<PaymentDTO>();
         }
 
-        private CreatePaymentRequest GetPaymentRequest(Account account, PaymentMethod paymentMethod, SalesOrder salesOrder, Domains.Models.PaymentDomain.Payment payment, string conversationId)
+        private CreatePaymentRequest GetPaymentRequest(Account account, PaymentMethod paymentMethod, SalesOrder salesOrder, Domains.Models.PaymentDomain.Payment payment)
         {
             var soldLineItems = salesOrder.LineItems.Where(x => x.State == Infrastructure.Shared.Enums.SalesOrderLineItemState.Sold);
 
@@ -176,7 +203,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
                 Email = account.Email,
                 IdentityNumber = "00000000000",
                 RegistrationAddress = salesOrder.SalesOrderAddress.FullAddress,
-                Ip = "00.00.00.000",
+                Ip = GetRemoteAddressIP(),
                 City = salesOrder.SalesOrderAddress.City,
                 Country = salesOrder.SalesOrderAddress.Country,
                 ZipCode = salesOrder.SalesOrderAddress.ZipCode,
@@ -205,7 +232,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
             {
                 var basketItem = new BasketItem
                 {
-                    Id = lineItem.Id.ToString(),
+                    Id = lineItem.ProductId.ToString(),
                     Name = lineItem.Product.Name,
                     Category1 = lineItem.Product.Category,
                     ItemType = BasketItemType.PHYSICAL.ToString(),
@@ -218,9 +245,9 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
             CreatePaymentRequest paymetRequest = new CreatePaymentRequest
             {
                 Locale = Locale.TR.ToString(),
-                ConversationId = conversationId,
-                Price = payment.TotalPrice.ToString(new CultureInfo("en")),
-                PaidPrice = payment.TotalPrice.ToString(new CultureInfo("en")),
+                ConversationId = $"{account.Id}/{salesOrder.Id}",
+                Price = soldLineItems.Sum(x => x.Product.Price).ToString(new CultureInfo("en")),
+                PaidPrice = soldLineItems.Sum(x => x.Product.Price).ToString(new CultureInfo("en")),
                 Currency = Currency.TRY.ToString(),
                 Installment = 1,
                 BasketId = salesOrder.Id.ToString(),
@@ -234,6 +261,29 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
             };
 
             return paymetRequest;
+        }
+
+        private string GetRemoteAddressIP()
+        {
+            string remoteIPAddress = "00.00.00.000";
+
+            try
+            {
+                var ip = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString();
+
+                if (string.IsNullOrEmpty(ip))
+                {
+                    return remoteIPAddress;
+                }
+
+                remoteIPAddress = ip;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch remote IP address.");
+            }
+
+            return remoteIPAddress;
         }
     }
 }

@@ -7,6 +7,7 @@ using JsonNet.ContractResolvers;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 using Modilist.Business.Seed.Configuration;
@@ -33,18 +34,25 @@ namespace Modilist.Business.Seed
         private readonly SeedCache _seedCache;
         private readonly SeedServices _seedServices;
         private readonly ModilistDbContext _dbContext;
+        private readonly IHostEnvironment _hostEnvironment;
 
-        public Seeder(ILogger<Seeder> logger, IServiceProvider serviceProvider, SeedCache seedCache, SeedServices seedServices, ModilistDbContext dbContext)
+        public Seeder(ILogger<Seeder> logger, IServiceProvider serviceProvider, SeedCache seedCache, SeedServices seedServices, ModilistDbContext dbContext, IHostEnvironment hostEnvironment)
         {
             _logger = logger;
             _serviceProvider = serviceProvider;
             _seedCache = seedCache;
             _seedServices = seedServices;
             _dbContext = dbContext;
+            _hostEnvironment = hostEnvironment;
         }
 
         public void ClearExecutedServices()
         {
+            if (_hostEnvironment.IsProduction())
+            {
+                throw new NotSupportedException("Auto Migrations are not supported for production environment.");
+            }
+
             var assembly = typeof(SeedData).Assembly;
             using (var stream = assembly.GetManifestResourceStream("Modilist.Business.Seed.ClearDatabase.sql"))
             using (var reader = new StreamReader(stream, Encoding.UTF8))
@@ -71,6 +79,11 @@ namespace Modilist.Business.Seed
 
         public async Task Seed(SeedServiceType service, CancellationToken cancellationToken)
         {
+            if (_hostEnvironment.IsProduction())
+            {
+                throw new NotSupportedException("Auto Migrations are not supported for production environment.");
+            }
+
             try
             {
                 await _dbContext.Database.BeginTransactionAsync(cancellationToken);

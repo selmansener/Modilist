@@ -15,15 +15,22 @@ namespace Modilist.API.Area.Dev.Controllers
     public class DevelopmentController : Controller
     {
         private readonly ISeeder _seeder;
+        private readonly IHostEnvironment _hostEnvironment;
 
-        public DevelopmentController(ISeeder seeder)
+        public DevelopmentController(ISeeder seeder, IHostEnvironment hostEnvironment)
         {
             _seeder = seeder;
+            _hostEnvironment = hostEnvironment;
         }
 
         [HttpPost("Seed")]
         public async Task<IActionResult> Seed(SeedServiceType seedServiceType, CancellationToken cancellationToken, bool recreateDb = false)
         {
+            if (_hostEnvironment.IsProduction())
+            {
+                return StatusCode(405);
+            }
+
             if (recreateDb)
             {
                 _seeder.ClearExecutedServices();

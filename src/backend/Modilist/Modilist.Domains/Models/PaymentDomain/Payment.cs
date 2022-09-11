@@ -39,14 +39,14 @@ namespace Modilist.Domains.Models.PaymentDomain
 
         // TODO: add invoice
 
-        public void AddLineItem(Product product)
+        public void AddLineItem(Product product, string paymentTransactionId)
         {
             if (_lineItems.Any(x => x.ProductId == product.Id))
             {
                 throw new DuplicatePaymentLineItemException(AccountId, Id, product.Id);
             }
 
-            _lineItems.Add(new PaymentLineItem(Id, product.Id, product.Price, product.PriceWithoutVAT));
+            _lineItems.Add(new PaymentLineItem(Id, product.Id, product.Price, product.PriceWithoutVAT, paymentTransactionId));
 
             TotalPrice += product.Price;
             TotalPriceWithoutVAT += product.PriceWithoutVAT;

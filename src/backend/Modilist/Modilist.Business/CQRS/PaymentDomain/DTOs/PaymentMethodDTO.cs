@@ -8,6 +8,8 @@ namespace Modilist.Business.CQRS.PaymentDomain.DTOs
 {
     public class PaymentMethodDTO
     {
+        public int Id { get; set; }
+
         public string? CardAssociation { get; set; }
 
         public string? CardFamily { get; set; }

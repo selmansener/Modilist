@@ -87,7 +87,7 @@ export function ImageComponent(props: ImageProps) {
         }
     }
 
-    return <Box ref={ref}>
+    return <Box ref={ref} sx={sx}>
         {loading && <Skeleton sx={{ width: width, height: height }} animation="wave" variant="rectangular" />}
         {RenderImage()}
     </Box>

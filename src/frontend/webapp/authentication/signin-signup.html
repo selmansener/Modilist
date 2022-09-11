@@ -292,8 +292,7 @@
     <div class="left">
       <div class="top">
         <img class="companyLogo" data-tenant-branding-logo="true"
-          src="https://cdn.modilist.com/img/logo/svg/originalhorizontallogoslogan.svg"
-          alt="Company Logo">
+          src="https://cdn.modilist.com/img/logo/svg/originalhorizontallogoslogan.svg" alt="Company Logo">
       </div>
       <div class="bottom">
         <img src="https://cdn.modilist.com/img/gender/female.svg" alt="Female">
@@ -302,13 +301,45 @@
     </div>
     <div class="container">
       <div class="panel">
-        <h1 style="text-align: center;">Merhaba</h1>
-        <p style="text-align: center;">Stilini keşfedip modaya uygun giyinmek istiyorsan;</p>
+        <h1 id="hello" style="text-align: center;">Merhaba</h1>
+        <p id="description" style="text-align: center;">Stilini keşfedip modaya uygun giyinmek istiyorsan;</p>
         <div id="api" role="main">
         </div>
       </div>
     </div>
   </div>
+  <script>
+    const tr = {
+      hello: "Merhaba",
+      description: "Stilini keşfedip modaya uygun giyinmek istiyorsan;"
+    }
+
+    const en = {
+      hello: "Hello",
+      description: "If you want to discover your style and dress in fashion;"
+    }
+
+    let currentLang;
+    switch (navigator.language) {
+      case "en-US":
+      case "en-GB":
+      case "en":
+        currentLang = en;
+        break;
+
+      case "tr-TR":
+      case "tr":
+      default:
+        currentLang = tr;
+        break;
+    }
+
+    const hello = document.getElementById("hello");
+    const description = document.getElementById("description");
+    hello.innerHTML = currentLang.hello;
+    description.innerHTML = currentLang.description;
+
+  </script>
 </body>
 
 </html>

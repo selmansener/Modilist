@@ -17,7 +17,8 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        button, input {
+        button,
+        input {
             font-family: 'Poppins', sans-serif;
         }
 
@@ -308,8 +309,7 @@
         <div class="left">
             <div class="top">
                 <img class="companyLogo" data-tenant-branding-logo="true"
-                    src="https://cdn.modilist.com/img/logo/svg/originalhorizontallogoslogan.svg"
-                    alt="Company Logo">
+                    src="https://cdn.modilist.com/img/logo/svg/originalhorizontallogoslogan.svg" alt="Company Logo">
             </div>
             <div class="bottom">
                 <img src="https://cdn.modilist.com/img/gender/female.svg" alt="Female">
@@ -318,21 +318,72 @@
         </div>
         <div class="container">
             <div class="panel">
-                <h1 style="text-align: center;">Merhaba</h1>
-                <p style="text-align: center;">Stilini keşfedip modaya uygun giyinmek istiyorsan;</p>
+                <h1 id="hello" style="text-align: center;">Merhaba</h1>
+                <p id="description" style="text-align: center;">Stilini keşfedip modaya uygun giyinmek istiyorsan;</p>
                 <div id="api" role="main">
                 </div>
-                <p>Kişisel verileriniz, <a class="contracts"
-                        href="https://cdn.modilist.com/contracts/gdpr.pdf"
-                        target="_blank">Aydınlatma Metni</a>
-                    kapsamında işlenmektedir. “Üye ol” butonuna basarak <a class="contracts" href="#"
-                        target="_blank">Üyelik Sözleşmesi’ni</a>, <a class="contracts"
-                        href="https://cdn.modilist.com/contracts/privacy-policy.pdf"
-                        target="_blank">Çerez ve Gizlilik Politikası’nı</a> okuduğunuzu ve
-                    kabul ettiğinizi onaylıyorsunuz.</p>
+                <p id="termsOfUse">Kişisel verileriniz,
+                    <a class="contracts" href="https://cdn.modilist.com/contracts/gdpr.pdf" target="_blank">Aydınlatma
+                        Metni</a>
+                    kapsamında işlenmektedir. “Üye ol” butonuna basarak
+                    <a class="contracts" href="#" target="_blank">Üyelik Sözleşmesi’ni</a>,
+                    <a class="contracts" href="https://cdn.modilist.com/contracts/privacy-policy.pdf"
+                        target="_blank">Çerez ve Gizlilik
+                        Politikası’nı
+                    </a> okuduğunuzu ve
+                    kabul ettiğinizi onaylıyorsunuz.
+                </p>
             </div>
         </div>
     </div>
+    <script>
+        const tr = {
+            hello: "Merhaba",
+            description: "Stilini keşfedip modaya uygun giyinmek istiyorsan;",
+            termsOfUse: `Kişisel verileriniz,
+                    <a class="contracts" href="https://cdn.modilist.com/contracts/gdpr.pdf" target="_blank">Aydınlatma
+                        Metni</a>
+                    kapsamında işlenmektedir. “Üye ol” butonuna basarak
+                    <a class="contracts" href="https://cdn.modilist.com/contracts/membership-agreement.pdf" target="_blank">Üyelik Sözleşmesi’ni</a>,
+                    <a class="contracts" href="https://cdn.modilist.com/contracts/privacy-policy.pdf"
+                        target="_blank">Çerez ve Gizlilik
+                        Politikası’nı
+                    </a> okuduğunuzu ve
+                    kabul ettiğinizi onaylıyorsunuz.
+            `
+        }
+
+        const en = {
+            hello: "Hello",
+            description: "If you want to discover your style and dress in fashion;",
+            termsOfUse: `
+            Your personal data is processed within the scope of the <a class="contracts" href="https://cdn.modilist.com/contracts/gdpr.pdf" target="_blank">Clarification Text</a>. By clicking the "Subscribe" button, you confirm that you have read and accepted the <a class="contracts" href="https://cdn.modilist.com/contracts/membership-agreement.pdf" target="_blank">Membership Agreement</a>, <a class="contracts" href="https://cdn.modilist.com/contracts/privacy-policy.pdf"
+                        target="_blank">Cookies and Privacy Policy</a>.
+            `
+        }
+
+        let currentLang;
+        switch (navigator.language) {
+            case "en-US":
+            case "en-GB":
+            case "en":
+                currentLang = en;
+                break;
+
+            case "tr-TR":
+            case "tr":
+            default:
+                currentLang = tr;
+                break;
+        }
+
+        const hello = document.getElementById("hello");
+        const description = document.getElementById("description");
+        const termsOfUse = document.getElementById("termsOfUse");
+        hello.innerHTML = currentLang.hello;
+        description.innerHTML = currentLang.description;
+        termsOfUse.innerHTML = currentLang.termsOfUse;
+    </script>
 </body>
 
 </html>

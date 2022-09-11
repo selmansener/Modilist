@@ -1,10 +1,11 @@
-import { Box, Button, Divider, Grid, Link, Paper, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Link, Paper, Tooltip, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import UpdateIcon from '@mui/icons-material/Update';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
 import { PaymentMethodDTO } from "../../../services/swagger/api";
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 export interface PaymentMethodListItemProps {
     paymentMethod: PaymentMethodDTO;
@@ -28,9 +29,26 @@ export function PaymentMethodListItem(props: PaymentMethodListItemProps) {
                 </Typography>
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="flex-end">
-                <Button variant="outlined" startIcon={<UpdateIcon />}>
-                    {t("Generic.Forms.Edit")}
-                </Button>
+                {paymentMethod.isDefault ?
+                    <Tooltip
+                        title={t("Pages.PaymentMethods.PaymentMethodListItem.DeleteWarning")}
+                        placement="left"
+                    >
+                        <span>
+                            <Button
+                                disabled
+                                variant="outlined"
+                                startIcon={<DeleteForeverOutlinedIcon />}
+                            >
+                                {t("Generic.Forms.Delete")}
+                            </Button>
+                        </span>
+                    </Tooltip>
+                    : <Button
+                        variant="outlined"
+                        startIcon={<DeleteForeverOutlinedIcon />}>
+                        {t("Generic.Forms.Delete")}
+                    </Button>}
             </Grid>
             <Grid item xs={12}>
                 <Divider />

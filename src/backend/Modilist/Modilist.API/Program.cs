@@ -57,6 +57,8 @@ builder.Services.AddBusinessUtils();
 
 builder.Services.AddBlobClientFactory();
 
+builder.Services.AddHttpContextAccessor();
+
 TypeAdapterConfig.GlobalSettings.Scan(typeof(Program).Assembly, typeof(BusinessExtensions).Assembly, typeof(AccountExtensions).Assembly);
 TypeAdapterConfig.GlobalSettings.Default.IgnoreNullValues(true);
 
@@ -123,13 +125,6 @@ builder.Services.AddVersionedApiExplorer(ConfigureApiExplorer);
 var app = builder.Build();
 
 app.UseCors(CorsPolicyName);
-
-//if (app.Environment.IsDevelopment() || app.Environment.IsInt())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI(ConfigureSwaggerUI);
-//    app.UseStaticFiles();
-//}
 
 app.UseHttpsRedirection();
 app.UseSwagger();
@@ -230,10 +225,14 @@ void ConfigureSwaggerGenerator(SwaggerGenOptions options)
                 });
 
     var enabledAreas = new List<string>
-            {
-                "api",
-                "dev"
-            };
+    {
+        "api"
+    };
+
+    if (!builder.Environment.IsProduction())
+    {
+        enabledAreas.Add("dev");
+    }
 
     options.DocumentFilter<SwaggerAreaFilter>(new object[] { enabledAreas.ToArray() });
 }

@@ -61,6 +61,7 @@ export function WelcomeSteps() {
 
     useEffect(() => {
         if (!createFirstOrderIsBusy && createFirstOrderStatus === 200) {
+            dispatch.activeSalesOrderModel.RESET();
             navigate("/", { replace: true });
         }
     }, [createFirstOrderStatus]);

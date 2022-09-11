@@ -26,7 +26,7 @@ namespace Modilist.Functions.ScheduledJobs.Jobs.SalesOrdersDomain
         {
             try
             {
-                var accounts = await _mediator.Send(new GetAllAccounts(), cancellationToken);
+                var accounts = await _mediator.Send(new GetAllActiveAccounts(), cancellationToken);
 
                 foreach (var account in accounts)
                 {

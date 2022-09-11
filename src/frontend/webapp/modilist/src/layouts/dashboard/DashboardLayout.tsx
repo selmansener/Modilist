@@ -12,17 +12,25 @@ import { useMsal } from '@azure/msal-react';
 import useWindowDimensions from '../../utils/windowDimensions';
 import { CircularProgress } from '@mui/material';
 import { menuItems } from '../Router';
+import { config } from '../../config';
+import { ImageComponent } from '../../components/image/ImageComponent';
 
 function Loading() {
   const { height, width } = useWindowDimensions();
+  const { cdnImg } = config;
 
   return <Box sx={{
     display: 'flex',
     width: width,
     height: height,
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center'
   }}>
+    <ImageComponent src={`${cdnImg}/logo/Modilist-logo.png`} width="25%" sx={{
+      textAlign: 'center',
+      mb:4
+    }} />
     <CircularProgress />
   </Box>
 }

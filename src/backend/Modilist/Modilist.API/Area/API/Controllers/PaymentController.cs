@@ -58,6 +58,20 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
+        // TODO: complete this endpoint
+        //[Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
+        //[HttpPost("[controller].DeletePaymentMethod/{paymentMethodId}")]
+        //[ProducesResponseType(200)]
+        //public async Task<IActionResult> DeletePaymentMethod(int paymentMethodId, CancellationToken cancellationToken)
+        //{
+        //    var response = await _mediator.Send(new DeletePaymentMethodCommand
+        //    {
+                
+        //    }, cancellationToken);
+
+        //    return Ok(response);
+        //}
+
         [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
         [HttpPost("[controller].Create/{salesOrderId}")]
         [ProducesResponseType(typeof(PaymentDTO), 200)]

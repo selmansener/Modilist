@@ -38,6 +38,7 @@
         },
         "Dashboard": {
             "Header": {
+                "Subscription": "Abonelik Bilgilerim",
                 "Profile": "Kişisel Bilgilerim",
                 "Logout": "Çıkış Yap"
             },
@@ -77,7 +78,8 @@
             "NotFound": "Sayfa Bulunamadı | Modilist"
         },
         "Main": {
-            "ActiveSalesOrders": "Aktif Siparişlerim",
+            "Welcome": "Hoşgeldin {{username}}",
+            "ActiveSalesOrders": "Aktif Siparişim",
             "SalesOrderReferenceNumber": "Sipariş Ref. No: ",
             "SalesOrderCreatedAt": "Sipariş Tarihi: ",
             "SalesOrderState": "Sipariş Durumu: ",
@@ -457,7 +459,8 @@
                 "BankName": "Banka: ",
                 "CardNumber": "Kart Numarası: ",
                 "SetAsDefault": "Varsayılan Olarak Ata",
-                "Default": "Varsayılan Kart"
+                "Default": "Varsayılan Kart",
+                "DeleteWarning": "En az bir ödeme yöntemi bulunmak zorunda."
             }
         },
         "NewPaymentMethod": {
@@ -783,7 +786,8 @@
             "SentMessageFailed": "Mesajınız gönderilirken bir hata oluştu.",
             "CareersApply": "Başvur",
             "SelectFile": "Dosya Seç",
-            "FilesSelected": "{{count}} dosya seçildi."
+            "FilesSelected": "{{count}} dosya seçildi.",
+            "Delete": "Kaldır"
         },
         "PersonalInfo": {
             "FullName": "Ad Soyad",

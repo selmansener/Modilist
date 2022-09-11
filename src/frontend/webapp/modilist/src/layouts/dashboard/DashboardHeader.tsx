@@ -2,7 +2,7 @@ import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListIte
 import React, { useRef } from "react";
 import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useTranslation } from 'react-i18next'
@@ -36,6 +36,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
   };
   const { menuItems, account } = props;
   const theme = useTheme();
+  const { pathname } = useLocation();
 
   const [notificationsIcon, setNotificationsIcon] = React.useState<null | HTMLElement>(null);
   const [accountIcon, setAccountIcon] = React.useState<null | HTMLElement>(null);
@@ -61,7 +62,6 @@ export function DashboardHeader(props: DashboardHeaderProps) {
       account: accounts[0]
     });
   }
-
 
   const container = window !== undefined ? () => window.document.body : undefined;
 
@@ -100,7 +100,12 @@ export function DashboardHeader(props: DashboardHeaderProps) {
           }}>
             {menuItems.map((item) => (
               <NavLink key={item.route} to={item.route} style={{ display: "flex" }}>
-                <Button sx={{ color: '#fff', mr: 2 }} size="small" startIcon={item.icon}>
+                <Button variant="outlined" color="secondary" sx={{
+                  color: '#fff',
+                  mr: 2,
+                  fontWeight: (`/${item.route}` === pathname ? 800 : 400),
+                  textDecoration: (`/${item.route}` === pathname ? "underline" : "none")
+                }} size="small" startIcon={item.icon}>
                   {t(item.name)}
                 </Button>
               </NavLink>
@@ -161,17 +166,6 @@ export function DashboardHeader(props: DashboardHeaderProps) {
                 </Grid>
               </MenuItem>
             </Menu> */}
-            <NavLink to={"/settings"} style={{ color: "#fff" }}>
-              <IconButton
-                size="large"
-                aria-label="settings"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                color="inherit"
-              >
-                <SettingsIcon />
-              </IconButton>
-            </NavLink>
             <IconButton
               size="large"
               onClick={handleAccountIconMenu}
@@ -180,7 +174,9 @@ export function DashboardHeader(props: DashboardHeaderProps) {
                 display: { xs: 'none', sm: 'inline' },
               }}
             >
-              <ManageAccountsIcon />
+              <Avatar>
+                <ManageAccountsIcon color="primary" />
+              </Avatar>
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -189,6 +185,12 @@ export function DashboardHeader(props: DashboardHeaderProps) {
               open={accountIcon !== null}
               onClose={handleAccountMenuClose}
             >
+              <MenuItem onClick={() => {
+                navigate("/settings");
+                handleAccountMenuClose();
+              }}>
+                {t("Layouts.Dashboard.Header.Subscription")}
+              </MenuItem>
               <MenuItem onClick={() => {
                 navigate("/account");
                 handleAccountMenuClose();

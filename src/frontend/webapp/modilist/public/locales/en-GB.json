@@ -38,7 +38,8 @@
         },
         "Dashboard": {
             "Header": {
-                "Profile": "Personal Info",
+                "Subscription": "Subscription Settings",
+                "Profile": "Personal Settings",
                 "Logout": "Sign out"
             },
             "Footer": {
@@ -75,7 +76,8 @@
             "AccountVerification": "Hesap Doğrulama"
         },
         "Main": {
-            "ActiveSalesOrders": "Active Orders",
+            "Welcome": "Welcome {{username}}",
+            "ActiveSalesOrders": "Active Order",
             "SalesOrderReferenceNumber": "Order Reference Number:",
             "SalesOrderCreatedAt": "Ordering Date:",
             "SalesOrderState": "Order Status:",
@@ -429,7 +431,8 @@
                 "BankName": "Bank Name:",
                 "CardNumber": "Card Number: ",
                 "SetAsDefault": "Set as Default",
-                "Default": "Default Card"
+                "Default": "Default Card",
+                "DeleteWarning": "There must be at least one payment method."
             }
         },
         "NewPaymentMethod": {
@@ -715,7 +718,8 @@
             "Success": "The operation is successful!",
             "Send": "Send",
             "SentMessageSuccess": "Your message has been sent successfully!",
-            "SentMessageFailed": "An error occurred while sending your message."
+            "SentMessageFailed": "An error occurred while sending your message.",
+            "Delete": "Delete"
         },
         "PersonalInfo": {
             "FirstName": "Name",

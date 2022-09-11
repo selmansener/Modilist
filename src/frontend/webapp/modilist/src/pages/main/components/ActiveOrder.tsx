@@ -127,7 +127,7 @@ export function ActiveOrder() {
         return (
             <Dialog onClose={handleRequestedStyleClose} open={isRequestedStyleOpen} maxWidth="lg" fullWidth>
                 <DialogTitle sx={{
-                    mb:2
+                    mb: 2
                 }}>
                     <Typography variant="h3" align="center">
                         {t("Pages.SalesOrderDetails.OutfitQuestion")}
@@ -151,8 +151,8 @@ export function ActiveOrder() {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    px:[6],
-                    py:[2]
+                    px: [6],
+                    py: [2]
                 }}>
                     <Box>
                         <Typography>
@@ -198,8 +198,10 @@ export function ActiveOrder() {
                             {t("Pages.Main.ActiveSalesOrders")}
                         </Typography>
                     </Grid>
-                    <Grid item xs={6}>
-                        <Typography variant="body1" align="right">
+                    <Grid item xs={6} sx={{
+                        zIndex: 9
+                    }}>
+                        <Typography variant="body1" align="right" >
                             {t("Pages.Main.SalesOrderReferenceNumber")}
                             <Link to={`/sales-orders/${salesOrder?.id}`}>
                                 #{salesOrder?.id}
