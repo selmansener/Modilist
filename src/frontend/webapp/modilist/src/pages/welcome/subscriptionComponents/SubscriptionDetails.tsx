@@ -39,7 +39,7 @@ export function SubscriptionDetails() {
                 maxPricingLimit: maxLimit
             })
         });
-    }, []);
+    }, [maxLimit]);
 
     return <Grid item container spacing={4}>
         <Grid item xs={9}>
