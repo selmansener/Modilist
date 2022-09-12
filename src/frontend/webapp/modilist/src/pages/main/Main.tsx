@@ -1,4 +1,5 @@
-import { Button, Grid, Paper, Typography, useTheme } from "@mui/material";
+import { Button, Grid, Paper, Typography, useTheme, FormControl, TextField, Stack } from "@mui/material";
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { useTranslation } from "react-i18next";
 import { BlogSection } from "./components/BlogSection";
@@ -6,15 +7,28 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
+import { InvitationDialog } from "./components/InvitationDialog";
 import { ActiveOrder } from "./components/ActiveOrder";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+
+
+
 
 export function Main() {
     const theme = useTheme();
     const { t } = useTranslation();
     const { cdnImg: imgBaseHost } = config;
     const { isBusy: getAccountIsBusy, data: getAccountResponse } = useSelector((state: RootState) => state.getAccountModel);
+    const [openDialogBox, setOpenDialogBox] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpenDialogBox(true);
+    };
+
+    const handleClose = () => {
+        setOpenDialogBox(false);
+    };
 
     return (
         <React.Fragment>
@@ -82,10 +96,14 @@ export function Main() {
                                     justifyContent: 'center',
                                     flexDirection: 'column'
                                 }}>
-                                    <Button variant="contained" color="secondary">
+                                    <Button variant="contained" color="secondary" onClick={handleClickOpen}>
                                         <Typography align="center" color={theme.palette.secondary.contrastText}>{t("Pages.Main.SendInvitation")}</Typography>
                                         <ArrowRightAltIcon />
                                     </Button>
+                                    <InvitationDialog
+                                        openDialog={openDialogBox}
+                                        onClose={handleClose}
+                                    />
                                 </Grid>
                             </Grid>
                         </Paper>

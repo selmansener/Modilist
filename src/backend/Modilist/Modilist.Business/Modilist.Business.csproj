@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Messaging.EventGrid" Version="4.11.0" />
     <PackageReference Include="Iyzipay" Version="2.1.39" />
     <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CQRS\DiscountsDomain\Queries\" />
     <Folder Include="CQRS\UserDomain\Queries\DTOs\" />
   </ItemGroup>
 

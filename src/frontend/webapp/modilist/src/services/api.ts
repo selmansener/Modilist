@@ -1,4 +1,4 @@
-import { AccountApi, StylePreferencesApi, AddressApi, SizeInfoApi, PreferedFabricPropertiesApi, FitPreferencesApi, SubscriptionApi, SalesOrderApi, ReturnApi, BlogApi, PaymentApi, MessageApi } from "./swagger/api";
+import { AccountApi, StylePreferencesApi, AddressApi, SizeInfoApi, PreferedFabricPropertiesApi, FitPreferencesApi, SubscriptionApi, SalesOrderApi, ReturnApi, BlogApi, PaymentApi, MessageApi, DiscountApi } from "./swagger/api";
 import axios from 'axios';
 import { InteractionRequiredAuthError, IPublicClientApplication } from "@azure/msal-browser";
 import { config } from "../config";
@@ -12,7 +12,8 @@ export interface ModilistApi {
     fitPreferences: FitPreferencesApi,
     subscriptions: SubscriptionApi,
     paymentMethods: PaymentApi,
-    salesOrders: SalesOrderApi
+    salesOrders: SalesOrderApi,
+    discounts: DiscountApi
 }
 
 export function apiFactory(msal: IPublicClientApplication) {
@@ -71,6 +72,7 @@ export function apiFactory(msal: IPublicClientApplication) {
         salesOrders: new SalesOrderApi(undefined, config.webApi, axios),
         returns: new ReturnApi(undefined, config.webApi, axios),
         blog: new BlogApi(undefined, config.webApi, axios),
-        messages: new MessageApi(undefined, config.webApi)
+        messages: new MessageApi(undefined, config.webApi),
+        discounts: new DiscountApi(undefined, config.webApi, axios)
     }
 }

@@ -11,6 +11,7 @@ import { updateAddressModel } from "./addresses/UpdateAddress"
 import { upsertAddressModel } from "./addresses/UpsertAddress"
 import { getBlogMetaDataModel } from "./blog/GetBlogMetaData"
 import { sendJobApplicationMailModel } from "./careers/SendJobApplicationMail"
+import { sendInvitationEmailsModel } from "./discounts/SendInvitationEmails"
 import { getPreferedFabricPropertiesModel } from "./fabricProperties/GetFabricProperties"
 import { upsertPreferedFabricPropertiesModel } from "./fabricProperties/UpsertFabricProperties"
 import { getFitPreferencesModel } from "./fitPreferences/GetFitPreferences"
@@ -98,6 +99,7 @@ export interface RootModel extends Models<RootModel> {
   sendJobApplicationMailModel: typeof sendJobApplicationMailModel,
   sendContactFormModel: typeof sendContactFormModel
   updateRequestedStyleModel: typeof updateRequestedStyleModel,
+  sendInvitationEmailsModel: typeof sendInvitationEmailsModel,
 }
 
 export const models: RootModel = {
@@ -148,5 +150,6 @@ export const models: RootModel = {
   sendPartnershipMailModel,
   sendJobApplicationMailModel,
   sendContactFormModel,
-  updateRequestedStyleModel
+  updateRequestedStyleModel,
+  sendInvitationEmailsModel,
 }

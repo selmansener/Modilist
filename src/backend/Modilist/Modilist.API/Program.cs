@@ -19,6 +19,7 @@ using Modilist.Business.Seed;
 using Modilist.Business.Utils.Extensions;
 using Modilist.Data.Extensions;
 using Modilist.Infrastructure.Azure.Extensions;
+using Modilist.Infrastructure.Azure.Extensions.Configurations;
 using Modilist.Infrastructure.Shared.Configurations;
 
 using Newtonsoft.Json;
@@ -50,6 +51,7 @@ builder.Services.Configure<ConfigurationOptions>(configuration =>
 builder.Services.Configure<IyzicoAPIOptions>(builder.Configuration.GetSection("AppSettings:IyzicoAPIOptions"));
 builder.Services.Configure<StorageConnectionStrings>(builder.Configuration.GetSection("AppSettings:StorageConnectionStrings"));
 builder.Services.Configure<SendGridOptions>(builder.Configuration.GetSection("AppSettings:SendGridOptions"));
+builder.Services.Configure<EventGridClientOptions>(builder.Configuration.GetSection("AppSettings:EventGridClientOptions"));
 
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpContextAccessor();

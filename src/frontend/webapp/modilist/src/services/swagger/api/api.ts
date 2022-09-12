@@ -14,6 +14,7 @@
 export * from './apis/address-api';
 export * from './apis/blog-api';
 export * from './apis/development-api';
+export * from './apis/discount-api';
 export * from './apis/fit-preferences-api';
 export * from './apis/message-api';
 export * from './apis/payment-api';

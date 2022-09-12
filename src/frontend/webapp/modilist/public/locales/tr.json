@@ -95,7 +95,9 @@
                 "1": "Arkadaşını davet et",
                 "2": "20 TL kazan!"
             },
-            "SendInvitation": "Davetiye Gönder"
+            "SendInvitation": "Davetiye Gönder",
+            "EnterEmail": "Bir email adresi girin...",
+            "InvitationOwnMailError": "Lütfen kendi email adresinizden farklı bir email adresi giriniz."
         },
         "SalesOrders": {
             "SalesOrderReferenceNumber": "Sipariş Ref. No: ",
@@ -785,7 +787,8 @@
         "MinCharacters": "Lütfen başında 0 olmadan 10 haneli bir telefon numarası giriniz",
         "MustBeInteger": "Lütfen bir tamsayı giriniz",
         "MustBeGreaterThanZero": "Lütfen sıfırdan büyük bir tamsayı giriniz",
-        "MustBeNumber": "Lütfen bir sayı giriniz"
+        "MustBeNumber": "Lütfen bir sayı giriniz",
+        "Email": "Lütfen geçerli bir email adresi giriniz."
     },
     "Generic": {
         "SalesOrderState": {
@@ -795,22 +798,23 @@
             "Delivered": "Siparişin Teslim Edildi",
             "Completed": "Siparişin Tamamlandı"
         },
-        "Forms": {
-            "Message": "Mesajınız",
-            "Select": "Seçiniz",
-            "Close": "Kapat",
-            "Submit": "Kaydet",
-            "Edit": "Düzenle",
-            "Success": "İşlem başarılı!",
-            "Error": "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
-            "Send": "Gönder",
-            "SentMessageSuccess": "Mesajınız başarıyla gönderildi!",
-            "SentMessageFailed": "Mesajınız gönderilirken bir hata oluştu.",
-            "CareersApply": "Başvur",
-            "SelectFile": "Dosya Seç",
-            "FilesSelected": "{{count}} dosya seçildi.",
-            "Delete": "Kaldır"
-        },
+      "Forms": {
+        "Message": "Mesajınız",
+        "Select": "Seçiniz",
+        "Close": "Kapat",
+        "Submit": "Kaydet",
+        "Edit": "Düzenle",
+        "Success": "İşlem başarılı!",
+        "Error": "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+        "Send": "Gönder",
+        "SentMessageSuccess": "Mesajınız başarıyla gönderildi!",
+        "SentMessageFailed": "Mesajınız gönderilirken bir hata oluştu.",
+        "CareersApply": "Başvur",
+        "SelectFile": "Dosya Seç",
+        "FilesSelected": "{{count}} dosya seçildi.",
+        "Delete": "Kaldır",
+        "Add": "Ekle"
+      },
         "PersonalInfo": {
             "FullName": "Ad Soyad",
             "FirstName": "Ad",

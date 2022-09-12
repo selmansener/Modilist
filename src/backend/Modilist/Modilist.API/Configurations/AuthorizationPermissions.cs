@@ -12,7 +12,7 @@
         public const string Products = "Products";
         public const string SalesOrders = "SalesOrders";
         public const string Returns = "Returns";
+        public const string Discounts = "Discounts";
         public const string Development = "Development";
-        
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Immutable;
 
 using Modilist.Domains.Base;
 using Modilist.Domains.Models.AddressDomain;
+using Modilist.Domains.Models.DiscountsDomain;
 using Modilist.Domains.Models.PaymentDomain;
 using Modilist.Domains.Models.ReturnDomain;
 using Modilist.Domains.Models.SalesOrderDomain;
@@ -20,6 +21,8 @@ namespace Modilist.Domains.Models.AccountDomain
         private readonly List<SalesOrder> _salesOrders = new List<SalesOrder>();
         private readonly List<Return> _returns = new List<Return>();
         private readonly List<Payment> _payments = new List<Payment>();
+        private readonly List<ExclusiveDiscount> _exclusiveDiscounts = new List<ExclusiveDiscount>();
+        private readonly List<PublicDiscount> _publicDiscounts = new List<PublicDiscount>();
 
         public Account(Guid id,
             string email,
@@ -74,6 +77,10 @@ namespace Modilist.Domains.Models.AccountDomain
         public IReadOnlyList<Return> Returns => _returns;
 
         public IReadOnlyList<Payment> Payments => _payments;
+
+        public IReadOnlyList<ExclusiveDiscount> ExclusiveDiscounts => _exclusiveDiscounts;
+
+        public IReadOnlyList<PublicDiscount> PublicDiscounts => _publicDiscounts;
 
         public string? FirstName { get; private set; }
 

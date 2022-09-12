@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Modilist.Domains.Base;
 using Modilist.Domains.Models.AccountDomain;
 using Modilist.Domains.Models.AddressDomain;
+using Modilist.Domains.Models.DiscountsDomain;
 using Modilist.Domains.Models.PaymentDomain;
 using Modilist.Domains.Models.ProductDomain;
 using Modilist.Domains.Models.ReturnDomain;
@@ -21,7 +22,8 @@ namespace Modilist.Data.DataAccess
 {
     internal class ModilistDbContext : DbContext
     {
-        public ModilistDbContext(DbContextOptions<ModilistDbContext> options) : base(options)
+        public ModilistDbContext(DbContextOptions<ModilistDbContext> options) 
+            : base(options)
         {
             Database.AutoTransactionsEnabled = false;
             ChangeTracker.LazyLoadingEnabled = false;
@@ -62,7 +64,13 @@ namespace Modilist.Data.DataAccess
 
         public virtual DbSet<Payment> Payments { get; set; }
 
-        public virtual DbSet<PaymentLineItem> PaymentLineItems { get; private set; }
+        public virtual DbSet<PaymentLineItem> PaymentLineItems { get; set; }
+
+        public virtual DbSet<Discount> Discounts { get; set; }
+
+        public virtual DbSet<ExclusiveDiscount> ExclusiveDiscounts { get; set; }
+
+        public virtual DbSet<PublicDiscount> PublicDiscounts { get; set; }
 
         public virtual DbSet<SubscriptionStateLog> SubscriptionStateLogs { get; private set; }
 

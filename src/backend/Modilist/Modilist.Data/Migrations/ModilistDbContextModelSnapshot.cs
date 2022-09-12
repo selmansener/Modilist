@@ -25,6 +25,9 @@ namespace Modilist.Data.Migrations
             modelBuilder.HasSequence("Address")
                 .IncrementsBy(10);
 
+            modelBuilder.HasSequence("Discount")
+                .IncrementsBy(10);
+
             modelBuilder.HasSequence("FitPreferences_HiLo")
                 .IncrementsBy(10);
 
@@ -262,6 +265,91 @@ namespace Modilist.Data.Migrations
                         .HasFilter("[DeletedAt] IS NULL");
 
                     b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("Modilist.Domains.Models.DiscountsDomain.Discount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "Discount");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DeletedById")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("DiscountValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Discounts", (string)null);
+                });
+
+            modelBuilder.Entity("Modilist.Domains.Models.DiscountsDomain.PublicDiscountAccount", b =>
+                {
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("PublicDiscountId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DeletedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
+
+                    b.HasKey("AccountId", "PublicDiscountId");
+
+                    b.HasIndex("PublicDiscountId");
+
+                    b.ToTable("PublicDiscountAccount");
                 });
 
             modelBuilder.Entity("Modilist.Domains.Models.PaymentDomain.Payment", b =>
@@ -1509,6 +1597,32 @@ namespace Modilist.Data.Migrations
                     b.ToTable("SubscriptionStateLogs");
                 });
 
+            modelBuilder.Entity("Modilist.Domains.Models.DiscountsDomain.ExclusiveDiscount", b =>
+                {
+                    b.HasBaseType("Modilist.Domains.Models.DiscountsDomain.Discount");
+
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("InvitedAccountEmail")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("ExclusiveDiscounts", (string)null);
+                });
+
+            modelBuilder.Entity("Modilist.Domains.Models.DiscountsDomain.PublicDiscount", b =>
+                {
+                    b.HasBaseType("Modilist.Domains.Models.DiscountsDomain.Discount");
+
+                    b.Property<int>("MaxLimit")
+                        .HasColumnType("int");
+
+                    b.ToTable("PublicDiscounts", (string)null);
+                });
+
             modelBuilder.Entity("Modilist.Domains.Models.AddressDomain.Address", b =>
                 {
                     b.HasOne("Modilist.Domains.Models.AccountDomain.Account", "Account")
@@ -1518,6 +1632,25 @@ namespace Modilist.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("Modilist.Domains.Models.DiscountsDomain.PublicDiscountAccount", b =>
+                {
+                    b.HasOne("Modilist.Domains.Models.AccountDomain.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Modilist.Domains.Models.DiscountsDomain.PublicDiscount", "PublicDiscount")
+                        .WithMany()
+                        .HasForeignKey("PublicDiscountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+
+                    b.Navigation("PublicDiscount");
                 });
 
             modelBuilder.Entity("Modilist.Domains.Models.PaymentDomain.Payment", b =>
@@ -1787,9 +1920,37 @@ namespace Modilist.Data.Migrations
                     b.Navigation("Subscription");
                 });
 
+            modelBuilder.Entity("Modilist.Domains.Models.DiscountsDomain.ExclusiveDiscount", b =>
+                {
+                    b.HasOne("Modilist.Domains.Models.AccountDomain.Account", "Account")
+                        .WithMany("ExclusiveDiscounts")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Modilist.Domains.Models.DiscountsDomain.Discount", null)
+                        .WithOne()
+                        .HasForeignKey("Modilist.Domains.Models.DiscountsDomain.ExclusiveDiscount", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("Modilist.Domains.Models.DiscountsDomain.PublicDiscount", b =>
+                {
+                    b.HasOne("Modilist.Domains.Models.DiscountsDomain.Discount", null)
+                        .WithOne()
+                        .HasForeignKey("Modilist.Domains.Models.DiscountsDomain.PublicDiscount", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Modilist.Domains.Models.AccountDomain.Account", b =>
                 {
                     b.Navigation("Addresses");
+
+                    b.Navigation("ExclusiveDiscounts");
 
                     b.Navigation("FitPreferences")
                         .IsRequired();

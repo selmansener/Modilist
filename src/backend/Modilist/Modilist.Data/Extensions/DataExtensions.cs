@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 using Modilist.Data.DataAccess;
 using Modilist.Data.Repositories.AddressDomain;
+using Modilist.Data.Repositories.DiscountsDomain;
 using Modilist.Data.Repositories.PaymentDomain;
 using Modilist.Data.Repositories.ProductDomain;
 using Modilist.Data.Repositories.ReturnDomain;
@@ -71,6 +72,10 @@ namespace Modilist.Data.Extensions
             services.AddScoped<IReturnRepository, ReturnRepository>();
 
             services.AddScoped<IPaymentRepository, PaymentRepository>();
+
+            services.AddScoped<IDiscountsRepository, DiscountsRepository>();
+
+            services.AddScoped<IExclusiveDiscountsRepository, ExclusiveDiscountsRepository>();
 
             return services;
         }

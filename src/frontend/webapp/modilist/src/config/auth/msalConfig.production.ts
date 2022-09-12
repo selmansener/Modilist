@@ -10,6 +10,7 @@ export const apiConfig = {
         "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Products",
         "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/SalesOrders",
         "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Returns",
+        "https://modilistauth.onmicrosoft.com/c2a43089-5855-4fa3-a46c-41fa67ac0ae4/Discounts",
     ],
     webApi: "https://app-modilist-prod-westeu.azurewebsites.net"
 };
