@@ -27,6 +27,7 @@
                     "TitlePaymentMethod": "Payment Method"
                 }
             },
+
             "WelcomeSteps": {
                 "Buttons": {
                     "Back": "Back",
@@ -45,7 +46,7 @@
             "Footer": {
                 "FollowUs": "Follow us.",
                 "Links": {
-                    "AboutUs": "About us",
+                    "AboutUs": "About Us",
                     "FAQ": "Frequently Asked Questions",
                     "Partnership": "Business Partnership Form",
                     "OpenPositions": "Career",
@@ -53,7 +54,8 @@
                     "KVKK": "Protection of Personal Data",
                     "OnlineSalesAgreement": "Distance Sales Contract",
                     "PrivacyAndCookiePolicies": "Privacy and Cookies Policy",
-                    "UsageAgreement": "Terms of Usage"
+                    "UsageAgreement": "Terms of Usage",
+                    "Contact": "Contact Form"
                 }
             }
         }
@@ -525,6 +527,27 @@
             },
             "CompanyName": "Brand/Company Adı",
             "JobTitle": "Position/JobTitle"
+        },
+        "Contact": {
+            "Title": "Contact Us :)",
+            "Description1": "For any questions, suggestions, opinions or complaints all you got to do",
+            "Description2": " is fill up this form and send. We will contact you through your email address",
+            "Description3": " as soon as possible. Thank you for your interest.",
+            "Subject": "Subject",
+            "Subjects": {
+                "Question": "Question",
+                "Suggestion": "Suggestion",
+                "Opinion": "Opinion",
+                "Complaint": "Complaint",
+                "Other": "Other"
+            },
+            "Complaint": "Complaint",
+            "Complaints": {
+                "PaymentIssue": "Payment issue",
+                "RefundIssue": "Refund issue",
+                "CargoIssue": "Cargo issue",
+                "OtherIssue": "Other issues"
+            }
         }
     },
     "WelcomeSteps": {
@@ -728,6 +751,7 @@
             "Delete": "Delete"
         },
         "PersonalInfo": {
+            "FullName": "Full Name",
             "FirstName": "Name",
             "LastName": "Surname",
             "BirthDate": "Birth Date",

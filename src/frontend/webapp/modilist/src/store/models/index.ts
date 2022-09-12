@@ -47,6 +47,7 @@ import { getAccountModel } from "./users/GetAccount"
 import { updateAccountModel } from "./users/UpdateAccount"
 import { stepperSubscription } from "./welcome/StepperSubscription"
 import { welcomePageStepper } from "./welcome/WelcomePageStepper"
+import { sendContactFormModel } from "./contact/SendContactForm"
 
 export interface RootModel extends Models<RootModel> {
   createAccountModel: typeof createAccountModel,
@@ -95,6 +96,7 @@ export interface RootModel extends Models<RootModel> {
   getAddressModel: typeof getAddressModel,
   sendPartnershipMailModel: typeof sendPartnershipMailModel,
   sendJobApplicationMailModel: typeof sendJobApplicationMailModel,
+  sendContactFormModel: typeof sendContactFormModel
   updateRequestedStyleModel: typeof updateRequestedStyleModel,
 }
 
@@ -145,5 +147,6 @@ export const models: RootModel = {
   getAddressModel,
   sendPartnershipMailModel,
   sendJobApplicationMailModel,
-  updateRequestedStyleModel,
+  sendContactFormModel,
+  updateRequestedStyleModel
 }

@@ -53,7 +53,8 @@
                     "KVKK": "Kişisel Verilerin Korunması",
                     "OnlineSalesAgreement": "Mesafeli Satış Sözleşmesi",
                     "PrivacyAndCookiePolicies": "Gizlilik ve Çerez Politikası",
-                    "UsageAgreement": "Kullanım Koşulları"
+                    "UsageAgreement": "Kullanım Koşulları",
+                    "Contact": "İletişim Formu"
                 }
             }
         }
@@ -585,6 +586,27 @@
                 "JuniorMobileDeveloper": "Junior Mobile Developer",
                 "SeniorMobileDeveloper": "Senior Mobile Developer",
                 "GeneralApplication": "Genel Başvuru"
+            }
+        },
+        "Contact": {
+            "Title": "Bize Ulaşın :)",
+            "Description1": "Soru, öneri, görüş veya şikayetleriniz için bu formu doldurup göndermeniz",
+            "Description2": "yeterli. En kısa sürede size mail adresiniz üzerinden dönüş yapacağız. İlginiz",
+            "Description3": "için teşekkür ederiz.",
+            "Subject": "Konu",
+            "Subjects": {
+                "Question": "Soru",
+                "Suggestion": "Öneri",
+                "Opinion": "Görüş",
+                "Complaint": "Şikayet",
+                "Other": "Diğer"
+            },
+            "Complaint": "Şikayet",
+            "Complaints": {
+                "PaymentIssue": "Ödeme sorunu",
+                "RefundIssue": "İade sorunu",
+                "CargoIssue": "Kargo sorunu",
+                "OtherIssue": "Diğer"
             }
         }
     },

@@ -49,6 +49,7 @@ import { Partnership } from '../pages/partnership/Partnership';
 import { Careers } from '../pages/careers/Careers';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
+import { Contact } from '../pages/contact/Contact';
 
 interface RouterOptions {
   title?: string,
@@ -115,6 +116,18 @@ const routes: RouterOptions[] = [
     disabledEnvironments: []
   },
   {
+    helmet: "Pages.Titles.Contact",
+    route: "contact",
+    component: <Contact />,
+    layout: {
+      path: "/",
+      component: <Dashboard />
+    },
+    isPublic: false,
+    disabledEnvironments: ["production"]
+  },
+  {
+    title: "Pages.Titles.Main",
     helmet: "Pages.Titles.Main",
     route: "",
     menuItem: {

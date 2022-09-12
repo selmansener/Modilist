@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Link, MenuItem, Select, SelectChangeEvent, Typography, useTheme } from "@mui/material";
+import { Box, Button, Divider, Grid, Link, MenuItem, Select, SelectChangeEvent, Typography, useTheme } from "@mui/material";
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { ImageComponent } from "../../components/image/ImageComponent";
@@ -68,6 +68,8 @@ export function DashboardFooter() {
         }
     }
 
+
+
     return (
         <Box component="footer" sx={{
             ml: 2,
@@ -80,10 +82,14 @@ export function DashboardFooter() {
                         <Grid item xs={12}>
                             <ImageComponent src="/modilist-logo-large.png" asBackground height={150} />
                         </Grid>
-                        <Grid item xs={12}>
-                            <Typography variant="h4" color="#fff" align="center">
-                                {t("Layouts.Dashboard.Footer.FollowUs")}
-                            </Typography>
+                        <Grid item xs={12} alignContent="center" textAlign="center" marginBottom={2}>
+                            <Button variant="contained" color="secondary">
+                                <NavLink to={"/contact"}>
+                                    <Typography color="#fff">
+                                        {t("Layouts.Dashboard.Footer.Links.Contact")}
+                                    </Typography>
+                                </NavLink>
+                            </Button>
                         </Grid>
                         <Grid item xs={12} alignContent="center" textAlign="center">
                             <Link href={instagram} target="_blank" color="#fff" sx={{
@@ -202,8 +208,6 @@ export function DashboardFooter() {
                             <ImageComponent src={`${imgBaseHost}/common/iyzico-footer-white.png`} height={25} />
                         </Grid>
                     </Grid>
-                    {/* <Grid item container xs={4} spacing={2} color="#fff">
-                    </Grid> */}
                     <Grid item xs={12}>
                         <Divider color="#fff" />
                     </Grid>
