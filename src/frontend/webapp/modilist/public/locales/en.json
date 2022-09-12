@@ -482,8 +482,8 @@
         },
         "NotFound": {
             "Message": "We couldn't find what you were looking for or we lost it.",
-            "ReturnToHome": "Return To Home Page",
-            "ReturnToPreviousPage": "Return Back"
+            "ReturnToHome": "Homepage",
+            "ReturnToPreviousPage": "Return back"
         },
         "About": {
             "Title": "About",

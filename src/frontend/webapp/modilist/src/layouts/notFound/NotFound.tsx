@@ -1,10 +1,12 @@
 import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 import { DashboardFooter } from "../dashboard/DashboardFooter";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 export default function NotFound() {
     const { t } = useTranslation();
@@ -41,22 +43,29 @@ export default function NotFound() {
                         <Grid item xs={12}>
                             <ImageComponent src={`${imgBaseHost}/checkout/checkout-failed.svg`} />
                         </Grid>
-                        <Grid item xs={12} sx={{
-                            display: "flex",
-                            justifyContent: "center"
+                        <Grid item container xs={12} sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            mt: 4
                         }}>
                             <Button sx={{
-                                mr: 2
+                                mr: 25
                             }}
                                 size="large"
+                                variant="outlined"
+                                startIcon={<KeyboardArrowLeftIcon />}
                                 onClick={() => {
                                     navigate(-1);
                                 }}>
+
                                 <Typography variant="h5">
                                     {t("Pages.NotFound.ReturnToPreviousPage")}
                                 </Typography>
                             </Button>
-                            <Button size="large"
+                            <Button
+                                size="large"
+                                variant="outlined"
+                                endIcon={<KeyboardArrowRightIcon />}
                                 onClick={() => {
                                     navigate("/", {
                                         replace: true

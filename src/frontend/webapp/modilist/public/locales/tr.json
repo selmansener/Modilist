@@ -152,7 +152,7 @@
                 "Modest": "Sade",
                 "Loungewear": "Rahat",
                 "BusinessCasual": "Ofis"
-            },            
+            },
             "OutfitQuestion": "Hangisi senin tarzın? *",
             "OutfitInfo": {
                 "1": "*Ürünler temsilidir, senin kendine en uygun tarzı",
@@ -508,7 +508,7 @@
         },
         "NotFound": {
             "Message": "Aradığınız sayfayı bulamadık ya da kaybettik.",
-            "ReturnToHome": "Anasayfa'ya dön",
+            "ReturnToHome": "Ana sayfa",
             "ReturnToPreviousPage": "Geri dön"
         },
         "About": {
