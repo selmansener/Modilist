@@ -66,13 +66,13 @@ const ExpireYearInputMask = React.forwardRef<HTMLElement, InputMaskProps>(
 );
 
 const CvcInputMask = React.forwardRef<HTMLElement, InputMaskProps>(
-    function CvcInputMask(props,ref) {
-        const { onChange, ...other} =props;
+    function CvcInputMask(props, ref) {
+        const { onChange, ...other } = props;
         return (
-            <IMaskInput 
-            {...other}
-            mask="000"
-            onAccept={(value: any) => onChange({ target: {name: props.name, value}})}
+            <IMaskInput
+                {...other}
+                mask="000"
+                onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
             />
         );
     },
@@ -95,6 +95,7 @@ export default function PaymentMethod() {
     const cvcValidation = t("Pages.Welcome.PaymentMethod.CvcValidation");
     const cardHolderNameValidation = t("Pages.Welcome.PaymentMethod.CardHolderNameValidation");
     const mustBeNumber = t("FormValidation.MustBeNumber");
+    const currentDate = new Date();
     const schema = Yup.object({
         cardHolderName: Yup.string().test({
             name: "cardHolderNameValidation",
@@ -107,7 +108,24 @@ export default function PaymentMethod() {
             }
         }).required(requiredField),
         cardNumber: Yup.string().required(requiredField),
-        expireMonth: Yup.string().test({
+        expireMonth: Yup.string().when("expireYear", {
+            is: (currentDate.getFullYear() % 1000).toString(),
+            then: Yup.string().test({
+                name: "monthValidation",
+                message: monthValidation,
+                test: (value) => {
+                    if (value == undefined) {
+                        return false
+                    }
+                    const valueAsNumber = parseInt(value);
+                    const currentMonth = currentDate.getMonth() + 1;
+                    return (
+                        (valueAsNumber >= 1 && valueAsNumber <= 12) &&
+                        (valueAsNumber > currentMonth)
+                    )
+                }
+            }).length(2, monthTwoDigits).required(requiredField)
+        }).test({
             name: "monthValidation",
             message: monthValidation,
             test: (value) => {
@@ -116,7 +134,7 @@ export default function PaymentMethod() {
                 }
                 const valueAsNumber = parseInt(value);
                 return (
-                    valueAsNumber >= 1 && valueAsNumber <= 12
+                    (valueAsNumber >= 1 && valueAsNumber <= 12)
                 )
             }
         }).length(2, monthTwoDigits).required(requiredField), //i18n ile değiştir
@@ -148,8 +166,8 @@ export default function PaymentMethod() {
                 )
             }
         })
-        .length(3, cvcThreeDigit)
-        .required(requiredField)
+            .length(3, cvcThreeDigit)
+            .required(requiredField)
     });
 
     const {
@@ -305,7 +323,7 @@ export default function PaymentMethod() {
                                     setCardFocused("cvc")
                                 }}
                                 onBlur={handleBlur}
-                                InputProps ={{
+                                InputProps={{
                                     inputComponent: CvcInputMask as any,
                                 }}
                             />
