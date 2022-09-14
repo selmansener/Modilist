@@ -404,7 +404,6 @@ export function Checkout() {
             <AddressSelection open={addressSelectionOpen} handleClose={handleAddressSelectionClose} onSelect={handleAddressSelection} contentText="Pages.Checkout.ChangeReturnAddressModal" />
         </React.Fragment>
     }
-
     return (
         <Grid item container xs={12} spacing={2}>
             <Grid item xs={6}>
@@ -457,7 +456,7 @@ export function Checkout() {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="body1">
-                                {getMaskedCardNumber()}
+                                **** **** **** ****
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -475,11 +474,11 @@ export function Checkout() {
                     }}>
                         <Cards
                             cvc={paymentMethod?.cvc ?? "000"}
-                            expiry={`${paymentMethod?.expireMonth}/${paymentMethod?.expireYear}`}
-                            name={paymentMethod?.cardHolderName ?? ""}
+                            expiry={""}
+                            name={" "}
                             preview
                             issuer={paymentMethod?.cardAssociation?.replace("_", "").toLowerCase() ?? undefined}
-                            number={getMaskedCardNumber()}
+                            number={"**** **** **** ****"}
                         />
                     </Grid>
                 </Grid>

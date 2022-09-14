@@ -67,7 +67,6 @@ export function NewPaymentMethod() {
     const monthValidation = t("Pages.NewPaymentMethod.MonthValidation");
     const yearTwoDigits = t("Pages.NewPaymentMethod.YearTwoDigits");
     const yearValidation = t("Pages.NewPaymentMethod.YearValidation");
-    const cvcValidation = t("Pages.NewPaymentMethod.CvcValidation");
     const cardHolderNameValidation = t("Pages.NewPaymentMethod.CardHolderNameValidation");
 
     const schema = Yup.object({
@@ -110,7 +109,7 @@ export function NewPaymentMethod() {
                 )
             }
         }).length(2, yearTwoDigits).required(requiredField),
-        cvc: Yup.string().length(3, cvcValidation).required(requiredField)
+        cardName: Yup.string().required(requiredField)
     });
 
     const {
@@ -128,7 +127,7 @@ export function NewPaymentMethod() {
             cardNumber: !isProduction ? "5526080000000006" : "",
             expireMonth: "",
             expireYear: "",
-            cvc: "",
+            cardName: "",
             isDefault: false
         },
         validationSchema: schema,
@@ -228,16 +227,13 @@ export function NewPaymentMethod() {
             <Grid item xs={4}>
                 <FormControl fullWidth >
                     <TextField
-                        name="cvc"
-                        error={touched.cvc && errors.cvc !== undefined}
-                        helperText={touched.cvc && errors.cvc}
-                        label="CVC"
-                        value={creditCard.cvc}
+                        name="cardName"
+                        error={touched.cardName && errors.cardName !== undefined}
+                        helperText={touched.cardName && errors.cardName}
+                        label={t("Pages.Welcome.PaymentMethod.CardName")}
+                        value={creditCard.cardName}
                         variant="outlined"
                         onChange={handleChange}
-                        onFocus={() => {
-                            setCardFocused("cvc")
-                        }}
                         onBlur={handleBlur}
                     />
                 </FormControl>
@@ -266,7 +262,7 @@ export function NewPaymentMethod() {
             alignItems: "flex-start"
         }}>
             <Cards
-                cvc={creditCard.cvc}
+                cvc={""}
                 focused={cardFocused}
                 expiry={`${creditCard.expireMonth}/${creditCard.expireYear}`}
                 name={creditCard.cardHolderName}

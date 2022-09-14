@@ -65,19 +65,7 @@ const ExpireYearInputMask = React.forwardRef<HTMLElement, InputMaskProps>(
     },
 );
 
-const CvcInputMask = React.forwardRef<HTMLElement, InputMaskProps>(
-    function CvcInputMask(props, ref) {
-        const { onChange, ...other } = props;
-        return (
-            <IMaskInput
-                {...other}
-                mask="000"
-                onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
-            />
-        );
-    },
 
-);
 
 export default function PaymentMethod() {
     const dispatch = useDispatch<Dispatch>();
@@ -91,8 +79,6 @@ export default function PaymentMethod() {
     const monthValidation = t("Pages.Welcome.PaymentMethod.MonthValidation");
     const yearTwoDigits = t("Pages.Welcome.PaymentMethod.YearTwoDigits");
     const yearValidation = t("Pages.Welcome.PaymentMethod.YearValidation");
-    const cvcThreeDigit = t("Pages.Welcome.PaymentMethod.CvcThreeDigit");
-    const cvcValidation = t("Pages.Welcome.PaymentMethod.CvcValidation");
     const cardHolderNameValidation = t("Pages.Welcome.PaymentMethod.CardHolderNameValidation");
     const mustBeNumber = t("FormValidation.MustBeNumber");
     const currentDate = new Date();
@@ -153,21 +139,8 @@ export default function PaymentMethod() {
                 )
             }
         }).length(2, yearTwoDigits).required(requiredField),
-        cvc: Yup.string().test({
-            name: "cvcValidation",
-            message: cvcValidation,
-            test: (value) => {
-                if (value == undefined) {
-                    return false
-                }
-                const valueAsNumber = parseInt(value);
-                return (
-                    valueAsNumber >= 1 && valueAsNumber <= 999
-                )
-            }
-        })
-            .length(3, cvcThreeDigit)
-            .required(requiredField)
+        cardName: Yup.string().required(requiredField),
+        
     });
 
     const {
@@ -186,7 +159,7 @@ export default function PaymentMethod() {
             cardNumber: !isProduction ? "5526080000000006" : "",
             expireMonth: "",
             expireYear: "",
-            cvc: ""
+            cardName: "",
         },
         validationSchema: schema,
         onSubmit: (values) => {
@@ -312,20 +285,14 @@ export default function PaymentMethod() {
                     <Grid item xs={4}>
                         <FormControl fullWidth >
                             <TextField
-                                name="cvc"
-                                error={touched.cvc && errors.cvc !== undefined}
-                                helperText={touched.cvc && errors.cvc}
-                                label="CVC"
-                                value={creditCard.cvc}
+                                name="cardName"
+                                error={touched.cardName && errors.cardName !== undefined}
+                                helperText={touched.cardName && errors.cardName}
+                                label={t("Pages.Welcome.PaymentMethod.CardName")}
+                                value={creditCard.cardName}
                                 variant="outlined"
                                 onChange={handleChange}
-                                onFocus={() => {
-                                    setCardFocused("cvc")
-                                }}
                                 onBlur={handleBlur}
-                                InputProps={{
-                                    inputComponent: CvcInputMask as any,
-                                }}
                             />
                         </FormControl>
                     </Grid>
@@ -335,7 +302,7 @@ export default function PaymentMethod() {
                     alignItems: "center"
                 }}>
                     <Cards
-                        cvc={creditCard.cvc}
+                        cvc={""}
                         focused={cardFocused}
                         expiry={`${creditCard.expireMonth}/${creditCard.expireYear}`}
                         name={creditCard.cardHolderName}
