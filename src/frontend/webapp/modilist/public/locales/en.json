@@ -730,7 +730,8 @@
         "MinCharacters": "Please insert your 10 digits phone number without 0 at the beginning.",
         "MustBeInteger": "Please insert an integer",
         "MustBeGreaterThanZero": "Please insert an integer bigger than 0",
-        "MustBeNumber": "Please insert a number"
+        "MustBeNumber": "Please insert a number",
+        "OverMaxCharLimit": "You are over the max character limit"
     },
     "Generic": {
         "SalesOrderState": {
@@ -750,7 +751,8 @@
             "Send": "Send",
             "SentMessageSuccess": "Your message has been sent successfully!",
             "SentMessageFailed": "An error occurred while sending your message.",
-            "Delete": "Delete"
+            "Delete": "Delete",
+            "CharactersLeft": "characters left"
         },
         "PersonalInfo": {
             "FullName": "Full Name",

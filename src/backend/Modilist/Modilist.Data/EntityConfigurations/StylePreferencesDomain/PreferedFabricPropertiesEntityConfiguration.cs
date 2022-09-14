@@ -19,6 +19,9 @@ namespace Modilist.Data.EntityConfigurations.StylePreferencesDomain
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseHiLo($"{nameof(PreferedFabricProperties)}_HiLo");
 
+            builder.Property(x => x.Allergens).HasMaxLength(4000);
+            builder.Property(x => x.AdditionalNotes).HasMaxLength(4000);
+
             builder.HasOne(x => x.Account)
                 .WithOne(x => x.PreferedFabricProperties)
                 .HasPrincipalKey<Account>(x => x.Id)

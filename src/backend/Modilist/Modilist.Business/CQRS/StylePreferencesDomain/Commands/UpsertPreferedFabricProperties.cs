@@ -41,6 +41,8 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
         public UpsertPreferedFabricPropertiesValidator()
         {
             RuleFor(x => x.AccountId).NotEmpty();
+            RuleFor(x => x.Allergens.Length).LessThanOrEqualTo(5000);
+            RuleFor(x => x.AdditionalNotes.Length).LessThanOrEqualTo(5000);
         }
     }
 

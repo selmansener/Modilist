@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, FormControl, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, FormControl, FormHelperText, Grid, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Colors } from "./stylePreferenceComponents/Colors";
@@ -10,6 +10,7 @@ import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import { Dispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { Gender, PreferedFabricPropertiesDTO } from "../../services/swagger/api";
+import { MAX_CHAR_LIMIT } from "../../utils/constans";
 
 export interface FabricPropertiesProps {
     layout?: string;
@@ -23,6 +24,7 @@ export function FabricProperties(props: FabricPropertiesProps) {
     const { isBusy: getPreferedFabricPropertiesIsBusy, data: initialPreferedFabricProperties, status: getPreferedFabricPropertiesStatus } = useSelector((state: RootState) => state.getPreferedFabricPropertiesModel);
     const { isBusy: upsertPreferedFabricPropertiesIsBusy, data: upsertPreferedFabricProperties, status: upsertStatus } = useSelector((state: RootState) => state.upsertPreferedFabricPropertiesModel);
     const isBusy = getAccountIsBusy || getPreferedFabricPropertiesIsBusy || upsertPreferedFabricPropertiesIsBusy;
+
     const [fabricProps, setFabricProps] = useState<PreferedFabricPropertiesDTO>({
         excludedColors: "",
         excludedColorCategories: "",
@@ -175,14 +177,25 @@ export function FabricProperties(props: FabricPropertiesProps) {
                 <TextField
                     value={fabricProps.allergens}
                     onChange={(e) => {
-                        setFabricProps({
-                            ...fabricProps,
-                            allergens: e.target.value
-                        });
+                        if (e.target.value.length > 4000) {
+                            setFabricProps({
+                                ...fabricProps,
+                                allergens: e.target.value.substring(0, 4000)
+                            })
+                        }
+                        else {
+                            setFabricProps({
+                                ...fabricProps,
+                                allergens: e.target.value
+                            })
+                        }
                     }}
                     variant="outlined"
                     multiline
                     rows={5} />
+                <FormHelperText>
+                    <Typography>{`${MAX_CHAR_LIMIT - (fabricProps?.allergens?.length ?? 0)} ${t('Generic.Forms.CharactersLeft')}`}</Typography>
+                </FormHelperText>
             </FormControl>
         </Grid>
         <Grid item xs={12}>
@@ -198,14 +211,25 @@ export function FabricProperties(props: FabricPropertiesProps) {
                 <TextField
                     value={fabricProps.additionalNotes}
                     onChange={(e) => {
-                        setFabricProps({
-                            ...fabricProps,
-                            additionalNotes: e.target.value
-                        });
+                        if (e.target.value.length > 4000) {
+                            setFabricProps({
+                                ...fabricProps,
+                                additionalNotes: e.target.value.substring(0, 4000)
+                            })
+                        }
+                        else {
+                            setFabricProps({
+                                ...fabricProps,
+                                additionalNotes: e.target.value
+                            })
+                        }
                     }}
                     variant="outlined"
                     multiline
                     rows={5} />
+                <FormHelperText>
+                    <Typography>{`${MAX_CHAR_LIMIT - (fabricProps?.additionalNotes?.length ?? 0)} ${t('Generic.Forms.CharactersLeft')}`}</Typography>
+                </FormHelperText>
             </FormControl>
         </Grid>
         {layout && layout === "dashboard" ? <Grid item xs={12} display="flex" justifyContent="flex-end">

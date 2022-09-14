@@ -19,7 +19,7 @@ namespace Modilist.Data.EntityConfigurations.SalesOrderDomain
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Property(x => x.AdditionalNotes).HasMaxLength(2500);
+            builder.Property(x => x.AdditionalNotes).HasMaxLength(4000);
         }
     }
 }

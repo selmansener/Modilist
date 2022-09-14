@@ -12,6 +12,7 @@ import { CustomRadioButtonGroup } from "../../components/customRadioButton/Custo
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 import React from "react";
+import { MAX_CHAR_LIMIT } from "../../utils/constans";
 
 let footWearSizes: number[] = [];
 
@@ -41,6 +42,8 @@ export function SizeInfo(props: SizeInfoProps) {
     const mustBeInteger = t("FormValidation.MustBeInteger");
     const mustBeGreaterThanZero = t("FormValidation.MustBeGreaterThanZero");
     const mustBeNumber = t("FormValidation.MustBeNumber");
+    const charactersLeft = t('Generic.Forms.CharactersLeft');
+    const maxCharLimitMessage = t("FormValidation.OverMaxCharLimit");
     const theme = useTheme();
 
     const schema = Yup.object({
@@ -64,6 +67,7 @@ export function SizeInfo(props: SizeInfoProps) {
         hipRadius: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
         legLength: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
         footLength: Yup.number().typeError(mustBeNumber).integer(mustBeInteger).moreThan(0, mustBeGreaterThanZero).optional(),
+        additionalNotes: Yup.string().max(MAX_CHAR_LIMIT, maxCharLimitMessage)
     });
 
     const sizeSymbols = ["XXS", "XS", "S", "M", "L", "XL", "XXL"];
@@ -287,7 +291,7 @@ export function SizeInfo(props: SizeInfoProps) {
                                 helperText={touched.weight && errors.weight}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                onFocus={e => {e.target.select();}}
+                                onFocus={e => { e.target.select(); }}
                             />
                         </FormControl>
                     </Box>
@@ -315,7 +319,7 @@ export function SizeInfo(props: SizeInfoProps) {
                                 variant="outlined"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                onFocus={e => {e.target.select();}}
+                                onFocus={e => { e.target.select(); }}
                             />
                         </FormControl>
                     </Box>
@@ -509,10 +513,15 @@ export function SizeInfo(props: SizeInfoProps) {
                         value={sizeInfo?.additionalNotes}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        error={touched.additionalNotes && errors.additionalNotes !== undefined}
+                        helperText={touched.additionalNotes && errors.additionalNotes}
                         variant="outlined"
                         multiline
                         minRows={5}
                         maxRows={8} />
+                    <FormHelperText>
+                        <Typography>{`${MAX_CHAR_LIMIT - (sizeInfo?.additionalNotes?.length ?? 0)} ${charactersLeft}`}</Typography>
+                    </FormHelperText>
                 </FormControl>
             </Grid>
             {layout && layout === "dashboard" ?

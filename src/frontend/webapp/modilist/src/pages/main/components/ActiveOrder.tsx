@@ -1,4 +1,4 @@
-import { Alert, Box, Button, CircularProgress, Dialog, DialogContent, DialogTitle, FormControl, Grid, Paper, Snackbar, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, CircularProgress, Dialog, DialogContent, DialogTitle, FormControl, FormHelperText, Grid, Paper, Snackbar, TextField, Typography } from "@mui/material";
 import { format, addDays } from "date-fns";
 import { tr } from "date-fns/locale";
 import { Trans, useTranslation } from "react-i18next";
@@ -11,6 +11,7 @@ import { Gender } from "../../../services/swagger/api";
 import { CustomRadioButtonGroup } from "../../../components/customRadioButton/CustomRadioButton";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
+import { MAX_CHAR_LIMIT } from "../../../utils/constans";
 
 const requestedStyleMale = [
     "Casual",
@@ -251,11 +252,20 @@ export function ActiveOrder() {
                                 rows={4}
                                 value={additionalRequests}
                                 onChange={(e) => {
-                                    setAdditionalRequests(e.target.value);
+                                    if (e.target.value.length > 4000) {
+                                        console.log("test")
+                                        setAdditionalRequests(additionalRequests.substring(0, 4000));
+                                        return;
+                                    } else {
+                                        setAdditionalRequests(e.target.value);
+                                    }
                                 }}
                                 variant="outlined"
                             />
                         </FormControl>
+                        <FormHelperText>
+                            <Typography>{`${MAX_CHAR_LIMIT - (additionalRequests.length ?? 0)} ${t('Generic.Forms.CharactersLeft')}`}</Typography>
+                        </FormHelperText>
                     </Grid>
                     <Grid item xs={12} sx={{
                         display: 'flex',

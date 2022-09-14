@@ -60,6 +60,7 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
             RuleFor(x => x.AccountId).NotEmpty();
             RuleFor(x => x.SalesOrderId).NotEmpty();
             RuleFor(x => x.SalesOrderLineItemId).NotEmpty();
+            RuleFor(x => x.AdditionalNotes.Length).LessThanOrEqualTo(5000);
         }
     }
 

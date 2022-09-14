@@ -83,6 +83,7 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
             RuleFor(x => x.MenUnderWear).NotEmpty().When(x => x.Gender == Gender.Male);
             RuleFor(x => x.Weight).NotEmpty();
             RuleFor(x => x.Height).NotEmpty();
+            RuleFor(x => x.AdditionalNotes.Length).LessThanOrEqualTo(5000);
         }
     }
 

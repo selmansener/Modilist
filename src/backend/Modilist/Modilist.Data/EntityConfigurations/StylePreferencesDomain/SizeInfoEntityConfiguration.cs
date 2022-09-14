@@ -20,6 +20,8 @@ namespace Modilist.Data.EntityConfigurations.StylePreferencesDomain
                 .HasConversion<string>()
                 .IsRequired();
 
+            builder.Property(x => x.AdditionalNotes).HasMaxLength(4000);
+
             builder.HasOne(x => x.Account)
                 .WithOne(x => x.SizeInfo)
                 .HasPrincipalKey<Account>(x => x.Id)

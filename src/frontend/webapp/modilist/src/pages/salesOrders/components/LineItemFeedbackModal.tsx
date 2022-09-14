@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, Grid, Typography, DialogContent, Box, Button, FormGroup, FormControlLabel, Checkbox, FormControl, TextField } from "@mui/material";
+import { Dialog, DialogTitle, Grid, Typography, DialogContent, Box, Button, FormGroup, FormControlLabel, Checkbox, FormControl, TextField, FormHelperText } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { ImageComponent } from "../../../components/image/ImageComponent";
 import { LovelyRating } from "../../../components/lovelyRating/LovelyRating";
 import { LineItemFeedbackDTO, LineItemSizeFeedback, ProductDTO, SalesOrderLineItemState } from "../../../services/swagger/api";
 import { Dispatch, RootState } from "../../../store/store";
+import { MAX_CHAR_LIMIT } from "../../../utils/constans";
 import { calculateAvgLineItemRating } from "../utils/calculateAvgRating";
 
 export interface LineItemFeedbackModalProps {
@@ -293,14 +294,27 @@ export function LineItemFeedbackModal(props: LineItemFeedbackModalProps) {
                                     variant="outlined"
                                     multiline
                                     rows={5}
+                                    value={feedback?.additionalNotes}
                                     onChange={(e) => {
-                                        setFeedback({
-                                            ...feedback,
-                                            additionalNotes: e.target.value
-                                        })
+                                        if (e.target.value.length > 4000) {
+                                            setFeedback({
+                                                ...feedback,
+                                                additionalNotes: e.target.value.substring(0, 4000)
+                                            })
+                                            return;
+                                        }
+                                        else {
+                                            setFeedback({
+                                                ...feedback,
+                                                additionalNotes: e.target.value
+                                            })
+                                        }
                                     }}
                                 />
                             </FormControl>
+                            <FormHelperText>
+                                <Typography>{`${MAX_CHAR_LIMIT - (feedback?.additionalNotes?.length ?? 0)} ${t('Generic.Forms.CharactersLeft')}`}</Typography>
+                            </FormHelperText>
                         </Grid>
                         <Grid item container xs={12} display="flex" justifyContent="flex-end">
                             <Grid item xs={2}>

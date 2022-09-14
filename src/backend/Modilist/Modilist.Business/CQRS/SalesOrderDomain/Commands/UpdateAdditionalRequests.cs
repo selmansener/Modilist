@@ -28,6 +28,7 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
         {
             RuleFor(x => x.AccountId).NotEmpty();
             RuleFor(x => x.SalesOrderId).NotEmpty();
+            RuleFor(x => x.AdditionalRequests.Length).LessThanOrEqualTo(5000);
         }
     }
 
