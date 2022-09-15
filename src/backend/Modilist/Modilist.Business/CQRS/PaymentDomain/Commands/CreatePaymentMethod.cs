@@ -27,6 +27,8 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
         [JsonIgnore]
         public Guid AccountId { get; set; }
 
+        public string CardName { get; private set; }
+
         public string CardNumber { get; set; }
 
         public string CardHolderName { get; set; }
@@ -35,8 +37,6 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
         public string ExpireYear { get; set; }
 
-        public string CVC { get; set; }
-
         public bool IsDefault { get; set; }
     }
 
@@ -44,12 +44,12 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
     {
         public CreatePaymentMethodValidator()
         {
+            RuleFor(x => x.CardName).NotEmpty();
             RuleFor(x => x.AccountId).NotEmpty();
             RuleFor(x => x.CardNumber).NotEmpty();
             RuleFor(x => x.CardHolderName).NotEmpty();
             RuleFor(x => x.ExpireMonth).NotEmpty();
             RuleFor(x => x.ExpireYear).NotEmpty();
-            RuleFor(x => x.CVC).NotEmpty();
         }
     }
 
@@ -94,7 +94,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
             CardInformation cardInformation = new CardInformation
             {
-                CardAlias = account.Email,
+                CardAlias = request.CardName,
                 CardHolderName = request.CardHolderName,
                 CardNumber = request.CardNumber.Replace(" ", string.Empty),
                 ExpireMonth = request.ExpireMonth,
@@ -118,25 +118,15 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
                     throw new InvalidOperationException("create card request failed");
                 }
 
-                var lastFourDigit = request.CardNumber.Substring(request.CardNumber.Length - 4, 4);
-
-                var holderLastName = request.CardHolderName.Split(" ").Last();
-                var holderFirstName = request.CardHolderName.Replace(" " + holderLastName, string.Empty);
-
-                var cardHolderName = $"{holderFirstName.Substring(0, 2).PadRight(holderFirstName.Length, '*')} {holderLastName.Substring(0, 2).PadRight(holderLastName.Length, '*')}";
-
                 paymentMethod.UpdateCardInfo(
                     card.CardUserKey,
-                    cardHolderName,
                     card.CardToken,
                     card.CardAssociation,
                     card.CardFamily,
                     card.CardBankName,
                     card.CardBankCode,
-                    lastFourDigit,
-                    request.CVC,
-                    request.ExpireMonth,
-                    request.ExpireYear);
+                    card.BinNumber,
+                    request.CardName);
 
                 await _paymentMethodRepository.UpdateAsync(paymentMethod, cancellationToken);
             }

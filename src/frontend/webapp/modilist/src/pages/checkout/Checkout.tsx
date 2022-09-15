@@ -118,18 +118,28 @@ export function Checkout() {
     }
 
     const getMaskedCardNumber = () => {
-        let cardNumber: string | null | undefined = paymentMethod?.lastFourDigit;
+        let cardNumber: string | null | undefined = paymentMethod?.binNumber;
 
         if (!cardNumber) {
             return "";
         }
-
-        for (let i = 0; i < 3; i++) {
-            cardNumber = cardNumber.padStart(cardNumber.length + 1, " ");
-            cardNumber = cardNumber?.padStart(cardNumber.length + 4, "*");
+        
+        let endResult = "";
+        for (let i = 0; i < 5; i++) {
+            if (i * 4 > cardNumber.length) {
+                endResult += " ****";
+                continue;
+            }
+            
+            if (i !== 0) {
+                endResult += (" " + cardNumber.substring(i * 4, 4));
+            }
+            else {
+                endResult += cardNumber.substring(i * 4, 4);
+            }
         }
 
-        return cardNumber;
+        return endResult;
     }
 
 
@@ -456,7 +466,7 @@ export function Checkout() {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="body1">
-                                **** **** **** ****
+                                {getMaskedCardNumber()}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -473,12 +483,12 @@ export function Checkout() {
                         justifyContent: "center"
                     }}>
                         <Cards
-                            cvc={paymentMethod?.cvc ?? "000"}
+                            cvc={"000"}
                             expiry={""}
                             name={" "}
                             preview
                             issuer={paymentMethod?.cardAssociation?.replace("_", "").toLowerCase() ?? undefined}
-                            number={"**** **** **** ****"}
+                            number={paymentMethod?.binNumber?.padEnd(16, "*") ?? ""}
                         />
                     </Grid>
                 </Grid>

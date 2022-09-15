@@ -26,6 +26,57 @@ export const DevelopmentApiAxiosParamCreator = function (configuration?: Configu
         /**
          * 
          * @param {string} xApiKey X-ApiKey
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        devV1GetClientIPGet: async (xApiKey: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xApiKey' is not null or undefined
+            if (xApiKey === null || xApiKey === undefined) {
+                throw new RequiredError('xApiKey','Required parameter xApiKey was null or undefined when calling devV1GetClientIPGet.');
+            }
+            const localVarPath = `/dev/v1/GetClientIP`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Addresses", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Returns", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Discounts", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (xApiKey !== undefined && xApiKey !== null) {
+                localVarHeaderParameter['X-ApiKey'] = String(xApiKey);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} xApiKey X-ApiKey
          * @param {SeedServiceType} [seedServiceType] 
          * @param {boolean} [recreateDb] 
          * @param {*} [options] Override http request option.
@@ -51,7 +102,7 @@ export const DevelopmentApiAxiosParamCreator = function (configuration?: Configu
             // oauth required
             if (configuration && configuration.accessToken) {
                 const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Addresses", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Returns", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Addresses", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Returns", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Discounts", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
             }
@@ -96,6 +147,19 @@ export const DevelopmentApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} xApiKey X-ApiKey
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async devV1GetClientIPGet(xApiKey: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await DevelopmentApiAxiosParamCreator(configuration).devV1GetClientIPGet(xApiKey, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {string} xApiKey X-ApiKey
          * @param {SeedServiceType} [seedServiceType] 
          * @param {boolean} [recreateDb] 
          * @param {*} [options] Override http request option.
@@ -120,6 +184,15 @@ export const DevelopmentApiFactory = function (configuration?: Configuration, ba
         /**
          * 
          * @param {string} xApiKey X-ApiKey
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async devV1GetClientIPGet(xApiKey: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return DevelopmentApiFp(configuration).devV1GetClientIPGet(xApiKey, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} xApiKey X-ApiKey
          * @param {SeedServiceType} [seedServiceType] 
          * @param {boolean} [recreateDb] 
          * @param {*} [options] Override http request option.
@@ -138,6 +211,16 @@ export const DevelopmentApiFactory = function (configuration?: Configuration, ba
  * @extends {BaseAPI}
  */
 export class DevelopmentApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} xApiKey X-ApiKey
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DevelopmentApi
+     */
+    public async devV1GetClientIPGet(xApiKey: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return DevelopmentApiFp(this.configuration).devV1GetClientIPGet(xApiKey, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * 
      * @param {string} xApiKey X-ApiKey

@@ -464,7 +464,8 @@
                 "CardNumber": "Kart Numarası: ",
                 "SetAsDefault": "Varsayılan Olarak Ata",
                 "Default": "Varsayılan Kart",
-                "DeleteWarning": "En az bir ödeme yöntemi bulunmak zorunda."
+                "DeleteWarning": "En az bir ödeme yöntemi bulunmak zorunda.",
+                "CardName": "Kart Adı: "
             }
         },
         "NewPaymentMethod": {

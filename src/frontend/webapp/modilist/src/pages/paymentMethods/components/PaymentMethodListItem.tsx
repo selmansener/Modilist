@@ -15,6 +15,31 @@ export function PaymentMethodListItem(props: PaymentMethodListItemProps) {
     const { t } = useTranslation();
     const { paymentMethod } = props;
     const { cdnImg: imgBaseHost } = config;
+    
+    const getMaskedCardNumber = () => {
+        let cardNumber: string | null | undefined = paymentMethod?.binNumber;
+
+        if (!cardNumber) {
+            return "";
+        }
+        
+        let endResult = "";
+        for (let i = 0; i < 5; i++) {
+            if (i * 4 > cardNumber.length) {
+                endResult += " ****";
+                continue;
+            }
+            
+            if (i !== 0) {
+                endResult += (" " + cardNumber.substring(i * 4, 4));
+            }
+            else {
+                endResult += cardNumber.substring(i * 4, 4);
+            }
+        }
+
+        return endResult;
+    }
 
     return <Paper elevation={6} sx={{
         p: 2
@@ -22,10 +47,10 @@ export function PaymentMethodListItem(props: PaymentMethodListItemProps) {
         <Grid item container xs={12} spacing={2}>
             <Grid item xs={6} display="flex" alignItems="center">
                 <Typography variant="body1" component="span" fontWeight={800}>
-                    {t("Pages.PaymentMethods.PaymentMethodListItem.BankName")}
+                    {t("Pages.PaymentMethods.PaymentMethodListItem.CardName")}
                 </Typography>
                 <Typography variant="body1" component="span" ml={1}>
-                    {paymentMethod.cardBankName}
+                    {paymentMethod.cardName}
                 </Typography>
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="flex-end">
@@ -52,13 +77,21 @@ export function PaymentMethodListItem(props: PaymentMethodListItemProps) {
             </Grid>
             <Grid item xs={12}>
                 <Divider />
+        </Grid>
+            <Grid item xs={12} display="flex" alignItems="center">
+                <Typography variant="body1" component="span" fontWeight={800}>
+                    {t("Pages.PaymentMethods.PaymentMethodListItem.BankName")}
+                </Typography>
+                <Typography variant="body1" component="span" ml={1}>
+                    {paymentMethod.cardBankName}
+                </Typography>
             </Grid>
             <Grid item xs={12}>
                 <Typography variant="body1" component="span" fontWeight={800}>
                     {t("Pages.PaymentMethods.PaymentMethodListItem.CardNumber")}
                 </Typography>
                 <Typography variant="body1" component="span" ml={1}>
-                    {`**** **** **** ${paymentMethod.lastFourDigit}`}
+                    {getMaskedCardNumber()}
                 </Typography>
             </Grid>
             <Grid item xs={6} sx={{
@@ -68,14 +101,6 @@ export function PaymentMethodListItem(props: PaymentMethodListItemProps) {
                 alignItems: 'center'
             }}>
                 <ImageComponent src={`${imgBaseHost}/card-logo/${paymentMethod.cardAssociation}.svg`} width={150} />
-                <Box>
-                    <Typography ml={2} mb={2}>
-                        {paymentMethod.cardHolderName}
-                    </Typography>
-                    <Typography ml={2}>
-                        {`${paymentMethod.expireMonth}/${paymentMethod.expireYear}`}
-                    </Typography>
-                </Box>
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="flex-end" alignItems="flex-end">
                 {paymentMethod.isDefault ?

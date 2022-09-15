@@ -104,14 +104,12 @@ namespace Modilist.Business.Seed.Services
 
                 CardInformation cardInformation = new CardInformation
                 {
-                    CardAlias = account.Email,
+                    CardAlias = "Credit Card",
                     CardHolderName = $"{account.FirstName} {account.LastName}",
                     CardNumber = faker.PickRandom(creditCards),
                     ExpireMonth = expireMonth,
                     ExpireYear = faker.Random.Int(min: DateTime.UtcNow.AddYears(1).Year, max: DateTime.UtcNow.AddYears(5).Year).ToString()
                 };
-
-                var cardHolderName = $"{account.FirstName.Substring(0, 2).PadRight(account.FirstName.Length, '*')} {account.LastName.Substring(0, 2).PadRight(account.LastName.Length, '*')}";
 
                 cardRequest.Card = cardInformation;
 
@@ -122,20 +120,15 @@ namespace Modilist.Business.Seed.Services
                     SecretKey = _iyzicoAPIOptions.SecretKey
                 });
 
-                var lastFourDigit = cardInformation.CardNumber.Substring(cardInformation.CardNumber.Length - 4, 4);
-
                 paymentMethod.UpdateCardInfo(
                     card.CardUserKey,
-                    cardHolderName,
                     card.CardToken,
                     card.CardAssociation,
                     card.CardFamily,
                     card.CardBankName,
                     card.CardBankCode,
-                    lastFourDigit,
-                    faker.Random.Int(min: 100, max: 999).ToString(),
-                    expireMonth,
-                    cardInformation.ExpireYear);
+                    card.BinNumber,
+                    card.CardAlias);
 
                 await _dbContext.PaymentMethods.AddAsync(paymentMethod, cancellationToken);
 

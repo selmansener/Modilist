@@ -19,6 +19,12 @@
 export interface PaymentMethodDTO {
     /**
      * 
+     * @type {number}
+     * @memberof PaymentMethodDTO
+     */
+    id?: number;
+    /**
+     * 
      * @type {string}
      * @memberof PaymentMethodDTO
      */
@@ -43,24 +49,6 @@ export interface PaymentMethodDTO {
     cardHolderName?: string;
     /**
      * 
-     * @type {string}
-     * @memberof PaymentMethodDTO
-     */
-    expireMonth?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentMethodDTO
-     */
-    expireYear?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentMethodDTO
-     */
-    cvc?: string;
-    /**
-     * 
      * @type {number}
      * @memberof PaymentMethodDTO
      */
@@ -70,7 +58,13 @@ export interface PaymentMethodDTO {
      * @type {string}
      * @memberof PaymentMethodDTO
      */
-    lastFourDigit?: string | null;
+    binNumber?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodDTO
+     */
+    cardName?: string;
     /**
      * 
      * @type {boolean}

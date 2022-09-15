@@ -11,9 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SubscriptionBlockingReason } from './subscription-blocking-reason';
 import { SubscriptionState } from './subscription-state';
-import { SubscriptionSuspentionReason } from './subscription-suspention-reason';
 /**
  * 
  * @export
@@ -56,18 +54,6 @@ export interface SubscriptionDTO {
      * @memberof SubscriptionDTO
      */
     state?: SubscriptionState;
-    /**
-     * 
-     * @type {SubscriptionSuspentionReason}
-     * @memberof SubscriptionDTO
-     */
-    suspentionReason?: SubscriptionSuspentionReason;
-    /**
-     * 
-     * @type {SubscriptionBlockingReason}
-     * @memberof SubscriptionDTO
-     */
-    blockingReason?: SubscriptionBlockingReason;
     /**
      * 
      * @type {string}

@@ -29,7 +29,7 @@ export function NewPaymentMethodListItem() {
                 <AddCardIcon
                     color="disabled"
                     sx={{
-                        fontSize: 154
+                        fontSize: 192
                     }} />
             </Grid>
         </Grid>

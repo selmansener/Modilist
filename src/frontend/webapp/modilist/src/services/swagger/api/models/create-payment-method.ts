@@ -22,6 +22,12 @@ export interface CreatePaymentMethod {
      * @type {string}
      * @memberof CreatePaymentMethod
      */
+    cardName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePaymentMethod
+     */
     cardNumber?: string;
     /**
      * 
@@ -41,12 +47,6 @@ export interface CreatePaymentMethod {
      * @memberof CreatePaymentMethod
      */
     expireYear?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePaymentMethod
-     */
-    cvc?: string;
     /**
      * 
      * @type {boolean}

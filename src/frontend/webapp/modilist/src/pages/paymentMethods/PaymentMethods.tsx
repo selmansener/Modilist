@@ -18,7 +18,7 @@ export function PaymentMethods() {
     return (
         <Grid item container xs={12} spacing={2}>
             {paymentMethods?.map(paymentMethod => {
-                return <Grid key={paymentMethod.lastFourDigit} item xs={4}>
+                return <Grid key={paymentMethod.id} item xs={4}>
                     <PaymentMethodListItem paymentMethod={paymentMethod} />
                 </Grid>
             })}
