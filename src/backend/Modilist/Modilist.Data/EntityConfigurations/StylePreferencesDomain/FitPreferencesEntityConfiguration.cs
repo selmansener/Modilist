@@ -19,6 +19,13 @@ namespace Modilist.Data.EntityConfigurations.StylePreferencesDomain
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseHiLo($"{nameof(FitPreferences)}_HiLo");
 
+            builder.Property(x => x.UpperFit).HasMaxLength(1000);
+            builder.Property(x => x.LowerFit).HasMaxLength(1000);
+            builder.Property(x => x.FootType).HasMaxLength(1000);
+            builder.Property(x => x.SkirtDressLength).HasMaxLength(1000);
+            builder.Property(x => x.ShortsLength).HasMaxLength(1000);
+            builder.Property(x => x.LegFit).HasMaxLength(1000);
+
             builder.HasOne(x => x.Account)
                 .WithOne(x => x.FitPreferences)
                 .HasPrincipalKey<Account>(x => x.Id)

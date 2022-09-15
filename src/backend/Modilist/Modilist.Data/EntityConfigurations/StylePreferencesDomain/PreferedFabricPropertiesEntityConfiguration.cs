@@ -21,6 +21,10 @@ namespace Modilist.Data.EntityConfigurations.StylePreferencesDomain
 
             builder.Property(x => x.Allergens).HasMaxLength(4000);
             builder.Property(x => x.AdditionalNotes).HasMaxLength(4000);
+            builder.Property(x => x.ExcludedColorCategories).HasMaxLength(1000);
+            builder.Property(x => x.ExcludedColors).HasMaxLength(1000);
+            builder.Property(x => x.ExcludedFabrics).HasMaxLength(1000);
+            builder.Property(x => x.ExcludedPatterns).HasMaxLength(1000);
 
             builder.HasOne(x => x.Account)
                 .WithOne(x => x.PreferedFabricProperties)
