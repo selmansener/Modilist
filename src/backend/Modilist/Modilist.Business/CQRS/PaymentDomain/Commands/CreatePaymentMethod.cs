@@ -27,7 +27,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
         [JsonIgnore]
         public Guid AccountId { get; set; }
 
-        public string CardName { get; private set; }
+        public string CardName { get; set; }
 
         public string CardNumber { get; set; }
 
