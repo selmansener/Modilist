@@ -854,7 +854,9 @@ export function StylePreferences(props: StylePreferencesProps) {
                 flexDirection: 'column'
             }}>
                 <ImageComponent src={`${imgBaseHost}/body-parts/${bodyPart}.svg`} />
-                <Typography>{t(`Pages.Welcome.StylePreferences.BodyParts.${bodyPart}`)}</Typography>
+                <Typography sx={{
+                    textAlign: 'center'
+                }}>{t(`Pages.Welcome.StylePreferences.BodyParts.${bodyPart}`)}</Typography>
             </Box>
         }
     });
