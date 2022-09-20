@@ -57,7 +57,7 @@ export function SubscriptionDetails() {
                         <Slider
                             color="secondary"
                             aria-label="Temperature"
-                            value={parseInt(maxLimit)}
+                            value={maxLimit === "+2500" ? 2750 : parseInt(maxLimit)}
                             getAriaValueText={(val, index) => val.toString()}
                             valueLabelFormat={(val, index) =>
                                 val <= 2500 ?
@@ -72,10 +72,10 @@ export function SubscriptionDetails() {
                             }
                             valueLabelDisplay="auto"
                             onChange={(e, val) => {
-                                if(val > 2500){
+                                if (val > 2500) {
                                     setMaxLimit("+2500");
                                 }
-                                else{
+                                else {
                                     setMaxLimit(val.toString());
                                 }
                             }}
@@ -97,7 +97,7 @@ export function SubscriptionDetails() {
                     maxLimit :
                     "+2500"}
                 <CurrencyLiraIcon fontSize="large" /></Typography>
-                {parseInt(maxLimit) > 2500 && <Typography variant="h5" color="secondary">{t("Pages.Welcome.Subscription.SubscriptionDetails.Description")}</Typography>}
+            {maxLimit === "+2500" && <Typography variant="h5" color="secondary">{t("Pages.Welcome.Subscription.SubscriptionDetails.Description")}</Typography>}
         </Grid>
     </Grid>
 }

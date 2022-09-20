@@ -574,12 +574,6 @@ export function StylePreferences(props: StylePreferencesProps) {
             img: `${imgBaseHost}/product-category-icons/BowTie.svg`,
             mainCategory: MainCategory.Accessories
         },
-        {
-            name: t("ProductCategories.Swimsuit"),
-            value: "Swimsuit",
-            img: `${imgBaseHost}/product-category-icons/Swimsuit-Man.svg`,
-            mainCategory: MainCategory.UnderwearPyjamasBeach
-        },
     ]
 
     const productCategories = gender === Gender.Female ? femaleProductCategories : maleProductCategories;
@@ -807,33 +801,33 @@ export function StylePreferences(props: StylePreferencesProps) {
 
     const BodyPartsToHighlight = () => {
         return <FormControl fullWidth>
-                <CustomCheckboxGroup
-                    value={stylePreferences?.bodyPartsToHighlight ?? ""}
-                    label={<Typography variant="h3" sx={{
-                        mb: 4
-                    }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>}
-                    contents={bodyParts}
-                    onChange={(values: string[]) => {
-                        setFieldValue("bodyPartsToHighlight", values.length > 0 ? values.join(',') : "");
-                    }}
-                />
-            </FormControl> 
+            <CustomCheckboxGroup
+                value={stylePreferences?.bodyPartsToHighlight ?? ""}
+                label={<Typography variant="h3" sx={{
+                    mb: 4
+                }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>}
+                contents={bodyParts}
+                onChange={(values: string[]) => {
+                    setFieldValue("bodyPartsToHighlight", values.length > 0 ? values.join(',') : "");
+                }}
+            />
+        </FormControl>
     }
 
     const BodyPartsToHide = () => {
         return <FormControl fullWidth>
-                <CustomCheckboxGroup
-                    value={stylePreferences?.bodyPartsToHide ?? ""}
-                    label={<Typography variant="h3" sx={{
-                        mb: 4
-                    }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>}
-                    isNegative
-                    contents={bodyParts}
-                    onChange={(values: string[]) => {
-                        setFieldValue("bodyPartsToHide", values.length > 0 ? values.join(',') : "");
-                    }}
-                />
-            </FormControl>
+            <CustomCheckboxGroup
+                value={stylePreferences?.bodyPartsToHide ?? ""}
+                label={<Typography variant="h3" sx={{
+                    mb: 4
+                }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>}
+                isNegative
+                contents={bodyParts}
+                onChange={(values: string[]) => {
+                    setFieldValue("bodyPartsToHide", values.length > 0 ? values.join(',') : "");
+                }}
+            />
+        </FormControl>
     }
 
     const _bodyParts = [
@@ -993,31 +987,31 @@ export function StylePreferences(props: StylePreferencesProps) {
             <Grid item xs={6}>
                 <ImageComponent src={`${imgBaseHost}/style-preferences-general/WhyModilist1.svg`}></ImageComponent>
             </Grid>
-            {account?.gender === Gender.Female && 
-            <>
-             <Grid item xs={12}>
-             <BodyPartsToHighlight />
-              </Grid>
-              <Grid item xs={12}>
-                <BodyPartsToHide />
-             
-                 <FormControl fullWidth sx={{
-                     mt: 4
-                 }}>
-                     <FormControlLabel
-                         control={
-                             <Checkbox
-                                 name="prefersHijabClothing"
-                                 onChange={handleChange}
-                                 checked={stylePreferences.prefersHijabClothing}
-                             />
-                         }
-                         label={<Typography variant="subtitle1">{t("Pages.Welcome.StylePreferences.Hijab")}</Typography>} />
-                         </FormControl>
-         </Grid>
-         </>
+            {account?.gender === Gender.Female &&
+                <>
+                    <Grid item xs={12}>
+                        <BodyPartsToHighlight />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <BodyPartsToHide />
+
+                        <FormControl fullWidth sx={{
+                            mt: 4
+                        }}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="prefersHijabClothing"
+                                        onChange={handleChange}
+                                        checked={stylePreferences.prefersHijabClothing}
+                                    />
+                                }
+                                label={<Typography variant="subtitle1">{t("Pages.Welcome.StylePreferences.Hijab")}</Typography>} />
+                        </FormControl>
+                    </Grid>
+                </>
             }
-               
+
             <Grid item xs={12}>
                 <Typography variant="h3" sx={{
                     mb: 4
