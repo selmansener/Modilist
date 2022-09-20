@@ -371,6 +371,7 @@
                 "ExpireMonth": "Expiration Date (Month)",
                 "ExpireYear": "Expiration Date (Year)",
                 "CardName": "Card Name",
+                "CardNumberValidation": "Please enter a valid card number",
                 "MonthTwoDigits": "Please enter in two digits",
                 "MonthValidation": "Please enter a valid month",
                 "YearTwoDigits": "Please enter the year in two digits",
@@ -445,6 +446,7 @@
             "ExpireMonth": "Expiration Date (Month)",
             "ExpireYear": "Expiration Date (Year)",
             "CardName": "Card Name",
+            "CardNumberValidation": "Please enter a valid card number",
             "MonthTwoDigits": "Please enter in two digits",
             "MonthValidation": "Please enter a valid month",
             "YearTwoDigits": "Please enter the year in two digits",
@@ -731,6 +733,7 @@
         "MustBeInteger": "Please insert an integer",
         "MustBeGreaterThanZero": "Please insert an integer bigger than 0",
         "MustBeNumber": "Please insert a number",
+        "CardNumber": "Please enter a valid card number",
         "OverMaxCharLimit": "You are over the max character limit"
     },
     "Generic": {

@@ -394,6 +394,7 @@
                 "ExpireMonth": "Son Kullanma Tarihi (Ay)",
                 "ExpireYear": "Son Kullanma Tarihi (Yıl)",
                 "CardName": "Kart İsmi",
+                "CardNumberValidation": "Lütfen geçerli bir kart numarası giriniz.",
                 "MonthTwoDigits": "Lütfen iki haneli olarak giriniz",
                 "MonthValidation": "Lütfen geçerli bir ay giriniz",
                 "YearTwoDigits": "Lütfen yılı iki haneli olarak giriniz",
@@ -474,6 +475,7 @@
             "ExpireMonth": "Son Kullanma Tarihi (Ay)",
             "ExpireYear": "Son Kullanma Tarihi (Yıl)",
             "CardName": "Kart İsmi",
+            "CardNumberValidation": "Lütfen geçerli bir kart numarası giriniz.",
             "MonthTwoDigits": "Lütfen iki haneli olarak giriniz",
             "MonthValidation": "Lütfen geçerli bir ay giriniz",
             "YearTwoDigits": "Lütfen yılı iki haneli olarak giriniz",
@@ -792,6 +794,7 @@
         "MustBeGreaterThanZero": "Lütfen sıfırdan büyük bir tamsayı giriniz",
         "MustBeNumber": "Lütfen bir sayı giriniz",
         "Email": "Lütfen geçerli bir email adresi giriniz.",
+        "CardNumber": "Lütfen geçerli bir kart numarası giriniz",
         "OverMaxCharLimit": "Maksimum karakter sayısını aştınız"
     },
     "Generic": {

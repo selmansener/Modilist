@@ -1,10 +1,10 @@
 import { Button, Checkbox, FormControl, FormControlLabel, Grid, TextField } from "@mui/material";
-import { useFormik } from "formik";
+import { useFormik, validateYupSchema } from "formik";
 import { useDispatch } from "react-redux";
 import { config } from "../../config";
 import * as Yup from "yup";
 import { IMaskInput } from "react-imask";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Focused } from "react-credit-cards";
 import { useTranslation } from "react-i18next";
 import Cards from 'react-credit-cards';
@@ -63,11 +63,16 @@ export function NewPaymentMethod() {
     const { isProduction } = config;
     const requiredField = t("FormValidation.RequiredField");
     const [cardFocused, setCardFocused] = useState<Focused>();
+    const [cardNumValidate, setCardNumberValidate] = useState(false);
+    const cardNumberValidation = t("Pages.NewPaymentMethod.CardNumberValidation");
     const monthTwoDigits = t("Pages.NewPaymentMethod.MonthTwoDigits");
     const monthValidation = t("Pages.NewPaymentMethod.MonthValidation");
     const yearTwoDigits = t("Pages.NewPaymentMethod.YearTwoDigits");
     const yearValidation = t("Pages.NewPaymentMethod.YearValidation");
     const cardHolderNameValidation = t("Pages.NewPaymentMethod.CardHolderNameValidation");
+    const CardNumber = t("FormValidation.CardNumber").toString();
+    const currentDate = new Date();
+
 
     const schema = Yup.object({
         cardHolderName: Yup.string().test({
@@ -80,8 +85,44 @@ export function NewPaymentMethod() {
                 return true
             }
         }).required(requiredField),
-        cardNumber: Yup.string().required(requiredField),
-        expireMonth: Yup.string().test({
+        cardNumber: Yup.string().test({
+            name: 'CardNumber',
+            message: `${CardNumber}`,
+            test: (value) => {
+                let valueArr = value?.split(" ");
+                let valueFinal = "";
+                valueArr?.forEach(value => {
+                    valueFinal += value;
+                })
+                let arr = (valueFinal.trim() + "").split("").reverse().map((x) => parseInt(x));
+                let lastDigit = arr.splice(0, 1)[0];
+                let sum = arr.reduce(
+                    (acc, val, i) => (i % 2 !== 0 ? acc + val : acc + ((val * 2) % 9) || 9), 0);
+                sum += lastDigit;
+                return (sum % 10 === 0) && (value?.length == 19);
+
+            }
+
+
+        }).required(requiredField),
+        expireMonth: Yup.string().when("expireYear", {
+            is: (currentDate.getFullYear() % 1000).toString(),
+            then: Yup.string().test({
+                name: "monthValidation",
+                message: monthValidation,
+                test: (value) => {
+                    if (value == undefined) {
+                        return false
+                    }
+                    const valueAsNumber = parseInt(value);
+                    const currentMonth = currentDate.getMonth() + 1;
+                    return (
+                        (valueAsNumber >= 1 && valueAsNumber <= 12) &&
+                        (valueAsNumber > currentMonth)
+                    )
+                }
+            }).length(2, monthTwoDigits).required(requiredField)
+        }).test({
             name: "monthValidation",
             message: monthValidation,
             test: (value) => {
@@ -90,7 +131,7 @@ export function NewPaymentMethod() {
                 }
                 const valueAsNumber = parseInt(value);
                 return (
-                    valueAsNumber >= 1 && valueAsNumber <= 12
+                    (valueAsNumber >= 1 && valueAsNumber <= 12)
                 )
             }
         }).length(2, monthTwoDigits).required(requiredField), //i18n ile değiştir

@@ -75,12 +75,14 @@ export default function PaymentMethod() {
     const requiredField = t("FormValidation.RequiredField");
     const [cardFocused, setCardFocused] = useState<Focused>();
     const [creditCardNumberShrink, setCreditCardNumberShrink] = useState(false);
+    const cardNumberValidation = t("Pages.Welcome.PaymentMethod.CardNumberValidation");
     const monthTwoDigits = t("Pages.Welcome.PaymentMethod.MonthTwoDigits");
     const monthValidation = t("Pages.Welcome.PaymentMethod.MonthValidation");
     const yearTwoDigits = t("Pages.Welcome.PaymentMethod.YearTwoDigits");
     const yearValidation = t("Pages.Welcome.PaymentMethod.YearValidation");
     const cardHolderNameValidation = t("Pages.Welcome.PaymentMethod.CardHolderNameValidation");
     const mustBeNumber = t("FormValidation.MustBeNumber");
+    const CardNumber = t("FormValidation.CardNumber").toString();
     const currentDate = new Date();
     const schema = Yup.object({
         cardHolderName: Yup.string().test({
@@ -93,7 +95,24 @@ export default function PaymentMethod() {
                 return true
             }
         }).required(requiredField),
-        cardNumber: Yup.string().required(requiredField),
+        cardNumber: Yup.string().test({
+            name: 'CardNumber',
+            message: `${CardNumber}`,
+            test: (value) => {
+                let valueArr = value?.split(" ");
+                let valueFinal = "";
+                valueArr?.forEach(value => {
+                    valueFinal += value;
+                })
+
+                let arr = (valueFinal.trim() + "").split("").reverse().map((x) => parseInt(x));
+                let lastDigit = arr.splice(0, 1)[0];
+                let sum = arr.reduce(
+                    (acc, val, i) => (i % 2 !== 0 ? acc + val : acc + ((val * 2) % 9) || 9), 0);
+                sum += lastDigit;
+                return (sum % 10 === 0) && (value?.length == 19);
+            }
+        }).required(requiredField),
         expireMonth: Yup.string().when("expireYear", {
             is: (currentDate.getFullYear() % 1000).toString(),
             then: Yup.string().test({
@@ -140,7 +159,7 @@ export default function PaymentMethod() {
             }
         }).length(2, yearTwoDigits).required(requiredField),
         cardName: Yup.string().required(requiredField),
-        
+
     });
 
     const {
