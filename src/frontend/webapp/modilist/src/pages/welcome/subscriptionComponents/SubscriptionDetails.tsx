@@ -11,7 +11,7 @@ export function SubscriptionDetails() {
     const dispatch = useDispatch<Dispatch>();
     const { isBusy: getSubscriptionIsBusy, data: getSubscription, status: getSubscriptionStatus } = useSelector((state: RootState) => state.getSubscriptionModel);
     const { isBusy: createSubscriptionIsBusy, data: createSubscription, status: createSubscriptionStatus } = useSelector((state: RootState) => state.createSubscriptionModel);
-    const [maxLimit, setMaxLimit] = useState<string>(getSubscription?.maxPricingLimit ?? "1000");
+    const [maxLimit, setMaxLimit] = useState<string>(getSubscription?.maxPricingLimit ?? "2500");
 
     useEffect(() => {
         if (createSubscription && createSubscriptionStatus === 200) {
@@ -25,7 +25,7 @@ export function SubscriptionDetails() {
         }
 
         if (getSubscriptionStatus === 200 && getSubscription?.maxPricingLimit) {
-            setMaxLimit(getSubscription?.maxPricingLimit ?? "1000");
+            setMaxLimit(getSubscription?.maxPricingLimit ?? "2500");
         }
     }, [getSubscriptionStatus]);
 
@@ -57,23 +57,23 @@ export function SubscriptionDetails() {
                         <Slider
                             color="secondary"
                             aria-label="Temperature"
-                            value={maxLimit === "+2500" ? 2750 : parseInt(maxLimit)}
+                            value={maxLimit === "+5000" ? 5250 : parseInt(maxLimit)}
                             getAriaValueText={(val, index) => val.toString()}
                             valueLabelFormat={(val, index) =>
-                                val <= 2500 ?
+                                val <= 5000 ?
                                     <Typography display="inline">{val}<CurrencyLiraIcon fontSize="small" sx={{
                                         verticalAlign: 'text-bottom',
                                         display: 'inline-flex'
                                     }} /></Typography> :
-                                    <Typography display="inline">+2500<CurrencyLiraIcon fontSize="small" sx={{
+                                    <Typography display="inline">+5000<CurrencyLiraIcon fontSize="small" sx={{
                                         verticalAlign: 'text-bottom',
                                         display: 'inline-flex'
                                     }} /></Typography>
                             }
                             valueLabelDisplay="auto"
                             onChange={(e, val) => {
-                                if (val > 2500) {
-                                    setMaxLimit("+2500");
+                                if (val > 5000) {
+                                    setMaxLimit("+5000");
                                 }
                                 else {
                                     setMaxLimit(val.toString());
@@ -81,8 +81,8 @@ export function SubscriptionDetails() {
                             }}
                             step={250}
                             marks
-                            min={500}
-                            max={2750}
+                            min={1500}
+                            max={5250}
                         />
                     } />
             </FormControl>
@@ -93,11 +93,11 @@ export function SubscriptionDetails() {
             alignItems: 'center'
         }} >
             <Typography variant="h2" color="secondary">{
-                parseInt(maxLimit) <= 2500 ?
+                parseInt(maxLimit) <= 5000 ?
                     maxLimit :
-                    "+2500"}
+                    "+5000"}
                 <CurrencyLiraIcon fontSize="large" /></Typography>
-            {maxLimit === "+2500" && <Typography variant="h5" color="secondary">{t("Pages.Welcome.Subscription.SubscriptionDetails.Description")}</Typography>}
+            {maxLimit === "+5000" && <Typography variant="h5" color="secondary">{t("Pages.Welcome.Subscription.SubscriptionDetails.Description")}</Typography>}
         </Grid>
     </Grid>
 }

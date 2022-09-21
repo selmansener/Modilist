@@ -21,7 +21,7 @@ namespace Modilist.Business.CQRS.SubscriptionDomain.Commands
         [JsonIgnore]
         public Guid AccountId { get; set; }
 
-        public string MaxPricingLimit { get; set; } = "1000";
+        public string MaxPricingLimit { get; set; } = "2500";
 
         [JsonIgnore]
         public int MaxPricingLimitAsInt 
@@ -31,7 +31,7 @@ namespace Modilist.Business.CQRS.SubscriptionDomain.Commands
                 if (!int.TryParse(MaxPricingLimit, out _maxPricingLimit))
                 {
 
-                    _maxPricingLimit = 2750;
+                    _maxPricingLimit = 5250;
                 }
                 return _maxPricingLimit; 
             }
@@ -44,7 +44,7 @@ namespace Modilist.Business.CQRS.SubscriptionDomain.Commands
         {
             RuleFor(x => x.AccountId).NotEmpty();
             RuleFor(x => x.MaxPricingLimitAsInt).NotEmpty()
-                .GreaterThanOrEqualTo(500)
+                .GreaterThanOrEqualTo(1500)
                 .Must(x => x % 250 == 0);
         }
     }

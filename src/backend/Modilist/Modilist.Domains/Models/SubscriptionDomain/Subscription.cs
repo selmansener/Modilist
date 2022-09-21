@@ -18,7 +18,7 @@ namespace Modilist.Domains.Models.SubscriptionDomain
             AccountId = accountId;
             State = SubscriptionState.Active;
             StartedAt = DateTime.UtcNow;
-            MaxPricingLimit = "1000";
+            MaxPricingLimit = "2500";
         }
 
         public Guid AccountId { get; private set; }
@@ -47,13 +47,13 @@ namespace Modilist.Domains.Models.SubscriptionDomain
         {
             int result;
 
-            if (int.TryParse(maxPricingLimit, out result) && result < 500)
+            if (int.TryParse(maxPricingLimit, out result) && result < 1500)
             {
-                throw new InvalidOperationException("MaxPricingLimit can not be less than 500");
+                throw new InvalidOperationException("MaxPricingLimit can not be less than 1500");
             }
-            else if(!int.TryParse(maxPricingLimit, out result) && !maxPricingLimit.Equals("+2500"))
+            else if(!int.TryParse(maxPricingLimit, out result) && !maxPricingLimit.Equals("+5000"))
             {
-                throw new InvalidOperationException("MaxPricingLimit must a valid integer");
+                throw new InvalidOperationException("MaxPricingLimit must be a valid integer");
             }
             else if(!int.TryParse(maxPricingLimit, out result) && maxPricingLimit.Equals("+5000"))
             {
