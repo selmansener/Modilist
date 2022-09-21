@@ -55,9 +55,13 @@ namespace Modilist.Domains.Models.SubscriptionDomain
             {
                 throw new InvalidOperationException("MaxPricingLimit must a valid integer");
             }
-            else
+            else if(!int.TryParse(maxPricingLimit, out result) && maxPricingLimit.Equals("+5000"))
             {
                 result = 9999;
+            }
+            else
+            {
+                int.TryParse(maxPricingLimit, out result);
             }
 
             MaxPricingLimit = maxPricingLimit;
