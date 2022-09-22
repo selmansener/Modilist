@@ -803,9 +803,15 @@ export function StylePreferences(props: StylePreferencesProps) {
         return <FormControl fullWidth>
             <CustomCheckboxGroup
                 value={stylePreferences?.bodyPartsToHighlight ?? ""}
-                label={<Typography variant="h3" sx={{
+                label={
+                <Box>
+                <Typography variant="h3" component={"span"} sx={{
                     mb: 4
-                }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>}
+                }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>
+                <Typography color="secondary" variant="h3" component={"span"} 
+                >{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
+                </Box>
+                }
                 contents={bodyParts}
                 onChange={(values: string[]) => {
                     setFieldValue("bodyPartsToHighlight", values.length > 0 ? values.join(',') : "");
@@ -813,14 +819,19 @@ export function StylePreferences(props: StylePreferencesProps) {
             />
         </FormControl>
     }
-
     const BodyPartsToHide = () => {
         return <FormControl fullWidth>
             <CustomCheckboxGroup
                 value={stylePreferences?.bodyPartsToHide ?? ""}
-                label={<Typography variant="h3" sx={{
+                label={
+                <Box>
+                <Typography variant="h3" component={"span"} sx={{
                     mb: 4
-                }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>}
+                    }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>
+                    <Typography color="secondary" variant="h3" component={"span"}
+                    >{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
+                </Box>
+                    }
                 isNegative
                 contents={bodyParts}
                 onChange={(values: string[]) => {
@@ -1013,9 +1024,12 @@ export function StylePreferences(props: StylePreferencesProps) {
             }
 
             <Grid item xs={12}>
-                <Typography variant="h3" sx={{
+                <Box>
+                    <Typography variant="h3" component={"span"} sx={{
                     mb: 4
-                }}>{t("Pages.Welcome.StylePreferences.ExcludedCategoriesTitle")}</Typography>
+                }}>{t("Pages.Welcome.StylePreferences.ExcludedCategoriesTitle")}</Typography><Typography color="secondary" variant="h3" component={"span"}>{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
+
+                </Box>
                 <Trans>
                     <Typography variant="subtitle1" display="inline">
                         {t("Pages.Welcome.StylePreferences.UnwantedPieces1")}

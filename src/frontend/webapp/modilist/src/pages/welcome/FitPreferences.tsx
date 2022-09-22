@@ -166,7 +166,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     return <Grid item container xs={12} spacing={12}>
         <Grid item xs={12}>
-            <Typography variant="h5" color="secondary" sx={{ fontWeight: 800 }} align="center">
+        <Typography variant="h5" color="secondary" sx={{ fontWeight: 800 }} align="center">
                 {t('Pages.Welcome.FitPreferences.Warning')}
             </Typography>
         </Grid>

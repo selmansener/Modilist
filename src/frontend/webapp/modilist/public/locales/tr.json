@@ -255,7 +255,7 @@
             },
             "FitPreferences": {
                 "Warning": "Seçim yapmadığın kategorilerdeki her tarzı benimsediğini varsayacağız.",
-                "WaistHeightPreference": "Alt giyimde tercih ettiğin bel çeşitleri",
+                "WaistHeightPreference": "Alt giyimde tercih ettiğin bel çeşitleri ",
                 "WaistHeights": {
                     "UltraHighWaist": "UltraHighWaist",
                     "HighWaist": "HighWaist",
@@ -265,7 +265,7 @@
                     "Low": "Low",
                     "UltraLow": "UltraLow"
                 },
-                "LowerFitPreference": "Alt giyimde tercih ettiğin kalıp tercihleri",
+                "LowerFitPreference": "Alt giyimde tercih ettiğin kalıp tercihleri ",
                 "LowerFits": {
                     "Straight": "Straight",
                     "Skinny": "Skinny",
@@ -274,19 +274,19 @@
                     "Relaxed": "Relaxed",
                     "Loose": "Loose"
                 },
-                "UpperFitPreference": "Üst giyimde tercih ettiğin kalıp çeşitleri",
+                "UpperFitPreference": "Üst giyimde tercih ettiğin kalıp çeşitleri ",
                 "UpperFits": {
                     "Skinny": "Skinny",
                     "Regular": "Regular",
                     "Loose": "Loose"
                 },
-                "SkirtDressLengthPreference": "Alt giyimde tercih ettiğin etek - elbise uzunluğu",
+                "SkirtDressLengthPreference": "Alt giyimde tercih ettiğin etek - elbise uzunluğu ",
                 "SkirtDressLengths": {
                     "Mini": "Mini",
                     "Midi": "Midi",
                     "Long": "Uzun"
                 },
-                "LegFitPreference": "Alt giyimde tercih ettiğin paça çeşitleri",
+                "LegFitPreference": "Alt giyimde tercih ettiğin paça çeşitleri ",
                 "LegFits": {
                     "Spanish": "İspanyol Paça",
                     "Straight": "Boru Paça",
@@ -294,7 +294,7 @@
                     "Slim": "Dar Paça",
                     "Wide": "Çizme Paça"
                 },
-                "ShortsLengthPreference": "Alt giyimde tercih ettiğin şort uzunluğu",
+                "ShortsLengthPreference": "Alt giyimde tercih ettiğin şort uzunluğu ",
                 "ShortsLengths": {
                     "SuperMini": "Süper Mini",
                     "Mini": "Mini",
@@ -302,7 +302,7 @@
                     "Midi": "Midi",
                     "Long": "Uzun"
                 },
-                "FootTypePreference": "Tercih ettiğin ayakkabı çeşitleri",
+                "FootTypePreference": "Tercih ettiğin ayakkabı çeşitleri ",
                 "FootTypes": {
                     "Narrow": "İnce",
                     "Wide": "Taraklı"
@@ -323,7 +323,7 @@
                 "ExcludedAccessoryColors": {
                     "1": "Kombinlerinizde ",
                     "2": "kesinlikle olmasını istemediğiniz ",
-                    "3": "aksesuar rengi"
+                    "3": "aksesuar renklerini seçiniz."
                 },
                 "ExcludedPatterns": {
                     "1": "Kombinlerinizde ",
@@ -360,8 +360,9 @@
                 "UnwantedPieces2": "kesinlikle olmasını istemediğiniz ",
                 "UnwantedPieces3": "parçaları seçiniz.",
                 "Hijab": "Tesettür giyim tercih ediyorum.",
-                "BodyPartsToHighlight": "Özellikle öne çıkarmak istediğiniz bölgeler var mı? (Opsiyonel)",
-                "BodyPartsToHide": "Özellikle saklamak istediğiniz bölgeler var mı? (Opsiyonel)",
+                "BodyPartsToHighlight": "Özellikle öne çıkarmak istediğiniz bölgeler var mı? ",
+                "BodyPartsToHide": "Özellikle saklamak istediğiniz bölgeler var mı? ",
+                "Optional": "(Opsiyonel)",
                 "BodyParts": {
                     "Arms": "Kollar",
                     "Shoulders": "Omuzlar",
@@ -379,7 +380,7 @@
                     "LikesSurprizes": "Süprizlerle Kendimi Şımartmak",
                     "MakingNewStyle": "Kendime Yeni Bir Stil Oluşturmak"
                 },
-                "ExcludedCategoriesTitle": "Asla giymem dediklerin (Opsiyonel)"
+                "ExcludedCategoriesTitle": "Asla giymem dediklerin "
             },
             "Subscription": {
                 "SubscriptionDetails": {
@@ -789,13 +790,13 @@
     },
     "FormValidation": {
         "RequiredField": "*Gerekli Alan",
-        "MinCharacters": "Lütfen başında 0 olmadan 10 haneli bir telefon numarası giriniz",
-        "MustBeInteger": "Lütfen bir tamsayı giriniz",
-        "MustBeGreaterThanZero": "Lütfen sıfırdan büyük bir tamsayı giriniz",
-        "MustBeNumber": "Lütfen bir sayı giriniz",
-        "Email": "Lütfen geçerli bir email adresi giriniz.",
-        "CardNumber": "Lütfen geçerli bir kart numarası giriniz",
-        "OverMaxCharLimit": "Maksimum karakter sayısını aştınız"
+        "MinCharacters": "*Lütfen başında 0 olmadan 10 haneli bir telefon numarası giriniz",
+        "MustBeInteger": "*Lütfen bir tamsayı giriniz",
+        "MustBeGreaterThanZero": "*Lütfen sıfırdan büyük bir tamsayı giriniz",
+        "MustBeNumber": "*Lütfen bir sayı giriniz",
+        "Email": "*Lütfen geçerli bir email adresi giriniz.",
+        "CardNumber": "*Lütfen geçerli bir kart numarası giriniz",
+        "OverMaxCharLimit": "*Maksimum karakter sayısını aştınız"
     },
     "Generic": {
         "SalesOrderState": {

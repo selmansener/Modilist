@@ -230,7 +230,7 @@
             },
             "FitPreferences": {
                 "Warning": "We will assume that you adopt every style in the categories you did not choose.",
-                "WaistHeightPreference": "The types of waists you prefer in bottom clothing",
+                "WaistHeightPreference": "The types of waists you prefer in bottom clothing ",
                 "WaistHeights": {
                     "UltraHighWaist": "UltraHighWaist",
                     "HighWaist": "HighWaist",
@@ -240,7 +240,7 @@
                     "Low": "Low",
                     "UltraLow": "UltraLow"
                 },
-                "LowerFitPreference": "Types of fits you prefer in lower clothing",
+                "LowerFitPreference": "Types of fits you prefer in lower clothing ",
                 "LowerFits": {
                     "Straight": "Straight",
                     "Skinny": "Skinny",
@@ -249,7 +249,7 @@
                     "Relaxed": "Relaxed",
                     "Loose": "Loose"
                 },
-                "UpperFitPreference": "Types of fits you prefer in top clothing",
+                "UpperFitPreference": "Types of fits you prefer in top clothing ",
                 "UpperFits": {
                     "Skinny": "Skinny",
                     "Regular": "Regular",
@@ -261,7 +261,7 @@
                     "Midi": "Midi",
                     "Long": "Long"
                 },
-                "LegFitPreference": "The types of trotters you prefer",
+                "LegFitPreference": "The types of trotters you prefer ",
                 "LegFits": {
                     "Spanish": "Bell Bottoms",
                     "Straight": "Straight Cut",
@@ -269,7 +269,7 @@
                     "Slim": "Skinny Leg",
                     "Wide": "Boot Trousers"
                 },
-                "ShortsLengthPreference": "The length of shorts you prefer",
+                "ShortsLengthPreference": "The length of shorts you prefer ",
                 "ShortsLengths": {
                     "SuperMini": "Super Mini",
                     "Mini": "Mini",
@@ -277,7 +277,7 @@
                     "Midi": "Midi",
                     "Long": "Long"
                 },
-                "FootTypePreference": "Types of shoes you prefer",
+                "FootTypePreference": "Types of shoes you prefer ",
                 "FootTypes": {
                     "Narrow": "Narrow",
                     "Wide": "Scalloped"
@@ -286,27 +286,27 @@
             },
             "FabricProperties": {
                 "ExcludedColors": {
-                    "1": "Select colors you definitely don't want in your outfits",
+                    "1": "Select colors you definitely don't want in your outfits ",
                     "2": "",
                     "3": ""
                 },
                 "ExcludedColorTypes": {
-                    "1": "Select color tones you definitely don't want in your outfits",
+                    "1": "Select color tones you definitely don't want in your outfits ",
                     "2": "",
                     "3": ""
                 },
                 "ExcludedAccessoryColors": {
-                    "1": "Select accessory colors you definitely don't want in your outfits.",
+                    "1": "Select accessory colors you definitely don't want in your outfits ",
                     "2": "",
                     "3": ""
                 },
                 "ExcludedPatterns": {
-                    "1": "Select patterns you definitely don't want in your outfits",
+                    "1": "Select patterns you definitely don't want in your outfits ",
                     "2": "",
                     "3": ""
                 },
                 "ExcludedFabrics": {
-                    "1": "Select textures you definitely don't want in your outfits",
+                    "1": "Select textures you definitely don't want in your outfits ",
                     "2": "",
                     "3": ""
                 },
@@ -335,8 +335,9 @@
                 "UnwantedPieces2": "that you definitely don't want to be",
                 "UnwantedPieces3": "Select pieces.",
                 "Hijab": "I prefer hijab clothing.",
-                "BodyPartsToHighlight": "Are there any body parts you would like to emphasise in particular? (Optional)",
-                "BodyPartsToHide": "Are there any body parts you particularly want to hide? (Optional)",
+                "BodyPartsToHighlight": "Are there any body parts you would like to emphasise in particular? ",
+                "BodyPartsToHide": "Are there any body parts you particularly want to hide? ",
+                "Optional": "(Optional)",
                 "BodyParts": {
                     "Arms": "Arms",
                     "Shoulders": "Shoulders",
@@ -354,7 +355,7 @@
                     "LikesSurprizes": "Pampering Myself with Surprises",
                     "MakingNewStyle": "Creating a New Style for Myself"
                 },
-                "ExcludedCategoriesTitle": "Things you would never wear (Optional)"
+                "ExcludedCategoriesTitle": "Things you would never wear "
             },
             "Subscription": {
                 "SubscriptionDetails": {
