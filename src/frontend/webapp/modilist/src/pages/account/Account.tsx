@@ -25,7 +25,7 @@ const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
         return (
             <IMaskInput
                 {...other}
-                mask="000 000 0000"
+                mask="500 000 0000"
                 definitions={{
                     '#': /[1-9]/,
                 }}
@@ -52,6 +52,7 @@ export function Account() {
     const [locale] = React.useState<keyof typeof localeMap>('tr');
     const dispatch = useDispatch<Dispatch>();
     const [isDatePickerOpen, setIsDatePickerOpen] = React.useState(false);
+    const [personalNumberShrink, setPersonalNumberShrink] = useState(false);
 
     const requiredField = t("FormValidation.RequiredField");
     const minCharacters = t("FormValidation.MinCharacters").toString();
@@ -101,6 +102,9 @@ export function Account() {
             dispatch.updateAccountModel.RESET();
         }
     }, [updateAccountStatus]);
+    useEffect(() => {
+        setPersonalNumberShrink(account.phone !== undefined && account.phone !== "");
+    }, [account]);
 
     return (
         <Grid container spacing={2}>
@@ -190,6 +194,9 @@ export function Account() {
                         onBlur={handleBlur}
                         InputProps={{
                             inputComponent: PhoneInputMask as any,
+                        }}
+                        InputLabelProps={{
+                            shrink: personalNumberShrink
                         }} />
                 </FormControl>
             </Grid>
