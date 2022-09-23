@@ -10,7 +10,8 @@
   <link rel="icon" href="https://cdn.modilist.com/img/common/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <style>
     html {
       height: 100%;
@@ -42,14 +43,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #fffef8;
-    }
-
-    .container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      align-self: stretch;
+      background-color: #f8faff;
       background-image: linear-gradient(rgba(150, 141, 179, 0.8), rgba(150, 141, 179, 0.8)), url("https://cdn.modilist.com/img/common/auth-form-background.png");
       background-repeat: no-repeat;
       background-position: center;
@@ -57,15 +51,18 @@
       overflow: auto;
     }
 
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      align-self: stretch;
+    }
+
     .panel {
       width: 490px;
       padding: 50px;
       color: #fffef8;
-      align-self: stretch;
-    }
-
-    .companyLogo {
-      width: 50%;
     }
 
     .heading h1 {
@@ -80,6 +77,7 @@
       border-top: 1px solid #2F2244;
       margin-top: 12px;
       margin-bottom: 12px;
+      display: none;
     }
 
     .social .options {
@@ -145,17 +143,17 @@
 
     .entry-item input {
       outline: none;
-      border: 2px solid #968DB3;
-      border-radius: 5px;
+      border: 1px solid #968DB3;
+      border-radius: 10px;
       font-size: 1em;
-      height: 50px;
+      height: 40px;
       line-height: 1.42857143;
       padding: 6px 12px;
       margin-top: 10px;
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: calc(100% - 28px);
+      width: calc(75% - 28px);
       font-family: 'Poppins';
     }
 
@@ -164,7 +162,13 @@
     }
 
     .entry-item label {
+      color: #363157;
       display: none;
+
+    }
+
+    .password-label {
+      text-align: left;
     }
 
     .password-label,
@@ -176,13 +180,11 @@
       text-align: center;
     }
 
-    .password-label {
-      text-align: left;
-    }
-
     .password-label a {
-      color: #2F2244;
+      color: #363157;
       text-decoration: none;
+      display: block;
+      padding-left: 3.7em;
     }
 
     .entry .rememberMe {
@@ -195,7 +197,7 @@
 
     .buttons #next {
       color: #fff;
-      width: 100%;
+      width: 50%;
       background-color: #2F2244;
       border: none;
       border-radius: 0.5rem;
@@ -211,7 +213,7 @@
       margin-left: 0;
       padding: 10px 16px;
       text-align: center;
-      font-weight: 800;
+      font-weight: 600;
       font-family: 'Poppins';
     }
 
@@ -220,8 +222,13 @@
       text-align: center;
     }
 
+    .create p {
+      color: #363157;
+      font-weight: lighter;
+    }
+
     .create a {
-      color: #2F2244;
+      color: #363157;
       font-weight: 800;
       text-decoration: none;
       padding-left: 5px;
@@ -242,6 +249,7 @@
       width: 100%;
       display: flex;
       justify-content: center;
+      align-items: center;
     }
 
     .bottom {
@@ -253,7 +261,7 @@
     #api {
       display: flex;
       flex-direction: column;
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: rgba(255, 255, 255, 0.605);
       padding: 24px;
       border-radius: 8px;
       color: #2F2244;
@@ -289,35 +297,19 @@
 
 <body>
   <div class="root">
-    <div class="left">
+    <div class="container">
       <div class="top">
         <img class="companyLogo" data-tenant-branding-logo="true"
-          src="https://cdn.modilist.com/img/logo/svg/originalhorizontallogoslogan.svg" alt="Company Logo">
+          src="https://cdn.modilist.com/img/logo/svg/sign-in-page-logo.svg" alt="Company Logo">
       </div>
-      <div class="bottom">
-        <img src="https://cdn.modilist.com/img/gender/female.svg" alt="Female">
-        <img src="https://cdn.modilist.com/img/gender/male.svg" alt="Male">
-      </div>
-    </div>
-    <div class="container">
+    
       <div class="panel">
-        <h1 id="hello" style="text-align: center;">Merhaba</h1>
-        <p id="description" style="text-align: center;">Stilini keşfedip modaya uygun giyinmek istiyorsan;</p>
-        <div id="api" role="main">
+         <div id="api" role="main">
         </div>
       </div>
     </div>
   </div>
   <script>
-    const tr = {
-      hello: "Merhaba",
-      description: "Stilini keşfedip modaya uygun giyinmek istiyorsan;"
-    }
-
-    const en = {
-      hello: "Hello",
-      description: "If you want to discover your style and dress in fashion;"
-    }
 
     let currentLang;
     switch (navigator.language) {
@@ -333,12 +325,6 @@
         currentLang = tr;
         break;
     }
-
-    const hello = document.getElementById("hello");
-    const description = document.getElementById("description");
-    hello.innerHTML = currentLang.hello;
-    description.innerHTML = currentLang.description;
-
   </script>
 </body>
 

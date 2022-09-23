@@ -10,7 +10,8 @@
     <link rel="icon" href="https://cdn.modilist.com/img/common/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
         html {
             height: 100%;
@@ -49,13 +50,6 @@
             align-items: center;
             justify-content: center;
             background-color: #fffef8;
-        }
-
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            align-self: stretch;
             background-image: linear-gradient(rgba(150, 141, 179, 0.8), rgba(150, 141, 179, 0.8)), url("https://cdn.modilist.com/img/common/auth-form-background.png");
             background-repeat: no-repeat;
             background-position: center;
@@ -63,15 +57,18 @@
             overflow: auto;
         }
 
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            align-self: stretch;
+        }
+
         .panel {
             width: 490px;
             padding: 50px;
             color: #fffef8;
-            align-self: stretch;
-        }
-
-        .companyLogo {
-            width: 50%;
         }
 
         .heading h1 {
@@ -86,6 +83,7 @@
             border-top: 1px solid #2F2244;
             margin-top: 12px;
             margin-bottom: 12px;
+            display: none;
         }
 
         .social .options {
@@ -146,17 +144,17 @@
 
         .attrEntry input {
             outline: none;
-            border: 2px solid #968DB3;
+            border: 1px solid #968DB3;
             border-radius: 5px;
             font-size: 1em;
-            height: 50px;
+            height: 40px;
             line-height: 1.42857143;
             padding: 6px 12px;
             margin-top: 10px;
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: calc(100% - 28px);
+            width: calc(75% - 28px);
             font-family: 'Poppins';
         }
 
@@ -197,24 +195,25 @@
             height: inherit;
             line-height: 1.3333333;
             margin-top: 2rem;
-            margin-right: 0;
+            margin-right: 60px;
             margin-bottom: 1.2rem;
-            margin-left: 0;
+            margin-left: 60px;
             padding: 10px 16px;
             text-align: center;
-            font-weight: 800;
+            font-weight: 600;
+            font-family: 'Poppins';
         }
 
         .buttons #cancel {
             margin-right: auto;
-            background: 0 0;
+            background: 20px 10px;
             border: 2px solid #2F2244;
             width: inherit;
             background-color: transparent;
             font-size: 1em;
             color: #2F2244;
             box-shadow: none;
-            text-align: left;
+            text-align: center;
             display: block;
         }
 
@@ -269,6 +268,10 @@
             color: #2F2244;
         }
 
+        #termsOfUse {
+            font-size: 15px;
+        }
+
         .helpLink,
         .intro {
             display: none;
@@ -299,33 +302,25 @@
 
         .contracts {
             color: #fff;
-            font-weight: 800;
+            font-weight: 600;
         }
     </style>
 </head>
 
 <body>
     <div class="root">
-        <div class="left">
+        <div class="container">
             <div class="top">
                 <img class="companyLogo" data-tenant-branding-logo="true"
-                    src="https://cdn.modilist.com/img/logo/svg/originalhorizontallogoslogan.svg" alt="Company Logo">
+                    src="https://cdn.modilist.com/img/logo/svg/sign-in-page-logo.svg" alt="Company Logo">
             </div>
-            <div class="bottom">
-                <img src="https://cdn.modilist.com/img/gender/female.svg" alt="Female">
-                <img src="https://cdn.modilist.com/img/gender/male.svg" alt="Male">
-            </div>
-        </div>
-        <div class="container">
             <div class="panel">
-                <h1 id="hello" style="text-align: center;">Merhaba</h1>
-                <p id="description" style="text-align: center;">Stilini keşfedip modaya uygun giyinmek istiyorsan;</p>
                 <div id="api" role="main">
                 </div>
                 <p id="termsOfUse">Kişisel verileriniz,
                     <a class="contracts" href="https://cdn.modilist.com/contracts/gdpr.pdf" target="_blank">Aydınlatma
                         Metni</a>
-                    kapsamında işlenmektedir. “Üye ol” butonuna basarak
+                    kapsamında işlenmektedir. “Oluştur” butonuna basarak
                     <a class="contracts" href="#" target="_blank">Üyelik Sözleşmesi’ni</a>,
                     <a class="contracts" href="https://cdn.modilist.com/contracts/privacy-policy.pdf"
                         target="_blank">Çerez ve Gizlilik
@@ -338,12 +333,10 @@
     </div>
     <script>
         const tr = {
-            hello: "Merhaba",
-            description: "Stilini keşfedip modaya uygun giyinmek istiyorsan;",
             termsOfUse: `Kişisel verileriniz,
                     <a class="contracts" href="https://cdn.modilist.com/contracts/gdpr.pdf" target="_blank">Aydınlatma
                         Metni</a>
-                    kapsamında işlenmektedir. “Üye ol” butonuna basarak
+                    kapsamında işlenmektedir. “Oluştur” butonuna basarak
                     <a class="contracts" href="https://cdn.modilist.com/contracts/membership-agreement.pdf" target="_blank">Üyelik Sözleşmesi’ni</a>,
                     <a class="contracts" href="https://cdn.modilist.com/contracts/privacy-policy.pdf"
                         target="_blank">Çerez ve Gizlilik
@@ -354,8 +347,6 @@
         }
 
         const en = {
-            hello: "Hello",
-            description: "If you want to discover your style and dress in fashion;",
             termsOfUse: `
             Your personal data is processed within the scope of the <a class="contracts" href="https://cdn.modilist.com/contracts/gdpr.pdf" target="_blank">Clarification Text</a>. By clicking the "Subscribe" button, you confirm that you have read and accepted the <a class="contracts" href="https://cdn.modilist.com/contracts/membership-agreement.pdf" target="_blank">Membership Agreement</a>, <a class="contracts" href="https://cdn.modilist.com/contracts/privacy-policy.pdf"
                         target="_blank">Cookies and Privacy Policy</a>.
@@ -376,12 +367,7 @@
                 currentLang = tr;
                 break;
         }
-
-        const hello = document.getElementById("hello");
-        const description = document.getElementById("description");
         const termsOfUse = document.getElementById("termsOfUse");
-        hello.innerHTML = currentLang.hello;
-        description.innerHTML = currentLang.description;
         termsOfUse.innerHTML = currentLang.termsOfUse;
     </script>
 </body>
