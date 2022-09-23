@@ -8,11 +8,13 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 {
     public class SalesOrderLineItem : BaseEntity
     {
-        public SalesOrderLineItem(int salesOrderId, int productId)
+        public SalesOrderLineItem(int salesOrderId, int productId, decimal price, decimal salesPrice)
         {
             SalesOrderId = salesOrderId;
             ProductId = productId;
             State = SalesOrderLineItemState.None;
+            Price = price;
+            SalesPrice = salesPrice;
         }
 
         public int SalesOrderId { get; private set; }
@@ -28,6 +30,10 @@ namespace Modilist.Domains.Models.SalesOrderDomain
         public int ProductId { get; private set; }
 
         public Product Product { get; private set; }
+
+        public decimal Price { get; private set; }
+
+        public decimal SalesPrice { get; private set; }
 
         internal void AddOrUpdateFeedback(
             SalesOrderLineItemState state,

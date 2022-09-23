@@ -58,14 +58,14 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public SalesOrderAddress? SalesOrderAddress { get; set; }
 
-        public SalesOrderLineItem AddLineItem(int productId)
+        public SalesOrderLineItem AddLineItem(int productId, decimal price, decimal salesPrice)
         {
             if (_lineItems.Any(x => x.ProductId == productId))
             {
                 throw new DuplicateSalesOrderLineItemException(AccountId, Id, productId);
             }
 
-            var salesOrderLineItem = new SalesOrderLineItem(Id, productId);
+            var salesOrderLineItem = new SalesOrderLineItem(Id, productId, price, salesPrice);
 
             _lineItems.Add(salesOrderLineItem);
 

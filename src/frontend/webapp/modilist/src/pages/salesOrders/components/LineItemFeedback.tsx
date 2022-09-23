@@ -128,7 +128,7 @@ export function LineItemFeedback(props: LineItemFeedbackProps) {
             </Grid>
             <Grid item xs={6}>
                 <Typography variant="body1" align="right">
-                    {product.price}
+                    {product.salesPrice} TL
                 </Typography>
             </Grid>
             {state === SalesOrderLineItemState.None &&

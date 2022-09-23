@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Modilist.Data.DataAccess;
 
 #nullable disable
 
-namespace Modilist.Data.Migrations
+namespace Modilist.Data.Migrations._2022._09
 {
     [DbContext(typeof(ModilistDbContext))]
-    partial class ModilistDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220922124956_UpdateProductDomain")]
+    partial class UpdateProductDomain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1127,17 +1129,11 @@ namespace Modilist.Data.Migrations
                     b.Property<int?>("LineItemFeedbackId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("SalesOrderId")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("SalesPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("State")
                         .IsRequired()

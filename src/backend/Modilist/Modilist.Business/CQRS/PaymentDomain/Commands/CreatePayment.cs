@@ -246,8 +246,8 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
             {
                 Locale = Locale.TR.ToString(),
                 ConversationId = $"{account.Id}/{salesOrder.Id}",
-                Price = soldLineItems.Sum(x => x.Product.Price).ToString(new CultureInfo("en")),
-                PaidPrice = soldLineItems.Sum(x => x.Product.Price).ToString(new CultureInfo("en")),
+                Price = soldLineItems.Sum(x => x.Product.SalesPrice).ToString(new CultureInfo("en")),
+                PaidPrice = soldLineItems.Sum(x => x.Product.SalesPrice).ToString(new CultureInfo("en")),
                 Currency = Currency.TRY.ToString(),
                 Installment = 1,
                 BasketId = salesOrder.Id.ToString(),

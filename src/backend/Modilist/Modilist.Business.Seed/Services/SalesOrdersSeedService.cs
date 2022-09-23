@@ -50,7 +50,7 @@ namespace Modilist.Business.Seed.Services
                         {
                             var product = products[j];
 
-                            salesOrder.AddLineItem(product.Id);
+                            salesOrder.AddLineItem(product.Id, product.Price, product.SalesPrice);
                         }
 
                         salesOrder.Prepared();

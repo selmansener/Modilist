@@ -11,6 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Gender } from './gender';
 /**
  * 
  * @export
@@ -40,6 +41,12 @@ export interface CreateProduct {
      * @type {string}
      * @memberof CreateProduct
      */
+    subCategory?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateProduct
+     */
     brand?: string;
     /**
      * 
@@ -52,11 +59,23 @@ export interface CreateProduct {
      * @type {number}
      * @memberof CreateProduct
      */
-    price?: number;
+    purchasePrice?: number;
     /**
      * 
      * @type {number}
      * @memberof CreateProduct
      */
     vat?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateProduct
+     */
+    profitRate?: number;
+    /**
+     * 
+     * @type {Gender}
+     * @memberof CreateProduct
+     */
+    gender?: Gender;
 }

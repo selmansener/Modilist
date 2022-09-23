@@ -60,11 +60,11 @@ export function SalesOrderFeedback(props: SalesOrderFeedbackProps) {
 
         const total = salesOrder.lineItems?.filter(x => x.state === SalesOrderLineItemState.Sold)
             .map(x => {
-                if (x.product?.priceWithoutVAT === undefined) {
+                if (x.product?.price === undefined) {
                     throw new Error("Price cannot be null or empty");
                 }
 
-                return x.product.priceWithoutVAT;
+                return x.product.price;
             })
             .reduce((prev, current) => {
                 return prev + current;
@@ -85,11 +85,11 @@ export function SalesOrderFeedback(props: SalesOrderFeedbackProps) {
 
         const total = salesOrder.lineItems?.filter(x => x.state === SalesOrderLineItemState.Sold)
             .map(x => {
-                if (x.product?.price === undefined) {
+                if (x.product?.salesPrice === undefined) {
                     throw new Error("Price cannot be null or empty");
                 }
 
-                return x.product.price;
+                return x.product.salesPrice;
             })
             .reduce((prev, current) => {
                 return prev + current;

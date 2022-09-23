@@ -11,6 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Gender } from './gender';
 import { ProductImageDTO } from './product-image-dto';
 /**
  * 
@@ -47,6 +48,12 @@ export interface ProductDTO {
      * @type {string}
      * @memberof ProductDTO
      */
+    subCategory?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductDTO
+     */
     brand?: string | null;
     /**
      * 
@@ -59,7 +66,7 @@ export interface ProductDTO {
      * @type {number}
      * @memberof ProductDTO
      */
-    priceWithoutVAT?: number;
+    salesPrice?: number;
     /**
      * 
      * @type {number}
@@ -72,6 +79,12 @@ export interface ProductDTO {
      * @memberof ProductDTO
      */
     size?: string;
+    /**
+     * 
+     * @type {Gender}
+     * @memberof ProductDTO
+     */
+    gender?: Gender;
     /**
      * 
      * @type {Array<ProductImageDTO>}

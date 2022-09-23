@@ -6,12 +6,12 @@ namespace Modilist.Domains.Models.PaymentDomain
 {
     public class PaymentLineItem : BaseEntity
     {
-        public PaymentLineItem(int paymentId, int productId, decimal price, decimal priceWithoutVAT, string paymentTransactionId)
+        public PaymentLineItem(int paymentId, int productId, decimal price, decimal salesPrice, string paymentTransactionId)
         {
             PaymentId = paymentId;
             ProductId = productId;
             Price = price;
-            PriceWithoutVAT = priceWithoutVAT;
+            SalesPrice = salesPrice;
             PaymentTransactionId = paymentTransactionId;
         }
 
@@ -25,7 +25,7 @@ namespace Modilist.Domains.Models.PaymentDomain
 
         public decimal Price { get; private set; }
 
-        public decimal PriceWithoutVAT { get; private set; }
+        public decimal SalesPrice { get; private set; }
 
         public string PaymentTransactionId { get; private set; }
     }

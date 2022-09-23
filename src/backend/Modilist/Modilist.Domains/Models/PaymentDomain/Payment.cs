@@ -29,7 +29,7 @@ namespace Modilist.Domains.Models.PaymentDomain
 
         public decimal TotalPrice { get; private set; } = 0;
 
-        public decimal TotalPriceWithoutVAT { get; private set; } = 0;
+        public decimal TotalSalesPrice { get; private set; } = 0;
 
         public decimal TotalDiscount { get; private set; } = 0;
 
@@ -46,10 +46,10 @@ namespace Modilist.Domains.Models.PaymentDomain
                 throw new DuplicatePaymentLineItemException(AccountId, Id, product.Id);
             }
 
-            _lineItems.Add(new PaymentLineItem(Id, product.Id, product.Price, product.PriceWithoutVAT, paymentTransactionId));
+            _lineItems.Add(new PaymentLineItem(Id, product.Id, product.Price, product.SalesPrice, paymentTransactionId));
 
             TotalPrice += product.Price;
-            TotalPriceWithoutVAT += product.PriceWithoutVAT;
+            TotalSalesPrice += product.SalesPrice;
 
             var validator = new PaymentAddLineItemValidator();
             validator.ValidateAndThrow(this);
@@ -61,7 +61,7 @@ namespace Modilist.Domains.Models.PaymentDomain
         public PaymentAddLineItemValidator()
         {
             RuleFor(x => x.TotalPrice).NotEmpty();
-            RuleFor(x => x.TotalPriceWithoutVAT).NotEmpty();
+            RuleFor(x => x.TotalSalesPrice).NotEmpty();
         }
     }
 }

@@ -48,9 +48,9 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
 
         public async Task<AddSalesOrderLineItemDTO> Handle(AddSalesOrderLineItem request, CancellationToken cancellationToken)
         {
-            var doesProductExists = await _productRepository.DoesProductExistsAsync(request.ProductId, cancellationToken);
+            var product = await _productRepository.GetByIdAsync(request.ProductId, cancellationToken);
 
-            if (!doesProductExists)
+            if (product == null)
             {
                 throw new ProductNotFoundException(request.ProductId);
             }
@@ -62,7 +62,7 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
                 throw new SalesOrderNotFoundException(request.AccountId, request.SalesOrderId);
             }
 
-            var salesOrderLineItem = salesOrder.AddLineItem(request.ProductId);
+            var salesOrderLineItem = salesOrder.AddLineItem(request.ProductId, product.Price, product.SalesPrice);
 
             await _salesOrderRepository.UpdateAsync(salesOrder, cancellationToken);
 

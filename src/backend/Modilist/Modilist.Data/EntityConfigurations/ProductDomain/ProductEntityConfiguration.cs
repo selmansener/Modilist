@@ -15,6 +15,8 @@ namespace Modilist.Data.EntityConfigurations.ProductDomain
 
             builder.HasIndex(x => new { x.SKU, x.DeletedAt })
                 .IsUnique();
+
+            builder.Property(x => x.Gender).HasConversion<string>();
         }
     }
 }

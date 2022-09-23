@@ -40,10 +40,13 @@ namespace Modilist.Business.Seed.Services
                     faker.Random.ReplaceNumbers("###-###-###"),
                     faker.Commerce.ProductName(),
                     faker.Commerce.Categories(1).FirstOrDefault(),
+                    faker.Commerce.Categories(1).FirstOrDefault(),
                     faker.Random.Decimal(min: 150, max: 500),
                     18,
+                    5,
                     faker.PickRandom(sizes),
-                    "Nike");
+                    "Nike",
+                    Infrastructure.Shared.Interfaces.Enums.Gender.Female);
 
                 product.AddImage(category, "image/jpeg", $"{baseUrl}/{category}.jpg");
 
