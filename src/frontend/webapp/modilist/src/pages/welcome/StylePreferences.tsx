@@ -597,7 +597,11 @@ export function StylePreferences(props: StylePreferencesProps) {
                 justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedUpperCategories ?? ""}
-            label={<Typography variant="h4">{t("MainCategories.Upper")}</Typography>}
+            label={
+            <Box>
+                <Typography variant="h4" component={"span"}>{t("MainCategories.Upper")}</Typography>
+                <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                </Box>}
             contents={upperCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -625,7 +629,11 @@ export function StylePreferences(props: StylePreferencesProps) {
                 justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedLowerCategories ?? ""}
-            label={<Typography variant="h4">{t("MainCategories.Lower")}</Typography>}
+            label={
+            <Box>
+                <Typography variant="h4" component={"span"}>{t("MainCategories.Lower")}</Typography>
+                 <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                </Box>}
             contents={lowerCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -653,7 +661,11 @@ export function StylePreferences(props: StylePreferencesProps) {
                 justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedOuterCategories ?? ""}
-            label={<Typography variant="h4">{t("MainCategories.Outer")}</Typography>}
+            label={
+            <Box>
+                <Typography variant="h4" component={"span"}>{t("MainCategories.Outer")}</Typography>
+                 <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                 </Box>}
             contents={outerCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -680,7 +692,11 @@ export function StylePreferences(props: StylePreferencesProps) {
                 justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedUnderwearCategories ?? ""}
-            label={<Typography variant="h4">{t("MainCategories.UnderwearPyjamasBeach")}</Typography>}
+            label={
+            <Box>
+                <Typography variant="h4" component={"span"}>{t("MainCategories.UnderwearPyjamasBeach")}</Typography>
+                 <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                </Box>}
             contents={accessoriesCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -708,7 +724,11 @@ export function StylePreferences(props: StylePreferencesProps) {
                 justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedAccessoryCategories ?? ""}
-            label={<Typography variant="h4">{t("MainCategories.Accessories")}</Typography>}
+            label={
+            <Box>
+                <Typography variant="h4" component={"span"}>{t("MainCategories.Accessories")}</Typography>
+               <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                </Box>}
             contents={accessoriesCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -736,7 +756,11 @@ export function StylePreferences(props: StylePreferencesProps) {
                 justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedBagCategories ?? ""}
-            label={<Typography variant="h4">{t("MainCategories.Bags")}</Typography>}
+            label={
+            <Box>
+                <Typography variant="h4" component={"span"}>{t("MainCategories.Bags")}</Typography>
+                <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                </Box>}
             contents={bagsCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -764,7 +788,12 @@ export function StylePreferences(props: StylePreferencesProps) {
                 justifyContent: 'flex-start'
             }}
             value={stylePreferences?.excludedFootwearCategories ?? ""}
-            label={<Typography variant="h4">{t("MainCategories.Footwear")}</Typography>}
+            label={
+                <Box>
+                    <Typography variant="h4" component={"span"}>{t("MainCategories.Footwear")}</Typography>
+                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                </Box>
+            }
             contents={categories}
             isNegative
             onChange={(values: string[]) => {

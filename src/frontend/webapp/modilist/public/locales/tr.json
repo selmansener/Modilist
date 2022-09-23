@@ -380,7 +380,7 @@
                     "LikesSurprizes": "Süprizlerle Kendimi Şımartmak",
                     "MakingNewStyle": "Kendime Yeni Bir Stil Oluşturmak"
                 },
-                "ExcludedCategoriesTitle": "Asla giymem dediklerin "
+                "ExcludedCategoriesTitle": "Tercih etmem dediklerin "
             },
             "Subscription": {
                 "SubscriptionDetails": {
@@ -733,7 +733,8 @@
         "Bags": "Bags",
         "Beach": "Plaj",
         "Footwear": "Ayakkabı",
-        "SportOutdoor": "Spor&Outdoor"
+        "SportOutdoor": "Spor&Outdoor",
+        "Optional": " (Opsiyonel)"
     },
     "ColorType": {
         "Hot": "Sıcak",

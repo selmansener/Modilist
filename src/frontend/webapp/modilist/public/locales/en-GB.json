@@ -355,7 +355,7 @@
                     "LikesSurprizes": "Pampering Myself with Surprises",
                     "MakingNewStyle": "Creating a New Style for Myself"
                 },
-                "ExcludedCategoriesTitle": "Things you would never wear "
+                "ExcludedCategoriesTitle": "Things you would not prefer to wear "
             },
             "Subscription": {
                 "SubscriptionDetails": {
@@ -644,7 +644,8 @@
         "Bags": "Bags",
         "Beach": "Beach",
         "Footwear": "Shoes",
-        "SportOutdoor": "Sports&Outdoor"
+        "SportOutdoor": "Sports&Outdoor",
+        "Optional": " (Optional)"
     },
     "ColorType": {
         "Hot": "Warm",
