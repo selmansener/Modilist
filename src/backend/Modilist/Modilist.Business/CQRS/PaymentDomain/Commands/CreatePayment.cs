@@ -235,8 +235,9 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
                     Id = lineItem.ProductId.ToString(),
                     Name = lineItem.Product.Name,
                     Category1 = lineItem.Product.Category,
+                    Category2 = lineItem.Product.SubCategory,
                     ItemType = BasketItemType.PHYSICAL.ToString(),
-                    Price = lineItem.Product.Price.ToString(new CultureInfo("en")),
+                    Price = lineItem.Product.SalesPrice.ToString(new CultureInfo("en")),
                 };
 
                 basketItems.Add(basketItem);
