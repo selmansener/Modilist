@@ -178,7 +178,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
             {
                 // TODO: check iyzicoPayment.errorCode and iyzicoPayment.errorMessage and throw proper exception with 
 
-                throw new InvalidOperationException("payment request failed");
+                throw new PaymentFailureException(request.AccountId, request.SalesOrderId, iyzicoPayment.Status, iyzicoPayment.ErrorCode, iyzicoPayment.ErrorGroup, iyzicoPayment.ErrorMessage);
             }
 
             return payment.Adapt<PaymentDTO>();
