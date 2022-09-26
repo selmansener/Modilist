@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, FormControl, FormHelperText, Grid, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, CircularProgress, FormControl, FormHelperText, Grid, Snackbar, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Colors } from "./stylePreferenceComponents/Colors";
@@ -34,6 +34,7 @@ export function FabricProperties(props: FabricPropertiesProps) {
         allergens: "",
         additionalNotes: ""
     });
+    const [snackbarStatus, setSnackbarStatus] = useState(false);
 
     useEffect(() => {
         window.scrollTo({
@@ -49,11 +50,16 @@ export function FabricProperties(props: FabricPropertiesProps) {
                 dispatch.getPreferedFabricPropertiesModel.HANDLE_RESPONSE(upsertPreferedFabricProperties, upsertStatus);
             }
 
-            dispatch.upsertPreferedFabricPropertiesModel.RESET();
-
             if (layout !== "dashboard") {
                 dispatch.welcomePageStepper.next();
             }
+        }
+        else if(upsertStatus !== 200 && upsertStatus !== 0) {
+            setSnackbarStatus(true);
+        }
+
+        if(upsertStatus !== 0) {
+            dispatch.upsertPreferedFabricPropertiesModel.RESET();
         }
     }, [upsertStatus]);
 
@@ -280,5 +286,19 @@ export function FabricProperties(props: FabricPropertiesProps) {
                 </Button>
             </Grid>
         </React.Fragment>}
+        <Snackbar
+            open={snackbarStatus}
+            autoHideDuration={6000}
+            onClose={() => {
+                setSnackbarStatus(false);
+            }}>
+            <Alert onClose={() => {
+                setSnackbarStatus(false);
+            }}
+                severity="error"
+                variant="filled">
+                {t(`Generic.Forms.UnexpectedError`)}
+            </Alert>
+        </Snackbar>
     </Grid>
 }

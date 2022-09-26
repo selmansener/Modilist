@@ -1,7 +1,9 @@
-import { Button, CircularProgress, Grid } from '@mui/material';
-import { useEffect } from 'react';
+import { Alert, Button, CircularProgress, Grid, Snackbar } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { string } from 'yup';
+import { upsertAddressModel } from '../../store/models/addresses/UpsertAddress';
 import { Dispatch, RootState } from '../../store/store';
 import ContactInfo from './subscriptionComponents/ContactInfo';
 import PaymentMethod from './subscriptionComponents/PaymentMethod';
@@ -19,17 +21,28 @@ export function Subscription() {
     const { isBusy: updateSubscriptionMaxPricingLimitIsBusy, status: updateSubscriptionMaxPricingLimitStatus } = useSelector((state: RootState) => state.updateSubscriptionMaxPricingLimitModel);
     const { personal, contactInfo, paymentMethod, subscriptionDetails } = useSelector((state: RootState) => state.stepperSubscription);
     const isBusy = getAccountIsBusy || updateAccountIsBusy || getDefaultAddressIsBusy || upsertAddressIsBusy || createPaymentMethodIsBusy || updateSubscriptionMaxPricingLimitIsBusy;
-    
-    useEffect(() => { window.scrollTo({ 
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      }); }, [])
-    
+    const [snackbarStatus, setSnackbarStatus] = useState(false);
+    const statusList = [updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionMaxPricingLimitStatus];
+
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }, [])
+
+    useEffect(() => {
+        statusList.forEach(status => {
+            if (status !== 200 && status !== 0) {
+                setSnackbarStatus(true);
+            }
+        });
+
         if (updateAccountStatus === 200 && upsertAddressStatus === 200 && createPaymentMethodStatus === 200 && updateSubscriptionMaxPricingLimitStatus === 200) {
             dispatch.welcomePageStepper.next();
         }
+
     }, [updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionMaxPricingLimitStatus])
 
 
@@ -68,6 +81,20 @@ export function Subscription() {
                     {t('Layouts.Welcome.WelcomeSteps.Buttons.Finish')}
                 </Button>
             </Grid>
+            <Snackbar
+                open={snackbarStatus}
+                autoHideDuration={6000}
+                onClose={() => {
+                    setSnackbarStatus(false);
+                }}>
+                <Alert onClose={() => {
+                    setSnackbarStatus(false);
+                }}
+                    severity="error"
+                    variant="filled">
+                    {t(`Generic.Forms.UnexpectedError`)}
+                </Alert>
+            </Snackbar>
         </Grid>
     );
 }

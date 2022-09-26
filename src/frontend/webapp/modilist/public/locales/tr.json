@@ -823,7 +823,8 @@
             "FilesSelected": "{{count}} dosya seçildi.",
             "Delete": "Kaldır",
             "CharactersLeft": "karakter kaldı",
-            "Add": "Ekle"
+            "Add": "Ekle",
+            "UnexpectedError": "Beklenmedik bir hatayla karşılaştık."
         },
         "PersonalInfo": {
             "FullName": "Ad Soyad",

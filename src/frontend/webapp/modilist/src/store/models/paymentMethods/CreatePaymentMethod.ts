@@ -38,6 +38,20 @@ export const createPaymentMethodModel = createModel<RootModel>()({
                 ...state,
                 status
             }
+        },
+        RESET: (state: ResponseModel<PaymentMethodDTO>) => {
+            return {
+                ...state,
+                isBusy: false,
+                data: {
+                    cardHolderName: "",
+                    cardNumber: "",
+                    expireMonth: "",
+                    expireYear: "",
+                    cvc: ""
+                },
+                status: 0
+            }
         }
     },
     effects: (dispatch) => {

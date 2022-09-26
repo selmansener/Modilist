@@ -59,9 +59,9 @@ export default function Personal() {
         phone: Yup.string().test({
             name: 'minCharacters',
             message: `${minCharacters}`,
-            test: (value) =>              
-                    value?.length == 12 
-            }).required(requiredField),
+            test: (value) =>
+                value?.length == 12
+        }).required(requiredField),
         instagramUserName: Yup.string().optional(),
         jobTitle: Yup.string().optional()
     });
@@ -103,7 +103,10 @@ export default function Personal() {
                 dispatch.getAccountModel.HANDLE_RESPONSE(updateAccount, updateAccountStatus);
             }
 
-            // dispatch.updateAccountModel.RESET();
+        }
+        if (updateAccountStatus !== 0) {
+
+            dispatch.updateAccountModel.RESET();
         }
     }, [updateAccountStatus]);
 

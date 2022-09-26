@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Grid, Typography } from "@mui/material";
+import { Alert, Button, CircularProgress, Grid, Snackbar, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,6 +33,7 @@ export function FitPreferences(props: FitPreferencesProps) {
         upperFit: "",
         waistHeight: ""
     });
+    const [snackbarStatus, setSnackbarStatus] = useState(false);
 
     useEffect(() => {
         window.scrollTo({
@@ -48,11 +49,16 @@ export function FitPreferences(props: FitPreferencesProps) {
                 dispatch.getFitPreferencesModel.HANDLE_RESPONSE(upsertFitPreferences, upsertStatus);
             }
 
-            dispatch.upsertFitPreferencesModel.RESET();
-
             if (layout !== "dashboard") {
                 dispatch.welcomePageStepper.next();
             }
+        }
+        else if (upsertStatus !== 200 && upsertStatus !== 0) {
+            setSnackbarStatus(true);
+        }
+
+        if (upsertStatus !== 0) {
+            dispatch.upsertFitPreferencesModel.RESET();
         }
     }, [upsertStatus]);
 
@@ -76,7 +82,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     const Waist = () => {
         return <WaistHeights
-        gender={account?.gender ?? Gender.None}
+            gender={account?.gender ?? Gender.None}
             value={fitPreferences.waistHeight}
             onChange={(value) => {
                 setFitPreferences({
@@ -89,7 +95,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     const Upper = () => {
         return <UpperFits
-        gender={account?.gender ?? Gender.None}
+            gender={account?.gender ?? Gender.None}
             value={fitPreferences.upperFit}
             onChange={(value) => {
                 setFitPreferences({
@@ -102,7 +108,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     const Lower = () => {
         return <LowerFits
-        gender={account?.gender ?? Gender.None}
+            gender={account?.gender ?? Gender.None}
             value={fitPreferences.lowerFit}
             onChange={(value) => {
                 setFitPreferences({
@@ -128,7 +134,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     const Legs = () => {
         return <LegFits
-        gender={account?.gender ?? Gender.None}
+            gender={account?.gender ?? Gender.None}
             value={fitPreferences.legFit}
             onChange={(value) => {
                 setFitPreferences({
@@ -141,7 +147,7 @@ export function FitPreferences(props: FitPreferencesProps) {
 
     const Foot = () => {
         return <FootTypes
-        gender={account?.gender ?? Gender.None}
+            gender={account?.gender ?? Gender.None}
             value={fitPreferences.footType}
             onChange={(value) => {
                 setFitPreferences({
@@ -242,5 +248,19 @@ export function FitPreferences(props: FitPreferencesProps) {
                 </Grid>
             </React.Fragment>
         }
+        <Snackbar
+            open={snackbarStatus}
+            autoHideDuration={6000}
+            onClose={() => {
+                setSnackbarStatus(false);
+            }}>
+            <Alert onClose={() => {
+                setSnackbarStatus(false);
+            }}
+                severity="error"
+                variant="filled">
+                {t(`Generic.Forms.UnexpectedError`)}
+            </Alert>
+        </Snackbar>
     </Grid>
 }

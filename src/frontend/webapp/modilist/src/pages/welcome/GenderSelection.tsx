@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Alert, Grid, Snackbar, Typography } from "@mui/material";
 import { ImageComponent, ImageProps } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 import { alpha, styled } from '@mui/material/styles';
@@ -47,6 +47,7 @@ export function GenderSelection() {
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: updateAccountIsBusy, data: updateAccount, status: updateAccountStatus } = useSelector((state: RootState) => state.updateAccountModel);
     const dispatch = useDispatch<Dispatch>();
+    const [snackbarStatus, setSnackbarStatus] = useState(false);
 
     const handleClick = (gender: Gender) => {
         if (!updateAccountIsBusy) {
@@ -69,10 +70,15 @@ export function GenderSelection() {
                 dispatch.getAccountModel.HANDLE_RESPONSE(updateAccount, updateAccountStatus);
             }
 
-            dispatch.updateAccountModel.RESET();
             navigate("/welcome");
         }
+        else if(updateAccountStatus !== 200 && updateAccountStatus !== 0) {
+            setSnackbarStatus(true);
+        }
 
+        if(updateAccountStatus !== 0){
+            dispatch.updateAccountModel.RESET();
+        }
     }, [updateAccountStatus])
 
     useEffect(() => {
@@ -105,5 +111,19 @@ export function GenderSelection() {
         <Grid item container xs={12} md={6} justifyContent="center">
             <GenderImage isSelected={account?.gender === Gender.Male} gender={Gender.Male} onClick={handleClick} />
         </Grid>
+        <Snackbar
+            open={snackbarStatus}
+            autoHideDuration={6000}
+            onClose={() => {
+                setSnackbarStatus(false);
+            }}>
+            <Alert onClose={() => {
+                setSnackbarStatus(false);
+            }}
+                severity="error"
+                variant="filled">
+                {t(`Generic.Forms.UnexpectedError`)}
+            </Alert>
+        </Snackbar>
     </Grid>
 }

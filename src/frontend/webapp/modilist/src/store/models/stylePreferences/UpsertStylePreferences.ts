@@ -69,10 +69,9 @@ export const upsertStylePreferencesModel = createModel<RootModel>()({
 
                 const response = await api.stylePreferences.apiV1StylePreferencesUpsertPost(input);
 
-                if (response.status === 200) {
-                    upsertStylePreferencesModel.HANDLE_RESPONSE(response.data, response.status);
-                }
-                // TODO: handle exceptions
+                upsertStylePreferencesModel.HANDLE_RESPONSE(response.data, response.status);
+
+
             }
         }
     }

@@ -1,4 +1,4 @@
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography, Button, CircularProgress, FormHelperText, useTheme } from "@mui/material";
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography, Button, CircularProgress, FormHelperText, useTheme, Snackbar, Alert } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import React, { useEffect, useState } from "react";
 import { CustomCheckboxGroup } from "../../components/customCheckbox/CustomCheckbox";
@@ -45,6 +45,7 @@ export function StylePreferences(props: StylePreferencesProps) {
     const { cdnImg: imgBaseHost } = config;
     const { gender } = account as AccountDTO;
     const theme = useTheme();
+    const [snackbarStatus, setSnackbarStatus] = useState(false);
 
     useEffect(() => {
         window.scrollTo({
@@ -64,11 +65,16 @@ export function StylePreferences(props: StylePreferencesProps) {
         if (upsertStylePreferencesStatus === 200 && upsertStylePreferences) {
             dispatch.getStylePreferencesModel.HANDLE_RESPONSE(upsertStylePreferences, upsertStylePreferencesStatus);
 
-            dispatch.upsertStylePreferencesModel.RESET();
-
             if (layout !== "dashboard") {
                 dispatch.welcomePageStepper.next();
             }
+        }
+        else if (upsertStylePreferencesStatus !== 200 && upsertStylePreferencesStatus !== 0) {
+            setSnackbarStatus(true);
+        }
+
+        if (upsertStylePreferencesStatus !== 0) {
+            dispatch.upsertStylePreferencesModel.RESET();
         }
     }, [upsertStylePreferencesStatus]);
 
@@ -1168,6 +1174,20 @@ export function StylePreferences(props: StylePreferencesProps) {
                         </Grid>
                     </React.Fragment>
             }
+            <Snackbar
+                open={snackbarStatus}
+                autoHideDuration={6000}
+                onClose={() => {
+                    setSnackbarStatus(false);
+                }}>
+                <Alert onClose={() => {
+                    setSnackbarStatus(false);
+                }}
+                    severity="error"
+                    variant="filled">
+                    {t(`Generic.Forms.UnexpectedError`)}
+                </Alert>
+            </Snackbar>
         </Grid >
     )
 }

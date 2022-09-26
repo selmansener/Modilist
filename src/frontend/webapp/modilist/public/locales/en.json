@@ -757,7 +757,8 @@
             "SentMessageSuccess": "Your message has been sent successfully!",
             "SentMessageFailed": "An error occurred while sending your message.",
             "Delete": "Delete",
-            "CharactersLeft": "characters left"
+            "CharactersLeft": "characters left",
+            "UnexpectedError": "An unexpected error has occured."
         },
         "PersonalInfo": {
             "FullName": "Full Name",

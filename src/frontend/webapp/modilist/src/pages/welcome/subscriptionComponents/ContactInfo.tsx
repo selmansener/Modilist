@@ -9,6 +9,7 @@ import { Districts } from "../address/Districts";
 import { FormControl, Grid, TextField, Typography } from "@mui/material";
 import { IMaskInput } from "react-imask";
 import React from "react";
+import { upsertAddressModel } from "../../../store/models/addresses/UpsertAddress";
 
 interface NumberInputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -49,6 +50,7 @@ const ZipCodeInputMask = React.forwardRef<HTMLElement, NumberInputMaskProps>(
 export default function ContactInfo() {
     const { t } = useTranslation();
     const { isBusy: getDefaultAddressIsBusy, data: getDefaultAddressResponse } = useSelector((state: RootState) => state.getDefaultAddressModel);
+    const { isBusy: upsertAddressIsBusy, status: upsertAddressStatus} = useSelector((state: RootState) => state.upsertAddressModel)
     const dispatch = useDispatch<Dispatch>();
     const [selectedCity, setSelectedCity] = useState<string | undefined>();
     const [addressNumberShrink, setAddressNumberShrink] = useState(false);
@@ -111,6 +113,12 @@ export default function ContactInfo() {
     useEffect(() => {
         setAddressNumberShrink(address.phone !== undefined && address.phone !== "");
     }, [address]);
+
+    useEffect(() => {
+        if(upsertAddressStatus !== 0) {
+            dispatch.upsertAddressModel.RESET();
+        }
+    }, [upsertAddressStatus])
 
     return (
         <>

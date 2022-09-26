@@ -1,6 +1,6 @@
-import { Fab, Box, Button, CircularProgress, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography, useTheme } from "@mui/material";
+import { Fab, Box, Button, CircularProgress, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography, useTheme, Snackbar, Alert } from "@mui/material";
 import NavigationIcon from '@mui/icons-material/Navigation';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Gender } from "../../services/swagger/api";
@@ -38,6 +38,7 @@ export function SizeInfo(props: SizeInfoProps) {
     const { isBusy: getSizeInfoIsBusy, data: initialSizeInfo, status: getSizeInfoStatus } = useSelector((state: RootState) => state.getSizeInfoModel);
     const { isBusy: upsertSizeInfoIsBusy, data: upsertSizeInfo, status: upsertStatus } = useSelector((state: RootState) => state.upsertSizeInfoModel);
     const isBusy = getAccountIsBusy || getSizeInfoIsBusy || upsertSizeInfoIsBusy;
+    const [snackbarStatus, setSnackbarStatus] = useState(false);
     const requiredField = t("FormValidation.RequiredField");
     const mustBeInteger = t("FormValidation.MustBeInteger");
     const mustBeGreaterThanZero = t("FormValidation.MustBeGreaterThanZero");
@@ -145,13 +146,18 @@ export function SizeInfo(props: SizeInfoProps) {
         if (upsertStatus === 200 && upsertSizeInfo) {
             dispatch.getSizeInfoModel.HANDLE_RESPONSE(upsertSizeInfo, upsertStatus);
 
-            dispatch.upsertSizeInfoModel.RESET();
-
             if (layout !== "dashboard") {
                 dispatch.welcomePageStepper.next();
             }
         }
-    }, [upsertSizeInfo]);
+        else if (upsertStatus !== 200 && upsertStatus !== 0) {
+            setSnackbarStatus(true);
+        }
+
+        if (upsertStatus !== 0) {
+            dispatch.upsertSizeInfoModel.RESET();
+        }
+    }, [upsertStatus]);
 
     const {
         handleChange,
@@ -592,6 +598,20 @@ export function SizeInfo(props: SizeInfoProps) {
                     </Grid>
                 </React.Fragment>
             }
+            <Snackbar
+                open={snackbarStatus}
+                autoHideDuration={6000}
+                onClose={() => {
+                    setSnackbarStatus(false);
+                }}>
+                <Alert onClose={() => {
+                    setSnackbarStatus(false);
+                }}
+                    severity="error"
+                    variant="filled">
+                    {t(`Generic.Forms.UnexpectedError`)}
+                </Alert>
+            </Snackbar>
         </Grid>
     )
 }

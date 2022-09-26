@@ -5,14 +5,15 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { IMaskInput } from "react-imask";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { Dispatch } from "../../../store/store";
+import { Dispatch, RootState } from "../../../store/store";
 import Cards from 'react-credit-cards';
 import { Focused } from 'react-credit-cards'
 import 'react-credit-cards/es/styles-compiled.css';
 import IMask, { MaskedRange } from "imask";
 import { config } from "../../../config";
+import { RootModel } from "../../../store/models";
 
 type CreditCardNumber = {
     number: boolean;
@@ -71,7 +72,7 @@ export default function PaymentMethod() {
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
     const { isProduction } = config;
-
+    const {isBusy: createPaymentMethodIsBusy, status: createPaymentMethodStatus} = useSelector((state: RootState) => state.createPaymentMethodModel);
     const requiredField = t("FormValidation.RequiredField");
     const [cardFocused, setCardFocused] = useState<Focused>();
     const [creditCardNumberShrink, setCreditCardNumberShrink] = useState(false);
@@ -223,6 +224,12 @@ export default function PaymentMethod() {
         setCreditCardNumberShrink(creditCard.cardNumber !== undefined && creditCard.cardNumber !== '');
 
     }, [creditCard])
+
+    useEffect(() => {
+        if(createPaymentMethodStatus !== 0) {
+            dispatch.createPaymentMethodModel.RESET();
+        }
+    }, [createPaymentMethodStatus])
 
     return (
         <>
