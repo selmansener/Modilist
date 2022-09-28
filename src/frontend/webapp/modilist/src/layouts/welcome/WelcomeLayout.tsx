@@ -67,7 +67,7 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
                         </Box>
                     </Toolbar>
                 </AppBar>
-                <Container maxWidth="xl" sx={{
+                <Container maxWidth="lg" sx={{
                     mt: 4,
                     mb: 2
                 }}>
