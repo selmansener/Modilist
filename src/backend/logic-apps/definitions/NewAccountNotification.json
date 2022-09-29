@@ -1,0 +1,222 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Post_adaptive_card_in_a_chat_or_channel": {
+                "inputs": {
+                    "body": {
+                        "messageBody": "{\n    \"type\": \"AdaptiveCard\",\n    \"body\": [\n        {\n            \"type\": \"TextBlock\",\n            \"size\": \"Large\",\n            \"weight\": \"Bolder\",\n            \"text\": \"New Customer!\"\n        },\n        {\n            \"type\": \"TextBlock\",\n            \"text\": \"Email:@{triggerBody()?['Email']}\",\n            \"wrap\": true\n        },\n        {\n            \"type\": \"TextBlock\",\n            \"text\": \"Gender:@{triggerBody()?['Gender']}\",\n            \"wrap\": true\n        },\n        {\n            \"type\": \"TextBlock\",\n            \"text\": \"MaxPricingLimit:@{triggerBody()?['MaxPricingLimit']}\",\n            \"wrap\": true\n        },\n        {\n            \"type\": \"TextBlock\",\n            \"text\": \"InstagramUserName:@{triggerBody()?['InstagramUserName']}\",\n            \"wrap\": true\n        },\n        {\n            \"type\": \"TextBlock\",\n            \"text\": \"JobTitle:@{triggerBody()?['JobTitle']}\",\n            \"wrap\": true\n        },\n        {\n            \"type\": \"Container\",\n            \"separator\": true,\n            \"items\": [\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"SalesOrderDetails\",\n                    \"wrap\": true,\n                    \"weight\": \"Bolder\",\n                    \"size\": \"Large\"\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"EstimatedDeliveryDate:@{formatDateTime(triggerBody()?['SalesOrderDetails']?['EstimatedDeliveryDate'], 'dd/MM/yyyy')}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"AdditionalRequests:@{triggerBody()?['SalesOrderDetails']?['AdditionalRequests']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"RequestedStyle:@{triggerBody()?['SalesOrderDetails']?['RequestedStyle']}\",\n                    \"wrap\": true\n                }\n            ],\n            \"style\": \"warning\",\n            \"bleed\": true\n        },\n        {\n            \"type\": \"Container\",\n            \"style\": \"accent\",\n            \"bleed\": true,\n            \"separator\": true,\n            \"items\": [\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"SizeInfo\",\n                    \"wrap\": true,\n                    \"weight\": \"Bolder\",\n                    \"size\": \"Large\"\n                },\n                {\n                    \"type\": \"ColumnSet\",\n                    \"columns\": [\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"Weight:@{triggerBody()?['SizeInfo']?['Weight']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        },\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"Height:@{triggerBody()?['SizeInfo']?['Height']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        },\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"BodyType:@{triggerBody()?['SizeInfo']?['BodyType']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        }\n                    ]\n                },\n                {\n                    \"type\": \"ColumnSet\",\n                    \"columns\": [\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"UpperBody:@{triggerBody()?['SizeInfo']?['UpperBody']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        },\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"LowerBody:@{triggerBody()?['SizeInfo']?['LowerBody']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        }\n                    ]\n                },\n                {\n                    \"type\": \"ColumnSet\",\n                    \"columns\": [\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"WomenUnderWearCup:@{triggerBody()?['SizeInfo']?['WomenUnderWearCup']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        },\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"WomenUnderWearSize:@{triggerBody()?['SizeInfo']?['WomenUnderWearSize']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        }\n                    ]\n                },\n                {\n                    \"type\": \"ColumnSet\",\n                    \"columns\": [\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"MenUnderWear:@{triggerBody()?['SizeInfo']?['MenUnderWear']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        },\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"OutWear:@{triggerBody()?['SizeInfo']?['OutWear']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        }\n                    ]\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"FootWear:@{triggerBody()?['SizeInfo']?['FootWear']}\",\n                    \"wrap\": true\n                }\n            ]\n        },\n        {\n            \"type\": \"Container\",\n            \"separator\": true,\n            \"style\": \"accent\",\n            \"bleed\": true,\n            \"items\": [\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"StylePreferences\",\n                    \"wrap\": true,\n                    \"weight\": \"Bolder\",\n                    \"size\": \"Large\"\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ChoiceReasons:@{triggerBody()?['StylePreferences']?['ChoiceReasons']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"ColumnSet\",\n                    \"columns\": [\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"LovesShopping:@{triggerBody()?['StylePreferences']?['LovesShopping']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        },\n                        {\n                            \"type\": \"Column\",\n                            \"width\": \"stretch\",\n                            \"items\": [\n                                {\n                                    \"type\": \"TextBlock\",\n                                    \"text\": \"OpenToSuggestions:@{triggerBody()?['StylePreferences']?['OpenToSuggestions']}\",\n                                    \"wrap\": true\n                                }\n                            ]\n                        }\n                    ]\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"PrefersHijabClothing:@{triggerBody()?['StylePreferences']?['PrefersHijabClothing']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"BodyPartsToHighlight:@{triggerBody()?['StylePreferences']?['BodyPartsToHighlight']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"BodyPartsToHide:@{triggerBody()?['StylePreferences']?['BodyPartsToHide']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedUpperCategories:@{triggerBody()?['StylePreferences']?['ExcludedUpperCategories']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedLowerCategories:@{triggerBody()?['StylePreferences']?['ExcludedLowerCategories']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedOuterCategories:@{triggerBody()?['StylePreferences']?['ExcludedOuterCategories']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedUnderwearCategories:@{triggerBody()?['StylePreferences']?['ExcludedUnderwearCategories']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedAccessoryCategories:@{triggerBody()?['StylePreferences']?['ExcludedAccessoryCategories']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedFootwearCategories:@{triggerBody()?['StylePreferences']?['ExcludedFootwearCategories']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedBagCategories:@{triggerBody()?['StylePreferences']?['ExcludedBagCategories']}\",\n                    \"wrap\": true\n                }\n            ]\n        },\n        {\n            \"type\": \"Container\",\n            \"separator\": true,\n            \"style\": \"accent\",\n            \"bleed\": true,\n            \"items\": [\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"PreferedFabricProperties\",\n                    \"wrap\": true,\n                    \"size\": \"Large\",\n                    \"weight\": \"Bolder\"\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedColors:@{triggerBody()?['PreferedFabricProperties']?['ExcludedColors']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedColorCategories:@{triggerBody()?['PreferedFabricProperties']?['ExcludedColorCategories']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedPatterns:@{triggerBody()?['PreferedFabricProperties']?['ExcludedPatterns']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedFabrics:@{triggerBody()?['PreferedFabricProperties']?['ExcludedFabrics']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ExcludedAccessoryColors:@{triggerBody()?['PreferedFabricProperties']?['ExcludedAccessoryColors']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"Allergens:@{triggerBody()?['PreferedFabricProperties']?['Allergens']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"AdditionalNotes:@{triggerBody()?['PreferedFabricProperties']?['AdditionalNotes']}\",\n                    \"wrap\": true\n                }\n            ]\n        },\n        {\n            \"type\": \"Container\",\n            \"separator\": true,\n            \"style\": \"accent\",\n            \"bleed\": true,\n            \"items\": [\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"FitPreferences\",\n                    \"wrap\": true,\n                    \"size\": \"Large\",\n                    \"weight\": \"Bolder\"\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"WaistHeight:@{triggerBody()?['FitPreferences']?['WaistHeight']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"UpperFit:@{triggerBody()?['FitPreferences']?['UpperFit']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"LowerFit:@{triggerBody()?['FitPreferences']?['LowerFit']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"LegFit:@{triggerBody()?['FitPreferences']?['LegFit']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"SkirtDressLength:@{triggerBody()?['FitPreferences']?['SkirtDressLength']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"ShortsLength:@{triggerBody()?['FitPreferences']?['ShortsLength']}\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"FootType:@{triggerBody()?['FitPreferences']?['FootType']}\",\n                    \"wrap\": true\n                }\n            ]\n        }\n    ],\n    \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n    \"version\": \"1.4\"\n}",
+                        "recipient": {
+                            "channelId": "19:8689dd30d66149ed87330e638d16827b@thread.tacv2",
+                            "groupId": "6a475965-07f6-40a3-aab6-b6cfd4644f3c"
+                        }
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['teams']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/v1.0/teams/conversation/adaptivecard/poster/Flow bot/location/@{encodeURIComponent('Channel')}"
+                },
+                "runAfter": {},
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "manual": {
+                "inputs": {
+                    "schema": {
+                        "properties": {
+                            "Email": {
+                                "type": "string"
+                            },
+                            "FitPreferences": {
+                                "properties": {
+                                    "FootType": {
+                                        "type": "string"
+                                    },
+                                    "LegFit": {
+                                        "type": "string"
+                                    },
+                                    "LowerFit": {
+                                        "type": "string"
+                                    },
+                                    "ShortsLength": {
+                                        "type": "string"
+                                    },
+                                    "SkirtDressLength": {
+                                        "type": "string"
+                                    },
+                                    "UpperFit": {
+                                        "type": "string"
+                                    },
+                                    "WaistHeight": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "Gender": {
+                                "type": "string"
+                            },
+                            "Id": {
+                                "type": "string"
+                            },
+                            "InstagramUserName": {
+                                "type": "string"
+                            },
+                            "JobTitle": {
+                                "type": "string"
+                            },
+                            "MaxPricingLimit": {
+                                "type": "string"
+                            },
+                            "PreferedFabricProperties": {
+                                "properties": {
+                                    "AdditionalNotes": {
+                                        "type": "string"
+                                    },
+                                    "Allergens": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedAccessoryColors": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedColorCategories": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedColors": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedFabrics": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedPatterns": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "SalesOrderDetails": {
+                                "properties": {
+                                    "AdditionalRequests": {
+                                        "type": "string"
+                                    },
+                                    "EstimatedDeliveryDate": {
+                                        "type": "string"
+                                    },
+                                    "RequestedStyle": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "SizeInfo": {
+                                "properties": {
+                                    "BodyType": {
+                                        "type": "string"
+                                    },
+                                    "FootWear": {
+                                        "type": "string"
+                                    },
+                                    "Height": {
+                                        "type": "integer"
+                                    },
+                                    "LowerBody": {
+                                        "type": "string"
+                                    },
+                                    "MenUnderWear": {
+                                        "type": "string"
+                                    },
+                                    "OutWear": {
+                                        "type": "string"
+                                    },
+                                    "UpperBody": {
+                                        "type": "string"
+                                    },
+                                    "Weight": {
+                                        "type": "integer"
+                                    },
+                                    "WomenUnderWearCup": {
+                                        "type": "string"
+                                    },
+                                    "WomenUnderWearSize": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "StylePreferences": {
+                                "properties": {
+                                    "BodyPartsToHide": {
+                                        "type": "string"
+                                    },
+                                    "BodyPartsToHighlight": {
+                                        "type": "string"
+                                    },
+                                    "ChoiceReasons": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedAccessoryCategories": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedBagCategories": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedFootwearCategories": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedLowerCategories": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedOuterCategories": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedUnderwearCategories": {
+                                        "type": "string"
+                                    },
+                                    "ExcludedUpperCategories": {
+                                        "type": "string"
+                                    },
+                                    "LovesShopping": {
+                                        "type": "number"
+                                    },
+                                    "OpenToSuggestions": {
+                                        "type": "integer"
+                                    },
+                                    "PrefersHijabClothing": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "kind": "Http",
+                "type": "Request"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "teams": {
+                    "connectionId": "/subscriptions/cd6bc22e-8b3a-4c6e-9c03-03152a8567ea/resourceGroups/rg-modilist-int/providers/Microsoft.Web/connections/teams",
+                    "connectionName": "teams",
+                    "id": "/subscriptions/cd6bc22e-8b3a-4c6e-9c03-03152a8567ea/providers/Microsoft.Web/locations/westeurope/managedApis/teams"
+                }
+            }
+        }
+    }
+}

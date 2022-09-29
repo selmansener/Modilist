@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using Modilist.API.Filters;
+using Modilist.Business.CQRS.UserDomain.Commands;
 using Modilist.Business.Seed;
 using Modilist.Business.Seed.Configuration;
+using Modilist.Infrastructure.Shared.Extensions;
 
 namespace Modilist.API.Area.Dev.Controllers
 {

@@ -8,5 +8,7 @@ namespace Modilist.Functions.EventHandlers.Configurations
         public DbConnectionOptions ModilistDbConnectionOptions { get; set; }
 
         public SendGridOptions SendGridOptions { get; set; }
+
+        public LogicAppUrls LogicAppUrls { get; set; }
     }
 }

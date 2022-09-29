@@ -1,0 +1,58 @@
+{
+    "Id": "e4d2fe04-2efe-4754-8d62-98dbf6013277",
+    "Email": "selmansenerr@gmail.com",
+    "Gender": "Male",
+    "SizeInfo": {
+        "Weight": 125,
+        "Height": 169,
+        "BodyType": "Round",
+        "UpperBody": "XXL",
+        "LowerBody": "XL",
+        "WomenUnderWearCup": "",
+        "WomenUnderWearSize": "",
+        "MenUnderWear": "XXL",
+        "OutWear": "XXL",
+        "FootWear": "43"
+    },
+    "StylePreferences": {
+        "ChoiceReasons": "TimeProblem,HavingPersonalStyleAdvisor,MakingNewStyle",
+        "LovesShopping": 3.5,
+        "OpenToSuggestions": 5,
+        "PrefersHijabClothing": false,
+        "BodyPartsToHighlight": "",
+        "BodyPartsToHide": "",
+        "ExcludedUpperCategories": "Jersey,Overalls,Waistcoat",
+        "ExcludedLowerCategories": "Shorts,Capri,Pants",
+        "ExcludedOuterCategories": "Poncho,Blazer,Jacket,Raincoat",
+        "ExcludedUnderwearCategories": "Swimsuit",
+        "ExcludedAccessoryCategories": "Earring,Ring,Necklace,Tie,BowTie",
+        "ExcludedFootwearCategories": "",
+        "ExcludedBagCategories": ""
+    },
+    "PreferedFabricProperties": {
+        "ExcludedColors": "Red,Orange,Yellow,Pink,Purple",
+        "ExcludedColorCategories": "Vivid,Neon,Nude,Hot",
+        "ExcludedPatterns": "PolkaDot,AnimalPattern,AnimalFigured,BigFlowers,SmallFlowers",
+        "ExcludedFabrics": "FauxFur,Guipure",
+        "ExcludedAccessoryColors": "Gold,Silver,Copper",
+        "Allergens": "Alerjim yok ama yün yakıyor",
+        "AdditionalNotes": "Test"
+    },
+    "FitPreferences": {
+        "WaistHeight": "HighWaist,Regular",
+        "UpperFit": "Loose",
+        "LowerFit": "Relaxed,Loose",
+        "LegFit": "Straight,Loose",
+        "SkirtDressLength": "",
+        "ShortsLength": "",
+        "FootType": ""
+    },
+    "SalesOrderDetails": {
+        "EstimatedDeliveryDate": "2022-10-05T11:02:55.1118131",
+        "AdditionalRequests": "Test",
+        "RequestedStyle": "Grunge"
+    },
+    "MaxPricingLimit": "1750",
+    "InstagramUserName": "@aselmansener",
+    "JobTitle": "Software Developer"
+}

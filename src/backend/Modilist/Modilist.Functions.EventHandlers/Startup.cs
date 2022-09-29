@@ -28,6 +28,11 @@ namespace Modilist.Functions.EventHandlers
                 options.APIKey = configurations.SendGridOptions.APIKey;
             });
 
+            builder.Services.Configure<LogicAppUrls>(options =>
+            {
+                options.NewAccountNotificationHandler = configurations.LogicAppUrls.NewAccountNotificationHandler;
+            });
+
             builder.Services.AddBusinessUtils();
 
             var environment = builder.Services.BuildServiceProvider().GetService<IHostEnvironment>();
