@@ -50,7 +50,7 @@ const ZipCodeInputMask = React.forwardRef<HTMLElement, NumberInputMaskProps>(
 export default function ContactInfo() {
     const { t } = useTranslation();
     const { isBusy: getDefaultAddressIsBusy, data: getDefaultAddressResponse } = useSelector((state: RootState) => state.getDefaultAddressModel);
-    const { isBusy: upsertAddressIsBusy, status: upsertAddressStatus} = useSelector((state: RootState) => state.upsertAddressModel)
+    const { isBusy: upsertAddressIsBusy, status: upsertAddressStatus } = useSelector((state: RootState) => state.upsertAddressModel)
     const dispatch = useDispatch<Dispatch>();
     const [selectedCity, setSelectedCity] = useState<string | undefined>();
     const [addressNumberShrink, setAddressNumberShrink] = useState(false);
@@ -65,8 +65,8 @@ export default function ContactInfo() {
         phone: Yup.string().test({
             name: 'minCharacters',
             message: `${minCharacters}`,
-            test: (value) => 
-                    value?.length == 12            
+            test: (value) =>
+                value?.length == 12
         }).required(requiredField),
         city: Yup.string().required(requiredField),
         district: Yup.string().required(requiredField),
@@ -104,8 +104,8 @@ export default function ContactInfo() {
 
         dispatch.stepperSubscription.setContactInfo(() => {
             submitForm();
-            if(!isValid){
-                window.scrollTo(0,0);
+            if (!isValid) {
+                window.scrollTo(0, 0);
             }
         })
     }, []);
@@ -115,21 +115,21 @@ export default function ContactInfo() {
     }, [address]);
 
     useEffect(() => {
-        if(upsertAddressStatus !== 0) {
+        if (upsertAddressStatus !== 0) {
             dispatch.upsertAddressModel.RESET();
         }
     }, [upsertAddressStatus])
 
     return (
         <>
-            <Grid item container spacing={4}>
+            <Grid item container spacing={{ xs: 2, md: 4 }}>
                 <Grid item xs={12}>
                     <Typography variant='h3' align='left' sx={{ m: 1 }}>
                         {t("Pages.Welcome.ContactInfo.Title")}
                     </Typography>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <FormControl fullWidth>
                         <TextField
                             name={"firstName"}
@@ -144,7 +144,7 @@ export default function ContactInfo() {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <FormControl fullWidth>
                         <TextField
                             name={"lastName"}
@@ -159,7 +159,7 @@ export default function ContactInfo() {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <FormControl fullWidth>
                         <TextField
                             name={"phone"}
@@ -180,7 +180,7 @@ export default function ContactInfo() {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <FormControl fullWidth>
                         <Cities
                             value={address?.city}
@@ -201,7 +201,7 @@ export default function ContactInfo() {
                         />
                     </FormControl>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <FormControl fullWidth>
                         <Districts
                             selectedCity={selectedCity}
@@ -220,22 +220,22 @@ export default function ContactInfo() {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <FormControl fullWidth>
-                        <TextField 
-                        label={t("Generic.Address.ZipCode")} 
-                        value={address?.zipCode} 
-                        name="zipCode"
-                        onChange={handleChange}
-                        InputProps={{
-                            inputComponent: ZipCodeInputMask as any,
-                        }}
-                        variant="outlined" />
+                        <TextField
+                            label={t("Generic.Address.ZipCode")}
+                            value={address?.zipCode}
+                            name="zipCode"
+                            onChange={handleChange}
+                            InputProps={{
+                                inputComponent: ZipCodeInputMask as any,
+                            }}
+                            variant="outlined" />
                     </FormControl>
                 </Grid>
 
 
-                <Grid item xs={8}>
+                <Grid item xs={12} md={8}>
                     <FormControl fullWidth>
                         <TextField
                             name={"fullAddress"}
@@ -252,7 +252,7 @@ export default function ContactInfo() {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <FormControl fullWidth>
                         <TextField
                             name={"name"}

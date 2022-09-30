@@ -54,11 +54,11 @@ export function FabricProperties(props: FabricPropertiesProps) {
                 dispatch.welcomePageStepper.next();
             }
         }
-        else if(upsertStatus !== 200 && upsertStatus !== 0) {
+        else if (upsertStatus !== 200 && upsertStatus !== 0) {
             setSnackbarStatus(true);
         }
 
-        if(upsertStatus !== 0) {
+        if (upsertStatus !== 0) {
             dispatch.upsertPreferedFabricPropertiesModel.RESET();
         }
     }, [upsertStatus]);
@@ -141,7 +141,7 @@ export function FabricProperties(props: FabricPropertiesProps) {
         />
     }
 
-    return <Grid item container spacing={12}>
+    return <Grid item container spacing={{ xs: 4, md: 12 }}>
         <Grid item xs={12}>
             <Color />
         </Grid>

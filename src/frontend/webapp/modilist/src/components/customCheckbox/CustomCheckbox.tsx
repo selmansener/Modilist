@@ -100,10 +100,11 @@ export function CustomCheckboxGroup(props: CustomCheckboxGroupProps) {
     }
 
     const defaultStyle: SxProps<Theme> = {
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        flexDirection: 'row', 
-        flexWrap: 'wrap'
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        overflowY: { xs:'auto', md:'unset' },
+        flexWrap: { xs: 'nowrap', md: 'wrap' }
     }
 
     return (

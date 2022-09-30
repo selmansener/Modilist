@@ -72,7 +72,7 @@ export default function PaymentMethod() {
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
     const { isProduction } = config;
-    const {isBusy: createPaymentMethodIsBusy, status: createPaymentMethodStatus} = useSelector((state: RootState) => state.createPaymentMethodModel);
+    const { isBusy: createPaymentMethodIsBusy, status: createPaymentMethodStatus } = useSelector((state: RootState) => state.createPaymentMethodModel);
     const requiredField = t("FormValidation.RequiredField");
     const [cardFocused, setCardFocused] = useState<Focused>();
     const [creditCardNumberShrink, setCreditCardNumberShrink] = useState(false);
@@ -105,10 +105,10 @@ export default function PaymentMethod() {
                 valueArr?.forEach(value => {
                     valueFinal += value;
                 })
-                let cardReverse : any = [];
+                let cardReverse: any = [];
                 cardReverse = valueFinal?.split('').reverse().map(num => parseInt(num));
-                let cardEvenDigits : number[] = [];
-                let cardOddDigits : number[] = [];
+                let cardEvenDigits: number[] = [];
+                let cardOddDigits: number[] = [];
                 let luhnSum1;
                 let luhnSum2;
                 let luhnSumFinal;
@@ -226,124 +226,126 @@ export default function PaymentMethod() {
     }, [creditCard])
 
     useEffect(() => {
-        if(createPaymentMethodStatus !== 0) {
+        if (createPaymentMethodStatus !== 0) {
             dispatch.createPaymentMethodModel.RESET();
         }
     }, [createPaymentMethodStatus])
 
     return (
         <>
-            <Grid item container spacing={4}>
+            <Grid item container spacing={{ xs: 2, md: 4 }}>
                 <Grid item xs={12}>
                     <Typography variant='h3' align='left' sx={{ m: 1 }}>
                         {t("Pages.Welcome.PaymentMethod.Title")}
                     </Typography>
                 </Grid>
 
-                <Grid item container spacing={4} xs={8}>
+                <Grid item container xs={12} md={8}>
+                    <Grid item container spacing={{ xs: 2, md: 4 }}>
 
-                    <Grid item xs={12}>
-                        <FormControl fullWidth >
-                            <TextField
-                                name="cardNumber"
-                                error={touched.cardNumber && errors.cardNumber !== undefined}
-                                helperText={touched.cardNumber && errors.cardNumber}
-                                label={t("Pages.Welcome.PaymentMethod.CardNumber")}
-                                value={creditCard.cardNumber}
-                                variant="outlined"
-                                onChange={handleChange}
-                                onFocus={() => {
-                                    setCardFocused("number")
-                                }}
-                                onBlur={handleBlur}
-                                InputProps={{
-                                    inputComponent: CreditCardInputMask as any,
-                                }}
-                                InputLabelProps={{
-                                    shrink: creditCardNumberShrink
-                                }}
-                            />
-                        </FormControl>
-                    </Grid>
+                        <Grid item xs={12}>
+                            <FormControl fullWidth >
+                                <TextField
+                                    name="cardNumber"
+                                    error={touched.cardNumber && errors.cardNumber !== undefined}
+                                    helperText={touched.cardNumber && errors.cardNumber}
+                                    label={t("Pages.Welcome.PaymentMethod.CardNumber")}
+                                    value={creditCard.cardNumber}
+                                    variant="outlined"
+                                    onChange={handleChange}
+                                    onFocus={() => {
+                                        setCardFocused("number")
+                                    }}
+                                    onBlur={handleBlur}
+                                    InputProps={{
+                                        inputComponent: CreditCardInputMask as any,
+                                    }}
+                                    InputLabelProps={{
+                                        shrink: creditCardNumberShrink
+                                    }}
+                                />
+                            </FormControl>
+                        </Grid>
 
-                    <Grid item xs={12}>
-                        <FormControl fullWidth >
-                            <TextField
-                                name="cardHolderName"
-                                error={touched.cardHolderName && errors.cardHolderName !== undefined}
-                                helperText={touched.cardHolderName && errors.cardHolderName}
-                                label={t("Pages.Welcome.PaymentMethod.CardHolderName")}
-                                value={creditCard.cardHolderName}
-                                variant="outlined"
-                                onChange={(e) => {
-                                    handleChange(e);
-                                }}
-                                onFocus={() => {
-                                    setCardFocused("name")
-                                }}
-                                onBlur={handleBlur}
-                            />
-                        </FormControl>
-                    </Grid>
+                        <Grid item xs={12}>
+                            <FormControl fullWidth >
+                                <TextField
+                                    name="cardHolderName"
+                                    error={touched.cardHolderName && errors.cardHolderName !== undefined}
+                                    helperText={touched.cardHolderName && errors.cardHolderName}
+                                    label={t("Pages.Welcome.PaymentMethod.CardHolderName")}
+                                    value={creditCard.cardHolderName}
+                                    variant="outlined"
+                                    onChange={(e) => {
+                                        handleChange(e);
+                                    }}
+                                    onFocus={() => {
+                                        setCardFocused("name")
+                                    }}
+                                    onBlur={handleBlur}
+                                />
+                            </FormControl>
+                        </Grid>
 
-                    <Grid item xs={4}>
-                        <FormControl fullWidth >
-                            <TextField
-                                name="expireMonth"
-                                error={touched.expireMonth && errors.expireMonth !== undefined}
-                                helperText={touched.expireMonth && errors.expireMonth}
-                                label={t("Pages.Welcome.PaymentMethod.ExpireMonth")}
-                                value={creditCard.expireMonth}
-                                variant="outlined"
-                                onChange={handleChange}
-                                onFocus={() => {
-                                    setCardFocused("expiry");
-                                }}
-                                onBlur={handleBlur}
-                                InputProps={{
-                                    inputComponent: ExpireMonthInputMask as any,
-                                }}
-                            />
-                        </FormControl>
-                    </Grid>
+                        <Grid item xs={6} md={4}>
+                            <FormControl fullWidth >
+                                <TextField
+                                    name="expireMonth"
+                                    error={touched.expireMonth && errors.expireMonth !== undefined}
+                                    helperText={touched.expireMonth && errors.expireMonth}
+                                    label={t("Pages.Welcome.PaymentMethod.ExpireMonth")}
+                                    value={creditCard.expireMonth}
+                                    variant="outlined"
+                                    onChange={handleChange}
+                                    onFocus={() => {
+                                        setCardFocused("expiry");
+                                    }}
+                                    onBlur={handleBlur}
+                                    InputProps={{
+                                        inputComponent: ExpireMonthInputMask as any,
+                                    }}
+                                />
+                            </FormControl>
+                        </Grid>
 
-                    <Grid item xs={4}>
-                        <FormControl fullWidth >
-                            <TextField
-                                name="expireYear"
-                                error={touched.expireYear && errors.expireYear !== undefined}
-                                helperText={touched.expireYear && errors.expireYear}
-                                label={t("Pages.Welcome.PaymentMethod.ExpireYear")}
-                                value={creditCard.expireYear}
-                                variant="outlined"
-                                onChange={handleChange}
-                                onFocus={() => {
-                                    setCardFocused("expiry")
-                                }}
-                                onBlur={handleBlur}
-                                InputProps={{
-                                    inputComponent: ExpireYearInputMask as any,
-                                }}
-                            />
-                        </FormControl>
-                    </Grid>
+                        <Grid item xs={6} md={4}>
+                            <FormControl fullWidth >
+                                <TextField
+                                    name="expireYear"
+                                    error={touched.expireYear && errors.expireYear !== undefined}
+                                    helperText={touched.expireYear && errors.expireYear}
+                                    label={t("Pages.Welcome.PaymentMethod.ExpireYear")}
+                                    value={creditCard.expireYear}
+                                    variant="outlined"
+                                    onChange={handleChange}
+                                    onFocus={() => {
+                                        setCardFocused("expiry")
+                                    }}
+                                    onBlur={handleBlur}
+                                    InputProps={{
+                                        inputComponent: ExpireYearInputMask as any,
+                                    }}
+                                />
+                            </FormControl>
+                        </Grid>
 
-                    <Grid item xs={4}>
-                        <FormControl fullWidth >
-                            <TextField
-                                name="cardName"
-                                error={touched.cardName && errors.cardName !== undefined}
-                                helperText={touched.cardName && errors.cardName}
-                                label={t("Pages.Welcome.PaymentMethod.CardName")}
-                                value={creditCard.cardName}
-                                variant="outlined"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                        </FormControl>
+                        <Grid item xs={12} md={4}>
+                            <FormControl fullWidth >
+                                <TextField
+                                    name="cardName"
+                                    error={touched.cardName && errors.cardName !== undefined}
+                                    helperText={touched.cardName && errors.cardName}
+                                    label={t("Pages.Welcome.PaymentMethod.CardName")}
+                                    value={creditCard.cardName}
+                                    variant="outlined"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                            </FormControl>
+                        </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={4} sx={{
+                <Grid item xs={12} md={4} sx={{
                     display: "flex",
                     alignItems: "center"
                 }}>

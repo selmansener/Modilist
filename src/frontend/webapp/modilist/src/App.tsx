@@ -1,6 +1,6 @@
 import './App.css';
 import { AuthenticatedTemplate, MsalProvider, UnauthenticatedTemplate } from "@azure/msal-react";
-import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material';
+import { createTheme, ThemeOptions, ThemeProvider, responsiveFontSizes } from '@mui/material';
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import Backend from 'i18next-http-backend';
@@ -93,7 +93,7 @@ const mdTheme = createTheme({
     },
     body2: {
       fontFamily: 'Poppins, sans-serif',
-      fontSize: 14,
+      fontSize: 12,
       fontWeight: 300,
       lineHeight: 1.27,
     },
@@ -174,6 +174,10 @@ const mdTheme = createTheme({
   }
 });
 
+const theme = responsiveFontSizes(mdTheme, {
+  factor: 4
+});
+
 i18n
   .use(LanguageDetector)
   .use(Backend)
@@ -202,7 +206,7 @@ function App() {
         <MsalProvider instance={msalInstance}>
           <BrowserRouter>
             <ScrollToTop />
-            <ThemeProvider theme={mdTheme} >
+            <ThemeProvider theme={theme} >
               <AuthenticatedTemplate>
                 <Router environment={config.environment} isPublic={false} />
               </AuthenticatedTemplate>

@@ -41,8 +41,8 @@ export function SubscriptionDetails() {
         });
     }, [maxLimit]);
 
-    return <Grid item container spacing={4}>
-        <Grid item xs={9}>
+    return <Grid item container spacing={{ xs: 2, md: 4 }}>
+        <Grid item xs={12} md={9}>
             <FormControl fullWidth>
                 <FormControlLabel
                     labelPlacement="bottom"
@@ -87,7 +87,7 @@ export function SubscriptionDetails() {
                     } />
             </FormControl>
         </Grid>
-        <Grid item xs={3} sx={{
+        <Grid item xs={12} md={3} sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
@@ -96,7 +96,8 @@ export function SubscriptionDetails() {
                 parseInt(maxLimit) <= 5000 ?
                     maxLimit :
                     "+5000"}
-                <CurrencyLiraIcon fontSize="large" /></Typography>
+                <CurrencyLiraIcon fontSize="large" />
+            </Typography>
             {maxLimit === "+5000" && <Typography variant="h5" color="secondary">{t("Pages.Welcome.Subscription.SubscriptionDetails.Description")}</Typography>}
         </Grid>
     </Grid>

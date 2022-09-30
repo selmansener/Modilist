@@ -604,9 +604,9 @@ export function StylePreferences(props: StylePreferencesProps) {
             }}
             value={stylePreferences?.excludedUpperCategories ?? ""}
             label={
-            <Box>
-                <Typography variant="h4" component={"span"}>{t("MainCategories.Upper")}</Typography>
-                <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                <Box>
+                    <Typography variant="h4" component={"span"}>{t("MainCategories.Upper")}</Typography>
+                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>}
             contents={upperCategories}
             isNegative
@@ -636,9 +636,9 @@ export function StylePreferences(props: StylePreferencesProps) {
             }}
             value={stylePreferences?.excludedLowerCategories ?? ""}
             label={
-            <Box>
-                <Typography variant="h4" component={"span"}>{t("MainCategories.Lower")}</Typography>
-                 <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                <Box>
+                    <Typography variant="h4" component={"span"}>{t("MainCategories.Lower")}</Typography>
+                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>}
             contents={lowerCategories}
             isNegative
@@ -668,10 +668,10 @@ export function StylePreferences(props: StylePreferencesProps) {
             }}
             value={stylePreferences?.excludedOuterCategories ?? ""}
             label={
-            <Box>
-                <Typography variant="h4" component={"span"}>{t("MainCategories.Outer")}</Typography>
-                 <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
-                 </Box>}
+                <Box>
+                    <Typography variant="h4" component={"span"}>{t("MainCategories.Outer")}</Typography>
+                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                </Box>}
             contents={outerCategories}
             isNegative
             onChange={(values: string[]) => {
@@ -699,9 +699,9 @@ export function StylePreferences(props: StylePreferencesProps) {
             }}
             value={stylePreferences?.excludedUnderwearCategories ?? ""}
             label={
-            <Box>
-                <Typography variant="h4" component={"span"}>{t("MainCategories.UnderwearPyjamasBeach")}</Typography>
-                 <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                <Box>
+                    <Typography variant="h4" component={"span"}>{t("MainCategories.UnderwearPyjamasBeach")}</Typography>
+                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>}
             contents={accessoriesCategories}
             isNegative
@@ -731,9 +731,9 @@ export function StylePreferences(props: StylePreferencesProps) {
             }}
             value={stylePreferences?.excludedAccessoryCategories ?? ""}
             label={
-            <Box>
-                <Typography variant="h4" component={"span"}>{t("MainCategories.Accessories")}</Typography>
-               <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                <Box>
+                    <Typography variant="h4" component={"span"}>{t("MainCategories.Accessories")}</Typography>
+                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>}
             contents={accessoriesCategories}
             isNegative
@@ -763,9 +763,9 @@ export function StylePreferences(props: StylePreferencesProps) {
             }}
             value={stylePreferences?.excludedBagCategories ?? ""}
             label={
-            <Box>
-                <Typography variant="h4" component={"span"}>{t("MainCategories.Bags")}</Typography>
-                <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                <Box>
+                    <Typography variant="h4" component={"span"}>{t("MainCategories.Bags")}</Typography>
+                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>}
             contents={bagsCategories}
             isNegative
@@ -839,13 +839,13 @@ export function StylePreferences(props: StylePreferencesProps) {
             <CustomCheckboxGroup
                 value={stylePreferences?.bodyPartsToHighlight ?? ""}
                 label={
-                <Box>
-                <Typography variant="h3" component={"span"} sx={{
-                    mb: 4
-                }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>
-                <Typography color="secondary" variant="h3" component={"span"} 
-                >{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
-                </Box>
+                    <Box>
+                        <Typography variant="h3" component={"span"} sx={{
+                            mb: 4
+                        }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>
+                        <Typography color="secondary" variant="h3" component={"span"}
+                        >{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
+                    </Box>
                 }
                 contents={bodyParts}
                 onChange={(values: string[]) => {
@@ -859,14 +859,14 @@ export function StylePreferences(props: StylePreferencesProps) {
             <CustomCheckboxGroup
                 value={stylePreferences?.bodyPartsToHide ?? ""}
                 label={
-                <Box>
-                <Typography variant="h3" component={"span"} sx={{
-                    mb: 4
-                    }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>
-                    <Typography color="secondary" variant="h3" component={"span"}
-                    >{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
-                </Box>
-                    }
+                    <Box>
+                        <Typography variant="h3" component={"span"} sx={{
+                            mb: 4
+                        }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>
+                        <Typography color="secondary" variant="h3" component={"span"}
+                        >{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
+                    </Box>
+                }
                 isNegative
                 contents={bodyParts}
                 onChange={(values: string[]) => {
@@ -901,11 +901,11 @@ export function StylePreferences(props: StylePreferencesProps) {
         }
     });
     return (
-        <Grid item container xs={12} spacing={12}>
-            <Grid item xs={6}>
+        <Grid item container xs={12} spacing={{ xs: 4, md: 12 }}>
+            <Grid item xs={6} display={{ xs: 'none', md: 'block' }}>
                 <ImageComponent src={`${imgBaseHost}/style-preferences-general/ShoppingIllustration.svg`}></ImageComponent>
             </Grid>
-            <Grid item container xs={6}>
+            <Grid item container xs={12} md={6}>
                 <Grid item xs={12} sx={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -915,13 +915,13 @@ export function StylePreferences(props: StylePreferencesProps) {
                         <Typography variant="h3" align="center" >
                             {t(`Pages.Welcome.StylePreferences.LikesShoping`)}
                         </Typography>
-                        <Typography variant="body1" mt={2} align="center" fontWeight={800} color={theme.palette.error.main}>
+                        <Typography variant="body1" mt={{ xs: 1, md: 2 }} align="center" fontWeight={800} color={theme.palette.error.main}>
                             {touched.lovesShopping && errors.lovesShopping}
                         </Typography>
                         <Box sx={{
                             display: 'flex',
                             justifyContent: 'space-evenly',
-                            mt: 2
+                            mt: { xs: 1, md: 2 }
                         }}>
                             <Rating
                                 disabled={isBusy}
@@ -956,16 +956,16 @@ export function StylePreferences(props: StylePreferencesProps) {
                     alignItems: 'center'
                 }}>
                     <FormControl error={touched.openToSuggestions && errors.openToSuggestions !== undefined}>
-                        <Typography variant="h3" mt={2} align="center">
+                        <Typography variant="h3" mt={{ xs: 1, md: 2 }} align="center">
                             {t(`Pages.Welcome.StylePreferences.OpenToSuggestions`)}
                         </Typography>
-                        <Typography variant="body1" mt={2} align="center" fontWeight={800} color={theme.palette.error.main}>
+                        <Typography variant="body1" mt={{ xs: 1, md: 2 }} align="center" fontWeight={800} color={theme.palette.error.main}>
                             {touched.openToSuggestions && errors.openToSuggestions}
                         </Typography>
                         <Box sx={{
                             display: 'flex',
                             justifyContent: 'space-evenly',
-                            mt: 2
+                            mt: { xs: 1, md: 2 }
                         }}>
                             <Rating
                                 disabled={isBusy}
@@ -996,9 +996,9 @@ export function StylePreferences(props: StylePreferencesProps) {
                 </Grid>
             </Grid>
 
-            <Grid item container xs={6}>
-                <Grid item xs={4}></Grid>
-                <Grid item xs={8}>
+            <Grid item container xs={12} md={6}>
+                <Grid item xs={0} md={4}></Grid>
+                <Grid item xs={12} md={8}>
                     <Typography variant="h3" align="left">
                         {t(`Pages.Welcome.StylePreferences.ChoiceReasonsQuestion`)}
                     </Typography>
@@ -1006,8 +1006,8 @@ export function StylePreferences(props: StylePreferencesProps) {
                         {touched.choiceReasons && errors.choiceReasons}
                     </Typography>
                 </Grid>
-                <Grid item xs={4}></Grid>
-                <Grid item xs={8}>
+                <Grid item xs={0} md={4}></Grid>
+                <Grid item xs={12} md={8}>
                     <FormControl fullWidth error={touched.choiceReasons && errors.choiceReasons !== undefined}>
                         <FormGroup>
                             {choiseReasons.map(reason => (
@@ -1030,7 +1030,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                     </FormControl>
                 </Grid>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} display={{ xs: 'none', md: 'block' }}>
                 <ImageComponent src={`${imgBaseHost}/style-preferences-general/WhyModilist1.svg`}></ImageComponent>
             </Grid>
             {account?.gender === Gender.Female &&
@@ -1061,8 +1061,8 @@ export function StylePreferences(props: StylePreferencesProps) {
             <Grid item xs={12}>
                 <Box>
                     <Typography variant="h3" component={"span"} sx={{
-                    mb: 4
-                }}>{t("Pages.Welcome.StylePreferences.ExcludedCategoriesTitle")}</Typography><Typography color="secondary" variant="h3" component={"span"}>{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
+                        mb: 4
+                    }}>{t("Pages.Welcome.StylePreferences.ExcludedCategoriesTitle")}</Typography><Typography color="secondary" variant="h3" component={"span"}>{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
 
                 </Box>
                 <Trans>

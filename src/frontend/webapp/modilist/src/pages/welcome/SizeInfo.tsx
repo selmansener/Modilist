@@ -196,14 +196,14 @@ export function SizeInfo(props: SizeInfoProps) {
                 const sectionName = camelCase(_section);
 
                 return (
-                    <Grid item key={sectionName} xs={4}>
+                    <Grid item key={sectionName} xs={12} md={4}>
                         <Box sx={{
                             display: 'flex',
                             justifyContent: 'space-evenly'
                         }}>
                             <Box sx={{
                                 width: '70px',
-                                mr: 2
+                                mr: 2,
                             }}>
                                 <ImageComponent src={`${imgBaseHost}/main-category/${_section}.svg`} />
                             </Box>
@@ -237,7 +237,7 @@ export function SizeInfo(props: SizeInfoProps) {
     }
 
     return (
-        <Grid item container xs={12} spacing={8}>
+        <Grid item container xs={12} spacing={{xs:2, md:8}}>
             {account?.gender !== Gender.None &&
                 <>
                     <Grid item xs={12}>
@@ -259,11 +259,24 @@ export function SizeInfo(props: SizeInfoProps) {
                                 onChange={(value) => {
                                     handleChange("bodyType")(value);
                                 }}
+                                // radioButtonSx={{
+                                //     flexBasis: '15%'
+                                // }}
                                 contents={
                                     bodyTypes.map(type => {
                                         return {
                                             value: type.name,
                                             element: <ImageComponent src={type.img} />
+                                            // element: (
+                                            //     <React.Fragment>
+                                            //         <Box display={{ xs: 'block', md: 'none' }}>
+                                            //             <ImageComponent width={"100%"} src={type.img} />
+                                            //         </Box>
+                                            //         <Box display={{ xs: 'none', md: 'block' }}>
+                                            //             <ImageComponent src={type.img} />
+                                            //         </Box>
+                                            //     </React.Fragment>
+                                            // )
                                         }
                                     })}
                             />
@@ -275,7 +288,7 @@ export function SizeInfo(props: SizeInfoProps) {
                 display: 'flex',
                 justifyContent: 'space-around'
             }}>
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <Box sx={{
                         display: 'flex'
                     }}>
@@ -303,7 +316,7 @@ export function SizeInfo(props: SizeInfoProps) {
                     </Box>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <Box sx={{
                         display: 'flex'
                     }}>
@@ -345,7 +358,7 @@ export function SizeInfo(props: SizeInfoProps) {
                 sizeData={sizeSymbols}
             />
 
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
                 <Box sx={{
                     display: 'flex',
                 }}>
@@ -382,7 +395,7 @@ export function SizeInfo(props: SizeInfoProps) {
             </Grid>
 
             {account?.gender === Gender.Female && <>
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <Box sx={{
                         display: 'flex',
                         justifyContent: 'space-evenly'
@@ -417,7 +430,7 @@ export function SizeInfo(props: SizeInfoProps) {
                     </Box>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                     <Box sx={{
                         display: 'flex',
                         justifyContent: 'space-evenly'
@@ -468,8 +481,8 @@ export function SizeInfo(props: SizeInfoProps) {
                     bodySizes.map((bodySize, index) => {
                         const sizeName = camelCase(bodySize);
                         return <React.Fragment key={sizeName}>
-                            {index % 2 === 0 ? <Grid item xs={2}></Grid> : <></>}
-                            <Grid item xs={4}>
+                            {index % 2 === 0 ? <Grid item xs={2} display={{xs:'none', md:'block'}}></Grid> : <></>}
+                            <Grid item xs={12} md={4}>
                                 <Box sx={{
                                     display: 'flex',
                                     justifyContent: 'space-evenly'
@@ -494,7 +507,7 @@ export function SizeInfo(props: SizeInfoProps) {
                                     </FormControl>
                                 </Box>
                             </Grid>
-                            {index % 2 === 0 ? <></> : <Grid item xs={2}></Grid>}
+                            {index % 2 === 0 ? <></> : <Grid item xs={2} display={{xs:'none', md:'block'}}></Grid>}
                         </React.Fragment>
                     })
                 }

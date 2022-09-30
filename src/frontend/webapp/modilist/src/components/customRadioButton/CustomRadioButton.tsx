@@ -21,18 +21,20 @@ function CustomRadioButton(props: CustomRadioButtonProps) {
         borderRadius: checked ? 1 : 0,
         p: 1,
         m: 1,
-        '&:hover': {
-            transition: theme.transitions.create('opacity', {
-                easing: theme.transitions.easing.easeInOut,
-                duration: 500
-            }),
-            opacity: (greyscale ? '1' : 'none'),
-            cursor: 'pointer'
-        },
-        '&': checked ? {
-            opacity: (greyscale ? '1' : 'none')
-        } : {
-            opacity: (greyscale ? '0.5' : 'none')
+        [theme.breakpoints.up("md")]: {
+            '&:hover': {
+                transition: theme.transitions.create('opacity', {
+                    easing: theme.transitions.easing.easeInOut,
+                    duration: 500
+                }),
+                opacity: (greyscale ? '1' : 'none'),
+                cursor: 'pointer'
+            },
+            '&': checked ? {
+                opacity: (greyscale ? '1' : 'none')
+            } : {
+                opacity: (greyscale ? '0.5' : 'none')
+            },
         },
         ...sx
     }} onClick={() => {
@@ -65,7 +67,7 @@ export function CustomRadioButtonGroup(props: CustomRadioButtonGroupProps) {
 
     return <RadioGroup
         name={name}
-        sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'wrap', ...containerSx }}>
+        sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', overflowY: { xs: 'auto', md: 'unset' }, flexWrap: { xs: 'nowrap', md: 'wrap' }, ...containerSx }}>
         {contents.map(radio => <CustomRadioButton
             sx={radioButtonSx}
             greyscale={greyscale}

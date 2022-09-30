@@ -114,14 +114,14 @@ export default function Personal() {
         setpersonalNumberShrink(account.phone !== undefined && account.phone !== "");
     }, [account]);
 
-    return <Grid item container xs={12} spacing={4}>
+    return <Grid item container xs={12} spacing={{ xs: 2, md: 4 }}>
         <Grid item xs={12}>
             <Typography variant='h3' align='left' sx={{ m: 1 }}>
                 {t("Pages.Welcome.Personal.HeaderPersonalInfo")}
             </Typography>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
             <FormControl fullWidth>
                 <TextField label={<Typography>{t('Generic.PersonalInfo.FirstName')}</Typography>}
                     name="firstName"
@@ -135,7 +135,7 @@ export default function Personal() {
             </FormControl>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
             <FormControl fullWidth>
                 <TextField label={<Typography>{t('Generic.PersonalInfo.LastName')}</Typography>}
                     name="lastName"
@@ -148,7 +148,7 @@ export default function Personal() {
             </FormControl>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
             <ClickAwayListener onClickAway={() => {
                 setIsDatePickerOpen(false);
             }}>
@@ -194,7 +194,7 @@ export default function Personal() {
             </ClickAwayListener>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
             <FormControl fullWidth>
                 <TextField label={<Typography>{t('Generic.PersonalInfo.PhoneNumber')}</Typography>}
                     name="phone"
@@ -215,7 +215,7 @@ export default function Personal() {
             </FormControl>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
             <FormControl fullWidth>
                 <TextField label={<Typography>{t('Pages.Welcome.Personal.Job')}</Typography>} variant="outlined"
                     name="jobTitle"
@@ -225,7 +225,7 @@ export default function Personal() {
             </FormControl>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
             <FormControl fullWidth>
                 <TextField label={<Typography>{t('Pages.Welcome.Personal.Instagram')}</Typography>} variant="outlined"
                     name="instagramUserName"

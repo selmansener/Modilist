@@ -19,19 +19,26 @@ function GenderImage(props: GenderProps) {
     const { isSelected, gender, onClick } = props;
     const src = gender === Gender.Female ? `${config.cdnImg}/gender/female.svg` : `${config.cdnImg}/gender/male.svg`;
     const StyledImage = styled(ImageComponent)<ImageProps>(({ theme }) => ({
-        '&:hover': {
-            transition: theme.transitions.create('opacity', {
-                easing: theme.transitions.easing.easeInOut,
-                duration: 500
-            }),
-            opacity: '1',
-            cursor: 'pointer'
+        [theme.breakpoints.up('md')]: {
+            '&:hover': {
+                transition: theme.transitions.create('opacity', {
+                    easing: theme.transitions.easing.easeInOut,
+                    duration: 500
+                }),
+                opacity: '1',
+                cursor: 'pointer'
+            },
+            '&': isSelected ? {
+                opacity: '1'
+            } : {
+                opacity: '0.5'
+            },
         },
-        '&': isSelected ? {
-            opacity: '1'
-        } : {
-            opacity: '0.5'
-        },
+        [theme.breakpoints.down('md')]: {
+            width: "75%",
+            margin: "auto",
+            display: "block"
+        }
     }));
 
     return <StyledImage
@@ -72,11 +79,11 @@ export function GenderSelection() {
 
             navigate("/welcome");
         }
-        else if(updateAccountStatus !== 200 && updateAccountStatus !== 0) {
+        else if (updateAccountStatus !== 200 && updateAccountStatus !== 0) {
             setSnackbarStatus(true);
         }
 
-        if(updateAccountStatus !== 0){
+        if (updateAccountStatus !== 0) {
             dispatch.updateAccountModel.RESET();
         }
     }, [updateAccountStatus])
@@ -105,10 +112,10 @@ export function GenderSelection() {
                 {t("Pages.Welcome.GenderSelection.Gender")}
             </Typography>
         </Grid>
-        <Grid item container xs={12} md={6} justifyContent="center">
+        <Grid item container xs={6} md={6} justifyContent="center">
             <GenderImage isSelected={account?.gender === Gender.Female} gender={Gender.Female} onClick={handleClick} />
         </Grid>
-        <Grid item container xs={12} md={6} justifyContent="center">
+        <Grid item container xs={6} md={6} justifyContent="center">
             <GenderImage isSelected={account?.gender === Gender.Male} gender={Gender.Male} onClick={handleClick} />
         </Grid>
         <Snackbar

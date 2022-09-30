@@ -49,6 +49,8 @@ export function WelcomeSteps() {
 
     const { isBusy: createFirstOrderIsBusy, data: createFirstOrderData, status: createFirstOrderStatus } = useSelector((state: RootState) => state.createFirstOrderModel);
     const dispatch = useDispatch<Dispatch>();
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const windowHeight = window.innerHeight;
 
     useEffect(() => {
         if (activateAccountStatus === 200 && activateAccount) {
@@ -72,8 +74,14 @@ export function WelcomeSteps() {
         backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
         zIndex: 1,
         color: '#fff',
-        width: 50,
-        height: 50,
+        [theme.breakpoints.down("md")]: {
+            width: 36,
+            height: 36,
+        },
+        [theme.breakpoints.up("md")]: {
+            width: 50,
+            height: 50,
+        },
         display: 'flex',
         borderRadius: '50%',
         justifyContent: 'center',
@@ -107,11 +115,30 @@ export function WelcomeSteps() {
         );
     }
 
+    const getScrollTopDisplayValue = () => {
+        const threshold = windowHeight * 35 / 100;
+
+        return scrollPosition > threshold;
+    }
+
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setScrollPosition(position);
+    }
+
     useEffect(() => {
         if (!activateAccountIsBusy && activeStep === steps.length && activateAccountStatus === 0) {
             dispatch.activateAccountModel.activateAccount();
         }
     }, [activeStep]);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
         <Grid item container>
@@ -133,8 +160,13 @@ export function WelcomeSteps() {
                                         flexDirection: 'column'
                                     }}>
                                     <Trans>
-                                        <Typography sx={{
-                                            mt: 1
+                                        <Typography variant="body1" sx={{
+                                            mt: 1,
+                                            display: { xs: 'none', md: 'block' }
+                                        }} align="center">{t(step.title)}</Typography>
+                                        <Typography variant="body2" sx={{
+                                            mt: 1,
+                                            display: { xs: 'block', md: 'none' }
                                         }} align="center">{t(step.title)}</Typography>
                                     </Trans>
                                 </StepLabel>
@@ -159,14 +191,17 @@ export function WelcomeSteps() {
                     {steps[activeStep].component}
                 </Grid>
             }
-            <Fab sx={{ position: "fixed", bottom: 80, right: 20 }} variant="extended" onClick={() => {
-                window.scrollTo({
-                    top: 0,
-                    left: 0,
-                    behavior: 'smooth'
-                });
-            }}><NavigationIcon sx={{ mr: 1 }} />
-                {t('Layouts.Welcome.WelcomeSteps.Buttons.Navigate')}</Fab>
+            {getScrollTopDisplayValue() && <Fab
+                sx={{ position: "fixed", bottom: 20, right: 20 }} variant="extended" onClick={() => {
+                    window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+                }}>
+                <NavigationIcon sx={{ mr: 1 }} />
+                {t('Layouts.Welcome.WelcomeSteps.Buttons.Navigate')}
+            </Fab>}
         </Grid>
     );
 }

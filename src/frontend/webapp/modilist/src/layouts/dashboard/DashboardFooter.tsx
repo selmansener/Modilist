@@ -75,6 +75,113 @@ export function DashboardFooter() {
             ml: 2,
         }}>
             <Grid container spacing={2} sx={{
+                display: { md: 'none' },
+                backgroundColor: theme.palette.primary.main
+            }}>
+                <Grid item xs={12} alignContent="center" textAlign="center" marginBottom={2}>
+                    <Button variant="contained" color="secondary">
+                        <NavLink to={"/contact"}>
+                            <Typography color="#fff">
+                                {t("Layouts.Dashboard.Footer.Links.Contact")}
+                            </Typography>
+                        </NavLink>
+                    </Button>
+                </Grid>
+                <Grid item xs={12} alignContent="center" textAlign="center">
+                    <Link href={instagram} target="_blank" color="#fff" sx={{
+                        px: [1]
+                    }}>
+                        <InstagramIcon />
+                    </Link>
+                    <Link href={facebook} target="_blank" color="#fff" sx={{
+                        px: [1]
+                    }}>
+                        <FacebookIcon />
+                    </Link>
+                    <Link href={twitter} target="_blank" color="#fff" sx={{
+                        px: [1]
+                    }}>
+                        <TwitterIcon />
+                    </Link>
+                    <Link href={linkedIn} target="_blank" color="#fff" sx={{
+                        px: [1]
+                    }}>
+                        <LinkedInIcon />
+                    </Link>
+                </Grid>
+                <Grid item xs={12} pr={2}>
+                    <Divider color="#fff" />
+                </Grid>
+                <Grid item xs={12}>
+                    <NavLink to={"/about"}>
+                        <Typography color="#fff">
+                            {t("Layouts.Dashboard.Footer.Links.AboutUs")}
+                        </Typography>
+                    </NavLink>
+                    <NavLink to={"#"}>
+                        <Typography color="#fff">
+                            {t("Layouts.Dashboard.Footer.Links.FAQ")}
+                        </Typography>
+                    </NavLink>
+                    <NavLink to={"/partnership"}>
+                        <Typography color="#fff">
+                            {t("Layouts.Dashboard.Footer.Links.Partnership")}
+                        </Typography>
+                    </NavLink>
+                    <NavLink to={"/careers"}>
+                        <Typography color="#fff">
+                            {t("Layouts.Dashboard.Footer.Links.OpenPositions")}
+                        </Typography>
+                    </NavLink>
+                    <NavLink to={"#"}>
+                        <Typography color="#fff">
+                            {t("Layouts.Dashboard.Footer.Links.DeveloperAPI")}
+                        </Typography>
+                    </NavLink>
+                </Grid>
+                <Grid item xs={12} pr={2}>
+                    <Divider color="#fff" />
+                </Grid>
+                <Grid item xs={12}>
+                    <Link href={`${cdn}/contracts/gdpr.pdf`} target="_blank">
+                        <Typography color="#fff">
+                            {t("Layouts.Dashboard.Footer.Links.KVKK")}
+                        </Typography>
+                    </Link>
+                    <Link href={`${cdn}/contracts/distant-sales-contract.pdf`} target="_blank">
+                        <Typography color="#fff">
+                            {t("Layouts.Dashboard.Footer.Links.OnlineSalesAgreement")}
+                        </Typography>
+                    </Link>
+                    <Link href={`${cdn}/contracts/privacy-policy.pdf`} target="_blank">
+                        <Typography color="#fff">
+                            {t("Layouts.Dashboard.Footer.Links.PrivacyAndCookiePolicies")}
+                        </Typography>
+                    </Link>
+                    <Link href={`${cdn}/contracts/terms-of-use`} target="_blank">
+                        <Typography color="#fff">
+                            {t("Layouts.Dashboard.Footer.Links.UsageAgreement")}
+                        </Typography>
+                    </Link>
+                </Grid>
+                <Grid item xs={12} pr={2}>
+                    <Divider color="#fff" />
+                </Grid>
+                <Grid item xs={12} display="flex" justifyContent="flex-end" alignItems="flex-end" pr={2}>
+                    <ImageComponent src={`${imgBaseHost}/common/iyzico-footer-white.png`} height={25} />
+                </Grid>
+                <Grid item xs={12}>
+                    <ImageComponent src="/modilist-logo-large.png" asBackground height={100} />
+                </Grid>
+                <Grid item xs={12} pr={2}>
+                    <Divider color="#fff" />
+                </Grid>
+                <Grid item xs={12}>
+                    <Copyright color={theme.palette.primary.contrastText} />
+                </Grid>
+            </Grid>
+            <Grid container item md={12} spacing={2} sx={{
+                display: { xs: 'none', md:'flex' },
                 backgroundColor: theme.palette.primary.main
             }}>
                 <Grid item container xs={12} spacing={2}>
@@ -170,11 +277,11 @@ export function DashboardFooter() {
                                     {t("Layouts.Dashboard.Footer.Links.PrivacyAndCookiePolicies")}
                                 </Typography>
                             </Link>
-                            <NavLink to={`${cdn}/contracts/terms-of-use`}>
+                            <Link href={`${cdn}/contracts/terms-of-use`} target="_blank">
                                 <Typography color="#fff">
                                     {t("Layouts.Dashboard.Footer.Links.UsageAgreement")}
                                 </Typography>
-                            </NavLink>
+                            </Link>
                         </Grid>
                     </Grid>
                     <Grid item container xs={4} >
