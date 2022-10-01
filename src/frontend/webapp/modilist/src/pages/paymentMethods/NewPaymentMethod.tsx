@@ -94,16 +94,34 @@ export function NewPaymentMethod() {
                 valueArr?.forEach(value => {
                     valueFinal += value;
                 })
-                let arr = (valueFinal.trim() + "").split("").reverse().map((x) => parseInt(x));
-                let lastDigit = arr.splice(0, 1)[0];
-                let sum = arr.reduce(
-                    (acc, val, i) => (i % 2 !== 0 ? acc + val : acc + ((val * 2) % 9) || 9), 0);
-                sum += lastDigit;
-                return (sum % 10 === 0) && (value?.length == 19);
+                let cardReverse: any = [];
+                cardReverse = valueFinal?.split('').reverse().map(num => parseInt(num));
+                let cardEvenDigits: number[] = [];
+                let cardOddDigits: number[] = [];
+                let luhnSum1;
+                let luhnSum2;
+                let luhnSumFinal;
 
+                for (let i = 0; i < cardReverse.length; i++) {
+                    if (i % 2 == 1) {
+                        if (cardReverse[i] * 2 < 10) {
+                            cardEvenDigits.push(cardReverse[i] * 2);
+                        }
+                        else {
+                            cardEvenDigits.push(cardReverse[i] * 2 % 10 + 1);
+                        }
+                    }
+                    else {
+                        cardOddDigits.push(cardReverse[i])
+                    }
+                }
+
+                luhnSum1 = cardEvenDigits.reduce((prev, curr) => prev + curr);
+                luhnSum2 = cardOddDigits.reduce((prev, curr) => prev + curr);
+                luhnSumFinal = luhnSum1 + luhnSum2;
+
+                return (luhnSumFinal % 10 == 0) && (value?.length == 19)
             }
-
-
         }).required(requiredField),
         expireMonth: Yup.string().when("expireYear", {
             is: (currentDate.getFullYear() % 1000).toString(),
