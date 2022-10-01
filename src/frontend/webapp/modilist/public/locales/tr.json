@@ -79,7 +79,7 @@
             "NotFound": "Sayfa Bulunamadı | Modilist"
         },
         "Main": {
-            "Welcome": "Hoşgeldin {{username}}",
+            "Welcome": "Hoşgeldin {{username}}!",
             "ActiveSalesOrders": "Aktif Siparişim",
             "SalesOrderReferenceNumber": "Sipariş Ref. No: ",
             "SalesOrderCreatedAt": "Sipariş Tarihi: ",
@@ -91,13 +91,26 @@
                 "1": "İlk Siparişinde",
                 "2": "20 TL indirim!"
             },
+            "ContinueStyleForm": {
+                "1": "Stil Formuna Devam Et!",
+                "2": "Stil formunda atladığın alanları doldurmaya",
+                "3": "devam ederek stilini keşfet!"
+            },
+            "OffersSpecialForYou": {
+                "1": "Sana Özel Teklifler",
+                "2": "Modilist'ten sana özel sunulan kampanyalar ve teklifleri",
+                "3": "hemen görmek ister misin?"
+            },
             "FriendshipPromotion": {
                 "1": "Arkadaşını davet et",
                 "2": "10 TL kazan!"
             },
-            "SendInvitation": "Davetiye Gönder",
+            "Offers": "Kampanyalar",
+            "GoToStyleForm": "Stil Formuna Git",
             "EnterEmail": "Bir email adresi girin...",
-            "InvitationOwnMailError": "Lütfen kendi email adresinizden farklı bir email adresi giriniz."
+            "InvitationOwnMailError": "Lütfen kendi email adresinizden farklı bir email adresi giriniz.",
+            "Modilist": "Modilist",
+            "Blog": " Blog"
         },
         "SalesOrders": {
             "SalesOrderReferenceNumber": "Sipariş Ref. No: ",

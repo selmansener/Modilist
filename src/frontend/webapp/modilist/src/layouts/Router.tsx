@@ -127,7 +127,6 @@ const routes: RouterOptions[] = [
     disabledEnvironments: ["production"]
   },
   {
-    title: "Pages.Titles.Main",
     helmet: "Pages.Titles.Main",
     route: "",
     menuItem: {

@@ -76,7 +76,7 @@
             "AccountVerification": "Hesap Doğrulama"
         },
         "Main": {
-            "Welcome": "Welcome {{username}}",
+            "Welcome": "Welcome {{username}}!",
             "ActiveSalesOrders": "Active Order",
             "SalesOrderReferenceNumber": "Order Reference Number:",
             "SalesOrderCreatedAt": "Ordering Date:",
@@ -87,6 +87,16 @@
             "FirstOrderPromotion": {
                 "1": "on your first order!",
                 "2": "₺20 discount"
+            },
+            "ContinueStyleForm": {
+                "1": "Continue Style Form!",
+                "2": "Find out your personal style by filling out the fields",
+                "3": "you skipped in your style form!"
+            },
+            "OffersSpecialForYou": {
+                "1": "Special Offers For You",
+                "2": "Would you like to see the special offers and campaigns from",
+                "3": "Modilist right away?"
             },
             "FriendshipPromotion": {
                 "1": "Invite your friend,",

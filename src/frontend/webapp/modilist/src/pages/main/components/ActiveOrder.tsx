@@ -186,65 +186,82 @@ export function ActiveOrder() {
 
     return (
         <Grid item container xs={12}>
-            <Paper elevation={6} sx={{
-                p: 2
+            <Paper sx={{
+                p: 4,
+                width: '100%'
             }}>
-                <Grid item container xs={12} spacing={2}>
+                <Grid item container xs={12} spacing={6}>
                     <Grid item xs={6}>
-                        <Typography variant="h3">
-                            <AccessTimeIcon fontSize="large" sx={{
-                                verticalAlign: "top",
-                                mr: 1
-                            }} />
-                            {t("Pages.Main.ActiveSalesOrders")}
-                        </Typography>
+                        <Grid container xs={12} spacing={2}>
+                            <Grid item xs={6}>
+                                <Typography variant="h4">
+                                    <AccessTimeIcon fontSize="large" sx={{
+                                        verticalAlign: "top",
+                                        mr: 1
+                                    }} />
+                                    {t("Pages.Main.ActiveSalesOrders")}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6} sx={{
+                                zIndex: 9
+                            }}>
+                                <Typography variant="body1" align="right" >
+                                    {t("Pages.Main.SalesOrderReferenceNumber")}
+                                    <Link to={`/sales-orders/${salesOrder?.id}`}>
+                                        #{salesOrder?.id}
+                                    </Link>
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12} sx={{
+                        }}>
+                            <Trans>
+                                <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.SalesOrderCreatedAt")}</Typography>
+                                <Typography display={"inline"} variant="body1">
+                                    {salesOrder?.createdAt && format(new Date(salesOrder?.createdAt), 'MMMM yyyy', { locale: tr })}
+                                </Typography>
+                            </Trans>
+                        </Grid>
+                        <Grid item xs={12} sx={{
+                        }}>
+                            <Trans>
+                                <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.SalesOrderState")}</Typography>
+                                <Typography display={"inline"} variant="body1" color="secondary">{t(`Generic.SalesOrderState.${salesOrder?.state}`)}</Typography>
+                            </Trans>
+                        </Grid>
+                        <Grid item xs={12} sx={{
+                        }}>
+                            <Trans>
+                                <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.SalesOrderAddress")}</Typography>
+                                <Typography display={"inline"} variant="body1">{salesOrder?.salesOrderAddress?.name}</Typography>
+                            </Trans>
+                        </Grid>
+                        <Grid item container xs={12}>
+                            <Grid item xs={10} sx={{
+                            }}>
+                                <Trans>
+                                    <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.EstimatedDeliveryDate")}</Typography>
+                                    <Typography display={"inline"} variant="body1">
+                                        {salesOrder?.createdAt && format(addDays(new Date(salesOrder.createdAt), 7), 'dd.MM.yyyy', { locale: tr })}
+                                    </Typography>
+                                </Trans>
+                            </Grid>
+                            <Grid item xs={2} textAlign="right" sx={{
+                            }}>
+                                <Typography variant="body1">
+                                    <Link to={`/sales-orders/${salesOrder?.id}`}>
+                                        {t("Pages.Main.Details")}
+                                    </Link>
+                                </Typography>
+                            </Grid>
+
+                        </Grid>
+
+
                     </Grid>
                     <Grid item xs={6} sx={{
-                        zIndex: 9
+                        alignItems: 'flex-end',
                     }}>
-                        <Typography variant="body1" align="right" >
-                            {t("Pages.Main.SalesOrderReferenceNumber")}
-                            <Link to={`/sales-orders/${salesOrder?.id}`}>
-                                #{salesOrder?.id}
-                            </Link>
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Trans>
-                            <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.SalesOrderCreatedAt")}</Typography>
-                            <Typography display={"inline"} variant="body1">
-                                {salesOrder?.createdAt && format(new Date(salesOrder?.createdAt), 'MMMM yyyy', { locale: tr })}
-                            </Typography>
-                        </Trans>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Trans>
-                            <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.SalesOrderState")}</Typography>
-                            <Typography display={"inline"} variant="body1" color="secondary">{t(`Generic.SalesOrderState.${salesOrder?.state}`)}</Typography>
-                        </Trans>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Trans>
-                            <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.SalesOrderAddress")}</Typography>
-                            <Typography display={"inline"} variant="body1">{salesOrder?.salesOrderAddress?.name}</Typography>
-                        </Trans>
-                    </Grid>
-                    <Grid item xs={10}>
-                        <Trans>
-                            <Typography display={"inline"} variant="body1" fontWeight={800}>{t("Pages.Main.EstimatedDeliveryDate")}</Typography>
-                            <Typography display={"inline"} variant="body1">
-                                {salesOrder?.createdAt && format(addDays(new Date(salesOrder.createdAt), 7), 'dd.MM.yyyy', { locale: tr })}
-                            </Typography>
-                        </Trans>
-                    </Grid>
-                    <Grid item xs={2} textAlign="right">
-                        <Typography variant="body1">
-                            <Link to={`/sales-orders/${salesOrder?.id}`}>
-                                {t("Pages.Main.Details")}
-                            </Link>
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
                         <FormControl fullWidth>
                             <TextField
                                 label={t("Pages.SalesOrderDetails.AdditionalNotes")}
@@ -271,41 +288,56 @@ export function ActiveOrder() {
                         display: 'flex',
                         justifyContent: 'space-between'
                     }}>
-                        <FormControl>
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                onClick={(() => {
-                                    if (salesOrder?.id && !isBusyUpdateAdditionalRequests) {
-                                        setIsRequestedStyleOpen(true);
-                                    }
-                                })}>
-                                {t("Pages.SalesOrderDetails.SelectRequestedStyle")}
-                            </Button>
-                        </FormControl>
-                        <FormControl>
-                            <Button
-                                disabled={isBusyUpdateAdditionalRequests}
-                                variant="contained"
-                                onClick={() => {
-                                    if (salesOrder?.id && !isBusyUpdateAdditionalRequests) {
-                                        dispatch.updateAdditionalRequestsModel.updateAdditionalRequests({
-                                            salesOrderId: salesOrder.id,
-                                            data: {
-                                                additionalRequests: additionalRequests
-                                            }
-                                        })
-                                    }
-                                }}
-                                color="secondary">
-                                {isBusyUpdateAdditionalRequests && <CircularProgress sx={{
-                                    width: "18px !important",
-                                    height: "18px !important",
-                                    mr: 2
-                                }} />}
-                                {t("Generic.Forms.Submit")}
-                            </Button>
-                        </FormControl>
+                        <Grid item xs={6} sx={{
+
+                        }}>
+                            <FormControl sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "flex-end",
+                            }}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={(() => {
+                                        if (salesOrder?.id && !isBusyUpdateAdditionalRequests) {
+                                            setIsRequestedStyleOpen(true);
+                                        }
+                                    })}>
+                                    {t("Pages.SalesOrderDetails.SelectRequestedStyle")}
+                                </Button>
+                            </FormControl>
+
+                        </Grid>
+                        <Grid item xs={6}>
+                            <FormControl sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "flex-end",
+                            }}>
+                                <Button
+                                    disabled={isBusyUpdateAdditionalRequests}
+                                    variant="outlined"
+                                    onClick={() => {
+                                        if (salesOrder?.id && !isBusyUpdateAdditionalRequests) {
+                                            dispatch.updateAdditionalRequestsModel.updateAdditionalRequests({
+                                                salesOrderId: salesOrder.id,
+                                                data: {
+                                                    additionalRequests: additionalRequests
+                                                }
+                                            })
+                                        }
+                                    }}
+                                >
+                                    {isBusyUpdateAdditionalRequests && <CircularProgress sx={{
+                                        width: "18px !important",
+                                        height: "18px !important",
+                                        mr: 2
+                                    }} />}
+                                    {t("Generic.Forms.Submit")}
+                                </Button>
+                            </FormControl>
+                        </Grid>
                     </Grid>
                 </Grid>
                 {RenderRequestedStyleDialog(content)}
