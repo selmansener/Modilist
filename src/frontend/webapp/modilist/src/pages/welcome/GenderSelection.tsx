@@ -96,7 +96,7 @@ export function GenderSelection() {
 
     return <Grid item container spacing={2}>
         <Grid item xs={12}>
-            <Typography variant="h4" gutterBottom sx={{ mt: 2, mb: 4 }} align="center">
+            <Typography variant="h2" gutterBottom sx={{ mt: 2, mb: 4 }} align="center">
                 {t('Layouts.Welcome.WelcomeLayout.Welcome')}
             </Typography>
             <Typography variant="subtitle1" gutterBottom align="center">

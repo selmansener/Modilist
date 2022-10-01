@@ -75,7 +75,7 @@ export function Colors(props: ColorsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={colorType.img} />
-                        <Typography variant="h4" align="center">{colorType.name}</Typography>
+                        <Typography variant="subtitle1" align="center">{colorType.name}</Typography>
                     </Box>
                 }
             })

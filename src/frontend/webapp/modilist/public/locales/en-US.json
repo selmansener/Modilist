@@ -203,8 +203,8 @@
                 "Gender": "Your gender?"
             },
             "BodySize": {
-                "CategorySizes": "Clothing size measurements",
-                "BodyType": "What body type do you have?",
+                "CategorySizes": "Clothing size measurements*",
+                "BodyType": "What body type do you have?*",
                 "UpperBody": "Top Clothing",
                 "LowerBody": "Bottom Clothing",
                 "OutWear": "Outerwear",
@@ -222,7 +222,7 @@
                 "Bra": "Bras - (Cup)",
                 "BraBelt": "Bras - (Back Circumference)",
                 "Shoes": "Shoes",
-                "HeaderBodySize": "If you want to achieve the style you dream of, you need to enter detailed and accurate body measurements. (Optional)",
+                "HeaderBodySize": "If you want to achieve the style you dream of, you need to enter detailed and accurate body measurements.",
                 "BodyLength": "Upper Body Length (cm)",
                 "HeadRadius": "Head circumference (cm)",
                 "ArmLength": "Arm Length (cm)",
@@ -328,19 +328,19 @@
                 "Optional": "(Optional)"
             },
             "ContactInfo": {
-                "Title": "Delivery Address"
+                "Title": "Delivery Address*"
             },
             "Personal": {
-                "HeaderPersonalInfo": "Personal Information",
+                "HeaderPersonalInfo": "Personal Information*",
                 "MenuItem": "Select",
                 "Job": "What is your profession? (Optional)",
                 "Instagram": "Your Instagram address? (Optional)"
             },
             "StylePreferences": {
                 "Title": "Style Preferences",
-                "LikesShoping": "Do you like shopping?",
-                "OpenToSuggestions": "Are you open to suggestions outside your style?",
-                "ChoiceReasonsQuestion": "Your reason for choosing us?",
+                "LikesShoping": "Do you like shopping?*",
+                "OpenToSuggestions": "Are you open to suggestions outside your style?*",
+                "ChoiceReasonsQuestion": "Your reason for choosing us?*",
                 "UnwantedPieces1": "In your outfits",
                 "UnwantedPieces2": "that you definitely don't want to be",
                 "UnwantedPieces3": "Select pieces.",
@@ -369,11 +369,11 @@
             },
             "Subscription": {
                 "SubscriptionDetails": {
-                    "PriceTitle": "Maximum spending limit for your outfits"
+                    "PriceTitle": "Maximum spending limit for your outfits*"
                 }
             },
             "PaymentMethod": {
-                "Title": "Payment Method",
+                "Title": "Payment Method*",
                 "CardHolderName": "Name on Card",
                 "CardNumber": "Card Number",
                 "ExpireMonth": "Expiration Date (Month)",

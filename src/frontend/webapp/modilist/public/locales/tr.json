@@ -231,8 +231,8 @@
                 "Gender": "Cinsiyetin?"
             },
             "BodySize": {
-                "CategorySizes": "Kıyafet beden ölçüleri",
-                "BodyType": "Hangi vücut tipine sahipsin?",
+                "CategorySizes": "Kıyafet beden ölçüleri*",
+                "BodyType": "Hangi vücut tipine sahipsin?*",
                 "UpperBody": "Üst Giyim",
                 "LowerBody": "Alt Giyim",
                 "OutWear": "Dış Giyim",
@@ -250,7 +250,7 @@
                 "Bra": "Sutyen - (Cup)",
                 "BraBelt": "Sutyen - (Sırt Çevresi)",
                 "Shoes": "Ayakkabı",
-                "HeaderBodySize": "Hayal ettiğin stile kavuşmak istiyorsan, detaylı ve doğru beden ölçülerini girmelisin. (Opsiyonel)",
+                "HeaderBodySize": "Hayal ettiğin stile kavuşmak istiyorsan, detaylı ve doğru beden ölçülerini girmelisin.",
                 "BodyLength": "Üst Beden Uzunluğu (cm)",
                 "HeadRadius": "Baş Çevresi (cm)",
                 "ArmLength": "Kol Uzunluğu (cm)",
@@ -270,13 +270,13 @@
                 "Warning": "Seçim yapmadığın kategorilerdeki her tarzı benimsediğini varsayacağız.",
                 "WaistHeightPreference": "Alt giyimde tercih ettiğin bel çeşitleri ",
                 "WaistHeights": {
-                    "UltraHighWaist": "UltraHighWaist",
-                    "HighWaist": "HighWaist",
+                    "UltraHighWaist": "Ultra Yüksek Bel",
+                    "HighWaist": "Yüksek Bel",
                     "Original": "Original",
                     "Regular": "Regular",
                     "Medium": "Medium",
-                    "Low": "Low",
-                    "UltraLow": "UltraLow"
+                    "Low": "Düşük Bel",
+                    "UltraLow": "Ultra Düşük Bel"
                 },
                 "LowerFitPreference": "Alt giyimde tercih ettiğin kalıp tercihleri ",
                 "LowerFits": {
@@ -356,19 +356,19 @@
                 "Optional": "(Opsiyonel)"
             },
             "ContactInfo": {
-                "Title": "Teslimat Adresi"
+                "Title": "Teslimat Adresi*"
             },
             "Personal": {
-                "HeaderPersonalInfo": "Kişisel Bilgiler",
+                "HeaderPersonalInfo": "Kişisel Bilgiler*",
                 "MenuItem": "Seçiniz",
                 "Job": "Mesleğin Nedir? (Opsiyonel)",
                 "Instagram": "Instagram adresin? (Opsiyonel)"
             },
             "StylePreferences": {
                 "Title": "Stil Tercihleri",
-                "LikesShoping": "Alışveriş yapmayı seviyor musun?",
-                "OpenToSuggestions": "Stilin dışında önerilere açık mısın?",
-                "ChoiceReasonsQuestion": "Bizi tercih etme sebebiniz?",
+                "LikesShoping": "Alışveriş yapmayı seviyor musun?*",
+                "OpenToSuggestions": "Stilin dışında önerilere açık mısın?*",
+                "ChoiceReasonsQuestion": "Bizi tercih etme sebebiniz?*",
                 "UnwantedPieces1": "Kombinlerinizde ",
                 "UnwantedPieces2": "kesinlikle olmasını istemediğiniz ",
                 "UnwantedPieces3": "parçaları seçiniz.",
@@ -397,12 +397,12 @@
             },
             "Subscription": {
                 "SubscriptionDetails": {
-                    "PriceTitle": "Kombinleriniz için maksimum harcama limiti",
+                    "PriceTitle": "Kombinleriniz için maksimum harcama limiti*",
                     "Description": "ve üzeri"
                 }
             },
             "PaymentMethod": {
-                "Title": "Ödeme Yöntemi",
+                "Title": "Ödeme Yöntemi*",
                 "CardHolderName": "Kart Üzerindeki İsim",
                 "CardNumber": "Kart Numarası",
                 "ExpireMonth": "Son Kullanma Tarihi (Ay)",
@@ -657,9 +657,9 @@
         "Blouse": "Bluz",
         "Sweatshirt": "Sweatşört",
         "Sweater": "Kazak",
-        "Jersey": "Suveter",
+        "Jersey": "Süveter",
         "Blazer": "Blazer",
-        "Jacket": "Çeket",
+        "Jacket": "Ceket",
         "Coats": "Mont",
         "Parka": "Parka",
         "Coat": "Kaban",
@@ -743,7 +743,7 @@
         "Outer": "Dış Giyim",
         "Accessories": "Aksesuar",
         "UnderwearPyjamasBeach": "İç Giyim & Pijama & Plaj",
-        "Bags": "Bags",
+        "Bags": "Çanta",
         "Beach": "Plaj",
         "Footwear": "Ayakkabı",
         "SportOutdoor": "Spor&Outdoor",

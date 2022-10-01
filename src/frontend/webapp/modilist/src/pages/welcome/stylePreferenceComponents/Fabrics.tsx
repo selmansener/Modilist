@@ -73,7 +73,7 @@ export function Fabrics(props: FabricsProps) {
                     value: fabric.value,
                     element: <Box>
                         <ImageComponent src={fabric.img} />
-                        <Typography variant="h4" align="center">{fabric.name}</Typography>
+                        <Typography variant="subtitle1" align="center">{fabric.name}</Typography>
                     </Box>
                 }
             })

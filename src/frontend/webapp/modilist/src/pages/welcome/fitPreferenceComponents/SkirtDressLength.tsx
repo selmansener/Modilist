@@ -43,12 +43,12 @@ export function SkirtDressLengths(props: SkirtDressLengthsProps) {
             <Box textAlign="center" sx={{
                 mb: 4
             }}>
-                <Typography variant="h3" align="center" component={"span"} sx={{
+                <Typography variant="h4" align="center" component={"span"} sx={{
                     mb: 4
                 }}>
                     {t("Pages.Welcome.FitPreferences.SkirtDressLengthPreference")}
                 </Typography>
-                <Typography variant="h3" align="center" color="secondary" component={"span"}>
+                <Typography variant="h4" align="center" color="secondary" component={"span"}>
                     {t('Pages.Welcome.FitPreferences.Optional')}
                 </Typography>
             </Box>
@@ -62,7 +62,7 @@ export function SkirtDressLengths(props: SkirtDressLengthsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={skirtDressLength.img} />
-                        <Typography variant="h4" align="center">{skirtDressLength.name}</Typography>
+                        <Typography variant="subtitle1" align="center">{skirtDressLength.name}</Typography>
                     </Box>
                 }
             })

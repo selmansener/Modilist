@@ -50,12 +50,12 @@ export function ShortsLengths(props: ShortsLengthsProps) {
             <Box textAlign="center" sx={{
                 mb: 4
             }}>
-                <Typography variant="h3" align="center" component={"span"} sx={{
+                <Typography variant="h4" align="center" component={"span"} sx={{
                     mb: 4
                 }}>
                     {t("Pages.Welcome.FitPreferences.ShortsLengthPreference")}
                 </Typography>
-                <Typography variant="h3" align="center" color="secondary" component={"span"}>
+                <Typography variant="h4" align="center" color="secondary" component={"span"}>
                     {t('Pages.Welcome.FitPreferences.Optional')}
                 </Typography>
             </Box>
@@ -69,7 +69,7 @@ export function ShortsLengths(props: ShortsLengthsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={shortsLength.img} />
-                        <Typography variant="h4" align="center">{shortsLength.name}</Typography>
+                        <Typography variant="subtitle1" align="center">{shortsLength.name}</Typography>
                     </Box>
                 }
             })

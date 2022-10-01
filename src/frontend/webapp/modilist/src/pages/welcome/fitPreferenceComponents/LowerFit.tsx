@@ -45,12 +45,12 @@ export function LowerFits(props: LowerFitsProps) {
             <Box textAlign="center" sx={{
                 mb: 4
             }}>
-                <Typography variant="h3" align="center" component={"span"} sx={{
+                <Typography variant="h4" align="center" component={"span"} sx={{
                     mb: 4
                 }}>
                     {t("Pages.Welcome.FitPreferences.LowerFitPreference")}
                 </Typography>
-                <Typography variant="h3" align="center" color="secondary" component={"span"}>
+                <Typography variant="h4" align="center" color="secondary" component={"span"}>
                     {t('Pages.Welcome.FitPreferences.Optional')}
                 </Typography>
             </Box>
@@ -64,7 +64,7 @@ export function LowerFits(props: LowerFitsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={lowerFit.img} />
-                        <Typography variant="h4" align="center">{lowerFit.name}</Typography>
+                        <Typography variant="subtitle1" align="center">{lowerFit.name}</Typography>
                     </Box>
                 }
             })

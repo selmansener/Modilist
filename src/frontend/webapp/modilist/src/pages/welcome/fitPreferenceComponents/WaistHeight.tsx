@@ -46,12 +46,12 @@ export function WaistHeights(props: WaistHeightsProps) {
             <Box textAlign="center" sx={{
                 mb: 4
             }}>
-                <Typography variant="h3" align="center" component={"span"} sx={{
+                <Typography variant="h4" align="center" component={"span"} sx={{
                     mb: 4
                 }}>
                     {t("Pages.Welcome.FitPreferences.WaistHeightPreference")}
                 </Typography>
-                <Typography variant="h3" align="center" color="secondary" component={"span"}>
+                <Typography variant="h4" align="center" color="secondary" component={"span"}>
                     {t('Pages.Welcome.FitPreferences.Optional')}
                 </Typography>
             </Box>
@@ -65,7 +65,7 @@ export function WaistHeights(props: WaistHeightsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={waistHeight.img} />
-                        <Typography variant="h4" align="center">{waistHeight.name}</Typography>
+                        <Typography variant="subtitle1" align="center">{waistHeight.name}</Typography>
                     </Box>
                 }
             })

@@ -41,12 +41,12 @@ export function FootTypes(props: FootTypesProps) {
             <Box textAlign="center" sx={{
                 mb: 4
             }}>
-                <Typography variant="h3" align="center" component={"span"} sx={{
+                <Typography variant="h4" align="center" component={"span"} sx={{
                     mb: 4
                 }}>
                     {t("Pages.Welcome.FitPreferences.FootTypePreference")}
                 </Typography>
-                <Typography variant="h3" align="center" color="secondary" component={"span"}>
+                <Typography variant="h4" align="center" color="secondary" component={"span"}>
                     {t('Pages.Welcome.FitPreferences.Optional')}
                 </Typography>
             </Box>
@@ -60,7 +60,7 @@ export function FootTypes(props: FootTypesProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={footType.img} />
-                        <Typography variant="h4" align="center">{footType.name}</Typography>
+                        <Typography variant="subtitle1" align="center">{footType.name}</Typography>
                     </Box>
                 }
             })

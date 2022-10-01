@@ -175,11 +175,6 @@ export function WelcomeSteps() {
                     })}
                 </Stepper>
             </Grid>
-            <Grid item xs={12}>
-                <Typography variant="subtitle1" sx={{ mb: 4 }} align="center">
-                    {t('Layouts.Welcome.WelcomeLayout.Description1')}
-                </Typography>
-            </Grid>
 
 
 

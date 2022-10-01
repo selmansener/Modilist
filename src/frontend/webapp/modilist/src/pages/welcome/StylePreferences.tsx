@@ -593,7 +593,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                     flexDirection: 'column'
                 }} >
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
                 </Box>
             }
         });
@@ -625,7 +625,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
                 </Box>
             }
         });
@@ -637,8 +637,8 @@ export function StylePreferences(props: StylePreferencesProps) {
             value={stylePreferences?.excludedLowerCategories ?? ""}
             label={
                 <Box>
-                    <Typography variant="h4" component={"span"}>{t("MainCategories.Lower")}</Typography>
-                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                    <Typography variant="h5" component={"span"}>{t("MainCategories.Lower")}</Typography>
+                    <Typography variant="h5" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>}
             contents={lowerCategories}
             isNegative
@@ -657,7 +657,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
                 </Box>
             }
         });
@@ -669,8 +669,8 @@ export function StylePreferences(props: StylePreferencesProps) {
             value={stylePreferences?.excludedOuterCategories ?? ""}
             label={
                 <Box>
-                    <Typography variant="h4" component={"span"}>{t("MainCategories.Outer")}</Typography>
-                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                    <Typography variant="h5" component={"span"}>{t("MainCategories.Outer")}</Typography>
+                    <Typography variant="h5" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>}
             contents={outerCategories}
             isNegative
@@ -688,7 +688,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
                 </Box>
             }
         });
@@ -700,8 +700,8 @@ export function StylePreferences(props: StylePreferencesProps) {
             value={stylePreferences?.excludedUnderwearCategories ?? ""}
             label={
                 <Box>
-                    <Typography variant="h4" component={"span"}>{t("MainCategories.UnderwearPyjamasBeach")}</Typography>
-                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                    <Typography variant="h5" component={"span"}>{t("MainCategories.UnderwearPyjamasBeach")}</Typography>
+                    <Typography variant="h5" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>}
             contents={accessoriesCategories}
             isNegative
@@ -720,7 +720,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
                 </Box>
             }
         });
@@ -732,8 +732,8 @@ export function StylePreferences(props: StylePreferencesProps) {
             value={stylePreferences?.excludedAccessoryCategories ?? ""}
             label={
                 <Box>
-                    <Typography variant="h4" component={"span"}>{t("MainCategories.Accessories")}</Typography>
-                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                    <Typography variant="h5" component={"span"}>{t("MainCategories.Accessories")}</Typography>
+                    <Typography variant="h5" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>}
             contents={accessoriesCategories}
             isNegative
@@ -752,7 +752,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
                 </Box>
             }
         });
@@ -764,8 +764,8 @@ export function StylePreferences(props: StylePreferencesProps) {
             value={stylePreferences?.excludedBagCategories ?? ""}
             label={
                 <Box>
-                    <Typography variant="h4" component={"span"}>{t("MainCategories.Bags")}</Typography>
-                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                    <Typography variant="h5" component={"span"}>{t("MainCategories.Bags")}</Typography>
+                    <Typography variant="h5" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>}
             contents={bagsCategories}
             isNegative
@@ -784,7 +784,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                     flexDirection: 'column'
                 }}>
                     <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} align="center">{category.name}</Typography>
+                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
                 </Box>
             }
         });
@@ -796,8 +796,8 @@ export function StylePreferences(props: StylePreferencesProps) {
             value={stylePreferences?.excludedFootwearCategories ?? ""}
             label={
                 <Box>
-                    <Typography variant="h4" component={"span"}>{t("MainCategories.Footwear")}</Typography>
-                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                    <Typography variant="h5" component={"span"}>{t("MainCategories.Footwear")}</Typography>
+                    <Typography variant="h5" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
                 </Box>
             }
             contents={categories}
@@ -840,10 +840,10 @@ export function StylePreferences(props: StylePreferencesProps) {
                 value={stylePreferences?.bodyPartsToHighlight ?? ""}
                 label={
                     <Box>
-                        <Typography variant="h3" component={"span"} sx={{
+                        <Typography variant="h4" component={"span"} sx={{
                             mb: 4
                         }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHighlight")}</Typography>
-                        <Typography color="secondary" variant="h3" component={"span"}
+                        <Typography color="secondary" variant="h4" component={"span"}
                         >{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
                     </Box>
                 }
@@ -860,10 +860,10 @@ export function StylePreferences(props: StylePreferencesProps) {
                 value={stylePreferences?.bodyPartsToHide ?? ""}
                 label={
                     <Box>
-                        <Typography variant="h3" component={"span"} sx={{
+                        <Typography variant="h4" component={"span"} sx={{
                             mb: 4
                         }}>{t("Pages.Welcome.StylePreferences.BodyPartsToHide")}</Typography>
-                        <Typography color="secondary" variant="h3" component={"span"}
+                        <Typography color="secondary" variant="h4" component={"span"}
                         >{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
                     </Box>
                 }
@@ -894,7 +894,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                 flexDirection: 'column'
             }}>
                 <ImageComponent src={`${imgBaseHost}/body-parts/${bodyPart}.svg`} />
-                <Typography sx={{
+                <Typography variant="body1" sx={{
                     textAlign: 'center'
                 }}>{t(`Pages.Welcome.StylePreferences.BodyParts.${bodyPart}`)}</Typography>
             </Box>
@@ -912,7 +912,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                     alignItems: 'center'
                 }}>
                     <FormControl error={touched.lovesShopping && errors.lovesShopping !== undefined}>
-                        <Typography variant="h3" align="center" >
+                        <Typography variant="h4" align="center" >
                             {t(`Pages.Welcome.StylePreferences.LikesShoping`)}
                         </Typography>
                         <Typography variant="body1" mt={{ xs: 1, md: 2 }} align="center" fontWeight={800} color={theme.palette.error.main}>
@@ -956,7 +956,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                     alignItems: 'center'
                 }}>
                     <FormControl error={touched.openToSuggestions && errors.openToSuggestions !== undefined}>
-                        <Typography variant="h3" mt={{ xs: 1, md: 2 }} align="center">
+                        <Typography variant="h4" mt={{ xs: 1, md: 2 }} align="center">
                             {t(`Pages.Welcome.StylePreferences.OpenToSuggestions`)}
                         </Typography>
                         <Typography variant="body1" mt={{ xs: 1, md: 2 }} align="center" fontWeight={800} color={theme.palette.error.main}>
@@ -999,7 +999,7 @@ export function StylePreferences(props: StylePreferencesProps) {
             <Grid item container xs={12} md={6}>
                 <Grid item xs={0} md={4}></Grid>
                 <Grid item xs={12} md={8}>
-                    <Typography variant="h3" align="left">
+                    <Typography variant="h4" align="left">
                         {t(`Pages.Welcome.StylePreferences.ChoiceReasonsQuestion`)}
                     </Typography>
                     <Typography variant="body1" mt={2} align="left" fontWeight={800} color={theme.palette.error.main}>
@@ -1060,9 +1060,9 @@ export function StylePreferences(props: StylePreferencesProps) {
 
             <Grid item xs={12}>
                 <Box>
-                    <Typography variant="h3" component={"span"} sx={{
+                    <Typography variant="h4" component={"span"} sx={{
                         mb: 4
-                    }}>{t("Pages.Welcome.StylePreferences.ExcludedCategoriesTitle")}</Typography><Typography color="secondary" variant="h3" component={"span"}>{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
+                    }}>{t("Pages.Welcome.StylePreferences.ExcludedCategoriesTitle")}</Typography><Typography color="secondary" variant="h4" component={"span"}>{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
 
                 </Box>
                 <Trans>

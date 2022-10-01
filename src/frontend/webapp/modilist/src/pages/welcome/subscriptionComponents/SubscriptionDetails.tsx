@@ -45,10 +45,10 @@ export function SubscriptionDetails() {
         <Grid item xs={12} md={9}>
             <FormControl fullWidth>
                 <FormControlLabel
-                    labelPlacement="bottom"
+                    labelPlacement="top"
                     label={
-                        <Typography variant="h4" sx={{
-                            mt: 2
+                        <Typography align="left" variant="h4" sx={{
+                            mb: 4
                         }}>
                             {t("Pages.Welcome.Subscription.SubscriptionDetails.PriceTitle")}
                         </Typography>

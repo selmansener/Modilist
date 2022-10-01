@@ -471,9 +471,10 @@ export function SizeInfo(props: SizeInfoProps) {
             </Grid>
 
             <Grid item xs={12}>
-                <Typography variant="h4">
+                <Typography variant="h4" component={"span"}>
                     {t('Pages.Welcome.BodySize.HeaderBodySize')}
                 </Typography>
+                <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography> 
             </Grid>
 
             <React.Fragment>

@@ -59,12 +59,12 @@ export function LegFits(props: LegFitsProps) {
             <Box textAlign="center" sx={{
                 mb: 4
             }}>
-                <Typography variant="h3" align="center" component={"span"} sx={{
+                <Typography variant="h4" align="center" component={"span"} sx={{
                     mb: 4
                 }}>
                     {t("Pages.Welcome.FitPreferences.LegFitPreference")}
                 </Typography>
-                <Typography variant="h3" align="center" color="secondary" component={"span"}>
+                <Typography variant="h4" align="center" color="secondary" component={"span"}>
                     {t('Pages.Welcome.FitPreferences.Optional')}
                 </Typography>
             </Box>
@@ -78,7 +78,7 @@ export function LegFits(props: LegFitsProps) {
                         flexDirection: 'column',
                     }}>
                         <ImageComponent src={legFit.img} />
-                        <Typography variant="h4" align="center">{legFit.name}</Typography>
+                        <Typography variant="subtitle1" align="center">{legFit.name}</Typography>
                     </Box>
                 }
             })
