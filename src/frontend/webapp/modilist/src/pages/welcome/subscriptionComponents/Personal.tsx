@@ -104,7 +104,7 @@ export default function Personal() {
             }
 
         }
-        if (updateAccountStatus !== 0) {
+        if (updateAccountStatus !== 200 && updateAccountStatus !== 0) {
 
             dispatch.updateAccountModel.RESET();
         }

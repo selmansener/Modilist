@@ -226,7 +226,7 @@ export default function PaymentMethod() {
     }, [creditCard])
 
     useEffect(() => {
-        if (createPaymentMethodStatus !== 0) {
+        if (createPaymentMethodStatus !== 200 && createPaymentMethodStatus !== 0) {
             dispatch.createPaymentMethodModel.RESET();
         }
     }, [createPaymentMethodStatus])

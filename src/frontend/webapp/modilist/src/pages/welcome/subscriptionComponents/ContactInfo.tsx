@@ -115,7 +115,7 @@ export default function ContactInfo() {
     }, [address]);
 
     useEffect(() => {
-        if (upsertAddressStatus !== 0) {
+        if (upsertAddressStatus !== 200 && upsertAddressStatus !== 0) {
             dispatch.upsertAddressModel.RESET();
         }
     }, [upsertAddressStatus])
