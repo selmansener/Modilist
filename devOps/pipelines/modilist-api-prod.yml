@@ -28,7 +28,6 @@ steps:
     displayName: Publish Functions
     inputs:
       command: 'publish'
-      publishWebProjects: true
       arguments: '-o $(System.DefaultWorkingDirectory)\Modilist.Functions.ScheduledJobs\'
       workingDirectory: '$(System.DefaultWorkingDirectory)\src\backend\Modilist\Modilist.Functions.ScheduledJobs'
   - task: AzureFunctionApp@1
