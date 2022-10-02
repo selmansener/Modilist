@@ -33,7 +33,12 @@
                     "Finish": "Complete",
                     "Next": "Next",
                     "Navigate": "Up"
-                }
+                },
+                "StyleFormSkipDescription1": "Are you having trouble choosing?",
+                "StyleFormSkipDescription2": "You can skip the style form <strong> for now </strong> and complete it later!",
+                "StyleFormSkipDescription3": "You can subscribe quickly by jumping to the subscription step.",
+                "SkipToSubscription": "Skip to Subscription",
+                "SkipFormForNow": "Skip The Form For Now!"
             }
         },
         "Dashboard": {
@@ -532,8 +537,8 @@
                 "1": "Easily deliver your products to the right audience with Modilist.",
                 "2": "Fill in the form below for business partnerships and we will contact you as soon as possible."
             },
-            "CompanyName":"Brand/Company Adı",
-            "JobTitle":"Position/JobTitle"
+            "CompanyName": "Brand/Company Name",
+            "JobTitle": "Position/JobTitle"
         }
     },
     "WelcomeSteps": {
@@ -736,7 +741,8 @@
             "Send": "Send",
             "SentMessageSuccess": "Your message has been sent successfully!",
             "SentMessageFailed": "An error occurred while sending your message.",
-            "Delete": "Delete"
+            "Delete": "Delete",
+            "UnexpectedError": "An unexpected error has occured."
         },
         "PersonalInfo": {
             "FirstName": "Name",

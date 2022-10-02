@@ -1,4 +1,4 @@
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography, Button, CircularProgress, FormHelperText, useTheme, Snackbar, Alert } from "@mui/material";
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography, Button, CircularProgress, FormHelperText, useTheme, Snackbar, Alert, Paper } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import React, { useEffect, useState } from "react";
 import { CustomCheckboxGroup } from "../../components/customCheckbox/CustomCheckbox";
@@ -8,10 +8,12 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 import { config } from "../../config";
-import { AccountDTO, Gender } from "../../services/swagger/api/models";
+import { AccountDTO, AccountState, Gender } from "../../services/swagger/api/models";
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { bgcolor } from "@mui/system";
+import SkipFormPaper from "./components/SkipFormPaper";
 
 enum MainCategory {
     Upper = "Upper",
@@ -900,8 +902,10 @@ export function StylePreferences(props: StylePreferencesProps) {
             </Box>
         }
     });
+
     return (
         <Grid item container xs={12} spacing={{ xs: 4, md: 12 }}>
+            {(layout !== "dashboard") && <SkipFormPaper />}
             <Grid item xs={6} display={{ xs: 'none', md: 'block' }}>
                 <ImageComponent src={`${imgBaseHost}/style-preferences-general/ShoppingIllustration.svg`}></ImageComponent>
             </Grid>

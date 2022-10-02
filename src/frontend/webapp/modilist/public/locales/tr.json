@@ -33,7 +33,12 @@
                     "Finish": "Tamamla",
                     "Next": "İleri",
                     "Navigate": "Yukarı"
-                }
+                },
+                "StyleFormSkipDescription1": "Seçim yapmakta zorlanıyor musun?",
+                "StyleFormSkipDescription2": "Stil formunu doldurmaya <strong> daha sonra </strong> devam edebilirsin!",
+                "StyleFormSkipDescription3": "Abonelik adımına atlayarak hızlıca abone olabilirsin.",
+                "SkipToSubscription": "Abonelik Adımına Atla",
+                "SkipFormForNow": "Formu Şimdilik Atla!"
             }
         },
         "Dashboard": {

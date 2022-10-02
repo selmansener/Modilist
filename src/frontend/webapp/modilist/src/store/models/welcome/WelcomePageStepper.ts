@@ -24,6 +24,12 @@ export const welcomePageStepper = createModel<RootModel>()({
                 ...state,
                 activeStep: state.activeStep - 1,
             }
+        },
+        skipToStep: (state: WelcomePageStepper, index: number) => {
+            return {
+                ...state,
+                activeStep: index
+            }
         }
     }
 });

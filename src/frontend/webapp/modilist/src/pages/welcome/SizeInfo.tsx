@@ -237,7 +237,7 @@ export function SizeInfo(props: SizeInfoProps) {
     }
 
     return (
-        <Grid item container xs={12} spacing={{xs:2, md:8}}>
+        <Grid item container xs={12} spacing={{ xs: 2, md: 8 }}>
             {account?.gender !== Gender.None &&
                 <>
                     <Grid item xs={12}>
@@ -474,7 +474,7 @@ export function SizeInfo(props: SizeInfoProps) {
                 <Typography variant="h4" component={"span"}>
                     {t('Pages.Welcome.BodySize.HeaderBodySize')}
                 </Typography>
-                <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography> 
+                <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
             </Grid>
 
             <React.Fragment>
@@ -482,7 +482,7 @@ export function SizeInfo(props: SizeInfoProps) {
                     bodySizes.map((bodySize, index) => {
                         const sizeName = camelCase(bodySize);
                         return <React.Fragment key={sizeName}>
-                            {index % 2 === 0 ? <Grid item xs={2} display={{xs:'none', md:'block'}}></Grid> : <></>}
+                            {index % 2 === 0 ? <Grid item xs={2} display={{ xs: 'none', md: 'block' }}></Grid> : <></>}
                             <Grid item xs={12} md={4}>
                                 <Box sx={{
                                     display: 'flex',
@@ -508,7 +508,7 @@ export function SizeInfo(props: SizeInfoProps) {
                                     </FormControl>
                                 </Box>
                             </Grid>
-                            {index % 2 === 0 ? <></> : <Grid item xs={2} display={{xs:'none', md:'block'}}></Grid>}
+                            {index % 2 === 0 ? <></> : <Grid item xs={2} display={{ xs: 'none', md: 'block' }}></Grid>}
                         </React.Fragment>
                     })
                 }

@@ -9,8 +9,9 @@ import { AccessoryColors } from "./stylePreferenceComponents/AccessoryColors";
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import { Dispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { Gender, PreferedFabricPropertiesDTO } from "../../services/swagger/api";
+import { AccountDTO, AccountState, Gender, PreferedFabricPropertiesDTO } from "../../services/swagger/api";
 import { MAX_CHAR_LIMIT } from "../../utils/constans";
+import SkipFormPaper from "./components/SkipFormPaper";
 
 export interface FabricPropertiesProps {
     layout?: string;
@@ -142,6 +143,7 @@ export function FabricProperties(props: FabricPropertiesProps) {
     }
 
     return <Grid item container spacing={{ xs: 4, md: 12 }}>
+        {(layout !== "dashboard") && <SkipFormPaper />}
         <Grid item xs={12}>
             <Color />
         </Grid>

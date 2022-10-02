@@ -2,8 +2,9 @@ import { Alert, Button, CircularProgress, Grid, Snackbar, Typography } from "@mu
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { FitPreferencesDTO, Gender } from "../../services/swagger/api";
+import { AccountDTO, AccountState, FitPreferencesDTO, Gender } from "../../services/swagger/api";
 import { RootState, Dispatch } from "../../store/store";
+import SkipFormPaper from "./components/SkipFormPaper";
 import { FootTypes } from "./fitPreferenceComponents/FootType";
 import { LegFits } from "./fitPreferenceComponents/LegFit";
 import { LowerFits } from "./fitPreferenceComponents/LowerFit";
@@ -171,6 +172,7 @@ export function FitPreferences(props: FitPreferencesProps) {
     }
 
     return <Grid item container xs={12} spacing={{ xs: 4, md: 12 }}>
+        {(layout !== "dashboard") && <SkipFormPaper />}
         <Grid item xs={12}>
             <Typography variant="h5" color="secondary" sx={{ fontWeight: 800 }} align="center">
                 {t('Pages.Welcome.FitPreferences.Warning')}
