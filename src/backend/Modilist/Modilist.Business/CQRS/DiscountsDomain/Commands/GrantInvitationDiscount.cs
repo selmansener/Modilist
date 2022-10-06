@@ -8,6 +8,8 @@ using FluentValidation;
 
 using MediatR;
 
+using Microsoft.Extensions.Logging;
+
 using Modilist.Business.Exceptions;
 using Modilist.Data.Repositories.DiscountsDomain;
 using Modilist.Data.Repositories.UserDomain;
@@ -34,11 +36,19 @@ namespace Modilist.Business.CQRS.DiscountsDomain.Commands
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IDiscountsRepository _discountRepository;
+        private readonly ILogger<GrantInvitationDiscountHandler> _logger;
 
-        public GrantInvitationDiscountHandler(IAccountRepository accountRepository, IDiscountsRepository discountRepository)
+        public GrantInvitationDiscountHandler(
+            IAccountRepository accountRepository,
+            IDiscountsRepository discountRepository,
+            ILogger<GrantInvitationDiscountHandler> logger)
+
+            
         {
             _accountRepository = accountRepository;
             _discountRepository = discountRepository;
+            _logger = logger;
+           
         }
 
         public async Task<Unit> Handle(GrantInvitationDiscount request, CancellationToken cancellationToken)
@@ -48,6 +58,7 @@ namespace Modilist.Business.CQRS.DiscountsDomain.Commands
             if (account == null)
             {
                 throw new AccountNotFoundException(request.AccountId);
+
             }
 
             if (account.State != AccountState.Active)
@@ -59,7 +70,8 @@ namespace Modilist.Business.CQRS.DiscountsDomain.Commands
 
             if (discount == null)
             {
-                throw new DiscountNotFoundException(account.Email);
+                _logger.LogInformation($"Invitation not found for account: {account.Email}");
+                return Unit.Value;
             }
 
             discount.Activate();
