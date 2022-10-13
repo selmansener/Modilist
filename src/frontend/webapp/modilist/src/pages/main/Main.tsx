@@ -21,7 +21,7 @@ export function Main() {
     const { t } = useTranslation();
     const { cdnImg: imgBaseHost } = config;
     const { isBusy: getAccountIsBusy, data: getAccountResponse } = useSelector((state: RootState) => state.getAccountModel);
-    const { isBusy: getStylePreferencesIsBusy, data: getStylePreferencesModel} = useSelector((state: RootState) => state.getStylePreferencesModel);
+    const { isBusy: getStylePreferencesIsBusy, data: getStylePreferencesModel } = useSelector((state: RootState) => state.getStylePreferencesModel);
     const [openDialogBox, setOpenDialogBox] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -46,7 +46,7 @@ export function Main() {
                 <Grid item container xs={12} spacing={4}>
                     <ActiveOrder />
                 </Grid>
-                <Grid item container xs={12} spacing={4} display="flex" alignContent="flex-start"> 
+                <Grid item container xs={12} spacing={4} display="flex" alignContent="flex-start">
                     <Grid item container xs={7} spacing={4}>
                         {getStylePreferencesModel?.lovesShopping == 0 && <Grid item xs={12} >
                             <Paper elevation={0} sx={{
@@ -95,7 +95,7 @@ export function Main() {
 
 
                             </Paper>
-                        </Grid> }
+                        </Grid>}
                         <Grid item xs={12}>
                             <Paper elevation={0} sx={{
                                 display: 'flex',
@@ -121,6 +121,10 @@ export function Main() {
                                             <Button variant="outlined" onClick={handleClickOpen}>
                                                 <Typography align="center" variant="h6">{t("Pages.Main.Offers")}</Typography>
                                             </Button>
+                                            <InvitationDialog
+                                                openDialog={openDialogBox}
+                                                onClose={handleClose}
+                                            />
                                         </Grid>
 
                                     </Grid>

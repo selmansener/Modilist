@@ -77,6 +77,7 @@ namespace Modilist.Business.CQRS.DiscountsDomain.Commands
 
             await SendInvitations(account.Id, $"{account.FirstName} {account.LastName}", uniqueEmails, cancellationToken);
 
+
             return Unit.Value;
         }
 

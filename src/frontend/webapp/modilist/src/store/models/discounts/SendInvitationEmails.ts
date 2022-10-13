@@ -27,6 +27,13 @@ export const sendInvitationEmailsModel = createModel<RootModel>()({
                 status
             }
         },
+        HANDLE_EXCEPTIONS: (state: ResponseModel<SendInvitation>, status: number) => {
+            return {
+                ...state,
+                isBusy: false,
+                status
+            }
+        },
         RESET: (state: ResponseModel<SendInvitation>) => {
             return {
                 isBusy: false,
@@ -45,6 +52,9 @@ export const sendInvitationEmailsModel = createModel<RootModel>()({
 
             if(response.status === 200) {
                 sendInvitationEmailsModel.HANDLE_RESPONSE(response.status);
+            }
+            else {
+                sendInvitationEmailsModel.HANDLE_EXCEPTIONS(response.status);
             }
         }
     }

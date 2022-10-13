@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Grid, Paper, Typography, useTheme, FormControl, TextField, Stack, DialogContent } from "@mui/material";
+import { Button, Grid, Paper, Portal, Typography, useTheme, FormControl, TextField, Stack, Snackbar, DialogContent, Alert } from "@mui/material";
 
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
@@ -22,6 +22,9 @@ export function InvitationDialog(props: InvitationDialogProps) {
   const dispatch = useDispatch<Dispatch>();
   const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
   const isBusy = getAccountIsBusy && sendInvitationEmailsIsBusy;
+  const [snackbarStatus, setSnackbarStatus] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
 
   const schema = Yup.array().of(Yup.string().email(t("FormValidation.Email")).notOneOf([account?.email], t("Pages.Main.InvitationOwnMailError")));
 
@@ -32,6 +35,7 @@ export function InvitationDialog(props: InvitationDialogProps) {
     values,
     setFieldValue,
     submitForm,
+    resetForm,
   } = useFormik({
     enableReinitialize: true,
     validateOnBlur: true,
@@ -44,10 +48,30 @@ export function InvitationDialog(props: InvitationDialogProps) {
       }
     },
   });
+  useEffect(() => {
+    if (sendInvitationEmailsStatus === 200) {
+      resetForm();
+      setIsSuccess(true);
+    }
+    else if (sendInvitationEmailsStatus !== 200 && sendInvitationEmailsStatus !== 0) {
+      setSnackbarStatus(true);
+      setIsSuccess(false);
+    }
+    if (sendInvitationEmailsStatus !== 0) {
+      dispatch.sendInvitationEmailsModel.RESET();
+    }
+      
+  }, [sendInvitationEmailsStatus]);
+
+  useEffect(() => {
+    if(isSuccess) {
+      onClose();
+    }
+  }, [isSuccess])
 
   return (
     <Dialog fullWidth maxWidth="md" open={openDialog} onClose={() => {
-      onClose()
+      onClose();
     }}>
       <DialogTitle>{t('Pages.Main.SendInvitation')}</DialogTitle>
       <DialogContent>
@@ -87,9 +111,28 @@ export function InvitationDialog(props: InvitationDialogProps) {
             }}>
               {t("Generic.Forms.Send")}
             </Button>
+            <Portal>
+              <Snackbar
+                open={snackbarStatus}
+                autoHideDuration={6000}
+                onClose={() => {
+                  setSnackbarStatus(false);
+                }}>
+                <Alert onClose={() => {
+                  setSnackbarStatus(false);
+                }}
+                  severity="error"
+                  variant="filled"
+                  sx={{ width: '100%' }}>
+                  {t(`Generic.Forms.SentMessageFailed`)}
+                </Alert>
+              </Snackbar>
+            </Portal>
+
           </Grid>
         </Grid>
       </DialogContent>
     </Dialog>
   );
+
 }
