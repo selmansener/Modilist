@@ -16,6 +16,7 @@ namespace Modilist.Infrastructure.Shared.Enums
         InvitationAcceptDiscount,
         NewMemberDiscount,
         ProductSpecificDiscount,
-        PrelovedDiscount
+        PrelovedDiscount,
+        BodySizeDiscount
     }
 }

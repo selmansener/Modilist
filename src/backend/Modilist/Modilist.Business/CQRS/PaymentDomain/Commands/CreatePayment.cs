@@ -145,7 +145,6 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
                 },
                 Formatting = Formatting.Indented
             });
-
             _logger.LogInformation(iyzicoPaymentLog);
 
             if (iyzicoPayment.Status == "success")
@@ -180,9 +179,10 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
                 throw new PaymentFailureException(request.AccountId, request.SalesOrderId, iyzicoPayment.Status, iyzicoPayment.ErrorCode, iyzicoPayment.ErrorGroup, iyzicoPayment.ErrorMessage);
             }
-
+            
             return payment.Adapt<PaymentDTO>();
         }
+         
 
         private CreatePaymentRequest GetPaymentRequest(Account account, PaymentMethod paymentMethod, SalesOrder salesOrder, Domains.Models.PaymentDomain.Payment payment)
         {
@@ -286,5 +286,6 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
             return remoteIPAddress;
         }
+        
     }
 }

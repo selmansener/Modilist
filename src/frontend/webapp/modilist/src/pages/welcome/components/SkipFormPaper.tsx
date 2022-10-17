@@ -22,21 +22,24 @@ export default function SkipFormPaper() {
                 minHeight: '300px',
                 bgcolor: '#ECE5FF'
             }}>
-                <Grid container textAlign="center">
-                    <Grid item container xs={12} textAlign="center" sx={{
+                <Grid item container xs={12} textAlign="center" alignItems="center" spacing={4}>
+                    <Grid item display={{ xs: 'block', md: 'none' }} xs={12}>
+                        <ImageComponent src={`${imgBaseHost}/common/style-form-continue.svg`}></ImageComponent>
+                    </Grid>
+                    <Grid item xs={12} md={8} textAlign="center" sx={{
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: "center",
                         justifyContent: 'center'
                     }}>
-                        <Box minHeight={200} mr={5} sx={{
+                        <Box minHeight={200} sx={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'space-between'
                         }}>
                             <Typography variant="h3">{t('Layouts.Welcome.WelcomeSteps.SkipFormForNow')}</Typography>
-                            <Box>
+                            <Box mb={2}>
                                 <Typography variant="body1">{t('Layouts.Welcome.WelcomeSteps.StyleFormSkipDescription1')}</Typography>
                                 <Typography variant="body1"><Trans>{t('Layouts.Welcome.WelcomeSteps.StyleFormSkipDescription2')}</Trans></Typography>
                                 <Typography variant="body1">{t('Layouts.Welcome.WelcomeSteps.StyleFormSkipDescription3')}</Typography>
@@ -45,6 +48,9 @@ export default function SkipFormPaper() {
                                 dispatch.welcomePageStepper.skipToStep(4);
                             }} variant="contained" color="secondary">{t('Layouts.Welcome.WelcomeSteps.SkipToSubscription')}</Button>
                         </Box>
+
+                    </Grid>
+                    <Grid item display={{ xs: 'none', md: 'flex' }} justifyContent='flex-start' md={4}>
                         <ImageComponent src={`${imgBaseHost}/common/style-form-continue.svg`}></ImageComponent>
                     </Grid>
                 </Grid>

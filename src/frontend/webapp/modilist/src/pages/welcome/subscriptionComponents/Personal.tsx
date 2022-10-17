@@ -114,7 +114,7 @@ export default function Personal() {
         setpersonalNumberShrink(account.phone !== undefined && account.phone !== "");
     }, [account]);
 
-    return <Grid item container xs={12} spacing={{ xs: 2, md: 4 }}>
+    return <Grid item container xs={12} spacing={2}>
         <Grid item xs={12}>
             <Typography variant='h3' align='left' sx={{ m: 1 }}>
                 {t("Pages.Welcome.Personal.HeaderPersonalInfo")}
@@ -163,9 +163,11 @@ export default function Personal() {
                             maxDate={maxDate}
                             inputFormat={"dd/MM/yyyy"}
                             onChange={(newValue) => {
-                                setFieldValue("birthDate", newValue);
+                                if (newValue) {
+                                    setFieldValue("birthDate", newValue);
+                                }
                             }}
-                            onAccept={() => {
+                            onAccept={(date) => {
                                 setIsDatePickerOpen(false)
                             }}
                             renderInput={(params) =>

@@ -233,7 +233,7 @@ export default function PaymentMethod() {
 
     return (
         <>
-            <Grid item container spacing={{ xs: 2, md: 4 }}>
+            <Grid item container spacing={2}>
                 <Grid item xs={12}>
                     <Typography variant='h3' align='left' sx={{ m: 1 }}>
                         {t("Pages.Welcome.PaymentMethod.Title")}
@@ -241,7 +241,7 @@ export default function PaymentMethod() {
                 </Grid>
 
                 <Grid item container xs={12} md={8}>
-                    <Grid item container spacing={{ xs: 2, md: 4 }}>
+                    <Grid item container spacing={2}>
 
                         <Grid item xs={12}>
                             <FormControl fullWidth >

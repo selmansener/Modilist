@@ -1,6 +1,6 @@
 import './App.css';
 import { AuthenticatedTemplate, MsalProvider, UnauthenticatedTemplate } from "@azure/msal-react";
-import { createTheme, ThemeOptions, ThemeProvider, responsiveFontSizes } from '@mui/material';
+import { createTheme, ThemeOptions, ThemeProvider, responsiveFontSizes, PaletteColorOptions } from '@mui/material';
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import Backend from 'i18next-http-backend';
@@ -15,6 +15,15 @@ import { apiFactory } from './services/api';
 import CssBaseline from '@mui/material/CssBaseline';
 import ScrollToTop from './utils/scrollToTop';
 
+declare module '@mui/material/styles' {
+  interface PaletteColor {
+    transparent?: string;
+  }
+  interface SimplePaletteColorOptions {
+    transparent?: string;
+  }
+}
+
 const msalInstance = new PublicClientApplication(config.msalConfig);
 
 const mdTheme = createTheme({
@@ -25,6 +34,7 @@ const mdTheme = createTheme({
     },
     secondary: {
       main: '#968DB3',
+      transparent: 'rgb(150, 141, 179, 0.2)'
     },
     error: {
       main: '#F08279',

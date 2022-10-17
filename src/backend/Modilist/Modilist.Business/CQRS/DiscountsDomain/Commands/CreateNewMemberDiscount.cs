@@ -52,7 +52,10 @@ namespace Modilist.Business.CQRS.DiscountsDomain.Commands
                 return Unit.Value;
             }
 
+
             var newMemberDiscount = new ExclusiveDiscount(request.AccountId, Infrastructure.Shared.Enums.Currency.TRY, Infrastructure.Shared.Enums.DiscountType.NewMemberDiscount);
+
+            newMemberDiscount.Activate();
 
             await _discountRepository.AddAsync(newMemberDiscount, cancellationToken);
 

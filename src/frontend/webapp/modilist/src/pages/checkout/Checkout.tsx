@@ -62,7 +62,12 @@ export function Checkout() {
             dispatch.createPaymentModel.RESET();
             navigate(`/sales-orders/${salesOrderId}/checkout-completed`);
         }
+        else if(createPaymentStatus !== 200 && createPaymentStatus !== 0) {
+            navigate(`/sales-orders/${salesOrderId}/checkout-failed`);
+            dispatch.createPaymentModel.RESET();
+        }
     }, [createPaymentStatus])
+
 
     useEffect(() => {
         if (!isBusyPaymentMethod && paymentMethodStatus === 0) {
@@ -123,14 +128,14 @@ export function Checkout() {
         if (!cardNumber) {
             return "";
         }
-        
+
         let endResult = "";
         for (let i = 0; i < 5; i++) {
             if (i * 4 > cardNumber.length) {
                 endResult += " ****";
                 continue;
             }
-            
+
             if (i !== 0) {
                 endResult += (" " + cardNumber.substring(i * 4, 4));
             }

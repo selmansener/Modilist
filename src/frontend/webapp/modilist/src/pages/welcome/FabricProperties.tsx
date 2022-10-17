@@ -142,7 +142,7 @@ export function FabricProperties(props: FabricPropertiesProps) {
         />
     }
 
-    return <Grid item container spacing={{ xs: 4, md: 12 }}>
+    return <Grid item container spacing={4}>
         {(layout !== "dashboard") && <SkipFormPaper />}
         <Grid item xs={12}>
             <Color />

@@ -181,6 +181,9 @@ export function SizeInfo(props: SizeInfoProps) {
         },
         validateOnMount: true
     });
+
+    console.log(theme.breakpoints.down("md"));
+
     const gender = account?.gender ? camelCase(account?.gender.toString()) : undefined;
 
     type SectionProps = {
@@ -237,7 +240,7 @@ export function SizeInfo(props: SizeInfoProps) {
     }
 
     return (
-        <Grid item container xs={12} spacing={{ xs: 2, md: 8 }}>
+        <Grid item container xs={12} spacing={2}>
             {account?.gender !== Gender.None &&
                 <>
                     <Grid item xs={12}>
@@ -259,24 +262,11 @@ export function SizeInfo(props: SizeInfoProps) {
                                 onChange={(value) => {
                                     handleChange("bodyType")(value);
                                 }}
-                                // radioButtonSx={{
-                                //     flexBasis: '15%'
-                                // }}
                                 contents={
                                     bodyTypes.map(type => {
                                         return {
                                             value: type.name,
                                             element: <ImageComponent src={type.img} />
-                                            // element: (
-                                            //     <React.Fragment>
-                                            //         <Box display={{ xs: 'block', md: 'none' }}>
-                                            //             <ImageComponent width={"100%"} src={type.img} />
-                                            //         </Box>
-                                            //         <Box display={{ xs: 'none', md: 'block' }}>
-                                            //             <ImageComponent src={type.img} />
-                                            //         </Box>
-                                            //     </React.Fragment>
-                                            // )
                                         }
                                     })}
                             />
@@ -478,6 +468,38 @@ export function SizeInfo(props: SizeInfoProps) {
             </Grid>
 
             <React.Fragment>
+                <Grid item container xs={12} spacing={2} alignItems="center">
+                    <Box sx={{
+                        display: 'flex',
+                        backgroundColor: theme.palette.secondary.transparent,
+                        borderRadius: 2,
+                        p: 4,
+                        alignItems: 'center',
+                        [theme.breakpoints.down("md")]: {
+                            flexDirection: "column",
+                            ml: 2,
+                            mt: 2
+                        }
+                    }}>
+                        <Grid item xs={12} display={{ xs: "flex", md: "none" }} mb={2} justifyContent="flex-end">
+                            <ImageComponent src={`${imgBaseHost}/common/body-size-discount.png`} />
+                        </Grid>
+                        <Grid item xs={12} md={6} textAlign="center">
+                            <Typography mb={2} variant="h3" color={theme.palette.secondary.main}>
+                                {t("Pages.Welcome.BodySize.DiscountInfoTitle.1")}
+                            </Typography>
+                            <Typography mb={2} variant="h3">
+                                {t("Pages.Welcome.BodySize.DiscountInfoTitle.2")}
+                            </Typography>
+                            <Typography variant="body1">
+                                {t("Pages.Welcome.BodySize.DiscountInfo")}
+                            </Typography>
+                        </Grid>
+                        <Grid item md={6} display={{ xs: "none", md: "flex" }} justifyContent="flex-end">
+                            <ImageComponent src={`${imgBaseHost}/common/body-size-discount.png`} />
+                        </Grid>
+                    </Box>
+                </Grid>
                 {
                     bodySizes.map((bodySize, index) => {
                         const sizeName = camelCase(bodySize);

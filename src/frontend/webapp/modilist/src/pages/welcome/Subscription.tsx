@@ -47,7 +47,7 @@ export function Subscription() {
 
 
     return (
-        <Grid item container spacing={{ xs: 4, md: 12 }}>
+        <Grid item container spacing={4}>
             <Personal />
             <ContactInfo />
             <SubscriptionDetails />

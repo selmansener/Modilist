@@ -146,5 +146,11 @@ namespace Modilist.Domains.Models.StylePreferencesDomain
             FootWear = footWear;
             AdditionalNotes = additionalNotes;
         }
+
+        public bool DoesBodySizeProvided()
+        {
+            //TODO: We might implement an avg calculation in feature with machine learning. If provided values are above some threshold then it will be considered as true values of body size.
+            return ShoulderWidth.HasValue && HeadRadius.HasValue && ArmLength.HasValue && BodyLength.HasValue && NeckRadius.HasValue && BreastRadius.HasValue && WaistRadius.HasValue && HipRadius.HasValue && LegLength.HasValue && FootLength.HasValue;
+        }
     }
 }

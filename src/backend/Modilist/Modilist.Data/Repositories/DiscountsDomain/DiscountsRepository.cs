@@ -13,6 +13,8 @@ namespace Modilist.Data.Repositories.DiscountsDomain
     {
         Task<bool> DoesNewMemberDiscountExists(Guid accountId, CancellationToken cancellationToken);
 
+        Task<bool> DoesBodySizeDiscountExists(Guid accountId, CancellationToken cancellationToken);
+
         Task<Discount?> GetByInvitationEmail(string invitationEmail, CancellationToken cancellationToken);
     }
     internal class DiscountsRepository : BaseRepository<Discount>, IDiscountsRepository
@@ -22,9 +24,14 @@ namespace Modilist.Data.Repositories.DiscountsDomain
 
         }
 
-        public Task<bool> DoesNewMemberDiscountExists(Guid accountId, CancellationToken cancellationToken)
+        public async Task<bool> DoesBodySizeDiscountExists(Guid accountId, CancellationToken cancellationToken)
         {
-            return _baseDb.ExclusiveDiscounts.AnyAsync(x => x.AccountId == accountId && x.Type == DiscountType.NewMemberDiscount, cancellationToken);
+            return await _baseDb.ExclusiveDiscounts.AnyAsync(x => x.AccountId == accountId && x.Type == DiscountType.BodySizeDiscount, cancellationToken);
+        }
+
+        public async Task<bool> DoesNewMemberDiscountExists(Guid accountId, CancellationToken cancellationToken)
+        {
+            return await _baseDb.ExclusiveDiscounts.AnyAsync(x => x.AccountId == accountId && x.Type == DiscountType.NewMemberDiscount, cancellationToken);
         }
 
         public async Task<Discount?> GetByInvitationEmail(string invitationEmail, CancellationToken cancellationToken)

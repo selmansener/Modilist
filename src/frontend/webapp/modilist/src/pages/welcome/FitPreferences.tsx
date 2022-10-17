@@ -171,7 +171,7 @@ export function FitPreferences(props: FitPreferencesProps) {
         />
     }
 
-    return <Grid item container xs={12} spacing={{ xs: 4, md: 12 }}>
+    return <Grid item container xs={12} spacing={4}>
         {(layout !== "dashboard") && <SkipFormPaper />}
         <Grid item xs={12}>
             <Typography variant="h5" color="secondary" sx={{ fontWeight: 800 }} align="center">

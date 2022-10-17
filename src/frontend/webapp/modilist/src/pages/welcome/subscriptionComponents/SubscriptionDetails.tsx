@@ -41,7 +41,7 @@ export function SubscriptionDetails() {
         });
     }, [maxLimit]);
 
-    return <Grid item container spacing={{ xs: 2, md: 4 }}>
+    return <Grid item container spacing={2}>
         <Grid item xs={12} md={9}>
             <FormControl fullWidth>
                 <FormControlLabel

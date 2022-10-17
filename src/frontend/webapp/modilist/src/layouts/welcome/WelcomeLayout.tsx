@@ -1,4 +1,4 @@
-import { AppBar, Box, Container, Grid, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Container, Grid, IconButton, Toolbar, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { RootState, Dispatch } from "../../store/store";
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,18 +9,26 @@ import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { DashboardFooter } from "../dashboard/DashboardFooter";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { WelcomeFooter } from "./WelcomeFooter";
 
 export interface WelcomeLayoutProps {
     title: string;
 }
 
 export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayoutProps>) {
-    const { instance: msal } = useMsal();
+    const { instance: msal, accounts } = useMsal();
     const { title } = props;
     const { t } = useTranslation();
     const navigate = useNavigate();
     const { isBusy: getAccountIsBusy, data: account, status: getAccountStatus } = useSelector((state: RootState) => state.getAccountModel);
     const dispatch = useDispatch<Dispatch>();
+
+    const logout = () => {
+        msal.logoutRedirect({
+            account: accounts[0]
+        });
+    }
 
     useEffect(() => {
         if (!getAccountIsBusy && account?.id === "") {
@@ -65,9 +73,19 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
                         }}>
                             <ImageComponent width={200} src="/whitehorizontallogo.svg" />
                         </Box>
+                        <IconButton
+                            size="large"
+                            onClick={logout}
+                            color="inherit"
+                            sx={{
+                                display: { xs: 'none', sm: 'inline' },
+                            }}
+                        >
+                            <LogoutIcon />
+                        </IconButton>
                     </Toolbar>
                 </AppBar>
-                <Container maxWidth="lg" sx={{
+                <Container maxWidth="xl" sx={{
                     mt: 4,
                     mb: 2
                 }}>
@@ -76,7 +94,7 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
                     </Grid>
                 </Container>
             </Box>
-            <DashboardFooter />
+            <WelcomeFooter />
         </Box>
     )
 }

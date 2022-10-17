@@ -270,7 +270,12 @@
                 "Height": "Boy (cm)",
                 "Weight": "Kilo (kg)",
                 "AdditionalNotes": "Kıyafet ve Beden ölçüleri ile ilgili eklemek istedikleriniz; ",
-                "Optional": "(Opsiyonel)"
+                "Optional": "(Opsiyonel)",
+                "DiscountInfoTitle": {
+                    "1": "Beden Ölçülerini Gir,",
+                    "2": "20 TL Kazan"
+                },
+                "DiscountInfo":"Beden ölçülerini doğru ve eksiksiz bir şekilde girdiğinde, hem hayalindeki tarza bir adım daha yaklaşmış olursun hem de 20 TL indirim kazanırsın!"
             },
             "FitPreferences": {
                 "Warning": "Seçim yapmadığın kategorilerdeki her tarzı benimsediğini varsayacağız.",

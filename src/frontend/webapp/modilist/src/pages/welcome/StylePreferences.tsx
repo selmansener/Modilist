@@ -904,7 +904,7 @@ export function StylePreferences(props: StylePreferencesProps) {
     });
 
     return (
-        <Grid item container xs={12} spacing={{ xs: 4, md: 12 }}>
+        <Grid item container xs={12} spacing={4}>
             {(layout !== "dashboard") && <SkipFormPaper />}
             <Grid item xs={6} display={{ xs: 'none', md: 'block' }}>
                 <ImageComponent src={`${imgBaseHost}/style-preferences-general/ShoppingIllustration.svg`}></ImageComponent>
