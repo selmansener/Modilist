@@ -60,10 +60,10 @@
         }
 
         .panel {
-      width: 490px;
-      padding: 50px;
-      color: #fffef8;
-    }
+            width: 490px;
+            padding: 50px;
+            color: #fffef8;
+        }
 
         .heading h1 {
             text-align: center;
@@ -289,6 +289,18 @@
             }
         }
 
+        @media screen and (max-width: 820px) {
+            .companyLogo {
+                width: 50%;
+            }
+
+            .panel {
+                width: 94%;
+                padding: 0;
+                margin-top: 24px;
+            }
+        }
+
         .error {
             color: #F08279;
         }
@@ -307,10 +319,8 @@
                 <img class="companyLogo" data-tenant-branding-logo="true"
                     src="https://cdn.modilist.com/img/logo/svg/sign-in-page-logo.svg" alt="Company Logo">
             </div>
-        
+
             <div class="panel">
-                <h1 id="hello" style="text-align: center;">Merhaba</h1>
-                <p id="description" style="text-align: center;">Stilini keşfedip modaya uygun giyinmek istiyorsan;</p>
                 <div id="api" role="main">
 
                 </div>
@@ -369,11 +379,7 @@
                 break;
         }
 
-        const hello = document.getElementById("hello");
-        const description = document.getElementById("description");
         const termsOfUse = document.getElementById("termsOfUse");
-        hello.innerHTML = currentLang.hello;
-        description.innerHTML = currentLang.description;
         termsOfUse.innerHTML = currentLang.termsOfUse;
     </script>
 </body>
