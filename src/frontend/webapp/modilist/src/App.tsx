@@ -218,10 +218,10 @@ function App() {
             <ScrollToTop />
             <ThemeProvider theme={theme} >
               <AuthenticatedTemplate>
-                <Router environment={config.environment} isPublic={false} />
+                <Router environment={config.environment} renderOptions="Authenticated" />
               </AuthenticatedTemplate>
               <UnauthenticatedTemplate>
-                <Router environment={config.environment} isPublic />
+                <Router environment={config.environment} renderOptions="Public" />
               </UnauthenticatedTemplate>
             </ThemeProvider>
           </BrowserRouter>

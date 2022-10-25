@@ -43,13 +43,14 @@ import { AccountCreated } from '../pages/verification/AccountCreated';
 import { Account } from '../pages/account/Account';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { About } from '../pages/about/About';
-import { ComingSoon } from './comingSoon/ComingSoon';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Partnership } from '../pages/partnership/Partnership';
 import { Careers } from '../pages/careers/Careers';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
 import { Contact } from '../pages/contact/Contact';
+
+type RenderOptions = "Public" | "Authenticated" | "Both";
 
 interface RouterOptions {
   title?: string,
@@ -66,7 +67,7 @@ interface RouterOptions {
     component: React.ReactNode;
   };
   roles?: string[];
-  isPublic: boolean;
+  renderOptions: RenderOptions;
   disabledEnvironments: Environment[];
 }
 
@@ -79,7 +80,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Unauthenticated />
     },
-    isPublic: true,
+    renderOptions: "Public",
     disabledEnvironments: []
   },
   {
@@ -90,7 +91,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    isPublic: false,
+    renderOptions: "Both",
     disabledEnvironments: []
   },
   {
@@ -101,7 +102,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    isPublic: false,
+    renderOptions: "Both",
     disabledEnvironments: []
   },
   {
@@ -112,7 +113,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    isPublic: false,
+    renderOptions: "Both",
     disabledEnvironments: []
   },
   {
@@ -123,7 +124,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    isPublic: false,
+    renderOptions: "Both",
     disabledEnvironments: ["production"]
   },
   {
@@ -140,7 +141,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -158,7 +159,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -173,7 +174,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -188,7 +189,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -200,7 +201,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -212,7 +213,7 @@ const routes: RouterOptions[] = [
       path: "/",
       component: <Dashboard />
     },
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -230,7 +231,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <SizeInfo />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -248,7 +249,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <StylePreferences />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -266,7 +267,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <FitPreferences />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -284,7 +285,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <FabricProperties />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -299,7 +300,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <Account />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -314,7 +315,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <AccountSettings />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -332,7 +333,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <PaymentMethods />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -347,7 +348,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <NewPaymentMethod />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -365,7 +366,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <Addresses />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -380,7 +381,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <UpsertAddress />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -395,7 +396,7 @@ const routes: RouterOptions[] = [
       component: <Dashboard />
     },
     component: <UpsertAddress />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -406,7 +407,7 @@ const routes: RouterOptions[] = [
       component: <WelcomeLayout title="Pages.Titles.Welcome" />
     },
     component: <GenderSelection />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -417,7 +418,7 @@ const routes: RouterOptions[] = [
       component: <WelcomeLayout title="Pages.Titles.Welcome" />
     },
     component: <WelcomeSteps />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -428,7 +429,7 @@ const routes: RouterOptions[] = [
       component: <VerificationLayout />
     },
     component: <AccountCreated />,
-    isPublic: false,
+    renderOptions: "Authenticated",
     disabledEnvironments: []
   },
   {
@@ -439,7 +440,7 @@ const routes: RouterOptions[] = [
       component: <VerificationLayout />
     },
     component: <AccountVerified />,
-    isPublic: false,
+    renderOptions: "Both",
     disabledEnvironments: []
   },
   {
@@ -450,19 +451,8 @@ const routes: RouterOptions[] = [
       component: <VerificationLayout />
     },
     component: <AccountVerificationFailed />,
-    isPublic: false,
+    renderOptions: "Both",
     disabledEnvironments: []
-  },
-  {
-    helmet: "Pages.Titles.Main",
-    route: "coming-soon",
-    layout: {
-      path: "/",
-      component: <ComingSoon />
-    },
-    component: <></>,
-    isPublic: false,
-    disabledEnvironments: ["production", "development", "int", "staging"]
   },
 ]
 
@@ -480,17 +470,17 @@ export const menuItems = routes.filter(x => x.menuItem !== undefined).map(x => {
 
 export interface RouterProps {
   environment: Environment;
-  isPublic: boolean;
+  renderOptions: RenderOptions;
   role?: string;
 }
 
 export function Router(props: RouterProps) {
   const { t } = useTranslation();
-  const { environment, isPublic, role } = props;
+  const { environment, renderOptions, role } = props;
 
-  const filteredRoutes = routes.filter(route =>
-    route.disabledEnvironments.every(env => env !== environment)
-    && route.isPublic === isPublic
+  let filteredRoutes = routes.filter(route =>
+    (route.renderOptions === renderOptions || route.renderOptions === "Both")
+    && route.disabledEnvironments.every(env => env !== environment)
     && (route.roles === undefined || route.roles?.length === 0 || (route.roles && route.roles.some(r => r === role)))
   );
 

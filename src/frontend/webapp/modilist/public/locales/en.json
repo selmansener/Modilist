@@ -493,7 +493,8 @@
             "Thanks": "Thank you for verifying your account and helping us to ensure your account's security.",
             "NavigationMessage": "You need to fill out the style form so that we can prepare your first outfit.",
             "NavigateToForm": "Fill in the style form",
-            "Timer": "You're being redirected to the style form in {{counter}} seconds."
+            "Timer": "You're being redirected to the style form in {{counter}} seconds.",
+            "Login": "Login"
         },
         "AccountVerificationFailed": {
             "FailedMessage": "We encountered an error while verifying your account.",

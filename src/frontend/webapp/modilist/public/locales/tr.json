@@ -527,7 +527,8 @@
             "Thanks": "Hesabınızı doğruladığınız ve hesap güvenliğinizi sağlamamıza katkıda bulunduğunuz için teşekkürler.",
             "NavigationMessage": "İlk kombininizi hazırlayabilmemiz için stil formunu doldurmanız gerekiyor.",
             "NavigateToForm": "Stil formunu doldur",
-            "Timer": "{{counter}} saniye içinde stil formuna yönlendiriliyorsun..."
+            "Timer": "{{counter}} saniye içinde stil formuna yönlendiriliyorsun...",
+            "Login": "Giriş Yap"
         },
         "AccountVerificationFailed": {
             "FailedMessage": "Hesabınızı doğrularken bir hata ile karşılaştık.",

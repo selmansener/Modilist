@@ -34,7 +34,6 @@ export function VerificationLayout() {
                     </Grid>
                 </Container>
             </Box>
-            <DashboardFooter />
         </Box>
     )
 }
