@@ -473,6 +473,7 @@
             "YearValidation": "Please enter a valid year",
             "CvcValidation": "Please enter a valid CVC",
             "CardHolderNameValidation": "Please enter a valid name that does not contain numbers",
+            "CardNameValidation": "Card name already exists.",
             "SetAsDefault": "Set as Default"
         },
         "Addresses": {

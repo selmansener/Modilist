@@ -1,13 +1,17 @@
-import { Button, Checkbox, FormControl, FormControlLabel, Grid, TextField } from "@mui/material";
+import { Alert, Button, Checkbox, FormControl, FormControlLabel, Grid, Snackbar, TextField } from "@mui/material";
 import { useFormik, validateYupSchema } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../store/store";
 import { config } from "../../config";
 import * as Yup from "yup";
 import { IMaskInput } from "react-imask";
 import React, { useEffect, useState } from "react";
 import { Focused } from "react-credit-cards";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useParams } from "react-router-dom";
 import Cards from 'react-credit-cards';
+import { getAllPaymentMethodsModel } from "../../store/models/paymentMethods/GetAllPaymentMethods";
+import { PaymentMethodDTO } from "../../services/swagger/api";
 
 interface InputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -56,22 +60,35 @@ const ExpireYearInputMask = React.forwardRef<HTMLElement, InputMaskProps>(
         );
     },
 );
+type FieldStates = {
+    cardHolderName: boolean,
+    cardNumber: boolean,
+    expireMonth: boolean,
+    expireYear: boolean,
+    cardName: boolean
+}
 
 export function NewPaymentMethod() {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const { paymentMethodId } = useParams();
     const { isProduction } = config;
+    const { isBusy: isBusyCreateNewPaymentMethod, status: statusCreateNewPaymentMethod, errorType: errorTypeCreateNewPaymentMethod } = useSelector((state: RootState) => state.createNewPaymentMethodModel);
+    const { isBusy: isBusyPaymentMethods, data: paymentMethods } = useSelector((state: RootState) => state.getAllPaymentMethodsModel);
+    const isBusy = isBusyCreateNewPaymentMethod;
+    const navigate = useNavigate();
     const requiredField = t("FormValidation.RequiredField");
     const [cardFocused, setCardFocused] = useState<Focused>();
-    const [cardNumValidate, setCardNumberValidate] = useState(false);
-    const cardNumberValidation = t("Pages.NewPaymentMethod.CardNumberValidation");
+    const [snackbarStatus, setSnackbarStatus] = useState(false);
     const monthTwoDigits = t("Pages.NewPaymentMethod.MonthTwoDigits");
     const monthValidation = t("Pages.NewPaymentMethod.MonthValidation");
     const yearTwoDigits = t("Pages.NewPaymentMethod.YearTwoDigits");
     const yearValidation = t("Pages.NewPaymentMethod.YearValidation");
     const cardHolderNameValidation = t("Pages.NewPaymentMethod.CardHolderNameValidation");
-    const CardNumber = t("FormValidation.CardNumber").toString();
+    const cardNameValidation = t("Pages.NewPaymentMethod.CardNameValidation");
+    const CardNumber = t("FormValidation.CardNumber");
     const currentDate = new Date();
+    const [creditCardNumberShrink, setCreditCardNumberShrink] = useState<boolean>(false);
 
 
     const schema = Yup.object({
@@ -178,7 +195,9 @@ export function NewPaymentMethod() {
         errors,
         values: creditCard,
         setFieldValue,
-        submitForm
+        submitForm,
+        resetForm,
+        setFieldError
     } = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -191,12 +210,50 @@ export function NewPaymentMethod() {
         },
         validationSchema: schema,
         onSubmit: (values) => {
-            dispatch.createPaymentMethodModel.createPaymentMethod({
-                ...values,
-                isDefault: true
-            });
+            if (!isBusy && values) {
+                dispatch.createNewPaymentMethodModel.createNewPaymentMethod({
+                    ...values
+                });
+            }
         },
     });
+    useEffect(() => {
+        if (!isBusyPaymentMethods) {
+            dispatch.getAllPaymentMethodsModel.getAllPaymentMethods();
+        }
+
+        if (paymentMethodId && !isBusyCreateNewPaymentMethod) {
+            dispatch.createNewPaymentMethodModel.createPayment(parseInt(paymentMethodId));
+        }
+
+        return () => {
+            dispatch.createNewPaymentMethodModel.RESET();
+        }
+    }, []);
+    useEffect(() => {
+        if (!isBusy && statusCreateNewPaymentMethod === 200) {
+            dispatch.createNewPaymentMethodModel.RESET();
+            navigate("/payment-methods");
+        }
+    }, [statusCreateNewPaymentMethod]);
+    useEffect(() => {
+        setCreditCardNumberShrink(creditCard.cardNumber !== undefined && creditCard.cardNumber !== "");
+    }, [creditCard]);
+
+    useEffect(() => {
+        if (statusCreateNewPaymentMethod !== 0) {
+            if (statusCreateNewPaymentMethod === 200) {
+                resetForm();
+            }
+
+            if (errorTypeCreateNewPaymentMethod === 'CardNameAlreadyExistsException') {
+                setFieldError('cardName', cardNameValidation)
+            }
+
+            setSnackbarStatus(true);
+            dispatch.createNewPaymentMethodModel.RESET();
+        }
+    }, [statusCreateNewPaymentMethod]);
 
     return (<Grid item container xs={12} spacing={2}>
         <Grid item container xs={6} spacing={2}>
@@ -216,6 +273,9 @@ export function NewPaymentMethod() {
                         onBlur={handleBlur}
                         InputProps={{
                             inputComponent: CreditCardInputMask as any,
+                        }}
+                        InputLabelProps={{
+                            shrink: creditCardNumberShrink
                         }}
                     />
                 </FormControl>
@@ -306,6 +366,7 @@ export function NewPaymentMethod() {
                     } />
                 </FormControl>
                 <Button
+                    disabled={isBusy}
                     variant="contained"
                     color="secondary"
                     onClick={() => {
@@ -328,5 +389,20 @@ export function NewPaymentMethod() {
                 number={creditCard.cardNumber}
             />
         </Grid>
+        <Snackbar
+            open={snackbarStatus}
+            autoHideDuration={6000}
+            onClose={() => {
+                setSnackbarStatus(false);
+            }}>
+            <Alert onClose={() => {
+                setSnackbarStatus(false);
+            }}
+                severity="error"
+                variant="filled"
+                sx={{ width: '100%' }}>
+                {t(`Generic.Forms.UnexpectedError`)}
+            </Alert>
+        </Snackbar>
     </Grid>)
 }

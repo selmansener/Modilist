@@ -29,7 +29,7 @@ export function Addresses() {
             {addresses?.map(address => {
                 return (
                     <Grid key={address.name} item xs={4}>
-                        <AddressListItem address={address} 
+                        <AddressListItem address={address}
                             setAsDefaultHandler={(name) => {
                                 if (!isBusyChangeDefault && changeDefaultAddressStatus === 0) {
                                     dispatch.changeDefaultAddressModel.changeDefaultAddress(name);

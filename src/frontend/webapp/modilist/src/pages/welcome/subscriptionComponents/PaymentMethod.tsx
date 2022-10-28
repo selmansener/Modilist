@@ -72,7 +72,7 @@ export default function PaymentMethod() {
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
     const { isProduction } = config;
-    const { isBusy: createPaymentMethodIsBusy, status: createPaymentMethodStatus } = useSelector((state: RootState) => state.createPaymentMethodModel);
+    const { isBusy: createDefaultPaymentMethodIsBusy, status: createDefaultPaymentMethodStatus } = useSelector((state: RootState) => state.createDefaultPaymentMethodModel);
     const requiredField = t("FormValidation.RequiredField");
     const [cardFocused, setCardFocused] = useState<Focused>();
     const [creditCardNumberShrink, setCreditCardNumberShrink] = useState(false);
@@ -226,10 +226,10 @@ export default function PaymentMethod() {
     }, [creditCard])
 
     useEffect(() => {
-        if (createPaymentMethodStatus !== 200 && createPaymentMethodStatus !== 0) {
+        if (createDefaultPaymentMethodStatus !== 0) {
             dispatch.createPaymentMethodModel.RESET();
         }
-    }, [createPaymentMethodStatus])
+    }, [createDefaultPaymentMethodStatus])
 
     return (
         <>

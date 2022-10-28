@@ -1,10 +1,10 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../../App";
-import { CreatePaymentMethod, PaymentMethodDTO } from "../../../services/swagger/api";
-import { ResponseModel } from "../../response-model";
+import { CreateNewPaymentMethod, CreatePaymentMethod, PaymentMethodDTO } from "../../../services/swagger/api";
+import { isResponseModel, ResponseModel } from "../../response-model";
 
-export const createPaymentMethodModel = createModel<RootModel>()({
+export const createNewPaymentMethodModel = createModel<RootModel>()({
     state: {
         isBusy: false,
         data: {
@@ -12,9 +12,10 @@ export const createPaymentMethodModel = createModel<RootModel>()({
             cardNumber: "",
             expireMonth: "",
             expireYear: "",
-            cvc: ""
+            cardName: "",
         },
-        status: 0
+        status: 0,
+        errorType: ""
     } as ResponseModel<PaymentMethodDTO>,
     reducers: {
         BUSY: (state: ResponseModel<PaymentMethodDTO>) => {
@@ -33,10 +34,11 @@ export const createPaymentMethodModel = createModel<RootModel>()({
                 status
             }
         },
-        HANDLE_EXCEPTION: (state: ResponseModel<PaymentMethodDTO>, status: number) => {
+        HANDLE_EXCEPTION: (state: ResponseModel<PaymentMethodDTO>, status: number, errorType?: string) => {
             return {
                 ...state,
-                status
+                status,
+                errorType
             }
         },
         RESET: (state: ResponseModel<PaymentMethodDTO>) => {
@@ -48,25 +50,29 @@ export const createPaymentMethodModel = createModel<RootModel>()({
                     cardNumber: "",
                     expireMonth: "",
                     expireYear: "",
-                    cvc: ""
+                    cardName: "",
                 },
                 status: 0
             }
         }
     },
     effects: (dispatch) => {
-        const { createPaymentMethodModel } = dispatch
+        const { createNewPaymentMethodModel } = dispatch
         return {
-            async createPaymentMethod(input: CreatePaymentMethod): Promise<any> {
-                createPaymentMethodModel.BUSY();
+            async createNewPaymentMethod(input: CreateNewPaymentMethod): Promise<any> {
+                createNewPaymentMethodModel.BUSY();
 
-                const response = await api.payments.apiV1PaymentCreatePaymentMethodPost(input);
-
+                const response = await api.payments.apiV1PaymentCreateNewPaymentMethodPost(input);
                 if (response.status === 200) {
-                    createPaymentMethodModel.HANDLE_RESPONSE(response.data, response.status);
+                    createNewPaymentMethodModel.HANDLE_RESPONSE(response.data, response.status);
                 }
                 else {
-                    createPaymentMethodModel.HANDLE_EXCEPTION(response.status);
+                    if (isResponseModel(response.data)) {
+                        createNewPaymentMethodModel.HANDLE_EXCEPTION(response.status, (response.data as ResponseModel).errorType);
+                    }
+                    else {
+                        createNewPaymentMethodModel.HANDLE_EXCEPTION(response.status);
+                    }
                 }
             }
         }

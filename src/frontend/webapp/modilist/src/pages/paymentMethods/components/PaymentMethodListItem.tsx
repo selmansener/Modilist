@@ -6,30 +6,34 @@ import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
 import { PaymentMethodDTO } from "../../../services/swagger/api";
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../../store/store";
+import { useEffect } from "react";
 
 export interface PaymentMethodListItemProps {
-    paymentMethod: PaymentMethodDTO;
+    paymentMethod: PaymentMethodDTO,
+    setAsDefaultPaymentMethod: (cardName: string) => void;
 }
 
 export function PaymentMethodListItem(props: PaymentMethodListItemProps) {
     const { t } = useTranslation();
-    const { paymentMethod } = props;
+    const { paymentMethod, setAsDefaultPaymentMethod } = props;
     const { cdnImg: imgBaseHost } = config;
-    
+
     const getMaskedCardNumber = () => {
         let cardNumber: string | null | undefined = paymentMethod?.binNumber;
 
         if (!cardNumber) {
             return "";
         }
-        
+
         let endResult = "";
         for (let i = 0; i < 5; i++) {
             if (i * 4 > cardNumber.length) {
                 endResult += " ****";
                 continue;
             }
-            
+
             if (i !== 0) {
                 endResult += (" " + cardNumber.substring(i * 4, 4));
             }
@@ -71,13 +75,14 @@ export function PaymentMethodListItem(props: PaymentMethodListItemProps) {
                     </Tooltip>
                     : <Button
                         variant="outlined"
+                        disabled
                         startIcon={<DeleteForeverOutlinedIcon />}>
                         {t("Generic.Forms.Delete")}
                     </Button>}
             </Grid>
             <Grid item xs={12}>
                 <Divider />
-        </Grid>
+            </Grid>
             <Grid item xs={12} display="flex" alignItems="center">
                 <Typography variant="body1" component="span" fontWeight={800}>
                     {t("Pages.PaymentMethods.PaymentMethodListItem.BankName")}
@@ -107,7 +112,12 @@ export function PaymentMethodListItem(props: PaymentMethodListItemProps) {
                     <Typography variant="body1" fontWeight={800}>
                         {t("Pages.PaymentMethods.PaymentMethodListItem.Default")}
                     </Typography> :
-                    <Button variant="outlined" startIcon={<CheckCircleOutlineIcon />}>
+                    <Button variant="outlined" startIcon={<CheckCircleOutlineIcon />}
+                        onClick={() => {
+                            if (paymentMethod.cardName) {
+                                setAsDefaultPaymentMethod(paymentMethod.cardName);
+                            }
+                        }}>
                         {t("Pages.PaymentMethods.PaymentMethodListItem.SetAsDefault")}
                     </Button>
                 }

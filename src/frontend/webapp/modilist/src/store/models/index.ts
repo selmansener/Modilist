@@ -18,7 +18,7 @@ import { getFitPreferencesModel } from "./fitPreferences/GetFitPreferences"
 import { upsertFitPreferencesModel } from "./fitPreferences/UpsertFitPreferences"
 import { sendPartnershipMailModel } from "./partnership/SendPartnershipMail"
 import { createPaymentModel } from "./paymentMethods/CreatePayment"
-import { createPaymentMethodModel } from "./paymentMethods/CreatePaymentMethod"
+import { createDefaultPaymentMethodModel } from "./paymentMethods/CreateDefaultPaymentMethod"
 import { getAllPaymentMethodsModel } from "./paymentMethods/GetAllPaymentMethods"
 import { getDefaultPaymentMethodModel } from "./paymentMethods/GetDefaultPaymentMethod"
 import { createReturnModel } from "./returns/CreateReturn"
@@ -49,6 +49,8 @@ import { updateAccountModel } from "./users/UpdateAccount"
 import { stepperSubscription } from "./welcome/StepperSubscription"
 import { welcomePageStepper } from "./welcome/WelcomePageStepper"
 import { sendContactFormModel } from "./contact/SendContactForm"
+import { createNewPaymentMethodModel } from "./paymentMethods/CreateNewPaymentMethod"
+import { changeDefaultPaymentMethodModel } from "./paymentMethods/ChangeDefaultPaymentMethod"
 
 export interface RootModel extends Models<RootModel> {
   createAccountModel: typeof createAccountModel,
@@ -76,7 +78,7 @@ export interface RootModel extends Models<RootModel> {
   updateSubscriptionMaxPricingLimitModel: typeof updateSubscriptionMaxPricingLimitModel,
   suspendSubscriptionModel: typeof suspendSubscriptionModel,
   activateSubscriptionModel: typeof activateSubscriptionModel,
-  createPaymentMethodModel: typeof createPaymentMethodModel,
+  createDefaultPaymentMethodModel: typeof createDefaultPaymentMethodModel,
   stepperSubscription: typeof stepperSubscription,
   salesOrdersQueryModel: typeof salesOrdersQueryModel,
   salesOrderDetailsModel: typeof salesOrderDetailsModel,
@@ -100,6 +102,8 @@ export interface RootModel extends Models<RootModel> {
   sendContactFormModel: typeof sendContactFormModel
   updateRequestedStyleModel: typeof updateRequestedStyleModel,
   sendInvitationEmailsModel: typeof sendInvitationEmailsModel,
+  createNewPaymentMethodModel: typeof createNewPaymentMethodModel,
+  changeDefaultPaymentMethodModel: typeof changeDefaultPaymentMethodModel
 }
 
 export const models: RootModel = {
@@ -128,7 +132,7 @@ export const models: RootModel = {
   updateSubscriptionMaxPricingLimitModel,
   suspendSubscriptionModel,
   activateSubscriptionModel,
-  createPaymentMethodModel,
+  createDefaultPaymentMethodModel,
   stepperSubscription,
   salesOrdersQueryModel,
   salesOrderDetailsModel,
@@ -152,4 +156,6 @@ export const models: RootModel = {
   sendContactFormModel,
   updateRequestedStyleModel,
   sendInvitationEmailsModel,
+  createNewPaymentMethodModel,
+  changeDefaultPaymentMethodModel
 }

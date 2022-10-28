@@ -507,6 +507,7 @@
             "YearValidation": "Lütfen geçerli bir yıl giriniz",
             "CvcValidation": "Lütfen geçerli bir CVC giriniz",
             "CardHolderNameValidation": "Lütfen sayı kullanmadan geçerli bir isim giriniz",
+            "CardNameValidation": "Bu kart ismine sahip başka bir kart bulunmakta.",
             "SetAsDefault": "Varsayılan Olarak Ata"
         },
         "Addresses": {

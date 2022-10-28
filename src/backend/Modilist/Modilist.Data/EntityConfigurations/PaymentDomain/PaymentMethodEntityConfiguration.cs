@@ -18,7 +18,7 @@ namespace Modilist.Data.EntityConfigurations.PaymentDomain
                 .HasForeignKey(x => x.AccountId)
                 .IsRequired();
 
-            builder.HasIndex(x => new { x.AccountId, x.CardUserKey, x.DeletedAt })
+            builder.HasIndex(x => new { x.AccountId, x.CardName, x.DeletedAt })
                 .IsUnique();
         }
     }

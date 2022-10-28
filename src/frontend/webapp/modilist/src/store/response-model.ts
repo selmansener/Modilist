@@ -19,3 +19,8 @@ export interface DQBResultDTO<T> {
     data: T[],
     count: number,
 }
+
+export function isResponseModel(object: any): object is ResponseModel {
+
+    return 'data' in object || 'status' in object || 'errors' in object || 'errorType' in object;
+}

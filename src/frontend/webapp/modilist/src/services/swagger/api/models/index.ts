@@ -12,6 +12,7 @@ export * from './body-type';
 export * from './city';
 export * from './create-account';
 export * from './create-address';
+export * from './create-new-payment-method';
 export * from './create-payment-method';
 export * from './create-product';
 export * from './create-return';

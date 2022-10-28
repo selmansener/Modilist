@@ -16,6 +16,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { CreateNewPaymentMethod } from '../models';
 import { CreatePaymentMethod } from '../models';
 import { PaymentDTO } from '../models';
 import { PaymentMethodDTO } from '../models';
@@ -32,8 +33,60 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1PaymentCreatePaymentMethodPost: async (body?: CreatePaymentMethod, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Payment.CreatePaymentMethod`;
+        apiV1PaymentCreateDefaultPaymentMethodPost: async (body?: CreatePaymentMethod, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/Payment.CreateDefaultPaymentMethod`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Addresses", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Returns", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Discounts", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (apiVersion !== undefined) {
+                localVarQueryParameter['api-version'] = apiVersion;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || (localVarRequestOptions.headers && localVarRequestOptions.headers['Content-Type'] === 'application/json');
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateNewPaymentMethod} [body] 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1PaymentCreateNewPaymentMethodPost: async (body?: CreateNewPaymentMethod, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/Payment.CreateNewPaymentMethod`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -224,6 +277,59 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {string} cardName 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1PaymentSetAsDefaultCardNamePost: async (cardName: string, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'cardName' is not null or undefined
+            if (cardName === null || cardName === undefined) {
+                throw new RequiredError('cardName','Required parameter cardName was null or undefined when calling apiV1PaymentSetAsDefaultCardNamePost.');
+            }
+            const localVarPath = `/api/v1/Payment.SetAsDefault/{cardName}`
+                .replace(`{${"cardName"}}`, encodeURIComponent(String(cardName)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("Bearer", ["https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Accounts", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/StylePreferences", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Addresses", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/PaymentMethods", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Subscriptions", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Products", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/SalesOrders", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Returns", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Discounts", "https://modilistauth.onmicrosoft.com/70773d38-9a72-4f72-af81-17eb6737353c/Development"])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (apiVersion !== undefined) {
+                localVarQueryParameter['api-version'] = apiVersion;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -240,8 +346,22 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1PaymentCreatePaymentMethodPost(body?: CreatePaymentMethod, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PaymentMethodDTO>>> {
-            const localVarAxiosArgs = await PaymentApiAxiosParamCreator(configuration).apiV1PaymentCreatePaymentMethodPost(body, apiVersion, options);
+        async apiV1PaymentCreateDefaultPaymentMethodPost(body?: CreatePaymentMethod, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PaymentMethodDTO>>> {
+            const localVarAxiosArgs = await PaymentApiAxiosParamCreator(configuration).apiV1PaymentCreateDefaultPaymentMethodPost(body, apiVersion, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {CreateNewPaymentMethod} [body] 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1PaymentCreateNewPaymentMethodPost(body?: CreateNewPaymentMethod, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PaymentMethodDTO>>> {
+            const localVarAxiosArgs = await PaymentApiAxiosParamCreator(configuration).apiV1PaymentCreateNewPaymentMethodPost(body, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -287,6 +407,20 @@ export const PaymentApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * 
+         * @param {string} cardName 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1PaymentSetAsDefaultCardNamePost(cardName: string, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PaymentMethodDTO>>> {
+            const localVarAxiosArgs = await PaymentApiAxiosParamCreator(configuration).apiV1PaymentSetAsDefaultCardNamePost(cardName, apiVersion, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -303,8 +437,18 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1PaymentCreatePaymentMethodPost(body?: CreatePaymentMethod, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<PaymentMethodDTO>> {
-            return PaymentApiFp(configuration).apiV1PaymentCreatePaymentMethodPost(body, apiVersion, options).then((request) => request(axios, basePath));
+        async apiV1PaymentCreateDefaultPaymentMethodPost(body?: CreatePaymentMethod, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<PaymentMethodDTO>> {
+            return PaymentApiFp(configuration).apiV1PaymentCreateDefaultPaymentMethodPost(body, apiVersion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateNewPaymentMethod} [body] 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1PaymentCreateNewPaymentMethodPost(body?: CreateNewPaymentMethod, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<PaymentMethodDTO>> {
+            return PaymentApiFp(configuration).apiV1PaymentCreateNewPaymentMethodPost(body, apiVersion, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -334,6 +478,16 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         async apiV1PaymentGetDefaultPaymentMethodGet(apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<PaymentMethodDTO>> {
             return PaymentApiFp(configuration).apiV1PaymentGetDefaultPaymentMethodGet(apiVersion, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {string} cardName 
+         * @param {string} [apiVersion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1PaymentSetAsDefaultCardNamePost(cardName: string, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<PaymentMethodDTO>> {
+            return PaymentApiFp(configuration).apiV1PaymentSetAsDefaultCardNamePost(cardName, apiVersion, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -352,8 +506,19 @@ export class PaymentApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public async apiV1PaymentCreatePaymentMethodPost(body?: CreatePaymentMethod, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<PaymentMethodDTO>> {
-        return PaymentApiFp(this.configuration).apiV1PaymentCreatePaymentMethodPost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    public async apiV1PaymentCreateDefaultPaymentMethodPost(body?: CreatePaymentMethod, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<PaymentMethodDTO>> {
+        return PaymentApiFp(this.configuration).apiV1PaymentCreateDefaultPaymentMethodPost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {CreateNewPaymentMethod} [body] 
+     * @param {string} [apiVersion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public async apiV1PaymentCreateNewPaymentMethodPost(body?: CreateNewPaymentMethod, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<PaymentMethodDTO>> {
+        return PaymentApiFp(this.configuration).apiV1PaymentCreateNewPaymentMethodPost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
@@ -385,5 +550,16 @@ export class PaymentApi extends BaseAPI {
      */
     public async apiV1PaymentGetDefaultPaymentMethodGet(apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<PaymentMethodDTO>> {
         return PaymentApiFp(this.configuration).apiV1PaymentGetDefaultPaymentMethodGet(apiVersion, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} cardName 
+     * @param {string} [apiVersion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public async apiV1PaymentSetAsDefaultCardNamePost(cardName: string, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<PaymentMethodDTO>> {
+        return PaymentApiFp(this.configuration).apiV1PaymentSetAsDefaultCardNamePost(cardName, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
 }

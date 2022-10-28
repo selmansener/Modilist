@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using Modilist.API.Configurations;
+using Modilist.Business.CQRS.AddressDomain.Commands;
+using Modilist.Business.CQRS.AddressDomain.DTOs;
 using Modilist.Business.CQRS.PaymentDomain.Commands;
 using Modilist.Business.CQRS.PaymentDomain.DTOs;
 using Modilist.Business.CQRS.PaymentDomain.Queries;
@@ -14,7 +16,6 @@ namespace Modilist.API.Area.API.Controllers
     public class PaymentController : APIBaseController
     {
         private readonly IMediator _mediator;
-
         public PaymentController(IMediator mediator)
         {
             _mediator = mediator;
@@ -47,13 +48,39 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
-        [HttpPost("[controller].CreatePaymentMethod")]
+        [HttpPost("[controller].CreateDefaultPaymentMethod")]
         [ProducesResponseType(typeof(PaymentMethodDTO), 200)]
-        public async Task<IActionResult> CreatePaymentMethod(CreatePaymentMethod input, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateDefaultPaymentMethod(CreatePaymentMethod input, CancellationToken cancellationToken)
         {
             input.AccountId = User.GetUserId();
 
             var response = await _mediator.Send(input, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
+        [HttpPost("[controller].CreateNewPaymentMethod")]
+        [ProducesResponseType(typeof(PaymentMethodDTO), 200)]
+        public async Task<IActionResult> CreateNewPaymentMethod(CreateNewPaymentMethod input, CancellationToken cancellationToken)
+        {
+            input.AccountId = User.GetUserId();
+
+            var response = await _mediator.Send(input, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [Authorize(nameof(AuthorizationPermissions.Addresses))]
+        [HttpPost("[controller].SetAsDefault/{cardName}")]
+        [ProducesResponseType(typeof(PaymentMethodDTO), 200)]
+        public async Task<IActionResult> SetAsDefault(string cardName, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new SetAsDefaultPaymentMethod
+            {
+                AccountId = User.GetUserId(),
+                CardName = cardName
+            }, cancellationToken);
 
             return Ok(response);
         }
@@ -66,7 +93,7 @@ namespace Modilist.API.Area.API.Controllers
         //{
         //    var response = await _mediator.Send(new DeletePaymentMethodCommand
         //    {
-                
+
         //    }, cancellationToken);
 
         //    return Ok(response);

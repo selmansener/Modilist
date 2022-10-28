@@ -1,6 +1,8 @@
 ﻿
 using FluentValidation;
 
+using Microsoft.EntityFrameworkCore;
+
 using Modilist.Domains.Base;
 using Modilist.Domains.Models.AccountDomain;
 
