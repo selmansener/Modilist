@@ -17,6 +17,8 @@ namespace Modilist.Business.CQRS.SubscriptionDomain.DTOs
 
         public SubscriptionState State { get; set; }
 
+        public SubscriptionPlan Plan { get; set; }
+
         public string MaxPricingLimit { get; set; }
     }
 }

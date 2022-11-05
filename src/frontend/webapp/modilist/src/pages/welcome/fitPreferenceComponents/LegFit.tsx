@@ -73,13 +73,8 @@ export function LegFits(props: LegFitsProps) {
             legFits.map(legFit => {
                 return {
                     value: legFit.value,
-                    element: <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                        <ImageComponent src={legFit.img} />
-                        <Typography variant="subtitle1" align="center">{legFit.name}</Typography>
-                    </Box>
+                    imageSrc: legFit.img,
+                    labelText: legFit.name
                 }
             })
         }

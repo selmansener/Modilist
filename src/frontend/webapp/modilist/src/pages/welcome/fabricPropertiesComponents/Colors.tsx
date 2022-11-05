@@ -5,28 +5,37 @@ import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
 
 enum Color {
-    Gold = "Gold",
-    Silver = "Silver",
-    Copper = "Copper"
+    Red = "Red",
+    Orange = "Orange",
+    Yellow = "Yellow",
+    Green = "Green",
+    Blue = "Blue",
+    NavyBlue = "NavyBlue",
+    Purple = "Purple",
+    Pink = "Pink",
+    Brown = "Brown",
+    Grey = "Grey",
+    White = "White",
+    Black = "Black"
 }
 
-interface AccessoryColorElement {
+interface ColorElement {
     name: string,
     value: string,
     img: string
 }
 
-export interface AccessoryColorsProps {
+export interface ColorsProps {
     value?: string | null;
     onChange: (values: string) => void;
 }
 
-export function AccessoryColors(props: AccessoryColorsProps) {
+export function Colors(props: ColorsProps) {
     const { t } = useTranslation();
     const { cdnImg: imgBaseHost } = config;
     const { value, onChange } = props;
 
-    const colors: AccessoryColorElement[] = Object.keys(Color).map(color => {
+    const colors: ColorElement[] = Object.keys(Color).map(color => {
         return {
             name: t(`Color.${color}`),
             value: color,
@@ -42,13 +51,13 @@ export function AccessoryColors(props: AccessoryColorsProps) {
             }} textAlign="center">
                 <Trans>
                     <Typography variant="h4" display="inline">
-                        {t("Pages.Welcome.FabricProperties.ExcludedAccessoryColors.1")}
+                        {t("Pages.Welcome.FabricProperties.ExcludedColors.1")}
                     </Typography>
                     <Typography variant="h4" display="inline" color={"error"} >
-                        {t("Pages.Welcome.FabricProperties.ExcludedAccessoryColors.2")}
+                        {t("Pages.Welcome.FabricProperties.ExcludedColors.2")}
                     </Typography>
                     <Typography variant="h4" display="inline">
-                        {t("Pages.Welcome.FabricProperties.ExcludedAccessoryColors.3")}
+                        {t("Pages.Welcome.FabricProperties.ExcludedColors.3")}
                     </Typography>
                     <Typography variant="h4" color="secondary" component={"span"}>
                         {t('Pages.Welcome.BodySize.Optional')}
@@ -56,18 +65,17 @@ export function AccessoryColors(props: AccessoryColorsProps) {
                 </Trans>
             </ Box>
         }
+        checkboxSx={{
+            p: 1,
+            mt: 2
+        }}
         isNegative
         contents={
             colors.map(colorType => {
                 return {
                     value: colorType.value,
-                    element: <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                        <ImageComponent src={colorType.img} />
-                        <Typography variant="subtitle1" align="center">{colorType.name}</Typography>
-                    </Box>
+                    imageSrc: colorType.img,
+                    labelText: colorType.name
                 }
             })
         }

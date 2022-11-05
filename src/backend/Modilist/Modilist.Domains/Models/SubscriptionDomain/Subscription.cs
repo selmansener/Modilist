@@ -19,6 +19,7 @@ namespace Modilist.Domains.Models.SubscriptionDomain
             State = SubscriptionState.Active;
             StartedAt = DateTime.UtcNow;
             MaxPricingLimit = "2500";
+            Plan = SubscriptionPlan.InEveryMonth;
         }
 
         public Guid AccountId { get; private set; }
@@ -40,6 +41,8 @@ namespace Modilist.Domains.Models.SubscriptionDomain
         public string MaxPricingLimit { get; private set; }
 
         public int MaxPricingLimitAsInt { get; private set; }
+
+        public SubscriptionPlan Plan { get; private set; }
 
         public IReadOnlyList<SubscriptionStateLog> StateLogs => _stateLogs;
 
@@ -66,6 +69,11 @@ namespace Modilist.Domains.Models.SubscriptionDomain
 
             MaxPricingLimit = maxPricingLimit;
             MaxPricingLimitAsInt = result;
+        }
+
+        public void SetPlan(SubscriptionPlan plan)
+        {
+            Plan = plan;
         }
 
         public void Suspend(IEnumerable<SubscriptionSuspentionReason> suspentionReasons)

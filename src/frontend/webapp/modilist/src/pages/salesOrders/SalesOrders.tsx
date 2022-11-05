@@ -120,7 +120,7 @@ export function SalesOrders() {
             </Grid>
             <Grid item container xs={12} spacing={4}>
                 {salesOrders?.data.map(salesOrder => {
-                    return <SalesOrderListItem salesOrder={salesOrder} />
+                    return <SalesOrderListItem key={salesOrder.id} salesOrder={salesOrder} />
                 })}
             </Grid>
             <Grid item xs={12} sx={{

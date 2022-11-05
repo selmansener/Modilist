@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Modilist.Domains.Models.AccountDomain;
 using Modilist.Domains.Models.SubscriptionDomain;
+using Modilist.Infrastructure.Shared.Enums;
 
 namespace Modilist.Data.EntityConfigurations.SubscriptionDomain
 {
@@ -25,6 +26,8 @@ namespace Modilist.Data.EntityConfigurations.SubscriptionDomain
                 .HasForeignKey<Subscription>(x => x.AccountId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Property(x => x.Plan).IsRequired().HasDefaultValue(SubscriptionPlan.InEveryMonth).HasConversion<string>();
         }
     }
 }

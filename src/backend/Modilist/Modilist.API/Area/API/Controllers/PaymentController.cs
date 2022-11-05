@@ -9,6 +9,8 @@ using Modilist.Business.CQRS.AddressDomain.DTOs;
 using Modilist.Business.CQRS.PaymentDomain.Commands;
 using Modilist.Business.CQRS.PaymentDomain.DTOs;
 using Modilist.Business.CQRS.PaymentDomain.Queries;
+using Modilist.Business.CQRS.SalesOrderDomain.DTOs;
+using Modilist.Domains.Models.SalesOrderDomain;
 using Modilist.Infrastructure.Shared.Extensions;
 
 namespace Modilist.API.Area.API.Controllers
@@ -102,12 +104,13 @@ namespace Modilist.API.Area.API.Controllers
         [Authorize(nameof(AuthorizationPermissions.PaymentMethods))]
         [HttpPost("[controller].Create/{salesOrderId}")]
         [ProducesResponseType(typeof(PaymentDTO), 200)]
-        public async Task<IActionResult> CreatePayment(int salesOrderId, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreatePayment(int salesOrderId, BillingAddressDTO billingAddress, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new CreatePayment
             {
                 AccountId = User.GetUserId(),
                 SalesOrderId = salesOrderId,
+                BillingAddress = billingAddress,
             }, cancellationToken);
 
             return Ok(response);

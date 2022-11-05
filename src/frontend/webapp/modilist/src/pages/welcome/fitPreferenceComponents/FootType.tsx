@@ -55,13 +55,8 @@ export function FootTypes(props: FootTypesProps) {
             footTypes.map(footType => {
                 return {
                     value: footType.value,
-                    element: <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                        <ImageComponent src={footType.img} />
-                        <Typography variant="subtitle1" align="center">{footType.name}</Typography>
-                    </Box>
+                    imageSrc: footType.img,
+                    labelText: footType.name
                 }
             })
         }

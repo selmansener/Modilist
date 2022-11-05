@@ -4,12 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Modilist.Data.DataAccess;
 using Modilist.Data.Repositories.Base;
 using Modilist.Domains.Models.SubscriptionDomain;
+using Modilist.Infrastructure.Shared.Enums;
 
 namespace Modilist.Data.Repositories.SubscriptionDomain
 {
     public interface ISubscriptionRepository : IBaseRepository<Subscription>
     {
         Task<Subscription?> GetByAccountIdAsync(Guid accountId, CancellationToken cancellationToken);
+
     }
 
     internal class SubscriptionRepository : BaseRepository<Subscription>, ISubscriptionRepository
@@ -23,5 +25,6 @@ namespace Modilist.Data.Repositories.SubscriptionDomain
         {
             return await GetAll().FirstOrDefaultAsync(x => x.AccountId == accountId, cancellationToken);
         }
+
     }
 }

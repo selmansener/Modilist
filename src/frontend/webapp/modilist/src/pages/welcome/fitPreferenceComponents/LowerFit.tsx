@@ -59,13 +59,8 @@ export function LowerFits(props: LowerFitsProps) {
             lowerFits.map(lowerFit => {
                 return {
                     value: lowerFit.value,
-                    element: <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                        <ImageComponent src={lowerFit.img} />
-                        <Typography variant="subtitle1" align="center">{lowerFit.name}</Typography>
-                    </Box>
+                    imageSrc: lowerFit.img,
+                    labelText: lowerFit.name
                 }
             })
         }

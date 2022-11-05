@@ -13,7 +13,8 @@ export const stepperSubscription = createModel<RootModel>()({
         personal: () => { },
         contactInfo: () => { },
         subscriptionDetails: () => { },
-        paymentMethod: () => { }
+        paymentMethod: () => { },
+        subscriptionPlan: () => { }
     } as StepperSubscription,
     reducers: {
         setPersonal: (state: StepperSubscription, callback: () => void) => {
@@ -38,6 +39,12 @@ export const stepperSubscription = createModel<RootModel>()({
             return {
                 ...state,
                 paymentMethod: callback
+            }
+        },
+        setSubscriptionPlan: (state: StepperSubscription, callback: () => void) => {
+            return {
+                ...state,
+                subscriptionPlan: callback
             }
         }
     }

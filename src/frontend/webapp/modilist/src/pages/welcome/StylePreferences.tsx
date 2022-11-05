@@ -12,7 +12,6 @@ import { AccountDTO, AccountState, Gender } from "../../services/swagger/api/mod
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { bgcolor } from "@mui/system";
 import SkipFormPaper from "./components/SkipFormPaper";
 
 enum MainCategory {
@@ -133,7 +132,7 @@ export function StylePreferences(props: StylePreferencesProps) {
         {
             name: t("ProductCategories.Jeans"),
             value: "Jeans",
-            img: `${imgBaseHost}/product-category-icons/Jeans.svg`, //SAYFADA GÖZÜKMÜYO
+            img: `${imgBaseHost}/product-category-icons/Jeans.svg`,
             mainCategory: MainCategory.Lower
         },
         {
@@ -162,7 +161,7 @@ export function StylePreferences(props: StylePreferencesProps) {
         },
         {
             name: t("ProductCategories.Sweater"),
-            value: "Sweater",                       //HALA ESKİ KAZAK RESMİ VAR
+            value: "Sweater",
             img: `${imgBaseHost}/product-category-icons/Sweater.svg`,
             mainCategory: MainCategory.Upper
         },
@@ -590,19 +589,18 @@ export function StylePreferences(props: StylePreferencesProps) {
         const upperCategories = productCategories.filter(x => x.mainCategory === MainCategory.Upper).map(category => {
             return {
                 value: category.value,
-                element: <Box key={category.name} sx={{
-                    display: 'flex',
-                    flexDirection: 'column'
-                }} >
-                    <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
-                </Box>
+                imageSrc: category.img,
+                labelText: category.name
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
                 justifyContent: 'flex-start'
+            }}
+            checkboxSx={{
+                p: 1,
+                mt: 2
             }}
             value={stylePreferences?.excludedUpperCategories ?? ""}
             label={
@@ -622,19 +620,18 @@ export function StylePreferences(props: StylePreferencesProps) {
         const lowerCategories = productCategories.filter(x => x.mainCategory === MainCategory.Lower).map(category => {
             return {
                 value: category.value,
-                element: <Box key={category.name} sx={{
-                    display: 'flex',
-                    flexDirection: 'column'
-                }}>
-                    <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
-                </Box>
+                imageSrc: category.img,
+                labelText: category.name,
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
                 justifyContent: 'flex-start'
+            }}
+            checkboxSx={{
+                p: 1,
+                mt: 2
             }}
             value={stylePreferences?.excludedLowerCategories ?? ""}
             label={
@@ -654,19 +651,18 @@ export function StylePreferences(props: StylePreferencesProps) {
         const outerCategories = productCategories.filter(x => x.mainCategory === MainCategory.Outer).map(category => {
             return {
                 value: category.value,
-                element: <Box key={category.name} sx={{
-                    display: 'flex',
-                    flexDirection: 'column'
-                }}>
-                    <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
-                </Box>
+                imageSrc: category.img,
+                labelText: category.name
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
                 justifyContent: 'flex-start'
+            }}
+            checkboxSx={{
+                p: 1,
+                mt: 2
             }}
             value={stylePreferences?.excludedOuterCategories ?? ""}
             label={
@@ -685,19 +681,18 @@ export function StylePreferences(props: StylePreferencesProps) {
         const accessoriesCategories = productCategories.filter(x => x.mainCategory === MainCategory.UnderwearPyjamasBeach).map(category => {
             return {
                 value: category.value,
-                element: <Box key={category.name} sx={{
-                    display: 'flex',
-                    flexDirection: 'column'
-                }}>
-                    <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
-                </Box>
+                imageSrc: category.img,
+                labelText: category.name
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
                 justifyContent: 'flex-start'
+            }}
+            checkboxSx={{
+                p: 1,
+                mt: 2
             }}
             value={stylePreferences?.excludedUnderwearCategories ?? ""}
             label={
@@ -717,19 +712,18 @@ export function StylePreferences(props: StylePreferencesProps) {
         const accessoriesCategories = productCategories.filter(x => x.mainCategory === MainCategory.Accessories).map(category => {
             return {
                 value: category.value,
-                element: <Box key={category.name} sx={{
-                    display: 'flex',
-                    flexDirection: 'column'
-                }}>
-                    <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
-                </Box>
+                imageSrc: category.img,
+                labelText: category.name
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
                 justifyContent: 'flex-start'
+            }}
+            checkboxSx={{
+                p: 1,
+                mt: 2
             }}
             value={stylePreferences?.excludedAccessoryCategories ?? ""}
             label={
@@ -749,19 +743,18 @@ export function StylePreferences(props: StylePreferencesProps) {
         const bagsCategories = productCategories.filter(x => x.mainCategory === MainCategory.Bags).map(category => {
             return {
                 value: category.value,
-                element: <Box key={category.name} sx={{
-                    display: 'flex',
-                    flexDirection: 'column'
-                }}>
-                    <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
-                </Box>
+                imageSrc: category.img,
+                labelText: category.name
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
                 justifyContent: 'flex-start'
+            }}
+            checkboxSx={{
+                p: 1,
+                mt: 2
             }}
             value={stylePreferences?.excludedBagCategories ?? ""}
             label={
@@ -781,19 +774,18 @@ export function StylePreferences(props: StylePreferencesProps) {
         const categories = productCategories.filter(x => x.mainCategory === MainCategory.Footwear).map(category => {
             return {
                 value: category.value,
-                element: <Box key={category.name} sx={{
-                    display: 'flex',
-                    flexDirection: 'column'
-                }}>
-                    <ImageComponent src={category.img} />
-                    <Typography sx={{ mt: 2 }} variant="body1" align="center">{category.name}</Typography>
-                </Box>
+                imageSrc: category.img,
+                labelText: category.name
             }
         });
 
         return <CustomCheckboxGroup
             sx={{
                 justifyContent: 'flex-start'
+            }}
+            checkboxSx={{
+                p: 1,
+                mt: 2
             }}
             value={stylePreferences?.excludedFootwearCategories ?? ""}
             label={
@@ -849,6 +841,10 @@ export function StylePreferences(props: StylePreferencesProps) {
                         >{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
                     </Box>
                 }
+                checkboxSx={{
+                    p: 1,
+                    mt: 2
+                }}
                 contents={bodyParts}
                 onChange={(values: string[]) => {
                     setFieldValue("bodyPartsToHighlight", values.length > 0 ? values.join(',') : "");
@@ -869,6 +865,10 @@ export function StylePreferences(props: StylePreferencesProps) {
                         >{t("Pages.Welcome.StylePreferences.Optional")}</Typography>
                     </Box>
                 }
+                checkboxSx={{
+                    p: 1,
+                    mt: 2
+                }}
                 isNegative
                 contents={bodyParts}
                 onChange={(values: string[]) => {
@@ -891,15 +891,8 @@ export function StylePreferences(props: StylePreferencesProps) {
     const bodyParts = _bodyParts.map(bodyPart => {
         return {
             value: bodyPart,
-            element: <Box key={bodyPart} sx={{
-                display: 'flex',
-                flexDirection: 'column'
-            }}>
-                <ImageComponent src={`${imgBaseHost}/body-parts/${bodyPart}.svg`} />
-                <Typography variant="body1" sx={{
-                    textAlign: 'center'
-                }}>{t(`Pages.Welcome.StylePreferences.BodyParts.${bodyPart}`)}</Typography>
-            </Box>
+            imageSrc: `${imgBaseHost}/body-parts/${bodyPart}.svg`,
+            labelText: t(`Pages.Welcome.StylePreferences.BodyParts.${bodyPart}`)
         }
     });
 

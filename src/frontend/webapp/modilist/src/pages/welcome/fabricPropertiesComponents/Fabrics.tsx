@@ -66,15 +66,17 @@ export function Fabrics(props: FabricsProps) {
             </Trans>
         </Box>
         }
+        checkboxSx={{
+            p: 1,
+            mt: 2
+        }}
         isNegative
         contents={
             fabrics.map(fabric => {
                 return {
                     value: fabric.value,
-                    element: <Box>
-                        <ImageComponent src={fabric.img} />
-                        <Typography variant="subtitle1" align="center">{fabric.name}</Typography>
-                    </Box>
+                    imageSrc: fabric.img,
+                    labelText: fabric.name
                 }
             })
         }

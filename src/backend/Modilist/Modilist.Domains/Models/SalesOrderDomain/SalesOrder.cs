@@ -1,4 +1,6 @@
 ﻿
+using Azure.Core;
+
 using Modilist.Domains.Base;
 using Modilist.Domains.Exceptions;
 using Modilist.Domains.Models.AccountDomain;
@@ -54,9 +56,11 @@ namespace Modilist.Domains.Models.SalesOrderDomain
 
         public IReadOnlyList<SalesOrderLineItem> LineItems => _lineItems;
 
-        public int? SalesOrderAddressId { get; set; }
+        public int? SalesOrderAddressId { get; private set; }
 
-        public SalesOrderAddress? SalesOrderAddress { get; set; }
+        public SalesOrderAddress? SalesOrderAddress { get; private set; }
+
+        public BillingAddress? BillingAddress { get; private set; }
 
         public SalesOrderLineItem AddLineItem(int productId, decimal price, decimal salesPrice)
         {
@@ -151,13 +155,47 @@ namespace Modilist.Domains.Models.SalesOrderDomain
             PreparedAt = DateTime.UtcNow;
         }
 
-        public void Completed()
+        public void Completed(BillingAddress billingAddress)
         {
             if (State == SalesOrderState.Completed)
             {
                 throw new SalesOrderAlreadyCompletedException(AccountId, Id);
             }
 
+            if(State != SalesOrderState.Delivered)
+            {
+                throw new InvalidOrderStateException(AccountId, Id, State, SalesOrderState.Delivered, "Complete" );
+            }
+
+            if(billingAddress == null)
+            {
+                throw new ArgumentNullException(nameof(billingAddress));
+            }
+
+            if (BillingAddress == null)
+            {
+                BillingAddress = billingAddress;
+            }
+
+            else
+            {
+                BillingAddress.UpdateBillingAddress(
+                    billingAddress.AddressName,
+                    billingAddress.City,
+                    billingAddress.District,
+                    billingAddress.FullAddress,
+                    billingAddress.Email,
+                    billingAddress.Phone,
+                    billingAddress.BillingType,
+                    billingAddress.FullName,
+                    billingAddress.ZipCode,
+                    billingAddress.IdNumber,
+                    billingAddress.CompanyName,
+                    billingAddress.TaxNumber,
+                    billingAddress.TaxOffice);
+            }
+
+           
             State = SalesOrderState.Completed;
             PreparedAt = DateTime.UtcNow;
         }

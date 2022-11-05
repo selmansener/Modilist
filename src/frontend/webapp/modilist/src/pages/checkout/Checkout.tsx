@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Checkbox, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, FormControl, FormControlLabel, FormHelperText, Grid, Link, Paper, TextField, Tooltip, Typography, useTheme } from "@mui/material";
+import { Alert, Box, Button, Checkbox, CircularProgress, Divider, FormControl, FormControlLabel, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, Link, MenuItem, Paper, Popper, Select, Tab, Tabs, TextField, Tooltip, Typography, useTheme } from "@mui/material";
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import format from "date-fns/format";
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
-import { AddressDTO, SalesOrderLineItemState } from "../../services/swagger/api";
+import { AddressDTO, BillingAddressDTO, BillingType, SalesOrderLineItemState } from "../../services/swagger/api";
 import { RootState, Dispatch } from "../../store/store";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import CurrencyLiraIcon from '@mui/icons-material/CurrencyLira';
@@ -19,17 +19,28 @@ import { AddressSelection } from "../../components/addressSelection/AddressSelec
 import trLocale from 'date-fns/locale/tr';
 import WarningAmberOutlinedIcon from '@mui/icons-material/WarningAmberOutlined';
 import Cards from 'react-credit-cards';
+import { Cities } from "../welcome/address/Cities";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Districts } from "../welcome/address/Districts";
+import { IMaskInput } from "react-imask";
+import BillingAddressIndividual, { IndividualBillingAddress } from "./components/BillingAddressIndividual";
+import BillingAddressCorporate, { CorporateBillingAddress } from "./components/BillingAddressCorporate";
 
 export function Checkout() {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const { salesOrderId } = useParams();
+
     const dispatch = useDispatch<Dispatch>();
     const { isBusy: isBusySalesOrder, data: salesOrder, status: salesOrderStatus } = useSelector((state: RootState) => state.salesOrderDetailsModel);
     const { isBusy: isBusyPaymentMethod, data: paymentMethod, status: paymentMethodStatus } = useSelector((state: RootState) => state.getDefaultPaymentMethodModel);
     const { isBusy: isBusyGetReturn, data: getReturnData, status: getReturnStatus } = useSelector((state: RootState) => state.getReturnModel);
     const { isBusy: isBusyCreateReturn, data: createReturnData, status: createReturnStatus } = useSelector((state: RootState) => state.createReturnModel);
     const { isBusy: isBusyCreatePayment, data: createPaymentData, status: createPaymentStatus } = useSelector((state: RootState) => state.createPaymentModel);
+
+
+    const isBusy = isBusySalesOrder || isBusyPaymentMethod || isBusyGetReturn || isBusyCreateReturn
     const { cdn, cdnImg: imgBaseHost } = config;
     const now = new Date();
     const minDate = addDays(now, 2);
@@ -41,6 +52,10 @@ export function Checkout() {
     const [isCheckoutTouched, setIsCheckoutTouched] = useState<boolean>(false);
     const [isReturnPolicyChecked, setIsReturnPolicyChecked] = useState<boolean>(false);
     const [isReturnTouched, setIsReturnTouched] = useState<boolean>(false);
+    const [selectedTabsIndex, setSelectedTabsIndex] = useState<number>(0);
+    const [isBillingFormValid, setIsBillingFormValid] = useState<boolean>(false);
+    const [billingFormData, setBillingFormData] = useState<IndividualBillingAddress | CorporateBillingAddress>();
+
     const theme = useTheme();
 
     const everyItemReturned = salesOrder?.lineItems?.every(x => x.state === SalesOrderLineItemState.Returned);
@@ -62,7 +77,7 @@ export function Checkout() {
             dispatch.createPaymentModel.RESET();
             navigate(`/sales-orders/${salesOrderId}/checkout-completed`);
         }
-        else if(createPaymentStatus !== 200 && createPaymentStatus !== 0) {
+        else if (createPaymentStatus !== 200 && createPaymentStatus !== 0) {
             navigate(`/sales-orders/${salesOrderId}/checkout-failed`);
             dispatch.createPaymentModel.RESET();
         }
@@ -112,9 +127,19 @@ export function Checkout() {
         }
 
         if (salesOrderId && !isBusyCreatePayment && createPaymentStatus === 0) {
-            dispatch.createPaymentModel.createPayment(parseInt(salesOrderId));
+            dispatch.createPaymentModel.createPayment({
+                salesOrderId: parseInt(salesOrderId),
+                data: {
+                    ...(billingFormData as BillingAddressDTO),
+                    billingType: selectedTabsIndex === 0 ? BillingType.Individual : BillingType.Organization
+                }
+            });
         }
     }
+
+    const handleTabsChange = (event: React.SyntheticEvent, newValue: number) => {
+        setSelectedTabsIndex(newValue);
+    };
 
     const getMaskedPhone = () => {
         const phone = selectedAddress?.phone;
@@ -203,10 +228,10 @@ export function Checkout() {
 
     const isCheckoutDisabled = () => {
         if (salesOrder?.lineItems?.every(x => x.state === SalesOrderLineItemState.Sold)) {
-            return false;
+            return !isBillingFormValid;
         }
 
-        return getReturnStatus !== 200;
+        return getReturnStatus !== 200 || !isBillingFormValid;
     }
 
     const RenderReturnedLineItems = () => {
@@ -248,11 +273,13 @@ export function Checkout() {
             </Grid>
         })
     }
-
+    
     const RenderReturnsSection = () => {
         if (salesOrder?.lineItems?.every(lineItem => lineItem.state === SalesOrderLineItemState.Sold)) {
             return <></>
         }
+
+
 
         return <React.Fragment>
             <Grid item container xs={12} spacing={2}>
@@ -419,6 +446,7 @@ export function Checkout() {
             <AddressSelection open={addressSelectionOpen} handleClose={handleAddressSelectionClose} onSelect={handleAddressSelection} contentText="Pages.Checkout.ChangeReturnAddressModal" />
         </React.Fragment>
     }
+
     return (
         <Grid item container xs={12} spacing={2}>
             <Grid item xs={6}>
@@ -555,115 +583,149 @@ export function Checkout() {
                     </Grid>
                 </Grid>
             </Grid>
+            {/* Fatura Adresi */}
+
             <Grid item container xs={12} spacing={2}>
-                {everyItemReturned && <Grid item xs={12} sx={{
-                    display: 'flex',
-                    flexBasis: 'max-content',
-                    justifyContent: 'flex-end'
-                }}>
-                    <Alert variant="filled" severity="warning" icon={<WarningAmberOutlinedIcon color="primary" />}>
+                <Grid item xs={12}>
+                    <Typography variant="h3" align="center" mt={6}>{t("Pages.Checkout.BillingAddress")}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Tabs
+                        value={selectedTabsIndex}
+                        onChange={handleTabsChange}
+                        textColor="secondary"
+                        indicatorColor="secondary"
+                        centered
+                        variant='fullWidth'
+                        aria-label="basic tabs example"
+                    >
+                        <Tab
+                            label={t("Pages.Checkout.Individual")}
+                        />
+                        <Tab
+                            label={t("Pages.Checkout.Corporate")}
+                        />
+                    </Tabs>
+                    {selectedTabsIndex === 0 ? <BillingAddressIndividual onComplete={(isValid: boolean, formData: IndividualBillingAddress) => {
+                        setIsBillingFormValid(isValid);
+                        setBillingFormData(formData);
+                    }} /> : <BillingAddressCorporate onComplete={(isValid: boolean, formData: CorporateBillingAddress) => {
+                        setIsBillingFormValid(isValid);
+                        setBillingFormData(formData);
+                    }} />}
+                </Grid>
+                {/* Fatura Adresi */}
+
+                <Grid item container xs={12} spacing={2}>
+                    {everyItemReturned && <Grid item xs={12} sx={{
+                        display: 'flex',
+                        flexBasis: 'max-content',
+                        justifyContent: 'flex-end'
+                    }}>
+                        <Alert variant="filled" severity="warning" icon={<WarningAmberOutlinedIcon color="primary" />}>
+                            <Typography variant="body1" align="right" fontWeight={800}>
+                                {t("Pages.SalesOrderFeedback.ServicePriceWarning")}
+                            </Typography>
+                        </Alert>
+                    </Grid>}
+                    <Grid item xs={11}>
                         <Typography variant="body1" align="right" fontWeight={800}>
-                            {t("Pages.SalesOrderFeedback.ServicePriceWarning")}
+                            {t("Pages.Checkout.SoldProductPrice")}
                         </Typography>
-                    </Alert>
-                </Grid>}
-                <Grid item xs={11}>
-                    <Typography variant="body1" align="right" fontWeight={800}>
-                        {t("Pages.Checkout.SoldProductPrice")}
-                    </Typography>
+                    </Grid>
+                    <Grid item xs={1}>
+                        <Typography variant="body1" align="right">
+                            {soldProductPrice()} TL
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={11}>
+                        <Typography variant="body1" align="right" fontWeight={800}>
+                            {t("Pages.Checkout.VATPrice")}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={1}>
+                        <Typography variant="body1" align="right">
+                            {vatPrice()} TL
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={11}>
+                        <Typography variant="body1" align="right" fontWeight={800} color={everyItemReturned ? theme.palette.error.main : theme.palette.primary.main}>
+                            {t("Pages.SalesOrderFeedback.ServicePrice")}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={1}>
+                        <Typography variant="body1" align="right" color={everyItemReturned ? theme.palette.error.main : theme.palette.primary.main}>
+                            {servicePrice} TL
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={11}>
+                        <Typography variant="body1" align="right" fontWeight={800}>
+                            {t("Pages.Checkout.TotalProductPrice")}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={1}>
+                        <Typography variant="body1" align="right">
+                            {totalPrice()} TL
+                        </Typography>
+                    </Grid>
                 </Grid>
-                <Grid item xs={1}>
-                    <Typography variant="body1" align="right">
-                        {soldProductPrice()} TL
-                    </Typography>
+                <Grid item xs={12} sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                }}>
+                    <FormControl error={isCheckoutTouched && !isFormChecked}>
+                        <FormControlLabel control={<Checkbox checked={isFormChecked} onClick={(e) => {
+                            setIsFormChecked(!isFormChecked);
+                            setIsCheckoutTouched(false);
+                        }} />} label={
+                            <Trans>
+                                <Link href={`${cdn}/contracts/pre-information-form.pdf`} target="_blank">
+                                    {t("Pages.Checkout.TermsInfo.1")}
+                                </Link>
+                                <Typography variant="body1" component="span">
+                                    {t("Pages.Checkout.TermsInfo.2")}
+                                </Typography>
+                                <Link href={`${cdn}/contracts/distant-sales-contract.pdf`} target="_blank">
+                                    {t("Pages.Checkout.TermsInfo.3")}
+                                </Link>
+                                <Typography variant="body1" component="span">
+                                    {t("Pages.Checkout.TermsInfo.4")}
+                                </Typography>
+                            </Trans>
+                        } />
+                        {isCheckoutTouched && !isFormChecked && <FormHelperText color="error">{t("Pages.Checkout.TermsInfoError")}</FormHelperText>}
+                    </FormControl>
+                    {isCheckoutDisabled() ?
+                        <Tooltip
+                            title={t("Pages.Checkout.ReturnWarning")}
+                            placement="left"
+                        >
+                            <span>
+                                <Button
+                                    disabled
+                                    variant="contained"
+                                >
+                                    {t("Pages.Checkout.Checkout")}
+                                </Button>
+                            </span>
+                        </Tooltip>
+                        : <Button
+                            disabled={isBusyCreatePayment}
+                            variant="contained"
+                            onClick={handleCheckout}
+                        >
+                            {isBusyCreatePayment && <CircularProgress
+                                sx={{
+                                    width: "18px !important",
+                                    height: "18px !important",
+                                    mr: 2
+                                }}
+                            />}
+                            {t("Pages.Checkout.Checkout")}
+                        </Button>
+                    }
                 </Grid>
-                <Grid item xs={11}>
-                    <Typography variant="body1" align="right" fontWeight={800}>
-                        {t("Pages.Checkout.VATPrice")}
-                    </Typography>
-                </Grid>
-                <Grid item xs={1}>
-                    <Typography variant="body1" align="right">
-                        {vatPrice()} TL
-                    </Typography>
-                </Grid>
-                <Grid item xs={11}>
-                    <Typography variant="body1" align="right" fontWeight={800} color={everyItemReturned ? theme.palette.error.main : theme.palette.primary.main}>
-                        {t("Pages.SalesOrderFeedback.ServicePrice")}
-                    </Typography>
-                </Grid>
-                <Grid item xs={1}>
-                    <Typography variant="body1" align="right" color={everyItemReturned ? theme.palette.error.main : theme.palette.primary.main}>
-                        {servicePrice} TL
-                    </Typography>
-                </Grid>
-                <Grid item xs={11}>
-                    <Typography variant="body1" align="right" fontWeight={800}>
-                        {t("Pages.Checkout.TotalProductPrice")}
-                    </Typography>
-                </Grid>
-                <Grid item xs={1}>
-                    <Typography variant="body1" align="right">
-                        {totalPrice()} TL
-                    </Typography>
-                </Grid>
-            </Grid>
-            <Grid item xs={12} sx={{
-                display: 'flex',
-                justifyContent: 'space-between'
-            }}>
-                <FormControl error={isCheckoutTouched && !isFormChecked}>
-                    <FormControlLabel control={<Checkbox checked={isFormChecked} onClick={(e) => {
-                        setIsFormChecked(!isFormChecked);
-                        setIsCheckoutTouched(false);
-                    }} />} label={
-                        <Trans>
-                            <Link href={`${cdn}/contracts/pre-information-form.pdf`} target="_blank">
-                                {t("Pages.Checkout.TermsInfo.1")}
-                            </Link>
-                            <Typography variant="body1" component="span">
-                                {t("Pages.Checkout.TermsInfo.2")}
-                            </Typography>
-                            <Link href={`${cdn}/contracts/distant-sales-contract.pdf`} target="_blank">
-                                {t("Pages.Checkout.TermsInfo.3")}
-                            </Link>
-                            <Typography variant="body1" component="span">
-                                {t("Pages.Checkout.TermsInfo.4")}
-                            </Typography>
-                        </Trans>
-                    } />
-                    {isCheckoutTouched && !isFormChecked && <FormHelperText color="error">{t("Pages.Checkout.TermsInfoError")}</FormHelperText>}
-                </FormControl>
-                {isCheckoutDisabled() ?
-                    <Tooltip
-                        title={t("Pages.Checkout.ReturnWarning")}
-                        placement="left"
-                    >
-                        <span>
-                            <Button
-                                disabled
-                                variant="contained"
-                            >
-                                {t("Pages.Checkout.Checkout")}
-                            </Button>
-                        </span>
-                    </Tooltip>
-                    : <Button
-                        disabled={isBusyCreatePayment}
-                        variant="contained"
-                        onClick={handleCheckout}
-                    >
-                        {isBusyCreatePayment && <CircularProgress
-                            sx={{
-                                width: "18px !important",
-                                height: "18px !important",
-                                mr: 2
-                            }}
-                        />}
-                        {t("Pages.Checkout.Checkout")}
-                    </Button>
-                }
             </Grid>
         </Grid>
     )
-}
+} 

@@ -1,11 +1,11 @@
 import { Alert, Box, Button, CircularProgress, FormControl, FormHelperText, Grid, Snackbar, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Colors } from "./stylePreferenceComponents/Colors";
-import { ColorTypes } from "./stylePreferenceComponents/ColorTypes";
-import { Fabrics } from "./stylePreferenceComponents/Fabrics";
-import { Patterns } from "./stylePreferenceComponents/Patterns";
-import { AccessoryColors } from "./stylePreferenceComponents/AccessoryColors";
+import { Colors } from "./fabricPropertiesComponents/Colors";
+import { ColorTypes } from "./fabricPropertiesComponents/ColorTypes";
+import { Fabrics } from "./fabricPropertiesComponents/Fabrics";
+import { Patterns } from "./fabricPropertiesComponents/Patterns";
+import { AccessoryColors } from "./fabricPropertiesComponents/AccessoryColors";
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import { Dispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";

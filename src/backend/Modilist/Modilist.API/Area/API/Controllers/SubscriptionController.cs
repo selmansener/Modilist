@@ -49,12 +49,12 @@ namespace Modilist.API.Area.API.Controllers
 
 
         [Authorize(nameof(AuthorizationPermissions.Subscriptions))]
-        [HttpPost("[controller].UpdateMaxPricingLimit")]
+        [HttpPost("[controller].Update")]
         [ProducesResponseType(typeof(SubscriptionDTO), 200)]
-        public async Task<IActionResult> UpdateMaxPricingLimit(UpdateSubscriptionMaxPricingLimit input, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update(UpdateSubscription input, CancellationToken cancellationToken)
         {
             input.AccountId = User.GetUserId();
-
+         
             var subscription = await _mediator.Send(input, cancellationToken);
 
             return Ok(subscription);

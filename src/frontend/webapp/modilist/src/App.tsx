@@ -1,6 +1,6 @@
 import './App.css';
 import { AuthenticatedTemplate, MsalProvider, UnauthenticatedTemplate } from "@azure/msal-react";
-import { createTheme, ThemeOptions, ThemeProvider, responsiveFontSizes, PaletteColorOptions } from '@mui/material';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material';
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import Backend from 'i18next-http-backend';
@@ -19,6 +19,7 @@ declare module '@mui/material/styles' {
   interface PaletteColor {
     transparent?: string;
   }
+
   interface SimplePaletteColorOptions {
     transparent?: string;
   }

@@ -12,7 +12,7 @@ export default function Unauthenticated() {
             .catch(e => {
                 console.log(e);
             });
-    })
+    }, []);
 
     return (
         <React.Fragment>

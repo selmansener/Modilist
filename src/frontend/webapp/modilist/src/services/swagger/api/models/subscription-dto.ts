@@ -11,6 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SubscriptionPlan } from './subscription-plan';
 import { SubscriptionState } from './subscription-state';
 /**
  * 
@@ -54,6 +55,12 @@ export interface SubscriptionDTO {
      * @memberof SubscriptionDTO
      */
     state?: SubscriptionState;
+    /**
+     * 
+     * @type {SubscriptionPlan}
+     * @memberof SubscriptionDTO
+     */
+    plan?: SubscriptionPlan;
     /**
      * 
      * @type {string}

@@ -2,13 +2,12 @@ import { Alert, Button, CircularProgress, Grid, Snackbar } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { string } from 'yup';
-import { upsertAddressModel } from '../../store/models/addresses/UpsertAddress';
 import { Dispatch, RootState } from '../../store/store';
 import ContactInfo from './subscriptionComponents/ContactInfo';
 import PaymentMethod from './subscriptionComponents/PaymentMethod';
 import Personal from './subscriptionComponents/Personal';
 import { SubscriptionDetails } from './subscriptionComponents/SubscriptionDetails';
+import { SubscriptionInformation } from './subscriptionComponents/SubscriptionInformation';
 
 export function Subscription() {
     const { t } = useTranslation();
@@ -17,12 +16,12 @@ export function Subscription() {
     const { isBusy: updateAccountIsBusy, status: updateAccountStatus } = useSelector((state: RootState) => state.updateAccountModel);
     const { isBusy: getDefaultAddressIsBusy } = useSelector((state: RootState) => state.getDefaultAddressModel);
     const { isBusy: upsertAddressIsBusy, status: upsertAddressStatus } = useSelector((state: RootState) => state.upsertAddressModel);
-    const { isBusy: createPaymentMethodIsBusy, status: createPaymentMethodStatus } = useSelector((state: RootState) => state.createPaymentMethodModel);
-    const { isBusy: updateSubscriptionMaxPricingLimitIsBusy, status: updateSubscriptionMaxPricingLimitStatus } = useSelector((state: RootState) => state.updateSubscriptionMaxPricingLimitModel);
+    const { isBusy: createPaymentMethodIsBusy, status: createPaymentMethodStatus } = useSelector((state: RootState) => state.createDefaultPaymentMethodModel);
+    const { isBusy: updateSubscriptiontIsBusy, status: updateSubscriptionStatus } = useSelector((state: RootState) => state.updateSubscriptionModel);
     const { personal, contactInfo, paymentMethod, subscriptionDetails } = useSelector((state: RootState) => state.stepperSubscription);
-    const isBusy = getAccountIsBusy || updateAccountIsBusy || getDefaultAddressIsBusy || upsertAddressIsBusy || createPaymentMethodIsBusy || updateSubscriptionMaxPricingLimitIsBusy;
+    const isBusy = getAccountIsBusy || updateAccountIsBusy || getDefaultAddressIsBusy || upsertAddressIsBusy || createPaymentMethodIsBusy || updateSubscriptiontIsBusy;
     const [snackbarStatus, setSnackbarStatus] = useState(false);
-    const statusList = [updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionMaxPricingLimitStatus];
+    const statusList = [updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionStatus];
 
     useEffect(() => {
         window.scrollTo({
@@ -39,17 +38,19 @@ export function Subscription() {
             }
         });
 
-        if (updateAccountStatus === 200 && upsertAddressStatus === 200 && createPaymentMethodStatus === 200 && updateSubscriptionMaxPricingLimitStatus === 200) {
+        console.log(updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionStatus)
+        if (updateAccountStatus === 200 && upsertAddressStatus === 200 && createPaymentMethodStatus === 200 && updateSubscriptionStatus === 200) {
             dispatch.welcomePageStepper.next();
         }
 
-    }, [updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionMaxPricingLimitStatus])
+    }, [updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionStatus])
 
 
     return (
         <Grid item container spacing={4}>
             <Personal />
             <ContactInfo />
+            <SubscriptionInformation />
             <SubscriptionDetails />
             <PaymentMethod />
             <Grid item container xs={6} justifyContent="flex-start">

@@ -130,7 +130,7 @@ export function SizeInfo(props: SizeInfoProps) {
             left: 0,
             behavior: 'smooth'
         })
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (!getAccountIsBusy && account === undefined) {
@@ -240,7 +240,7 @@ export function SizeInfo(props: SizeInfoProps) {
     }
 
     return (
-        <Grid item container xs={12} spacing={2}>
+        <Grid item container xs={12} spacing={4}>
             {account?.gender !== Gender.None &&
                 <>
                     <Grid item xs={12}>
@@ -461,44 +461,48 @@ export function SizeInfo(props: SizeInfoProps) {
             </Grid>
 
             <Grid item xs={12}>
-                <Typography variant="h4" component={"span"}>
-                    {t('Pages.Welcome.BodySize.HeaderBodySize')}
-                </Typography>
-                <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                <Box mb={4}>
+                    <Typography variant="h4" component={"span"}>
+                        {t('Pages.Welcome.BodySize.HeaderBodySize')}
+                    </Typography>
+                    <Typography variant="h4" color="secondary" component={"span"}>{t("MainCategories.Optional")}</Typography>
+                </Box>
             </Grid>
 
             <React.Fragment>
-                <Grid item container xs={12} spacing={2} alignItems="center">
-                    <Box sx={{
-                        display: 'flex',
-                        backgroundColor: theme.palette.secondary.transparent,
-                        borderRadius: 2,
-                        p: 4,
-                        alignItems: 'center',
-                        [theme.breakpoints.down("md")]: {
-                            flexDirection: "column",
-                            ml: 2,
-                            mt: 2
-                        }
-                    }}>
-                        <Grid item xs={12} display={{ xs: "flex", md: "none" }} mb={2} justifyContent="flex-end">
-                            <ImageComponent src={`${imgBaseHost}/common/body-size-discount.png`} />
-                        </Grid>
-                        <Grid item xs={12} md={6} textAlign="center">
-                            <Typography mb={2} variant="h3" color={theme.palette.secondary.main}>
-                                {t("Pages.Welcome.BodySize.DiscountInfoTitle.1")}
-                            </Typography>
-                            <Typography mb={2} variant="h3">
-                                {t("Pages.Welcome.BodySize.DiscountInfoTitle.2")}
-                            </Typography>
-                            <Typography variant="body1">
-                                {t("Pages.Welcome.BodySize.DiscountInfo")}
-                            </Typography>
-                        </Grid>
-                        <Grid item md={6} display={{ xs: "none", md: "flex" }} justifyContent="flex-end">
-                            <ImageComponent src={`${imgBaseHost}/common/body-size-discount.png`} />
-                        </Grid>
-                    </Box>
+                <Grid item container xs={12} spacing={4} alignItems="center">
+                    <Grid item xs={12}>
+                        <Box sx={{
+                            display: 'flex',
+                            backgroundColor: theme.palette.secondary.transparent,
+                            borderRadius: 2,
+                            p: 4,
+                            alignItems: 'center',
+                            [theme.breakpoints.down("md")]: {
+                                flexDirection: "column",
+                                ml: 2,
+                                mt: 2
+                            }
+                        }}>
+                            <Grid item xs={12} display={{ xs: "flex", md: "none" }} mb={2} justifyContent="flex-end">
+                                <ImageComponent src={`${imgBaseHost}/common/body-size-discount.png`} />
+                            </Grid>
+                            <Grid item xs={12} md={6} textAlign="center">
+                                <Typography mb={2} variant="h3" color={theme.palette.secondary.main}>
+                                    {t("Pages.Welcome.BodySize.DiscountInfoTitle.1")}
+                                </Typography>
+                                <Typography mb={2} variant="h3">
+                                    {t("Pages.Welcome.BodySize.DiscountInfoTitle.2")}
+                                </Typography>
+                                <Typography variant="body1">
+                                    {t("Pages.Welcome.BodySize.DiscountInfo")}
+                                </Typography>
+                            </Grid>
+                            <Grid item md={6} display={{ xs: "none", md: "flex" }} justifyContent="flex-end">
+                                <ImageComponent src={`${imgBaseHost}/common/body-size-discount.png`} />
+                            </Grid>
+                        </Box>
+                    </Grid>
                 </Grid>
                 {
                     bodySizes.map((bodySize, index) => {

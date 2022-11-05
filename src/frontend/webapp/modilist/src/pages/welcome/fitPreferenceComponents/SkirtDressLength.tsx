@@ -57,13 +57,8 @@ export function SkirtDressLengths(props: SkirtDressLengthsProps) {
             skirtDressLengths.map(skirtDressLength => {
                 return {
                     value: skirtDressLength.value,
-                    element: <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                        <ImageComponent src={skirtDressLength.img} />
-                        <Typography variant="subtitle1" align="center">{skirtDressLength.name}</Typography>
-                    </Box>
+                    imageSrc: skirtDressLength.img,
+                    labelText: skirtDressLength.name
                 }
             })
         }

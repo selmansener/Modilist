@@ -1,10 +1,10 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../../App";
-import { SubscriptionDTO, SubscriptionState, UpdateSubscriptionMaxPricingLimit } from "../../../services/swagger/api";
+import { SubscriptionDTO, SubscriptionPlan, SubscriptionState, UpdateSubscription } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 
-export const updateSubscriptionMaxPricingLimitModel = createModel<RootModel>()({
+export const updateSubscriptionModel = createModel<RootModel>()({
     state: {
         isBusy: false,
         data: {
@@ -15,6 +15,7 @@ export const updateSubscriptionMaxPricingLimitModel = createModel<RootModel>()({
             closedAt: undefined,
             state: SubscriptionState.None,
             maxPricingLimit: "0",
+            plan: SubscriptionPlan.InEveryMonth
         },
         status: 0
     } as ResponseModel<SubscriptionDTO>,
@@ -43,18 +44,18 @@ export const updateSubscriptionMaxPricingLimitModel = createModel<RootModel>()({
         }
     },
     effects: (dispatch) => {
-        const { updateSubscriptionMaxPricingLimitModel } = dispatch
+        const { updateSubscriptionModel } = dispatch
         return {
-            async updateSubscriptionMaxPricingLimit(input: UpdateSubscriptionMaxPricingLimit): Promise<any> {
-                updateSubscriptionMaxPricingLimitModel.BUSY();
+            async updateSubscription(input: UpdateSubscription): Promise<any> {
+                updateSubscriptionModel.BUSY();
 
-                const response = await api.subscriptions.apiV1SubscriptionUpdateMaxPricingLimitPost(input);
+                const response = await api.subscriptions.apiV1SubscriptionUpdatePost(input);
 
                 if (response.status === 200) {
-                    updateSubscriptionMaxPricingLimitModel.HANDLE_RESPONSE(response.data, response.status);
+                    updateSubscriptionModel.HANDLE_RESPONSE(response.data, response.status);
                 }
                 else {
-                    updateSubscriptionMaxPricingLimitModel.HANDLE_EXCEPTION(response.status);
+                    updateSubscriptionModel.HANDLE_EXCEPTION(response.status);
                 }
             }
         }

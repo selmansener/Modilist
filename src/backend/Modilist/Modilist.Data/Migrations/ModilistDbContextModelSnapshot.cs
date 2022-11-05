@@ -25,6 +25,9 @@ namespace Modilist.Data.Migrations
             modelBuilder.HasSequence("Address")
                 .IncrementsBy(10);
 
+            modelBuilder.HasSequence("BillingAddress")
+                .IncrementsBy(10);
+
             modelBuilder.HasSequence("Discount")
                 .IncrementsBy(10);
 
@@ -867,6 +870,109 @@ namespace Modilist.Data.Migrations
                     b.ToTable("ReturnLineItems");
                 });
 
+            modelBuilder.Entity("Modilist.Domains.Models.SalesOrderDomain.BillingAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "BillingAddress");
+
+                    b.Property<string>("AddressName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BillingType")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasDefaultValue("None");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CompanyName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DeletedById")
+                        .HasColumnType("int");
+
+                    b.Property<string>("District")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FullAddress")
+                        .IsRequired()
+                        .HasMaxLength(2500)
+                        .HasColumnType("nvarchar(2500)");
+
+                    b.Property<string>("FullName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("IdNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("SalesOrderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TaxNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("TaxOffice")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ZipCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SalesOrderId")
+                        .IsUnique();
+
+                    b.ToTable("BillingAddresses");
+                });
+
             modelBuilder.Entity("Modilist.Domains.Models.SalesOrderDomain.LineItemFeedback", b =>
                 {
                     b.Property<int>("Id")
@@ -1536,6 +1642,13 @@ namespace Modilist.Data.Migrations
                     b.Property<int>("MaxPricingLimitAsInt")
                         .HasColumnType("int");
 
+                    b.Property<string>("Plan")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasDefaultValue("InEveryMonth");
+
                     b.Property<DateTime>("StartedAt")
                         .HasColumnType("datetime2");
 
@@ -1812,6 +1925,17 @@ namespace Modilist.Data.Migrations
                     b.Navigation("Return");
                 });
 
+            modelBuilder.Entity("Modilist.Domains.Models.SalesOrderDomain.BillingAddress", b =>
+                {
+                    b.HasOne("Modilist.Domains.Models.SalesOrderDomain.SalesOrder", "SalesOrder")
+                        .WithOne("BillingAddress")
+                        .HasForeignKey("Modilist.Domains.Models.SalesOrderDomain.BillingAddress", "SalesOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SalesOrder");
+                });
+
             modelBuilder.Entity("Modilist.Domains.Models.SalesOrderDomain.LineItemFeedback", b =>
                 {
                     b.HasOne("Modilist.Domains.Models.SalesOrderDomain.SalesOrderLineItem", "SalesOrderLineItem")
@@ -2003,6 +2127,8 @@ namespace Modilist.Data.Migrations
 
             modelBuilder.Entity("Modilist.Domains.Models.SalesOrderDomain.SalesOrder", b =>
                 {
+                    b.Navigation("BillingAddress");
+
                     b.Navigation("LineItems");
 
                     b.Navigation("Payment");

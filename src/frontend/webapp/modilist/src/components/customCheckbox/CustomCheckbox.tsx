@@ -2,17 +2,20 @@ import { Badge, Box, styled, SxProps, Theme, Typography, useTheme } from "@mui/m
 import React, { useEffect, useState } from "react";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { ImageComponent } from "../image/ImageComponent";
 
 interface CustomCheckboxProps {
     value: string;
     isNegative: boolean;
+    label: string;
     checked: boolean;
     greyscale?: boolean;
     onChange: (checked: boolean, value: string) => void;
+    sx?: SxProps<Theme>;
 }
 
 function CustomCheckbox(props: React.PropsWithChildren<CustomCheckboxProps>) {
-    const { isNegative, onChange, value, checked: initialChecked, greyscale } = props;
+    const { isNegative, onChange, value, checked: initialChecked, greyscale, label, sx } = props;
     const theme = useTheme();
     const [checked, setChecked] = useState(initialChecked);
 
@@ -22,20 +25,17 @@ function CustomCheckbox(props: React.PropsWithChildren<CustomCheckboxProps>) {
     }
 
     return (
-        <Badge badgeContent={
-            (checked ?
-                (isNegative ? <CancelIcon color="error" /> : <CheckCircleIcon color="success" />)
-                : <></>)
-        } sx={{
-            m: 1,
-            justifyContent: 'center',
-            boxShadow: checked ? theme.shadows[1] : theme.shadows[0],
+        <Box textAlign="center" sx={{
+            ...sx
         }}>
             <Box
                 onClick={handleClick}
                 sx={{
                     display: 'flex',
-                    boxShadow: checked ? theme.shadows[1] : theme.shadows[0],
+                    border: checked ? 4 : 0,
+                    borderColor: checked ? (isNegative ? theme.palette.error.main : theme.palette.success.main) : '',
+                    borderRadius: checked ? 2 : 0,
+                    boxSizing: 'border-box',
                     p: 1,
                     cursor: 'pointer',
                     flexGrow: 1,
@@ -57,25 +57,37 @@ function CustomCheckbox(props: React.PropsWithChildren<CustomCheckboxProps>) {
             >
                 {props.children}
             </Box>
-        </Badge>
+            <Box sx={{
+                mt: 1,
+                bgcolor: checked ? (isNegative ? theme.palette.error.main : theme.palette.success.main) : '',
+                borderRadius: 2,
+                boxSizing: 'border-box',
+                p: 1,
+                display: 'inline-block'
+            }}>
+                <Typography variant="body1" align="center" color={checked ? 'white' : ''}>{label}</Typography>
+            </Box>
+        </Box>
     )
 }
 
 export interface CustomCheckboxGroupProps {
-    label: React.ReactNode;
+    label?: React.ReactNode;
     value: string;
     contents: {
         value: string;
-        element: React.ReactNode;
+        imageSrc: string;
+        labelText: string;
     }[],
     isNegative?: boolean;
     onChange: (values: string[]) => void;
     sx?: SxProps<Theme>;
+    checkboxSx?: SxProps<Theme>;
     greyscale?: boolean;
 }
 
 export function CustomCheckboxGroup(props: CustomCheckboxGroupProps) {
-    const { value, label, contents, isNegative, onChange, sx, greyscale } = props;
+    const { value, label, contents, isNegative, onChange, sx, checkboxSx, greyscale } = props;
     const [values, setValues] = useState<string[]>(value === "" ? [] : value.split(','));
 
     const handleChange = (checked: boolean, value: string) => {
@@ -103,7 +115,7 @@ export function CustomCheckboxGroup(props: CustomCheckboxGroupProps) {
         display: 'flex',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        overflowY: { xs:'auto', md:'unset' },
+        overflowY: { xs: 'auto', md: 'unset' },
         flexWrap: { xs: 'nowrap', md: 'wrap' }
     }
 
@@ -124,8 +136,10 @@ export function CustomCheckboxGroup(props: CustomCheckboxGroupProps) {
                             value={content.value}
                             key={content.value}
                             checked={values.indexOf(content.value) > -1}
+                            label={content.labelText}
+                            sx={checkboxSx}
                         >
-                            {content.element}
+                            <ImageComponent width='100%' src={content.imageSrc} />
                         </CustomCheckbox>
                     )
                 })}

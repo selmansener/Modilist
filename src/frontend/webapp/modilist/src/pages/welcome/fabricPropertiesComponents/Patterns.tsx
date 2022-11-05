@@ -70,18 +70,17 @@ export function Patterns(props: PatternsProps) {
             </Typography>
         </Box>
         }
+        checkboxSx={{
+            p: 1,
+            mt: 2
+        }}
         isNegative
         contents={
             patterns.map(colorType => {
                 return {
                     value: colorType.value,
-                    element: <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                        <ImageComponent src={colorType.img} />
-                        <Typography variant="subtitle1" align="center">{colorType.name}</Typography>
-                    </Box>
+                    imageSrc: colorType.img,
+                    labelText: colorType.name
                 }
             })
         }

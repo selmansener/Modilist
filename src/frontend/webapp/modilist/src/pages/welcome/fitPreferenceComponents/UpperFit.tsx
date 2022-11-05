@@ -26,7 +26,7 @@ export interface UpperFitsProps {
 export function UpperFits(props: UpperFitsProps) {
     const { cdnImg: imgBaseHost } = config;
     const { t } = useTranslation();
-    const { gender,value, onChange } = props;
+    const { gender, value, onChange } = props;
 
     const upperFits: UpperFitElement[] = Object.keys(UpperFit).map(upperFit => {
         return {
@@ -59,13 +59,8 @@ export function UpperFits(props: UpperFitsProps) {
             upperFits.map(upperFit => {
                 return {
                     value: upperFit.value,
-                    element: <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                        <ImageComponent src={upperFit.img} />
-                        <Typography variant="subtitle1" align="center">{upperFit.name}</Typography>
-                    </Box>
+                    imageSrc: upperFit.img,
+                    labelText: upperFit.name
                 }
             })
         }

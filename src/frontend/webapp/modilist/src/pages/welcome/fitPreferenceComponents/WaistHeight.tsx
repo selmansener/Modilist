@@ -60,13 +60,8 @@ export function WaistHeights(props: WaistHeightsProps) {
             waistHeights.map(waistHeight => {
                 return {
                     value: waistHeight.value,
-                    element: <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                        <ImageComponent src={waistHeight.img} />
-                        <Typography variant="subtitle1" align="center">{waistHeight.name}</Typography>
-                    </Box>
+                    imageSrc: waistHeight.img,
+                    labelText: waistHeight.name
                 }
             })
         }

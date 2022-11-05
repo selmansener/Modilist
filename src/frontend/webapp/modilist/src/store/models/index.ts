@@ -41,7 +41,7 @@ import { activateSubscriptionModel } from "./subscriptions/ActivateSubscription"
 import { createSubscriptionModel } from "./subscriptions/CreateSubscription"
 import { getSubscriptionModel } from "./subscriptions/GetSubscription"
 import { suspendSubscriptionModel } from "./subscriptions/SuspendSubscription"
-import { updateSubscriptionMaxPricingLimitModel } from "./subscriptions/UpdateSubscriptionMaxPricingLimit"
+import { updateSubscriptionModel } from "./subscriptions/UpdateSubscription"
 import { activateAccountModel } from "./users/ActivateAccount"
 import { createAccountModel } from "./users/CreateAccount"
 import { getAccountModel } from "./users/GetAccount"
@@ -75,7 +75,7 @@ export interface RootModel extends Models<RootModel> {
   upsertFitPreferencesModel: typeof upsertFitPreferencesModel,
   getSubscriptionModel: typeof getSubscriptionModel,
   createSubscriptionModel: typeof createSubscriptionModel,
-  updateSubscriptionMaxPricingLimitModel: typeof updateSubscriptionMaxPricingLimitModel,
+  updateSubscriptionModel: typeof updateSubscriptionModel,
   suspendSubscriptionModel: typeof suspendSubscriptionModel,
   activateSubscriptionModel: typeof activateSubscriptionModel,
   createDefaultPaymentMethodModel: typeof createDefaultPaymentMethodModel,
@@ -129,7 +129,7 @@ export const models: RootModel = {
   upsertFitPreferencesModel,
   getSubscriptionModel,
   createSubscriptionModel,
-  updateSubscriptionMaxPricingLimitModel,
+  updateSubscriptionModel,
   suspendSubscriptionModel,
   activateSubscriptionModel,
   createDefaultPaymentMethodModel,

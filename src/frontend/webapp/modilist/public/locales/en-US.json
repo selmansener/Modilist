@@ -374,7 +374,69 @@
             },
             "Subscription": {
                 "SubscriptionDetails": {
-                    "PriceTitle": "Maximum spending limit for your outfits*"
+                    "PriceTitle": "Maximum spending limit for your outfits*",
+                    "AndAbove": "and above",
+                    "Description1": "Can you set a limit for your 5 pieces combination?",
+                    "Description2": "We want this information so we can create ",
+                    "Description3": "a combination suitable your budget.",
+                    "PaymentInformation1": "Remember, you only pay for the pieces you",
+                    "PaymentInformation2": "like after trying them out."
+                },
+                "SubscriptionPlan": {
+                    "Title": "Kombin Alma Sıklığın*",
+                    "Description": "Ne sıklıkta senin için kombin hazırlanmasını tercih edersin?",
+                    "OnDemand": {
+                        "Title": "Dilediğin Bir Zaman",
+                        "Description": "<strong> Dilediğin zaman </strong> sipariş ver, sana özel kombinini hazırlayıp kayıtlı adresine gönderelim."
+                    },
+                    "EveryTwoWeeks": {
+                        "Title": "2 Haftada Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her 2 haftada bir </strong> belirttiğin adrese ulaşır."
+                    },
+                    "EveryMonth": {
+                        "Title": "Ayda Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her ay </strong> belirttiğin adrese ulaşır."
+                    },
+                    "EveryTwoMonths": {
+                        "Title": "2 Ayda Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her 2 ayda bir </strong> belirttiğin adrese ulaşır."
+                    },
+                    "EveryThreeMonths": {
+                        "Title": "3 Ayda Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her 3 ayda bir </strong> belirttiğin adrese ulaşır."
+                    },
+                    "OnDemandDescription": "Bu planda siparişini dilediğin zaman kendin oluşturursun!",
+                    "PeriodicPlanDescription": "Unutma! Bu kısımda yer alan planlarımızı seçtiğinde, ilk siparişini oluştururuz! Daha sonrasında ise seçtiğin plan dahilinde sana <strong> 2 haftada bir, ayda bir, 2 ayda bir </strong> veya <strong> 3 ayda bir </strong> kombin göndereceğiz.",
+                    "Button": {
+                        "Select": "Select",
+                        "Selected": "Selected Plan"
+                    },
+                    "PriceTitle": "Maximum budget for your outfits*",
+                    "Suggested": "Best Offer"
+                },
+                "SubscriptionInformation": {
+                    "Title1": "Bekle! ",
+                    "Title2": " Son adımı tamamlamadan önce sana bir notumuz var!",
+                    "LastStep": {
+                        "Title": "Son adım :)",
+                        "Description": "Son adımın abonelik adımı! Bu adımda öncelikle kendine bir limit belirlersin. Biz de bu limiti aşmadan bütçene uygun kombinler hazırlarız."
+                    },
+                    "GotQuestions": {
+                        "Title": "Soruların mı var?",
+                        "Description": "Stil formu veya ödeme adımı hakkında soruların/ görüşlerin varsa bizimle hızlıca iletişime geçebilirsin!"
+                    },
+                    "SubscriptionIsFree": {
+                        "Title": "Abonelik ücretsiz!",
+                        "Description": "Modilist senin yanında! Modilist’te senin için oluşturulacak olan <strong> kombin dışında ödeme yapmazsın. </strong> Hatta kombin içerisinde beğenmediğin parçaları ücretsiz şekilde iade edebilirsin."
+                    },
+                    "YourInformationIsSafe": {
+                        "Title": "Bilgilerin güvende!",
+                        "Description": "Modilist’te kart bilgilerin İyzico güvencesiyle saklanmakta.  Kart bilgilerini kombinini gönderdikten sonra ödemeni alabilmek için alıyoruz."
+                    },
+                    "YourFirstOrder": {
+                        "Title": "İlk Siparişin",
+                        "Description": "Tüm adımları tamamladıktan sonra ilk siparişini hazırlamaya başlayacağız. Sürpriz kombinin için heyecanlı mısın?"
+                    }
                 }
             },
             "PaymentMethod": {
@@ -414,7 +476,7 @@
             "TotalProductPrice": "Total Amount:",
             "PackageTotalPrice": "Total cost of the outfit:",
             "Checkout": "Complete the payment",
-            "ReturnWarning": "You must complete the refund process before you can make the payment.",
+            "ReturnWarning": "You must complete the refund process and provide a billing address before you can make the payment.",
             "CargoTrackingCode": "Cargo Tracking Number",
             "CargoTrackingCodeInfo": "When you complete the return process, a cargo tracking number will be generated.",
             "CreateReturn": "Create a return request",
@@ -734,6 +796,7 @@
             "Completed": "The order is completed"
         },
         "Forms": {
+            "Other": "Other",
             "Message": "Message",
             "Select": "Choose",
             "Close": "Close",
@@ -744,7 +807,9 @@
             "SentMessageSuccess": "Your message has been sent successfully!",
             "SentMessageFailed": "An error occurred while sending your message.",
             "Delete": "Delete",
-            "UnexpectedError": "An unexpected error has occured."
+            "UnexpectedError": "An unexpected error has occured.",
+            "InvalidIdNumber": "Invalid Id Number",
+            "InvalidTaxNumber": "Invalid Tax Number"
         },
         "PersonalInfo": {
             "FirstName": "Name",

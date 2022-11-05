@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 using Modilist.Business.CQRS.SalesOrderDomain.Commands;
 using Modilist.Business.CQRS.UserDomain.Queries;
+using Modilist.Data.Repositories.UserDomain;
 
 namespace Modilist.Functions.ScheduledJobs.Jobs.SalesOrdersDomain
 {
@@ -32,11 +33,11 @@ namespace Modilist.Functions.ScheduledJobs.Jobs.SalesOrdersDomain
                 {
                     try
                     {
-                        await _mediator.Send(new CreateMonthlySalesOrder(account.Id), cancellationToken);
+                        await _mediator.Send(new CreatePeriodicSalesOrders(account.Id), cancellationToken);
                     }
                     catch (Exception ex)
                     {
-                        logger.LogError(ex, "CreateMonthlySalesOrder failed for account: {AccountId}", account.Id);
+                        logger.LogError(ex, "CreatePeriodicSalesOrders failed for account: {AccountId}", account.Id);
                     }
                 }
             }

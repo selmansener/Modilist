@@ -275,7 +275,7 @@
                     "1": "Beden Ölçülerini Gir,",
                     "2": "20 TL Kazan"
                 },
-                "DiscountInfo":"Beden ölçülerini doğru ve eksiksiz bir şekilde girdiğinde, hem hayalindeki tarza bir adım daha yaklaşmış olursun hem de 20 TL indirim kazanırsın!"
+                "DiscountInfo": "Beden ölçülerini doğru ve eksiksiz bir şekilde girdiğinde, hem hayalindeki tarza bir adım daha yaklaşmış olursun hem de 20 TL indirim kazanırsın!"
             },
             "FitPreferences": {
                 "Warning": "Seçim yapmadığın kategorilerdeki her tarzı benimsediğini varsayacağız.",
@@ -409,7 +409,73 @@
             "Subscription": {
                 "SubscriptionDetails": {
                     "PriceTitle": "Kombinleriniz için maksimum harcama limiti*",
-                    "Description": "ve üzeri"
+                    "Description": "ve üzeri",
+                    "Description1": "5 parçadan oluşacak olan kombinin için bir limit",
+                    "Description2": "belirleyebilir misin? Bu bilgiyi istememizin sebebi",
+                    "Description3": "bütçene uygun bir kombin oluşturabilmek.",
+                    "AndAbove": "ve üzeri",
+                    "PaymentInformation1": "Unutma, sadece denedikten sonra beğenip satın almak",
+                    "PaymentInformation2": "istediğin ürünlerin ücretini ödersin."
+                },
+                "SubscriptionPlan": {
+                    "Title": "Kombin Alma Sıklığın*",
+                    "Description": "Ne sıklıkta senin için kombin hazırlanmasını tercih edersin?",
+                    "OnDemand": {
+                        "Title": "Dilediğin Bir Zaman",
+                        "Description": "<strong> Dilediğin zaman </strong> sipariş ver, sana özel kombinini hazırlayıp kayıtlı adresine gönderelim."
+                    },
+                    "EveryTwoWeeks": {
+                        "Title": "2 Haftada Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her 2 haftada bir </strong> belirttiğin adrese ulaşır."
+                    },
+                    "EveryMonth": {
+                        "Title": "Ayda Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her ay </strong> belirttiğin adrese ulaşır."
+                    },
+                    "EveryTwoMonths": {
+                        "Title": "2 Ayda Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her 2 ayda bir </strong> belirttiğin adrese ulaşır."
+                    },
+                    "EveryThreeMonths": {
+                        "Title": "3 Ayda Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her 3 ayda bir </strong> belirttiğin adrese ulaşır."
+                    },
+                    "PlanType": {
+                        "Flexible": "Esnek Plan *",
+                        "Periodic": "<strong> Periyodik Plan ** </strong>"
+                    },
+                    "OnDemandDescription": "Bu planda siparişini dilediğin zaman kendin oluşturursun!",
+                    "PeriodicPlanDescription": "Unutma! Bu kısımda yer alan planlarımızı seçtiğinde, ilk siparişini oluştururuz! Daha sonrasında ise seçtiğin plan dahilinde sana <strong> 2 haftada bir, ayda bir, 2 ayda bir </strong> veya <strong> 3 ayda bir </strong> kombin göndereceğiz.",
+                    "Button": {
+                        "Select": "Seç",
+                        "Selected": "Seçili Plan"
+                    },
+                    "PriceTitle": "Kombinin Maksimum Limiti*",
+                    "Suggested": "Önerilen"
+                },
+                "SubscriptionInformation": {
+                    "Title1": "Bekle! ",
+                    "Title2": " Son adımı tamamlamadan önce sana bir notumuz var!",
+                    "LastStep": {
+                        "Title": "Son adım :)",
+                        "Description": "Son adımın abonelik adımı! Bu adımda öncelikle kendine bir limit belirlersin. Biz de bu limiti aşmadan bütçene uygun kombinler hazırlarız."
+                    },
+                    "GotQuestions": {
+                        "Title": "Soruların mı var?",
+                        "Description": "Stil formu veya ödeme adımı hakkında soruların/ görüşlerin varsa bizimle hızlıca iletişime geçebilirsin!"
+                    },
+                    "SubscriptionIsFree": {
+                        "Title": "Abonelik ücretsiz!",
+                        "Description": "Modilist senin yanında! Modilist’te senin için oluşturulacak olan <strong> kombin dışında ödeme yapmazsın. </strong> Hatta kombin içerisinde beğenmediğin parçaları <i> ücretsiz </i> şekilde iade edebilirsin."
+                    },
+                    "YourInformationIsSafe": {
+                        "Title": "Bilgilerin güvende!",
+                        "Description": "Modilist’te kart bilgilerin İyzico güvencesiyle saklanmakta.  Kart bilgilerini kombinini gönderdikten sonra ödemeni alabilmek için alıyoruz."
+                    },
+                    "YourFirstOrder": {
+                        "Title": "İlk Siparişin",
+                        "Description": "Tüm adımları tamamladıktan sonra ilk siparişini hazırlamaya başlayacağız. Sürpriz kombinin için heyecanlı mısın?"
+                    }
                 }
             },
             "PaymentMethod": {
@@ -445,12 +511,29 @@
             "Wallet": "Modilist Cüzdanım",
             "Balance": "Kalan Bakiye",
             "UseBalance": "Kullan",
+            "BillingAddress": "Fatura Adresi",
+            "Corporate": "Kurumsal",
+            "Individual": "Bireysel",
+            "PersonalInfo": "Kişisel Bilgiler",
+            "FullName": "Ad Soyad*",
+            "IdNumber ": "TC Kimlik Numarası*",
+            "AddressName": "Adres Adı (ev,iş vb.)",
+            "MenuItem": "Seçiniz",
+            "FullAddress": "Adres",
+            "InfoTitle": "Bu bilgiyi neden istiyoruz?",
+            "ZipCode":"Posta Kodu",
+            "CorporateInfo": "Kurum Bilgileri",
+            "ContactInfo": "İletişim Bilgileri",
+            "CompanyName": "Şirket Ünvanı*",
+            "Email": "E-Posta adresi*",
+            "TaxNumber": "Vergi Numarası*",
+            "Phone": "Telefon",
             "SoldProductPrice": "Ürünler Toplam: ",
             "VATPrice": "KDV %18: ",
             "TotalProductPrice": "Toplam Tutar: ",
             "PackageTotalPrice": "Kombinin Toplam Tutarı: ",
             "Checkout": "Ödemeyi tamamla",
-            "ReturnWarning": "Ödemeyi yapabilmek için önce iade işlemini tamamlamalısın.",
+            "ReturnWarning": "Ödemeyi yapabilmek için önce iade işlemini tamamlamalısın ve fatura adresini girmelisin.",
             "CargoTrackingCode": "Kargo Takip Numarası",
             "CargoTrackingCodeInfo": "İade işlemini tamamladığında kargo takip numarası oluşur.",
             "CreateReturn": "İade talebi oluştur",
@@ -466,7 +549,10 @@
                 "1": "İade sözleşmesini",
                 "2": " okudum ve onaylıyorum."
             },
-            "TermsInfoError": "Devam edebilmek için lütfen formu onaylayın."
+            "TermsInfoError": "Devam edebilmek için lütfen formu onaylayın.",
+            "IdNumberTitle": "Bu bilgiyi neden istiyoruz?",
+            "IdNumberDescription": "13 Sayılı Vergi Usul Kanunu'nun (VUK) 230. maddesine göre ister matbu fatura, e-fatura, ister e-arşiv fatura olsun tüm tüm faturalarda müşterinin TC kimlik numarası, adı, soyadı ve adresinin bulunması gerekiyor.",
+            "TaxOffice": "Vergi Dairesi"
         },
         "CheckoutCompleted": {
             "SalesOrderReferenceNumber": "Sipariş Ref. No: #{{salesOrderId}}",
@@ -834,6 +920,7 @@
             "Completed": "Siparişin Tamamlandı"
         },
         "Forms": {
+            "Other": "Diğer",
             "Message": "Mesajınız",
             "Select": "Seçiniz",
             "Close": "Kapat",
@@ -850,9 +937,13 @@
             "Delete": "Kaldır",
             "CharactersLeft": "karakter kaldı",
             "Add": "Ekle",
-            "UnexpectedError": "Beklenmedik bir hatayla karşılaştık."
+            "UnexpectedError": "Beklenmedik bir hatayla karşılaştık.",
+            "InvalidIdNumber": "Geçersiz TC Kimlik No",
+            "InvalidTaxNumber": "Geçersiz Vergi No"
         },
         "PersonalInfo": {
+            "Address": "Adres",
+            "IdNumber": "TC Kimlik Numarası",
             "FullName": "Ad Soyad",
             "FirstName": "Ad",
             "LastName": "Soyad",

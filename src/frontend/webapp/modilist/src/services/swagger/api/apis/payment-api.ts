@@ -16,6 +16,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BillingAddressDTO } from '../models';
 import { CreateNewPaymentMethod } from '../models';
 import { CreatePaymentMethod } from '../models';
 import { PaymentDTO } from '../models';
@@ -133,11 +134,12 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {number} salesOrderId 
+         * @param {BillingAddressDTO} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1PaymentCreateSalesOrderIdPost: async (salesOrderId: number, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiV1PaymentCreateSalesOrderIdPost: async (salesOrderId: number, body?: BillingAddressDTO, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'salesOrderId' is not null or undefined
             if (salesOrderId === null || salesOrderId === undefined) {
                 throw new RequiredError('salesOrderId','Required parameter salesOrderId was null or undefined when calling apiV1PaymentCreateSalesOrderIdPost.');
@@ -167,6 +169,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['api-version'] = apiVersion;
             }
 
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -177,6 +181,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || (localVarRequestOptions.headers && localVarRequestOptions.headers['Content-Type'] === 'application/json');
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -370,12 +376,13 @@ export const PaymentApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} salesOrderId 
+         * @param {BillingAddressDTO} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1PaymentCreateSalesOrderIdPost(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PaymentDTO>>> {
-            const localVarAxiosArgs = await PaymentApiAxiosParamCreator(configuration).apiV1PaymentCreateSalesOrderIdPost(salesOrderId, apiVersion, options);
+        async apiV1PaymentCreateSalesOrderIdPost(salesOrderId: number, body?: BillingAddressDTO, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PaymentDTO>>> {
+            const localVarAxiosArgs = await PaymentApiAxiosParamCreator(configuration).apiV1PaymentCreateSalesOrderIdPost(salesOrderId, body, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -453,12 +460,13 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @param {number} salesOrderId 
+         * @param {BillingAddressDTO} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1PaymentCreateSalesOrderIdPost(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<PaymentDTO>> {
-            return PaymentApiFp(configuration).apiV1PaymentCreateSalesOrderIdPost(salesOrderId, apiVersion, options).then((request) => request(axios, basePath));
+        async apiV1PaymentCreateSalesOrderIdPost(salesOrderId: number, body?: BillingAddressDTO, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<PaymentDTO>> {
+            return PaymentApiFp(configuration).apiV1PaymentCreateSalesOrderIdPost(salesOrderId, body, apiVersion, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -523,13 +531,14 @@ export class PaymentApi extends BaseAPI {
     /**
      * 
      * @param {number} salesOrderId 
+     * @param {BillingAddressDTO} [body] 
      * @param {string} [apiVersion] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentApi
      */
-    public async apiV1PaymentCreateSalesOrderIdPost(salesOrderId: number, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<PaymentDTO>> {
-        return PaymentApiFp(this.configuration).apiV1PaymentCreateSalesOrderIdPost(salesOrderId, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    public async apiV1PaymentCreateSalesOrderIdPost(salesOrderId: number, body?: BillingAddressDTO, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<PaymentDTO>> {
+        return PaymentApiFp(this.configuration).apiV1PaymentCreateSalesOrderIdPost(salesOrderId, body, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

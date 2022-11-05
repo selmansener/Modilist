@@ -1,7 +1,7 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from "..";
 import { api } from "../../../App";
-import { PaymentDTO } from "../../../services/swagger/api";
+import { BillingAddressDTO, PaymentDTO } from "../../../services/swagger/api";
 import { ResponseModel } from "../../response-model";
 
 export const createPaymentModel = createModel<RootModel>()({
@@ -44,10 +44,10 @@ export const createPaymentModel = createModel<RootModel>()({
     effects: (dispatch) => {
         const { createPaymentModel } = dispatch
         return {
-            async createPayment(salesOrderId: number): Promise<any> {
+            async createPayment(payload: {salesOrderId: number, data: BillingAddressDTO}): Promise<any> {
                 createPaymentModel.BUSY();
 
-                const response = await api.payments.apiV1PaymentCreateSalesOrderIdPost(salesOrderId);
+                const response = await api.payments.apiV1PaymentCreateSalesOrderIdPost(payload.salesOrderId, payload.data);
 
                 if (response.status === 200) {
                     createPaymentModel.HANDLE_RESPONSE(response.data, response.status);

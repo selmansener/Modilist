@@ -18,7 +18,7 @@ import { Configuration } from '../configuration';
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { SubscriptionDTO } from '../models';
 import { SuspendSubscription } from '../models';
-import { UpdateSubscriptionMaxPricingLimit } from '../models';
+import { UpdateSubscription } from '../models';
 /**
  * SubscriptionApi - axios parameter creator
  * @export
@@ -220,13 +220,13 @@ export const SubscriptionApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @param {UpdateSubscriptionMaxPricingLimit} [body] 
+         * @param {UpdateSubscription} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1SubscriptionUpdateMaxPricingLimitPost: async (body?: UpdateSubscriptionMaxPricingLimit, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/Subscription.UpdateMaxPricingLimit`;
+        apiV1SubscriptionUpdatePost: async (body?: UpdateSubscription, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/Subscription.Update`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -334,13 +334,13 @@ export const SubscriptionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {UpdateSubscriptionMaxPricingLimit} [body] 
+         * @param {UpdateSubscription} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1SubscriptionUpdateMaxPricingLimitPost(body?: UpdateSubscriptionMaxPricingLimit, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<SubscriptionDTO>>> {
-            const localVarAxiosArgs = await SubscriptionApiAxiosParamCreator(configuration).apiV1SubscriptionUpdateMaxPricingLimitPost(body, apiVersion, options);
+        async apiV1SubscriptionUpdatePost(body?: UpdateSubscription, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<SubscriptionDTO>>> {
+            const localVarAxiosArgs = await SubscriptionApiAxiosParamCreator(configuration).apiV1SubscriptionUpdatePost(body, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -394,13 +394,13 @@ export const SubscriptionApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @param {UpdateSubscriptionMaxPricingLimit} [body] 
+         * @param {UpdateSubscription} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1SubscriptionUpdateMaxPricingLimitPost(body?: UpdateSubscriptionMaxPricingLimit, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<SubscriptionDTO>> {
-            return SubscriptionApiFp(configuration).apiV1SubscriptionUpdateMaxPricingLimitPost(body, apiVersion, options).then((request) => request(axios, basePath));
+        async apiV1SubscriptionUpdatePost(body?: UpdateSubscription, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<SubscriptionDTO>> {
+            return SubscriptionApiFp(configuration).apiV1SubscriptionUpdatePost(body, apiVersion, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -455,13 +455,13 @@ export class SubscriptionApi extends BaseAPI {
     }
     /**
      * 
-     * @param {UpdateSubscriptionMaxPricingLimit} [body] 
+     * @param {UpdateSubscription} [body] 
      * @param {string} [apiVersion] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SubscriptionApi
      */
-    public async apiV1SubscriptionUpdateMaxPricingLimitPost(body?: UpdateSubscriptionMaxPricingLimit, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<SubscriptionDTO>> {
-        return SubscriptionApiFp(this.configuration).apiV1SubscriptionUpdateMaxPricingLimitPost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    public async apiV1SubscriptionUpdatePost(body?: UpdateSubscription, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<SubscriptionDTO>> {
+        return SubscriptionApiFp(this.configuration).apiV1SubscriptionUpdatePost(body, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
 }

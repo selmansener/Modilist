@@ -108,27 +108,36 @@ export function ActiveOrder() {
     const content = requestedStyleData?.map(style => {
         return {
             value: style,
-            element: <Box textAlign="center">
-                <ImageComponent src={`${cdnImg}/outfit-styles/${getAccountResponse?.gender?.toString().toLowerCase()}/${style}.png`} width={155} />
-                <Typography variant="h6">
-                    {t(`Pages.SalesOrderDetails.OutfitStyles.${style}`)}
-                </Typography>
-            </Box>
+            element: <Box sx={{
+                p: 6
+            }}>
+                <ImageComponent src={`${cdnImg}/outfit-styles/${getAccountResponse?.gender?.toString().toLowerCase()}/${style}.png`} width='100%' sx={{
+                    boxSizing: 'border-box'
+                }} />
+            </Box>,
+            label: <Typography variant="h6" align='center' color='inherit' sx={{
+                boxSizing: 'border-box',
+            }}>
+                {t(`Pages.SalesOrderDetails.OutfitStyles.${style}`)}
+            </Typography>
+
+
         }
     }) ?? [];
 
     const RenderRequestedStyleDialog = (content: {
         value: string;
-        element: JSX.Element;
+        element: string | JSX.Element;
+        label: string | JSX.Element;
     }[]) => {
         if (!requestedStyleData || requestedStyleData.length === 0) {
             return <></>
         }
 
         return (
-            <Dialog onClose={handleRequestedStyleClose} open={isRequestedStyleOpen} maxWidth="lg" fullWidth>
+            <Dialog onClose={handleRequestedStyleClose} open={isRequestedStyleOpen} maxWidth="lg" fullWidth >
                 <DialogTitle sx={{
-                    mb: 2
+                    mt: 4
                 }}>
                     <Typography variant="h3" align="center">
                         {t("Pages.SalesOrderDetails.OutfitQuestion")}
@@ -136,10 +145,11 @@ export function ActiveOrder() {
                 </DialogTitle>
                 <CustomRadioButtonGroup
                     containerSx={{
-                        justifyContent: 'space-evenly'
+                        justifyContent: 'space-evenly',
+                        p: 4
                     }}
                     radioButtonSx={{
-                        flexBasis: '20%'
+                        flexBasis: '25%'
                     }}
                     name="requestedStyle"
                     value={requestedStyle}
@@ -153,7 +163,7 @@ export function ActiveOrder() {
                     justifyContent: "space-between",
                     alignItems: "center",
                     px: [6],
-                    py: [2]
+                    py: [4]
                 }}>
                     <Box>
                         <Typography>
@@ -270,7 +280,6 @@ export function ActiveOrder() {
                                 value={additionalRequests}
                                 onChange={(e) => {
                                     if (e.target.value.length > 4000) {
-                                        console.log("test")
                                         setAdditionalRequests(additionalRequests.substring(0, 4000));
                                         return;
                                     } else {

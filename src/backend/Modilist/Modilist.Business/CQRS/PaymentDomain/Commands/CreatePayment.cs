@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using Modilist.Business.CQRS.PaymentDomain.DTOs;
+using Modilist.Business.CQRS.SalesOrderDomain.DTOs;
 using Modilist.Business.Exceptions;
 using Modilist.Data.Repositories.PaymentDomain;
 using Modilist.Data.Repositories.SalesOrderDomain;
@@ -28,6 +29,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 using IyzicoPayment = Iyzipay.Model.Payment;
+using Payment = Modilist.Domains.Models.PaymentDomain.Payment;
 
 namespace Modilist.Business.CQRS.PaymentDomain.Commands
 {
@@ -37,6 +39,8 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
         public Guid AccountId { get; set; }
 
         public int SalesOrderId { get; set; }
+
+        public BillingAddressDTO? BillingAddress { get; set; }
     }
 
     internal class CreatePaymentValidator : AbstractValidator<CreatePayment>
@@ -45,6 +49,7 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
         {
             RuleFor(x => x.AccountId).NotEmpty();
             RuleFor(x => x.SalesOrderId).NotEmpty();
+            RuleFor(x => x.BillingAddress).NotEmpty();
         }
     }
 
@@ -123,10 +128,10 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
             }
 
             payment = new Domains.Models.PaymentDomain.Payment(request.AccountId, request.SalesOrderId);
-
+           
             var soldLineItems = salesOrder.LineItems.Where(x => x.State == Infrastructure.Shared.Enums.SalesOrderLineItemState.Sold);
 
-            var paymentRequest = GetPaymentRequest(account, paymentMethod, salesOrder, payment);
+            var paymentRequest = GetPaymentRequest(account, paymentMethod, salesOrder, payment, request.BillingAddress);
 
             IyzicoPayment iyzicoPayment = IyzicoPayment.Create(paymentRequest, new Iyzipay.Options
             {
@@ -169,7 +174,23 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
                 await _paymentRepository.AddAsync(payment, cancellationToken);
 
-                salesOrder.Completed();
+                BillingAddress billingAddress = new BillingAddress(
+                    request.SalesOrderId,
+                    request.BillingAddress.AddressName,
+                    request.BillingAddress.City,
+                    request.BillingAddress.District,
+                    request.BillingAddress.FullAddress,
+                    request.BillingAddress.Email ?? account.Email,
+                    request.BillingAddress.Phone ?? account.Phone,
+                    request.BillingAddress.BillingType,
+                    request.BillingAddress.FullName,
+                    request.BillingAddress.ZipCode,
+                    request.BillingAddress.IdNumber,
+                    request.BillingAddress.CompanyName,
+                    request.BillingAddress.TaxNumber,
+                    request.BillingAddress.TaxOffice);
+
+                salesOrder.Completed(billingAddress);
 
                 await _salesOrderRepository.UpdateAsync(salesOrder, cancellationToken);
             }
@@ -184,7 +205,8 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
         }
          
 
-        private CreatePaymentRequest GetPaymentRequest(Account account, PaymentMethod paymentMethod, SalesOrder salesOrder, Domains.Models.PaymentDomain.Payment payment)
+        private CreatePaymentRequest GetPaymentRequest(Account account, PaymentMethod paymentMethod, SalesOrder salesOrder, Payment payment, BillingAddressDTO billingaddress)
+            
         {
             var soldLineItems = salesOrder.LineItems.Where(x => x.State == Infrastructure.Shared.Enums.SalesOrderLineItemState.Sold);
 
@@ -220,11 +242,11 @@ namespace Modilist.Business.CQRS.PaymentDomain.Commands
 
             Address billingAddress = new Address
             {
-                ContactName = $"{salesOrder.SalesOrderAddress.FirstName} {salesOrder.SalesOrderAddress.LastName}",
-                City = salesOrder.SalesOrderAddress.City,
-                Country = salesOrder.SalesOrderAddress.Country,
-                Description = salesOrder.SalesOrderAddress.FullAddress,
-                ZipCode = salesOrder.SalesOrderAddress.ZipCode,
+                ContactName = billingaddress.CompanyName ?? billingaddress.FullName,
+                City = billingaddress.City,
+                Country = billingaddress.Country,
+                Description = billingaddress.FullAddress,
+                ZipCode = billingaddress.ZipCode,
             };
 
             List<BasketItem> basketItems = new List<BasketItem>();

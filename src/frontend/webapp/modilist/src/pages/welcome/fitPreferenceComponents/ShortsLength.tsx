@@ -64,13 +64,8 @@ export function ShortsLengths(props: ShortsLengthsProps) {
             shortsLengths.map(shortsLength => {
                 return {
                     value: shortsLength.value,
-                    element: <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                        <ImageComponent src={shortsLength.img} />
-                        <Typography variant="subtitle1" align="center">{shortsLength.name}</Typography>
-                    </Box>
+                    imageSrc: shortsLength.img,
+                    labelText: shortsLength.name
                 }
             })
         }

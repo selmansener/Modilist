@@ -13,6 +13,8 @@ using Modilist.Domains.Models.AccountDomain;
 using Modilist.Domains.Models.StylePreferencesDomain;
 using Modilist.Infrastructure.Shared.Enums;
 using Modilist.Infrastructure.Shared.Interfaces.Enums;
+using Modilist.Data.Repositories.DiscountsDomain;
+using Modilist.Domains.Models.DiscountsDomain;
 
 using Newtonsoft.Json;
 
@@ -91,11 +93,13 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
     {
         private readonly ISizeInfoRepository _sizeInfoRepository;
         private readonly IAccountRepository _accountRepository;
+        private readonly IDiscountsRepository _discountsRepository;
 
-        public UpsertSizeInfoHandler(ISizeInfoRepository sizeInfoRepository, IAccountRepository accountRepository)
+        public UpsertSizeInfoHandler(ISizeInfoRepository sizeInfoRepository, IAccountRepository accountRepository, IDiscountsRepository discountsRepository)
         {
             _sizeInfoRepository = sizeInfoRepository;
             _accountRepository = accountRepository;
+            _discountsRepository = discountsRepository;
         }
 
         public async Task<SizeInfoDTO> Handle(UpsertSizeInfo request, CancellationToken cancellationToken)
@@ -166,7 +170,23 @@ namespace Modilist.Business.CQRS.StylePreferencesDomain.Commands
                     request.FootWear,
                     request.AdditionalNotes);
 
+                
+
                 await _sizeInfoRepository.UpdateAsync(sizeInfo, cancellationToken);
+            }
+
+            if (sizeInfo.DoesBodySizeProvided())
+            {
+                var doesBodySizeDiscountExists = await _discountsRepository.DoesBodySizeDiscountExists(request.AccountId, cancellationToken);
+
+                if (!doesBodySizeDiscountExists)
+                {
+                    ExclusiveDiscount bodySizeDiscount = new ExclusiveDiscount(request.AccountId, Currency.TRY, DiscountType.BodySizeDiscount);
+
+                    bodySizeDiscount.Activate();
+
+                    await _discountsRepository.AddAsync(bodySizeDiscount, cancellationToken);
+                }
             }
 
             return sizeInfo.Adapt<SizeInfoDTO>();

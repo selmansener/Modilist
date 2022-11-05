@@ -122,7 +122,7 @@ export default function ContactInfo() {
 
     return (
         <>
-            <Grid item container spacing={2}>
+            <Grid item container spacing={2} mb={4}>
                 <Grid item xs={12}>
                     <Typography variant='h3' align='left' sx={{ m: 1 }}>
                         {t("Pages.Welcome.ContactInfo.Title")}

@@ -1,10 +1,14 @@
-import { Box, RadioGroup, SxProps, Theme, useTheme } from "@mui/material";
+import { Box, Button, RadioGroup, SxProps, Theme, Typography, useTheme } from "@mui/material";
+import React from "react";
 import { useEffect, useState } from "react";
 
 interface CustomRadioButtonProps {
     value: string;
     checked: boolean;
-    control: React.ReactNode;
+    control: {
+        element: string | React.ReactNode;
+        label?: string | React.ReactNode | ((selected: boolean) => React.ReactNode);
+    };
     onChange: (value: string) => void;
     greyscale?: boolean;
     sx?: SxProps<Theme>;
@@ -14,42 +18,102 @@ function CustomRadioButton(props: CustomRadioButtonProps) {
     const { value, checked, control, onChange, greyscale, sx } = props;
     const theme = useTheme();
 
-    return <Box sx={{
-        cursor: 'pointer',
-        border: checked ? 1 : 0,
-        borderColor: theme.palette.primary.main,
-        borderRadius: checked ? 1 : 0,
-        p: 1,
-        m: 1,
-        [theme.breakpoints.up("md")]: {
-            '&:hover': {
-                transition: theme.transitions.create('opacity', {
-                    easing: theme.transitions.easing.easeInOut,
-                    duration: 500
-                }),
-                opacity: (greyscale ? '1' : 'none'),
-                cursor: 'pointer'
-            },
-            '&': checked ? {
-                opacity: (greyscale ? '1' : 'none')
-            } : {
-                opacity: (greyscale ? '0.5' : 'none')
-            },
-        },
-        ...sx
-    }} onClick={() => {
-        onChange(value);
-    }}>
-        {control}
-    </Box>
-}
+    function RenderLabel(checked: boolean, label?: string | React.ReactNode | ((selected: boolean) => React.ReactNode)) {
+        if (!label) {
+            return;
+        }
 
+        if (typeof label === 'string' || React.isValidElement(label)) {
+            return <Box sx={{
+                cursor: 'pointer',
+                borderColor: theme.palette.secondary.main,
+                borderRadius: checked ? 2 : 0,
+                bgcolor: checked ? theme.palette.secondary.main : 'white',
+                boxSizing: 'border-box',
+                textAlign: 'center',
+                color: checked ? 'white' : theme.palette.primary.main,
+                p: 1,
+                m: 1,
+                display: 'inline-block',
+                [theme.breakpoints.up("md")]: {
+                    '&:hover': {
+                        transition: theme.transitions.create('opacity', {
+                            easing: theme.transitions.easing.easeInOut,
+                            duration: 500
+                        }),
+                        opacity: (greyscale ? '1' : 'none'),
+                        cursor: 'pointer'
+                    },
+                    '&': checked ? {
+                        opacity: (greyscale ? '1' : 'none')
+                    } : {
+                        opacity: (greyscale ? '0.5' : 'none')
+                    },
+                },
+                ...sx
+            }} onClick={() => {
+                onChange(value);
+            }}>
+                {label}
+            </Box>
+        }
+
+        if (typeof label === 'function') {
+            return <Box onClick={() => {
+                onChange(value);
+            }}>
+                {label(checked)}
+            </Box>
+        }
+    }
+
+    return (
+        <Box sx={{
+            textAlign: 'center',
+            ...sx
+        }}>
+            <Box sx={{
+                cursor: 'pointer',
+                border: checked ? 4 : 0,
+                borderColor: checked ? (theme.palette.secondary.main) : '',
+                borderRadius: 4,
+                bgcolor: (checked ? '#eae8f0' : 'white'),
+                textAlign: 'center',
+                m: 1,
+                p: 1,
+                boxSizing: 'border-box',
+                [theme.breakpoints.up("md")]: {
+                    '&:hover': {
+                        transition: theme.transitions.create('opacity', {
+                            easing: theme.transitions.easing.easeInOut,
+                            duration: 500
+                        }),
+                        opacity: (greyscale ? '1' : 'none'),
+                        cursor: 'pointer'
+                    },
+                    '&': checked ? {
+                        opacity: (greyscale ? '1' : 'none')
+                    } : {
+                        opacity: (greyscale ? '0.5' : 'none')
+                    },
+                },
+                ...sx
+            }} onClick={() => {
+                onChange(value);
+            }}>
+                {control.element}
+            </Box>
+            {RenderLabel(checked, control.label)}
+        </Box>
+    )
+}
 export interface CustomRadioButtonGroupProps {
     name: string;
     value?: string;
     contents: {
         value: string;
-        element: React.ReactNode;
+        element: string | React.ReactNode;
+        label?: string | React.ReactNode | ((selected: boolean) => React.ReactNode);
     }[],
     onChange: (value: string) => void;
     greyscale?: boolean;
@@ -74,7 +138,7 @@ export function CustomRadioButtonGroup(props: CustomRadioButtonGroupProps) {
             key={radio.value}
             value={radio.value}
             checked={radio.value === innerValue}
-            control={radio.element}
+            control={radio}
             onChange={(val) => {
                 onChange(val);
             }}

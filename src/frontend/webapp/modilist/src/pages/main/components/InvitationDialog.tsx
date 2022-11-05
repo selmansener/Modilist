@@ -60,14 +60,14 @@ export function InvitationDialog(props: InvitationDialogProps) {
     if (sendInvitationEmailsStatus !== 0) {
       dispatch.sendInvitationEmailsModel.RESET();
     }
-      
   }, [sendInvitationEmailsStatus]);
 
   useEffect(() => {
-    if(isSuccess) {
+    if (isSuccess) {
       onClose();
     }
   }, [isSuccess])
+
 
   return (
     <Dialog fullWidth maxWidth="md" open={openDialog} onClose={() => {
@@ -108,6 +108,7 @@ export function InvitationDialog(props: InvitationDialogProps) {
             </Button>
             <Button variant="contained" color="secondary" disabled={isBusy} onClick={() => {
               submitForm();
+              setIsSuccess(false);
             }}>
               {t("Generic.Forms.Send")}
             </Button>

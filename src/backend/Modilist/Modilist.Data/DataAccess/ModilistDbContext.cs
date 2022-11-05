@@ -74,6 +74,8 @@ namespace Modilist.Data.DataAccess
 
         public virtual DbSet<SubscriptionStateLog> SubscriptionStateLogs { get; private set; }
 
+        public virtual DbSet<BillingAddress> BillingAddresses { get; private set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var entityTypes = GetEntityTypes(builder).ToList();

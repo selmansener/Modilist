@@ -25,7 +25,10 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
 
         Task<SalesOrder?> GetLatestActiveOrderAsync(Guid accountId, CancellationToken cancellationToken);
 
+        Task<SalesOrder?> GetLatestCompletedOrderAsync(Guid accountId, CancellationToken cancellationToken);
+
         Task<bool> DoesAccountHasAnyOrder(Guid accountId, CancellationToken cancellationToken);
+
     }
 
     internal class SalesOrderRepository : BaseRepository<SalesOrder>, ISalesOrderRepository
@@ -75,6 +78,13 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
         public IQueryable<SalesOrder> QueryAllByAccountId(Guid accountId)
         {
             return GetAll().Where(x => x.AccountId == accountId);
+        }
+        public async Task<SalesOrder?> GetLatestCompletedOrderAsync(Guid accountId, CancellationToken cancellationToken)
+        {
+            return await GetAll()
+                .Include(x => x.SalesOrderAddress)
+                .OrderByDescending(x => x.CreatedAt)
+                .FirstOrDefaultAsync(x => x.AccountId == accountId && x.State == SalesOrderState.Completed, cancellationToken);
         }
     }
 }

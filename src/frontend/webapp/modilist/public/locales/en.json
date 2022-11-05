@@ -233,7 +233,7 @@
                 "Bra": "Bras - (Cup)",
                 "BraBelt": "Bras - (Back Circumference)",
                 "Shoes": "Shoes",
-                "HeaderBodySize": "If you want to achieve the style you dream of, you need to enter detailed and accurate body measurements. (Optional)",
+                "HeaderBodySize": "If you want to achieve the style you dream of, you need to enter detailed and accurate body measurements.",
                 "BodyLength": "Upper Body Length (cm)",
                 "HeadRadius": "Head circumference (cm)",
                 "ArmLength": "Arm Length (cm)",
@@ -381,7 +381,69 @@
             "Subscription": {
                 "SubscriptionDetails": {
                     "PriceTitle": "Maximum spending limit for your outfits",
-                    "Description": "and above"
+                    "Description": "and above",
+                    "AndAbove": "and above",
+                    "Description1": "Can you set a limit for your 5 pieces combination?",
+                    "Description2": "We want this information so we can create ",
+                    "Description3": "a combination suitable your budget.",
+                    "PaymentInformation1": "Remember, you only pay for the pieces you",
+                    "PaymentInformation2": "like after trying them out."
+                },
+                "SubscriptionPlan": {
+                    "Title": "Kombin Alma Sıklığın*",
+                    "Description": "Ne sıklıkta senin için kombin hazırlanmasını tercih edersin?",
+                    "OnDemand": {
+                        "Title": "Dilediğin Bir Zaman",
+                        "Description": "<strong> Dilediğin zaman </strong> sipariş ver, sana özel kombinini hazırlayıp kayıtlı adresine gönderelim."
+                    },
+                    "EveryTwoWeeks": {
+                        "Title": "2 Haftada Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her 2 haftada bir </strong> belirttiğin adrese ulaşır."
+                    },
+                    "EveryMonth": {
+                        "Title": "Ayda Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her ay </strong> belirttiğin adrese ulaşır."
+                    },
+                    "EveryTwoMonths": {
+                        "Title": "2 Ayda Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her 2 ayda bir </strong> belirttiğin adrese ulaşır."
+                    },
+                    "EveryThreeMonths": {
+                        "Title": "3 Ayda Bir Kombin",
+                        "Description": "Sana özel hazırlanan kombinler <strong> her 3 ayda bir </strong> belirttiğin adrese ulaşır."
+                    },
+                    "OnDemandDescription": "Bu planda siparişini dilediğin zaman kendin oluşturursun!",
+                    "PeriodicPlanDescription": "Unutma! Bu kısımda yer alan planlarımızı seçtiğinde, ilk siparişini oluştururuz! Daha sonrasında ise seçtiğin plan dahilinde sana <strong> 2 haftada bir, ayda bir, 2 ayda bir </strong> veya <strong> 3 ayda bir </strong> kombin göndereceğiz.",
+                    "Button": {
+                        "Select": "Select",
+                        "Selected": "Selected Plan"
+                    },
+                    "PriceTitle": "Maximum budget for your outfits*",
+                    "Suggested": "Best Offer"
+                },
+                "SubscriptionInformation": {
+                    "Title1": "Wait! ",
+                    "Title2": " Before you finish, we have something to say!",
+                    "LastStep": {
+                        "Title": "Last Step :)",
+                        "Description": "Last step is subscription! You set a spending limit in this step and we buy your clothes without exceeding this limit."
+                    },
+                    "GotQuestions": {
+                        "Title": "Got Questions?",
+                        "Description": "If you have any questions/suggestions about the style form or the subscription step, you can get in touch with us fast."
+                    },
+                    "SubscriptionIsFree": {
+                        "Title": "Subscription is free!",
+                        "Description": "Modilist is with you! You only <strong> pay for the clothes you buy. </strong> You can even refund the pieces you don't like for <i> free </i>."
+                    },
+                    "YourInformationIsSafe": {
+                        "Title": "Your information is safe!",
+                        "Description": "In Modilist, your card information is secured with Iyzico assurance. We require your card information so you can easily pay after you receive your outfits."
+                    },
+                    "YourFirstOrder": {
+                        "Title": "First Order",
+                        "Description": "After you hit finish we will begin preparing your first order. Are you excited for your surprise outfit?"
+                    }
                 }
             },
             "PaymentMethod": {
@@ -421,7 +483,7 @@
             "TotalProductPrice": "Total Amount:",
             "PackageTotalPrice": "Total cost of the outfit:",
             "Checkout": "Complete the payment",
-            "ReturnWarning": "You must complete the refund process before you can make the payment.",
+            "ReturnWarning": "You must complete the refund process and provide a billing address before you can make the payment.",
             "CargoTrackingCode": "Cargo Tracking Number",
             "CargoTrackingCodeInfo": "When you complete the return process, a cargo tracking number will be generated.",
             "CreateReturn": "Create a return request",
@@ -768,6 +830,7 @@
             "Completed": "The order is completed"
         },
         "Forms": {
+            "Other": "Other",
             "Message": "Message",
             "Select": "Choose",
             "Close": "Close",
@@ -779,9 +842,12 @@
             "SentMessageFailed": "An error occurred while sending your message.",
             "Delete": "Delete",
             "CharactersLeft": "characters left",
-            "UnexpectedError": "An unexpected error has occured."
+            "UnexpectedError": "An unexpected error has occured.",
+            "InvalidIdNumber": "Invalid Id Number",
+            "InvalidTaxNumber": "Invalid Tax Number"
         },
         "PersonalInfo": {
+            "Address": "Address",
             "FullName": "Full Name",
             "FirstName": "Name",
             "LastName": "Surname",

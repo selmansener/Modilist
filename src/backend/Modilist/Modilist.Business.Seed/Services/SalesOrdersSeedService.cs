@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Modilist.Business.Seed.Configuration;
 using Modilist.Business.Seed.Utils;
+using Modilist.Business.Utils.AddressDomain;
 using Modilist.Data.DataAccess;
 using Modilist.Domains.Models.SalesOrderDomain;
 using Modilist.Infrastructure.Shared.Enums;
@@ -14,16 +15,18 @@ namespace Modilist.Business.Seed.Services
 {
     internal class SalesOrdersSeedService : BaseSeedService
     {
-        public SalesOrdersSeedService(ModilistDbContext dbContext)
+        private readonly IAddressService _addressService;
+        public SalesOrdersSeedService(ModilistDbContext dbContext, IAddressService addressService)
             : base(dbContext)
         {
+            _addressService = addressService;
         }
 
         protected override ImmutableList<SeedServiceType> Dependencies => ImmutableList.Create(SeedServiceType.Users, SeedServiceType.Product);
 
         public override async Task Execute(CancellationToken cancellationToken)
         {
-            var faker = new Faker();
+            var faker = new Faker("tr");
             var accounts = await _dbContext.Accounts.ToListAsync(cancellationToken);
             var products = await _dbContext.Products.ToListAsync(cancellationToken);
 
@@ -67,6 +70,8 @@ namespace Modilist.Business.Seed.Services
             _dbContext.ChangeTracker.DetectChanges();
 
             await _dbContext.SaveChangesAsync();
+
+            var cities = _addressService.GetCities();
 
             foreach (var account in accounts)
             {
@@ -119,7 +124,32 @@ namespace Modilist.Business.Seed.Services
                             faker.Random.Bool());
                     }
 
-                    salesOrder.Completed();
+
+
+                    var randomCity = faker.PickRandom(cities);
+                    var districts = _addressService.GetDistricts(randomCity.Code);
+
+                    var randomDistrict = faker.PickRandom(districts);
+
+                    var billingType = faker.PickRandomWithout<BillingType>(BillingType.None);
+
+                    var billingAddress = new BillingAddress(
+                        salesOrder.Id,
+                        "ev",
+                        randomCity.Name,
+                        randomDistrict.Name,
+                        $"{faker.Address.StreetName()} {faker.Address.StreetAddress()} {randomDistrict.Name}/{randomCity.Name}",
+                        account.Email,
+                        account.Phone,
+                        billingType,
+                        billingType == BillingType.Individual ? $"{account.FirstName} {account.LastName}" : null,
+                        faker.Address.ZipCode(),
+                        billingType == BillingType.Individual ? faker.Random.ReplaceNumbers("###########") : null,
+                        billingType == BillingType.Organization ? faker.Company.CompanyName() : null,
+                        billingType == BillingType.Organization ? faker.Random.ReplaceNumbers("##########") : null,
+                        billingType == BillingType.Organization ? faker.Company.CompanyName() : null);
+
+                    salesOrder.Completed(billingAddress);
                 }
             }
 

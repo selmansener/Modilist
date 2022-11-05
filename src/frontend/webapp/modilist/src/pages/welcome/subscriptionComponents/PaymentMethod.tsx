@@ -203,7 +203,7 @@ export default function PaymentMethod() {
         },
         validationSchema: schema,
         onSubmit: (values) => {
-            dispatch.createPaymentMethodModel.createPaymentMethod({
+            dispatch.createDefaultPaymentMethodModel.createDefaultPaymentMethod({
                 ...values,
                 isDefault: true
             });
@@ -226,8 +226,8 @@ export default function PaymentMethod() {
     }, [creditCard])
 
     useEffect(() => {
-        if (createDefaultPaymentMethodStatus !== 0) {
-            dispatch.createPaymentMethodModel.RESET();
+        if (createDefaultPaymentMethodStatus !== 200 && createDefaultPaymentMethodStatus !== 0) {
+            dispatch.createDefaultPaymentMethodModel.RESET();
         }
     }, [createDefaultPaymentMethodStatus])
 

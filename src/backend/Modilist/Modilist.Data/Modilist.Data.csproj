@@ -16,4 +16,9 @@
     <ProjectReference Include="..\Modilist.Infrastructure.Shared\Modilist.Infrastructure.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\2022\10\" />
+    <Folder Include="Migrations\Scripts\2022\10\" />
+  </ItemGroup>
+
 </Project>
