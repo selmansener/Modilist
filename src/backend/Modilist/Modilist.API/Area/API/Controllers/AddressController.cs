@@ -106,12 +106,12 @@ namespace Modilist.API.Area.API.Controllers
         }
 
         [Authorize(nameof(AuthorizationPermissions.Addresses))]
-        [HttpPost("[controller].Upsert/{name}")]
+        [HttpPost("[controller].Upsert/{addressId}")]
         [ProducesResponseType(typeof(AddressDTO), 200)]
-        public async Task<IActionResult> Upsert(string name, UpsertAddress input, CancellationToken cancellationToken)
+        public async Task<IActionResult> Upsert(int addressId, UpsertAddress input, CancellationToken cancellationToken)
         {
             input.AccountId = User.GetUserId();
-            input.Name = name;
+            input.AddressId = addressId;
 
             var response = await _mediator.Send(input, cancellationToken);
 

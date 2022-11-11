@@ -3,15 +3,16 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "../../store/store";
+import { Dispatch, RootState } from "../../../store/store";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
-import { AccountDTO, Gender, UpdateAccount } from "../../services/swagger/api";
+import { AccountDTO, Gender, UpdateAccount } from "../../../services/swagger/api";
 import add from 'date-fns/add'
 import React from "react";
 import { IMaskInput } from "react-imask";
 import trLocale from 'date-fns/locale/tr';
+import { Helmet } from "react-helmet";
 
 interface PhoneInputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -41,7 +42,7 @@ const localeMap = {
 };
 
 
-export function Account() {
+export default function Account() {
     const { t } = useTranslation();
     const maxDate = add(new Date(), {
         years: -18
@@ -108,6 +109,14 @@ export function Account() {
 
     return (
         <Grid container spacing={2}>
+            <Helmet>
+                <title>{t("Pages.Titles.Account")} | Modilist</title>
+            </Helmet>
+            <Grid item xs={12}>
+                <Typography variant="h4">
+                    {t("Pages.Titles.Account")}
+                </Typography>
+            </Grid>
             <Grid item xs={6}>
                 <FormControl fullWidth>
                     <TextField label={<Typography>{t('Generic.PersonalInfo.FirstName')}</Typography>}

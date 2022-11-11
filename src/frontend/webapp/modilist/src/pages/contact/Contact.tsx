@@ -48,7 +48,7 @@ const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
 
 
 
-export function Contact() {
+export default function Contact() {
     const { t } = useTranslation();
     const { instagram, facebook, twitter, linkedIn } = config.socialMediaLinks;
     const dispatch = useDispatch<Dispatch>();
@@ -174,8 +174,6 @@ export function Contact() {
     )
 
     useEffect(() => {
-        console.log("isBusy", isBusy)
-        console.log("status", status)
         if (!isBusy && status !== 0) {
             if (status === 200) {
                 setIsSuccess(true);

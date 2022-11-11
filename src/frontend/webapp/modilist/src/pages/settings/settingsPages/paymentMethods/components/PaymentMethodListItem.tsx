@@ -1,14 +1,10 @@
-import { Box, Button, Divider, Grid, Link, Paper, Tooltip, Typography } from "@mui/material";
+import { Button, Divider, Grid, Paper, Tooltip, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import UpdateIcon from '@mui/icons-material/Update';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { ImageComponent } from "../../../components/image/ImageComponent";
-import { config } from "../../../config";
-import { PaymentMethodDTO } from "../../../services/swagger/api";
+import { ImageComponent } from "../../../../../components/image/ImageComponent";
+import { config } from "../../../../../config";
+import { PaymentMethodDTO } from "../../../../../services/swagger/api";
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "../../../store/store";
-import { useEffect } from "react";
 
 export interface PaymentMethodListItemProps {
     paymentMethod: PaymentMethodDTO,

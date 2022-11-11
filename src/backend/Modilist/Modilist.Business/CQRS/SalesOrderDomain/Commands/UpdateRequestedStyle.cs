@@ -43,7 +43,7 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
 
         public async Task<Unit> Handle(UpdateRequestedStyle request, CancellationToken cancellationToken)
         {
-            SalesOrder? salesOrder = await _salesOrderRepository.GetLatestActiveOrderAsync(request.AccountId, cancellationToken);
+            SalesOrder? salesOrder = await _salesOrderRepository.GetSalesOrderAsync(request.AccountId, request.SalesOrderId, cancellationToken);
 
             if (salesOrder == null)
             {

@@ -15,7 +15,7 @@ export function NewPaymentMethodListItem() {
             <Grid item xs={12} display="flex" justifyContent="flex-end">
                 <Button 
                     onClick={() => {
-                        navigate("/add-payment-method");
+                        navigate("/settings/payment-methods/new");
                     }}
                     variant="outlined" 
                     startIcon={<AddCircleOutlineIcon />}>

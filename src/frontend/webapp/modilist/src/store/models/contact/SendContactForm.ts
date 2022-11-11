@@ -38,7 +38,6 @@ export const sendContactFormModel = createModel<RootModel>()({
                 sendContactFormModel.BUSY();
 
                 const response = await api.messages.apiV1MessageSendEmailPost(input);
-                console.log("response", response)
                 sendContactFormModel.HANDLE_RESPONSE(response.status);
             }
         }

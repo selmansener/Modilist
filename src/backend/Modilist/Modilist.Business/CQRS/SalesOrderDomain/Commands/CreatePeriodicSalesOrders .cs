@@ -121,7 +121,7 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
                 throw new DefaultAddressNotFoundException(request.AccountId);
             }
 
-            var salesOrder = new SalesOrder(request.AccountId);
+            var salesOrder = new SalesOrder(request.AccountId, subscription.MaxPricingLimit);
 
             salesOrder.AssignAddress(defaultAddress);
 

@@ -61,10 +61,10 @@ export const upsertAddressModel = createModel<RootModel>()({
     effects: (dispatch) => {
         const { upsertAddressModel } = dispatch
         return {
-            async upsertAddress(input: { name: string, body: UpsertAddress }): Promise<any> {
+            async upsertAddress(input: { id: number, body: UpsertAddress }): Promise<any> {
                 upsertAddressModel.BUSY();
 
-                const response = await api.addresses.apiV1AddressUpsertNamePost(input.name, input.body);
+                const response = await api.addresses.apiV1AddressUpsertAddressIdPost(input.id, input.body);
 
                 if (response.status === 200) {
 

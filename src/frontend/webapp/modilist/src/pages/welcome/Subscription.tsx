@@ -2,6 +2,7 @@ import { Alert, Button, CircularProgress, Grid, Snackbar } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Dispatch, RootState } from '../../store/store';
 import ContactInfo from './subscriptionComponents/ContactInfo';
 import PaymentMethod from './subscriptionComponents/PaymentMethod';
@@ -9,7 +10,7 @@ import Personal from './subscriptionComponents/Personal';
 import { SubscriptionDetails } from './subscriptionComponents/SubscriptionDetails';
 import { SubscriptionInformation } from './subscriptionComponents/SubscriptionInformation';
 
-export function Subscription() {
+export default function Subscription() {
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
     const { isBusy: getAccountIsBusy } = useSelector((state: RootState) => state.getAccountModel);
@@ -18,10 +19,12 @@ export function Subscription() {
     const { isBusy: upsertAddressIsBusy, status: upsertAddressStatus } = useSelector((state: RootState) => state.upsertAddressModel);
     const { isBusy: createPaymentMethodIsBusy, status: createPaymentMethodStatus } = useSelector((state: RootState) => state.createDefaultPaymentMethodModel);
     const { isBusy: updateSubscriptiontIsBusy, status: updateSubscriptionStatus } = useSelector((state: RootState) => state.updateSubscriptionModel);
+    const { isBusy: activateAccountIsBusy, data: activateAccount, status: activateAccountStatus } = useSelector((state: RootState) => state.activateAccountModel);
     const { personal, contactInfo, paymentMethod, subscriptionDetails } = useSelector((state: RootState) => state.stepperSubscription);
     const isBusy = getAccountIsBusy || updateAccountIsBusy || getDefaultAddressIsBusy || upsertAddressIsBusy || createPaymentMethodIsBusy || updateSubscriptiontIsBusy;
     const [snackbarStatus, setSnackbarStatus] = useState(false);
     const statusList = [updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionStatus];
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo({
@@ -38,13 +41,18 @@ export function Subscription() {
             }
         });
 
-        console.log(updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionStatus)
         if (updateAccountStatus === 200 && upsertAddressStatus === 200 && createPaymentMethodStatus === 200 && updateSubscriptionStatus === 200) {
-            dispatch.welcomePageStepper.next();
+            dispatch.activateAccountModel.activateAccount();
         }
 
     }, [updateAccountStatus, upsertAddressStatus, createPaymentMethodStatus, updateSubscriptionStatus])
 
+    useEffect(() => {
+        if (activateAccountStatus === 200 && activateAccount) {
+            dispatch.getAccountModel.HANDLE_RESPONSE(activateAccount, activateAccountStatus);
+            navigate("/", { replace: true });
+        }
+    }, [activateAccountStatus]);
 
     return (
         <Grid item container spacing={4}>
@@ -58,7 +66,7 @@ export function Subscription() {
                     disabled={isBusy}
                     variant="outlined"
                     onClick={() => {
-                        dispatch.welcomePageStepper.back();
+                        navigate(-1);
                     }}
                 >
                     {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}

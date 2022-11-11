@@ -5,6 +5,12 @@ namespace Modilist.Business.Exceptions
 {
     internal class SalesOrderNotFoundException : Exception, IClientException
     {
+        public SalesOrderNotFoundException(Guid accountId)
+            : base($"No SalesOrder were found for account: {accountId}")
+        {
+            AccountId = accountId;
+        }
+
         public SalesOrderNotFoundException(Guid accountId, int salesOrderId)
             : base($"SalesOrder not found with Id: {salesOrderId} for account: {accountId}")
         {

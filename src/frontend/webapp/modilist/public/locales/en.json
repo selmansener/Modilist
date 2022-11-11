@@ -27,7 +27,6 @@
                     "TitlePaymentMethod": "Payment Method"
                 }
             },
-
             "WelcomeSteps": {
                 "Buttons": {
                     "Back": "Back",
@@ -44,9 +43,18 @@
         },
         "Dashboard": {
             "Header": {
-                "Subscription": "Subscription Settings",
-                "Profile": "Personal Settings",
+                "Account": "Account Settings",
                 "Logout": "Sign out"
+            },
+            "Settings": {
+                "Title": "My Account",
+                "PersonalInfo": "Personal Information",
+                "Login&Password": "Login&Password",
+                "SubscriptionInfo": "Subscription Information",
+                "Address": "Addresses",
+                "Payment": "Payment Methods",
+                "Offers": "Offers",
+                "Logout": "Logout"
             },
             "Footer": {
                 "FollowUs": "Follow us.",
@@ -69,6 +77,7 @@
         "Titles": {
             "Main": "Main Page",
             "SalesOrders": "My Orders",
+            "StyleForm": "My Style Form",
             "SizeInfo": "My Size Info",
             "StylePreferences": "My Style Preferences",
             "FitPreferences": "My Fit Preferences",
@@ -569,9 +578,12 @@
             "CheckMailMessage": "Before we start preparing your outfit, you need to verify your account via the message sent to your e-mail address."
         },
         "NotFound": {
-            "Message": "We couldn't find what you were looking for or we lost it.",
+            "Error": "Error :(",
+            "Description1": "Sorry, we can't find what",
+            "Description2": "you are looking for or",
+            "Description3": "we lost it.",
             "ReturnToHome": "Homepage",
-            "ReturnToPreviousPage": "Return back"
+            "ReturnToPreviousPage": "Back"
         },
         "About": {
             "Title": "About",

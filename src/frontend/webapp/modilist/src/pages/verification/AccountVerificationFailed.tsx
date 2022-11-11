@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import UnsubscribeIcon from '@mui/icons-material/Unsubscribe';
 
-export function AccountVerificationFailed() {
+export default function AccountVerificationFailed() {
     const { t } = useTranslation();
 
     return (

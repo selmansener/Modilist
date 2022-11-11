@@ -217,7 +217,7 @@ export default function PaymentMethod() {
                 window.scrollTo(0, 0);
             }
         })
-    }, []);
+    }, [isValid]);
 
     useEffect(() => {
 

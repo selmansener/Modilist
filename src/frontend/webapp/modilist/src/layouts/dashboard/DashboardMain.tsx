@@ -11,7 +11,7 @@ export function DashboardMain(props: React.PropsWithChildren<DashboardMainProps>
         <Box
             component="main"
             sx={{
-                minHeight: '100vh',
+                minHeight: `${window.innerHeight - 465}px`,
                 overflow: 'auto',
                 p: 2,
                 mt: 14,
@@ -19,8 +19,12 @@ export function DashboardMain(props: React.PropsWithChildren<DashboardMainProps>
                 mx: [4],
             }}
         >
-            <Container maxWidth="xl">
-                <Grid container spacing={4}>
+            <Container maxWidth="xl" sx={{
+                minHeight: `${window.innerHeight - 465}px`,
+            }}>
+                <Grid container spacing={4} sx={{
+                    minHeight: `${window.innerHeight - 465}px`,
+                }}>
                     <Outlet />
                 </Grid>
             </Container>

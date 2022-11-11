@@ -13,6 +13,7 @@ import { ImageComponent } from "../../components/image/ImageComponent";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import SkipFormPaper from "./components/SkipFormPaper";
+import { useNavigate } from "react-router-dom";
 
 enum MainCategory {
     Upper = "Upper",
@@ -35,7 +36,7 @@ export interface StylePreferencesProps {
     layout?: string;
 }
 
-export function StylePreferences(props: StylePreferencesProps) {
+export default function StylePreferences(props: StylePreferencesProps) {
     const { layout } = props;
     const { t } = useTranslation();
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
@@ -47,6 +48,7 @@ export function StylePreferences(props: StylePreferencesProps) {
     const { gender } = account as AccountDTO;
     const theme = useTheme();
     const [snackbarStatus, setSnackbarStatus] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo({
@@ -67,7 +69,7 @@ export function StylePreferences(props: StylePreferencesProps) {
             dispatch.getStylePreferencesModel.HANDLE_RESPONSE(upsertStylePreferences, upsertStylePreferencesStatus);
 
             if (layout !== "dashboard") {
-                dispatch.welcomePageStepper.next();
+                navigate("/style-form/step/fit-preferences");
             }
         }
         else if (upsertStylePreferencesStatus !== 200 && upsertStylePreferencesStatus !== 0) {
@@ -585,7 +587,7 @@ export function StylePreferences(props: StylePreferencesProps) {
 
     const productCategories = gender === Gender.Female ? femaleProductCategories : maleProductCategories;
 
-    const UpperGroup = () => {
+    const UpperGroup = (productCategories: ProductCategory[]) => {
         const upperCategories = productCategories.filter(x => x.mainCategory === MainCategory.Upper).map(category => {
             return {
                 value: category.value,
@@ -647,7 +649,7 @@ export function StylePreferences(props: StylePreferencesProps) {
         />
     }
 
-    const OuterGroup = () => {
+    const OuterGroup = (productCategories: ProductCategory[]) => {
         const outerCategories = productCategories.filter(x => x.mainCategory === MainCategory.Outer).map(category => {
             return {
                 value: category.value,
@@ -677,7 +679,7 @@ export function StylePreferences(props: StylePreferencesProps) {
             }}
         />
     }
-    const UnderwearPyjamasBeachGroup = () => {
+    const UnderwearPyjamasBeachGroup = (productCategories: ProductCategory[]) => {
         const accessoriesCategories = productCategories.filter(x => x.mainCategory === MainCategory.UnderwearPyjamasBeach).map(category => {
             return {
                 value: category.value,
@@ -708,7 +710,7 @@ export function StylePreferences(props: StylePreferencesProps) {
         />
     }
 
-    const AccessoriesGroup = () => {
+    const AccessoriesGroup = (productCategories: ProductCategory[]) => {
         const accessoriesCategories = productCategories.filter(x => x.mainCategory === MainCategory.Accessories).map(category => {
             return {
                 value: category.value,
@@ -739,7 +741,7 @@ export function StylePreferences(props: StylePreferencesProps) {
         />
     }
 
-    const BagsGroup = () => {
+    const BagsGroup = (productCategories: ProductCategory[]) => {
         const bagsCategories = productCategories.filter(x => x.mainCategory === MainCategory.Bags).map(category => {
             return {
                 value: category.value,
@@ -770,7 +772,7 @@ export function StylePreferences(props: StylePreferencesProps) {
         />
     }
 
-    const FootwearGroup = () => {
+    const FootwearGroup = (productCategories: ProductCategory[]) => {
         const categories = productCategories.filter(x => x.mainCategory === MainCategory.Footwear).map(category => {
             return {
                 value: category.value,
@@ -1082,32 +1084,32 @@ export function StylePreferences(props: StylePreferencesProps) {
 
             <Grid item xs={12}>
                 <FormControl fullWidth>
-                    <UpperGroup />
+                    {UpperGroup(productCategories)}
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
                 <FormControl fullWidth>
-                    <OuterGroup />
+                    {OuterGroup(productCategories)}
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
                 <FormControl fullWidth>
-                    <UnderwearPyjamasBeachGroup />
+                    {UnderwearPyjamasBeachGroup(productCategories)}
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
                 <FormControl fullWidth>
-                    <AccessoriesGroup />
+                    {AccessoriesGroup(productCategories)}
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
                 <FormControl fullWidth>
-                    <FootwearGroup />
+                    {FootwearGroup(productCategories)}
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
                 <FormControl fullWidth>
-                    <BagsGroup />
+                    {BagsGroup(productCategories)}
                 </FormControl>
             </Grid>
             {
@@ -1140,7 +1142,7 @@ export function StylePreferences(props: StylePreferencesProps) {
                                 disabled={isBusy}
                                 variant="outlined"
                                 onClick={() => {
-                                    dispatch.welcomePageStepper.back();
+                                    navigate(-1);
                                 }}
                             >
                                 {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}

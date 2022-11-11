@@ -12,12 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { AccountDTO, AccountState, Gender, PreferedFabricPropertiesDTO } from "../../services/swagger/api";
 import { MAX_CHAR_LIMIT } from "../../utils/constans";
 import SkipFormPaper from "./components/SkipFormPaper";
+import { useNavigate } from "react-router-dom";
 
 export interface FabricPropertiesProps {
     layout?: string;
 }
 
-export function FabricProperties(props: FabricPropertiesProps) {
+export default function FabricProperties(props: FabricPropertiesProps) {
     const { layout } = props;
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
@@ -25,6 +26,7 @@ export function FabricProperties(props: FabricPropertiesProps) {
     const { isBusy: getPreferedFabricPropertiesIsBusy, data: initialPreferedFabricProperties, status: getPreferedFabricPropertiesStatus } = useSelector((state: RootState) => state.getPreferedFabricPropertiesModel);
     const { isBusy: upsertPreferedFabricPropertiesIsBusy, data: upsertPreferedFabricProperties, status: upsertStatus } = useSelector((state: RootState) => state.upsertPreferedFabricPropertiesModel);
     const isBusy = getAccountIsBusy || getPreferedFabricPropertiesIsBusy || upsertPreferedFabricPropertiesIsBusy;
+    const navigate = useNavigate();
 
     const [fabricProps, setFabricProps] = useState<PreferedFabricPropertiesDTO>({
         excludedColors: "",
@@ -52,7 +54,7 @@ export function FabricProperties(props: FabricPropertiesProps) {
             }
 
             if (layout !== "dashboard") {
-                dispatch.welcomePageStepper.next();
+                navigate("/style-form/step/subscription");
             }
         }
         else if (upsertStatus !== 200 && upsertStatus !== 0) {
@@ -263,7 +265,7 @@ export function FabricProperties(props: FabricPropertiesProps) {
                     disabled={isBusy}
                     variant="outlined"
                     onClick={() => {
-                        dispatch.welcomePageStepper.back();
+                        navigate(-1);
                     }}
                 >
                     {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}

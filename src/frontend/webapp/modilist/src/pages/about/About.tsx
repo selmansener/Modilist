@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 
-export function About() {
+export default function About() {
     const { t } = useTranslation();
     const { cdnImg } = config;
 

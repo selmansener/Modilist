@@ -14,6 +14,7 @@ export interface AppConfig extends ApiConfig, EnvConfig {
     isProduction: boolean;
     msalConfig: MsalConfig;
     loginRequest: RedirectRequest;
+    resetRequest: RedirectRequest;
     cdnImg: string;
     cdn: string;
 }
@@ -22,6 +23,7 @@ const envConfig = require(`./config.${env}`).config as EnvConfig;
 const msalConfig = require(`./auth/msalConfig.${env}`).msalConfig as MsalConfig;
 const webApiConfig = require(`./auth/msalConfig.${env}`).apiConfig as ApiConfig;
 const loginRequest = require(`./auth/msalConfig.${env}`).loginRequest as RedirectRequest;
+const resetRequest = require(`./auth/msalConfig.${env}`).resetRequest as RedirectRequest;
 
 export const config: AppConfig = {
     environment: env as Environment,
@@ -32,6 +34,7 @@ export const config: AppConfig = {
     ...envConfig,
     ...webApiConfig,
     loginRequest,
+    resetRequest,
     msalConfig,
     cdnImg: "https://cdn.modilist.com/img",
     cdn: "https://cdn.modilist.com"

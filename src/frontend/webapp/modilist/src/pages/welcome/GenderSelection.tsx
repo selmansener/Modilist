@@ -48,7 +48,7 @@ function GenderImage(props: GenderProps) {
         }} />
 }
 
-export function GenderSelection() {
+export default function GenderSelection() {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
@@ -77,7 +77,7 @@ export function GenderSelection() {
                 dispatch.getAccountModel.HANDLE_RESPONSE(updateAccount, updateAccountStatus);
             }
 
-            navigate("/welcome");
+            navigate("/style-form/step/size-info");
         }
         else if (updateAccountStatus !== 200 && updateAccountStatus !== 0) {
             setSnackbarStatus(true);

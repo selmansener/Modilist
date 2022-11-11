@@ -1,16 +1,19 @@
-import { Button, Checkbox, FormControl, FormControlLabel, Grid, TextField } from "@mui/material";
+import { Button, Checkbox, FormControl, FormControlLabel, Grid, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "../../store/store";
-import { Cities } from "../welcome/address/Cities";
-import { Districts } from "../welcome/address/Districts";
+import { Dispatch, RootState } from "../../../../store/store";
+import { Cities } from "../../../welcome/address/Cities";
+import { Districts } from "../../../welcome/address/Districts";
 import * as Yup from "yup";
 import React from "react";
 import { IMaskInput } from "react-imask";
 import { useNavigate, useParams } from "react-router-dom";
-import { AddressDTO } from "../../services/swagger/api";
+import { AddressDTO } from "../../../../services/swagger/api";
+import { Helmet } from "react-helmet";
+import { IconButton } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 interface NumberInputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -63,7 +66,7 @@ type FieldStates = {
     zipCode: boolean;
 }
 
-export function UpsertAddress() {
+export default function UpsertAddress() {
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
     const { addressId } = useParams();
@@ -94,8 +97,8 @@ export function UpsertAddress() {
         phone: Yup.string().test({
             name: 'minCharacters',
             message: `${minCharacters}`,
-            test: (value) => 
-                    value?.length == 12            
+            test: (value) =>
+                value?.length == 12
         }).required(requiredField),
         city: Yup.string().required(requiredField),
         district: Yup.string().required(requiredField),
@@ -161,7 +164,7 @@ export function UpsertAddress() {
             onSubmit: (values) => {
                 if (!isBusy && values && values?.name) {
                     dispatch.upsertAddressModel.upsertAddress({
-                        name: values.name,
+                        id: addressId ? parseInt(addressId) : 0,
                         body: values
                     });
                 }
@@ -171,7 +174,7 @@ export function UpsertAddress() {
     useEffect(() => {
         if (!isBusy && statusUpsertAddress === 200) {
             dispatch.upsertAddressModel.RESET();
-            navigate("/addresses");
+            navigate("/settings/addresses");
         }
     }, [statusUpsertAddress]);
 
@@ -190,6 +193,20 @@ export function UpsertAddress() {
 
     return (
         <Grid item container xs={12} spacing={2}>
+            <Helmet>
+                <title>{initialAddress ? t("Pages.Titles.UpdateAddress", { addressName: initialAddress?.name }) : t("Pages.Titles.NewAddress")} | Modilist</title>
+            </Helmet>
+            <Grid item xs={12}>
+                <IconButton onClick={() => navigate(-1)}>
+                    <ChevronLeftIcon />
+                </IconButton>
+                <Typography variant="h4" component="span" sx={{
+                    verticalAlign: "middle",
+                    ml: 2
+                }}>
+                    {initialAddress ? t("Pages.Titles.UpdateAddress", { addressName: initialAddress?.name }) : t("Pages.Titles.NewAddress")}
+                </Typography>
+            </Grid>
             <Grid item xs={4}>
                 <FormControl fullWidth>
                     <TextField

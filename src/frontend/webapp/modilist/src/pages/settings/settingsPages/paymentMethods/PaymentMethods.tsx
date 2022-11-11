@@ -1,12 +1,13 @@
-import { Alert, Grid, Snackbar } from "@mui/material";
+import { Alert, Grid, Snackbar, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, Dispatch } from "../../store/store";
+import { RootState, Dispatch } from "../../../../store/store";
 import { NewPaymentMethodListItem } from "./components/NewPaymentMethodListItem";
 import { PaymentMethodListItem } from "./components/PaymentMethodListItem";
 
-export function PaymentMethods() {
+export default function PaymentMethods() {
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
     const { isBusy: isBusyPaymentMethods, data: paymentMethods } = useSelector((state: RootState) => state.getAllPaymentMethodsModel);
@@ -36,6 +37,14 @@ export function PaymentMethods() {
 
     return (
         <Grid item container xs={12} spacing={2}>
+            <Helmet>
+                <title>{t("Pages.Titles.PaymentMethods")} | Modilist</title>
+            </Helmet>
+            <Grid item xs={12}>
+                <Typography variant="h4">
+                    {t("Pages.Titles.PaymentMethods")}
+                </Typography>
+            </Grid>
             {paymentMethods?.map(paymentMethod => {
                 return <Grid key={paymentMethod.id} item xs={4}>
                     <PaymentMethodListItem paymentMethod={paymentMethod}

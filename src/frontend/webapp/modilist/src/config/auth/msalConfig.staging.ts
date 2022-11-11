@@ -18,13 +18,13 @@ export const apiConfig = {
 export const b2cPolicies = {
     names: {
         signUpSignIn: "b2c_1_susi",
-        forgotPassword: "b2c_1_reset"
+        resetPassword: "b2c_1_reset"
     },
     authorities: {
         signUpSignIn: {
             authority: "https://login.modilist.com/7a597f5e-68aa-4c7e-a553-6591835b7217/B2C_1_signIn_signUp",
         },
-        forgotPassword: {
+        resetPassword: {
             authority: "https://login.modilist.com/7a597f5e-68aa-4c7e-a553-6591835b7217/B2C_1_reset",
         }
     },
@@ -75,8 +75,14 @@ export const msalConfig = {
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-    scopes: [...apiConfig.b2cScopes, "openid", "offline_access" ]
+    scopes: [...apiConfig.b2cScopes, "openid", "offline_access"]
 };
+
+
+export const resetRequest = {
+    authority: b2cPolicies.authorities.resetPassword.authority
+}
+
 
 /**
  * Add here the scopes to request when obtaining an access token for MS Graph API. For more information, see:

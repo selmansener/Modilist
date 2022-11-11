@@ -4,38 +4,34 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 import { Trans, useTranslation } from "react-i18next";
-import { FabricProperties } from "./FabricProperties";
-import { FitPreferences } from "./FitPreferences";
-import { useNavigate } from "react-router-dom";
-import { SizeInfo } from "./SizeInfo";
-import { StylePreferences } from "./StylePreferences";
-import { Subscription } from "./Subscription";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import CheckroomIcon from '@mui/icons-material/Checkroom';
 import StraightenIcon from '@mui/icons-material/Straighten';
 import GradientIcon from '@mui/icons-material/Gradient';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 
+
 const steps = [
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleBodySize',
-        component: <SizeInfo />
+        pathname: '/style-form/step/size-info'
     },
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleStylePreferences',
-        component: <StylePreferences />
+        pathname: '/style-form/step/style-preferences'
     },
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleFitPreferences',
-        component: <FitPreferences />
+        pathname: '/style-form/step/fit-preferences'
     },
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleFabricProperties',
-        component: <FabricProperties />
+        pathname: '/style-form/step/fabric-preferences'
     },
     {
         title: 'Layouts.Welcome.WelcomeLayout.Steps.TitleSubscription',
-        component: <Subscription />
+        pathname: '/style-form/step/subscription'
     },
 ];
 
@@ -43,30 +39,10 @@ const steps = [
 
 export function WelcomeSteps() {
     const { t } = useTranslation();
-    const navigate = useNavigate();
-    const { activeStep } = useSelector((state: RootState) => state.welcomePageStepper);
-    const { isBusy: activateAccountIsBusy, data: activateAccount, status: activateAccountStatus } = useSelector((state: RootState) => state.activateAccountModel);
-
-    const { isBusy: createFirstOrderIsBusy, data: createFirstOrderData, status: createFirstOrderStatus } = useSelector((state: RootState) => state.createFirstOrderModel);
-    const dispatch = useDispatch<Dispatch>();
+    const location = useLocation();
     const [scrollPosition, setScrollPosition] = useState(0);
     const windowHeight = window.innerHeight;
-
-    useEffect(() => {
-        if (activateAccountStatus === 200 && activateAccount) {
-            dispatch.getAccountModel.HANDLE_RESPONSE(activateAccount, activateAccountStatus);
-            if (!createFirstOrderIsBusy && createFirstOrderStatus === 0) {
-                dispatch.createFirstOrderModel.createFirstOrder();
-            }
-        }
-    }, [activateAccountStatus]);
-
-    useEffect(() => {
-        if (!createFirstOrderIsBusy && createFirstOrderStatus === 200) {
-            dispatch.activeSalesOrderModel.RESET();
-            navigate("/", { replace: true });
-        }
-    }, [createFirstOrderStatus]);
+    const [activeStep, setActiveStep] = useState(0);
 
     const StepIconRoot = styled('div')<{
         ownerState: { completed?: boolean; active?: boolean };
@@ -127,18 +103,17 @@ export function WelcomeSteps() {
     }
 
     useEffect(() => {
-        if (!activateAccountIsBusy && activeStep === steps.length && activateAccountStatus === 0) {
-            dispatch.activateAccountModel.activateAccount();
-        }
-    }, [activeStep]);
-
-    useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    useEffect(() => {
+        const index = steps.findIndex(x => x.pathname === location.pathname);
+        setActiveStep(index);
+    }, [location]);
 
     return (
         <Grid item container>
@@ -175,17 +150,9 @@ export function WelcomeSteps() {
                     })}
                 </Stepper>
             </Grid>
-
-
-
-            {activeStep === steps.length
-                ? <Grid item xs={12}>
-                    <CircularProgress />
-                </Grid>
-                : <Grid item container xs={12} spacing={2}>
-                    {steps[activeStep].component}
-                </Grid>
-            }
+            <Grid item container xs={12} spacing={2}>
+                <Outlet />
+            </Grid>
             {getScrollTopDisplayValue() && <Fab
                 sx={{ position: "fixed", bottom: 20, right: 20 }} variant="extended" onClick={() => {
                     window.scrollTo({

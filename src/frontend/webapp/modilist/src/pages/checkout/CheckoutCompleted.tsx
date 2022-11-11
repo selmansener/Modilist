@@ -5,7 +5,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { config } from "../../config";
 import { ImageComponent } from "../../components/image/ImageComponent";
 
-export function CheckoutCompleted() {
+export default function CheckoutCompleted() {
     const { t } = useTranslation();
     const { salesOrderId } = useParams();
     const { cdnImg: imgBaseHost } = config;

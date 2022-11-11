@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 import { useMsal } from "@azure/msal-react";
 
-export function AccountVerified() {
+export default function AccountVerified() {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const { instance: msal } = useMsal();

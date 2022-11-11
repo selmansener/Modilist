@@ -3,6 +3,7 @@ import { t } from "i18next";
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { ImageComponent } from "../../../components/image/ImageComponent";
 import { config } from "../../../config";
 import { Dispatch } from "../../../store/store";
@@ -13,6 +14,7 @@ export default function SkipFormPaper() {
     const { cdnImg: imgBaseHost } = config;
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     return (
         <Grid item xs={12} textAlign="center">
@@ -45,7 +47,7 @@ export default function SkipFormPaper() {
                                 <Typography variant="body1">{t('Layouts.Welcome.WelcomeSteps.StyleFormSkipDescription3')}</Typography>
                             </Box>
                             <Button onClick={() => {
-                                dispatch.welcomePageStepper.skipToStep(4);
+                                navigate("/style-form/step/subscription")
                             }} variant="contained" color="secondary">{t('Layouts.Welcome.WelcomeSteps.SkipToSubscription')}</Button>
                         </Box>
 

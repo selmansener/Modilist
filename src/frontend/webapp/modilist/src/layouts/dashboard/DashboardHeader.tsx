@@ -1,5 +1,5 @@
-import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent, Avatar, Box, Portal, AppBar, Drawer, Button, Grid } from "@mui/material"
-import React, { useRef } from "react";
+import { Toolbar, IconButton, Typography, Menu, MenuItem, Divider, List, ListItemButton, ListItemIcon, ListItemText, Badge, Select, SelectChangeEvent, Avatar, Box, Portal, AppBar, Drawer, Button, Grid, Collapse } from "@mui/material"
+import React, { useRef, useState } from "react";
 import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
@@ -13,6 +13,17 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
+import GradingIcon from '@mui/icons-material/Grading';
+
+import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import CheckroomIcon from "@mui/icons-material/Checkroom";
+import StraightenIcon from "@mui/icons-material/Straighten";
+import GradientIcon from "@mui/icons-material/Gradient";
+
+
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+
 const drawerWidth: number = 240;
 
 export interface MenuItem {
@@ -22,15 +33,18 @@ export interface MenuItem {
 }
 
 interface DashboardHeaderProps {
-  menuItems: MenuItem[];
+  menuItems?: MenuItem[];
   account?: AccountDTO;
 }
 
 export function DashboardHeader(props: DashboardHeaderProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { instance, accounts } = useMsal();
-  const [open, setOpen] = React.useState(false);
+  const [styleFormMenuOpen, setStyleFormMenuOpen] = useState(false);
+
+  const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -38,8 +52,16 @@ export function DashboardHeader(props: DashboardHeaderProps) {
   const theme = useTheme();
   const { pathname } = useLocation();
 
-  const [notificationsIcon, setNotificationsIcon] = React.useState<null | HTMLElement>(null);
-  const [accountIcon, setAccountIcon] = React.useState<null | HTMLElement>(null);
+  const styleFormPaths = [
+    "/size-info",
+    "/style-preferences",
+    "/fit-preferences",
+    "/fabric-properties",
+  ];
+
+  const [notificationsIcon, setNotificationsIcon] = useState<null | HTMLElement>(null);
+  const [accountIcon, setAccountIcon] = useState<null | HTMLElement>(null);
+  const [styleFormMenu, setStyleFormMenu] = useState<null | HTMLElement>(null);
 
   const handleNotificationMenu = (event: React.MouseEvent<HTMLElement>) => {
     setNotificationsIcon(event.currentTarget);
@@ -52,9 +74,15 @@ export function DashboardHeader(props: DashboardHeaderProps) {
   const handleAccountIconMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAccountIcon(event.currentTarget);
   };
+  const handleStyleFormMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setStyleFormMenu(event.currentTarget);
+  }
 
   const handleAccountMenuClose = () => {
     setAccountIcon(null);
+  }
+  const handleStyleFormMenuClose = () => {
+    setStyleFormMenu(null);
   }
 
   const logout = () => {
@@ -67,16 +95,16 @@ export function DashboardHeader(props: DashboardHeaderProps) {
 
   return (
     <Box display="flex">
-      <AppBar position="fixed">
+      <AppBar position="fixed" color="inherit">
         <Toolbar
           sx={{
-            pr: '24px', // keep right padding when drawer closed
+            pr: '24px', 
           }}
         >
           <Box>
             <IconButton
               edge="start"
-              color="inherit"
+              color="default"
               aria-label="open drawer"
               onClick={toggleDrawer}
               sx={{ display: { sm: 'none' } }}
@@ -90,7 +118,7 @@ export function DashboardHeader(props: DashboardHeaderProps) {
             flexGrow: 1,
           }}>
             <NavLink to="/">
-              <ImageComponent width={200} src="/whitehorizontallogo.svg" />
+              <ImageComponent width={200} src="/originalhorizontallogoslogan.svg" />
             </NavLink>
           </Box>
           <Box sx={{
@@ -98,10 +126,9 @@ export function DashboardHeader(props: DashboardHeaderProps) {
             justifyContent: 'flex-start',
             alignContent: 'flex-start'
           }}>
-            {menuItems.map((item) => (
+            {menuItems && menuItems?.map((item) => (
               <NavLink key={item.route} to={item.route} style={{ display: "flex" }}>
-                <Button variant="outlined" color="secondary" sx={{
-                  color: '#fff',
+                <Button variant={item.route === location.pathname ? "contained" : "outlined"} color="primary" sx={{
                   mr: 2,
                   fontWeight: (`/${item.route}` === pathname ? 800 : 400),
                   textDecoration: (`/${item.route}` === pathname ? "underline" : "none")
@@ -110,6 +137,69 @@ export function DashboardHeader(props: DashboardHeaderProps) {
                 </Button>
               </NavLink>
             ))}
+          </Box>
+          <Box sx={{
+            display: { xs: 'none', sm: 'inline' },
+          }}>
+            <Button variant={styleFormPaths.some(x => x === location.pathname) ? "contained" : "outlined"} color="primary" startIcon={<GradingIcon />} sx={{
+              mr: 2,
+              fontWeight: 400,
+            }}
+              size="small"
+              onClick={handleStyleFormMenu}
+            >
+              {t("Pages.Titles.StyleForm")}
+            </Button>
+            <Menu
+              id="styleform-menu"
+              anchorEl={styleFormMenu}
+              keepMounted
+              open={styleFormMenu !== null}
+              onClose={handleStyleFormMenuClose}
+            >
+              <MenuItem sx={location.pathname === "/size-info" ? {
+                backgroundColor: theme.palette.primary.main,
+                color: theme.palette.primary.contrastText,
+                "&.MuiMenuItem-root:hover": {
+                  color: theme.palette.text.primary,
+                }
+              } : undefined} onClick={() => {
+                navigate("/size-info");
+                handleStyleFormMenuClose();
+              }}>
+                {t("Pages.Titles.SizeInfo")}
+              </MenuItem>
+              <MenuItem sx={location.pathname === "/style-preferences" ? {
+                backgroundColor: theme.palette.primary.main,
+                color: theme.palette.primary.contrastText,
+                "&.MuiMenuItem-root:hover": {
+                  color: theme.palette.text.primary,
+                }
+              } : undefined} onClick={() => {
+                navigate("/style-preferences");
+                handleStyleFormMenuClose();
+              }}>{t("Pages.Titles.StylePreferences")}</MenuItem>
+              <MenuItem sx={location.pathname === "/fit-preferences" ? {
+                backgroundColor: theme.palette.primary.main,
+                color: theme.palette.primary.contrastText,
+                "&.MuiMenuItem-root:hover": {
+                  color: theme.palette.text.primary,
+                }
+              } : undefined} onClick={() => {
+                navigate("/fit-preferences");
+                handleStyleFormMenuClose();
+              }}>{t("Pages.Titles.FitPreferences")}</MenuItem>
+              <MenuItem sx={location.pathname === "/fabric-properties" ? {
+                backgroundColor: theme.palette.primary.main,
+                color: theme.palette.primary.contrastText,
+                "&.MuiMenuItem-root:hover": {
+                  color: theme.palette.text.primary,
+                }
+              } : undefined} onClick={() => {
+                navigate("/fabric-properties");
+                handleStyleFormMenuClose();
+              }}>{t("Pages.Titles.FabricProperties")}</MenuItem>
+            </Menu>
           </Box>
           <Box>
             {/* <IconButton
@@ -186,15 +276,11 @@ export function DashboardHeader(props: DashboardHeaderProps) {
               onClose={handleAccountMenuClose}
             >
               <MenuItem onClick={() => {
-                navigate("/settings");
+                navigate("/settings/account");
                 handleAccountMenuClose();
               }}>
-                {t("Layouts.Dashboard.Header.Subscription")}
+                {t("Layouts.Dashboard.Header.Account")}
               </MenuItem>
-              <MenuItem onClick={() => {
-                navigate("/account");
-                handleAccountMenuClose();
-              }}>{t("Layouts.Dashboard.Header.Profile")}</MenuItem>
               <MenuItem onClick={logout}>{t("Layouts.Dashboard.Header.Logout")}</MenuItem>
             </Menu>
           </Box>
@@ -250,9 +336,9 @@ export function DashboardHeader(props: DashboardHeaderProps) {
             </Box>
             <Divider />
             <List component="nav">
-              {menuItems.map((item: MenuItem) => {
+              {menuItems && menuItems?.map((item: MenuItem) => {
                 return (
-                  <NavLink key={item.route} to={item.route}>
+                  <NavLink key={item.route} to={item.route} onClick={toggleDrawer}>
                     <ListItemButton>
                       <ListItemIcon>
                         {item.icon}
@@ -262,9 +348,53 @@ export function DashboardHeader(props: DashboardHeaderProps) {
                   </NavLink>
                 )
               })}
+              <ListItemButton onClick={() => {
+                setStyleFormMenuOpen(!styleFormMenuOpen);
+              }}>
+                <ListItemIcon>
+                  <GradingIcon />
+                </ListItemIcon>
+                <ListItemText primary={t("Pages.Titles.StyleForm")} />
+                {styleFormMenuOpen ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={styleFormMenuOpen} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <NavLink to="/size-info" onClick={toggleDrawer}>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <AccessibilityNewIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={t("Pages.Titles.SizeInfo")} />
+                    </ListItemButton>
+                  </NavLink>
+                  <NavLink to="/style-preferences" onClick={toggleDrawer}>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <CheckroomIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={t("Pages.Titles.StylePreferences")} />
+                    </ListItemButton>
+                  </NavLink>
+                  <NavLink to="/fit-preferences" onClick={toggleDrawer}>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <StraightenIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={t("Pages.Titles.FitPreferences")} />
+                    </ListItemButton>
+                  </NavLink>
+                  <NavLink to="/fabric-preferences" onClick={toggleDrawer}>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <GradientIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={t("Pages.Titles.FabricProperties")} />
+                    </ListItemButton>
+                  </NavLink>
+                </List>
+              </Collapse>
             </List>
           </Drawer>
-
         </Portal>
       </Box>
     </Box >

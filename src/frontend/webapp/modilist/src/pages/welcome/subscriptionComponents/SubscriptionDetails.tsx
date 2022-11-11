@@ -36,7 +36,6 @@ export function SubscriptionDetails() {
             dispatch.getSubscriptionModel.getSubscription();
         }
 
-        console.log("fff");
         dispatch.stepperSubscription.setSubscriptionDetails(() => {
             dispatch.updateSubscriptionModel.updateSubscription({
                 maxPricingLimit: maxLimit,
@@ -127,7 +126,6 @@ export function SubscriptionDetails() {
             </Grid>
         </Grid>
         <SubscriptionPlanFrame currentPlan={getSubscription?.plan ?? SubscriptionPlan.InEveryMonth} onChange={(selectedPlan: SubscriptionPlan) => {
-            console.log("selectedPlan", selectedPlan)
             setSelectedPlan(selectedPlan);
         }} />
     </React.Fragment>

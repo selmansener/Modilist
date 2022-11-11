@@ -27,5 +27,7 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.DTOs
         public DateTime CreatedAt { get; set; }
 
         public SalesOrderAddressDTO SalesOrderAddress { get; set; }
+
+        public string MaxPricingLimit { get; private set; }
     }
 }

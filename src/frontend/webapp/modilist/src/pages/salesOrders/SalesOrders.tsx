@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../store/store";
 import { SalesOrderListItem } from "./components/SalesOrderListItem";
 import { Pagination, QueryBuilder, SortDirection, SortField, StringFilter, StringFilterOperation } from "dynamic-query-builder-client";
+import { Helmet } from "react-helmet";
 
 enum SalesOrderStateMap {
     All = 0,
@@ -13,7 +14,7 @@ enum SalesOrderStateMap {
     Returned = 3,
 }
 
-export function SalesOrders() {
+export default function SalesOrders() {
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
     const { isBusy: salesOrdersIsBusy, data: salesOrders } = useSelector((state: RootState) => state.salesOrdersQueryModel);
@@ -94,13 +95,19 @@ export function SalesOrders() {
     }
 
     return (
-        <Grid item container xs={12} spacing={4} sx={{
-            mt: -8
-        }}>
+        <Grid item container xs={12} spacing={4}>
+            <Helmet>
+                <title>{t("Pages.Titles.SalesOrders")} | Modilist</title>
+            </Helmet>
             <Grid item container xs={12} sx={{
                 display: 'flex',
                 justifyContent: 'flex-end'
             }}>
+                <Grid item xs={9}>
+                    <Typography variant="h4">
+                        {t("Pages.Titles.SalesOrders")}
+                    </Typography>
+                </Grid>
                 <Grid item xs={3}>
                     <FormControl fullWidth>
                         <InputLabel id="sales-order-state-label">{t("Pages.SalesOrders.Filters.SalesOrderStateTitle")}</InputLabel>

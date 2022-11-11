@@ -16,7 +16,7 @@ import { RootState } from "../../store/store";
 
 
 
-export function Main() {
+export default function Main() {
     const theme = useTheme();
     const { t } = useTranslation();
     const { cdnImg: imgBaseHost } = config;

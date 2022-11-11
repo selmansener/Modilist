@@ -92,6 +92,12 @@ export interface BillingAddressDTO {
     taxNumber?: string;
     /**
      * 
+     * @type {string}
+     * @memberof BillingAddressDTO
+     */
+    taxOffice?: string;
+    /**
+     * 
      * @type {BillingType}
      * @memberof BillingAddressDTO
      */

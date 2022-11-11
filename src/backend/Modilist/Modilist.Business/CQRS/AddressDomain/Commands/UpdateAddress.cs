@@ -74,6 +74,7 @@ namespace Modilist.Business.CQRS.AddressDomain.Commands
             }
 
             address.UpdateAddress(
+                request.Name,
                 request.FirstName,
                 request.LastName,
                 request.Phone,

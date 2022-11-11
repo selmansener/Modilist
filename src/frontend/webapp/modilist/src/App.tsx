@@ -6,14 +6,15 @@ import { initReactI18next } from "react-i18next";
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { config } from './config';
-import { Router } from './layouts/Router';
 import { Provider } from 'react-redux';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { store } from './store/store';
-import { BrowserRouter } from 'react-router-dom';
 import { apiFactory } from './services/api';
 import CssBaseline from '@mui/material/CssBaseline';
 import ScrollToTop from './utils/scrollToTop';
+import { Router } from './router/router';
+import { routes } from './router/routes';
+
 
 declare module '@mui/material/styles' {
   interface PaletteColor {
@@ -141,23 +142,23 @@ const mdTheme = createTheme({
           text-decoration: none;
         }
 
-        a.active[aria-current='page'] {
-          & .MuiListItemButton-root {
-            background-color: #2F2244
-          }
+        // a.active[aria-current='page'] {
+        //   & .MuiListItemButton-root {
+        //     background-color: #2F2244
+        //   }
 
-          & .MuiListItemButton-root:active {
-            background-color: #2F2244
-          }
+        //   & .MuiListItemButton-root:active {
+        //     background-color: #2F2244
+        //   }
 
-          & .MuiTypography-root, & .MuiSvgIcon-root {
-            color: #fff
-          }
+        //   & .MuiTypography-root, & .MuiSvgIcon-root {
+        //     color: #fff
+        //   }
 
-          & .MuiButton-text {
-            text-decoration: underline;
-          }
-        }
+        //   & .MuiButton-text {
+        //     text-decoration: underline;
+        //   }
+        // }
       `
     },
     MuiLink: {
@@ -215,17 +216,17 @@ function App() {
       <CssBaseline enableColorScheme />
       <Provider store={store}>
         <MsalProvider instance={msalInstance}>
-          <BrowserRouter>
-            <ScrollToTop />
+            {/* <ScrollToTop /> */}
             <ThemeProvider theme={theme} >
               <AuthenticatedTemplate>
-                <Router environment={config.environment} renderOptions="Authenticated" />
+                <Router routes={routes} isPublic={false} currentAccountRole="user" environment={config.environment} />
+                {/* <Router environment={config.environment} renderOptions="Authenticated" /> */}
               </AuthenticatedTemplate>
               <UnauthenticatedTemplate>
-                <Router environment={config.environment} renderOptions="Public" />
+                <Router routes={routes} isPublic={true} currentAccountRole="user" environment={config.environment} />
+                {/* <Router environment={config.environment} renderOptions="Public" /> */}
               </UnauthenticatedTemplate>
             </ThemeProvider>
-          </BrowserRouter>
         </MsalProvider>
       </Provider>
     </div>

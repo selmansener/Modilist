@@ -43,9 +43,18 @@
         },
         "Dashboard": {
             "Header": {
-                "Subscription": "Abonelik Bilgilerim",
-                "Profile": "Kişisel Bilgilerim",
+                "Account": "Hesap Ayarları",
                 "Logout": "Çıkış Yap"
+            },
+            "Settings": {
+                "Title": "Hesabım",
+                "PersonalInfo": "Kişisel Bilgilerim",
+                "ResetPassword": "Şifre Değiştir",
+                "SubscriptionInfo": "Abonelik Bilgilerim",
+                "Address": "Adreslerim",
+                "Payment": "Kartlarım",
+                "Offers": "Kampanyalarım",
+                "Logout":"Çıkış Yap"
             },
             "Footer": {
                 "FollowUs": "Bizi takip edin.",
@@ -68,19 +77,22 @@
         "Titles": {
             "Main": "Anasayfa",
             "SalesOrders": "Siparişlerim",
+            "SalesOrderDetails": "#{{orderId}} No'lu Sipariş Detayları",
+            "StyleForm": "Stil Formum",
             "SizeInfo": "Beden Ölçülerim",
             "StylePreferences": "Stil Tercihlerim",
             "FitPreferences": "Kalıp Tercihlerim",
             "FabricProperties": "Renk & Kumaş",
             "Addresses": "Kayıtlı Adreslerim",
             "NewAddress": "Yeni Adres Ekle",
-            "UpdateAddress": "Adresi Güncelle",
+            "UpdateAddress": "{{addressName}} Adresini Güncelle",
             "PaymentMethods": "Kayıtlı Kartlarım",
             "NewPaymentMethod": "Yeni Kart Ekle",
             "Settings": "Hesap Ayarlarım",
             "Welcome": "Hoşgeldin",
             "AccountVerification": "Hesap Doğrulama",
             "Account": "Kişisel Bilgilerim",
+            "Subscription": "Abonelik Bilgilerim",
             "NotFound": "Sayfa Bulunamadı | Modilist"
         },
         "Main": {
@@ -521,7 +533,7 @@
             "MenuItem": "Seçiniz",
             "FullAddress": "Adres",
             "InfoTitle": "Bu bilgiyi neden istiyoruz?",
-            "ZipCode":"Posta Kodu",
+            "ZipCode": "Posta Kodu",
             "CorporateInfo": "Kurum Bilgileri",
             "ContactInfo": "İletişim Bilgileri",
             "CompanyName": "Şirket Ünvanı*",
@@ -627,9 +639,12 @@
             "CheckMailMessage": "Kombinlerini hazırlamaya başlamadan önce e-posta adresine gelen mesaj üzerinden hesabını doğrulaman gerekiyor."
         },
         "NotFound": {
-            "Message": "Aradığınız sayfayı bulamadık ya da kaybettik.",
+            "Description1": "Üzgünüz, aradığınız sayfayı",
+            "Description2": "bulamıyoruz ya da",
+            "Description3": "kaybettik.",
             "ReturnToHome": "Ana sayfa",
-            "ReturnToPreviousPage": "Geri dön"
+            "ReturnToPreviousPage": "Geri",
+            "Error": "Hata :("
         },
         "About": {
             "Title": "Hakkımızda",

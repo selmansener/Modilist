@@ -440,19 +440,19 @@ export const AddressApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @param {string} name 
+         * @param {number} addressId 
          * @param {UpsertAddress} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1AddressUpsertNamePost: async (name: string, body?: UpsertAddress, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'name' is not null or undefined
-            if (name === null || name === undefined) {
-                throw new RequiredError('name','Required parameter name was null or undefined when calling apiV1AddressUpsertNamePost.');
+        apiV1AddressUpsertAddressIdPost: async (addressId: number, body?: UpsertAddress, apiVersion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'addressId' is not null or undefined
+            if (addressId === null || addressId === undefined) {
+                throw new RequiredError('addressId','Required parameter addressId was null or undefined when calling apiV1AddressUpsertAddressIdPost.');
             }
-            const localVarPath = `/api/v1/Address.Upsert/{name}`
-                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            const localVarPath = `/api/v1/Address.Upsert/{addressId}`
+                .replace(`{${"addressId"}}`, encodeURIComponent(String(addressId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -617,14 +617,14 @@ export const AddressApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} name 
+         * @param {number} addressId 
          * @param {UpsertAddress} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1AddressUpsertNamePost(name: string, body?: UpsertAddress, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AddressDTO>>> {
-            const localVarAxiosArgs = await AddressApiAxiosParamCreator(configuration).apiV1AddressUpsertNamePost(name, body, apiVersion, options);
+        async apiV1AddressUpsertAddressIdPost(addressId: number, body?: UpsertAddress, apiVersion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AddressDTO>>> {
+            const localVarAxiosArgs = await AddressApiAxiosParamCreator(configuration).apiV1AddressUpsertAddressIdPost(addressId, body, apiVersion, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -719,14 +719,14 @@ export const AddressApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @param {string} name 
+         * @param {number} addressId 
          * @param {UpsertAddress} [body] 
          * @param {string} [apiVersion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1AddressUpsertNamePost(name: string, body?: UpsertAddress, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<AddressDTO>> {
-            return AddressApiFp(configuration).apiV1AddressUpsertNamePost(name, body, apiVersion, options).then((request) => request(axios, basePath));
+        async apiV1AddressUpsertAddressIdPost(addressId: number, body?: UpsertAddress, apiVersion?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<AddressDTO>> {
+            return AddressApiFp(configuration).apiV1AddressUpsertAddressIdPost(addressId, body, apiVersion, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -826,14 +826,14 @@ export class AddressApi extends BaseAPI {
     }
     /**
      * 
-     * @param {string} name 
+     * @param {number} addressId 
      * @param {UpsertAddress} [body] 
      * @param {string} [apiVersion] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressApi
      */
-    public async apiV1AddressUpsertNamePost(name: string, body?: UpsertAddress, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<AddressDTO>> {
-        return AddressApiFp(this.configuration).apiV1AddressUpsertNamePost(name, body, apiVersion, options).then((request) => request(this.axios, this.basePath));
+    public async apiV1AddressUpsertAddressIdPost(addressId: number, body?: UpsertAddress, apiVersion?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<AddressDTO>> {
+        return AddressApiFp(this.configuration).apiV1AddressUpsertAddressIdPost(addressId, body, apiVersion, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -39,7 +39,7 @@ const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
     },
 );
 
-export function Partnership() {
+export default function Partnership() {
     const { isBusy, status } = useSelector((state: RootState) => state.sendPartnershipMailModel);
     const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();

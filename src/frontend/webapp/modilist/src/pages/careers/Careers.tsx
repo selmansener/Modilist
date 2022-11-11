@@ -43,7 +43,7 @@ const PhoneInputMask = React.forwardRef<HTMLElement, PhoneInputMaskProps>(
 );
 
 
-export function Careers() {
+export default function Careers() {
     const { t } = useTranslation();
     const { cdn } = config;
     const [selectedDepartment, setSelectedDepartment] = useState<string | undefined>();

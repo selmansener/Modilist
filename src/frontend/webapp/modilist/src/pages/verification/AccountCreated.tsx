@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 
-export function AccountCreated() {
+export default function AccountCreated() {
     const { t } = useTranslation();
 
     return (

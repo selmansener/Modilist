@@ -2,6 +2,7 @@ import { Alert, Button, CircularProgress, Grid, Snackbar, Typography } from "@mu
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { AccountDTO, AccountState, FitPreferencesDTO, Gender } from "../../services/swagger/api";
 import { RootState, Dispatch } from "../../store/store";
 import SkipFormPaper from "./components/SkipFormPaper";
@@ -17,7 +18,7 @@ export interface FitPreferencesProps {
     layout?: string;
 }
 
-export function FitPreferences(props: FitPreferencesProps) {
+export default function FitPreferences(props: FitPreferencesProps) {
     const { layout } = props;
     const { t } = useTranslation();
     const dispatch = useDispatch<Dispatch>();
@@ -35,6 +36,7 @@ export function FitPreferences(props: FitPreferencesProps) {
         waistHeight: ""
     });
     const [snackbarStatus, setSnackbarStatus] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo({
@@ -51,7 +53,7 @@ export function FitPreferences(props: FitPreferencesProps) {
             }
 
             if (layout !== "dashboard") {
-                dispatch.welcomePageStepper.next();
+                navigate("/style-form/step/fabric-preferences");
             }
         }
         else if (upsertStatus !== 200 && upsertStatus !== 0) {
@@ -224,7 +226,7 @@ export function FitPreferences(props: FitPreferencesProps) {
                         disabled={isBusy}
                         variant="outlined"
                         onClick={() => {
-                            dispatch.welcomePageStepper.back();
+                            navigate(-1);
                         }}
                     >
                         {t('Layouts.Welcome.WelcomeSteps.Buttons.Back')}

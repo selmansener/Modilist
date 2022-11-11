@@ -6,6 +6,7 @@ using Mapster;
 using MediatR;
 
 using Modilist.Business.CQRS.AddressDomain.DTOs;
+using Modilist.Business.Exceptions;
 using Modilist.Data.Repositories.AddressDomain;
 using Modilist.Domains.Models.AddressDomain;
 
@@ -19,6 +20,8 @@ namespace Modilist.Business.CQRS.AddressDomain.Commands
         public Guid AccountId { get; set; }
 
         [JsonIgnore]
+        public int AddressId { get; set; }
+
         public string Name { get; set; }
 
         public string FirstName { get; set; }
@@ -76,17 +79,25 @@ namespace Modilist.Business.CQRS.AddressDomain.Commands
                 }
             }
 
-            Address? address = await _addressWriteRepository.GetByNameAsync(request.Name, request.AccountId, cancellationToken);
+            Address? address = await _addressWriteRepository.GetByAccountIdAsync(request.AddressId, request.AccountId, cancellationToken);
 
             if (address == null)
             {
+                await CheckAddressName(request, cancellationToken);
+
                 address = new Address(request.AccountId, request.Name, request.FirstName, request.LastName, request.Phone, request.City, request.District, request.FullAddress, request.IsDefault, request.ZipCode);
 
                 await _addressWriteRepository.AddAsync(address, cancellationToken);
             }
             else
             {
+                if (address.Name != request.Name)
+                {
+                    await CheckAddressName(request, cancellationToken);
+                }
+
                 address.UpdateAddress(
+                    request.Name,
                     request.FirstName,
                     request.LastName,
                     request.Phone,
@@ -100,6 +111,16 @@ namespace Modilist.Business.CQRS.AddressDomain.Commands
             }
 
             return address.Adapt<AddressDTO>();
+        }
+
+        private async Task CheckAddressName(UpsertAddress request, CancellationToken cancellationToken)
+        {
+            var doesAddressExistsWithName = await _addressWriteRepository.DoesExistsWithNameAsync(request.Name, request.AccountId, cancellationToken);
+
+            if (doesAddressExistsWithName)
+            {
+                throw new AddressAlreadyExistsException(request.AccountId, request.AddressId, request.Name);
+            }
         }
     }
 }

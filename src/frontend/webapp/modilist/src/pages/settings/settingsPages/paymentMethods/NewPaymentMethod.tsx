@@ -1,8 +1,8 @@
-import { Alert, Button, Checkbox, FormControl, FormControlLabel, Grid, Snackbar, TextField } from "@mui/material";
-import { useFormik, validateYupSchema } from "formik";
+import { Alert, Button, Checkbox, FormControl, FormControlLabel, Grid, Snackbar, TextField, Typography } from "@mui/material";
+import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "../../store/store";
-import { config } from "../../config";
+import { RootState } from "../../../../store/store";
+import { config } from "../../../../config";
 import * as Yup from "yup";
 import { IMaskInput } from "react-imask";
 import React, { useEffect, useState } from "react";
@@ -10,8 +10,9 @@ import { Focused } from "react-credit-cards";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import Cards from 'react-credit-cards';
-import { getAllPaymentMethodsModel } from "../../store/models/paymentMethods/GetAllPaymentMethods";
-import { PaymentMethodDTO } from "../../services/swagger/api";
+import { Helmet } from "react-helmet";
+import { IconButton } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 interface InputMaskProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -68,7 +69,7 @@ type FieldStates = {
     cardName: boolean
 }
 
-export function NewPaymentMethod() {
+export default function NewPaymentMethod() {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const { paymentMethodId } = useParams();
@@ -233,7 +234,7 @@ export function NewPaymentMethod() {
     useEffect(() => {
         if (!isBusy && statusCreateNewPaymentMethod === 200) {
             dispatch.createNewPaymentMethodModel.RESET();
-            navigate("/payment-methods");
+            navigate("/settings/payment-methods");
         }
     }, [statusCreateNewPaymentMethod]);
     useEffect(() => {
@@ -256,6 +257,20 @@ export function NewPaymentMethod() {
     }, [statusCreateNewPaymentMethod]);
 
     return (<Grid item container xs={12} spacing={2}>
+        <Helmet>
+            <title>{t("Pages.Titles.NewPaymentMethod")} | Modilist</title>
+        </Helmet>
+        <Grid item xs={12}>
+            <IconButton onClick={() => navigate(-1)}>
+                <ChevronLeftIcon />
+            </IconButton>
+            <Typography variant="h4" component="span" sx={{
+                verticalAlign: "middle",
+                ml: 2
+            }}>
+                {t("Pages.Titles.NewPaymentMethod")}
+            </Typography>
+        </Grid>
         <Grid item container xs={6} spacing={2}>
             <Grid item xs={12}>
                 <FormControl fullWidth >

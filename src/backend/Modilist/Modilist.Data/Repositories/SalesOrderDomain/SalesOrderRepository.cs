@@ -29,6 +29,10 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
 
         Task<bool> DoesAccountHasAnyOrder(Guid accountId, CancellationToken cancellationToken);
 
+        Task<SalesOrder?> GetLatestOrderAsync(Guid accountId, CancellationToken cancellationToken);
+
+        Task<string?> GetMaxPricingLimit(Guid accountId, CancellationToken cancellationToken);
+
     }
 
     internal class SalesOrderRepository : BaseRepository<SalesOrder>, ISalesOrderRepository
@@ -49,13 +53,13 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
                 && x.CreatedAt.DayOfYear >= startDate.DayOfYear 
                 && x.CreatedAt.DayOfYear <= endDate.DayOfYear);
         }
-
+        
         public async Task<SalesOrder?> GetLatestActiveOrderAsync(Guid accountId, CancellationToken cancellationToken)
         {
             return await GetAll()
                 .Include(x => x.SalesOrderAddress)
                 .OrderByDescending(x => x.CreatedAt)
-                .FirstOrDefaultAsync(x => x.AccountId == accountId && x.State == SalesOrderState.Created || x.State == SalesOrderState.Prepared || x.State == SalesOrderState.Shipped, cancellationToken);
+                .FirstOrDefaultAsync(x => x.AccountId == accountId && x.State != SalesOrderState.Completed, cancellationToken);
         }
 
         public async Task<SalesOrder?> GetSalesOrderAsync(Guid accountId, int id, CancellationToken cancellationToken, bool includeLineItems = false)
@@ -85,6 +89,21 @@ namespace Modilist.Data.Repositories.SalesOrderDomain
                 .Include(x => x.SalesOrderAddress)
                 .OrderByDescending(x => x.CreatedAt)
                 .FirstOrDefaultAsync(x => x.AccountId == accountId && x.State == SalesOrderState.Completed, cancellationToken);
+        }
+
+        public async Task<SalesOrder?> GetLatestOrderAsync(Guid accountId, CancellationToken cancellationToken)
+        {
+            return await GetAll()
+                .OrderByDescending(x => x.CreatedAt)
+                .FirstOrDefaultAsync(x => x.AccountId == accountId, cancellationToken);
+        }
+
+        public Task<string?> GetMaxPricingLimit(Guid accountId, CancellationToken cancellationToken)
+        {
+            return GetAll()
+                .Where(x => x.AccountId == accountId)
+                .Select(x => x.MaxPricingLimit)
+                .FirstOrDefaultAsync();
         }
     }
 }

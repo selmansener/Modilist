@@ -1,5 +1,7 @@
 ﻿using System.Collections.Immutable;
 
+using Azure.Core;
+
 using Bogus;
 
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,7 @@ using Modilist.Business.Seed.Utils;
 using Modilist.Business.Utils.AddressDomain;
 using Modilist.Data.DataAccess;
 using Modilist.Domains.Models.SalesOrderDomain;
+using Modilist.Domains.Models.SubscriptionDomain;
 using Modilist.Infrastructure.Shared.Enums;
 
 namespace Modilist.Business.Seed.Services
@@ -34,11 +37,13 @@ namespace Modilist.Business.Seed.Services
 
             foreach (var account in accounts)
             {
-                var defaultAddress = await _dbContext.Addresses.FirstOrDefaultAsync(x => x.AccountId == account.Id && x.IsDefault);
+                var defaultAddress = await _dbContext.Addresses.FirstOrDefaultAsync(x => x.AccountId == account.Id && x.IsDefault, cancellationToken);
+
+                Subscription? subscription = await _dbContext.Subscriptions.FirstOrDefaultAsync(x => x.AccountId == account.Id, cancellationToken);
 
                 for (int i = 15; i >= 0; i--)
                 {
-                    var salesOrder = new SalesOrder(account.Id);
+                    var salesOrder = new SalesOrder(account.Id, subscription.MaxPricingLimit);
 
                     salesOrder.SetBasePrivateProperty(nameof(SalesOrder.CreatedAt), DateTime.UtcNow.AddMonths(-i));
 
@@ -69,7 +74,7 @@ namespace Modilist.Business.Seed.Services
 
             _dbContext.ChangeTracker.DetectChanges();
 
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
             var cities = _addressService.GetCities();
 

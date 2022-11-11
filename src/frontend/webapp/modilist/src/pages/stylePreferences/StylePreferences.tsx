@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
-import { StylePreferences as WStylePreferences } from "../welcome/StylePreferences";
+import WStylePreferences from "../welcome/StylePreferences";
 
-export function StylePreferences() {
+export default function StylePreferences() {
 
     return (
         <Grid item container xs={12} spacing={2}>

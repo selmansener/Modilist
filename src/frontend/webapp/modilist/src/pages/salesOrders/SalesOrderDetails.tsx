@@ -4,7 +4,7 @@ import { tr } from "date-fns/locale";
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AddressDTO, Gender, SalesOrderState } from "../../services/swagger/api";
 import { Dispatch, RootState } from "../../store/store";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -17,6 +17,9 @@ import { calculateAvgSalesOrderRating } from "./utils/calculateAvgRating";
 import { AddressSelection } from "../../components/addressSelection/AddressSelection";
 import { DeliveryDateDialog } from "./components/DeliveryDateDialog";
 import { CustomRadioButtonGroup } from "../../components/customRadioButton/CustomRadioButton";
+import { Helmet } from "react-helmet";
+import { IconButton } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 const requestedStyleMale = [
     "Casual",
@@ -48,7 +51,7 @@ const requestedStyleFemale = [
     "BusinessCasual"
 ];
 
-export function SalesOrderDetails() {
+export default function SalesOrderDetails() {
     const { t } = useTranslation();
     const { salesOrderId } = useParams();
     const dispatch = useDispatch<Dispatch>();
@@ -67,6 +70,7 @@ export function SalesOrderDetails() {
     const [isRequestedStyleOpen, setIsRequestedStyleOpen] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const theme = useTheme();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (updateAdditionalRequestsStatus === 200) {
@@ -385,10 +389,19 @@ export function SalesOrderDetails() {
 
     return (
         <Grid item container xs={12} spacing={2}>
+            <Helmet>
+                {salesOrderId && <title>{t("Pages.Titles.SalesOrderDetails", { orderId: salesOrderId })} | Modilist</title>}
+            </Helmet>
             <Grid item xs={12}>
                 <Grid item container xs={12} spacing={2}>
                     <Grid item xs={6}>
-                        <Typography variant="h4">{t("Pages.SalesOrderDetails.Title")}#{salesOrderId}</Typography>
+                        <IconButton onClick={() => navigate(-1)}>
+                            <ChevronLeftIcon />
+                        </IconButton>
+                        <Typography variant="h4" component="span" sx={{
+                            verticalAlign: "middle",
+                            ml: 2
+                        }}>{t("Pages.SalesOrderDetails.Title")}#{salesOrderId}</Typography>
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant="h4" align="right">
@@ -525,8 +538,6 @@ export function SalesOrderDetails() {
                 salesOrderId={salesOrderId ? parseInt(salesOrderId) : 0}
                 currentDate={new Date(salesOrder?.estimatedDeliveryDate)}
                 handleClose={(isDateChanged: boolean) => {
-                    console.log("isDateChanged", isDateChanged);
-                    console.log("salesOrderId", salesOrderId);
                     if (isDateChanged && salesOrderId) {
                         dispatch.salesOrderDetailsModel.salesOrderDetails(parseInt(salesOrderId));
                     }

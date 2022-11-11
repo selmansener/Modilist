@@ -63,6 +63,7 @@ namespace Modilist.Domains.Models.AddressDomain
         }
 
         public void UpdateAddress(
+            string name,
             string firstName,
             string lastName,
             string phone,
@@ -72,6 +73,7 @@ namespace Modilist.Domains.Models.AddressDomain
             string fullAddress,
             bool isDefault)
         {
+            Name = name;
             FirstName = firstName;
             LastName = lastName;
             Phone = phone;

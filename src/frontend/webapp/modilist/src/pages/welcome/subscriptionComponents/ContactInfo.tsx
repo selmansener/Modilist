@@ -90,7 +90,7 @@ export default function ContactInfo() {
             onSubmit: (values) => {
                 if (values && values?.name) {
                     dispatch.upsertAddressModel.upsertAddress({
-                        name: values.name,
+                        id: getDefaultAddressResponse?.id ?? 0,
                         body: values
                     });
                 }
@@ -108,7 +108,7 @@ export default function ContactInfo() {
                 window.scrollTo(0, 0);
             }
         })
-    }, []);
+    }, [isValid]);
 
     useEffect(() => {
         setAddressNumberShrink(address.phone !== undefined && address.phone !== "");

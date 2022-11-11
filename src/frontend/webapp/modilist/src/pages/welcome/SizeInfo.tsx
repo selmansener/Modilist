@@ -3,7 +3,7 @@ import NavigationIcon from '@mui/icons-material/Navigation';
 import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Gender } from "../../services/swagger/api";
+import { Gender, SizeInfoDTO } from "../../services/swagger/api";
 import { Dispatch, RootState } from "../../store/store";
 import { useFormik } from 'formik';
 import * as Yup from "yup";
@@ -13,6 +13,7 @@ import { ImageComponent } from "../../components/image/ImageComponent";
 import { config } from "../../config";
 import React from "react";
 import { MAX_CHAR_LIMIT } from "../../utils/constans";
+import { useNavigate } from "react-router-dom";
 
 let footWearSizes: number[] = [];
 
@@ -29,10 +30,11 @@ export interface SizeInfoProps {
     layout?: string;
 }
 
-export function SizeInfo(props: SizeInfoProps) {
+export default function SizeInfo(props: SizeInfoProps) {
     const { layout } = props;
     const { cdnImg: imgBaseHost } = config;
     const dispatch = useDispatch<Dispatch>();
+    const navigate = useNavigate();
     const { t } = useTranslation();
     const { isBusy: getAccountIsBusy, data: account, status } = useSelector((state: RootState) => state.getAccountModel);
     const { isBusy: getSizeInfoIsBusy, data: initialSizeInfo, status: getSizeInfoStatus } = useSelector((state: RootState) => state.getSizeInfoModel);
@@ -130,9 +132,7 @@ export function SizeInfo(props: SizeInfoProps) {
             left: 0,
             behavior: 'smooth'
         })
-    }, []);
 
-    useEffect(() => {
         if (!getAccountIsBusy && account === undefined) {
             dispatch.getAccountModel.getAccount();
         }
@@ -147,7 +147,7 @@ export function SizeInfo(props: SizeInfoProps) {
             dispatch.getSizeInfoModel.HANDLE_RESPONSE(upsertSizeInfo, upsertStatus);
 
             if (layout !== "dashboard") {
-                dispatch.welcomePageStepper.next();
+                navigate("/style-form/step/style-preferences");
             }
         }
         else if (upsertStatus !== 200 && upsertStatus !== 0) {
@@ -169,20 +169,40 @@ export function SizeInfo(props: SizeInfoProps) {
         submitForm,
     } = useFormik({
         enableReinitialize: true,
-        initialValues: initialSizeInfo ?? {},
+        initialValues: {
+            bodyType: initialSizeInfo?.bodyType,
+            weight: initialSizeInfo?.weight,
+            height: initialSizeInfo?.height,
+            upperBody: initialSizeInfo?.upperBody,
+            lowerBody: initialSizeInfo?.lowerBody,
+            outWear: initialSizeInfo?.outWear,
+            footWear: initialSizeInfo?.footWear,
+            menUnderWear: initialSizeInfo?.menUnderWear,
+            womenUnderWearCup: initialSizeInfo?.womenUnderWearCup,
+            womenUnderWearSize: initialSizeInfo?.womenUnderWearSize,
+            additionalNotes: initialSizeInfo?.additionalNotes,
+            shoulderWidth: initialSizeInfo?.shoulderWidth ?? "",
+            headRadius: initialSizeInfo?.headRadius ?? "",
+            armLength: initialSizeInfo?.armLength ?? "",
+            bodyLength: initialSizeInfo?.bodyLength ?? "",
+            neckRadius: initialSizeInfo?.neckRadius ?? "",
+            breastRadius: initialSizeInfo?.breastRadius ?? "",
+            waistRadius: initialSizeInfo?.waistRadius ?? "",
+            hipRadius: initialSizeInfo?.hipRadius ?? "",
+            legLength: initialSizeInfo?.legLength ?? "",
+            footLength: initialSizeInfo?.footLength ?? "",
+        },
         validationSchema: schema,
         onSubmit: (values) => {
             if (!upsertSizeInfoIsBusy) {
                 dispatch.upsertSizeInfoModel.upsertSizeInfo({
-                    ...values,
+                    ...values as SizeInfoDTO,
                     gender: account?.gender
                 });
             }
         },
         validateOnMount: true
     });
-
-    console.log(theme.breakpoints.down("md"));
 
     const gender = account?.gender ? camelCase(account?.gender.toString()) : undefined;
 
@@ -249,10 +269,13 @@ export function SizeInfo(props: SizeInfoProps) {
                         }}>{t("Pages.Welcome.BodySize.BodyType")}</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <FormHelperText>
-                            <Typography variant="h3" fontWeight={800} align="center" color={theme.palette.error.main}>
-                                {touched.bodyType && errors?.bodyType}
-                            </Typography>
+                        <FormHelperText sx={{
+                            fontWeight: 800,
+                            color: theme.palette.error.main,
+                            fontSize: theme.typography.h3.fontSize,
+                            textAlign: "center"
+                        }}>
+                            {touched.bodyType && errors?.bodyType}
                         </FormHelperText>
                         <FormControl fullWidth error={touched.bodyType && errors.bodyType !== undefined}>
                             <CustomRadioButtonGroup
@@ -566,7 +589,7 @@ export function SizeInfo(props: SizeInfoProps) {
                         minRows={5}
                         maxRows={8} />
                     <FormHelperText>
-                        <Typography>{`${MAX_CHAR_LIMIT - (sizeInfo?.additionalNotes?.length ?? 0)} ${charactersLeft}`}</Typography>
+                        {`${MAX_CHAR_LIMIT - (sizeInfo?.additionalNotes?.length ?? 0)} ${charactersLeft}`}
                     </FormHelperText>
                 </FormControl>
             </Grid>

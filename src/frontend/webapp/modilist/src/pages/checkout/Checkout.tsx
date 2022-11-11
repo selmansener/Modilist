@@ -27,7 +27,7 @@ import { IMaskInput } from "react-imask";
 import BillingAddressIndividual, { IndividualBillingAddress } from "./components/BillingAddressIndividual";
 import BillingAddressCorporate, { CorporateBillingAddress } from "./components/BillingAddressCorporate";
 
-export function Checkout() {
+export default function Checkout() {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const { salesOrderId } = useParams();

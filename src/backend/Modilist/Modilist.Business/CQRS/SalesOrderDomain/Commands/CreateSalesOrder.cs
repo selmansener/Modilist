@@ -9,8 +9,10 @@ using Modilist.Business.CQRS.SalesOrderDomain.DTOs;
 using Modilist.Business.Exceptions;
 using Modilist.Data.Repositories.AddressDomain;
 using Modilist.Data.Repositories.SalesOrderDomain;
+using Modilist.Data.Repositories.SubscriptionDomain;
 using Modilist.Domains.Models.AddressDomain;
 using Modilist.Domains.Models.SalesOrderDomain;
+using Modilist.Domains.Models.SubscriptionDomain;
 
 namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
 {
@@ -31,11 +33,13 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
     {
         private readonly ISalesOrderRepository _salesOrderRepository;
         private readonly IAddressRepository _addressRepository;
+        private readonly ISubscriptionRepository _subscriptionRepository;
 
-        public CreateSalesOrderHandler(ISalesOrderRepository salesOrderRepository, IAddressRepository addressRespository)
+        public CreateSalesOrderHandler(ISalesOrderRepository salesOrderRepository, IAddressRepository addressRespository, ISubscriptionRepository subscriptionRepository)
         {
             _salesOrderRepository = salesOrderRepository;
             _addressRepository = addressRespository;
+            _subscriptionRepository = subscriptionRepository;
         }
 
         public async Task<SalesOrderDTO> Handle(CreateSalesOrder request, CancellationToken cancellationToken)
@@ -58,7 +62,14 @@ namespace Modilist.Business.CQRS.SalesOrderDomain.Commands
                 throw new DefaultAddressNotFoundException(request.AccountId);
             }
 
-            var salesOrder = new SalesOrder(request.AccountId);
+            Subscription? subscription = await _subscriptionRepository.GetByAccountIdAsync(request.AccountId, cancellationToken);
+
+            if (subscription == null)
+            {
+                throw new SubscriptionNotFoundException(request.AccountId);
+            }
+
+            var salesOrder = new SalesOrder(request.AccountId, subscription.MaxPricingLimit);
 
             salesOrder.AssignAddress(address);
 

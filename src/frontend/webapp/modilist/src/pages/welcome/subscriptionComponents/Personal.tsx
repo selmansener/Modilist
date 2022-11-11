@@ -95,7 +95,7 @@ export default function Personal() {
                 window.scrollTo(0, 0);
             }
         });
-    }, []);
+    }, [isValid]);
 
     useEffect(() => {
         if (updateAccountStatus === 200) {

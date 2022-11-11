@@ -22,6 +22,12 @@ export interface UpsertAddress {
      * @type {string}
      * @memberof UpsertAddress
      */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertAddress
+     */
     firstName?: string;
     /**
      * 

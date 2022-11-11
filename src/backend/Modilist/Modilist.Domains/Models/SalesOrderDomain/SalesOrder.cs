@@ -15,11 +15,12 @@ namespace Modilist.Domains.Models.SalesOrderDomain
     {
         private readonly List<SalesOrderLineItem> _lineItems = new List<SalesOrderLineItem>();
 
-        public SalesOrder(Guid accountId)
+        public SalesOrder(Guid accountId, string maxPricingLimit)
         {
             AccountId = accountId;
             State = SalesOrderState.Created;
             EstimatedDeliveryDate = CreatedAt.AddDays(7);
+            SetMaxPricingLimit(maxPricingLimit);
         }
 
         public Guid AccountId { get; private set; }
@@ -61,6 +62,35 @@ namespace Modilist.Domains.Models.SalesOrderDomain
         public SalesOrderAddress? SalesOrderAddress { get; private set; }
 
         public BillingAddress? BillingAddress { get; private set; }
+
+        public string MaxPricingLimit { get; private set; }
+
+        public int MaxPricingLimitAsInt { get; private set; }
+
+        public void SetMaxPricingLimit(string maxPricingLimit)
+        {
+            int result;
+
+            if (int.TryParse(maxPricingLimit, out result) && result < 1500)
+            {
+                throw new InvalidOperationException("MaxPricingLimit can not be less than 1500");
+            }
+            else if (!int.TryParse(maxPricingLimit, out result) && !maxPricingLimit.Equals("+5000"))
+            {
+                throw new InvalidOperationException("MaxPricingLimit must be a valid integer");
+            }
+            else if (maxPricingLimit.Equals("+5000"))
+            {
+                result = 9999;
+            }
+            else
+            {
+                int.TryParse(maxPricingLimit, out result);
+            }
+
+            MaxPricingLimit = maxPricingLimit;
+            MaxPricingLimitAsInt = result;
+        }
 
         public SalesOrderLineItem AddLineItem(int productId, decimal price, decimal salesPrice)
         {

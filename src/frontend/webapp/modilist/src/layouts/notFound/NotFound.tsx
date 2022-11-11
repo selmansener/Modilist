@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Container, Grid, Toolbar, Typography, useTheme } from "@mui/material";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -12,74 +12,71 @@ export default function NotFound() {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const { cdnImg: imgBaseHost } = config;
+    const theme = useTheme();
 
     return (
-        <Box display="flex" flexDirection="column">
-            <Box component="main" minHeight={760}>
-                <Helmet>
-                    {t("Pages.Titles.NotFound")}
-                </Helmet>
-                <AppBar position="static">
-                    <Toolbar>
-                        <Box sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            flexGrow: 1
-                        }}>
-                            <ImageComponent width={200} src="/whitehorizontallogo.svg" />
-                        </Box>
-                    </Toolbar>
-                </AppBar>
-                <Container maxWidth="xl" sx={{
-                    mt: 2,
-                    mb: 2
-                }}>
-                    <Grid container spacing={2} textAlign="center" mt={4}>
-                        <Grid item xs={12}>
-                            <Typography variant="h5">
-                                {t("Pages.NotFound.Message")}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <ImageComponent src={`${imgBaseHost}/checkout/checkout-failed.svg`} />
-                        </Grid>
-                        <Grid item container xs={12} sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            mt: 4
-                        }}>
-                            <Button sx={{
-                                mr: 25
-                            }}
-                                size="large"
-                                variant="outlined"
-                                startIcon={<KeyboardArrowLeftIcon />}
-                                onClick={() => {
-                                    navigate(-1);
-                                }}>
 
-                                <Typography variant="h5">
-                                    {t("Pages.NotFound.ReturnToPreviousPage")}
-                                </Typography>
-                            </Button>
-                            <Button
-                                size="large"
-                                variant="outlined"
-                                endIcon={<KeyboardArrowRightIcon />}
-                                onClick={() => {
-                                    navigate("/", {
-                                        replace: true
-                                    });
-                                }}>
-                                <Typography variant="h5">
-                                    {t("Pages.NotFound.ReturnToHome")}
-                                </Typography>
-                            </Button>
-                        </Grid>
+        <Box component="main" sx={{
+            bgcolor: 'secondary.transparent'
+        }}>
+            <Grid container alignItems="center" spacing={2}>
+                <Grid item container xs={4} direction="column" alignItems="center" spacing={4}>
+                    <Grid item xs={12} >
+                        <Typography variant="h1" color="primary">
+                            {t("Pages.NotFound.Error")}
+                        </Typography>
                     </Grid>
-                </Container>
-            </Box>
-            <DashboardFooter />
+                    <Grid item xs={12}>
+                        <Typography variant="body1" color="primary">
+                            {t("Pages.NotFound.Description1")}
+                        </Typography>
+                        <Typography variant="body1" color="primary">
+                            {t("Pages.NotFound.Description2")}
+                        </Typography>
+                        <Typography variant="body1" color="primary">
+                            {t("Pages.NotFound.Description3")}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            size="large"
+                            variant="outlined"
+                            color="secondary"
+                            sx={{
+                                ml: 4
+                            }}
+                            onClick={() => {
+                                navigate(-1);
+                            }}>
+
+                            <Typography variant="h5" color="primary">
+                                {t("Pages.NotFound.ReturnToPreviousPage")}
+                            </Typography>
+                        </Button>
+                        <Button
+                            size="large"
+                            variant="contained"
+                            color="primary"
+                            sx={{
+                                ml: 2
+                            }}
+                            onClick={() => {
+                                navigate("/", {
+                                    replace: true
+                                });
+                            }}>
+                            <Typography variant="h5" color="white">
+                                {t("Pages.NotFound.ReturnToHome")}
+                            </Typography>
+                        </Button>
+                    </Grid>
+                </Grid>
+                <Grid item xs={8} textAlign="center" sx={{
+                    display: 'flex'
+                }}>
+                    <ImageComponent src={`${imgBaseHost}/not-found/not-found-404.svg`} />
+                </Grid>
+            </Grid>
         </Box>
     )
 }

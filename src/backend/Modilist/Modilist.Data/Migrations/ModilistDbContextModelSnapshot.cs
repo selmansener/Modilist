@@ -1092,6 +1092,14 @@ namespace Modilist.Data.Migrations
                     b.Property<DateTime>("EstimatedDeliveryDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("MaxPricingLimit")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("MaxPricingLimitAsInt")
+                        .HasColumnType("int");
+
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 

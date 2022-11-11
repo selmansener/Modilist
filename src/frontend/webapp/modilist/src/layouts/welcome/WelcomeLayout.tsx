@@ -3,22 +3,19 @@ import { useEffect } from "react";
 import { RootState, Dispatch } from "../../store/store";
 import { useDispatch, useSelector } from 'react-redux';
 import { useMsal } from "@azure/msal-react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
 import { AccountState } from "../../services/swagger/api";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { ImageComponent } from "../../components/image/ImageComponent";
-import { DashboardFooter } from "../dashboard/DashboardFooter";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { WelcomeFooter } from "./WelcomeFooter";
+import { RouteConfig } from "../../router/routes";
+import React from "react";
+import { WelcomeSteps } from "../../pages/welcome/WelcomeSteps";
 
-export interface WelcomeLayoutProps {
-    title: string;
-}
-
-export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayoutProps>) {
+export default function WelcomeLayout() {
     const { instance: msal, accounts } = useMsal();
-    const { title } = props;
     const { t } = useTranslation();
     const navigate = useNavigate();
     const { isBusy: getAccountIsBusy, data: account, status: getAccountStatus } = useSelector((state: RootState) => state.getAccountModel);
@@ -62,7 +59,7 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
         <Box>
             <Box component="main" mb={8}>
                 <Helmet>
-                    {`${t(title)} | Modilist`}
+                    <title>{`Bak bu sana yakışır | Modilist`}</title>
                 </Helmet>
                 <AppBar position="static">
                     <Toolbar>
@@ -71,7 +68,9 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
                             justifyContent: 'center',
                             flexGrow: 1
                         }}>
-                            <ImageComponent width={200} src="/whitehorizontallogo.svg" />
+                            <Link to="/style-form/gender-selection">
+                                <ImageComponent width={200} src="/whitehorizontallogo.svg" />
+                            </Link>
                         </Box>
                         <IconButton
                             size="large"
@@ -87,7 +86,8 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
                 </AppBar>
                 <Container maxWidth="xl" sx={{
                     mt: 4,
-                    mb: 2
+                    mb: 2,
+                    minHeight: `${window.innerHeight - 465}px`
                 }}>
                     <Grid container>
                         <Outlet />
@@ -95,6 +95,53 @@ export default function WelcomeLayout(props: React.PropsWithChildren<WelcomeLayo
                 </Container>
             </Box>
             <WelcomeFooter />
+            <ScrollRestoration />
         </Box>
     )
 }
+
+const GenderSelectionPage = React.lazy(() => import("../../pages/welcome/GenderSelection"));
+const SizeInfoPage = React.lazy(() => import("../../pages/welcome/SizeInfo"));
+const StylePreferencesPage = React.lazy(() => import("../../pages/welcome/StylePreferences"));
+const FitPreferencesPage = React.lazy(() => import("../../pages/welcome/FitPreferences"));
+const FabricPreferencesPage = React.lazy(() => import("../../pages/welcome/FabricProperties"));
+const SubscriptionPage = React.lazy(() => import("../../pages/welcome/Subscription"));
+
+export const welcomeRoutes: RouteConfig = {
+    path: "/style-form",
+    element: <WelcomeLayout />,
+    isPublic: false,
+    leafNodes: [
+        {
+            path: "gender-selection",
+            element: <GenderSelectionPage />
+        },
+        {
+            path: "step",
+            element: <WelcomeSteps />,
+            leafNodes: [
+                {
+                    path: "size-info",
+                    element: <SizeInfoPage />
+                },
+                {
+                    path: "style-preferences",
+                    element: <StylePreferencesPage />,
+                },
+                {
+                    path: "fit-preferences",
+                    element: <FitPreferencesPage />,
+                },
+                {
+                    path: "fabric-preferences",
+                    element: <FabricPreferencesPage />,
+                },
+                {
+                    path: "subscription",
+                    element: <SubscriptionPage />,
+                }
+            ]
+        }
+    ]
+}
+

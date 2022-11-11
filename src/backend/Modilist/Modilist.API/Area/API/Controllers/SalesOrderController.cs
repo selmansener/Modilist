@@ -66,6 +66,32 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
+        [HttpGet("[controller].Latest")]
+        [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
+        [ProducesResponseType(typeof(LatestSalesOrderDTO), 200)]
+        public async Task<IActionResult> GetLatestOrder(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetLatestSalesOrder
+            {
+                AccountId = User.GetUserId()
+            }, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [HttpPost("[controller].CreateNewSalesOrder")]
+        [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
+        [ProducesResponseType(typeof(SalesOrderDTO), 200)]
+        public async Task<IActionResult> CreateNewSalesOrder(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new CreateNewSalesOrder
+            {
+                AccountId = User.GetUserId()
+            }, cancellationToken);
+
+            return Ok(response);
+        }
+
         [HttpPost("[controller].CreateFirstOrder")]
         [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
         [ProducesResponseType(typeof(SalesOrderDTO), 200)]
@@ -196,6 +222,17 @@ namespace Modilist.API.Area.API.Controllers
             return Ok(response);
         }
 
+        [HttpPost("[controller].{salesOrderId}/UpdateMaxPricingLimit")]
+        [Authorize(nameof(AuthorizationPermissions.SalesOrders))]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> UpdateMaxPricingLimit(int salesOrderId, [FromBody] UpdateMaxPricingLimit request, CancellationToken cancellationToken)
+        {
+            request.AccountId = User.GetUserId();
+            request.SalesOrderId = salesOrderId;
 
+            var response = await _mediator.Send(request, cancellationToken);
+
+            return Ok(response);
+        }
     }
 }

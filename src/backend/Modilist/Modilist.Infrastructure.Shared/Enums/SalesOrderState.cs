@@ -10,9 +10,10 @@ namespace Modilist.Infrastructure.Shared.Enums
     {
         None = 0,
         Created = 1,
-        Prepared = 2,
-        Shipped = 3,
-        Delivered = 4,
-        Completed = 5
+        Preparing = 2,
+        Prepared = 3,
+        Shipped = 4,
+        Delivered = 5,
+        Completed = 6
     }
 }

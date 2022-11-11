@@ -1,7 +1,7 @@
 import { Paper, Grid, Button, Typography, Divider } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import UpdateIcon from '@mui/icons-material/Update';
-import { AddressDTO } from "../../../services/swagger/api";
+import { AddressDTO } from "../../../../../services/swagger/api";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useNavigate } from "react-router-dom";
 
@@ -36,7 +36,7 @@ export function AddressListItem(props: AddressListItemProps) {
                 <Grid item xs={6} display="flex" justifyContent="flex-end">
                     <Button
                         onClick={() => {
-                            navigate(`/update-address/${address.id}`);
+                            navigate(`/settings/addresses/${address.id}`);
                         }}
                         variant="outlined"
                         startIcon={<UpdateIcon />}

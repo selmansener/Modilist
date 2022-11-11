@@ -16,7 +16,7 @@ export function NewAddressListItem() {
             <Grid item xs={12} display="flex" justifyContent="flex-end">
                 <Button 
                     onClick={() => {
-                        navigate("/add-address");
+                        navigate("/settings/addresses/new");
                     }}
                     variant="outlined" 
                     startIcon={<AddCircleOutlineIcon />}>

@@ -25,7 +25,6 @@ import { createReturnModel } from "./returns/CreateReturn"
 import { getReturnModel } from "./returns/GetReturn"
 import { activeSalesOrderModel } from "./salesOrders/ActiveSalesOrder"
 import { buyAllLineItemsModel } from "./salesOrders/BuyAllLineItems"
-import { createFirstOrderModel } from "./salesOrders/CreateFirstOrder"
 import { addOrUpdateFeedbackModel } from "./salesOrders/Feedback"
 import { salesOrderDetailsModel } from "./salesOrders/SalesOrderDetails"
 import { salesOrdersQueryModel } from "./salesOrders/SalesOrdersQuery"
@@ -90,7 +89,6 @@ export interface RootModel extends Models<RootModel> {
   createReturnModel: typeof createReturnModel,
   getBlogMetaDataModel: typeof getBlogMetaDataModel,
   createPaymentModel: typeof createPaymentModel,
-  createFirstOrderModel: typeof createFirstOrderModel,
   updateSalesOrderAddressModel: typeof updateSalesOrderAddressModel,
   updateEstimatedDeliveryDateModel: typeof updateEstimatedDeliveryDateModel,
   updateAdditionalRequestsModel: typeof updateAdditionalRequestsModel,
@@ -144,7 +142,6 @@ export const models: RootModel = {
   createReturnModel,
   getBlogMetaDataModel,
   createPaymentModel,
-  createFirstOrderModel,
   updateSalesOrderAddressModel,
   updateEstimatedDeliveryDateModel,
   updateAdditionalRequestsModel,
